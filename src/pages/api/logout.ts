@@ -23,5 +23,20 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
   const cookies = new Cookies(req, res);
   cookies.set('access_token');
 
+  return new Promise(() => {
+    // http://localhost:3500
+    proxy.web(
+      req,
+      res,
+      {
+        target: process.env.API_URL_AUTH,
+        changeOrigin: true
+      },
+      function (err) {
+        res.status(500).send('Oops, something went wrong.');
+      }
+    );
+  });
+
   res.status(200).json({ message: 'Logout successfully' });
 }
