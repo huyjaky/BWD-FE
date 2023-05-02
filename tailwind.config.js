@@ -3,16 +3,68 @@ module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}'
   ],
   theme: {
     extend: {
       screens: {
-        laptop: {min: '1150px'},
-        tablet: {max: '1149px', min: '800px'},
-        mobile: {max: '799px'}
+        desktop: { min: '1401px' },
+        laptop: { max: '1400px', min: '1150px' },
+        tablet: { max: '1149px', min: '800px' },
+        mobile: { max: '799px' }
+      },
+      colors: {
+        mask: 'rgba(105,105,105, 0.4)'
+      },
+      keyframes: {
+        hiddenAnimate: {
+          '0%': { visibility: 'visible' },
+          '100%': { visibility: 'hidden'}
+        },
+        showAnimate: {
+          '0%': { visibility: 'hidden' },
+          '100%': { visibility: 'visible'}
+        },
+        slideDownHeader: {
+          '0%': { transform: 'translateY(0)', scale: '1', opacity: '1' },
+          '100%': { transform: 'translateY(10px)', scale: '1.3', opacity: '0' }
+        },
+        slideDownControl: {
+          '0%': { height: '0px' },
+          '100%': { height: '80px' }
+        },
+
+        slideUpControl: {
+          '0%': { height: '80px' },
+          '100%': { height: '0px' }
+        },
+        slideUpHeader: {
+          '0%': { transform: 'translateY(10px)', scale: '1.3', opacity: '0' },
+          '100%': { transform: 'translateY(0)', scale: '1', opacity: '1' }
+        },
+
+        transparentAnimate: {
+          '0%': {opacity: '0'},
+          '100%': {opacity: '1'},
+        },
+        transparentAnimateReverse: {
+          '0%': {opacity: '1'},
+          '100%': {opacity: '0'},
+        }
+      },
+      animation: {
+        showAnimate: 'showAnimate .1s forwards',
+        hiddenAnimate: 'hiddenAnimate .5s forwards',
+        slideDownHeader: 'slideDownHeader .6s ease-in-out forwards, hiddenAnimate .7s forwards',
+        slideDownControl: 'showAnimate .1s forwards ,slideDownControl .6s ease-in-out forwards',
+
+        slideUpControl: 'slideUpControl .6s ease-in-out forwards',
+        slideUpHeader: 'showAnimate .1s forwards,slideUpHeader .6s ease-in-out forwards',
+
+        transparentAnimate: 'showAnimate .1s forwards, transparentAnimate .6s ease-in-out forwards',
+        transparentAnimateReverse: 'showAnimate .1s forwards, transparentAnimateReverse .6s ease-in-out forwards'
       }
-    },
+    }
   },
-  plugins: [],
-}
+  plugins: []
+};

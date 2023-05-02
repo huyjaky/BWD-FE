@@ -13,13 +13,17 @@ const monsterrat = Montserrat({
 });
 
 const Home: NextPageWithLayout = () => {
+
   return (
     <>
       <Head>
         <title>Air BNB</title>
       </Head>
-      <main className={`${monsterrat.className}`}>
+      <main className={`${monsterrat.className}`} id='root' >
         <HeaderMain/>
+        {/* <div className='w-screen h-screen bg-slate-500 -z-50'>
+
+        </div> */}
       </main>
     </>
   );
