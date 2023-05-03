@@ -22,8 +22,7 @@ const Login: NextPageWithLayout = () => {
 
   return (
     <main>
-      <HeaderLogin/>
-      
+      <HeaderLogin />
     </main>
   );
 };

@@ -3,6 +3,7 @@ import EmptyLayout from '@/components/layouts/empty';
 import { AppPropsWithLayout } from '@/models/layoutprops';
 import '@/styles/globals.css';
 import { SWRConfig } from 'swr';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 // const circular = Flow_Circular
 

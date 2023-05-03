@@ -18,6 +18,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/headers/headerMain/controlPlan"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/headers/headerMain/controlPlan", "src/components/searchBox"],
   "exclude": ["node_modules"]
 }

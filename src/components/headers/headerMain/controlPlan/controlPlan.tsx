@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
+import ControlBar from './controlBar/controlBar';
+
 const ControlPlan = () => {
   const arrLink: { ref: string; title: string }[] = [
     {
@@ -17,13 +18,12 @@ const ControlPlan = () => {
     }
   ];
 
-
   const handleOnScaleUp = (event: any) => {
-    const scaleUp = document.getElementById('scaleUp');
-    const ControlHeader = document.getElementById('ControlHeader');
-    const link = document.getElementById('link');
-    const mask = document.getElementById('mask');
-    const controlBar = document.getElementById('controlBar');
+    const scaleUp: HTMLElement | null = document.getElementById('scaleUp');
+    const ControlHeader: HTMLElement | null = document.getElementById('ControlHeader');
+    const link: HTMLElement | null = document.getElementById('link');
+    const mask: HTMLElement | null = document.getElementById('mask');
+    const controlBar: HTMLElement | null = document.getElementById('controlBar');
 
     scaleUp?.classList.add('animate-slideDownHeader');
     link?.classList.add('animate-slideDownControl');
@@ -54,7 +54,8 @@ const ControlPlan = () => {
                     before:bottom-0 before:h-[2px]  before:w-0 before:absolute
                     before:bg-slate-500 hover:before:w-full before:transition-all
                     before:duration-200
-                  ">
+                  "
+                  >
                     {item.title}
                   </Link>
                 );
@@ -67,11 +68,14 @@ const ControlPlan = () => {
             rounded-full border-slate-400
           "
             id="scaleUp"
-            onClick={handleOnScaleUp}>
-            <button className="flex-1 " id="header-control_bar-list-index-1" >
+            onClick={handleOnScaleUp}
+          >
+            <button className="flex-1 " id="header-control_bar-list-index-1">
               Anywhere
             </button>
-            <button className="flex-1 border-x-2 border-slate-400" id="header-control_bar-list-index-2"
+            <button
+              className="flex-1 border-x-2 border-slate-400"
+              id="header-control_bar-list-index-2"
             >
               Any week
             </button>
@@ -89,78 +93,18 @@ const ControlPlan = () => {
         className="absolute w-full h-0 mt-[80px] bg-white flex
         box-border
       "
-        id="ControlHeader">
+        id="ControlHeader"
+      >
         <div
           className="w-[850px] tablet:w-full h-[90%] box-border rounded-full m-auto flex
           text-[15px] transition-all duration-300 border-2 invisible overflow-hidden
           cursor-pointer
         "
-          id="controlBar">
-          <div className="w-full h-full flex">
-            <div className="flex-[0.6] flex">
-              <div
-                className="flex-col flex m-auto w-full rounded-full box-border pl-7
-                z-10 relative before:absolute before:w-full before:h-[calc(100%+25px)] before:-translate-y-[calc(15%+1px)]
-                before:-translate-x-9 before:-z-10 before:rounded-full transition-all duration-500
-                before:shadow-xl
-                "
-                id="header-control_bar-index-1"
-                >
-                <span>Where</span>
-                {/* the input cho nay lam sau */}
-                <span>Search destinations</span>
-              </div>
-
-            </div>
-            <div className="flex-1 flex">
-              <div className="flex-1 flex">
-                <div
-                  className="flex flex-col m-auto flex-1 box-border pl-3
-                z-10 relative before:absolute before:w-full before:h-[calc(100%+25px)] before:-translate-y-[calc(15%+1px)]
-                before:-translate-x-3 before:-z-10 before:rounded-full transition-all duration-500
-                before:shadow-xl
-                "
-                  >
-                  <span>Check in</span>
-                  <span>Add dates</span>
-                </div>
-                <div
-                  className="flex flex-col m-auto flex-1 box-border pl-3
-                z-10 relative before:absolute before:w-full before:h-[calc(100%+25px)] before:-translate-y-[calc(15%+1px)]
-                before:-translate-x-3 before:-z-10 before:rounded-full transition-all duration-500
-                before:shadow-xl
-                "
-                  id="header-control_bar-index-3"
-                  >
-                  <span>Check out</span>
-                  <span>Add dates</span>
-                </div>
-              </div>
-              <div className="flex-1 flex">
-                <div
-                  className="flex-1 flex flex-col m-auto box-border pl-3
-                z-10 relative before:absolute before:w-[calc(200%+30px)] before:h-[calc(100%+25px)] before:-translate-y-[calc(15%+1px)]
-                before:-translate-x-3 before:-z-10 before:rounded-full transition-all duration-500
-                before:shadow-xl
-                "
-                  id="header-control_bar-index-4"
-                  >
-                  <span>Who</span>
-                  <span>Add guests</span>
-                </div>
-
-                <div className="flex-1 flex box-border p-3 w-full relative z-10">
-                  <div className="rounded-full w-full h-full bg-red-500 flex ">
-                    <BiSearch className="w-[30px] h-[30px] m-auto text-white" />
-                    <span className="text-white font-semibold m-auto ml-0">Search</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          id="controlBar"
+        >
+          <ControlBar />
         </div>
       </div>
-
     </>
   );
 };

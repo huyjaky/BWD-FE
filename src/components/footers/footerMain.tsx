@@ -1,10 +1,5 @@
-
 const FooterTest = () => {
-  return (
-    <div>
-      footer
-    </div>
-  );
+  return <div>footer</div>;
 };
 
 export default FooterTest;

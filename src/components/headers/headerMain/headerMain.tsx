@@ -5,13 +5,13 @@ import { BsList } from 'react-icons/bs';
 import { HiUserCircle } from 'react-icons/hi';
 import ControlPlan from './controlPlan/controlPlan';
 const HeaderMain = () => {
-
   const handleOnMask = (event: any) => {
-    const mask = document.getElementById('mask');
-    const scaleUp = document.getElementById('scaleUp');
-    const ControlHeader = document.getElementById('ControlHeader');
-    const link = document.getElementById('link');
-    const controlBar = document.getElementById('controlBar');
+    const mask: HTMLElement | null = document.getElementById('mask');
+    const scaleUp: HTMLElement | null = document.getElementById('scaleUp');
+
+    const ControlHeader: HTMLElement | null = document.getElementById('ControlHeader');
+    const link: HTMLElement | null = document.getElementById('link');
+    const controlBar: HTMLElement | null = document.getElementById('controlBar');
 
     scaleUp?.classList.remove('animate-slideDownHeader');
     link?.classList.remove('animate-slideDownControl');
@@ -28,19 +28,26 @@ const HeaderMain = () => {
 
   return (
     <>
-      <div className='w-screen h-screen invisible transition-all duration-500 bg-mask absolute' id='mask' onClick={handleOnMask}
+      <div
+        className="w-screen h-screen invisible transition-all duration-500 bg-mask absolute"
+        id="mask"
+        onClick={handleOnMask}
         onScroll={handleOnMask}
       ></div>
       <div className="w-full h-[80px] relative bg-white">
         <header className="w-full h-[80px] border-b-2 flex justify-center px-[80px] box-border absolute">
           <div className="w-full h-full flex relative">
-
             {/* logo container */}
-            <Link href={'/'} className="desktop:flex-1 laptop:mr-7  flex items-center text-red-500
+            <Link
+              href={'/'}
+              className="desktop:flex-1 laptop:mr-7  flex items-center text-red-500
             z-30
-            ">
+            "
+            >
               <FaAirbnb className="h-[50px] w-[50px] mr-1" />
-              <div className="text-[30px] w-0 overflow-hidden desktop:w-fit font-semibold">airbnb</div>
+              <div className="text-[30px] w-0 overflow-hidden desktop:w-fit font-semibold">
+                airbnb
+              </div>
             </Link>
 
             {/* control plan */}
@@ -53,20 +60,23 @@ const HeaderMain = () => {
                 href={''}
                 className="rounded-full bg-white h-fit box-content px-4 py-2
             hover:bg-slate-300
-          ">
+          "
+              >
                 <span className="font-semibold">Airbnb your home</span>
               </Link>
               {/* translate */}
               <Link
                 href={''}
-                className="rounded-full bg-white box-content p-1 mr-3 hover:bg-slate-300">
+                className="rounded-full bg-white box-content p-1 mr-3 hover:bg-slate-300"
+              >
                 <TbWorld className="w-[30px] h-[30px]" />
               </Link>
               {/* control */}
               <div
                 className="w-fit p-1 rounded-full bg-white flex border-gray-400 hover:shadow-lg
             transition-all duration-500
-          ">
+          "
+              >
                 <BsList className="w-[30px] h-[30px]" />
                 <HiUserCircle className="w-[40px] h-[30px]" />
               </div>
