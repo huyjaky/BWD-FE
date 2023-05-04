@@ -4,6 +4,8 @@ import { AppPropsWithLayout } from '@/models/layoutprops';
 import '@/styles/globals.css';
 import { SWRConfig } from 'swr';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import SelectPopoverProvider from '@/contexts/selectPopover';
+import PlaceListProvider from '@/contexts/placeList';
 
 // const circular = Flow_Circular
 
@@ -13,9 +15,13 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <>
       <SWRConfig value={{ fetcher: (url) => axiosClient.get(url), shouldRetryOnError: false }}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <SelectPopoverProvider>
+          <PlaceListProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </PlaceListProvider>
+        </SelectPopoverProvider>
       </SWRConfig>
     </>
   );

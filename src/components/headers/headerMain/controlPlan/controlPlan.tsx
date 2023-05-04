@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { BiSearch } from 'react-icons/bi';
 import ControlBar from './controlBar/controlBar';
+import Popover from './controlBar/popOver';
 
 const ControlPlan = () => {
   const arrLink: { ref: string; title: string }[] = [
@@ -103,6 +104,7 @@ const ControlPlan = () => {
           id="controlBar"
         >
           <ControlBar />
+          <Popover/>
         </div>
       </div>
     </>

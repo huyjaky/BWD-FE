@@ -26,7 +26,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
     // dont send cookies to api server
     req.headers.cookie = '';
 
-    // https://js-post-api.herokuapp.com
     proxy.web(req, res, {
       target: process.env.API_URL_PATH,
       changeOrigin: true,

@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
-import { BiSearch } from 'react-icons/bi';
+import { selectPopoverContext } from '@/contexts';
+import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { BiSearch } from 'react-icons/bi';
 import SearchBox from '../../../../searchBox/searchBox';
 
 interface Place {
@@ -9,8 +10,20 @@ interface Place {
   longitude: number | null;
 }
 
+
 const ControlBar = () => {
   const [submit, setSubmit] = useState(false);
+  const {selected, setSelected} = useContext(selectPopoverContext);
+
+  const onSelected = (event: any) => {
+    setSelected(event.currentTarget.id);
+  }
+
+  const onSubmit = (data: Place) => {
+    setSubmit(true);
+    handleCreate(data);
+  };
+
   const {
     register,
     handleSubmit,
@@ -22,18 +35,14 @@ const ControlBar = () => {
   useEffect(() => {
     register('address', { required: 'Please enter your address' });
     register('latitude', { required: true, min: -90, max: 90 });
-    register('longitude', { required: true, min: -90, max: 90 });
+    register('longitude', { required: true, min: -180, max: 180 });
   }, [register]);
 
   const handleCreate = async (data: Place) => {};
 
-  const onSubmit = (data: Place) => {
-    setSubmit(true);
-    handleCreate(data);
-  };
 
   return (
-    <div className="w-full h-full flex">
+    <div className="w-full h-full flex relative">
       <div className="flex-[0.6] flex">
         <div
           className="flex-col flex m-auto w-full rounded-full box-border pl-7
@@ -41,9 +50,11 @@ const ControlBar = () => {
                 before:-translate-x-9 before:-z-10 before:rounded-full transition-all duration-500
                 before:shadow-xl
                 "
-          id="header-control_bar-index-1"
+          id="where"
+          onClick={onSelected}
         >
           <span>Where</span>
+
 
           {/* the input cho nay lam sau */}
           <form action="" onSubmit={handleSubmit(onSubmit)}>
@@ -57,6 +68,8 @@ const ControlBar = () => {
             />
             <div>{errors.address && <p>{errors.address.message}</p>}</div>
           </form>
+
+
         </div>
       </div>
       <div className="flex-1 flex">
@@ -67,6 +80,8 @@ const ControlBar = () => {
                 before:-translate-x-3 before:-z-10 before:rounded-full transition-all duration-500
                 before:shadow-xl
                 "
+                id='checkin'
+                onClick={onSelected}
           >
             <span>Check in</span>
             <span>Add dates</span>
@@ -77,7 +92,8 @@ const ControlBar = () => {
                 before:-translate-x-3 before:-z-10 before:rounded-full transition-all duration-500
                 before:shadow-xl
                 "
-            id="header-control_bar-index-3"
+            id="checkout"
+            onClick={onSelected}
           >
             <span>Check out</span>
             <span>Add dates</span>
@@ -90,7 +106,8 @@ const ControlBar = () => {
                 before:-translate-x-3 before:-z-10 before:rounded-full transition-all duration-500
                 before:shadow-xl
                 "
-            id="header-control_bar-index-4"
+            id="who"
+            onClick={onSelected}
           >
             <span>Who</span>
             <span>Add guests</span>

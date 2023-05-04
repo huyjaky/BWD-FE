@@ -16,7 +16,6 @@ interface IProps {
 }
 
 const Home: NextPageWithLayout<IProps> = ({ accessToken }: IProps) => {
-  console.log(accessToken);
 
   return (
     <>
@@ -47,7 +46,6 @@ Home.Layout = EmptyLayout;
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const accessToken: string | undefined = process.env.ACCESS_TOKEN_MAPBOX;
 
-  console.log('Main');
   return {
     props: {
       accessToken: accessToken
