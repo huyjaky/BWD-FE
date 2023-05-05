@@ -10,12 +10,14 @@ interface SearchBoxProps {
 
 const SearchBox = ({ onSelectAddress, defaultValue }: SearchBoxProps) => {
   const {address, setAddress} = useContext(selectPlaceContext);
-  const {placeList, setPlaceList, isLoading, setIsLoading} = useContext(placeListContext);
+  const {placeList, setPlaceList, isLoading, setIsLoading, isFetch, setIsFetch} = useContext(placeListContext);
 
 
   useEffect(() => {
     const fetchLocation =async () => {
-      if (!address.formattedAddress) return;
+
+      // return while address null while select one in spaceList suggest
+      if (!address.formattedAddress || !isFetch) return;
 
       // loading is running while fetching api
       setIsLoading(true);
@@ -23,7 +25,6 @@ const SearchBox = ({ onSelectAddress, defaultValue }: SearchBoxProps) => {
       if (placeList_?.data?.statusCode == 200) {
         setIsLoading(false);
         setPlaceList(placeList_.data.resourceSets[0].resources[0].value);
-        console.log(placeList_);
         return;
       }
       console.log('Something went wrong searchBox');
@@ -41,8 +42,8 @@ const SearchBox = ({ onSelectAddress, defaultValue }: SearchBoxProps) => {
   return (
     <div>
       <input type="text" name="input-place" id="" placeholder={'Search your locations'}
-      className="outline-none focus:border-b-2 focus:border-slate-600"
-      onChange={event => setAddress({...address, formattedAddress: event.target.value})}
+      className="outline-none focus:border-b-2 focus:border-slate-600 w-[calc(100%-40px)]"
+      onChange={event => {setAddress({...address, formattedAddress: event.target.value}); setIsFetch(true)}}
       value={address.formattedAddress}
       />
     </div>
