@@ -5,6 +5,7 @@ import { BsList } from 'react-icons/bs';
 import { HiUserCircle } from 'react-icons/hi';
 import ControlPlan from './controlPlan/controlPlan';
 const HeaderMain = () => {
+
   const handleOnMask = (event: any) => {
     const mask: HTMLElement | null = document.getElementById('mask');
     const scaleUp: HTMLElement | null = document.getElementById('scaleUp');
@@ -12,6 +13,11 @@ const HeaderMain = () => {
     const ControlHeader: HTMLElement | null = document.getElementById('ControlHeader');
     const link: HTMLElement | null = document.getElementById('link');
     const controlBar: HTMLElement | null = document.getElementById('controlBar');
+    const where: HTMLElement | null = document.getElementById('where-popup');
+    const checkIn: HTMLElement | null = document.getElementById('checkin-popup');
+    const checkOut: HTMLElement | null = document.getElementById('checkout-popup');
+    const who: HTMLElement | null = document.getElementById('who-popup');
+
 
     scaleUp?.classList.remove('animate-slideDownHeader');
     link?.classList.remove('animate-slideDownControl');
@@ -19,11 +25,22 @@ const HeaderMain = () => {
     mask?.classList.remove('animate-transparentAnimate');
     controlBar?.classList.remove('animate-showAnimate');
 
+    where?.classList.remove('animate-transparentAnimate');
+    checkIn?.classList.remove('animate-transparentAnimate');
+    checkOut?.classList.remove('animate-transparentAnimate');
+    who?.classList.remove('animate-transparentAnimate');
+    // -------------------------------------------------------------------
     scaleUp?.classList.add('animate-slideUpHeader');
     link?.classList.add('animate-slideUpControl');
     ControlHeader?.classList.add('animate-slideUpControl');
     mask?.classList.add('animate-transparentAnimateReverse');
     controlBar?.classList.add('animate-hiddenAnimate');
+
+    where?.classList.add('animate-transparentAnimateReverse');
+    checkIn?.classList.add('animate-transparentAnimateReverse');
+    checkOut?.classList.add('animate-transparentAnimateReverse');
+    who?.classList.add('animate-transparentAnimateReverse');
+
   };
 
   return (

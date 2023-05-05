@@ -13,7 +13,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
   const que: string | undefined = req.body.address;
   if (!que) return res.status(400).json({ message: 'address not valid' });
 
-  const place: string = encodeURIComponent(que);
+  const place: string = que.replace(' ', '%20');
   const token = process.env.ACCESS_TOKEN_BINGMAP;
   const urlBingMap: string = `http://dev.virtualearth.net/REST/v1/Autosuggest?query=${place}&maxResults=10&key=${token}`;
 
@@ -22,9 +22,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
       const handleRequest: ProxyReqCallback = async (proxyReq, req, res, options) => {
         try {
           const response = await axios.get(urlBingMap);
-          res.write(JSON.stringify(response.data));
-          res.end();
-          return;
+          if (response.status == 200) {
+            res.write(JSON.stringify(response.data));
+            res.end();
+            return;
+          }
         } catch (error) {
           console.log(error);
           (res as NextApiResponse).status(500).json({ message: 'Internal server error' });
@@ -35,9 +37,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
       proxy.on('proxyReq', handleRequest);
 
       proxy.web(req, res, {
-        target: urlBingMap,
+        target: 'http://dev.virtualearth.net',
         changeOrigin: true,
-
         selfHandleResponse: true
 
       });

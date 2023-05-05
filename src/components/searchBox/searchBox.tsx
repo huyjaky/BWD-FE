@@ -9,14 +9,22 @@ interface SearchBoxProps {
 
 const SearchBox = ({ onSelectAddress, defaultValue }: SearchBoxProps) => {
   const [typingLocation, setTypingLocation] = useState('');
-  const {placeList, setPlaceList} = useContext(placeListContext);
+  const {placeList, setPlaceList, isLoading, setIsLoading} = useContext(placeListContext);
+
 
   useEffect(() => {
     const fetchLocation =async () => {
       if (!typingLocation) return;
+
+      setIsLoading(true);
       const placeList_ = await placeApi.searchPlace({address: typingLocation});
-      setPlaceList(placeList_.data.resourceSets[0].resources[0].value);
+      if (placeList_.data.statusCode == 200) {
+        setIsLoading(false);
+        setPlaceList(placeList_.data.resourceSets[0].resources[0].value);
+        return;
+      }
       console.log(placeList_);
+      console.log('co j day sai o searchBox ');
     }
     const debounceFetch = setTimeout(()=> {
       fetchLocation();
