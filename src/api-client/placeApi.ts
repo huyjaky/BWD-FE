@@ -7,5 +7,8 @@ interface addressProps {
 export const placeApi = {
   searchPlace(payload: addressProps) {
     return axiosClient.post('/searchplace', payload);
+  },
+  searchLocation(payload:string) {
+    return axiosClient.post('/searchlocation', payload)
   }
 };

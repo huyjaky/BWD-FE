@@ -7,6 +7,8 @@ import ControlPlan from './controlPlan/controlPlan';
 const HeaderMain = () => {
 
   const handleOnMask = (event: any) => {
+
+    // add animate by hand beacause i its ez to fixed :")))
     const mask: HTMLElement | null = document.getElementById('mask');
     const scaleUp: HTMLElement | null = document.getElementById('scaleUp');
 

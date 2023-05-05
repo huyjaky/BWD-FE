@@ -19,6 +19,7 @@ const ControlPlan = () => {
     }
   ];
 
+  // animate by hand again :")))"
   const handleOnScaleUp = (event: any) => {
     const scaleUp: HTMLElement | null = document.getElementById('scaleUp');
     const ControlHeader: HTMLElement | null = document.getElementById('ControlHeader');
