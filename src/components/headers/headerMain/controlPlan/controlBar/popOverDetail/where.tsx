@@ -1,10 +1,11 @@
+import { placeApi } from '@/api-client';
 import { placeListContext } from '@/contexts/placeList';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 import { address } from '@/models/address';
 import { useContext, useEffect, useState } from 'react';
 
 const Where = () => {
-  const { placeList, isLoading, setIsFetch } = useContext(placeListContext);
+  const { placeList, setPlaceList, isLoading, setIsFetch } = useContext(placeListContext);
   const { address, setAddress } = useContext(selectPlaceContext);
   const [address_, setAddress_] = useState<address>();
 
@@ -15,8 +16,17 @@ const Where = () => {
 
   useEffect(() => {
     const fetchLocation = async () => {
-      if (!address_?.formattedAddress) return;
+      if (!address?.formattedAddress) return;
+      const located= await placeApi.searchLocation(address);
+      if (located?.data?.statusCode == 200) {
 
+        console.log(located);
+        const latitude = located.data.resourceSets[0].resources[0].geocodePoints[0].coordinates[0];
+        const longitude = located.data.resourceSets[0].resources[0].geocodePoints[0].coordinates[1];
+        console.log(latitude, longitude);
+        setAddress({...address, latitude: latitude, longitude: longitude});
+
+      }
     };
     fetchLocation();
   }, [address_]);
@@ -25,6 +35,7 @@ const Where = () => {
   const handleOnclick = (event: any) => {
     setAddress(JSON.parse(event.target.value));
     setAddress_(JSON.parse(event.target.value));
+    setPlaceList([]);
     setIsFetch(false);
   };
 

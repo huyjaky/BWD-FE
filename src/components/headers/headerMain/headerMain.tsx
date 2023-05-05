@@ -4,7 +4,13 @@ import { TbWorld } from 'react-icons/tb';
 import { BsList } from 'react-icons/bs';
 import { HiUserCircle } from 'react-icons/hi';
 import ControlPlan from './controlPlan/controlPlan';
+import { useContext } from 'react';
+import { placeListContext } from '@/contexts/placeList';
+import { selectPlaceContext } from '@/contexts/selectPlace';
 const HeaderMain = () => {
+  const {setPlaceList} = useContext(placeListContext);
+  const {setAddress} = useContext(selectPlaceContext);
+
 
   const handleOnMask = (event: any) => {
 
@@ -43,6 +49,7 @@ const HeaderMain = () => {
     checkOut?.classList.add('animate-transparentAnimateReverse');
     who?.classList.add('animate-transparentAnimateReverse');
 
+    setPlaceList([]);
   };
 
   return (

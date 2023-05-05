@@ -1,7 +1,6 @@
 import axios from 'axios';
 import httpProxy, { ProxyReqCallback, ProxyResCallback } from 'http-proxy';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { json } from 'stream/consumers';
 
 const proxy = httpProxy.createProxyServer();
 
@@ -13,9 +12,17 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
   const que: string | undefined = req.body.address;
   if (!que) return res.status(400).json({ message: 'address not valid' });
 
-  const place: string = que.replace(' ', '%20');
+  let place: string ='';
+  for (let index = 0; index < que.length; index++) {
+    if (que.charAt(index) === ' ') {
+      place += '%20';
+      continue
+    }
+    place += que.charAt(index);
+  }
   const token = process.env.ACCESS_TOKEN_BINGMAP;
-  const urlBingMap: string = `http://dev.virtualearth.net/REST/v1/Autosuggest?query=${place}&maxResults=10&key=${token}`;
+  const urlBingMap: string = `http://dev.virtualearth.net/REST/v1/Autosuggest?query=${place}&maxRes=10&key=${token}`;
+
 
   return new Promise(() => {
     try {

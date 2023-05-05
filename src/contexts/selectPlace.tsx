@@ -21,7 +21,9 @@ const selectPlaceDefaultData = {
     postalCode: '',
     addressLine: '',
     streetName: '',
-    formattedAddress: ''
+    formattedAddress: '',
+    latitude: '',
+    longitude: '',
   },
   setAddress: () => {}
 };
