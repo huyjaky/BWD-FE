@@ -22,8 +22,7 @@ const HeaderMain = () => {
     const link: HTMLElement | null = document.getElementById('link');
     const controlBar: HTMLElement | null = document.getElementById('controlBar');
     const where: HTMLElement | null = document.getElementById('where-popup');
-    const checkIn: HTMLElement | null = document.getElementById('checkin-popup');
-    const checkOut: HTMLElement | null = document.getElementById('checkout-popup');
+    const checkIn_Out: HTMLElement | null = document.getElementById('checkin_out-popup');
     const who: HTMLElement | null = document.getElementById('who-popup');
 
 
@@ -34,8 +33,7 @@ const HeaderMain = () => {
     controlBar?.classList.remove('animate-showAnimate');
 
     where?.classList.remove('animate-transparentAnimate');
-    checkIn?.classList.remove('animate-transparentAnimate');
-    checkOut?.classList.remove('animate-transparentAnimate');
+    checkIn_Out?.classList.remove('animate-transparentAnimate');
     who?.classList.remove('animate-transparentAnimate');
     // -------------------------------------------------------------------
     scaleUp?.classList.add('animate-slideUpHeader');
@@ -45,8 +43,7 @@ const HeaderMain = () => {
     controlBar?.classList.add('animate-hiddenAnimate');
 
     where?.classList.add('animate-transparentAnimateReverse');
-    checkIn?.classList.add('animate-transparentAnimateReverse');
-    checkOut?.classList.add('animate-transparentAnimateReverse');
+    checkIn_Out?.classList.add('animate-transparentAnimateReverse');
     who?.classList.add('animate-transparentAnimateReverse');
 
     setPlaceList([]);

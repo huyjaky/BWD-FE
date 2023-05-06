@@ -4,6 +4,8 @@ import { AppPropsWithLayout } from '@/models/layoutprops';
 import '@/styles/globals.css';
 import { SWRConfig } from 'swr';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import 'react-date-range/dist/styles.css'; // main css file
+import 'react-date-range/dist/theme/default.css'; // theme css file
 import SelectPopoverProvider from '@/contexts/selectPopover';
 import PlaceListProvider from '@/contexts/placeList';
 import SelectPlaceProvider from '@/contexts/selectPlace';
