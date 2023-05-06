@@ -24,6 +24,8 @@ const selectPlaceDefaultData = {
     formattedAddress: '',
     latitude: '',
     longitude: '',
+    checkInDay: new Date(),
+    checkOutDay: new Date()
   },
   setAddress: () => {}
 };

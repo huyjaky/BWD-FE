@@ -3,7 +3,8 @@ import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BiSearch } from 'react-icons/bi';
 import SearchBox from '../../../../searchBox/searchBox';
-
+import { selectPlaceContext } from '@/contexts/selectPlace';
+import { format } from 'date-fns';
 interface Place {
   address: string;
   latitude: number | null;
@@ -14,6 +15,7 @@ interface Place {
 const ControlBar = () => {
   const [submit, setSubmit] = useState(false);
   const {selected, setSelected} = useContext(selectPopoverContext);
+  const {address} = useContext(selectPlaceContext);
 
   const onSelected = (event: any) => {
     setSelected(event.currentTarget.id);
@@ -23,7 +25,6 @@ const ControlBar = () => {
     setSubmit(true);
     handleCreate(data);
   };
-
   const {
     register,
     handleSubmit,
@@ -84,7 +85,7 @@ const ControlBar = () => {
                 onClick={onSelected}
           >
             <span>Check in</span>
-            <span>Add dates</span>
+            <span className='text-[12px]'>{format(address.checkInDay, "eeee, ddMMM")}</span>
           </div>
           <div
             className="flex flex-col m-auto flex-1 box-border pl-3
@@ -96,7 +97,7 @@ const ControlBar = () => {
             onClick={onSelected}
           >
             <span>Check out</span>
-            <span>Add dates</span>
+            <span className='text-[12px]'>{format(address.checkOutDay, "eeee, ddMMM")}</span>
           </div>
         </div>
         <div className="flex-1 flex">
