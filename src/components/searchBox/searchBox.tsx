@@ -1,7 +1,7 @@
-import { placeApi } from "@/api-client";
 import { placeListContext } from "@/contexts/placeList";
 import { selectPlaceContext } from "@/contexts/selectPlace";
-import { useContext, useEffect, useState } from "react";
+import placeSearch from "@/hooks/placeSearch";
+import { useContext, useEffect } from "react";
 
 interface SearchBoxProps {
   onSelectAddress: (address: string, latitude: number | null, longitude: number | null) => void;
@@ -21,12 +21,14 @@ const SearchBox = ({ onSelectAddress, defaultValue }: SearchBoxProps) => {
 
       // loading is running while fetching api
       setIsLoading(true);
-      const placeList_ = await placeApi.searchPlace({address: address.formattedAddress});
-      if (placeList_?.data?.statusCode == 200) {
+      const placeList_ = await placeSearch().placeSearch_({address: address.formattedAddress});
+
+      if (placeList_) {
         setIsLoading(false);
-        setPlaceList(placeList_.data.resourceSets[0].resources[0].value);
+        setPlaceList(placeList_);
         return;
       }
+
       console.log('Something went wrong searchBox');
     }
 

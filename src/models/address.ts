@@ -13,3 +13,7 @@ export interface address {
   latitude: string;
   longitude: string
 }
+
+export interface addressProps {
+  address: string
+}

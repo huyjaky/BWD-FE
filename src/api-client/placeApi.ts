@@ -1,9 +1,7 @@
-import { address } from "@/models/address";
+import { address, addressProps } from "@/models/address";
 import axiosClient from "./axiosClient";
 
-interface addressProps {
-  address: string
-}
+
 
 export const placeApi = {
   searchPlace(payload: addressProps) {
