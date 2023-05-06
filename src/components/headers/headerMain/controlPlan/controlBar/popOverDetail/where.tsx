@@ -1,4 +1,5 @@
 import { placeApi } from '@/api-client';
+import { selectPopoverContext } from '@/contexts';
 import { placeListContext } from '@/contexts/placeList';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 import placeSearch from '@/hooks/placeSearch';
@@ -8,6 +9,7 @@ import { useContext, useEffect, useState } from 'react';
 const Where = () => {
   const { placeList, setPlaceList, isLoading, setIsFetch } = useContext(placeListContext);
   const { address, setAddress } = useContext(selectPlaceContext);
+  const {selected} = useContext(selectPopoverContext);
   const [address_, setAddress_] = useState<address>();
 
   useEffect(() => {
@@ -26,6 +28,8 @@ const Where = () => {
     };
     fetchLocation();
   }, [address_]);
+
+  useEffect(() => {}, [selected])
 
   // address for use for filter and address_ use for local component
   const handleOnclick = (event: any) => {

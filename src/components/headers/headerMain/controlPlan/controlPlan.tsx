@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { BiSearch } from 'react-icons/bi';
 import ControlBar from './controlBar/controlBar';
 import Popover from './controlBar/popOver';
+import { useContext } from 'react';
+import { selectPopoverContext } from '@/contexts';
 
 const ControlPlan = () => {
   const arrLink: { ref: string; title: string }[] = [
@@ -18,6 +20,11 @@ const ControlPlan = () => {
       title: 'Online Experiences'
     }
   ];
+  const {setSelected} = useContext(selectPopoverContext);
+
+  const onSelected = (popoverId: string) => {
+    setSelected(popoverId);
+  }
 
   // animate by hand again :")))"
   const handleOnScaleUp = (event: any) => {
@@ -82,16 +89,17 @@ const ControlPlan = () => {
             id="scaleUp"
             onClick={handleOnScaleUp}
           >
-            <button className="flex-1 " id="header-control_bar-list-index-1">
+            <button className="flex-1 " id="header-control_bar-list-index-1" onClick={event => onSelected('where')}>
               Anywhere
             </button>
             <button
               className="flex-1 border-x-2 border-slate-400"
               id="header-control_bar-list-index-2"
+              onClick={event => onSelected('checkin')}
             >
               Any week
             </button>
-            <button className="flex-1" id="header-control_bar-list-index-4">
+            <button className="flex-1" id="header-control_bar-list-index-4" onClick={event => onSelected('who')}>
               Add guests
             </button>
             <button className="rounded-full w-[30px] h-[30px] bg-red-500 flex">

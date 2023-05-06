@@ -2,8 +2,11 @@ import { useContext, useEffect, useState } from 'react';
 import { addDays, setDate } from 'date-fns';
 import { DateRangePicker } from 'react-date-range';
 import { selectPlaceContext } from '@/contexts/selectPlace';
+import { selectPopoverContext } from '@/contexts';
 const CheckIn_Out = () => {
   const {address, setAddress} = useContext(selectPlaceContext);
+
+  const {selected} = useContext(selectPopoverContext);
   const [date_, setDate_] = useState([
     {
       startDate: address.checkInDay,
@@ -12,6 +15,7 @@ const CheckIn_Out = () => {
     }
   ]);
 
+  useEffect(() => {}, [selected])
 
   useEffect(()=>{
     setAddress({...address, checkInDay: date_[0]?.startDate, checkOutDay: date_[0]?.endDate});
