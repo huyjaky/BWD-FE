@@ -19,11 +19,11 @@ module.exports = {
       keyframes: {
         hiddenAnimate: {
           '0%': { visibility: 'visible' },
-          '100%': { visibility: 'hidden'}
+          '100%': { visibility: 'hidden' }
         },
         showAnimate: {
           '0%': { visibility: 'hidden' },
-          '100%': { visibility: 'visible'}
+          '100%': { visibility: 'visible' }
         },
         slideDownHeader: {
           '0%': { transform: 'translateY(0)', scale: '1', opacity: '1' },
@@ -44,12 +44,12 @@ module.exports = {
         },
 
         transparentAnimate: {
-          '0%': {opacity: '0'},
-          '100%': {opacity: '1'},
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
         },
         transparentAnimateReverse: {
-          '0%': {opacity: '1'},
-          '100%': {opacity: '0'},
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
         }
       },
       animation: {
@@ -63,6 +63,12 @@ module.exports = {
 
         transparentAnimate: 'showAnimate .1s forwards, transparentAnimate .6s ease-in-out forwards',
         transparentAnimateReverse: 'showAnimate .1s forwards, transparentAnimateReverse .6s ease-in-out forwards'
+      },
+      backgroundColor: {
+        'ColorBgFooter': '#F7F7F7',
+      },
+      borderColor: {
+        'colorBorderBottom': 'rgb(221,221,221)',
       }
     }
   },

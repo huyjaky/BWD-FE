@@ -1,10 +1,11 @@
 import HeaderMain from '@/components/headers/headerMain/headerMain';
+import FooterTest from '@/components/footers/footerMain';
 import EmptyLayout from '@/components/layouts/empty';
 import { NextPageWithLayout } from '@/models/layoutprops';
 import { GetServerSideProps } from 'next';
 import { Montserrat } from 'next/font/google';
 import { Map, NavigationControl } from 'react-map-gl';
-
+import FooterRooms from '@/components/footers/footerRooms';
 const monsterrat = Montserrat({
   subsets: ['latin'],
   weight: ['200', '400', '600', '800'],
@@ -36,6 +37,8 @@ const Home: NextPageWithLayout<IProps> = ({ accessToken }: IProps) => {
               <NavigationControl/>
             </Map>
         </div> */}
+        {/* <FooterTest /> */}
+        <FooterRooms />
       </main>
     </>
   );
