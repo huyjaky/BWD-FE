@@ -17,7 +17,6 @@ interface IProps {
 }
 
 const Home: NextPageWithLayout<IProps> = ({ accessToken }: IProps) => {
-
   return (
     <>
       <main className={`${monsterrat.className}`} id="root">
@@ -38,7 +37,6 @@ const Home: NextPageWithLayout<IProps> = ({ accessToken }: IProps) => {
             </Map>
         </div> */}
         {/* <FooterTest /> */}
-        <FooterRooms />
       </main>
     </>
   );

@@ -15,8 +15,14 @@ export interface address {
 
   checkInDay: Date;
   checkOutDay: Date;
+
+  guest: {
+    adults: number;
+    childrens: number;
+    infants: number;
+  };
 }
 
 export interface addressProps {
-  address: string
+  address: string;
 }

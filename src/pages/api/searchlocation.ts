@@ -7,16 +7,16 @@ const proxy = httpProxy.createProxyServer();
 
 const replaceString = (payload: string | undefined) => {
   if (payload == null) return;
-  let place: string ='';
+  let place: string = '';
   for (let index = 0; index < payload.length; index++) {
     if (payload.charAt(index) === ' ') {
       place += '%20';
-      continue
+      continue;
     }
     place += payload.charAt(index);
   }
   return place;
-}
+};
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<any>) {
   if (req.method !== 'POST') {
@@ -35,7 +35,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
   const adminDistrict: string = replaceString(adminDistrict_) || '-';
   const locality: string = replaceString(locality_) || '-';
   const addressLine: string = replaceString(addressLine_) || '-';
-  const countryRegionIso2: string = replaceString(countryRegionIso2_) || '-'
+  const countryRegionIso2: string = replaceString(countryRegionIso2_) || '-';
 
   const token = process.env.ACCESS_TOKEN_BINGMAP;
   const urlBingMap: string = `http://dev.virtualearth.net/REST/v1/Locations/${countryRegionIso2}/${adminDistrict}/${locality}/${addressLine}?key=${token}`;
@@ -51,7 +51,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
             return;
           }
         } catch (error) {
-          return (res as NextApiResponse).status(500).json({ message: 'Internal server error'+ error });
+          return (res as NextApiResponse)
+            .status(500)
+            .json({ message: 'Internal server error' + error });
         }
       };
 
@@ -67,4 +69,3 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
     }
   });
 }
-

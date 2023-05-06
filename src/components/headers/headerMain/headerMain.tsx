@@ -8,12 +8,10 @@ import { useContext } from 'react';
 import { placeListContext } from '@/contexts/placeList';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 const HeaderMain = () => {
-  const {setPlaceList} = useContext(placeListContext);
-  const {setAddress} = useContext(selectPlaceContext);
-
+  const { setPlaceList } = useContext(placeListContext);
+  const { setAddress } = useContext(selectPlaceContext);
 
   const handleOnMask = (event: any) => {
-
     // add animate by hand beacause i its ez to fixed :")))
     const mask: HTMLElement | null = document.getElementById('mask');
     const scaleUp: HTMLElement | null = document.getElementById('scaleUp');
@@ -24,7 +22,6 @@ const HeaderMain = () => {
     const where: HTMLElement | null = document.getElementById('where-popup');
     const checkIn_Out: HTMLElement | null = document.getElementById('checkin_out-popup');
     const who: HTMLElement | null = document.getElementById('who-popup');
-
 
     scaleUp?.classList.remove('animate-slideDownHeader');
     link?.classList.remove('animate-slideDownControl');

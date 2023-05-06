@@ -11,15 +11,14 @@ interface Place {
   longitude: number | null;
 }
 
-
 const ControlBar = () => {
   const [submit, setSubmit] = useState(false);
-  const {selected, setSelected} = useContext(selectPopoverContext);
-  const {address} = useContext(selectPlaceContext);
+  const { selected, setSelected } = useContext(selectPopoverContext);
+  const { address } = useContext(selectPlaceContext);
 
   const onSelected = (event: any) => {
     setSelected(event.currentTarget.id);
-  }
+  };
 
   const onSubmit = (data: Place) => {
     setSubmit(true);
@@ -41,7 +40,6 @@ const ControlBar = () => {
 
   const handleCreate = async (data: Place) => {};
 
-
   return (
     <div className="w-full h-full flex relative">
       <div className="flex-[0.6] flex">
@@ -56,7 +54,6 @@ const ControlBar = () => {
         >
           <span>Where</span>
 
-
           {/* the input cho nay lam sau */}
           <form action="" onSubmit={handleSubmit(onSubmit)}>
             <SearchBox
@@ -69,8 +66,6 @@ const ControlBar = () => {
             />
             <div>{errors.address && <p>{errors.address.message}</p>}</div>
           </form>
-
-
         </div>
       </div>
       <div className="flex-1 flex">
@@ -81,11 +76,11 @@ const ControlBar = () => {
                 before:-translate-x-3 before:-z-10 before:rounded-full transition-all duration-500
                 before:shadow-xl
                 "
-                id='checkin'
-                onClick={onSelected}
+            id="checkin"
+            onClick={onSelected}
           >
             <span>Check in</span>
-            <span className='text-[12px]'>{format(address.checkInDay, "eeee, ddMMM")}</span>
+            <span className="text-[12px]">{format(address.checkInDay, 'eeee, ddMMM')}</span>
           </div>
           <div
             className="flex flex-col m-auto flex-1 box-border pl-3
@@ -97,7 +92,7 @@ const ControlBar = () => {
             onClick={onSelected}
           >
             <span>Check out</span>
-            <span className='text-[12px]'>{format(address.checkOutDay, "eeee, ddMMM")}</span>
+            <span className="text-[12px]">{format(address.checkOutDay, 'eeee, ddMMM')}</span>
           </div>
         </div>
         <div className="flex-1 flex">

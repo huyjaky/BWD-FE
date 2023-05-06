@@ -9,27 +9,26 @@ import { useContext, useEffect, useState } from 'react';
 const Where = () => {
   const { placeList, setPlaceList, isLoading, setIsFetch } = useContext(placeListContext);
   const { address, setAddress } = useContext(selectPlaceContext);
-  const {selected} = useContext(selectPopoverContext);
+  const { selected } = useContext(selectPopoverContext);
   const [address_, setAddress_] = useState<address>();
 
   useEffect(() => {
     console.log('fetching success', placeList);
   }, [placeList, isLoading]);
 
-
   useEffect(() => {
     const fetchLocation = async () => {
       if (!address?.formattedAddress) return;
-      const located= await placeSearch().locationSearch_(address);
+      const located = await placeSearch().locationSearch_(address);
 
       if (located) {
-        setAddress({...address, latitude: located.latitude, longitude: located.longitude});
+        setAddress({ ...address, latitude: located.latitude, longitude: located.longitude });
       }
     };
     fetchLocation();
   }, [address_]);
 
-  useEffect(() => {}, [selected])
+  useEffect(() => {}, [selected]);
 
   // address for use for filter and address_ use for local component
   const handleOnclick = (event: any) => {
@@ -46,7 +45,8 @@ const Where = () => {
           className="h-fit w-fit bg-white rounded-2xl pointer-events-auto
       box-border p-5
     "
-          id="where-popup">
+          id="where-popup"
+        >
           <div className="h-full w-full flex-col flex">
             {isLoading == false
               ? placeList?.map((item: any, index: number) => {
@@ -57,7 +57,8 @@ const Where = () => {
                       className="
                 mb-3 relative w-full  text-left"
                       onClick={handleOnclick}
-                      value={JSON.stringify(address)}>
+                      value={JSON.stringify(address)}
+                    >
                       {address.formattedAddress}
                     </button>
                   );

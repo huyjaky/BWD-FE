@@ -20,11 +20,11 @@ const ControlPlan = () => {
       title: 'Online Experiences'
     }
   ];
-  const {setSelected} = useContext(selectPopoverContext);
+  const { setSelected } = useContext(selectPopoverContext);
 
   const onSelected = (popoverId: string) => {
     setSelected(popoverId);
-  }
+  };
 
   // animate by hand again :")))"
   const handleOnScaleUp = (event: any) => {
@@ -33,7 +33,7 @@ const ControlPlan = () => {
     const link: HTMLElement | null = document.getElementById('link');
     const mask: HTMLElement | null = document.getElementById('mask');
     const controlBar: HTMLElement | null = document.getElementById('controlBar');
-    const where: HTMLElement | null =document.getElementById('where-popup');
+    const where: HTMLElement | null = document.getElementById('where-popup');
     const checkIn_Out: HTMLElement | null = document.getElementById('checkin_out-popup');
     const who: HTMLElement | null = document.getElementById('who-popup');
 
@@ -54,7 +54,6 @@ const ControlPlan = () => {
     where?.classList.remove('animate-transparentAnimateReverse');
     checkIn_Out?.classList.remove('animate-transparentAnimateReverse');
     who?.classList.remove('animate-transparentAnimateReverse');
-
   };
 
   return (
@@ -89,17 +88,25 @@ const ControlPlan = () => {
             id="scaleUp"
             onClick={handleOnScaleUp}
           >
-            <button className="flex-1 " id="header-control_bar-list-index-1" onClick={event => onSelected('where')}>
+            <button
+              className="flex-1 "
+              id="header-control_bar-list-index-1"
+              onClick={(event) => onSelected('where')}
+            >
               Anywhere
             </button>
             <button
               className="flex-1 border-x-2 border-slate-400"
               id="header-control_bar-list-index-2"
-              onClick={event => onSelected('checkin')}
+              onClick={(event) => onSelected('checkin')}
             >
               Any week
             </button>
-            <button className="flex-1" id="header-control_bar-list-index-4" onClick={event => onSelected('who')}>
+            <button
+              className="flex-1"
+              id="header-control_bar-list-index-4"
+              onClick={(event) => onSelected('who')}
+            >
               Add guests
             </button>
             <button className="rounded-full w-[30px] h-[30px] bg-red-500 flex">
@@ -123,7 +130,7 @@ const ControlPlan = () => {
           id="controlBar"
         >
           <ControlBar />
-          <Popover/>
+          <Popover />
         </div>
       </div>
     </>

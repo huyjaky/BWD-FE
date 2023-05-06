@@ -25,7 +25,12 @@ const selectPlaceDefaultData = {
     latitude: '',
     longitude: '',
     checkInDay: new Date(),
-    checkOutDay: new Date()
+    checkOutDay: new Date(),
+    guest: {
+      adults: 0,
+      childrens: 0,
+      infants: 0
+    }
   },
   setAddress: () => {}
 };

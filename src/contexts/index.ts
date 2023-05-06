@@ -1,1 +1,1 @@
-export * from './selectPopover'
+export * from './selectPopover';

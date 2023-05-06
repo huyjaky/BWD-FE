@@ -1,18 +1,16 @@
-import { ReactNode, createContext, useEffect, useState } from "react";
-
-
+import { ReactNode, createContext, useEffect, useState } from 'react';
 
 interface placeListProp {
   children: ReactNode;
 }
 
 interface placeListData {
-  placeList: any[],
-  isLoading: boolean,
-  isFetch: boolean,
-  setIsLoading: (payload: boolean) => void,
-  setPlaceList: (payload: any) => void,
-  setIsFetch: (payload: boolean) => void,
+  placeList: any[];
+  isLoading: boolean;
+  isFetch: boolean;
+  setIsLoading: (payload: boolean) => void;
+  setPlaceList: (payload: any) => void;
+  setIsFetch: (payload: boolean) => void;
 }
 
 const placeListDefault = {
@@ -22,27 +20,32 @@ const placeListDefault = {
   setIsLoading: () => {},
   setPlaceList: () => {},
   setIsFetch: () => {}
-}
+};
 
 export const placeListContext = createContext<placeListData>(placeListDefault);
 
-const PlaceListProvider = ({children}: placeListProp) => {
+const PlaceListProvider = ({ children }: placeListProp) => {
   const [placeList, setPlaceList_] = useState(placeListDefault.placeList);
   const [isLoading, setIsLoading_] = useState(placeListDefault.isLoading);
   const [isFetch, setIsFetch_] = useState(placeListDefault.isFetch);
-  const setIsLoading = (IsLoading:boolean)=> setIsLoading_(IsLoading);
-  const setPlaceList = (placeList:any) => setPlaceList_(placeList);
+  const setIsLoading = (IsLoading: boolean) => setIsLoading_(IsLoading);
+  const setPlaceList = (placeList: any) => setPlaceList_(placeList);
   const setIsFetch = (isFetch: boolean) => setIsFetch_(isFetch);
 
-  useEffect(() => {
-  }, [setPlaceList]);
+  useEffect(() => {}, [setPlaceList]);
 
-  const placeListDynamicData = {placeList, setPlaceList, isLoading, setIsLoading, isFetch, setIsFetch};
+  const placeListDynamicData = {
+    placeList,
+    setPlaceList,
+    isLoading,
+    setIsLoading,
+    isFetch,
+    setIsFetch
+  };
 
-  return <placeListContext.Provider value={placeListDynamicData}>
-    {children}
-  </placeListContext.Provider>
-
-}
+  return (
+    <placeListContext.Provider value={placeListDynamicData}>{children}</placeListContext.Provider>
+  );
+};
 
 export default PlaceListProvider;

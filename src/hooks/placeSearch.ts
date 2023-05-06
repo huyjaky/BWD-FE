@@ -21,8 +21,9 @@ const placeSearch = (options?: Partial<PublicConfiguration>) => {
       const located_ = await placeApi.searchLocation(address);
       if (located_?.data?.statusCode == 200) {
         const latitude = located_.data.resourceSets[0].resources[0].geocodePoints[0].coordinates[0];
-        const longitude = located_.data.resourceSets[0].resources[0].geocodePoints[0].coordinates[1];
-        return {latitude, longitude}
+        const longitude =
+          located_.data.resourceSets[0].resources[0].geocodePoints[0].coordinates[1];
+        return { latitude, longitude };
       }
       return undefined;
     } catch (error) {
