@@ -1,15 +1,18 @@
-import Link from 'next/link';
-import { FaAirbnb } from 'react-icons/fa';
-import { TbWorld } from 'react-icons/tb';
-import { BsList } from 'react-icons/bs';
-import { HiUserCircle } from 'react-icons/hi';
-import ControlPlan from './controlPlan/controlPlan';
-import { useContext } from 'react';
 import { placeListContext } from '@/contexts/placeList';
 import { selectPlaceContext } from '@/contexts/selectPlace';
+import Link from 'next/link';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { BsArrowReturnLeft, BsList } from 'react-icons/bs';
+import { FaAirbnb } from 'react-icons/fa';
+import { HiUserCircle } from 'react-icons/hi';
+import { TbWorld } from 'react-icons/tb';
+import ControlPlan from './controlPlan/controlPlan';
 const HeaderMain = () => {
   const { setPlaceList } = useContext(placeListContext);
   const { setAddress } = useContext(selectPlaceContext);
+
+  const divRef = useRef<HTMLDivElement>(null);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const handleOnMask = (event: any) => {
     // add animate by hand beacause i its ez to fixed :")))
@@ -46,8 +49,29 @@ const HeaderMain = () => {
     setPlaceList([]);
   };
 
+  useEffect(() => {
+    if (!showDropdown) return;
+    const handleOnclick = (event: any) => {
+      if (divRef.current && !divRef.current.contains(event.target)) {
+      }
+    };
+  }, [showDropdown]);
+
   return (
     <>
+      <div
+        className="w-screen h-screen transition-all duration-500 bg-mask absolute z-40 flex
+        overflow-hidden animate-transparentAnimateLogin
+        "
+        id="mask2"
+        onScroll={handleOnMask}
+      >
+        <div
+          className="w-[600px] h-[600px] bg-white m-auto rounded-3xl
+        translate-y-[1200px] animate-slideUpLogin "
+          ref={divRef}
+        ></div>
+      </div>
       <div
         className="w-screen h-screen invisible transition-all duration-500 bg-mask absolute"
         id="mask"

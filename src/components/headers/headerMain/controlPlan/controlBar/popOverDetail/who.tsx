@@ -46,7 +46,10 @@ const Who = () => {
       setAddress({ ...address, guest: { ...address.guest, adults: address.guest.adults - 1 } });
     } else if (componentId === 'Childrens') {
       if (address.guest.childrens == 0) return;
-      setAddress({ ...address, guest: { ...address.guest, childrens: address.guest.childrens - 1 } });
+      setAddress({
+        ...address,
+        guest: { ...address.guest, childrens: address.guest.childrens - 1 }
+      });
     } else if (componentId === 'Infants') {
       if (address.guest.infants == 0) return;
       setAddress({ ...address, guest: { ...address.guest, infants: address.guest.infants - 1 } });
@@ -58,13 +61,15 @@ const Who = () => {
         className="w-[350px] h-full bg-white rounded-2xl pointer-events-auto box-border
         p-6
       "
-        id="who-popup">
+        id="who-popup"
+      >
         <div className="grid grid-cols-1 grid-rows-3 w-full h-full">
           {guestArr.map((item, index) => {
             return (
               <div
                 className={`w-full ${index == guestArr.length - 1 ? '' : 'border-b-2'} flex`}
-                key={index}>
+                key={index}
+              >
                 {/* title and des */}
                 <div className="flex-1 h-full flex flex-col">
                   <span className="w-full m-auto mb-0 font-bold">{item.title}</span>
@@ -79,8 +84,8 @@ const Who = () => {
                         className={`w-[35px] h-[35px] border-2 rounded-full font-bold
                         ${item.amount == 0 ? '' : 'border-slate-800'}
                       `}
-                      id={`${item.title}`}
-                      onClick={minusGuest}
+                        id={`${item.title}`}
+                        onClick={minusGuest}
                       >
                         &#45;
                       </button>
@@ -91,8 +96,8 @@ const Who = () => {
                         className="w-[35px] h-[35px] border-2 rounded-full
                       border-slate-800 font-bold
                       "
-                      id={`${item.title}`}
-                      onClick={plusGuest}
+                        id={`${item.title}`}
+                        onClick={plusGuest}
                       >
                         &#43;
                       </button>

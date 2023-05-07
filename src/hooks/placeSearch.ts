@@ -2,7 +2,7 @@ import { placeApi } from '@/api-client';
 import { address, addressProps } from '@/models/address';
 import { PublicConfiguration } from 'swr/_internal';
 
-const placeSearch = (options?: Partial<PublicConfiguration>) => {
+const placeSearch = () => {
   const placeSearch_ = async ({ address }: addressProps) => {
     try {
       const placeList_ = await placeApi.searchPlace({ address: address });

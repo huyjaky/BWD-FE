@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 
 const Auth = (req: any, res: ServerResponse<IncomingMessage>) => {
   const isLogin = Cookies.get('access_token');
-  console.log('check');
+
   if (!isLogin) {
     res.setHeader('location', '/login');
     res.statusCode = 302;

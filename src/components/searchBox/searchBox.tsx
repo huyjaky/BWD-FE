@@ -8,10 +8,9 @@ interface SearchBoxProps {
   defaultValue: string;
 }
 
-const SearchBox = ({ onSelectAddress, defaultValue }: SearchBoxProps) => {
+const SearchBox = () => {
   const { address, setAddress } = useContext(selectPlaceContext);
-  const { placeList, setPlaceList, isLoading, setIsLoading, isFetch, setIsFetch } =
-    useContext(placeListContext);
+  const { setPlaceList, setIsLoading, isFetch, setIsFetch } = useContext(placeListContext);
 
   useEffect(() => {
     const fetchLocation = async () => {

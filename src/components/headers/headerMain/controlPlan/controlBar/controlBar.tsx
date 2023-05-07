@@ -32,12 +32,6 @@ const ControlBar = () => {
     watch
   } = useForm<Place>({ defaultValues: {} });
 
-  useEffect(() => {
-    register('address', { required: 'Please enter your address' });
-    register('latitude', { required: true, min: -90, max: 90 });
-    register('longitude', { required: true, min: -180, max: 180 });
-  }, [register]);
-
   const handleCreate = async (data: Place) => {};
 
   return (
@@ -56,14 +50,7 @@ const ControlBar = () => {
 
           {/* the input cho nay lam sau */}
           <form action="" onSubmit={handleSubmit(onSubmit)}>
-            <SearchBox
-              onSelectAddress={(address, latitude, longitude) => {
-                setValue('address', address);
-                setValue('latitude', latitude);
-                setValue('longitude', longitude);
-              }}
-              defaultValue=""
-            />
+            <SearchBox />
             <div>{errors.address && <p>{errors.address.message}</p>}</div>
           </form>
         </div>

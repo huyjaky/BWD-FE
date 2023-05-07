@@ -19,7 +19,7 @@ interface IProps {
 const Home: NextPageWithLayout<IProps> = ({ accessToken }: IProps) => {
   return (
     <>
-      <main className={`${monsterrat.className}`} id="root">
+      <main className={`${monsterrat.className} relative`} id="root">
         <HeaderMain />
 
         {/* <div className="w-full h-screen mt-[200px] relative">
@@ -36,7 +36,8 @@ const Home: NextPageWithLayout<IProps> = ({ accessToken }: IProps) => {
               <NavigationControl/>
             </Map>
         </div> */}
-        {/* <FooterTest /> */}
+        <FooterTest />
+        <FooterRooms />
       </main>
     </>
   );

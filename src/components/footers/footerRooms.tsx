@@ -131,7 +131,7 @@ export default function FooterRooms() {
             </li>
 
             <li>
-              <div className="flex relative">
+              <ul className="flex relative">
                 <li>
                   <span className="absolute left-[5px] bottom-1 ">.</span>
                   <a className="ml-3 hover:underline hover:decoration-solid hover:cursor-pointer">
@@ -156,7 +156,7 @@ export default function FooterRooms() {
                     Your Privacy Choices
                   </a>
                 </li>
-              </div>
+              </ul>
             </li>
           </ul>
         </div>
