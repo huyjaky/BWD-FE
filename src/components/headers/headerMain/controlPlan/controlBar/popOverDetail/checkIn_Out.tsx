@@ -28,16 +28,31 @@ const CheckIn_Out = () => {
   return (
     <div className="w-full h-full bg-white rounded-2xl pointer-events-auto" id="checkin_out-popup">
       <div className="p-8 w-full h-full flex items-center justify-center ">
-        <DateRangePicker
-          onChange={(item: any) => handleOnChange(item)}
-          showPreview={true}
-          moveRangeOnFirstSelection={false}
-          months={2}
-          ranges={date_}
-          direction="horizontal"
-          rangeColors={['rgb(239 68 68)']}
-          className="w-full h-full font-semibold"
-        />
+        <div className="w-full h-full tablet:hidden mobile:hidden">
+          <DateRangePicker
+            onChange={(item: any) => handleOnChange(item)}
+            showPreview={true}
+            moveRangeOnFirstSelection={false}
+            months={2}
+            ranges={date_}
+            direction="horizontal"
+            rangeColors={['rgb(239 68 68)']}
+            className="w-full h-full font-semibold "
+          />
+        </div>
+        <div className="w-full h-full laptop:hidden desktop:hidden flex overflow-scroll">
+          <DateRangePicker
+            onChange={(item: any) => handleOnChange(item)}
+            showPreview={true}
+            moveRangeOnFirstSelection={false}
+            months={2}
+            ranges={date_}
+            direction="vertical"
+            rangeColors={['rgb(239 68 68)']}
+            className=" font-semibold m-auto mt-0"
+          />
+        </div>
+
       </div>
     </div>
   );

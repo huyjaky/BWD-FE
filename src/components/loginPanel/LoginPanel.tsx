@@ -9,17 +9,18 @@ interface LoginPanelProps {
   children: ReactNode;
 }
 
+const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+
 const schema = yup
   .object({
     userName: yup.string().required(),
-    password: yup.string().required()
+    password: yup.string().required().matches(passwordRegex, 'Invalid password')
   })
   .required();
 
 type LoginInterface = yup.InferType<typeof schema>;
 
 const LoginPanel = ({ children }: LoginPanelProps) => {
-  const router = useRouter();
   const { login } = useAuth();
   const divRef = useRef<HTMLInputElement>(null);
   const title_username = useRef<HTMLInputElement>(null);
@@ -67,7 +68,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
     },
     resolver: yupResolver(schema)
   });
-  const onSubmit: SubmitHandler<LoginInterface> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<LoginInterface> = (data) => console.log('cehck', data);
 
   return (
     <div className="w-[600px] h-fit m-auto shadow-2xl rounded-3xl box-border p-10">
@@ -82,47 +83,64 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="w-full h-full grid grid-cols-1 grid-rows-2 mb-3
-            "
-        >
+            ">
+          {/* form input username */}
           <div
-            className={`border-2 rounded-t-xl box-border p-3 ${
+            className={`border-2 rounded-t-xl box-border p-3 h-[70px]${
               errors?.userName?.message ? 'border-red-500' : ''
             }`}
-            ref={divRef}
-          >
+            ref={divRef}>
             <div className="w-full h-full flex items-center" ref={title_username}>
-              <span>UserName</span>
+              <span>
+                User name
+                <span className="italic text-red-500">
+                  {' '}
+                  | {errors.userName?.message ? ` ${errors.userName.message}` : ''}
+                </span>
+              </span>
             </div>
-            <input
-              {...register('userName')}
-              type="text"
-              ref={input_username}
-              className="w-full h-0 border-b shadow-2xl outline-none"
-            />
+            <div className="w-full h-0 mt-1 overflow-hidden" ref={input_username}>
+              <input
+                {...register('userName')}
+                type="text"
+                className="w-full h-full outline-none border-b shadow-2xl"
+              />
+            </div>
           </div>
+
+          {/* form input password */}
           <div
-            className={`border-2 rounded-b-xl box-border p-3 ${
+            className={`border-2 rounded-b-xl box-border p-3 h-[70px] ${
               errors?.password?.message ? 'border-red-500' : ''
             }`}
-            ref={divRef2}
-          >
+            ref={divRef2}>
             <div className="w-full h-full flex items-center" ref={title_password}>
-              <span>Password</span>
+              <span>
+                Password
+                <span className="italic text-red-500">
+                  {' '}
+                  | {errors.password?.message ? ` ${errors.password.message}` : ''}
+                </span>
+              </span>
             </div>
-            <input
-              {...register('password')}
-              type="text"
-              ref={input_password}
-              className="w-full h-0 border-b shadow-2xl outline-none"
-            />
+            <div className="w-full h-0 mt-1 overflow-hidden" ref={input_password}>
+              <input
+                {...register('password')}
+                type="text"
+                className="w-full h-full outline-none border-b shadow-2xl"
+              />
+            </div>
           </div>
           <button type="submit" className="w-full h-[40px] bg-red-600 mt-5 rounded-xl">
             <span className="text-white font-semibold text-[25px]">Login</span>
           </button>
         </form>
+
         <span className="font-light text-[15px]">
           We&#39;ll call or text you to confirm your number. Standard message and data rates apply.
         </span>
+        <p>{errors.password?.message}</p>
+        <p>{errors.userName?.message}</p>
       </div>
     </div>
   );

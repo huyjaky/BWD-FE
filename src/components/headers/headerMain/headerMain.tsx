@@ -66,7 +66,6 @@ const HeaderMain = () => {
 
     const handleIsClick = () => {
       if (isLoginClick) {
-        console.log('isClick true');
         mask.current?.classList.remove('animate-transparentAnimateLoginReverse2');
         loginPanel.current?.classList.remove('animate-slideDownLogin');
         mask.current?.classList.add('animate-transparentAnimateLogin2');
