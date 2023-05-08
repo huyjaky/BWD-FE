@@ -7,6 +7,7 @@ import { FaAirbnb } from 'react-icons/fa';
 import { TbWorld } from 'react-icons/tb';
 import ControlPlan from './controlPlan/controlPlan';
 import ButtonAccount from '../buttonAccount/ButtonAccount';
+import HeaderForm from '../headerForm/HeaderForm';
 const HeaderMain = () => {
   const { setPlaceList } = useContext(placeListContext);
 
@@ -51,31 +52,31 @@ const HeaderMain = () => {
   useEffect(() => {
     const handleOnclickLogin = (event: any) => {
       const isClick = loginPanel.current?.contains(event.target);
-      if (!isClick){
+      if (!isClick) {
         mask.current?.classList.remove('animate-transparentAnimate');
         loginPanel.current?.classList.remove('animate-slideUpLogin');
 
         mask.current?.classList.add('animate-transparentAnimateReverse');
         loginPanel.current?.classList.add('animate-slideDownLogin');
       }
-    }
-    document.addEventListener('mousedown', handleOnclickLogin)
+    };
+    document.addEventListener('mousedown', handleOnclickLogin);
   }, []);
 
   return (
     <>
       <div
         className="w-screen h-screen transition-all duration-500 bg-mask absolute z-40 flex
-        overflow-hidden animate-transparentAnimate
+        overflow-hidden animate-transparentAnimate hidden
         "
         ref={mask}
         onScroll={handleOnMask}
       >
-        <div className='w-full h-full flex animate-slideUpLogin'>
-          <div className='w-fit  h-fit bg-white m-auto rounded-3xl'  ref={loginPanel}>
-          <LoginPanel>
-            <div></div>
-          </LoginPanel>
+        <div className="w-full h-full flex animate-slideUpLogin">
+          <div className="w-fit  h-fit bg-white m-auto rounded-3xl" ref={loginPanel}>
+            <LoginPanel>
+              <div></div>
+            </LoginPanel>
           </div>
         </div>
       </div>
@@ -85,48 +86,9 @@ const HeaderMain = () => {
         onClick={handleOnMask}
         onScroll={handleOnMask}
       ></div>
-      <div className="w-full h-[80px] relative bg-white">
-        <header className="w-full h-[80px] border-b-2 flex justify-center px-[80px] box-border absolute">
-          <div className="w-full h-full flex relative">
-            {/* logo container */}
-            <Link
-              href={'/'}
-              className="desktop:flex-1 laptop:mr-7  flex items-center text-red-500
-            z-30
-            "
-            >
-              <FaAirbnb className="h-[50px] w-[50px] mr-1" />
-              <div className="text-[30px] w-0 overflow-hidden desktop:w-fit font-semibold">
-                airbnb
-              </div>
-            </Link>
-
-            {/* control plan */}
-            <ControlPlan />
-
-            {/* controlbar */}
-            <div className="flex-1 flex items-center justify-end z-30">
-              {/* airbnb your home */}
-              <Link
-                href={''}
-                className="rounded-full bg-white h-fit box-content px-4 py-2
-            hover:bg-slate-300
-          "
-              >
-                <span className="font-semibold">Airbnb your home</span>
-              </Link>
-              {/* translate */}
-              <Link
-                href={''}
-                className="rounded-full bg-white box-content p-1 mr-3 hover:bg-slate-300"
-              >
-                <TbWorld className="w-[30px] h-[30px]" />
-              </Link>
-              <ButtonAccount/>
-            </div>
-          </div>
-        </header>
-      </div>
+      <HeaderForm>
+        <ControlPlan/>
+      </HeaderForm>
     </>
   );
 };
