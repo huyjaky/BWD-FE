@@ -10,6 +10,14 @@ import SelectPopoverProvider from '@/contexts/selectPopover';
 import PlaceListProvider from '@/contexts/placeList';
 import SelectPlaceProvider from '@/contexts/selectPlace';
 
+import { Poppins } from 'next/font/google';
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['200', '400', '600', '800'],
+  variable: '--font-poppins'
+});
+
 // const circular = Flow_Circular
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
@@ -22,7 +30,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           <PlaceListProvider>
             <SelectPlaceProvider>
               <Layout>
-                <Component {...pageProps} />
+                <div className={`${poppins.className}`}>
+                  <Component {...pageProps} />
+                </div>
               </Layout>
             </SelectPlaceProvider>
           </PlaceListProvider>
