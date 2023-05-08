@@ -39,10 +39,8 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
         title_username?.current?.classList.remove('animate-boxInputLoginFocus_titleReverse');
         input_username?.current?.classList.remove('animate-boxInputLoginFocus_inputReverse');
         input_username?.current?.focus();
-        console.log('check contain1');
         return;
       } else if (!isContain1) {
-        console.log('cehck conatin 1');
         title_username?.current?.classList.remove('animate-boxInputLoginFocus_title');
         input_username?.current?.classList.remove('animate-boxInputLoginFocus_input');
         title_username?.current?.classList.add('animate-boxInputLoginFocus_titleReverse');

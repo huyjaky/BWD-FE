@@ -1,14 +1,12 @@
+import LoginPanel from '@/components/loginPanel/LoginPanel';
 import { placeListContext } from '@/contexts/placeList';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 import Link from 'next/link';
 import { useContext, useEffect, useRef, useState } from 'react';
-import { BsArrowReturnLeft, BsList } from 'react-icons/bs';
 import { FaAirbnb } from 'react-icons/fa';
-import { HiUserCircle } from 'react-icons/hi';
 import { TbWorld } from 'react-icons/tb';
 import ControlPlan from './controlPlan/controlPlan';
-import LoginPanel from '@/components/loginPanel/LoginPanel';
-import { IoIosClose } from 'react-icons/io';
+import ButtonAccount from '../buttonAccount/ButtonAccount';
 const HeaderMain = () => {
   const { setPlaceList } = useContext(placeListContext);
   const { setAddress } = useContext(selectPlaceContext);
@@ -119,15 +117,7 @@ const HeaderMain = () => {
               >
                 <TbWorld className="w-[30px] h-[30px]" />
               </Link>
-              {/* control */}
-              <div
-                className="w-fit p-1 rounded-full bg-white flex border-gray-400 hover:shadow-lg
-            transition-all duration-500
-          "
-              >
-                <BsList className="w-[30px] h-[30px]" />
-                <HiUserCircle className="w-[40px] h-[30px]" />
-              </div>
+              <ButtonAccount/>
             </div>
           </div>
         </header>
