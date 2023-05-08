@@ -1,12 +1,8 @@
+import { selectPopoverDefault } from '@/models/place';
 import { ReactNode, useState, createContext } from 'react';
 
 interface selectPopoverProps {
   children: ReactNode;
-}
-
-interface selectPopoverDefault {
-  selected: string;
-  setSelected: (selected: string) => void;
 }
 
 const selectPopoverDefaultData = {

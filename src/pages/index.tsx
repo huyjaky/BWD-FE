@@ -36,8 +36,6 @@ const Home: NextPageWithLayout<IProps> = ({ accessToken }: IProps) => {
               <NavigationControl/>
             </Map>
         </div> */}
-        <FooterTest />
-        <FooterRooms />
       </main>
     </>
   );

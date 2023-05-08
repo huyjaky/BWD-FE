@@ -1,13 +1,9 @@
 import { address } from '@/models/address';
+import { selectPlaceData } from '@/models/place';
 import { ReactNode, createContext, useState } from 'react';
 
 interface selectPlaceProps {
   children: ReactNode;
-}
-
-interface selectPlaceData {
-  address: address;
-  setAddress: (payload: address) => void;
 }
 
 const selectPlaceDefaultData = {

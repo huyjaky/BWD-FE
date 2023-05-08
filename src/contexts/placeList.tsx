@@ -1,16 +1,8 @@
+import { placeListData } from '@/models/place';
 import { ReactNode, createContext, useEffect, useState } from 'react';
 
 interface placeListProp {
   children: ReactNode;
-}
-
-interface placeListData {
-  placeList: any[];
-  isLoading: boolean;
-  isFetch: boolean;
-  setIsLoading: (payload: boolean) => void;
-  setPlaceList: (payload: any) => void;
-  setIsFetch: (payload: boolean) => void;
 }
 
 const placeListDefault = {

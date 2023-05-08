@@ -7,6 +7,8 @@ import { FaAirbnb } from 'react-icons/fa';
 import { HiUserCircle } from 'react-icons/hi';
 import { TbWorld } from 'react-icons/tb';
 import ControlPlan from './controlPlan/controlPlan';
+import LoginPanel from '@/components/loginPanel/LoginPanel';
+import { IoIosClose } from 'react-icons/io';
 const HeaderMain = () => {
   const { setPlaceList } = useContext(placeListContext);
   const { setAddress } = useContext(selectPlaceContext);
@@ -61,16 +63,18 @@ const HeaderMain = () => {
     <>
       <div
         className="w-screen h-screen transition-all duration-500 bg-mask absolute z-40 flex
-        overflow-hidden animate-transparentAnimateLogin
+        overflow-hidden animate-transparentAnimateLogin invisible
         "
         id="mask2"
         onScroll={handleOnMask}
       >
-        <div
-          className="w-[600px] h-[600px] bg-white m-auto rounded-3xl
-        translate-y-[1200px] animate-slideUpLogin "
-          ref={divRef}
-        ></div>
+        <div className='w-full h-full flex'>
+          <div className='w-fit  h-fit bg-white m-auto rounded-3xl'>
+          <LoginPanel>
+            <div></div>
+          </LoginPanel>
+          </div>
+        </div>
       </div>
       <div
         className="w-screen h-screen invisible transition-all duration-500 bg-mask absolute"
