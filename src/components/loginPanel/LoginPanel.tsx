@@ -40,7 +40,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
         input_username?.current?.classList.remove('animate-boxInputLoginFocus_inputReverse');
         input_username?.current?.focus();
         return;
-      } else if (!isContain1) {
+      } else if (!isContain1 && !input_username.current?.value) {
         title_username?.current?.classList.remove('animate-boxInputLoginFocus_title');
         input_username?.current?.classList.remove('animate-boxInputLoginFocus_input');
         title_username?.current?.classList.add('animate-boxInputLoginFocus_titleReverse');

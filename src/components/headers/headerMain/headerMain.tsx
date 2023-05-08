@@ -9,10 +9,9 @@ import ControlPlan from './controlPlan/controlPlan';
 import ButtonAccount from '../buttonAccount/ButtonAccount';
 const HeaderMain = () => {
   const { setPlaceList } = useContext(placeListContext);
-  const { setAddress } = useContext(selectPlaceContext);
 
-  const divRef = useRef<HTMLDivElement>(null);
-  const [showDropdown, setShowDropdown] = useState(false);
+  const loginPanel = useRef<HTMLInputElement>(null);
+  const mask = useRef<HTMLInputElement>(null);
 
   const handleOnMask = (event: any) => {
     // add animate by hand beacause i its ez to fixed :")))
@@ -50,24 +49,30 @@ const HeaderMain = () => {
   };
 
   useEffect(() => {
-    if (!showDropdown) return;
-    const handleOnclick = (event: any) => {
-      if (divRef.current && !divRef.current.contains(event.target)) {
+    const handleOnclickLogin = (event: any) => {
+      const isClick = loginPanel.current?.contains(event.target);
+      if (!isClick){
+        mask.current?.classList.remove('animate-transparentAnimate');
+        loginPanel.current?.classList.remove('animate-slideUpLogin');
+
+        mask.current?.classList.add('animate-transparentAnimateReverse');
+        loginPanel.current?.classList.add('animate-slideDownLogin');
       }
-    };
-  }, [showDropdown]);
+    }
+    document.addEventListener('mousedown', handleOnclickLogin)
+  }, []);
 
   return (
     <>
       <div
         className="w-screen h-screen transition-all duration-500 bg-mask absolute z-40 flex
-        overflow-hidden animate-transparentAnimateLogin invisible
+        overflow-hidden animate-transparentAnimate
         "
-        id="mask2"
+        ref={mask}
         onScroll={handleOnMask}
       >
-        <div className='w-full h-full flex'>
-          <div className='w-fit  h-fit bg-white m-auto rounded-3xl'>
+        <div className='w-full h-full flex animate-slideUpLogin'>
+          <div className='w-fit  h-fit bg-white m-auto rounded-3xl'  ref={loginPanel}>
           <LoginPanel>
             <div></div>
           </LoginPanel>
