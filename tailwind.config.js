@@ -115,6 +115,9 @@ controlPanelSlideUp: {
 
         controlPanelSlideDown: 'showAnimate .1s forwards, controlPanelSlideDown .5s ease-in-out forwards',
         controlPanelSlideUp: 'controlPanelSlideUp .5s ease-in-out forwards, hiddenAnimate .5s forwards',
+
+        transparentAnimateLogin2: 'showAnimate .1s forwards, transparentAnimate .5s ease-in-out forwards ',
+        transparentAnimateLoginReverse2: 'transparentAnimateReverse .5s ease-in-out forwards, hiddenAnimate .5s forwards',
       },
       backgroundColor: {
         'ColorBgFooter': '#F7F7F7',

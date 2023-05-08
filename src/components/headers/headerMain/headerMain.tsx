@@ -8,8 +8,10 @@ import { TbWorld } from 'react-icons/tb';
 import ControlPlan from './controlPlan/controlPlan';
 import ButtonAccount from '../buttonAccount/ButtonAccount';
 import HeaderForm from '../headerForm/HeaderForm';
+import { selectPopoverContext } from '@/contexts';
 const HeaderMain = () => {
   const { setPlaceList } = useContext(placeListContext);
+  const { isLoginClick, setIsLoginClick } = useContext(selectPopoverContext);
 
   const loginPanel = useRef<HTMLInputElement>(null);
   const mask = useRef<HTMLInputElement>(null);
@@ -52,27 +54,39 @@ const HeaderMain = () => {
   useEffect(() => {
     const handleOnclickLogin = (event: any) => {
       const isClick = loginPanel.current?.contains(event.target);
-      if (!isClick) {
-        mask.current?.classList.remove('animate-transparentAnimate');
+      if (!isClick && isLoginClick) {
+        mask.current?.classList.remove('animate-transparentAnimateLogin2');
         loginPanel.current?.classList.remove('animate-slideUpLogin');
-
-        mask.current?.classList.add('animate-transparentAnimateReverse');
+        mask.current?.classList.add('animate-transparentAnimateLoginReverse2');
         loginPanel.current?.classList.add('animate-slideDownLogin');
+        setIsLoginClick(false);
+        return
       }
     };
+
+    const handleIsClick = () => {
+      if (isLoginClick) {
+        console.log('isClick true');
+        mask.current?.classList.remove('animate-transparentAnimateLoginReverse2');
+        loginPanel.current?.classList.remove('animate-slideDownLogin');
+        mask.current?.classList.add('animate-transparentAnimateLogin2');
+        loginPanel.current?.classList.add('animate-slideUpLogin');
+        return;
+      }
+    };
+
     document.addEventListener('mousedown', handleOnclickLogin);
-  }, []);
+    handleIsClick();
+  }, [isLoginClick]);
 
   return (
     <>
       <div
         className="w-screen h-screen transition-all duration-500 bg-mask absolute z-40 flex
-        overflow-hidden animate-transparentAnimate hidden
+        overflow-hidden invisible
         "
-        ref={mask}
-        onScroll={handleOnMask}
-      >
-        <div className="w-full h-full flex animate-slideUpLogin">
+        ref={mask}>
+        <div className="w-full h-full flex">
           <div className="w-fit  h-fit bg-white m-auto rounded-3xl" ref={loginPanel}>
             <LoginPanel>
               <div></div>
@@ -84,10 +98,9 @@ const HeaderMain = () => {
         className="w-screen h-screen invisible transition-all duration-500 bg-mask absolute"
         id="mask"
         onClick={handleOnMask}
-        onScroll={handleOnMask}
-      ></div>
+        onScroll={handleOnMask}></div>
       <HeaderForm>
-        <ControlPlan/>
+        <ControlPlan />
       </HeaderForm>
     </>
   );

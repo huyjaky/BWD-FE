@@ -9,7 +9,7 @@ const Popover = () => {
 
   return (
     <div
-      className="absolute w-[850px] h-[480px] top-24 pointer-events-none"
+      className="absolute tablet:w-full w-[850px] h-[480px] top-24 pointer-events-none"
       id="root-popup"
       onClick={(event) => event.stopPropagation()}
     >

@@ -1,9 +1,13 @@
-import { useEffect, useRef } from 'react';
+import { selectPopoverContext } from '@/contexts';
+import { useContext, useEffect, useRef } from 'react';
 import { BsList } from 'react-icons/bs';
 import { HiUserCircle } from 'react-icons/hi';
 
 const ButtonAccount = () => {
+  const {setIsLoginClick} = useContext(selectPopoverContext);
   const controlBar = useRef<HTMLInputElement>(null);
+
+  // animation open control panel
   const handleOnclick = (event: any) => {
     if (!controlBar.current?.classList.contains('animate-controlPanelSlideDown')) {
       controlBar.current?.classList.remove('animate-controlPanelSlideUp');
@@ -12,15 +16,18 @@ const ButtonAccount = () => {
   };
 
   useEffect(() => {
+
+    // animation close control panel
     const handleControlPanel = (event: any) => {
       const isClick = controlBar.current?.contains(event.target);
-      if (!isClick && controlBar.current?.classList.contains('animate-controlPanelSlideDown')) {
+      if (!isClick && controlBar.current?.classList.contains("animate-controlPanelSlideDown")) {
         controlBar.current?.classList.remove('animate-controlPanelSlideDown');
         controlBar.current?.classList.add('animate-controlPanelSlideUp');
       }
     };
     document.addEventListener('mousedown', handleControlPanel);
   }, []);
+
 
   return (
     <div
@@ -34,11 +41,10 @@ const ButtonAccount = () => {
         className="absolute translate-y-12 w-[250px] h-0 right-0 rounded-2xl border-[3px] bg-white
         overflow-hidden invisible
       "
-        onClick={handleOnclick}
         ref={controlBar}
       >
         <div className="w-full h-fit border-b-2">
-          <button className="w-full py-4 text-left px-5">Login</button>
+          <button className="w-full py-4 text-left px-5" onClick={event=> setIsLoginClick(true)}>Login</button>
           <button className="w-full py-4 text-left px-5">Sign up</button>
         </div>
         <div className="w-full h-fit">

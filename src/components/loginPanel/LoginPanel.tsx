@@ -40,11 +40,6 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
         input_username?.current?.classList.remove('animate-boxInputLoginFocus_inputReverse');
         input_username?.current?.focus();
         return;
-      } else if (!isContain1 && !input_username.current?.value) {
-        title_username?.current?.classList.remove('animate-boxInputLoginFocus_title');
-        input_username?.current?.classList.remove('animate-boxInputLoginFocus_input');
-        title_username?.current?.classList.add('animate-boxInputLoginFocus_titleReverse');
-        input_username?.current?.classList.add('animate-boxInputLoginFocus_inputReverse');
       }
 
       const isContain2 = divRef2?.current?.contains(event.target);
@@ -54,12 +49,6 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
         title_password?.current?.classList.remove('animate-boxInputLoginFocus_titleReverse');
         input_password?.current?.classList.remove('animate-boxInputLoginFocus_inputReverse');
         input_password?.current?.focus();
-        return;
-      } else if (!isContain2) {
-        title_password?.current?.classList.remove('animate-boxInputLoginFocus_title');
-        input_password?.current?.classList.remove('animate-boxInputLoginFocus_input');
-        title_password?.current?.classList.add('animate-boxInputLoginFocus_titleReverse');
-        input_password?.current?.classList.add('animate-boxInputLoginFocus_inputReverse');
         return;
       }
     };
@@ -86,9 +75,6 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
         <div className="w-full h-full text-center m-auto">
           <span className="font-bold">Login or Sign Up</span>
         </div>
-        {/* <button>
-                <IoIosClose className="w-[50px] h-[50px]" />
-              </button> */}
         {children}
       </div>
       <span className="font-semibold text-[24px] w-full">Welcome to Airbnb</span>
@@ -100,7 +86,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
         >
           <div
             className={`border-2 rounded-t-xl box-border p-3 ${
-              errors?.userName ? 'border-red-500' : ''
+              errors?.userName?.message ? 'border-red-500' : ''
             }`}
             ref={divRef}
           >
@@ -116,7 +102,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
           </div>
           <div
             className={`border-2 rounded-b-xl box-border p-3 ${
-              errors?.password ? 'border-red-500' : ''
+              errors?.password?.message ? 'border-red-500' : ''
             }`}
             ref={divRef2}
           >
