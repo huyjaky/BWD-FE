@@ -1,4 +1,5 @@
 import { authApi } from '@/api-client';
+import { selectPopoverContext } from '@/contexts';
 import { userAccContext } from '@/contexts/userAcc';
 import useAuth from '@/hooks/useAuth';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -26,6 +27,7 @@ type LoginInterface = yup.InferType<typeof schema>;
 const LoginPanel = ({ children }: LoginPanelProps) => {
   const { login } = useAuth();
   const { user, setUser } = useContext(userAccContext);
+  const {setIsLoginClick} =useContext(selectPopoverContext);
   const router = useRouter();
   const divRef = useRef<HTMLInputElement>(null);
   const title_username = useRef<HTMLInputElement>(null);
@@ -76,23 +78,15 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
     resolver: yupResolver(schema)
   });
 
-  const [userName, setUserName] = useState('');
-  const { data, error, mutate, isValidating } = useSWR(`/get/useracc/UserName/${userName}`, {
-    revalidateOnMount: false
-  });
 
   const onSubmit: SubmitHandler<LoginInterface> = async (data_) => {
     const login_ = await authApi.login(data_);
-    if (login_.status == 200 && !user?.UserId) {
-      setUserName(data_.username);
-      await mutate();
-      router.push('/', undefined, {shallow: true})
+    router.push('/', undefined, {shallow: true});
+    setUser({...user, UserName: data_.username});
+    if (login_?.status == 200 && login_?.data) {
+      setIsLoginClick(false);
     }
   };
-
-  useEffect(()=>{
-    return setUser({...user, ...data?.data});
-  }, [data])
 
 
   return (
@@ -152,7 +146,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
             <div className="w-full h-0 mt-1 overflow-hidden" ref={input_password}>
               <input
                 {...register('password')}
-                type="text"
+                type="password"
                 className="w-full h-full outline-none border-b shadow-2xl"
               />
             </div>

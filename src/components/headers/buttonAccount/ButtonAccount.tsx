@@ -30,7 +30,6 @@ const ButtonAccount = () => {
     document.addEventListener('mousedown', handleControlPanel);
   }, []);
 
-  useEffect(()=>{console.log(user);}, [user])
 
   return (
     <div

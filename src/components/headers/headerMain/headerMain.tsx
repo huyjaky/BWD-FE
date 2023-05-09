@@ -12,6 +12,7 @@ import { selectPopoverContext } from '@/contexts';
 const HeaderMain = () => {
   const { setPlaceList } = useContext(placeListContext);
   const { isLoginClick, setIsLoginClick } = useContext(selectPopoverContext);
+  const [isFirstLoading, setIsFirstLoading] = useState(true);
 
   const loginPanel = useRef<HTMLInputElement>(null);
   const mask = useRef<HTMLInputElement>(null);
@@ -71,11 +72,17 @@ const HeaderMain = () => {
         mask.current?.classList.add('animate-transparentAnimateLogin2');
         loginPanel.current?.classList.add('animate-slideUpLogin');
         return;
+      } else if (!isLoginClick && !isFirstLoading){
+        mask.current?.classList.remove('animate-transparentAnimateLogin2');
+        loginPanel.current?.classList.remove('animate-slideUpLogin');
+        mask.current?.classList.add('animate-transparentAnimateLoginReverse2');
+        loginPanel.current?.classList.add('animate-slideDownLogin');
       }
     };
 
     document.addEventListener('mousedown', handleOnclickLogin);
     handleIsClick();
+    setIsFirstLoading(false);
   }, [isLoginClick]);
 
   return (

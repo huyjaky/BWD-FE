@@ -44,7 +44,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
       const handleRequest: ProxyReqCallback = async (proxyReq, req, res, options) => {
         try {
           const response = await axios.get(urlBingMap);
-          console.log(options.target);
           if (response.status === 200) {
             res.write(JSON.stringify(response.data));
             res.end();
