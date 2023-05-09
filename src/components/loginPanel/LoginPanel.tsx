@@ -1,3 +1,4 @@
+import { authApi } from '@/api-client';
 import useAuth from '@/hooks/useAuth';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
@@ -9,12 +10,12 @@ interface LoginPanelProps {
   children: ReactNode;
 }
 
-const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+// const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
 const schema = yup
   .object({
-    userName: yup.string().required(),
-    password: yup.string().required().matches(passwordRegex, 'Invalid password')
+    username: yup.string().required(),
+    password: yup.string().required()
   })
   .required();
 
@@ -22,6 +23,7 @@ type LoginInterface = yup.InferType<typeof schema>;
 
 const LoginPanel = ({ children }: LoginPanelProps) => {
   const { login } = useAuth();
+  const router= useRouter();
   const divRef = useRef<HTMLInputElement>(null);
   const title_username = useRef<HTMLInputElement>(null);
   const input_username = useRef<HTMLInputElement>(null);
@@ -30,6 +32,8 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
   const title_password = useRef<HTMLInputElement>(null);
   const input_password = useRef<HTMLInputElement>(null);
 
+
+  // animations
   useEffect(() => {
     let handleOnClickOutSide = (event: any) => {
       const isContain1 = divRef?.current?.contains(event.target);
@@ -63,12 +67,16 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
     formState: { errors }
   } = useForm<LoginInterface>({
     defaultValues: {
-      userName: '',
+      username: '',
       password: ''
     },
     resolver: yupResolver(schema)
   });
-  const onSubmit: SubmitHandler<LoginInterface> = (data) => console.log('cehck', data);
+
+  const onSubmit: SubmitHandler<LoginInterface> = async (data) => {
+    const login_ = await authApi.login(data);
+    console.log(login_);
+  }
 
   return (
     <div className="w-[600px] h-fit m-auto shadow-2xl rounded-3xl box-border p-10">
@@ -86,8 +94,8 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
             ">
           {/* form input username */}
           <div
-            className={`border-2 rounded-t-xl box-border p-3 h-[70px]${
-              errors?.userName?.message ? 'border-red-500' : ''
+            className={`border-2 rounded-t-xl box-border p-3 h-[70px] ${
+              errors?.username?.message ? 'border-red-500' : ''
             }`}
             ref={divRef}>
             <div className="w-full h-full flex items-center" ref={title_username}>
@@ -95,13 +103,13 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
                 User name
                 <span className="italic text-red-500">
                   {' '}
-                  | {errors.userName?.message ? ` ${errors.userName.message}` : ''}
+                  | {errors.username?.message ? ` ${errors.username.message}` : ''}
                 </span>
               </span>
             </div>
             <div className="w-full h-0 mt-1 overflow-hidden" ref={input_username}>
               <input
-                {...register('userName')}
+                {...register('username')}
                 type="text"
                 className="w-full h-full outline-none border-b shadow-2xl"
               />
@@ -139,8 +147,6 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
         <span className="font-light text-[15px]">
           We&#39;ll call or text you to confirm your number. Standard message and data rates apply.
         </span>
-        <p>{errors.password?.message}</p>
-        <p>{errors.userName?.message}</p>
       </div>
     </div>
   );

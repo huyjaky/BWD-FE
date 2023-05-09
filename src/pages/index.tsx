@@ -6,6 +6,8 @@ import { GetServerSideProps } from 'next';
 import { Montserrat } from 'next/font/google';
 import { Map, NavigationControl } from 'react-map-gl';
 import FooterRooms from '@/components/footers/footerRooms';
+import Auth from '@/funcServerSide/Auth';
+import { BiCloudLightning } from 'react-icons/bi';
 const monsterrat = Montserrat({
   subsets: ['latin'],
   weight: ['200', '400', '600', '800'],

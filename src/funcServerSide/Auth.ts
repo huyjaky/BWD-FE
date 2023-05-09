@@ -7,7 +7,11 @@ const Auth = (req: any, res: ServerResponse<IncomingMessage>) => {
   if (!isLogin) {
     res.setHeader('location', '/login');
     res.statusCode = 302;
-    res.end();
+    res.end;
+  } else {
+    res.setHeader('location', '/');
+    res.statusCode = 200;
+    res.end;
   }
   return res;
 };
