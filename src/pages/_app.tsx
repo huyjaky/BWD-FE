@@ -11,6 +11,7 @@ import PlaceListProvider from '@/contexts/placeList';
 import SelectPlaceProvider from '@/contexts/selectPlace';
 
 import { Poppins } from 'next/font/google';
+import UserAccProvider from '@/contexts/userAcc';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -29,11 +30,13 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         <SelectPopoverProvider>
           <PlaceListProvider>
             <SelectPlaceProvider>
-              <Layout>
-                <div className={`${poppins.className}`}>
-                  <Component {...pageProps} />
-                </div>
-              </Layout>
+              <UserAccProvider>
+                <Layout>
+                  <div className={`${poppins.className}`}>
+                    <Component {...pageProps} />
+                  </div>
+                </Layout>
+              </UserAccProvider>
             </SelectPlaceProvider>
           </PlaceListProvider>
         </SelectPopoverProvider>

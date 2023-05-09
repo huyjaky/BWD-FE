@@ -1,6 +1,5 @@
 import { placeApi } from '@/api-client';
 import { address, addressProps } from '@/models/address';
-import { PublicConfiguration } from 'swr/_internal';
 
 const placeSearch = () => {
   const placeSearch_ = async ({ address }: addressProps) => {

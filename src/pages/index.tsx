@@ -1,13 +1,9 @@
 import HeaderMain from '@/components/headers/headerMain/headerMain';
-import FooterTest from '@/components/footers/footerMain';
 import EmptyLayout from '@/components/layouts/empty';
+import redirectToHome from '@/funcServerSide/redirectToHome';
 import { NextPageWithLayout } from '@/models/layoutprops';
 import { GetServerSideProps } from 'next';
 import { Montserrat } from 'next/font/google';
-import { Map, NavigationControl } from 'react-map-gl';
-import FooterRooms from '@/components/footers/footerRooms';
-import Auth from '@/funcServerSide/Auth';
-import { BiCloudLightning } from 'react-icons/bi';
 const monsterrat = Montserrat({
   subsets: ['latin'],
   weight: ['200', '400', '600', '800'],
@@ -15,29 +11,18 @@ const monsterrat = Montserrat({
 });
 
 interface IProps {
-  accessToken: string;
+  accessTokenMapbox: string;
+  isLogin: false
 }
 
-const Home: NextPageWithLayout<IProps> = ({ accessToken }: IProps) => {
+
+const Home: NextPageWithLayout<IProps> = ({ accessTokenMapbox }: IProps) => {
+
   return (
     <>
       <main className={`${monsterrat.className} relative`} id="root">
         <HeaderMain />
-
-        {/* <div className="w-full h-screen mt-[200px] relative">
-          <Map
-            initialViewState={{
-              longitude: -100,
-              latitude: 40,
-              zoom: 3.5
-            }}
-            style={{ width: '100%', height: '100%' }}
-            mapStyle={`mapbox://styles/mapbox/outdoors-v12`}
-            mapboxAccessToken={`${accessToken}`}
-            projection={'globe'}>
-              <NavigationControl/>
-            </Map>
-        </div> */}
+        
       </main>
     </>
   );
@@ -45,14 +30,12 @@ const Home: NextPageWithLayout<IProps> = ({ accessToken }: IProps) => {
 
 Home.Layout = EmptyLayout;
 
+export default Home;
+
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const accessToken: string | undefined = process.env.ACCESS_TOKEN_MAPBOX;
+  const isLogin = redirectToHome(req, res);
 
   return {
-    props: {
-      accessToken: accessToken
-    }
+    props: {}
   };
 };
-
-export default Home;

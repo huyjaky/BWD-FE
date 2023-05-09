@@ -2,17 +2,12 @@ import FooterRooms from '@/components/footers/footerRooms';
 import HeaderLogin from '@/components/headers/headerLogin/headerLogin';
 import EmptyLayout from '@/components/layouts/empty';
 import LoginPanel from '@/components/loginPanel/LoginPanel';
-import Auth from '@/funcServerSide/Auth';
 import { NextPageWithLayout } from '@/models/layoutprops';
 import Cookies from 'js-cookie';
 import { GetServerSideProps } from 'next';
 import { useEffect } from 'react';
 
 const Login: NextPageWithLayout = () => {
-  useEffect(()=>{
-    const cookies = Cookies.get('access_token');
-    console.log(cookies);
-  },[])
 
   return (
     <main>
@@ -31,12 +26,15 @@ const Login: NextPageWithLayout = () => {
 
 Login.Layout = EmptyLayout;
 
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const cookies = req.cookies.access_token;
+  if (cookies) {
+    res.setHeader('location', '/');
+    res.statusCode = 302;
+    res.end();
+    return {props: {}};
+  }
+  return { props: {} };
+};
+
 export default Login;
-
-
-export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
-  const cookies = Cookies.get('access_token');
-  console.log(cookies);
-
-  return{props: {}}
-}

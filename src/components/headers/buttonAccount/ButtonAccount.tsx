@@ -1,10 +1,12 @@
 import { selectPopoverContext } from '@/contexts';
+import { userAccContext } from '@/contexts/userAcc';
 import { useContext, useEffect, useRef } from 'react';
 import { BsList } from 'react-icons/bs';
 import { HiUserCircle } from 'react-icons/hi';
 
 const ButtonAccount = () => {
   const {setIsLoginClick} = useContext(selectPopoverContext);
+  const {user} = useContext(userAccContext)
   const controlBar = useRef<HTMLInputElement>(null);
 
   // animation open control panel
@@ -28,6 +30,7 @@ const ButtonAccount = () => {
     document.addEventListener('mousedown', handleControlPanel);
   }, []);
 
+  useEffect(()=>{console.log(user);}, [user])
 
   return (
     <div
@@ -44,8 +47,17 @@ const ButtonAccount = () => {
         ref={controlBar}
       >
         <div className="w-full h-fit border-b-2">
-          <button className="w-full py-4 text-left px-5" onClick={event=> setIsLoginClick(true)}>Login</button>
-          <button className="w-full py-4 text-left px-5">Sign up</button>
+          {!user?.UserId ?
+          <>
+            <button className="w-full py-4 text-left px-5" onClick={event=> setIsLoginClick(true)}>Login</button>
+            <button className="w-full py-4 text-left px-5">Sign up</button>
+          </>
+          :
+          <>
+            <button className="w-full py-4 text-left px-5" >Manage listings</button>
+            <button className="w-full py-4 text-left px-5">Account</button>
+          </>
+          }
         </div>
         <div className="w-full h-fit">
           <button className="w-full py-4 text-left px-5">Airbnb your home</button>

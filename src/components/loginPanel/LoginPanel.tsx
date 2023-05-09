@@ -1,9 +1,11 @@
 import { authApi } from '@/api-client';
+import { userAccContext } from '@/contexts/userAcc';
 import useAuth from '@/hooks/useAuth';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
-import { ReactNode, useEffect, useRef } from 'react';
+import { ReactNode, useContext, useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import useSWR from 'swr';
 import * as yup from 'yup';
 
 interface LoginPanelProps {
@@ -23,7 +25,8 @@ type LoginInterface = yup.InferType<typeof schema>;
 
 const LoginPanel = ({ children }: LoginPanelProps) => {
   const { login } = useAuth();
-  const router= useRouter();
+  const { user, setUser } = useContext(userAccContext);
+  const router = useRouter();
   const divRef = useRef<HTMLInputElement>(null);
   const title_username = useRef<HTMLInputElement>(null);
   const input_username = useRef<HTMLInputElement>(null);
@@ -32,7 +35,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
   const title_password = useRef<HTMLInputElement>(null);
   const input_password = useRef<HTMLInputElement>(null);
 
-
+  // const {data, error, mutate, isValidating} = useSWR(`/api/get/useracc/UserName/${userName}`);
   // animations
   useEffect(() => {
     let handleOnClickOutSide = (event: any) => {
@@ -73,10 +76,24 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
     resolver: yupResolver(schema)
   });
 
-  const onSubmit: SubmitHandler<LoginInterface> = async (data) => {
-    const login_ = await authApi.login(data);
-    console.log(login_);
-  }
+  const [userName, setUserName] = useState('');
+  const { data, error, mutate, isValidating } = useSWR(`/get/useracc/UserName/${userName}`, {
+    revalidateOnMount: false
+  });
+
+  const onSubmit: SubmitHandler<LoginInterface> = async (data_) => {
+    const login_ = await authApi.login(data_);
+    if (login_.status == 200 && !user?.UserId) {
+      setUserName(data_.username);
+      await mutate();
+      router.push('/', undefined, {shallow: true})
+    }
+  };
+
+  useEffect(()=>{
+    return setUser({...user, ...data?.data});
+  }, [data])
+
 
   return (
     <div className="w-[600px] h-fit m-auto shadow-2xl rounded-3xl box-border p-10">
@@ -84,6 +101,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
         <div className="w-full h-full text-center m-auto">
           <span className="font-bold">Login or Sign Up</span>
         </div>
+
         {children}
       </div>
       <span className="font-semibold text-[24px] w-full">Welcome to Airbnb</span>
