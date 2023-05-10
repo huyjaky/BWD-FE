@@ -36,6 +36,7 @@ const Home: NextPageWithLayout<userAcc> = (user_: userAcc) => {
     <>
       <main className={`${monsterrat.className} relative`} id="root">
         <HeaderMain />
+        
       </main>
     </>
   );

@@ -4,9 +4,8 @@ import { userAccContext } from '@/contexts/userAcc';
 import useAuth from '@/hooks/useAuth';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
-import { ReactNode, useContext, useEffect, useRef, useState } from 'react';
+import { ReactNode, useContext, useEffect, useRef } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import useSWR from 'swr';
 import * as yup from 'yup';
 
 interface LoginPanelProps {
@@ -37,8 +36,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
   const title_password = useRef<HTMLInputElement>(null);
   const input_password = useRef<HTMLInputElement>(null);
 
-  // const {data, error, mutate, isValidating} = useSWR(`/api/get/useracc/UserName/${userName}`);
-  // animations
+  // just animate
   useEffect(() => {
     let handleOnClickOutSide = (event: any) => {
       const isContain1 = divRef?.current?.contains(event.target);
@@ -79,6 +77,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
   });
 
 
+  // fetch accesstoken , navigate as well as do animte
   const onSubmit: SubmitHandler<LoginInterface> = async (data_) => {
     const login_ = await authApi.login(data_);
     router.push('/', undefined, {shallow: true});

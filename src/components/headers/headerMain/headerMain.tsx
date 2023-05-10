@@ -1,14 +1,9 @@
 import LoginPanel from '@/components/loginPanel/LoginPanel';
-import { placeListContext } from '@/contexts/placeList';
-import { selectPlaceContext } from '@/contexts/selectPlace';
-import Link from 'next/link';
-import { useContext, useEffect, useRef, useState } from 'react';
-import { FaAirbnb } from 'react-icons/fa';
-import { TbWorld } from 'react-icons/tb';
-import ControlPlan from './controlPlan/controlPlan';
-import ButtonAccount from '../buttonAccount/ButtonAccount';
-import HeaderForm from '../headerForm/HeaderForm';
 import { selectPopoverContext } from '@/contexts';
+import { placeListContext } from '@/contexts/placeList';
+import { useContext, useEffect, useRef, useState } from 'react';
+import HeaderForm from '../headerForm/HeaderForm';
+import ControlPlan from './controlPlan/controlPlan';
 const HeaderMain = () => {
   const { setPlaceList } = useContext(placeListContext);
   const { isLoginClick, setIsLoginClick } = useContext(selectPopoverContext);
@@ -53,6 +48,7 @@ const HeaderMain = () => {
   };
 
   useEffect(() => {
+    // animate
     const handleOnclickLogin = (event: any) => {
       const isClick = loginPanel.current?.contains(event.target);
       if (!isClick && isLoginClick) {
@@ -65,6 +61,7 @@ const HeaderMain = () => {
       }
     };
 
+    // animate for dynamic event
     const handleIsClick = () => {
       if (isLoginClick) {
         mask.current?.classList.remove('animate-transparentAnimateLoginReverse2');
