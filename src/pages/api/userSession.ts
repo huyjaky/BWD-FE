@@ -1,7 +1,6 @@
 
 
 import { sessionOptions } from '@/api-client/session';
-import { userAcc } from '@/models/userAcc'
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { NextApiRequest, NextApiResponse } from 'next'
 

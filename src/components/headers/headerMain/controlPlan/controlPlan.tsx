@@ -118,14 +118,14 @@ const ControlPlan = () => {
 
       <div
         className="absolute w-full h-0 mt-[80px] bg-white flex
-        box-border
+        box-border z-20
       "
         id="ControlHeader"
       >
         <div
           className="w-[850px] tablet:w-full h-[90%] box-border rounded-full m-auto flex
           text-[15px] transition-all duration-300 border-2 invisible overflow-hidden
-          cursor-pointer
+          cursor-pointer 
         "
           id="controlBar"
         >
