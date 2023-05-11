@@ -31,6 +31,7 @@
     "yup": "^1.1.1"
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.0.1",
     "@types/cookies": "^0.7.7",
     "@types/http-proxy": "^1.17.10",
     "@types/js-cookie": "^3.0.3",

@@ -1,10 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next';
-import httpProxy, { ProxyResCallback } from 'http-proxy';
-import Cookies from 'cookies';
-import { resolve } from 'path';
-import { withIronSessionApiRoute } from 'iron-session/next';
 import { sessionOptions } from '@/api-client/session';
+import { userAcc } from '@/models/userAcc';
+import Cookies from 'cookies';
+import httpProxy, { ProxyResCallback } from 'http-proxy';
+import { withIronSessionApiRoute } from 'iron-session/next';
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { resolve } from 'path';
 
 export const config = {
   api: {
@@ -41,12 +42,16 @@ const handler = (req: NextApiRequest, res: NextApiResponse<any>) => {
       });
 
       proxyRes.on('end', async () => {
-        const user = JSON.parse(body);
-        req.session.user = { ...req.session.user, ...user };
-        console.log(req.session.user);
-        await req.session.save();
+        const user: userAcc = JSON.parse(body);
+
         try {
-          (res as NextApiResponse).status(200).json({ ...user });
+          req.session = req.session ?? {};
+          req.session.props = {
+            user_: user,
+            props: undefined
+          };
+          const wait = await req.session.save();
+          (res as NextApiResponse).status(200).json({ message: 'fetch Done' });
         } catch (error) {
           console.log(error);
           (res as NextApiResponse)

@@ -12,6 +12,7 @@ import SelectPlaceProvider from '@/contexts/selectPlace';
 
 import { Poppins } from 'next/font/google';
 import UserAccProvider from '@/contexts/userAcc';
+import ImgPahtProvider from '@/contexts/imgPath';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -31,11 +32,13 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           <PlaceListProvider>
             <SelectPlaceProvider>
               <UserAccProvider>
-                <Layout>
-                  <div className={`${poppins.className}`}>
-                    <Component {...pageProps} />
-                  </div>
-                </Layout>
+                <ImgPahtProvider>
+                  <Layout>
+                    <div className={`${poppins.className}`}>
+                      <Component {...pageProps} />
+                    </div>
+                  </Layout>
+                </ImgPahtProvider>
               </UserAccProvider>
             </SelectPlaceProvider>
           </PlaceListProvider>
