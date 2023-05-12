@@ -57,7 +57,7 @@ const HeaderMain = () => {
         mask.current?.classList.add('animate-transparentAnimateLoginReverse2');
         loginPanel.current?.classList.add('animate-slideDownLogin');
         setIsLoginClick(false);
-        return
+        return;
       }
     };
 
@@ -69,7 +69,7 @@ const HeaderMain = () => {
         mask.current?.classList.add('animate-transparentAnimateLogin2');
         loginPanel.current?.classList.add('animate-slideUpLogin');
         return;
-      } else if (!isLoginClick && !isFirstLoading){
+      } else if (!isLoginClick && !isFirstLoading) {
         mask.current?.classList.remove('animate-transparentAnimateLogin2');
         loginPanel.current?.classList.remove('animate-slideUpLogin');
         mask.current?.classList.add('animate-transparentAnimateLoginReverse2');
@@ -88,7 +88,8 @@ const HeaderMain = () => {
         className="w-screen h-screen transition-all duration-500 bg-mask absolute z-40 flex
         overflow-hidden invisible
         "
-        ref={mask}>
+        ref={mask}
+      >
         <div className="w-full h-full flex">
           <div className="w-fit  h-fit bg-white m-auto rounded-3xl" ref={loginPanel}>
             <LoginPanel>
@@ -101,7 +102,8 @@ const HeaderMain = () => {
         className="w-screen h-screen invisible transition-all duration-500 bg-mask absolute"
         id="mask"
         onClick={handleOnMask}
-        onScroll={handleOnMask}></div>
+        onScroll={handleOnMask}
+      ></div>
       <HeaderForm>
         <ControlPlan />
       </HeaderForm>

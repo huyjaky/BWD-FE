@@ -14,7 +14,7 @@ module.exports = {
         mobile: { max: '799px' }
       },
       colors: {
-        mask: 'rgba(105,105,105, 0.4)'
+        mask: 'rgba(105,105,105, 0.4)',
       },
       keyframes: {
         hiddenAnimate: {

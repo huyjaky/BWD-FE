@@ -45,11 +45,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
             sameSite: 'lax',
             expires: new Date(expiresIn)
           });
-          
 
-          (res as NextApiResponse)
-            .status(200)
-            .json({ message: 'login successfully'});
+          (res as NextApiResponse).status(200).json({ message: 'login successfully' });
         } catch (error) {
           (res as NextApiResponse)
             .status(500)

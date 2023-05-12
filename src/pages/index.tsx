@@ -25,7 +25,6 @@ interface HomeProps {
 const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
   const { user, setUser } = useContext(userAccContext);
 
-
   if (!user_?.UserId) {
     const { data, error, mutate, isValidating } = useSWR(`/get/useracc/UserName/${user.UserName}`, {
       revalidateOnFocus: false,

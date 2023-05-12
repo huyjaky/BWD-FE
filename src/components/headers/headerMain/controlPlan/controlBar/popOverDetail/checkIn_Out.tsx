@@ -52,7 +52,6 @@ const CheckIn_Out = () => {
             className=" font-semibold m-auto mt-0"
           />
         </div>
-
       </div>
     </div>
   );

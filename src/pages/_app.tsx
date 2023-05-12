@@ -31,11 +31,11 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           <PlaceListProvider>
             <SelectPlaceProvider>
               <UserAccProvider>
-                  <Layout>
-                    <div className={`${poppins.className}`}>
-                      <Component {...pageProps} />
-                    </div>
-                  </Layout>
+                <Layout>
+                  <div className={`${poppins.className}`}>
+                    <Component {...pageProps} />
+                  </div>
+                </Layout>
               </UserAccProvider>
             </SelectPlaceProvider>
           </PlaceListProvider>

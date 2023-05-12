@@ -9,7 +9,7 @@ const selectPopoverDefaultData = {
   selected: '',
   setSelected: () => {},
   isLoginClick: false,
-  setIsLoginClick: ()=> {}
+  setIsLoginClick: () => {}
 };
 
 export const selectPopoverContext = createContext<selectPopoverDefault>(selectPopoverDefaultData);
@@ -19,7 +19,6 @@ const SelectPopoverProvider = ({ children }: selectPopoverProps) => {
   const [isLoginClick, setIsLoginClick_] = useState(selectPopoverDefaultData.isLoginClick);
   const setSelected = (payload: string) => setSelected_(payload);
   const setIsLoginClick = (payload: boolean) => setIsLoginClick_(payload);
-
 
   const selectedDynamicData = { selected, setSelected, isLoginClick, setIsLoginClick };
   return (

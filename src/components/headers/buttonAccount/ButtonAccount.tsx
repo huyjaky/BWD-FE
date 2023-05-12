@@ -5,8 +5,8 @@ import { BsList } from 'react-icons/bs';
 import { HiUserCircle } from 'react-icons/hi';
 
 const ButtonAccount = () => {
-  const {setIsLoginClick} = useContext(selectPopoverContext);
-  const {user} = useContext(userAccContext)
+  const { setIsLoginClick } = useContext(selectPopoverContext);
+  const { user } = useContext(userAccContext);
   const controlBar = useRef<HTMLInputElement>(null);
 
   // animation open control panel
@@ -18,18 +18,16 @@ const ButtonAccount = () => {
   };
 
   useEffect(() => {
-
     // animation close control panel
     const handleControlPanel = (event: any) => {
       const isClick = controlBar.current?.contains(event.target);
-      if (!isClick && controlBar.current?.classList.contains("animate-controlPanelSlideDown")) {
+      if (!isClick && controlBar.current?.classList.contains('animate-controlPanelSlideDown')) {
         controlBar.current?.classList.remove('animate-controlPanelSlideDown');
         controlBar.current?.classList.add('animate-controlPanelSlideUp');
       }
     };
     document.addEventListener('mousedown', handleControlPanel);
   }, []);
-
 
   return (
     <div
@@ -46,17 +44,22 @@ const ButtonAccount = () => {
         ref={controlBar}
       >
         <div className="w-full h-fit border-b-2">
-          {!user?.UserId ?
-          <>
-            <button className="w-full py-4 text-left px-5" onClick={event=> setIsLoginClick(true)}>Login</button>
-            <button className="w-full py-4 text-left px-5">Sign up</button>
-          </>
-          :
-          <>
-            <button className="w-full py-4 text-left px-5" >Manage listings</button>
-            <button className="w-full py-4 text-left px-5">Account</button>
-          </>
-          }
+          {!user?.UserId ? (
+            <>
+              <button
+                className="w-full py-4 text-left px-5"
+                onClick={(event) => setIsLoginClick(true)}
+              >
+                Login
+              </button>
+              <button className="w-full py-4 text-left px-5">Sign up</button>
+            </>
+          ) : (
+            <>
+              <button className="w-full py-4 text-left px-5">Manage listings</button>
+              <button className="w-full py-4 text-left px-5">Account</button>
+            </>
+          )}
         </div>
         <div className="w-full h-fit">
           <button className="w-full py-4 text-left px-5">Airbnb your home</button>
