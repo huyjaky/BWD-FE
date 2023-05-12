@@ -36,20 +36,20 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
 
       proxyRes.on('end', function () {
         try {
-          const { accessToken, expiredAt } = JSON.parse(body);
+          const { accessToken, expiresIn } = JSON.parse(body);
 
           // convert to cookies
           const cookies = new Cookies(req, res, { secure: process.env.NODE_ENV !== 'development' });
           cookies.set('access_token', accessToken, {
             httpOnly: true,
             sameSite: 'lax',
-            expires: new Date(expiredAt)
+            expires: new Date(expiresIn)
           });
-          console.log(new Date(expiredAt).getHours());
+          
 
           (res as NextApiResponse)
             .status(200)
-            .json({ message: 'login successfully', accessToken: true });
+            .json({ message: 'login successfully'});
         } catch (error) {
           (res as NextApiResponse)
             .status(500)

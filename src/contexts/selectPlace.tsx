@@ -1,13 +1,9 @@
 import { address } from '@/models/address';
+import { selectPlaceData } from '@/models/place';
 import { ReactNode, createContext, useState } from 'react';
 
 interface selectPlaceProps {
   children: ReactNode;
-}
-
-interface selectPlaceData {
-  address: address;
-  setAddress: (payload: address) => void;
 }
 
 const selectPlaceDefaultData = {
@@ -24,6 +20,13 @@ const selectPlaceDefaultData = {
     formattedAddress: '',
     latitude: '',
     longitude: '',
+    checkInDay: new Date(),
+    checkOutDay: new Date(),
+    guest: {
+      adults: 0,
+      childrens: 0,
+      infants: 0
+    }
   },
   setAddress: () => {}
 };

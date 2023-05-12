@@ -1,44 +1,51 @@
+import { sessionOptions } from '@/api-client/session';
 import HeaderMain from '@/components/headers/headerMain/headerMain';
-import FooterTest from '@/components/footers/footerMain';
 import EmptyLayout from '@/components/layouts/empty';
+import { userAccContext } from '@/contexts/userAcc';
 import { NextPageWithLayout } from '@/models/layoutprops';
+import { userAcc } from '@/models/userAcc';
+import { withIronSessionSsr } from 'iron-session/next';
 import { GetServerSideProps } from 'next';
 import { Montserrat } from 'next/font/google';
-import { Map, NavigationControl } from 'react-map-gl';
-import FooterRooms from '@/components/footers/footerRooms';
+import { useContext, useEffect, useState } from 'react';
+import fs from 'fs';
+import useSWR from 'swr';
+import path from 'path';
+import TypeHouse from '@/components/main/typeHouse';
 const monsterrat = Montserrat({
   subsets: ['latin'],
   weight: ['200', '400', '600', '800'],
   variable: '--font-monsterrat'
 });
-
-interface IProps {
-  accessToken: string;
+interface HomeProps {
+  user_: userAcc;
+  props: any;
 }
 
-const Home: NextPageWithLayout<IProps> = ({ accessToken }: IProps) => {
+const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
+  const { user, setUser } = useContext(userAccContext);
+
+
+  if (!user_?.UserId) {
+    const { data, error, mutate, isValidating } = useSWR(`/get/useracc/UserName/${user.UserName}`, {
+      revalidateOnFocus: false,
+      revalidateOnMount: false
+    });
+    useEffect(() => {
+      setUser({ ...user, ...data?.data });
+      return () => {};
+    }, [data]);
+  } else if (user_?.UserId && !user.UserId) {
+    setUser({ ...user, ...user_ });
+  }
 
   return (
     <>
-      <main className={`${monsterrat.className}`} id="root">
+      <main className={`${monsterrat.className} relative`} id="root">
         <HeaderMain />
-
-        {/* <div className="w-full h-screen mt-[200px] relative">
-          <Map
-            initialViewState={{
-              longitude: -100,
-              latitude: 40,
-              zoom: 3.5
-            }}
-            style={{ width: '100%', height: '100%' }}
-            mapStyle={`mapbox://styles/mapbox/outdoors-v12`}
-            mapboxAccessToken={`${accessToken}`}
-            projection={'globe'}>
-              <NavigationControl/>
-            </Map>
-        </div> */}
-        {/* <FooterTest /> */}
-        <FooterRooms />
+        <div className="w-full h-fit">
+          <TypeHouse />
+        </div>
       </main>
     </>
   );
@@ -46,14 +53,18 @@ const Home: NextPageWithLayout<IProps> = ({ accessToken }: IProps) => {
 
 Home.Layout = EmptyLayout;
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const accessToken: string | undefined = process.env.ACCESS_TOKEN_MAPBOX;
-
-  return {
-    props: {
-      accessToken: accessToken
-    }
-  };
-};
-
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = withIronSessionSsr(
+  async ({ req, res, params }) => {
+    const user = req.session.props?.user_;
+    // if user available not callback api from server
+    if (user?.UserId) {
+      return {
+        props: { ...req.session.props }
+      };
+    }
+    return { props: {} };
+  },
+  sessionOptions
+);

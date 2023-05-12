@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, RefObject } from 'react'
+<<<<<<< HEAD
 import Step2Video from '../Video/Step2.mp4'
+=======
+// import Step2Video from '../Video/Step2.mp4'
+>>>>>>> 958266f
 export default function Step8CHome() {
 
     const videoRef: RefObject<HTMLVideoElement> = useRef(null);
@@ -33,7 +37,11 @@ export default function Step8CHome() {
                         mobile:w-[100%]'>
                         <video ref={videoRef} crossOrigin='anonymous' width="100%" height="421" autoPlay="" className='object-cover' preload='auto' webkit-playsinline="true"
                             playsinline="true" muted="muted">
+<<<<<<< HEAD
                             <source src={Step2Video} type="video/mp4" />
+=======
+                            <source src="" type="video/mp4" />
+>>>>>>> 958266f
                         </video>
                     </div>
                 </div>

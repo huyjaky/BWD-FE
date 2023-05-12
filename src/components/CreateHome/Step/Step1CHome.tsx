@@ -1,5 +1,9 @@
 import React, { RefObject, useEffect, useRef } from 'react'
+<<<<<<< HEAD
 import Step1Video from "../Video/Step1.mp4"
+=======
+// import Step1Video from "../Video/Step1.mp4"
+>>>>>>> 958266f
 
 export default function Step1CHome() {
 
@@ -36,9 +40,15 @@ export default function Step1CHome() {
                     </div>
                     <div className='w-[50%] tablet:w-[100%]
                         mobile:w-[100%]'>
+<<<<<<< HEAD
                         <video ref={videoRef} crossOrigin='anonymous' width="100%" height="421" autoPlay="" className='object-cover' preload='auto' webkit-playsinline="true"
                             playsinline="true" muted>
                             <source src={Step1Video} type="video/mp4" />
+=======
+                        <video ref={videoRef} crossOrigin='anonymous' width="100%" height="421" autoPlay={true} className='object-cover' preload='auto' webkit-playsinline="true"
+                            playsInline muted>
+                            <source src="" type="video/mp4" />
+>>>>>>> 958266f
                         </video>
                     </div>
                 </div>

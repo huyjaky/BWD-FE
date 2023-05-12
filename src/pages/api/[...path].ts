@@ -3,9 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import httpProxy from 'http-proxy';
 import Cookies from 'cookies';
 
-// type Data = {
-//   name: string
-// }
+
 export const config = {
   api: {
     bodyParser: false
@@ -19,6 +17,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
     // convert cookies to header Authorization
     const cookies = new Cookies(req, res);
     const accessToken = cookies.get('access_token');
+    console.log(accessToken);
     if (accessToken) {
       req.headers.Authorization = `Bearer ${accessToken}`;
     }

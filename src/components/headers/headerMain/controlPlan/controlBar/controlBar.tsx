@@ -3,27 +3,27 @@ import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BiSearch } from 'react-icons/bi';
 import SearchBox from '../../../../searchBox/searchBox';
-
+import { selectPlaceContext } from '@/contexts/selectPlace';
+import { format } from 'date-fns';
 interface Place {
   address: string;
   latitude: number | null;
   longitude: number | null;
 }
 
-
 const ControlBar = () => {
   const [submit, setSubmit] = useState(false);
-  const {selected, setSelected} = useContext(selectPopoverContext);
+  const { selected, setSelected } = useContext(selectPopoverContext);
+  const { address } = useContext(selectPlaceContext);
 
   const onSelected = (event: any) => {
     setSelected(event.currentTarget.id);
-  }
+  };
 
   const onSubmit = (data: Place) => {
     setSubmit(true);
     handleCreate(data);
   };
-
   const {
     register,
     handleSubmit,
@@ -32,14 +32,7 @@ const ControlBar = () => {
     watch
   } = useForm<Place>({ defaultValues: {} });
 
-  useEffect(() => {
-    register('address', { required: 'Please enter your address' });
-    register('latitude', { required: true, min: -90, max: 90 });
-    register('longitude', { required: true, min: -180, max: 180 });
-  }, [register]);
-
   const handleCreate = async (data: Place) => {};
-
 
   return (
     <div className="w-full h-full flex relative">
@@ -55,21 +48,11 @@ const ControlBar = () => {
         >
           <span>Where</span>
 
-
           {/* the input cho nay lam sau */}
           <form action="" onSubmit={handleSubmit(onSubmit)}>
-            <SearchBox
-              onSelectAddress={(address, latitude, longitude) => {
-                setValue('address', address);
-                setValue('latitude', latitude);
-                setValue('longitude', longitude);
-              }}
-              defaultValue=""
-            />
+            <SearchBox />
             <div>{errors.address && <p>{errors.address.message}</p>}</div>
           </form>
-
-
         </div>
       </div>
       <div className="flex-1 flex">
@@ -80,11 +63,11 @@ const ControlBar = () => {
                 before:-translate-x-3 before:-z-10 before:rounded-full transition-all duration-500
                 before:shadow-xl
                 "
-                id='checkin'
-                onClick={onSelected}
+            id="checkin"
+            onClick={onSelected}
           >
             <span>Check in</span>
-            <span>Add dates</span>
+            <span className="text-[12px]">{format(address.checkInDay, 'eeee, ddMMM')}</span>
           </div>
           <div
             className="flex flex-col m-auto flex-1 box-border pl-3
@@ -96,7 +79,7 @@ const ControlBar = () => {
             onClick={onSelected}
           >
             <span>Check out</span>
-            <span>Add dates</span>
+            <span className="text-[12px]">{format(address.checkOutDay, 'eeee, ddMMM')}</span>
           </div>
         </div>
         <div className="flex-1 flex">

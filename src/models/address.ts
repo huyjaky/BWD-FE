@@ -11,5 +11,18 @@ export interface address {
   formattedAddress: string;
 
   latitude: string;
-  longitude: string
+  longitude: string;
+
+  checkInDay: Date;
+  checkOutDay: Date;
+
+  guest: {
+    adults: number;
+    childrens: number;
+    infants: number;
+  };
+}
+
+export interface addressProps {
+  address: string;
 }

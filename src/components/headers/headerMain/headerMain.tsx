@@ -1,19 +1,18 @@
-import Link from 'next/link';
-import { FaAirbnb } from 'react-icons/fa';
-import { TbWorld } from 'react-icons/tb';
-import { BsList } from 'react-icons/bs';
-import { HiUserCircle } from 'react-icons/hi';
-import ControlPlan from './controlPlan/controlPlan';
-import { useContext } from 'react';
+import LoginPanel from '@/components/loginPanel/LoginPanel';
+import { selectPopoverContext } from '@/contexts';
 import { placeListContext } from '@/contexts/placeList';
-import { selectPlaceContext } from '@/contexts/selectPlace';
+import { useContext, useEffect, useRef, useState } from 'react';
+import HeaderForm from '../headerForm/HeaderForm';
+import ControlPlan from './controlPlan/controlPlan';
 const HeaderMain = () => {
-  const {setPlaceList} = useContext(placeListContext);
-  const {setAddress} = useContext(selectPlaceContext);
+  const { setPlaceList } = useContext(placeListContext);
+  const { isLoginClick, setIsLoginClick } = useContext(selectPopoverContext);
+  const [isFirstLoading, setIsFirstLoading] = useState(true);
 
+  const loginPanel = useRef<HTMLInputElement>(null);
+  const mask = useRef<HTMLInputElement>(null);
 
   const handleOnMask = (event: any) => {
-
     // add animate by hand beacause i its ez to fixed :")))
     const mask: HTMLElement | null = document.getElementById('mask');
     const scaleUp: HTMLElement | null = document.getElementById('scaleUp');
@@ -22,10 +21,8 @@ const HeaderMain = () => {
     const link: HTMLElement | null = document.getElementById('link');
     const controlBar: HTMLElement | null = document.getElementById('controlBar');
     const where: HTMLElement | null = document.getElementById('where-popup');
-    const checkIn: HTMLElement | null = document.getElementById('checkin-popup');
-    const checkOut: HTMLElement | null = document.getElementById('checkout-popup');
+    const checkIn_Out: HTMLElement | null = document.getElementById('checkin_out-popup');
     const who: HTMLElement | null = document.getElementById('who-popup');
-
 
     scaleUp?.classList.remove('animate-slideDownHeader');
     link?.classList.remove('animate-slideDownControl');
@@ -34,8 +31,7 @@ const HeaderMain = () => {
     controlBar?.classList.remove('animate-showAnimate');
 
     where?.classList.remove('animate-transparentAnimate');
-    checkIn?.classList.remove('animate-transparentAnimate');
-    checkOut?.classList.remove('animate-transparentAnimate');
+    checkIn_Out?.classList.remove('animate-transparentAnimate');
     who?.classList.remove('animate-transparentAnimate');
     // -------------------------------------------------------------------
     scaleUp?.classList.add('animate-slideUpHeader');
@@ -45,71 +41,70 @@ const HeaderMain = () => {
     controlBar?.classList.add('animate-hiddenAnimate');
 
     where?.classList.add('animate-transparentAnimateReverse');
-    checkIn?.classList.add('animate-transparentAnimateReverse');
-    checkOut?.classList.add('animate-transparentAnimateReverse');
+    checkIn_Out?.classList.add('animate-transparentAnimateReverse');
     who?.classList.add('animate-transparentAnimateReverse');
 
     setPlaceList([]);
   };
 
+  useEffect(() => {
+    // animate
+    const handleOnclickLogin = (event: any) => {
+      const isClick = loginPanel.current?.contains(event.target);
+      if (!isClick && isLoginClick) {
+        mask.current?.classList.remove('animate-transparentAnimateLogin2');
+        loginPanel.current?.classList.remove('animate-slideUpLogin');
+        mask.current?.classList.add('animate-transparentAnimateLoginReverse2');
+        loginPanel.current?.classList.add('animate-slideDownLogin');
+        setIsLoginClick(false);
+        return
+      }
+    };
+
+    // animate for dynamic event
+    const handleIsClick = () => {
+      if (isLoginClick) {
+        mask.current?.classList.remove('animate-transparentAnimateLoginReverse2');
+        loginPanel.current?.classList.remove('animate-slideDownLogin');
+        mask.current?.classList.add('animate-transparentAnimateLogin2');
+        loginPanel.current?.classList.add('animate-slideUpLogin');
+        return;
+      } else if (!isLoginClick && !isFirstLoading){
+        mask.current?.classList.remove('animate-transparentAnimateLogin2');
+        loginPanel.current?.classList.remove('animate-slideUpLogin');
+        mask.current?.classList.add('animate-transparentAnimateLoginReverse2');
+        loginPanel.current?.classList.add('animate-slideDownLogin');
+      }
+    };
+
+    document.addEventListener('mousedown', handleOnclickLogin);
+    handleIsClick();
+    setIsFirstLoading(false);
+  }, [isLoginClick]);
+
   return (
     <>
+      <div
+        className="w-screen h-screen transition-all duration-500 bg-mask absolute z-40 flex
+        overflow-hidden invisible
+        "
+        ref={mask}>
+        <div className="w-full h-full flex">
+          <div className="w-fit  h-fit bg-white m-auto rounded-3xl" ref={loginPanel}>
+            <LoginPanel>
+              <div></div>
+            </LoginPanel>
+          </div>
+        </div>
+      </div>
       <div
         className="w-screen h-screen invisible transition-all duration-500 bg-mask absolute"
         id="mask"
         onClick={handleOnMask}
-        onScroll={handleOnMask}
-      ></div>
-      <div className="w-full h-[80px] relative bg-white">
-        <header className="w-full h-[80px] border-b-2 flex justify-center px-[80px] box-border absolute">
-          <div className="w-full h-full flex relative">
-            {/* logo container */}
-            <Link
-              href={'/'}
-              className="desktop:flex-1 laptop:mr-7  flex items-center text-red-500
-            z-30
-            "
-            >
-              <FaAirbnb className="h-[50px] w-[50px] mr-1" />
-              <div className="text-[30px] w-0 overflow-hidden desktop:w-fit font-semibold">
-                airbnb
-              </div>
-            </Link>
-
-            {/* control plan */}
-            <ControlPlan />
-
-            {/* controlbar */}
-            <div className="flex-1 flex items-center justify-end z-30">
-              {/* airbnb your home */}
-              <Link
-                href={''}
-                className="rounded-full bg-white h-fit box-content px-4 py-2
-            hover:bg-slate-300
-          "
-              >
-                <span className="font-semibold">Airbnb your home</span>
-              </Link>
-              {/* translate */}
-              <Link
-                href={''}
-                className="rounded-full bg-white box-content p-1 mr-3 hover:bg-slate-300"
-              >
-                <TbWorld className="w-[30px] h-[30px]" />
-              </Link>
-              {/* control */}
-              <div
-                className="w-fit p-1 rounded-full bg-white flex border-gray-400 hover:shadow-lg
-            transition-all duration-500
-          "
-              >
-                <BsList className="w-[30px] h-[30px]" />
-                <HiUserCircle className="w-[40px] h-[30px]" />
-              </div>
-            </div>
-          </div>
-        </header>
-      </div>
+        onScroll={handleOnMask}></div>
+      <HeaderForm>
+        <ControlPlan />
+      </HeaderForm>
     </>
   );
 };
