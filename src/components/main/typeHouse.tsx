@@ -1,5 +1,5 @@
-import { useScroll } from "framer-motion";
-import { useRef } from "react";
+import { useScroll } from 'framer-motion';
+import { useRef } from 'react';
 
 const TypeHouse = () => {
   const imgArr: { title: string; path: string }[] = [
@@ -113,11 +113,14 @@ const TypeHouse = () => {
     }
   ];
   const slide = useRef<HTMLInputElement>(null);
-  const {} = useScroll({container: slide});
+  const {} = useScroll({ container: slide });
 
   return (
     <div className="w-full h-full relative z-10">
-      <div className="grid grid-flow-col w-full h-fit overflow-scroll overflow-y-hidden" ref={slide}>
+      <div
+        className="grid grid-flow-col w-full h-fit overflow-scroll overflow-y-hidden"
+        ref={slide}
+      >
         {imgArr.map((item: { title: string; path: string }, index: number) => {
           return (
             <div
@@ -125,7 +128,8 @@ const TypeHouse = () => {
               className="w-fit h-full flex flex-col mx-[20px] box-border
             py-3 relative after:absolute after:w-0 after:h-[3px] after:bottom-0 after:bg-slate-600
             after:hover:w-full after:transition-all after:duration-500
-          ">
+          "
+            >
               <div className="w-full h-fit flex">
                 <img src={`${item.path}`} alt="" className="w-[30px] h-[30px] m-auto" />
               </div>

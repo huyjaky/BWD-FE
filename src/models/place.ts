@@ -16,5 +16,5 @@ export interface selectPopoverDefault {
   selected: string;
   setSelected: (selected: string) => void;
   isLoginClick: boolean;
-  setIsLoginClick: (payload: boolean) => void
+  setIsLoginClick: (payload: boolean) => void;
 }

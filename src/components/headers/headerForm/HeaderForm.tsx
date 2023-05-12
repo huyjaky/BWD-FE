@@ -8,10 +8,10 @@ import { TbWorld } from 'react-icons/tb';
 import ButtonAccount from '../buttonAccount/ButtonAccount';
 
 interface HeaderFormProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
-const HeaderForm = ({children}: HeaderFormProps) => {
+const HeaderForm = ({ children }: HeaderFormProps) => {
   return (
     <div className="w-full h-[80px] relative bg-white">
       <header className="w-full h-[80px] border-b-2 flex justify-center px-[80px] box-border absolute">

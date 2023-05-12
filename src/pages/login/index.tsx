@@ -8,7 +8,6 @@ import { GetServerSideProps } from 'next';
 import { useEffect } from 'react';
 
 const Login: NextPageWithLayout = () => {
-
   return (
     <main>
       <HeaderLogin />
@@ -32,7 +31,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     res.setHeader('location', '/');
     res.statusCode = 302;
     res.end();
-    return {props: {}};
+    return { props: {} };
   }
   return { props: {} };
 };
