@@ -2,9 +2,9 @@ import { selectPopoverContext } from '@/contexts';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BiSearch } from 'react-icons/bi';
-import SearchBox from '../../../../searchBox/searchBox';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 import { format } from 'date-fns';
+import SearchBox from '@/components/searchBox/searchBox';
 interface Place {
   address: string;
   latitude: number | null;

@@ -1,8 +1,5 @@
-import LoginPanel from '@/components/loginPanel/LoginPanel';
-import { placeListContext } from '@/contexts/placeList';
-import { selectPlaceContext } from '@/contexts/selectPlace';
 import Link from 'next/link';
-import { ReactNode, useContext, useEffect, useRef, useState } from 'react';
+import { ReactNode } from 'react';
 import { FaAirbnb } from 'react-icons/fa';
 import { TbWorld } from 'react-icons/tb';
 import ButtonAccount from '../buttonAccount/ButtonAccount';

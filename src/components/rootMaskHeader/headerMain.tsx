@@ -2,8 +2,8 @@ import LoginPanel from '@/components/loginPanel/LoginPanel';
 import { selectPopoverContext } from '@/contexts';
 import { placeListContext } from '@/contexts/placeList';
 import { useContext, useEffect, useRef, useState } from 'react';
-import HeaderForm from '../headerForm/HeaderForm';
 import ControlPlan from './controlPlan/controlPlan';
+import HeaderForm from '../headers/headerForm/HeaderForm';
 const HeaderMain = () => {
   const { setPlaceList } = useContext(placeListContext);
   const { isLoginClick, setIsLoginClick } = useContext(selectPopoverContext);
@@ -84,6 +84,15 @@ const HeaderMain = () => {
 
   return (
     <>
+
+      <div
+        className="w-screen h-screen transition-all duration-500 bg-mask absolute z-40 flex
+        overflow-hidden invisible" id='maskFilter'>
+          <div className=''>
+
+          </div>
+      </div>
+
       <div
         className="w-screen h-screen transition-all duration-500 bg-mask absolute z-40 flex
         overflow-hidden invisible
@@ -98,6 +107,7 @@ const HeaderMain = () => {
           </div>
         </div>
       </div>
+
       <div
         className="w-screen h-screen invisible transition-all duration-500 bg-mask absolute"
         id="mask"

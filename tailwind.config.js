@@ -100,7 +100,7 @@ module.exports = {
         // header
         transparentAnimate: 'showAnimate .1s forwards, transparentAnimate .5s ease-in-out forwards',
         transparentAnimateReverse:
-          'showAnimate .1s forwards, transparentAnimateReverse .5s ease-in-out forwards',
+          'transparentAnimateReverse .5s ease-in-out forwards, hiddenAnimate .5s ease-in-out forwards ',
 
         // login
         transparentAnimateLogin: 'transparentAnimate .5s ease-in-out forwards',

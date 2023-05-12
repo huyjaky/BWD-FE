@@ -1,5 +1,4 @@
 import { sessionOptions } from '@/api-client/session';
-import HeaderMain from '@/components/headers/headerMain/headerMain';
 import EmptyLayout from '@/components/layouts/empty';
 import { userAccContext } from '@/contexts/userAcc';
 import { NextPageWithLayout } from '@/models/layoutprops';
@@ -12,6 +11,7 @@ import fs from 'fs';
 import useSWR from 'swr';
 import path from 'path';
 import TypeHouse from '@/components/main/typeHouse';
+import HeaderMain from '@/components/rootMaskHeader/headerMain';
 const monsterrat = Montserrat({
   subsets: ['latin'],
   weight: ['200', '400', '600', '800'],
