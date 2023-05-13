@@ -4,6 +4,7 @@ import { placeListContext } from '@/contexts/placeList';
 import { useContext, useEffect, useRef, useState } from 'react';
 import ControlPlan from './controlPlan/controlPlan';
 import HeaderForm from '../headers/headerForm/HeaderForm';
+import FormFilter from '../main/filter/formFilter/formFilter';
 const HeaderMain = () => {
   const { setPlaceList } = useContext(placeListContext);
   const { isLoginClick, setIsLoginClick } = useContext(selectPopoverContext);
@@ -88,9 +89,7 @@ const HeaderMain = () => {
       <div
         className="w-screen h-screen transition-all duration-500 bg-mask absolute z-40 flex
         overflow-hidden invisible" id='maskFilter'>
-          <div className=''>
-
-          </div>
+          <FormFilter/>
       </div>
 
       <div
