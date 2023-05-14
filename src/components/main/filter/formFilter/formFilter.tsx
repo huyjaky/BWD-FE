@@ -6,16 +6,18 @@ import Amenities from './filterFormComponent/amenities/amenities';
 import BedsBathRooms from './filterFormComponent/bedsBathrooms';
 import PriceRange from './filterFormComponent/priceRange';
 import PropertyHouse from './filterFormComponent/property';
+import { filterContext } from '@/contexts/filter';
+import { filterForm } from '@/models/filter';
 
 const variantsAmenities: Variants = {
   showMore: {
-    height: 100,
-  },
-
-}
+    height: 100
+  }
+};
 
 const FormFilter = () => {
   const [show, setShow] = useState(false);
+  const { filterForm, setFilterForm } = useContext(filterContext);
   const { isClickOutSide, setIsClickOutSide } = useContext(filterFormAnimateContext);
   const formFilter = useRef<HTMLInputElement>(null);
 
@@ -33,6 +35,8 @@ const FormFilter = () => {
     document.addEventListener('mousedown', handleOnClickOutSide);
   }, []);
 
+  useEffect(() => {}, [show]);
+
   return (
     <>
       <AnimatePresence initial={false}>
@@ -44,20 +48,15 @@ const FormFilter = () => {
           }
           animate={isClickOutSide ? { translateY: 0, visibility: 'visible' } : { translateY: 2000 }}
           transition={{ duration: 0.5, type: 'spring' }}
-          className="w-[800px] h-[90vh] bg-white m-auto rounded-3xl overflow-hidden"
-          ref={formFilter}
-        >
+          className="w-[800px] h-[calc(100vh-50px)] bg-white m-auto rounded-3xl overflow-hidden flex flex-col"
+          ref={formFilter}>
           {/* header formfilter */}
-          <div className="h-[70px] w-full border-b-2 flex relative">
-            {/* button */}
-            <div className="absolute w-[70px] h-full left-0 bottom-0 flex">
-              <IoMdClose className="m-auto text-[35px]" />
-            </div>
+          <div className=" flex-1 w-full border-b-2 flex relative">
             <span className="m-auto font-semibold text-[23px]">Filter</span>
           </div>
 
           {/* content formfilter */}
-          <div className="w-full h-[75vh] overflow-x-hidden  overflow-scroll box-border p-10">
+          <div className="w-full flex-[10] h-[75vh] overflow-x-hidden  overflow-scroll box-border p-10">
             {/* price range */}
             <div className="w-full h-fit mb-5">
               {/* header pricerange */}
@@ -92,9 +91,10 @@ const FormFilter = () => {
                 <span className="font-bold text-[25px] mb-5">Amenities</span>
                 <Amenities typeAmenities="essentials" />
                 <motion.div
+                  className="overflow-hidden"
                   variants={variantsAmenities}
-
-                >
+                  animate={show ? { height: 700, opacity: 1 } : { height: 0, opacity: 0 }}
+                  transition={{ duration: 0.4 }}>
                   <Amenities typeAmenities="features" />
                   <Amenities typeAmenities="location" />
                   <Amenities typeAmenities="safety" />
@@ -103,14 +103,47 @@ const FormFilter = () => {
                   className="w-[300px] rounded-lg border-2"
                   whileHover={{ backgroundColor: 'rgba(255, 56, 92, 0.8)', color: 'white' }}
                   whileTap={{ scale: 0.9 }}
-                  onClick={event=> setShow(!show)}>
-
+                  onClick={(event) => setShow(!show)}>
                   <span className="text-[20px]">{show ? 'Show less' : 'Show more'}</span>
                 </motion.button>
               </div>
             </div>
           </div>
-          <div className="w-full h-[100px] border-t-2"></div>
+
+          <div className="w-full border-t-2 flex items-center flex-1">
+            <div className="flex-1 flex justify-start">
+              <div
+                className="m-auto underline"
+                onClick={(event) => {
+                  const filterFormTemp: filterForm = {
+                    ...filterForm,
+                    maxPrice: 250,
+                    minPrice: 10,
+                    beds: 0,
+                    bathRooms: 0,
+                    typeHouse: [],
+                    amenities: {
+                      essentials: [],
+                      features: [],
+                      location: [],
+                      safety: []
+                    },
+                    hostLanguage: 'vietnam'
+                  };
+                  setFilterForm(filterFormTemp);
+                }}>
+                Clear all
+              </div>
+            </div>
+            <div className="flex-1 flex justify-center">
+              <motion.button
+                className="w-[200px] h-[40px] rounded-lg border-2"
+                whileHover={{ backgroundColor: 'rgba(255, 56, 92, 0.8)', color: 'white' }}
+                whileTap={{ scale: 0.9 }}>
+                Submit
+              </motion.button>
+            </div>
+          </div>
         </motion.div>
       </AnimatePresence>
     </>
