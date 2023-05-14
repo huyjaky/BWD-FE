@@ -21,7 +21,7 @@ const filterDataDefault: filterData = {
       essentials: [],
       features: [],
       location: [],
-      safety: [],
+      safety: []
     },
     hostLanguage: 'vietnam'
   },
@@ -30,14 +30,12 @@ const filterDataDefault: filterData = {
 
 export const filterContext = createContext<filterData>(filterDataDefault);
 
-const FilterProvider = ({children}: filterProps) => {
+const FilterProvider = ({ children }: filterProps) => {
   const [filterForm, setFilterForm_] = useState(filterDataDefault.filterForm);
   const setFilterForm = (payload: filterForm) => setFilterForm_(payload);
 
-  const filterDynamicData = {filterForm, setFilterForm};
+  const filterDynamicData = { filterForm, setFilterForm };
 
-  return <filterContext.Provider value={filterDynamicData}>
-    {children}
-  </filterContext.Provider>
-}
+  return <filterContext.Provider value={filterDynamicData}>{children}</filterContext.Provider>;
+};
 export default FilterProvider;

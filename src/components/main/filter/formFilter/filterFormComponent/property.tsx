@@ -1,6 +1,6 @@
-import { filterContext } from "@/contexts/filter";
-import { Variants, motion } from "framer-motion";
-import { useContext, useEffect } from "react";
+import { filterContext } from '@/contexts/filter';
+import { Variants, motion } from 'framer-motion';
+import { useContext, useEffect } from 'react';
 
 interface PropertyItem {
   title: string;
@@ -9,7 +9,7 @@ interface PropertyItem {
 
 const variantsPropertyItems: Variants = {
   isHover: {
-    scale: 1.1,
+    scale: 1.1
   }
 };
 const PropertyHouse = () => {
@@ -28,7 +28,7 @@ const PropertyHouse = () => {
     }
   ];
   const { filterForm, setFilterForm } = useContext(filterContext);
-  useEffect(()=>{}, [filterForm])
+  useEffect(() => {}, [filterForm]);
 
   return (
     <div className="grid grid-cols-3 grid-rows-1">
@@ -40,7 +40,8 @@ const PropertyHouse = () => {
                             ${filterForm.typeHouse.includes(item.title) ? 'border-black' : ''}
                           `}
               variants={variantsPropertyItems}
-              whileTap={{scale: 0.6}} transition={{duration: .5}}
+              whileTap={{ scale: 0.6 }}
+              transition={{ duration: 0.5 }}
               onClick={(event) => {
                 const arrTemp = filterForm.typeHouse;
                 // if typeHouse have exist => remove it
@@ -55,7 +56,8 @@ const PropertyHouse = () => {
                 setFilterForm({ ...filterForm, typeHouse: arrTemp });
                 return;
               }}
-              key={index}>
+              key={index}
+            >
               <div className="w-full flex flex-col h-full">
                 <div className="flex-1">
                   <img src={`${item.imgPath}`} alt="" />

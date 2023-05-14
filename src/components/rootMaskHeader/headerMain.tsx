@@ -103,7 +103,8 @@ const HeaderMain = () => {
           }
           className="w-screen h-screen transition-all duration-500 bg-mask absolute z-40 flex
         overflow-hidden"
-          id="maskFilter">
+          id="maskFilter"
+        >
           <FormFilter />
         </motion.div>
       </AnimatePresence>
@@ -112,7 +113,8 @@ const HeaderMain = () => {
         className="w-screen h-screen transition-all duration-500 bg-mask absolute z-40 flex
         overflow-hidden invisible
         "
-        ref={mask}>
+        ref={mask}
+      >
         <div className="w-full h-full flex">
           <div className="w-fit  h-fit bg-white m-auto rounded-3xl" ref={loginPanel}>
             <LoginPanel>
@@ -126,7 +128,8 @@ const HeaderMain = () => {
         className="w-screen h-screen invisible transition-all duration-500 bg-mask absolute"
         id="mask"
         onClick={handleOnMask}
-        onScroll={handleOnMask}></div>
+        onScroll={handleOnMask}
+      ></div>
       <HeaderForm>
         <ControlPlan />
       </HeaderForm>
