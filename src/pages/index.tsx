@@ -40,7 +40,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
 
   return (
     <>
-      <main className={`${monsterrat.className} relative`} id="root">
+      <main className={`${monsterrat.className} relative `} id="root">
         <HeaderMain />
         <div className="w-full h-fit">
           <TypeHouse />

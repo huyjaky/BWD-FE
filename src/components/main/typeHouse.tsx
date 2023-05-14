@@ -22,7 +22,6 @@ const TypeHouse = () => {
   };
 
   const handleOnClickNext = async (event: any) => {
-
     if (slide.current) {
       const temp = x - slideRange;
       // if -temp > width => return
@@ -37,7 +36,6 @@ const TypeHouse = () => {
   };
 
   const handleOnCLickPrevious = async (event: any) => {
-
     const temp = x + slideRange;
     if (temp > 0) {
       setX(0);
@@ -54,13 +52,15 @@ const TypeHouse = () => {
         <div
           className="absolute w-[100px] h-full right-0 bottom-0 z-10
           bg-gradient-to-r from-transparent via-white to-white flex
-        ">
+        "
+        >
           {x != 0 && (
             <button
               className="w-[40px] h-[40px] m-auto rounded-full
             flex mr-[10px]
           "
-              onClick={handleOnClickNext}>
+              onClick={handleOnClickNext}
+            >
               <GrNext className={`m-auto text-[30px]`} />
             </button>
           )}
@@ -70,13 +70,15 @@ const TypeHouse = () => {
         <div
           className="absolute w-[100px] h-full left-0 bottom-0 z-10
           bg-gradient-to-l from-transparent via-white to-white
-        ">
+        "
+        >
           {x != width * -1 && (
             <button
               className="w-[40px] h-[40px] m-auto rounded-full
             mt-[10px] flex ml-[10px]
           "
-              onClick={handleOnCLickPrevious}>
+              onClick={handleOnCLickPrevious}
+            >
               <GrPrevious className="m-auto text-[30px]" />
             </button>
           )}
@@ -86,7 +88,8 @@ const TypeHouse = () => {
           className="grid grid-flow-col w-fit h-fit box-border px-20"
           animate={{ x }}
           dragConstraints={{ right: 0, left: -width }}
-          transition={{ type: 'spring' }}>
+          transition={{ type: 'spring' }}
+        >
           {imgArr?.map((item: { title: string; path: string }, index: number) => {
             return (
               <motion.div
@@ -94,7 +97,8 @@ const TypeHouse = () => {
                 className="w-fit h-full flex flex-col mx-[20px] box-border
             py-3 relative after:absolute after:w-0 after:h-[3px] after:bottom-0 after:bg-slate-600
             after:hover:w-full after:transition-all after:duration-500"
-                onClick={handleOnClickLogo}>
+                onClick={handleOnClickLogo}
+              >
                 <div className="w-full h-fit flex pointer-events-none">
                   <img src={`${item.path}`} alt="" className="w-[30px] h-[30px] m-auto" />
                 </div>

@@ -49,7 +49,8 @@ const FormFilter = () => {
           animate={isClickOutSide ? { translateY: 0, visibility: 'visible' } : { translateY: 2000 }}
           transition={{ duration: 0.5, type: 'spring' }}
           className="w-[800px] h-[calc(100vh-50px)] bg-white m-auto rounded-3xl overflow-hidden flex flex-col"
-          ref={formFilter}>
+          ref={formFilter}
+        >
           {/* header formfilter */}
           <div className=" flex-1 w-full border-b-2 flex relative">
             <span className="m-auto font-semibold text-[23px]">Filter</span>
@@ -94,7 +95,8 @@ const FormFilter = () => {
                   className="overflow-hidden"
                   variants={variantsAmenities}
                   animate={show ? { height: 700, opacity: 1 } : { height: 0, opacity: 0 }}
-                  transition={{ duration: 0.4 }}>
+                  transition={{ duration: 0.4 }}
+                >
                   <Amenities typeAmenities="features" />
                   <Amenities typeAmenities="location" />
                   <Amenities typeAmenities="safety" />
@@ -103,7 +105,8 @@ const FormFilter = () => {
                   className="w-[300px] rounded-lg border-2"
                   whileHover={{ backgroundColor: 'rgba(255, 56, 92, 0.8)', color: 'white' }}
                   whileTap={{ scale: 0.9 }}
-                  onClick={(event) => setShow(!show)}>
+                  onClick={(event) => setShow(!show)}
+                >
                   <span className="text-[20px]">{show ? 'Show less' : 'Show more'}</span>
                 </motion.button>
               </div>
@@ -131,7 +134,8 @@ const FormFilter = () => {
                     hostLanguage: 'vietnam'
                   };
                   setFilterForm(filterFormTemp);
-                }}>
+                }}
+              >
                 Clear all
               </div>
             </div>
@@ -139,7 +143,8 @@ const FormFilter = () => {
               <motion.button
                 className="w-[200px] h-[40px] rounded-lg border-2"
                 whileHover={{ backgroundColor: 'rgba(255, 56, 92, 0.8)', color: 'white' }}
-                whileTap={{ scale: 0.9 }}>
+                whileTap={{ scale: 0.9 }}
+              >
                 Submit
               </motion.button>
             </div>

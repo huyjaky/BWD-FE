@@ -117,8 +117,13 @@ const ControlPlan = () => {
       </div>
 
       <div
-        className="absolute w-full h-0 mt-[80px] bg-white flex
+        className="absolute w-full h-0 mt-[80px] bg-white
         box-border z-20
+      after:h-full after:left-0 after:top-0 after:absolute
+      after:w-[calc(100vw-(100vw-100%)/2)] after:bg-white after:-z-10
+
+      before:h-full before:right-0 before:top-0 before:absolute
+      before:w-[calc(100vw-(100vw-100%)/2)] before:bg-white before:-z-10
       "
         id="ControlHeader"
       >
