@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  categoriesStep2,
   categoriesStep9,
   safetyitems,
   standoutamenities
@@ -19,7 +18,7 @@ export default function Step9Home() {
         "
     >
       <div
-        className="w-[60%] ml-auto mr-auto pl-[70px]
+        className="w-[60%] ml-auto mr-auto pl-[70px] mb-[150px]
             mobile:pl-0  
             laptop:w-[90%] 
             tablet:w-[90%]

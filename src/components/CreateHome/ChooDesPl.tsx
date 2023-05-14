@@ -21,8 +21,8 @@ hover:border-[2px] hover:border-black
       }}
       onClick={() => setselected(title)}
     >
-      <div>
-        <img src={icon} className="w-[45px] h-[45px]" alt="Iscon" />
+      <div style={{}} >
+        {icon}
       </div>
       <div className="font-semibold ">{title}</div>
     </button>

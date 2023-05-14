@@ -23,7 +23,7 @@ export default function Step2CHome() {
                                     mobile:grid-cols-1
                     "
           >
-            {/* {categoriesStep2.map((category) => (
+            {categoriesStep2.map((category) => (
               <ChooDesPl
                 title={category.name}
                 icon={category.icon}
@@ -31,8 +31,8 @@ export default function Step2CHome() {
                 setselected={setselected}
               />
 
-            ))} */}
-            <House/>
+            ))}
+            <House />
           </div>
         </div>
       </div>

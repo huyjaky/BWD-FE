@@ -45,7 +45,7 @@ import { Carbonmono } from '../../../../Icon_BnB_svg';
 export const categoriesStep2 = [
   { name: 'Home', icon: House },
   { name: 'Cabins', icon: cabins },
-  { name: 'Tyni home', icon: TynihomeIcon },
+  { name: 'Tyni home', icon: <TynihomeIcon /> },
   { name: 'Luxury', icon: Luxe },
   { name: 'Camping', icon: Camping },
   { name: 'Historical home', icon: Historical_home },
