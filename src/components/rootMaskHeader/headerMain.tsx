@@ -5,9 +5,13 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import ControlPlan from './controlPlan/controlPlan';
 import HeaderForm from '../headers/headerForm/HeaderForm';
 import FormFilter from '../main/filter/formFilter/formFilter';
+import { AnimatePresence, motion } from 'framer-motion';
+import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
+
 const HeaderMain = () => {
   const { setPlaceList } = useContext(placeListContext);
   const { isLoginClick, setIsLoginClick } = useContext(selectPopoverContext);
+  const { isClickOutSide } = useContext(filterFormAnimateContext);
   const [isFirstLoading, setIsFirstLoading] = useState(true);
 
   const loginPanel = useRef<HTMLInputElement>(null);
@@ -85,19 +89,30 @@ const HeaderMain = () => {
 
   return (
     <>
-
-      <div
-        className="w-screen h-screen transition-all duration-500 bg-mask absolute z-40 flex
-        overflow-hidden invisible" id='maskFilter'>
-          <FormFilter/>
-      </div>
+      <AnimatePresence initial={false}>
+        <motion.div
+          initial={
+            isClickOutSide
+              ? { opacity: 0, visibility: 'hidden' }
+              : { opacity: 1, visibility: 'visible' }
+          }
+          animate={
+            isClickOutSide
+              ? { opacity: 1, visibility: 'visible' }
+              : { opacity: 0, visibility: 'hidden' }
+          }
+          className="w-screen h-screen transition-all duration-500 bg-mask absolute z-40 flex
+        overflow-hidden"
+          id="maskFilter">
+          <FormFilter />
+        </motion.div>
+      </AnimatePresence>
 
       <div
         className="w-screen h-screen transition-all duration-500 bg-mask absolute z-40 flex
         overflow-hidden invisible
         "
-        ref={mask}
-      >
+        ref={mask}>
         <div className="w-full h-full flex">
           <div className="w-fit  h-fit bg-white m-auto rounded-3xl" ref={loginPanel}>
             <LoginPanel>
@@ -111,8 +126,7 @@ const HeaderMain = () => {
         className="w-screen h-screen invisible transition-all duration-500 bg-mask absolute"
         id="mask"
         onClick={handleOnMask}
-        onScroll={handleOnMask}
-      ></div>
+        onScroll={handleOnMask}></div>
       <HeaderForm>
         <ControlPlan />
       </HeaderForm>

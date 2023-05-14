@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { GrNext, GrPrevious } from 'react-icons/gr';
 import { imgArr } from './imgArr';
-import {HiOutlineFilter} from 'react-icons/hi'
+import { HiOutlineFilter } from 'react-icons/hi';
 import Filter from './filter/filter';
 
 const TypeHouse = () => {
@@ -103,7 +103,7 @@ const TypeHouse = () => {
         </motion.div>
       </motion.div>
 
-      <Filter/>
+      <Filter />
     </div>
   );
 };

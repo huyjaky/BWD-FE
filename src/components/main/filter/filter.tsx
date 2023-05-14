@@ -1,25 +1,14 @@
 import { HiOutlineFilter } from 'react-icons/hi';
 import {motion} from 'framer-motion'
-import { useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
+import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 
 const Filter = () => {
   const buttonFilter = useRef<HTMLInputElement>(null);
-
-  useEffect(()=>{
-    // const handleOnClickFilter = (event: any) =>{
-    //   if (buttonFilter.current) {
-    //     const buttonFilter_ = document.getElementById('maskFilter');
-    //     if (buttonFilter_) [
-
-    //     ]
-    //   }
-    // }
-  },[])
+  const {setIsClickOutSide} = useContext(filterFormAnimateContext);
 
   const handleOnClickFilter = (event: any) => {
-    const buttonFilter_ = document.getElementById('maskFilter');
-    buttonFilter_?.classList.add('animate-transparentAnimate');
-    buttonFilter_?.classList.remove('invisible');
+    setIsClickOutSide(true)
   }
 
   return (

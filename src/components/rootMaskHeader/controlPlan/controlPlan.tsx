@@ -89,21 +89,21 @@ const ControlPlan = () => {
             onClick={handleOnScaleUp}
           >
             <button
-              className="flex-1 "
+              className="flex-1 h-full"
               id="header-control_bar-list-index-1"
               onClick={(event) => onSelected('where')}
             >
               Anywhere
             </button>
             <button
-              className="flex-1 border-x-2 border-slate-400"
+              className="flex-1 border-x-2 border-slate-400 h-full"
               id="header-control_bar-list-index-2"
               onClick={(event) => onSelected('checkin')}
             >
               Any week
             </button>
             <button
-              className="flex-1"
+              className="flex-1 h-full"
               id="header-control_bar-list-index-4"
               onClick={(event) => onSelected('who')}
             >
@@ -125,7 +125,7 @@ const ControlPlan = () => {
         <div
           className="w-[850px] tablet:w-full h-[90%] box-border rounded-full m-auto flex
           text-[15px] transition-all duration-300 border-2 invisible overflow-hidden
-          cursor-pointer 
+          cursor-pointer
         "
           id="controlBar"
         >
