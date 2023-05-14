@@ -38,6 +38,7 @@ const Amenities = ({ typeAmenities }: AmenitiesProps) => {
   return (
     <div className="w-full mb-14">
       <span className="w-full font-semibold">{typeAmenities.toLocaleUpperCase()}</span>
+
       <div className="w-full h-fit grid grid-cols-2 gap-y-5 mt-3">
         {arrAmenities_[typeAmenities].map((item: string, index: number) => {
           return (

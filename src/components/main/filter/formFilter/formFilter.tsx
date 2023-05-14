@@ -29,7 +29,7 @@ const FormFilter = () => {
         }
       }
     };
-    
+
     document.addEventListener('mousedown', handleOnClickOutSide);
   }, []);
 
@@ -92,11 +92,8 @@ const FormFilter = () => {
                 <span className="font-bold text-[25px] mb-5">Amenities</span>
                 <Amenities typeAmenities="essentials" />
                 <motion.div
-                  className='overflow-hidden h-0'
                   variants={variantsAmenities}
-                  initial={{height: 0}}
-                  animate={show ? 'showMore' : ''}
-                  transition={{ease: 'easeInOut', duration: 2, repeat: Infinity}}
+
                 >
                   <Amenities typeAmenities="features" />
                   <Amenities typeAmenities="location" />

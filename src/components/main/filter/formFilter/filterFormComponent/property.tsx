@@ -34,7 +34,7 @@ const PropertyHouse = () => {
     <div className="grid grid-cols-3 grid-rows-1">
       {arrPropertyItems.map((item: PropertyItem, index: number) => {
         return (
-          <div className="w-full h-full flex justify-center">
+          <div className="w-full h-full flex justify-center" key={index}>
             <motion.button
               className={`w-[150px] h-[130px] border-2 rounded-2xl box-border p-2
                             ${filterForm.typeHouse.includes(item.title) ? 'border-black' : ''}
