@@ -54,7 +54,7 @@ const TypeHouse = () => {
           bg-gradient-to-r from-transparent via-white to-white flex
         "
         >
-          {x != 0 && (
+          {x != width * -1 && (
             <button
               className="w-[40px] h-[40px] m-auto rounded-full
             flex mr-[10px]
@@ -72,7 +72,7 @@ const TypeHouse = () => {
           bg-gradient-to-l from-transparent via-white to-white
         "
         >
-          {x != width * -1 && (
+          { x != 0 && (
             <button
               className="w-[40px] h-[40px] m-auto rounded-full
             mt-[10px] flex ml-[10px]

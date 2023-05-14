@@ -10,7 +10,7 @@ interface HeaderFormProps {
 
 const HeaderForm = ({ children }: HeaderFormProps) => {
   return (
-    <div className="w-full h-[80px] relative bg-white">
+    <div className="w-full h-[80px] relative bg-white z-30">
       <header className="w-full h-[80px] border-b-2 flex justify-center px-[80px] box-border absolute">
         <div className="w-full h-full flex relative">
           {/* logo container */}

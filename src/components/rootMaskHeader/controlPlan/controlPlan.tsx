@@ -58,7 +58,7 @@ const ControlPlan = () => {
 
   return (
     <>
-      <div className="w-[400px] box-border p-4">
+      <div className="w-[400px] box-border p-4 ">
         <div className="w-full h-full">
           {/* link */}
           <div className="w-full h-0 flex overflow-hidden mb-1 " id="link">
