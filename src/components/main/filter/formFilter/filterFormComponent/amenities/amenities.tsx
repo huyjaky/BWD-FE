@@ -13,7 +13,6 @@ const Amenities = ({ typeAmenities }: AmenitiesProps) => {
   const { filterForm, setFilterForm } = useContext(filterContext);
 
   useEffect(() => {
-    console.log(filterForm);
   }, [filterForm.amenities[typeAmenities]]);
 
   const handleOnClick = (event: any, item: string) => {

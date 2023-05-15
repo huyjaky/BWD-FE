@@ -51,7 +51,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse<any>) => {
             props: undefined
           };
           const wait = await req.session.save();
-          (res as NextApiResponse).status(200).json({ message: 'fetch Done' });
+          (res as NextApiResponse).status(200).json({ message: 'fetch Done', data: user });
         } catch (error) {
           console.log(error);
           (res as NextApiResponse)

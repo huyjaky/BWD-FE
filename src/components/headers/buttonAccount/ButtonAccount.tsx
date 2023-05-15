@@ -29,6 +29,10 @@ const ButtonAccount = () => {
     document.addEventListener('mousedown', handleControlPanel);
   }, []);
 
+  useEffect(()=>{
+    console.log(user);
+  },[user]);
+
   return (
     <div
       className="w-fit p-1 rounded-full bg-white flex border-gray-400 hover:shadow-lg

@@ -67,6 +67,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
     register,
     handleSubmit,
     watch,
+    setError,
     formState: { errors }
   } = useForm<LoginInterface>({
     defaultValues: {
@@ -79,6 +80,11 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
   // fetch accesstoken , navigate as well as do animte
   const onSubmit: SubmitHandler<LoginInterface> = async (data_) => {
     const login_ = await authApi.login(data_);
+    if (login_?.status != 200) {
+      setError('username',{type: 'validate', message: 'Wrong username or password!'});
+      setError('password',{type: 'validate', message: 'Wrong username or password!'});
+      return
+    }
     router.push('/', undefined, { shallow: true });
     setUser({ ...user, UserName: data_.username });
     if (login_?.status == 200 && login_?.data) {
