@@ -15,7 +15,7 @@ export const config = {
 
 const proxy = httpProxy.createProxyServer();
 
-const handler = (req: NextApiRequest, res: NextApiResponse<any>) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   // convert cookies to header Authorization
   const cookies = new Cookies(req, res);
   const accessToken = cookies.get('access_token');
@@ -24,50 +24,54 @@ const handler = (req: NextApiRequest, res: NextApiResponse<any>) => {
   }
   // dont send cookies to api server
   req.headers.cookie = '';
-  return new Promise(() => {
-    const handleUserResponse: ProxyResCallback = (proxyRes, req, res) => {
-      let body = '';
 
-      // fetch have err return to client
-      if (proxyRes.statusCode != 200) {
-        (res as NextApiResponse)
-          .status(500)
-          .json({ message: 'Something went wrong', error: proxyRes.statusMessage });
-        resolve();
-      }
+  try {
+    const userResponse = await new Promise<string>((resolve, reject) => {
+      const handleUserResponse: ProxyResCallback = (proxyRes, req, res) => {
+        let body = '';
 
-      // get chunk and convert to data
-      proxyRes.on('data', (chunk) => {
-        body += chunk;
-      });
-
-      proxyRes.on('end', async () => {
-        const user: userAcc = JSON.parse(body);
-
-        try {
-          req.session = req.session ?? {};
-          req.session.props = {
-            user_: user,
-            props: undefined
-          };
-          const wait = await req.session.save();
-          (res as NextApiResponse).status(200).json({ message: 'fetch Done', data: user });
-        } catch (error) {
-          console.log(error);
-          (res as NextApiResponse)
-            .status(500)
-            .json({ message: 'Something wrong', error: error + '' });
+        // fetch have err return to client
+        if (proxyRes.statusCode != 200) {
+          reject({
+            status: 500,
+            message: 'Something went wrong',
+            error: proxyRes.statusMessage
+          });
         }
-      });
-    };
 
-    proxy.web(req, res, {
-      target: process.env.API_URL_PATH,
-      changeOrigin: true,
-      selfHandleResponse: true
+        // get chunk and convert to data
+        proxyRes.on('data', (chunk) => {
+          body += chunk;
+        });
+
+        proxyRes.on('end', () => {
+          resolve(body);
+        });
+      };
+
+      proxy.web(req, res, {
+        target: process.env.API_URL_PATH,
+        changeOrigin: true,
+        selfHandleResponse: true
+      });
+      proxy.once('proxyRes', handleUserResponse);
     });
-    proxy.once('proxyRes', handleUserResponse);
-  });
+
+    const user: userAcc = JSON.parse(userResponse);
+
+    req.session = req.session ?? {};
+    req.session.props = {
+      user_: user,
+      props: undefined
+    };
+    await req.session.save();
+
+    res.status(200).json({ message: 'fetch Done', data: user });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Something wrong', error: error});
+  }
 };
 
 export default withIronSessionApiRoute(handler, sessionOptions);
+
