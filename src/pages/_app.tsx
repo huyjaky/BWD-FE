@@ -15,6 +15,7 @@ import { Poppins } from 'next/font/google';
 import UserAccProvider from '@/contexts/userAcc';
 import FilterFormAnimateProvider from '@/contexts/filterFormAnimate';
 import FilterProvider from '@/contexts/filter';
+import GetHouseProvider from '@/contexts/getHouse';
 const poppins = Poppins({
   subsets: ['latin'],
   weight: ['200', '400', '600', '800'],
@@ -35,11 +36,13 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
               <UserAccProvider>
                 <FilterFormAnimateProvider>
                   <FilterProvider>
-                    <Layout>
-                      <div className={`${poppins.className}`}>
-                        <Component {...pageProps} />
-                      </div>
-                    </Layout>
+                    <GetHouseProvider>
+                      <Layout>
+                        <div className={`${poppins.className}`}>
+                          <Component {...pageProps} />
+                        </div>
+                      </Layout>
+                    </GetHouseProvider>
                   </FilterProvider>
                 </FilterFormAnimateProvider>
               </UserAccProvider>

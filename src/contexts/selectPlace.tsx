@@ -7,7 +7,7 @@ interface selectPlaceProps {
   children: ReactNode;
 }
 
-const selectPlaceDefaultData:selectPlaceData = {
+const selectPlaceDefaultData: selectPlaceData = {
   address: {
     address: {
       countryRegion: '',
@@ -21,7 +21,7 @@ const selectPlaceDefaultData:selectPlaceData = {
       streetName: '',
       formattedAddress: '',
       latitude: '',
-      longitude: '',
+      longitude: ''
     },
     checkInDay: new Date(),
     checkOutDay: new Date(),
@@ -29,7 +29,7 @@ const selectPlaceDefaultData:selectPlaceData = {
       adults: 0,
       childrens: 0,
       infants: 0
-    },
+    }
   },
   setAddress: () => {}
 };

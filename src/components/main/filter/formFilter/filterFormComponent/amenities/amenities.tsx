@@ -12,8 +12,7 @@ const Amenities = ({ typeAmenities }: AmenitiesProps) => {
   const arrAmenities_: amenities = arrAmenities;
   const { filterForm, setFilterForm } = useContext(filterContext);
 
-  useEffect(() => {
-  }, [filterForm.amenities[typeAmenities]]);
+  useEffect(() => {}, [filterForm.amenities[typeAmenities]]);
 
   const handleOnClick = (event: any, item: string) => {
     const arrTemp = filterForm.amenities[typeAmenities];

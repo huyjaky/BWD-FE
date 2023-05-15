@@ -91,7 +91,6 @@ const HeaderMain = () => {
     <>
       <AnimatePresence initial={false}>
         <motion.div
-
           initial={
             isClickOutSide
               ? { opacity: 0, visibility: 'hidden' }
@@ -102,7 +101,6 @@ const HeaderMain = () => {
               ? { opacity: 1, visibility: 'visible' }
               : { opacity: 0, visibility: 'hidden' }
           }
-
           className="w-screen h-screen bg-mask absolute z-40 flex
         overflow-hidden "
           id="maskFilter"

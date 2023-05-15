@@ -9,10 +9,8 @@ export interface address {
   addressLine: string;
   streetName: string;
   formattedAddress: string;
-
   latitude: string;
   longitude: string;
-
 }
 
 export interface addressProps {
