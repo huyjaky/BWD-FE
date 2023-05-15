@@ -1,5 +1,5 @@
-import { address } from "./address";
-import { userAcc } from "./userAcc";
+import { address } from './address';
+import { userAcc } from './userAcc';
 
 export interface house {
   HouseId: string;

@@ -20,13 +20,7 @@ const nextConfig = {
         use: [
           {
             loader: '@svgr/webpack',
-<<<<<<< HEAD
             options: { icon: true }
-=======
-            options: {
-              options: {icon: true}
-            }
->>>>>>> Huy
           }
         ]
       }

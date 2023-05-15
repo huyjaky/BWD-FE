@@ -5,7 +5,7 @@ import { categoriesStep8 } from '../utils/constant';
 export default function Step8CHome() {
   const [selected, setselected] = useState('');
 
-  const type = 'select1'
+  const type = 'select1';
   return (
     <div>
       <div className="w-[98vw] px-[80px] mt-10">

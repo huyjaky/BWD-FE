@@ -62,10 +62,10 @@ const GetHouseProvider = ({ children }: getHouseProps) => {
   const [house, setHouse_] = useState(getHouseDataDefault.house);
   const setHouse = (payload: house_[]) => setHouse_(payload);
 
-  const getHouseDynamicData = {house, setHouse};
-  return <getHouseContext.Provider value={getHouseDynamicData}>
-    {children}
-  </getHouseContext.Provider>
+  const getHouseDynamicData = { house, setHouse };
+  return (
+    <getHouseContext.Provider value={getHouseDynamicData}>{children}</getHouseContext.Provider>
+  );
 };
 
 export default GetHouseProvider;

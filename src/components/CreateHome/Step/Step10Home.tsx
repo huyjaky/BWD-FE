@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-import {
-  categoriesStep10,
-  safetyitems,
-  standoutamenities
-} from '../utils/constant';
+import { categoriesStep10, safetyitems, standoutamenities } from '../utils/constant';
 import ChooDesPl from '../ChooDesPl';
 
 export default function Step10Home() {
@@ -11,18 +7,18 @@ export default function Step10Home() {
   // để trong lớp con thì khi render ra mỗi class sẽ có 1 state
   const [selectedMany, setselectedMany] = useState<string[]>([]);
 
-  const type = "selectMany"
+  const type = 'selectMany';
 
   return (
     <div
-      className="w-[98vw] px-[80px] 
+      className="w-[98vw] px-[80px]
                         mobile:px-0
         "
     >
       <div
         className="w-[60%] ml-auto mr-auto pl-[70px] mb-[150px]
-            mobile:pl-0  
-            laptop:w-[90%] 
+            mobile:pl-0
+            laptop:w-[90%]
             tablet:w-[90%]
             "
       >
@@ -30,8 +26,7 @@ export default function Step10Home() {
           <div className="mb-[32px]">
             <div className="mb-[32px] h-[82px] tablet:mb-[62px] mobile:mb-[152px] w-[100%] ml-auto mr-auto ">
               <h1
-                className="text-[32px] font-semibold w-[100%] leading-10 mb-3 
-                        "
+                className="text-[32px] font-semibold w-[100%] leading-10 mb-3"
               >
                 Tell guests what your place has to offer
               </h1>

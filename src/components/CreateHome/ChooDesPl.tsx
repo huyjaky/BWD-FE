@@ -4,28 +4,34 @@ interface ChooDesPlProps {
   title: string;
   icon: string;
   selected: string;
-  type: string,
+  type: string;
   setselected: (title: string) => void;
   selectedMany: string[];
   setselectedMany: (titles: string[]) => void;
-
 }
 
-const ChooDesPl: React.FC<ChooDesPlProps> = ({ title, icon, type, selected, setselected, selectedMany = [], setselectedMany }) => {
-
+const ChooDesPl: React.FC<ChooDesPlProps> = ({
+  title,
+  icon,
+  type,
+  selected,
+  setselected,
+  selectedMany = [],
+  setselectedMany
+}) => {
   const handleOnclick = () => {
-    if (type === "select1") {
-      setselected(title)
+    if (type === 'select1') {
+      setselected(title);
       if (selected == title) {
         setselected('');
       }
-    } else if (type === "selectMany") {
-      setselectedMany([...selectedMany, title])
+    } else if (type === 'selectMany') {
+      setselectedMany([...selectedMany, title]);
       if (selectedMany.includes(title)) {
-        setselectedMany(selectedMany.filter((selected) => selected !== title))
+        setselectedMany(selectedMany.filter((selected) => selected !== title));
       }
     }
-  }
+  };
 
   return (
     <button
@@ -40,9 +46,7 @@ hover:border-[2px] hover:border-black
       }}
       onClick={handleOnclick}
     >
-      <div className='w-[45px] h-[45px] mb-2' >
-        {icon}
-      </div>
+      <div className="w-[45px] h-[45px] mb-2">{icon}</div>
       <div className="font-semibold leading-5 text-left">{title}</div>
     </button>
   );

@@ -1,8 +1,7 @@
 import axiosClient from './axiosClient';
 
 export const houseApi = {
-  noneAuthHouseApi () {
+  noneAuthHouseApi() {
     return axiosClient.get(`/get/house`);
   }
 };
-

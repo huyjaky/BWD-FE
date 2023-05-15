@@ -12,7 +12,7 @@ import { motion } from 'framer-motion';
 import { withIronSessionSsr } from 'iron-session/next';
 import { GetServerSideProps } from 'next';
 import { Montserrat } from 'next/font/google';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import useSWR from 'swr';
 
 const monsterrat = Montserrat({
@@ -27,27 +27,28 @@ interface HomeProps {
 
 const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
   const { user, setUser } = useContext(userAccContext);
-  const {house, setHouse} = useContext(getHouseContext);
+  const { house, setHouse } = useContext(getHouseContext);
 
   if (!user_?.UserId) {
     const { data, error, mutate, isValidating } = useSWR(`/get/useracc/UserName/${user.UserName}`, {
-      revalidateOnFocus: false,
-      revalidateOnMount: false
+      revalidateOnFocus: false
     });
+
     useEffect(() => {
+      console.log(data);
       setUser({ ...user, ...data?.data?.data });
-      return () => {};
     }, [data]);
+
   } else if (user_?.UserId && !user.UserId) {
     setUser({ ...user, ...user_ });
   }
 
   useEffect(() => {
-    const fetchHouseApi = async() =>{
+    const fetchHouseApi = async () => {
       if (house.length != 0) return;
       const arr = await houseApi.noneAuthHouseApi();
-      setHouse(arr.data as house_[])
-    }
+      setHouse(arr.data as house_[]);
+    };
     fetchHouseApi();
   }, [house]);
 
@@ -57,9 +58,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
         <HeaderMain />
         <div className="w-full h-fit">
           <TypeHouse />
-          <motion.div className="w-full h-fit">
-
-          </motion.div>
+          <motion.div className="w-full h-fit"></motion.div>
         </div>
       </main>
     </>
@@ -73,6 +72,7 @@ export default Home;
 export const getServerSideProps: GetServerSideProps = withIronSessionSsr(
   async ({ req, res, params }) => {
     const user = req.session.props?.user_;
+
     // if user available not callback api from server
     if (user?.UserId) {
       return {

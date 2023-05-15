@@ -51,22 +51,22 @@ export const categoriesStep2 = [
   { name: 'Tyni home', icon: <TynihomeIcon className="w-[45px] h-[45px]" /> },
   { name: 'Luxury', icon: <Luxe className="w-[45px] h-[45px]" /> },
   { name: 'Camping', icon: <Camping className="w-[45px] h-[45px]" /> },
-  { name: 'Historical home', icon: < Historical_home className="w-[45px] h-[45px]" /> },
+  { name: 'Historical home', icon: <Historical_home className="w-[45px] h-[45px]" /> },
   { name: 'Island', icon: <Islands className="w-[45px] h-[45px]" /> },
   { name: 'Private rooms', icon: <Private_rooms className="w-[45px] h-[45px]" /> },
   { name: 'Dammusi', icon: <Dammusi className="w-[45px] h-[45px]" /> },
-  { name: 'Amazing pool', icon: < Amazing_pools className="w-[45px] h-[45px]" /> },
-  { name: 'Surfing', icon: < Surfing className="w-[45px] h-[45px]" /> },
+  { name: 'Amazing pool', icon: <Amazing_pools className="w-[45px] h-[45px]" /> },
+  { name: 'Surfing', icon: <Surfing className="w-[45px] h-[45px]" /> },
   { name: 'Tropical', icon: <TropicalIcon className="w-[45px] h-[45px]" /> },
-  { name: 'Vineyard', icon: < VineYardIcon className="w-[45px] h-[45px]" /> },
+  { name: 'Vineyard', icon: <VineYardIcon className="w-[45px] h-[45px]" /> },
   { name: 'Beach front', icon: <BeachFronts className="w-[45px] h-[45px]" /> },
   { name: 'Desert', icon: <Desert className="w-[45px] h-[45px]" /> }
 ];
 export const categoriesStep8 = [
   { name: 'Me', icon: <Me className="w-[45px] h-[45px]" /> },
   { name: 'My family', icon: <MyFamily className="w-[45px] h-[45px]" /> },
-  { name: 'Other guests', icon: < OtherGuess className="w-[45px] h-[45px]" /> },
-  { name: 'Roommates', icon: < Roommates className="w-[45px] h-[45px]" /> }
+  { name: 'Other guests', icon: <OtherGuess className="w-[45px] h-[45px]" /> },
+  { name: 'Roommates', icon: <Roommates className="w-[45px] h-[45px]" /> }
 ];
 export const categoriesStep10 = [
   { name: 'Wifi', icon: <Wifi className="w-[45px] h-[45px]" /> },
@@ -74,41 +74,41 @@ export const categoriesStep10 = [
   { name: 'Kitchen', icon: <Kitchen className="w-[45px] h-[45px]" /> },
   { name: 'Washer', icon: <Washer className="w-[45px] h-[45px]" /> },
   { name: 'Free parking on premiese', icon: <Freepark className="w-[45px] h-[45px]" /> },
-  { name: 'Paid parking on premises', icon: < Paidpark className="w-[45px] h-[45px]" /> },
-  { name: 'Air conditioning', icon: < Aircond className="w-[45px] h-[45px]" /> },
-  { name: 'Dedicated workspace', icon: < Dedwork className="w-[45px] h-[45px]" /> }
+  { name: 'Paid parking on premises', icon: <Paidpark className="w-[45px] h-[45px]" /> },
+  { name: 'Air conditioning', icon: <Aircond className="w-[45px] h-[45px]" /> },
+  { name: 'Dedicated workspace', icon: <Dedwork className="w-[45px] h-[45px]" /> }
 ];
 export const standoutamenities = [
-  { name: 'Pool', icon: < Amazing_pools className="w-[45px] h-[45px]" /> },
-  { name: 'Hot tub', icon: < Hottub className="w-[45px] h-[45px]" /> },
-  { name: 'Patio', icon: < Patio className="w-[45px] h-[45px]" /> },
-  { name: 'BBQ grill', icon: < BBQ className="w-[45px] h-[45px]" /> },
-  { name: 'Outdoor dining area', icon: < OutdoorDining className="w-[45px] h-[45px]" /> },
+  { name: 'Pool', icon: <Amazing_pools className="w-[45px] h-[45px]" /> },
+  { name: 'Hot tub', icon: <Hottub className="w-[45px] h-[45px]" /> },
+  { name: 'Patio', icon: <Patio className="w-[45px] h-[45px]" /> },
+  { name: 'BBQ grill', icon: <BBQ className="w-[45px] h-[45px]" /> },
+  { name: 'Outdoor dining area', icon: <OutdoorDining className="w-[45px] h-[45px]" /> },
   { name: 'Pool table', icon: <Pooltable className="w-[45px] h-[45px]" /> },
   { name: 'Piano', icon: <Piano className="w-[45px] h-[45px]" /> },
-  { name: 'Exercise equipment', icon: < Excersise className="w-[45px] h-[45px]" /> },
-  { name: 'Outdoor shower', icon: < OutdoorShow className="w-[45px] h-[45px]" /> }
+  { name: 'Exercise equipment', icon: <Excersise className="w-[45px] h-[45px]" /> },
+  { name: 'Outdoor shower', icon: <OutdoorShow className="w-[45px] h-[45px]" /> }
 ];
 export const safetyitems = [
-  { name: 'Smoke alarm', icon: < SmokeA className="w-[45px] h-[45px]" /> },
+  { name: 'Smoke alarm', icon: <SmokeA className="w-[45px] h-[45px]" /> },
   { name: 'First aid kit', icon: <Firstaid className="w-[45px] h-[45px]" /> },
-  { name: 'Fire extinguisher', icon: < FireExting className="w-[45px] h-[45px]" /> },
-  { name: 'Carbon monoxide alarm', icon: < Carbonmono className="w-[45px] h-[45px]" /> }
+  { name: 'Fire extinguisher', icon: <FireExting className="w-[45px] h-[45px]" /> },
+  { name: 'Carbon monoxide alarm', icon: <Carbonmono className="w-[45px] h-[45px]" /> }
 ];
 export const categoriesStep3 = [
   {
     name: 'An entire place',
-    icon: < House className="w-[45px] h-[45px]" />,
-    description: "Guests have the whole place to themselves."
+    icon: <House className="w-[45px] h-[45px]" />,
+    description: 'Guests have the whole place to themselves.'
   },
   {
     name: 'A room',
     icon: <Room className="w-[45px] h-[45px]" />,
-    description: "Guests have their own room in a home, plus access to shared spaces."
+    description: 'Guests have their own room in a home, plus access to shared spaces.'
   },
   {
     name: 'A shared room',
-    icon: < ShareRoom className="w-[45px] h-[45px]" />,
-    description: "Guests sleep in a room or common area that may be shared with you or others."
-  },
-]; 
+    icon: <ShareRoom className="w-[45px] h-[45px]" />,
+    description: 'Guests sleep in a room or common area that may be shared with you or others.'
+  }
+];

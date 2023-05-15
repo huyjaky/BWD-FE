@@ -7,7 +7,7 @@ export default function Step2CHome() {
   // để trong lớp con thì khi render ra mỗi class sẽ có 1 state
   const [selected, setselected] = useState('');
 
-  const type = 'select1'
+  const type = 'select1';
 
   return (
     <div className="w-[98vw] px-[80px] h-[800px]">
@@ -33,7 +33,6 @@ export default function Step2CHome() {
                 setselected={setselected}
                 type={type}
               />
-
             ))}
           </div>
         </div>
