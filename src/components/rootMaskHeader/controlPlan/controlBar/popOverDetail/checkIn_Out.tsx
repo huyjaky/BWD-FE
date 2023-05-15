@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
-import { addDays, setDate } from 'date-fns';
-import { DateRangePicker } from 'react-date-range';
-import { selectPlaceContext } from '@/contexts/selectPlace';
 import { selectPopoverContext } from '@/contexts';
+import { selectPlaceContext } from '@/contexts/selectPlace';
+import { addDays } from 'date-fns';
+import { useContext, useEffect, useState } from 'react';
+import { DateRangePicker } from 'react-date-range';
 const CheckIn_Out = () => {
   const { address, setAddress } = useContext(selectPlaceContext);
 

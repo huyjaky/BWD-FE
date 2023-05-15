@@ -9,18 +9,8 @@ export interface address {
   addressLine: string;
   streetName: string;
   formattedAddress: string;
-
   latitude: string;
   longitude: string;
-
-  checkInDay: Date;
-  checkOutDay: Date;
-
-  guest: {
-    adults: number;
-    childrens: number;
-    infants: number;
-  };
 }
 
 export interface addressProps {

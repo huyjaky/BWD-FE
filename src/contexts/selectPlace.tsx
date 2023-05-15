@@ -1,4 +1,5 @@
 import { address } from '@/models/address';
+import { addressSearch } from '@/models/addressSearch';
 import { selectPlaceData } from '@/models/place';
 import { ReactNode, createContext, useState } from 'react';
 
@@ -6,20 +7,22 @@ interface selectPlaceProps {
   children: ReactNode;
 }
 
-const selectPlaceDefaultData = {
+const selectPlaceDefaultData: selectPlaceData = {
   address: {
-    countryRegion: '',
-    locality: '',
-    adminDistrict: '',
-    adminDistrict2: '',
-    countryRegionIso2: '',
-    houseNumber: '',
-    postalCode: '',
-    addressLine: '',
-    streetName: '',
-    formattedAddress: '',
-    latitude: '',
-    longitude: '',
+    address: {
+      countryRegion: '',
+      locality: '',
+      adminDistrict: '',
+      adminDistrict2: '',
+      countryRegionIso2: '',
+      houseNumber: '',
+      postalCode: '',
+      addressLine: '',
+      streetName: '',
+      formattedAddress: '',
+      latitude: '',
+      longitude: ''
+    },
     checkInDay: new Date(),
     checkOutDay: new Date(),
     guest: {
@@ -36,7 +39,7 @@ export const selectPlaceContext = createContext<selectPlaceData>(selectPlaceDefa
 const SelectPlaceProvider = ({ children }: selectPlaceProps) => {
   const [address, setAddress_] = useState(selectPlaceDefaultData.address);
 
-  const setAddress = (payload: address) => setAddress_(payload);
+  const setAddress = (payload: addressSearch) => setAddress_(payload);
 
   const selectPlaceDynamicData = { address, setAddress };
 
