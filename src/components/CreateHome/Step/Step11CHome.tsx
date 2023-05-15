@@ -1,28 +1,6 @@
-import React, { ChangeEvent, useState } from 'react'
-import { RiErrorWarningFill } from 'react-icons/ri'
-
+import React from 'react'
 
 export default function Step11CHome() {
-
-    const [character, setCharacter] = useState('')
-
-    const [warning, setWarning] = useState(false)
-
-
-    let lengthChar = character.length;
-
-    const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-
-        if (character.length < 32) {
-            setWarning(false)
-        } else {
-            setWarning(true)
-        }
-        setCharacter(event.target.value);
-    };
-
-    const characterCount = character.length;
-
     return (
         <div
             className="w-[98vw] px-[80px] 
@@ -43,28 +21,13 @@ export default function Step11CHome() {
                                 className="text-[32px] font-semibold w-[100%] leading-10 mb-3 
                         "
                             >
-                                Now, let's give your cabin a title
+                                Add some photos of your cabin
                             </h1>
                             <p className="text-[18px] text-[#717171]">
-                                Short titles work best. Have fun with it—you can always change it later.
+                                You'll need 5 photos to get started. You can add more or make changes later.
                             </p>
                         </div>
-                        <div>
-                            <textarea
-                                value={character}
-                                onChange={handleChange}
-                                id="message"
-                                rows={7}
-                                className="block p-2.5 text-[20px] w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" ></textarea>
-                            <div className='mt-2'>
-                                <span className='text-gray-400 '>{characterCount}/32</span>
-                            </div>
-                            {warning &&
-                                <div>
-                                    <span className='flex items-center text-red-500 text-[12px]'><RiErrorWarningFill /> The maximum number of characters allowed is 32.</span>
-                                </div>
-                            }
-                        </div>
+
                     </div>
                 </div>
             </div>

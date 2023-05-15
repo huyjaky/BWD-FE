@@ -1,7 +1,7 @@
 export { default as Amazing_pools } from './amazing_pools.svg';
 export { default as Amazing_views } from './amazing_views.svg';
 export { default as BeachFronts } from './BeachFronts.svg';
-export { default as cabins } from './cabins.svg';
+export { default as Cabins } from './cabins.svg';
 export { default as Camping } from './camping.svg';
 export { default as Caves } from './Caves.svg';
 export { default as Dammusi } from './Dammusi.svg';
@@ -34,7 +34,7 @@ export { default as House } from './House.svg'
 export { default as Kitchen } from './Kitchen.svg'
 export { default as Me } from './Me.svg'
 export { default as MyFamily } from './MyFamily.svg'
-export { default as otherGuess } from './OtherGuest.svg'
+export { default as OtherGuess } from './OtherGuest.svg'
 export { default as OutdoorDining } from './OutDdining.svg'
 export { default as OutdoorShow } from './OutDshow.svg'
 export { default as Paidpark } from './Paidparking.svg'
@@ -47,9 +47,9 @@ export { default as TV } from './TV.svg'
 export { default as Washer } from './Washer.svg'
 export { default as Wifi } from './Wifi.svg'
 export { default as TynihomeIcon } from './tinyhomes.svg'
-export { default as vineYardIcon } from './vineYards.svg'
-
-
+export { default as VineYardIcon } from './vineYards.svg'
+export { default as Room } from './Room.svg'
+export { default as ShareRoom } from './SharedRoom.svg'
 
 
 

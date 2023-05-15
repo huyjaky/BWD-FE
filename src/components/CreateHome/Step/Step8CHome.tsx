@@ -1,47 +1,51 @@
-import React, { useEffect, useRef, RefObject } from 'react';
+import React, { useState } from 'react';
+import ChooDesPl from '../ChooDesPl';
+import { categoriesStep8 } from '../utils/constant';
+
 export default function Step8CHome() {
-  const videoRef: RefObject<HTMLVideoElement> = useRef(null);
+  const [selected, setselected] = useState('');
 
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.onloadedmetadata = () => {
-        videoRef.current?.play();
-      };
-    }
-  }, [videoRef]);
-
+  const type = 'select1'
   return (
-    <div className="mt-[88px] w-[98vw]">
-      <div className="w-[80%] ml-auto mr-auto">
+    <div>
+      <div className="w-[98vw] px-[80px] mt-10">
         <div
-          className="px-[80px] flex  items-center w-[100%]
-                    tablet:flex-col-reverse
-                    mobile:flex-col-reverse
+          className="w-[60%] ml-auto mr-auto pl-[70px] 
+                    mobile:pl-[0px] 
+
                 "
         >
-          <div
-            className="w-[70%]
-                        tablet:w-[100%]
-                        mobile:w-[100%]
+          <div className="flex flex-col ">
+            <div className="mb-[32px] h-[72px] tablet:mb-[62px] mobile:mb-[92px] ">
+              <h1 className="text-[32px] font-semibold w-[530px] leading-10 mb-3 ">
+                Who else might be there?
+              </h1>
+              <p className="text-[18px] text-[#717171]">
+                Guests need to know whether they’ll encounter other people during their stay.
+              </p>
+            </div>
+            <div
+              className="grid grid-cols-3 gap-[15px] w-[100%] mb-6
+                                    laptop:grid-cols-2
+                                    tablet:grid-cols-2
+                                    mobile:grid-cols-1
                     "
-          >
-            <h5 className="text-[18px] font-semibold mb-[16px]">Step 2</h5>
-            <h1 className="text-[48px] leading-[54px] font-semibold mb-[24px] w-[70%]">
-              Make your place stand out
-            </h1>
-            <p className="font-normal text-[18px] w-[90%]">
-              In this step, you’ll add some of the amenities your place offers, plus 5 or more
-              photos. Then, you’ll create a title and description.
-            </p>
-          </div>
-          <div
-            className="w-[55%] tablet:w-[100%]
-                        mobile:w-[100%]"
-          >
-            <video className='w-fit h-fit' preload='auto' autoPlay={true} muted={true}>
-              <source src='./Step2.mp4' className='w-full h-full' />
-            </video>
-
+            >
+              {categoriesStep8.map((category) => (
+                <ChooDesPl
+                  title={category.name}
+                  icon={category.icon}
+                  type={type}
+                  selected={selected}
+                  setselected={setselected}
+                />
+              ))}
+            </div>
+            <div>
+              <p className="text-[18px] text-[#717171]">
+                We’ll show this information on your listing and in search results.
+              </p>
+            </div>
           </div>
         </div>
       </div>

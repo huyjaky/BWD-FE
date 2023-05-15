@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import {
-  categoriesStep9,
+  categoriesStep10,
   safetyitems,
   standoutamenities
 } from '../utils/constant';
 import ChooDesPl from '../ChooDesPl';
 
-export default function Step9Home() {
+export default function Step10Home() {
   // set Active thì để ngoài như này kh đc để trong lớp con
   // để trong lớp con thì khi render ra mỗi class sẽ có 1 state
-  const [selected, setselected] = useState('');
+  const [selectedMany, setselectedMany] = useState<string[]>([]);
+
+  const type = "selectMany"
 
   return (
     <div
@@ -44,12 +46,13 @@ export default function Step9Home() {
                                     mobile:grid-cols-1
                     "
             >
-              {categoriesStep9.map((category) => (
+              {categoriesStep10.map((category) => (
                 <ChooDesPl
                   title={category.name}
                   icon={category.icon}
-                  selected={selected}
-                  setselected={setselected}
+                  type={type}
+                  selectedMany={selectedMany}
+                  setselectedMany={setselectedMany}
                 />
               ))}
             </div>
@@ -71,8 +74,9 @@ export default function Step9Home() {
                 <ChooDesPl
                   title={category.name}
                   icon={category.icon}
-                  selected={selected}
-                  setselected={setselected}
+                  type={type}
+                  selectedMany={selectedMany}
+                  setselectedMany={setselectedMany}
                 />
               ))}
             </div>
@@ -94,8 +98,9 @@ export default function Step9Home() {
                 <ChooDesPl
                   title={category.name}
                   icon={category.icon}
-                  selected={selected}
-                  setselected={setselected}
+                  type={type}
+                  selectedMany={selectedMany}
+                  setselectedMany={setselectedMany}
                 />
               ))}
             </div>

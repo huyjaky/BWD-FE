@@ -7,8 +7,10 @@ export default function Step2CHome() {
   // để trong lớp con thì khi render ra mỗi class sẽ có 1 state
   const [selected, setselected] = useState('');
 
+  const type = 'select1'
+
   return (
-    <div className="w-[98vw] px-[80px]">
+    <div className="w-[98vw] px-[80px] h-[800px]">
       <div className="w-[60%] ml-auto mr-auto pl-[70px] ">
         <div className="flex flex-col px-10">
           <div className="mb-[32px] h-[72px] ">
@@ -29,10 +31,10 @@ export default function Step2CHome() {
                 icon={category.icon}
                 selected={selected}
                 setselected={setselected}
+                type={type}
               />
 
             ))}
-            <House />
           </div>
         </div>
       </div>

@@ -1,22 +1,31 @@
-import React from 'react';
-import Map from '../Map/Map';
+import React, { useState } from 'react'
+import ChooTypeHo from '../ChooTypeHo'
+import { categoriesStep3 } from '../utils/constant'
 
-function Step3CHome(): JSX.Element {
-  return (
-    <div className="flex items-center justify-start md:justify-center w-full h-screen">
-      <div className="">
-        <div className="mb-11">
-          <h1 className="font-sans text-2xl ml-2 md:ml-0 md:text-4xl font-semibold text-[#222222] mb-4">
-            Where's your place located?
-          </h1>
-          <p className="font-sans text-sm ml-2 md:ml-0 md:text-lg text-[#717171]">
-            Your address is only shared with guests after they’ve made a reservation.
-          </p>
+export default function Step3CHome() {
+
+    const [selected, setselected] = useState('');
+    return (
+        <div className='w-full h-screen flex justify-center mt-7 
+                        mobile:px-[24px]
+        '>
+            <div className='w-[630px]'>
+                <div className='mb-7'>
+                    <h1 className='text-[30px] font-semibold
+                                    mobile:text-[20px]
+                    '>What type of place will guests have?</h1>
+                </div>
+                <div className=''>
+                    {categoriesStep3.map((categorie, index) => (
+                        <ChooTypeHo key={index} selected={selected}
+                            setselected={setselected}
+                            name={categorie.name}
+                            icon={categorie.icon}
+                            description={categorie.description} />
+                    ))}
+
+                </div>
+            </div>
         </div>
-        <Map />
-      </div>
-    </div>
-  );
+    )
 }
-
-export default Step3CHome;

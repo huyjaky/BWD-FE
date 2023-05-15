@@ -1,8 +1,10 @@
 import React, { ChangeEvent, useState } from 'react'
 import { RiErrorWarningFill } from 'react-icons/ri'
 
+
 export default function Step12CHome() {
-    const [character, setCharacter] = useState("You'll have a great time at this comfortable place to stay.")
+
+    const [character, setCharacter] = useState('')
 
     const [warning, setWarning] = useState(false)
 
@@ -11,7 +13,7 @@ export default function Step12CHome() {
 
     const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
 
-        if (character.length < 500) {
+        if (character.length < 32) {
             setWarning(false)
         } else {
             setWarning(true)
@@ -41,10 +43,10 @@ export default function Step12CHome() {
                                 className="text-[32px] font-semibold w-[100%] leading-10 mb-3 
                         "
                             >
-                                Create your description
+                                Now, let's give your cabin a title
                             </h1>
                             <p className="text-[18px] text-[#717171]">
-                                Share what makes your place special.
+                                Short titles work best. Have fun with it—you can always change it later.
                             </p>
                         </div>
                         <div>
@@ -53,9 +55,9 @@ export default function Step12CHome() {
                                 onChange={handleChange}
                                 id="message"
                                 rows={7}
-                                className="block p-6 text-[20px] w-full h-[300px] text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" ></textarea>
+                                className="block p-2.5 text-[20px] w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" ></textarea>
                             <div className='mt-2'>
-                                <span className='text-gray-400 '>{characterCount}/500</span>
+                                <span className='text-gray-400 '>{characterCount}/32</span>
                             </div>
                             {warning &&
                                 <div>

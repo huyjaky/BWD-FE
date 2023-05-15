@@ -1,103 +1,96 @@
 import React, { ChangeEvent, useState } from 'react'
-import { BsPlusLg } from 'react-icons/bs'
-import { RxMinus } from 'react-icons/rx'
-import { RiErrorWarningFill } from 'react-icons/ri'
-import { HiOutlineInformationCircle } from 'react-icons/hi'
-
 
 export default function Step15CHome() {
 
-    const [money, setMoney] = useState<number>(0);
+    const [selectedOption, setSelectedOption] = useState<string>();
 
-    const [error, setError] = useState<boolean>(true);
-
-    const handleMoney = (event: ChangeEvent<HTMLInputElement>) => {
-        const inputValue = event.target.value;
-
-        const moneyValue = parseInt(inputValue.slice(1));
-
-        setMoney(moneyValue);
-        if (money <= 0) {
-            setError(true)
-        } else {
-            setError(false)
-        }
+    const handleRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setSelectedOption(prevState => event.target.value);
     };
-
     return (
         <div
             className="w-[98vw] px-[80px] 
                         mobile:px-0
+                        mobile:pb-20
         "
         >
             <div
-                className="w-[830px] ml-auto mr-auto pl-[70px] mt-[30px] h-[700px] 
-                mobile:w-[530px]
+                className="w-[65%] ml-auto mr-auto pl-[70px] mt-[30px]
             mobile:pl-0  
-       
+            laptop:w-[90%] 
+            tablet:w-[90%]
             "
             >
-                <div className="flex flex-col px-10 w-[100%] ">
+                <div className="flex flex-col px-10 w-[100%]">
                     <div className="mb-[32px]">
-                        <div className="mb-[32px] h-[82px] tablet:mb-[62px] mobile:mb-[152px] w-[100%] ml-auto mr-auto ">
-                            <div className='mb-[22px]'>
-                                <h1
-                                    className="text-[32px] font-semibold w-[100%] leading-10 mb-3 
+                        <div className="mb-[62px] h-[82px] tablet:mb-[62px] laptop:mb-[22px] mobile:mb-[152px] w-[100%] ml-auto mr-auto ">
+                            <h1
+                                className="text-[32px] font-semibold w-[100%] leading-10 mb-3 
                         "
-                                >
-                                    Now, set your price
-                                </h1>
-                                <p className="text-[18px] text-[#717171] ">
-                                    You can change it anytime.
-                                </p>
-                            </div>
-                            <div className='w-[95%] bg-[#F7F7F7] h-[320px] border rounded-[12px] p-[32px] flex flex-col items-center 
-                                            mobile:h-[260px]
-                            '>
-                                <div className=' flex items-center flex-col w-[100%]'>
-                                    <div className='flex items-center justify-around w-[430px] pb-[16px]'>
-                                        <button className='border border-[#717171] w-[55px] h-[48px] flex justify-center items-center rounded-full hover:border-black'>
-                                            <span><RxMinus /></span>
-                                        </button>
-
-                                        <div className={`w-[400px] h-[96px]  
-                                                        mobile:w-[200px] mobile:h-[56px]
-                                        `}>
-                                            <input placeholder='$00' type='text'
-                                                value={`$${money}`}
-                                                onChange={handleMoney}
-                                                className={`my-[8px] mx-[12px] w-[98%] h-[98%] border border-black rounded-[8px] text-[48px] text-center ${error ? " bg-red-50 border border-red-500 text-red-900" : ""}
-                                            ` } />
-                                        </div>
-
-                                        <button className='border border-[#717171] w-[55px] ml-3 h-[48px] flex justify-center items-center rounded-full hover:border-black'>
-                                            <BsPlusLg />
-                                        </button>
-                                    </div>
-                                    <div className='mt-4'>
-                                        <span>per night</span>
-                                    </div>
-                                    {error &&
-                                        <div className='flex justify-center items-center pt-3'>
-                                            <RiErrorWarningFill className='text-[14px] text-[#C13515]' /> <span className='text-[12px] text-[#C13515]'>Please enter a base price between ₫234,680 and ₫234,679,747.</span>
-                                        </div>
-                                    }
-                                </div>
-                                <div className='flex items-center text-[18px] relative pt-[16px]'>
-                                    Places like yours in your area usually <br /> range from ₫398,861 to ₫664,768
-                                    <button><HiOutlineInformationCircle className='absolute right-3 bottom-[5px]' /></button>
-                                </div>
-                            </div>
-                            <label htmlFor='helper-checkbox' className="w-[95%] cursor-pointer bg-[#F7F7F7] h-[120px] mobile:h-[150px] border rounded-[12px] mt-[20px] px-[32px] py-0 pt-[20px] flex  justify-between ">
-                                <div className="flex flex-col justify-start h-5 ">
-                                    <label htmlFor="helper-checkbox" className=" text-[18px] font-semibold text-gray-900 cursor-pointer">Get booked faster</label>
-                                    <p id="helper-checkbox-text" className="text-[18px] font-normal text-gray-500 ">Offer 20% off on your first 3 bookings to help your place stand out. Get details</p>
-                                </div>
-                                <div className="ml-2 text-sm">
-                                    <input id="helper-checkbox" aria-describedby="helper-checkbox-text" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                                </div>
-                            </label>
+                            >
+                                Choose who to welcome for your first reservation
+                            </h1>
+                            <p className="text-[18px] text-[#717171] ">
+                                After your first guest, anyone can book your place. <span className='underline'>Learn more</span>
+                            </p>
                         </div>
+                        <div className=''>
+                            <div className={`flex flex-col my-[16px] p-[24px] border 
+                            ${selectedOption === "AnyAirbnbguest" ? 'bg-[#F7F7F7] border-[2px] hover:border-black border-black' : 'border-gray-200 border-[2px] hover:border-black'} 
+                             rounded-[14px] hover:border-black cursor-pointer
+                            `}>
+                                <div className='flex items-center justify-center cursor-pointer'>
+                                    <div>
+                                        <input
+                                            value="AnyAirbnbguest"
+                                            onChange={handleRadioChange}
+                                            id="bordered-radio-1"
+                                            type="radio" name="bordered-radio"
+                                            checked={selectedOption === "AnyAirbnbguest"}
+                                            className='w-4 h-4 
+                                        text-blue-600 
+                                        bg-gray-100 
+                                        border-gray-300 
+                                        focus:ring-black 
+                                        dark:focus:ring-blue-600
+                                        dark:ring-offset-gray-800 
+                                        focus:ring-2
+                                        dark:bg-gray-700
+                                        dark:border-gray-600 
+                                        cursor-pointer
+                                       ' />
+                                    </div>
+                                    <label htmlFor="bordered-radio-1" className="w-full cursor-pointer ml-2 text-[18px] font-semibold text-black ">Any Airbnb guest</label>
+                                </div>
+                                <div className='flex justify-start'>
+                                    <label
+                                        htmlFor="bordered-radio-1"
+                                        className="w-full ml-6 cursor-pointer text-sm font-medium text-gray-900 dark:text-gray-300">
+                                        Get reservations faster when you welcome anyone from the Airbnb community.
+                                    </label>
+                                </div>
+                            </div>
+                            <div className={`flex flex-col p-[24px] rounded-[14px] cursor-pointer  ${selectedOption === "AnExperiancedguest" ? 'bg-[#F7F7F7] border-[2px] hover:border-black border-black' : 'border-gray-200 border-[2px] hover:border-black'}`}>
+                                <div className='flex justify-center items-center cursor-pointer'>
+                                    <div className='cursor-pointer'>
+                                        <input
+                                            value="AnExperiancedguest"
+                                            onChange={handleRadioChange}
+                                            checked={selectedOption === "AnExperiancedguest"}
+                                            id="bordered-radio-2" type="radio" name="bordered-radio" className="w-4 h-4 cursor-pointer text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                    </div>
+                                    <label htmlFor="bordered-radio-2" className="w-full ml-2 text-[18px] font-semibold text-gray-900 cursor-pointer">An experienced guest</label>
+                                </div>
+                                <div className='ml-6 flex justify-start cursor-pointer'>
+                                    <label
+                                        htmlFor="bordered-radio-2"
+                                        className="w-full text-sm cursor-pointer font-medium text-gray-900 dark:text-gray-300">
+                                        For your first guest, welcome someone with a good track record on Airbnb who can offer tips for how to be a great Host.
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
