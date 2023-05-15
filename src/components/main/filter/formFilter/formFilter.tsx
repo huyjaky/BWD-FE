@@ -47,7 +47,7 @@ const FormFilter = () => {
               : { translateY: 0, visibility: 'visible' }
           }
           animate={isClickOutSide ? { translateY: 0, visibility: 'visible' } : { translateY: 2000 }}
-          transition={{ duration: 0.5, type: 'spring' }}
+          transition={{ duration: .5, type: 'tween' }}
           className="w-[800px] h-[calc(100vh-50px)] bg-white m-auto rounded-3xl overflow-hidden flex flex-col"
           ref={formFilter}
         >

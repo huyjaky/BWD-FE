@@ -13,14 +13,6 @@ export interface address {
   latitude: string;
   longitude: string;
 
-  checkInDay: Date;
-  checkOutDay: Date;
-
-  guest: {
-    adults: number;
-    childrens: number;
-    infants: number;
-  };
 }
 
 export interface addressProps {

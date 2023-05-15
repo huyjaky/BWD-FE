@@ -18,11 +18,11 @@ const Where = () => {
 
   useEffect(() => {
     const fetchLocation = async () => {
-      if (!address?.formattedAddress) return;
-      const located = await placeSearch().locationSearch_(address);
+      if (!address?.address.formattedAddress) return;
+      const located = await placeSearch().locationSearch_(address.address);
 
       if (located) {
-        setAddress({ ...address, latitude: located.latitude, longitude: located.longitude });
+        setAddress({ ...address, address: {...address.address, latitude: located.latitude, longitude: located.longitude }});
       }
     };
     fetchLocation();
@@ -40,7 +40,7 @@ const Where = () => {
 
   return (
     <div>
-      {placeList?.length != 0 && address.formattedAddress && (
+      {placeList?.length != 0 && address.address.formattedAddress && (
         <div
           className="h-fit w-fit bg-white rounded-2xl pointer-events-auto
       box-border p-5
@@ -48,8 +48,8 @@ const Where = () => {
           id="where-popup"
         >
           <div className="h-full w-full flex-col flex">
-            {isLoading == false
-              ? placeList?.map((item: any, index: number) => {
+            {
+              placeList?.map((item: any, index: number) => {
                   const address: address = item.address;
                   return (
                     <button
@@ -63,7 +63,7 @@ const Where = () => {
                     </button>
                   );
                 })
-              : 'Loading'}
+              }
           </div>
         </div>
       )}
