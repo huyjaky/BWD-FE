@@ -73,7 +73,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
       username: '',
       password: ''
     },
-    resolver: yupResolver(schema)
+    resolver: yupResolver<any>(schema)
   });
 
   // fetch accesstoken , navigate as well as do animte
