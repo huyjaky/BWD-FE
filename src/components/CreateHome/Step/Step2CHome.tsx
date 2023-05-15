@@ -32,6 +32,8 @@ export default function Step2CHome() {
                 selected={selected}
                 setselected={setselected}
                 type={type}
+                selectedMany={[]}
+                setselectedMany={()=>{}}
               />
             ))}
           </div>

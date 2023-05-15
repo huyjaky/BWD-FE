@@ -10,8 +10,8 @@ export default function Step8CHome() {
     <div>
       <div className="w-[98vw] px-[80px] mt-10">
         <div
-          className="w-[60%] ml-auto mr-auto pl-[70px] 
-                    mobile:pl-[0px] 
+          className="w-[60%] ml-auto mr-auto pl-[70px]
+                    mobile:pl-[0px]
 
                 "
         >
@@ -38,6 +38,8 @@ export default function Step8CHome() {
                   type={type}
                   selected={selected}
                   setselected={setselected}
+                  selectedMany={[]}
+                  setselectedMany={()=>{}}
                 />
               ))}
             </div>

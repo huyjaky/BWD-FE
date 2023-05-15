@@ -3,7 +3,7 @@ import { House } from '../../../Icon_BnB_svg';
 
 interface ChooTypeHoProps {
   name: string;
-  icon: string;
+  icon: string | JSX.Element;
   type: string;
   description: string;
   selected: string;

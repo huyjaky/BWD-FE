@@ -6,7 +6,7 @@ export default function Step3CHome() {
   const [selected, setselected] = useState('');
   return (
     <div
-      className="w-full h-screen flex justify-center mt-7 
+      className="w-full h-screen flex justify-center mt-7
                         mobile:px-[24px]
         "
     >
@@ -29,6 +29,7 @@ export default function Step3CHome() {
               name={categorie.name}
               icon={categorie.icon}
               description={categorie.description}
+              type=''
             />
           ))}
         </div>

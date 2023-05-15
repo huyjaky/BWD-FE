@@ -2,10 +2,10 @@ import React from 'react';
 
 interface ChooDesPlProps {
   title: string;
-  icon: string;
+  icon: JSX.Element;
   selected: string;
   type: string;
-  setselected: (title: string) => void;
+  setselected: (title: string) => void ;
   selectedMany: string[];
   setselectedMany: (titles: string[]) => void;
 }
@@ -36,7 +36,7 @@ const ChooDesPl: React.FC<ChooDesPlProps> = ({
   return (
     <button
       className="rounded-[8px] border-[2px] border-colorButtonHeader px-[14px] pt-[9px] w-[100%] h-[105px]
-flex flex-col ease-in duration-200 
+flex flex-col ease-in duration-200
 mobile:w-[40vw]
 hover:border-[2px] hover:border-black
 "
