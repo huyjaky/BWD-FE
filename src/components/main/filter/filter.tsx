@@ -1,9 +1,12 @@
-import { HiOutlineFilter } from 'react-icons/hi';
-import { motion } from 'framer-motion';
-import { useContext, useEffect, useRef } from 'react';
 import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
+import { useContext, useRef } from 'react';
+import { HiOutlineFilter } from 'react-icons/hi';
 
-const Filter = () => {
+interface FilterProps{
+  isInvisible: string | null
+}
+
+const Filter = ({isInvisible}: FilterProps) => {
   const buttonFilter = useRef<HTMLInputElement>(null);
   const { setIsClickOutSide } = useContext(filterFormAnimateContext);
 
@@ -13,7 +16,7 @@ const Filter = () => {
 
   return (
     <>
-      <div className="w-[150px] h-[80px] flex">
+      <div className={`w-[150px] h-[80px] flex ${isInvisible}`}>
         <div
           className="flex m-auto p-3 border-2 rounded-2xl border-slate-800 "
           ref={buttonFilter}

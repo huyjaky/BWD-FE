@@ -10,8 +10,8 @@ module.exports = {
       screens: {
         desktop: { min: '1401px' },
         laptop: { max: '1400px', min: '1150px' },
-        tablet: { max: '1149px', min: '800px' },
-        mobile: { max: '799px' }
+        tablet: { max: '1149px', min: '950px' },
+        mobile: { max: '949px' }
       },
       gridTemplateColumns: {
         houseBox: 'repeat(auto-fit, minmax(300, 1fr))'

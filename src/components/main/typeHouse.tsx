@@ -85,7 +85,7 @@ const TypeHouse = () => {
         </div>
 
         <motion.div
-          className="grid grid-flow-col w-fit h-fit box-border px-20"
+          className="grid grid-flow-col w-fit h-fit box-border px-10"
           animate={{ x }}
           dragConstraints={{ right: 0, left: -width }}
           transition={{ type: 'spring' }}
@@ -109,7 +109,7 @@ const TypeHouse = () => {
         </motion.div>
       </motion.div>
 
-      <Filter />
+      <Filter isInvisible={'tablet:hidden'}/>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { BiSearch } from 'react-icons/bi';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 import { format } from 'date-fns';
 import SearchBox from '@/components/searchBox/searchBox';
+import { mobileContolPanelContext } from '@/contexts/mobileControlPanel';
 interface Place {
   address: string;
   latitude: number | null;
@@ -50,7 +51,7 @@ const ControlBar = () => {
 
           {/* the input cho nay lam sau */}
           <form action="" onSubmit={handleSubmit(onSubmit)}>
-            <SearchBox />
+            <SearchBox styleBox={null}/>
             <div>{errors.address && <p>{errors.address.message}</p>}</div>
           </form>
         </div>
@@ -102,6 +103,7 @@ const ControlBar = () => {
               <span className="text-white font-semibold m-auto ml-0">Search</span>
             </div>
           </div>
+
         </div>
       </div>
     </div>

@@ -16,7 +16,7 @@ const ShowHouse = () => {
                 <div className="w-full h-[300px]">
                   <Carousel arrImg={item.arrImg} />
                 </div>
-                <div className="h-[100px] w-full box-border p-2">
+                <div className="h-[100px] w-full box-border p-4">
                   <div className="w-full h-fit flex font-semibold">
                     <div className="flex-[2]">
                       <span>

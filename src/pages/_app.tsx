@@ -16,6 +16,7 @@ import UserAccProvider from '@/contexts/userAcc';
 import FilterFormAnimateProvider from '@/contexts/filterFormAnimate';
 import FilterProvider from '@/contexts/filter';
 import GetHouseProvider from '@/contexts/getHouse';
+import MobileContolPanelProvider from '@/contexts/mobileControlPanel';
 const poppins = Poppins({
   subsets: ['latin'],
   weight: ['200', '400', '600', '800'],
@@ -37,11 +38,13 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
                 <FilterFormAnimateProvider>
                   <FilterProvider>
                     <GetHouseProvider>
-                      <Layout>
-                        <div className={`${poppins.className}`}>
-                          <Component {...pageProps} />
-                        </div>
-                      </Layout>
+                      <MobileContolPanelProvider>
+                        <Layout>
+                          <div className={`${poppins.className}`}>
+                            <Component {...pageProps} />
+                          </div>
+                        </Layout>
+                      </MobileContolPanelProvider>
                     </GetHouseProvider>
                   </FilterProvider>
                 </FilterFormAnimateProvider>

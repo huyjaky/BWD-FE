@@ -50,7 +50,7 @@ interface CarouselProps {
 }
 
 const styleBtn =
-  'absolute top-[calc(50%-20px)] z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center';
+  'absolute top-[calc(50%-20px)] z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center mobile:invisible tablet:invisible ';
 
 const Carousel = ({ arrImg }: CarouselProps) => {
   const [[page, direction], setPage] = useState([0, 0]);
@@ -109,6 +109,7 @@ const Carousel = ({ arrImg }: CarouselProps) => {
           onClick={() => paginate(-1)}
           initial={isHover ? 'hiddenLeft' : 'showLeft'}
           animate={isHover ? 'showLeft' : 'hiddenLeft'}
+          whileHover={{scale: 1.1, backgroundColor: 'rgba(239, 68, 68, .6)'}}
           transition={{ duration: 0.5, type: 'tween' }}
           className={`${styleBtn} left-[10px]`}>
           <GrCaretPrevious />
@@ -117,6 +118,7 @@ const Carousel = ({ arrImg }: CarouselProps) => {
           variants={variantsBtn}
           onClick={() => paginate(1)}
           initial={isHover ? 'showRight' : 'hiddenRight'}
+          whileHover={{scale: 1.1, backgroundColor: 'rgba(239, 68, 68, .6)'}}
           animate={isHover ? 'hiddenRight' : 'showRight'}
           transition={{ duration: 0.5, type: 'tween' }}
           className={`${styleBtn} right-[10px]`}>

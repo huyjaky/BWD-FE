@@ -8,6 +8,8 @@ import FormFilter from '../main/filter/formFilter/formFilter';
 import { AnimatePresence, motion } from 'framer-motion';
 import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 
+
+
 const HeaderMain = () => {
   const { setPlaceList } = useContext(placeListContext);
   const { isLoginClick, setIsLoginClick } = useContext(selectPopoverContext);
