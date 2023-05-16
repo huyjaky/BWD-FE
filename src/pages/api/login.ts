@@ -37,7 +37,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
       proxyRes.on('end', function () {
         try {
           const { accessToken, expiresIn } = JSON.parse(body);
-
           // convert to cookies
           const cookies = new Cookies(req, res, { secure: process.env.NODE_ENV !== 'development' });
           cookies.set('access_token', accessToken, {
@@ -48,6 +47,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
 
           (res as NextApiResponse).status(200).json({ message: 'login successfully' });
         } catch (error) {
+          console.log(error);
           (res as NextApiResponse)
             .status(500)
             .json({ message: 'Something wrong', error: error + '' });
@@ -58,6 +58,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
 
     proxy.once('proxyRes', handleLoginResponse);
 
+
     // http://localhost:3500
     proxy.web(
       req,
@@ -65,7 +66,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
       {
         target: process.env.API_URL_AUTH,
         changeOrigin: true,
-        selfHandleResponse: true
+        selfHandleResponse: true,
       },
       function (err) {
         res.status(500).send('Oops, something went wrong.');

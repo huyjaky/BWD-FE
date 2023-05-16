@@ -13,6 +13,9 @@ module.exports = {
         tablet: { max: '1149px', min: '800px' },
         mobile: { max: '799px' }
       },
+      gridTemplateColumns: {
+        houseBox: 'repeat(auto-fit, minmax(300, 1fr))'
+      },
       colors: {
         mask: 'rgba(105,105,105, 0.4)',
       },

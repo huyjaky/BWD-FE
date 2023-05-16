@@ -1,6 +1,7 @@
 import { houseApi } from '@/api-client/houseApi';
 import { sessionOptions } from '@/api-client/session';
 import EmptyLayout from '@/components/layouts/empty';
+import ShowHouse from '@/components/main/showHouse/showHouse';
 import TypeHouse from '@/components/main/typeHouse';
 import HeaderMain from '@/components/rootMaskHeader/headerMain';
 import { getHouseContext } from '@/contexts/getHouse';
@@ -42,6 +43,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
   } else if (user_?.UserId && !user.UserId) {
     setUser({ ...user, ...user_ });
   }
+  console.log(house);
 
   useEffect(() => {
     const fetchHouseApi = async () => {
@@ -56,9 +58,9 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
     <>
       <main className={`${monsterrat.className} relative `} id="root">
         <HeaderMain />
-        <div className="w-full h-fit">
+        <div className="w-full h-fit px-[80px]">
           <TypeHouse />
-          <motion.div className="w-full h-fit"></motion.div>
+          <ShowHouse/>
         </div>
       </main>
     </>
