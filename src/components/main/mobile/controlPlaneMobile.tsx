@@ -31,18 +31,19 @@ const ControlPlanMobile = () => {
           className="fixed right-0 top-0 w-screen h-screen bg-white  flex flex-col"
           variants={variants}
           animate={isShow ? 'show' : 'hidden'}
-          transition={{ type: 'tween', duration: 1, ease: 'easeInOut' }}
+          transition={{ type: 'tween', duration: .5 }}
         >
           {/* header */}
           <motion.div className="flex-[0.5] ">
             <motion.button
-            className='h-full w-[100px] overflow-hidden'>
+            className='h-full w-[100px] overflow-hidden '>
               <IoIosArrowRoundBack className='w-full text-[40px] font-bold  stroke-[50px] fill-red-500
               text-red-500 '
               onClick={event => setIsShow(false)}
               />
             </motion.button>
           </motion.div>
+
           <motion.div className="flex-1 box-border px-[80px] mobile:px-3">
             <ControlBar />
           </motion.div>

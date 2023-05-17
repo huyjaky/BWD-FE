@@ -14,7 +14,7 @@ module.exports = {
         mobile: { max: '949px' }
       },
       gridTemplateColumns: {
-        houseBox: 'repeat(auto-fit, minmax(300, 1fr))'
+        houseBox: 'repeat(auto-fit, minmax(300px, 1fr))'
       },
       colors: {
         mask: 'rgba(105,105,105, 0.4)',

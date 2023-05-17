@@ -60,7 +60,7 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
       </header>
       <header className="w-full h-[80px] desktop:hidden laptop:hidden  box-border py-3 px-[80px]">
         <motion.div
-          className="w-full h-full shadow-xl rounded-full box-border px-4 py-2 flex "
+          className="w-full h-full shadow-xl rounded-full box-border px-4 py-2 flex cursor-pointer"
           onClick={(event) => setIsShow(true)}
         >
           <FiSearch className="h-full text-[30px] text-center" />

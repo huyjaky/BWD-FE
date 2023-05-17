@@ -1,18 +1,32 @@
+import SkeletonShowHouse from '@/components/skeletonLoading/skletonShowHouse';
 import { getHouseContext } from '@/contexts/getHouse';
-import { house_ } from '@/models/house';
 import { motion } from 'framer-motion';
 import { useContext, useEffect } from 'react';
 import Carousel from './carousel';
+import { house_ } from '@/models/house';
 const ShowHouse = () => {
+  const arrTempLoading:number[] = []
+  for (let index = 0; index < 10; index++) {arrTempLoading.push(index)}
   const { house, setHouse } = useContext(getHouseContext);
   useEffect(() => {}, [house]);
   return (
     <div>
       <motion.div className="w-full h-fit">
-        <motion.div className="w-full grid grid-cols-houseBox h-fit">
-          {house.map((item: house_, index: number) => {
+        <motion.div className="w-full h-fit grid grid-cols-houseBox gap-x-5 gap-y-8 ">
+
+
+          { house && house.length == 0 ?
+            arrTempLoading.map((item:number, index:number)=>{
+              return (
+                <div key={index}>
+                  <SkeletonShowHouse/>
+                </div>
+              )
+            })
+          :
+          house?.map((item: house_, index: number) => {
             return (
-              <motion.div key={index} className="w-[300px] h-[400px] ">
+              <motion.div key={index} className="w-full h-[400px] ">
                 <div className="w-full h-[300px]">
                   <Carousel arrImg={item.arrImg} />
                 </div>

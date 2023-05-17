@@ -1,7 +1,9 @@
+import { getHouseContext } from '@/contexts/getHouse';
 import { AnimatePresence, Variants, motion, useMotionValue, useTransform } from 'framer-motion';
 import { wrap } from 'popmotion';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { GrCaretNext, GrCaretPrevious } from 'react-icons/gr';
+import Skeleton from 'react-loading-skeleton';
 
 const variants = {
   enter: (direction: number) => {
@@ -50,7 +52,7 @@ interface CarouselProps {
 }
 
 const styleBtn =
-  'absolute top-[calc(50%-20px)] z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center mobile:invisible tablet:invisible ';
+  'absolute top-[calc(50%-20px)] z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center ';
 
 const Carousel = ({ arrImg }: CarouselProps) => {
   const [[page, direction], setPage] = useState([0, 0]);
@@ -75,35 +77,35 @@ const Carousel = ({ arrImg }: CarouselProps) => {
       <motion.div
         className="w-full h-full relative flex overflow-hidden rounded-xl"
         onHoverStart={handleOnEnter}
-        onHoverEnd={handleOnLeave}
-      >
+        onHoverEnd={handleOnLeave}>
         <AnimatePresence initial={false} custom={direction}>
-          <motion.img
-            key={page}
-            src={arrImg[imageIndex].Path}
-            custom={direction}
-            variants={variants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            className="w-full h-full absolute object-cover"
-            transition={{
-              x: { type: 'spring', stiffness: 200, damping: 30 },
-              opacity: { duration: 0.5 }
-            }}
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={1}
-            onDragEnd={(e, { offset, velocity }) => {
-              const swipe = swipePower(offset.x, velocity.x);
 
-              if (swipe < -swipeConfidenceThreshold) {
-                paginate(1);
-              } else if (swipe > swipeConfidenceThreshold) {
-                paginate(-1);
-              }
-            }}
-          />
+            <motion.img
+              key={page}
+              src={arrImg[imageIndex].Path}
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              className="w-full h-full absolute object-cover"
+              transition={{
+                x: { type: 'spring', stiffness: 200, damping: 30 },
+                opacity: { duration: 0.5 }
+              }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={1}
+              onDragEnd={(e, { offset, velocity }) => {
+                const swipe = swipePower(offset.x, velocity.x);
+
+                if (swipe < -swipeConfidenceThreshold) {
+                  paginate(1);
+                } else if (swipe > swipeConfidenceThreshold) {
+                  paginate(-1);
+                }
+              }}
+            />
         </AnimatePresence>
         <motion.button
           variants={variantsBtn}
@@ -112,8 +114,7 @@ const Carousel = ({ arrImg }: CarouselProps) => {
           animate={isHover ? 'showLeft' : 'hiddenLeft'}
           whileHover={{ scale: 1.1, backgroundColor: 'rgba(239, 68, 68, .6)' }}
           transition={{ duration: 0.5, type: 'tween' }}
-          className={`${styleBtn} left-[10px]`}
-        >
+          className={`${styleBtn} left-[10px] mobile:hidden tablet:hidden `}>
           <GrCaretPrevious />
         </motion.button>
         <motion.button
@@ -123,8 +124,25 @@ const Carousel = ({ arrImg }: CarouselProps) => {
           whileHover={{ scale: 1.1, backgroundColor: 'rgba(239, 68, 68, .6)' }}
           animate={isHover ? 'hiddenRight' : 'showRight'}
           transition={{ duration: 0.5, type: 'tween' }}
-          className={`${styleBtn} right-[10px]`}
-        >
+          className={`${styleBtn} right-[10px] mobile:hidden tablet:hidden `}>
+          <GrCaretNext />
+        </motion.button>
+
+        {/* mobile and tablet button */}
+        <motion.button
+          variants={variantsBtn}
+          onClick={() => paginate(-1)}
+          whileTap={{ scale: 1.1, backgroundColor: 'rgba(239, 68, 68, .6)' }}
+          transition={{ duration: 0.5, type: 'tween' }}
+          className={`${styleBtn} left-[10px] laptop:hidden desktop:hidden`}>
+          <GrCaretPrevious />
+        </motion.button>
+        <motion.button
+          variants={variantsBtn}
+          onClick={() => paginate(1)}
+          whileTap={{ scale: 1.1, backgroundColor: 'rgba(239, 68, 68, .6)' }}
+          transition={{ duration: 0.5, type: 'tween' }}
+          className={`${styleBtn} right-[10px] laptop:hidden desktop:hidden`}>
           <GrCaretNext />
         </motion.button>
       </motion.div>
