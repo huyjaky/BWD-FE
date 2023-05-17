@@ -13,13 +13,15 @@ export default function Step10Home() {
     <div
       className="w-[98vw] px-[80px]
                         mobile:px-0
-        ">
+        "
+    >
       <div
         className="w-[60%] ml-auto mr-auto pl-[70px] mb-[150px]
             mobile:pl-0
             laptop:w-[90%]
             tablet:w-[90%]
-            ">
+            "
+      >
         <div className="flex flex-col px-10 w-[100%]">
           <div className="mb-[32px]">
             <div className="mb-[32px] h-[82px] tablet:mb-[62px] mobile:mb-[152px] w-[100%] ml-auto mr-auto ">
@@ -35,7 +37,8 @@ export default function Step10Home() {
                                     laptop:grid-cols-2
                                     tablet:grid-cols-2
                                     mobile:grid-cols-1
-                    ">
+                    "
+            >
               {categoriesStep10.map((category) => (
                 <ChooDesPl
                   title={category.name}
@@ -60,7 +63,8 @@ export default function Step10Home() {
                                     laptop:grid-cols-2
                                     tablet:grid-cols-2
                                     mobile:grid-cols-1
-                    ">
+                    "
+            >
               {standoutamenities.map((category) => (
                 <ChooDesPl
                   title={category.name}
@@ -85,7 +89,8 @@ export default function Step10Home() {
                                     laptop:grid-cols-2
                                     tablet:grid-cols-2
                                     mobile:grid-cols-1
-                    ">
+                    "
+            >
               {safetyitems.map((category) => (
                 <ChooDesPl
                   title={category.name}

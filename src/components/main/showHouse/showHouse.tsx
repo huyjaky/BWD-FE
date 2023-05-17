@@ -27,7 +27,7 @@ const ShowHouse = () => {
                   </div>
                   <div className="w-full h-fit mt-1">{item.useracc.UserName}</div>
                   <div className="w-full h-fit mt-1 ">
-                    <span className='font-semibold'>&#36;{item.Price}</span> night
+                    <span className="font-semibold">&#36;{item.Price}</span> night
                   </div>
                 </div>
               </motion.div>

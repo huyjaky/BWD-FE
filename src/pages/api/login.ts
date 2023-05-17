@@ -58,7 +58,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
 
     proxy.once('proxyRes', handleLoginResponse);
 
-
     // http://localhost:3500
     proxy.web(
       req,
@@ -66,7 +65,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
       {
         target: process.env.API_URL_AUTH,
         changeOrigin: true,
-        selfHandleResponse: true,
+        selfHandleResponse: true
       },
       function (err) {
         res.status(500).send('Oops, something went wrong.');

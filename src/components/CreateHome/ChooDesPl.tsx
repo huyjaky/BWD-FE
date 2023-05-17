@@ -5,7 +5,7 @@ interface ChooDesPlProps {
   icon: JSX.Element;
   selected: string;
   type: string;
-  setselected: (title: string) => void ;
+  setselected: (title: string) => void;
   selectedMany: string[];
   setselectedMany: (titles: string[]) => void;
 }

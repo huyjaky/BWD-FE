@@ -2,11 +2,11 @@ import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 import { useContext, useRef } from 'react';
 import { HiOutlineFilter } from 'react-icons/hi';
 
-interface FilterProps{
-  isInvisible: string | null
+interface FilterProps {
+  isInvisible: string | null;
 }
 
-const Filter = ({isInvisible}: FilterProps) => {
+const Filter = ({ isInvisible }: FilterProps) => {
   const buttonFilter = useRef<HTMLInputElement>(null);
   const { setIsClickOutSide } = useContext(filterFormAnimateContext);
 

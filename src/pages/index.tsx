@@ -39,7 +39,6 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
       console.log(data);
       setUser({ ...user, ...data?.data?.data });
     }, [data]);
-
   } else if (user_?.UserId && !user.UserId) {
     setUser({ ...user, ...user_ });
   }
@@ -60,7 +59,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
         <HeaderMain />
         <div className="w-full h-fit px-[80px]">
           <TypeHouse />
-          <ShowHouse/>
+          <ShowHouse />
         </div>
       </main>
     </>

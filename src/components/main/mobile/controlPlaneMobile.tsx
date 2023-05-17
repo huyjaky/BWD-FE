@@ -1,26 +1,25 @@
 import ControlBar from '@/components/rootMaskHeader/controlPlan/controlBar/controlBar';
+import Popover from '@/components/rootMaskHeader/controlPlan/controlBar/popOver';
 import { mobileContolPanelContext } from '@/contexts/mobileControlPanel';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
+import { IoIosArrowRoundBack } from 'react-icons/io';
 
 const variants: Variants = {
   show: {
     top: 0,
     opacity: 1,
-    visibility: 'visible'
+
   },
   hidden: {
     top: 30,
     opacity: 0,
-    visibility: 'hidden'
   }
 };
 
 const ControlPlanMobile = () => {
   const { isShow, setIsShow } = useContext(mobileContolPanelContext);
-  useEffect(() => {
-    console.log(isShow);
-  }, [isShow]);
+
 
   return (
     <AnimatePresence initial={false}>
@@ -30,21 +29,30 @@ const ControlPlanMobile = () => {
           variants={variants}
           initial={isShow ? 'hidden' : 'show'}
           animate={isShow ? 'show' : 'hidden'}
-          transition={{ type: 'tween', duration: 1 }}>
-            {/* header */}
-            <motion.div className='flex-1 border-b-2'>
-              
-            </motion.div>
-            <motion.div className='flex-1 box-border px-[80px]'>
-              <ControlBar/>
-            </motion.div>
-
-            {/* content */}
-            <motion.div className='flex-[7]'>
-            </motion.div>
-
-
+          transition={{ type: 'tween', duration: 1, ease: 'easeInOut' }}
+        >
+          {/* header */}
+          <motion.div className="flex-[0.5] ">
+            <motion.button
+            className='h-full w-[100px] overflow-hidden'>
+              <IoIosArrowRoundBack className='w-full text-[40px] font-bold  stroke-[50px] fill-red-500
+              text-red-500 '
+              onClick={event => setIsShow(false)}
+              />
+            </motion.button>
           </motion.div>
+          <motion.div className="flex-1 box-border px-[80px] mobile:px-3">
+            <ControlBar />
+          </motion.div>
+
+          {/* content */}
+          <motion.div className="flex-[7] box-border w-full h-full px-[80px] py-5 ">
+            <motion.div className="w-full h-full relative border-2 rounded-2xl">
+              <Popover />
+            </motion.div>
+          </motion.div>
+
+        </motion.div>
       </motion.div>
     </AnimatePresence>
   );

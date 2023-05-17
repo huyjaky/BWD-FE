@@ -39,7 +39,7 @@ export default function Step8CHome() {
                   selected={selected}
                   setselected={setselected}
                   selectedMany={[]}
-                  setselectedMany={()=>{}}
+                  setselectedMany={() => {}}
                 />
               ))}
             </div>

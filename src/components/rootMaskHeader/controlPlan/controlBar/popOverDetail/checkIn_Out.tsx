@@ -40,7 +40,7 @@ const CheckIn_Out = () => {
             className="w-full h-full font-semibold "
           />
         </div>
-        <div className="w-full h-full laptop:hidden desktop:hidden flex overflow-scroll">
+        <div className="w-full h-full laptop:hidden desktop:hidden flex overflow-scroll overflow-x-hidden">
           <DateRangePicker
             onChange={(item: any) => handleOnChange(item)}
             showPreview={true}

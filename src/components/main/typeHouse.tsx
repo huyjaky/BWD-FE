@@ -109,7 +109,7 @@ const TypeHouse = () => {
         </motion.div>
       </motion.div>
 
-      <Filter isInvisible={'tablet:hidden'}/>
+      <Filter isInvisible={'tablet:hidden mobile:hidden'} />
     </div>
   );
 };

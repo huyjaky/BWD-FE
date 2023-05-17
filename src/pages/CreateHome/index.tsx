@@ -52,7 +52,7 @@ function CreateHome(): JSX.Element {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const cookies = req.cookies.access_token;
   if (!cookies) {
     res.setHeader('location', '/login');
@@ -61,9 +61,7 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
     return { props: {} };
   }
 
-  return {props: {}};
-}
+  return { props: {} };
+};
 
 export default CreateHome;
-
-

@@ -29,7 +29,5 @@ export interface house_ {
   JudicalId: string;
   address: address;
   useracc: userAcc;
-  arrImg: {Path:string}[]
+  arrImg: { Path: string }[];
 }
-
-

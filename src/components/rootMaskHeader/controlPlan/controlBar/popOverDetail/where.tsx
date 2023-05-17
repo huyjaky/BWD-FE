@@ -42,11 +42,11 @@ const Where = () => {
   };
 
   return (
-    <div>
+    <>
       {placeList?.length != 0 && address.address.formattedAddress && (
         <div
           className="h-fit w-fit bg-white rounded-2xl pointer-events-auto
-      box-border p-5
+      box-border p-5 tablet:w-full mobile:w-full tablet:overflow-hidden mobile:overflow-hidden
     "
           id="where-popup"
         >
@@ -56,7 +56,7 @@ const Where = () => {
               return (
                 <button
                   key={index}
-                  className="
+                  className="tablet:text-center
                 mb-3 relative w-full  text-left"
                   onClick={(event) => handleOnclick(event, item)}
                 >
@@ -67,7 +67,7 @@ const Where = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

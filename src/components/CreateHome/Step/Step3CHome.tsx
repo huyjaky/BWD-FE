@@ -29,7 +29,7 @@ export default function Step3CHome() {
               name={categorie.name}
               icon={categorie.icon}
               description={categorie.description}
-              type=''
+              type=""
             />
           ))}
         </div>
