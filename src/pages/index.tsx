@@ -1,3 +1,4 @@
+import axiosClient from '@/api-client/axiosClient';
 import { houseApi } from '@/api-client/houseApi';
 import { sessionOptions } from '@/api-client/session';
 import FooterMainRes from '@/components/footers/footerMainRes';
@@ -23,10 +24,9 @@ const monsterrat = Montserrat({
 });
 interface HomeProps {
   user_: userAcc;
-  house_: house_[];
 }
 
-const Home: NextPageWithLayout<HomeProps> = ({ user_, house_ }: HomeProps) => {
+const Home: NextPageWithLayout<HomeProps> = ({ user_ }: HomeProps) => {
   const { user, setUser } = useContext(userAccContext);
   const { house, setHouse } = useContext(getHouseContext);
 
@@ -42,20 +42,16 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, house_ }: HomeProps) => {
   } else if (user_?.UserId && !user.UserId) {
     setUser({ ...user, ...user_ });
   }
+  console.log(house);
 
-  // if house available, dont need fetch again anymore
-  if (!house_) {
-    useEffect(() => {
-      const fetchHouseApi = async () => {
-        if (house.length != 0) return;
-        const arr = await houseApi.noneAuthHouseApi(1);
-        setHouse(arr.data.data as house_[]);
-      };
-      fetchHouseApi();
-    }, [house]);
-  } else {
-    setHouse(house_);
-  }
+  useEffect(() => {
+    const fetchHouseApi = async () => {
+      if (house.length != 0) return;
+      const arr = await houseApi.noneAuthHouseApi(1);
+      setHouse(arr.data as house_[]);
+    };
+    fetchHouseApi();
+  }, [house]);
 
   return (
     <>
@@ -78,12 +74,11 @@ export default Home;
 export const getServerSideProps: GetServerSideProps = withIronSessionSsr(
   async ({ req, res, params }) => {
     const user = req.session.props?.user_;
-    const house = req.session.house?.house;
 
     // if user available not callback api from server
-    if (user?.UserId && house?.length != 0) {
+    if (user?.UserId) {
       return {
-        props: { ...req.session.props?.user_, ...req.session.house?.house }
+        props: { ...req.session.props?.user_ }
       };
     }
     return { props: {} };

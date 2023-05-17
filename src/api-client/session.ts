@@ -17,6 +17,5 @@ export const sessionOptions: IronSessionOptions = {
 declare module 'iron-session' {
   interface IronSessionData {
     props?: { user_: userAcc | undefined; props: any };
-    house?: { house: house_[] | undefined; props: any};
   }
 }
