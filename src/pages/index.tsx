@@ -24,12 +24,14 @@ const monsterrat = Montserrat({
 });
 interface HomeProps {
   user_: userAcc;
+  props: any
 }
 
-const Home: NextPageWithLayout<HomeProps> = ({ user_ }: HomeProps) => {
+const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
   const { user, setUser } = useContext(userAccContext);
   const { house, setHouse } = useContext(getHouseContext);
 
+  console.log(user);
   if (!user_?.UserId) {
     const { data, error, mutate, isValidating } = useSWR(`/get/useracc/UserName/${user.UserName}`, {
       revalidateOnFocus: false
@@ -74,11 +76,10 @@ export default Home;
 export const getServerSideProps: GetServerSideProps = withIronSessionSsr(
   async ({ req, res, params }) => {
     const user = req.session.props?.user_;
-
     // if user available not callback api from server
     if (user?.UserId) {
       return {
-        props: { ...req.session.props?.user_ }
+        props: { ...req.session.props }
       };
     }
     return { props: {} };

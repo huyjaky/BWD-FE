@@ -6,11 +6,12 @@ import { AiOutlineHeart, AiOutlineUser } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 
 const FooterMainRes = () => {
-  const {user, setUser} = useContext(userAccContext);
-  useEffect(()=>{}, [user]);
+  const {user} = useContext(userAccContext);
+  console.log(user);
+  useEffect(()=>{ }, [user]);
   return (
     <div
-      className="laptop:hidden desktop:hidden fixed bottom-0 w-full h-[70px]
+      className="laptop:hidden desktop:hidden fixed z-40 bg-white bottom-0 w-full h-[70px]
           flex border-t-2 py-1 box-border justify-center">
       <Link href={'/'}>
         <motion.button className="flex w-fit h-full flex-col box-border ">

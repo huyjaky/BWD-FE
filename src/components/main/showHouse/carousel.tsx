@@ -71,7 +71,6 @@ const Carousel = ({ arrImg }: CarouselProps) => {
   const handleOnLeave = (event: any) => {
     setIsHover(false);
   };
-  console.log(arrImg);
 
   return (
     <>

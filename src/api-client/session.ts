@@ -1,7 +1,6 @@
 // this file is a wrapper with defaults to be used in both API routes and `getServerSideProps` functions
-import { house_ } from '@/models/house';
 import { userAcc } from '@/models/userAcc';
-import type { IronSessionData, IronSessionOptions } from 'iron-session';
+import type { IronSessionOptions } from 'iron-session';
 
 export const sessionOptions: IronSessionOptions = {
   password: process.env.SECRET_COOKIE_PASSWORD as string,
