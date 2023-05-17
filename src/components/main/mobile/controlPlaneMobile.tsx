@@ -49,7 +49,7 @@ const ControlPlanMobile = () => {
           </motion.div>
 
           {/* content */}
-          <motion.div className="flex-[7] box-border w-full h-full px-[80px] py-5 ">
+          <motion.div className="flex-[7] box-border w-full mb-[70px] px-[80px] py-5 ">
             <motion.div className="w-full h-full relative border-2 rounded-2xl">
               <Popover />
             </motion.div>
