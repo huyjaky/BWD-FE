@@ -7,13 +7,16 @@ import { IoIosArrowRoundBack } from 'react-icons/io';
 
 const variants: Variants = {
   show: {
-    top: 0,
-    opacity: 1,
-
+    visibility: ['hidden', 'visible'],
+    top: [30, 0],
+    opacity: [0, 1],
   },
   hidden: {
-    top: 30,
-    opacity: 0,
+    top: [0, 30],
+    opacity: [1, 0],
+    transitionEnd: {
+      visibility: 'hidden'
+    }
   }
 };
 
@@ -27,7 +30,6 @@ const ControlPlanMobile = () => {
         <motion.div
           className="fixed right-0 top-0 w-screen h-screen bg-white  flex flex-col"
           variants={variants}
-          initial={isShow ? 'hidden' : 'show'}
           animate={isShow ? 'show' : 'hidden'}
           transition={{ type: 'tween', duration: 1, ease: 'easeInOut' }}
         >
