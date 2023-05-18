@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { motion } from 'framer-motion';
 interface Step {
   number: number;
 }
@@ -7,39 +7,35 @@ interface Step {
 interface ProgressBarProps {
   steps: Step[];
   currentStep: number;
-  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
+  handleNextStep: () => void;
+  handleBackStep: () => void;
 }
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ steps, currentStep, setCurrentStep }) => {
+const ProgressBar: React.FC<ProgressBarProps> = ({ steps, currentStep, handleBackStep, handleNextStep }) => {
+
+
+
   return (
-    <div className="fixed bottom-0 left-0 w-full h-[80px] bg-white">
-      <div className="w-full bg-gray-400 h-1.5 mb-2 flex">
-        {steps.map((item: Step) => (
-          <div
-            key={item.number}
-            className={`h-1.5 bg-transparent mb-2 transition-all duration-700 ease-out ${
-              item.number <= currentStep ? 'bg-[#222222]' : ''
-            }`}
-            style={{ width: `${100 / steps.length}%` }}
-          ></div>
-        ))}
+    <div className="fixed bottom-0 left-0 w-full h-[80px] items-center bg-white">
+      <div className="w-full bg-gray-200  h-2 ">
+        <motion.div
+          className="bg-black h-2 "
+          style={{ borderRadius: " 0 10px 10px 0" }}
+          animate={{ width: `${(currentStep / steps.length) * 100}%` }}
+          transition={{ duration: 1 }}
+        >
+        </motion.div>
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mt-2">
         <button
           className="py-4 px-8 bg-whiter text-[#222222] font-semibold text-[16px] rounded-xl inline ml-8 underline"
-          onClick={() =>
-            setCurrentStep((prevStep) =>
-              prevStep <= steps.length && prevStep > 1 ? prevStep - 1 : prevStep
-            )
-          }
+          onClick={handleBackStep}
         >
           Back
         </button>
         <button
           className="py-4 px-8 bg-[#222222] text-white font-semibold text-[16px] rounded-xl inline mr-8"
-          onClick={() =>
-            setCurrentStep((prevStep) => (prevStep < steps.length ? prevStep + 1 : prevStep))
-          }
+          onClick={handleNextStep}
         >
           Next
         </button>

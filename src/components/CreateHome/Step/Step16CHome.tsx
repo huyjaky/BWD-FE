@@ -3,7 +3,7 @@ import { BsPlusLg } from 'react-icons/bs'
 import { RxMinus } from 'react-icons/rx'
 import { RiErrorWarningFill } from 'react-icons/ri'
 import { HiOutlineInformationCircle } from 'react-icons/hi'
-
+import { motion } from 'framer-motion'
 
 export default function Step16CHome() {
 
@@ -25,7 +25,11 @@ export default function Step16CHome() {
     };
 
     return (
-        <div
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
             className="w-[98vw] px-[80px] 
                         mobile:px-0
         "
@@ -41,20 +45,33 @@ export default function Step16CHome() {
                     <div className="mb-[32px]">
                         <div className="mb-[32px] h-[82px] tablet:mb-[62px] mobile:mb-[152px] w-[100%] ml-auto mr-auto ">
                             <div className='mb-[22px]'>
-                                <h1
+                                <motion.h1
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ type: "spring", stiffness: 35, delay: 0.1 }}
                                     className="text-[32px] font-semibold w-[100%] leading-10 mb-3 
                         "
                                 >
                                     Now, set your price
-                                </h1>
-                                <p className="text-[18px] text-[#717171] ">
+                                </motion.h1>
+                                <motion.p
+                                    initial={{ opacity: 0, y: -30 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
+                                    className="text-[18px] text-[#717171] ">
                                     You can change it anytime.
-                                </p>
+                                </motion.p>
                             </div>
-                            <div className='w-[95%] bg-[#F7F7F7] h-[320px] border rounded-[12px] p-[32px] flex flex-col items-center 
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
+                                className='w-[95%] bg-[#F7F7F7] h-[320px] border rounded-[12px] p-[32px] flex flex-col items-center 
                                             mobile:h-[260px]
                             '>
-                                <div className=' flex items-center flex-col w-[100%]'>
+                                <div
+
+                                    className=' flex items-center flex-col w-[100%]'>
                                     <div className='flex items-center justify-around w-[430px] pb-[16px]'>
                                         <button className='border border-[#717171] w-[55px] h-[48px] flex justify-center items-center rounded-full hover:border-black'>
                                             <span><RxMinus /></span>
@@ -87,8 +104,12 @@ export default function Step16CHome() {
                                     Places like yours in your area usually <br /> range from ₫398,861 to ₫664,768
                                     <button><HiOutlineInformationCircle className='absolute right-3 bottom-[5px]' /></button>
                                 </div>
-                            </div>
-                            <label htmlFor='helper-checkbox' className="w-[95%] cursor-pointer bg-[#F7F7F7] h-[120px] mobile:h-[150px] border rounded-[12px] mt-[20px] px-[32px] py-0 pt-[20px] flex  justify-between ">
+                            </motion.div>
+                            <motion.label
+                                initial={{ opacity: 0, y: -30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
+                                htmlFor='helper-checkbox' className="w-[95%] cursor-pointer bg-[#F7F7F7] h-[120px] mobile:h-[150px] border rounded-[12px] mt-[20px] px-[32px] py-0 pt-[20px] flex  justify-between ">
                                 <div className="flex flex-col justify-start h-5 ">
                                     <label htmlFor="helper-checkbox" className=" text-[18px] font-semibold text-gray-900 cursor-pointer">Get booked faster</label>
                                     <p id="helper-checkbox-text" className="text-[18px] font-normal text-gray-500 ">Offer 20% off on your first 3 bookings to help your place stand out. Get details</p>
@@ -96,11 +117,11 @@ export default function Step16CHome() {
                                 <div className="ml-2 text-sm">
                                     <input id="helper-checkbox" aria-describedby="helper-checkbox-text" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                                 </div>
-                            </label>
+                            </motion.label>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }

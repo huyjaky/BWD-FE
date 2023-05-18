@@ -1,44 +1,54 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { BsPlus } from 'react-icons/bs';
 import { FiMinus } from 'react-icons/fi';
+import { motion } from 'framer-motion';
+
 export default function Step6CHome() {
-  // const [buttonBorder, setButtonBorder] = useState("");
-  // const [colorIcon, setColorIcon] = useState("black");
 
   const [guestCount, setguestCount] = useState(1);
-
-  const handelguestCount = () => {
-    if (guestCount > 1) {
-      setguestCount((prev) => prev - 1);
-      // setButtonBorder("border-black");
-      // setColorIcon("black")
-    } else {
-      // setButtonBorder("")
-      // setColorIcon("#b0b0b0")
-    }
-  };
 
   const [BedroomCount, setBedroomCount] = useState(1);
 
   const [BedsCount, setBedsCount] = useState(1);
 
-  const [showExtraRow, setShowExtraRow] = useState(true);
+  const [BathroomCount, setBathroomCount] = useState(1);
+
+  const [showExtraRow, setShowExtraRow] = useState(false);
 
   return (
-    <div className="w-[98vw] px-[80px]">
-      <div className="w-[60%] ml-auto mr-auto pl-[70px] ">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1 }}
+      className="w-[98vw] h-[700px] px-[80px] tablet:px-[50px] mt-10">
+      <div className="w-[60%] tablet:w-[80%] laptop:w-[80%] mobile:w-[100%] ml-auto mr-auto pl-[70px] mobile:pl-0 ">
         <div>
           <div>
-            <h1
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 35, delay: 0.1 }}
               className="text-[32px] font-semibold
                         mobile:text-[26px]
+                        tablet:text-[26px]
                         "
             >
-              Let's start with the basics
-            </h1>
-            <h2 className="text-[18px] font-semibold py-[18px]">How many people can stay here</h2>
+              Share some basics about your place
+            </motion.h1>
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
+              className="text-[18px] py-[18px] text-[#717171]">
+              You'll add more details later, like bed types.
+            </motion.h2>
             <div className="flex flex-col justify-between">
-              <div className="flex justify-between py-[24px] border-b-[1px]">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 35, delay: 0.3 }}
+                className="flex justify-between py-[24px] border-b-[1px]">
                 <div>
                   <h1 className="text-[18px] ">Guests</h1>
                 </div>
@@ -46,7 +56,7 @@ export default function Step6CHome() {
                   <button
                     className={`border-[1px] rounded-[50%] border-[#b0b0b0] ease-in duration-300 hover:border-black `}
                     style={{}}
-                    onClick={handelguestCount}
+                    onClick={() => setguestCount((prev) => prev - 1)}
                   >
                     <FiMinus className={`w-[32px] h-[32px] p-[5px] `} />
                   </button>
@@ -61,8 +71,12 @@ export default function Step6CHome() {
                     />
                   </button>
                 </div>
-              </div>
-              <div className="flex justify-between py-[24px] border-b-[1px]">
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 35, delay: 0.4 }}
+                className="flex justify-between py-[24px] border-b-[1px]">
                 <div>
                   <h1 className="text-[18px] ">Bedrooms</h1>
                 </div>
@@ -70,7 +84,7 @@ export default function Step6CHome() {
                   <button
                     className="border-[1px] rounded-[50%] border-[#b0b0b0] ease-in duration-300
                                                         hover:border-black"
-                    onClick={(e) => setBedroomCount((prev) => prev - 1)}
+                    onClick={() => setBedroomCount((prev) => prev - 1)}
                   >
                     <FiMinus className="w-[32px] h-[32px] p-[5px]" />
                   </button>
@@ -78,13 +92,17 @@ export default function Step6CHome() {
                   <button
                     className="border-[1px] rounded-[50%] border-[#b0b0b0] ease-in duration-300
                                                         hover:border-black"
-                    onClick={(e) => setBedroomCount((prev) => prev + 1)}
+                    onClick={() => setBedroomCount((prev) => prev + 1)}
                   >
                     <BsPlus className="w-[32px] h-[32px] p-[5px]" />
                   </button>
                 </div>
-              </div>
-              <div className="flex justify-between py-[24px]">
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 35, delay: 0.5 }}
+                className="flex justify-between py-[24px] border-b-[1px]">
                 <div>
                   <h1 className="text-[18px] ">Beds</h1>
                 </div>
@@ -92,7 +110,7 @@ export default function Step6CHome() {
                   <button
                     className="border-[1px] rounded-[50%] border-[#b0b0b0] ease-in duration-300
                                                         hover:border-black"
-                    onClick={(e) => setBedsCount((prev) => prev - 1)}
+                    onClick={() => setBedsCount((prev) => prev - 1)}
                   >
                     <FiMinus className="w-[32px] h-[32px] p-[5px] " />
                   </button>
@@ -100,14 +118,44 @@ export default function Step6CHome() {
                   <button
                     className="border-[1px] rounded-[50%] border-[#b0b0b0] ease-in duration-300
                                                         hover:border-black"
-                    onClick={(e) => setBedsCount((prev) => prev + 1)}
+                    onClick={() => setBedsCount((prev) => prev + 1)}
                   >
                     <BsPlus className="w-[32px] h-[32px] p-[5px]" />
                   </button>
                 </div>
-              </div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 35, delay: 0.6 }}
+                className="flex justify-between py-[24px] ">
+                <div>
+                  <h1 className="text-[18px] ">Bathrooms</h1>
+                </div>
+                <div className="flex justify-between gap-3 items-center">
+                  <button
+                    className="border-[1px] rounded-[50%] border-[#b0b0b0] ease-in duration-300
+                                                        hover:border-black"
+                    onClick={() => setBathroomCount((prev) => prev - 1)}
+                  >
+                    <FiMinus className="w-[32px] h-[32px] p-[5px] " />
+                  </button>
+                  <span className="text-[16px] w-[16px]">{BathroomCount}</span>
+                  <button
+                    className="border-[1px] rounded-[50%] border-[#b0b0b0] ease-in duration-300
+                                                        hover:border-black"
+                    onClick={() => setBathroomCount((prev) => prev + 1)}
+                  >
+                    <BsPlus className="w-[32px] h-[32px] p-[5px]" />
+                  </button>
+                </div>
+              </motion.div>
             </div>
-            <div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 35, delay: 0.7 }}
+            >
               <div>
                 <h2 className="text-[18px] font-semibold py-[18px]">
                   Does every bedroom have a lock?
@@ -155,10 +203,10 @@ export default function Step6CHome() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

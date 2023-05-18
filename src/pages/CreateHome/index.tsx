@@ -17,10 +17,28 @@ import Step14CHome from '@/components/CreateHome/Step/Step14CHome';
 import Step15CHome from '@/components/CreateHome/Step/Step15CHome';
 import Step16CHome from '@/components/CreateHome/Step/Step16CHome';
 import Step17CHome from '@/components/CreateHome/Step/Step17CHome';
+import { AnimatePresence } from 'framer-motion';
 
 import ProcessBar from '../../components/CreateHome/ProcessBar/ProccessBar';
 function CreateHome(): JSX.Element {
   const [currentStep, setCurrentStep] = useState(1);
+
+  const [isMounted, setIsMounted] = useState(true);
+
+  const handleNextStep = () => {
+    setIsMounted(false); // Gán giá trị false để unmount component
+    setTimeout(() => {
+      setCurrentStep((prevStep) => prevStep + 1);
+      setIsMounted(true); // Gán giá trị true để mount component tiếp theo
+    }, 1000); // Thời gian delay trước khi chuyển sang component tiếp theo
+  };
+  const handleBackStep = () => {
+    setIsMounted(false); // Gán giá trị false để unmount component
+    setTimeout(() => {
+      setCurrentStep((prevStep) => prevStep - 1);
+      setIsMounted(true); // Gán giá trị true để mount component tiếp theo
+    }, 1000); // Thời gian delay trước khi chuyển sang component tiếp theo
+  };
 
   const steps = [
     { number: 1, component: <Step1CHome /> },
@@ -45,8 +63,11 @@ function CreateHome(): JSX.Element {
   return (
     <div className="">
       <Header />
-      {steps[currentStep - 1].component}
-      <ProcessBar steps={steps} currentStep={currentStep} setCurrentStep={setCurrentStep} />
+      <AnimatePresence >
+        {currentStep > 0 && currentStep <= 17 && currentStep === steps[currentStep - 1].number && isMounted && steps[currentStep - 1].component}
+      </AnimatePresence>
+
+      <ProcessBar steps={steps} handleBackStep={handleBackStep} handleNextStep={handleNextStep} currentStep={currentStep} />
     </div>
   );
 }

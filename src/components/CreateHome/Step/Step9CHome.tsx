@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, RefObject } from 'react';
+import { motion } from 'framer-motion';
 export default function Step9CHome() {
   const videoRef: RefObject<HTMLVideoElement> = useRef(null);
 
@@ -11,7 +12,12 @@ export default function Step9CHome() {
   }, [videoRef]);
 
   return (
-    <div className="mt-[88px] w-[98vw]">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1 }}
+      className="mt-[88px] w-[98vw]">
       <div className="w-[80%] ml-auto mr-auto">
         <div
           className="px-[80px] flex  items-center w-[100%]
@@ -45,6 +51,6 @@ export default function Step9CHome() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
