@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { useContext, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Carousel from './carousel';
+import { array } from 'yup';
 
 const ShowHouse = () => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
@@ -20,24 +21,28 @@ const ShowHouse = () => {
 
   const getMoreHouse = async () => {
     try {
-      const moreHouse = await houseApi.noneAuthHouseApi(page);
-      if (Array.isArray(moreHouse.data)) {
-        const newHouse = [...houseTemp, ...moreHouse.data];
-        setHouseTemp(newHouse);
-        setPage(page + 1);
+      const moreHouse = await houseApi.noneAuthHouseApi(houseTemp.length/10 + 1);
+      if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
+        setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
+      } else {
+        console.log('has more');
+        setHasMore(false)
       }
+
     } catch (error) {
       console.log(error);
     }
   };
+  useEffect(()=>{}, [hasMore])
 
   useEffect(() => {
+    console.log(houseTemp);
     setIsLoading(false);
   }, [houseTemp, setIsLoading]);
 
   return (
     <div>
-      <motion.div className="w-full h-fit">
+      <motion.div className="w-full h-fit py-20" id='scroll-inf'>
         <InfiniteScroll
           dataLength={houseTemp.length}
           next={getMoreHouse}

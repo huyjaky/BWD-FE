@@ -65,7 +65,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
     <>
       <main className={`${monsterrat.className} relative overflow-hidden`} id="root">
         <HeaderMain />
-        <div className="w-full h-fit px-[80px] box-border ">
+        <div className="w-full h-fit px-[80px] box-border">
           <TypeHouse />
           <ShowHouse />
         </div>

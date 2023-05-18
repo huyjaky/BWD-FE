@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { BiSearch } from 'react-icons/bi';
 import ControlBar from './controlBar/controlBar';
 import Popover from './controlBar/popOver';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { selectPopoverContext } from '@/contexts';
 
 const ControlPlan = () => {
