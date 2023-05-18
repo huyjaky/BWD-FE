@@ -15,11 +15,13 @@ const SearchBox = () => {
   useEffect(() => {
     const fetchLocation = async () => {
       // return while address null while select one in spaceList suggest
-      if (!address.formattedAddress || !isFetch) return;
+      if (!address.address.formattedAddress || !isFetch) return;
 
       // loading is running while fetching api
       setIsLoading(true);
-      const placeList_ = await placeSearch().placeSearch_({ address: address.formattedAddress });
+      const placeList_ = await placeSearch().placeSearch_({
+        address: address.address.formattedAddress
+      });
 
       if (placeList_) {
         setIsLoading(false);
@@ -37,7 +39,7 @@ const SearchBox = () => {
     return () => {
       clearTimeout(debounceFetch);
     };
-  }, [address.formattedAddress]);
+  }, [address.address.formattedAddress]);
 
   return (
     <div>
@@ -48,10 +50,13 @@ const SearchBox = () => {
         placeholder={'Search your locations'}
         className="outline-none focus:border-b-2 focus:border-slate-600 w-[calc(100%-40px)]"
         onChange={(event) => {
-          setAddress({ ...address, formattedAddress: event.target.value });
+          setAddress({
+            ...address,
+            address: { ...address.address, formattedAddress: event.target.value }
+          });
           setIsFetch(true);
         }}
-        value={address.formattedAddress}
+        value={address.address.formattedAddress}
       />
     </div>
   );

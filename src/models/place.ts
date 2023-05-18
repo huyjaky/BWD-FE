@@ -1,4 +1,5 @@
 import { address } from './address';
+import { addressSearch } from './addressSearch';
 
 export interface placeListData {
   placeList: any[];
@@ -9,8 +10,8 @@ export interface placeListData {
   setIsFetch: (payload: boolean) => void;
 }
 export interface selectPlaceData {
-  address: address;
-  setAddress: (payload: address) => void;
+  address: addressSearch;
+  setAddress: (payload: addressSearch) => void;
 }
 export interface selectPopoverDefault {
   selected: string;

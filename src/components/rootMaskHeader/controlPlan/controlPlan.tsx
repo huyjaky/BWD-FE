@@ -58,7 +58,7 @@ const ControlPlan = () => {
 
   return (
     <>
-      <div className="w-[400px] box-border p-4">
+      <div className="w-[400px] box-border p-4 ">
         <div className="w-full h-full">
           {/* link */}
           <div className="w-full h-0 flex overflow-hidden mb-1 " id="link">
@@ -89,21 +89,21 @@ const ControlPlan = () => {
             onClick={handleOnScaleUp}
           >
             <button
-              className="flex-1 "
+              className="flex-1 h-full"
               id="header-control_bar-list-index-1"
               onClick={(event) => onSelected('where')}
             >
               Anywhere
             </button>
             <button
-              className="flex-1 border-x-2 border-slate-400"
+              className="flex-1 border-x-2 border-slate-400 h-full"
               id="header-control_bar-list-index-2"
               onClick={(event) => onSelected('checkin')}
             >
               Any week
             </button>
             <button
-              className="flex-1"
+              className="flex-1 h-full"
               id="header-control_bar-list-index-4"
               onClick={(event) => onSelected('who')}
             >
@@ -117,15 +117,20 @@ const ControlPlan = () => {
       </div>
 
       <div
-        className="absolute w-full h-0 mt-[80px] bg-white flex
+        className="absolute w-full h-0 mt-[80px] bg-white
         box-border z-20
+      after:h-full after:left-0 after:top-0 after:absolute
+      after:w-[calc(100vw-(100vw-100%)/2)] after:bg-white after:-z-10
+
+      before:h-full before:right-0 before:top-0 before:absolute
+      before:w-[calc(100vw-(100vw-100%)/2)] before:bg-white before:-z-10
       "
         id="ControlHeader"
       >
         <div
           className="w-[850px] tablet:w-full h-[90%] box-border rounded-full m-auto flex
           text-[15px] transition-all duration-300 border-2 invisible overflow-hidden
-          cursor-pointer 
+          cursor-pointer
         "
           id="controlBar"
         >

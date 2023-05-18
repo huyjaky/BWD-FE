@@ -2,11 +2,16 @@ import LoginPanel from '@/components/loginPanel/LoginPanel';
 import { selectPopoverContext } from '@/contexts';
 import { placeListContext } from '@/contexts/placeList';
 import { useContext, useEffect, useRef, useState } from 'react';
-import HeaderForm from '../headerForm/HeaderForm';
 import ControlPlan from './controlPlan/controlPlan';
+import HeaderForm from '../headers/headerForm/HeaderForm';
+import FormFilter from '../main/filter/formFilter/formFilter';
+import { AnimatePresence, motion } from 'framer-motion';
+import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
+
 const HeaderMain = () => {
   const { setPlaceList } = useContext(placeListContext);
   const { isLoginClick, setIsLoginClick } = useContext(selectPopoverContext);
+  const { isClickOutSide } = useContext(filterFormAnimateContext);
   const [isFirstLoading, setIsFirstLoading] = useState(true);
 
   const loginPanel = useRef<HTMLInputElement>(null);
@@ -84,6 +89,26 @@ const HeaderMain = () => {
 
   return (
     <>
+      <AnimatePresence initial={false}>
+        <motion.div
+          initial={
+            isClickOutSide
+              ? { opacity: 0, visibility: 'hidden' }
+              : { opacity: 1, visibility: 'visible' }
+          }
+          animate={
+            isClickOutSide
+              ? { opacity: 1, visibility: 'visible' }
+              : { opacity: 0, visibility: 'hidden' }
+          }
+          className="w-screen h-screen bg-mask absolute z-40 flex
+        overflow-hidden "
+          id="maskFilter"
+        >
+          <FormFilter />
+        </motion.div>
+      </AnimatePresence>
+
       <div
         className="w-screen h-screen transition-all duration-500 bg-mask absolute z-40 flex
         overflow-hidden invisible
@@ -98,8 +123,9 @@ const HeaderMain = () => {
           </div>
         </div>
       </div>
+
       <div
-        className="w-screen h-screen invisible transition-all duration-500 bg-mask absolute"
+        className="w-screen h-screen invisible transition-all duration-500 bg-mask absolute z-20"
         id="mask"
         onClick={handleOnMask}
         onScroll={handleOnMask}

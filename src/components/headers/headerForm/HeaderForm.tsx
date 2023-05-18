@@ -1,8 +1,5 @@
-import LoginPanel from '@/components/loginPanel/LoginPanel';
-import { placeListContext } from '@/contexts/placeList';
-import { selectPlaceContext } from '@/contexts/selectPlace';
 import Link from 'next/link';
-import { ReactNode, useContext, useEffect, useRef, useState } from 'react';
+import { ReactNode } from 'react';
 import { FaAirbnb } from 'react-icons/fa';
 import { TbWorld } from 'react-icons/tb';
 import ButtonAccount from '../buttonAccount/ButtonAccount';
@@ -13,7 +10,7 @@ interface HeaderFormProps {
 
 const HeaderForm = ({ children }: HeaderFormProps) => {
   return (
-    <div className="w-full h-[80px] relative bg-white">
+    <div className="w-full h-[80px] relative bg-white z-30">
       <header className="w-full h-[80px] border-b-2 flex justify-center px-[80px] box-border absolute">
         <div className="w-full h-full flex relative">
           {/* logo container */}

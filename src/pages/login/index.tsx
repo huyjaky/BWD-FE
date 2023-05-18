@@ -3,9 +3,7 @@ import HeaderLogin from '@/components/headers/headerLogin/headerLogin';
 import EmptyLayout from '@/components/layouts/empty';
 import LoginPanel from '@/components/loginPanel/LoginPanel';
 import { NextPageWithLayout } from '@/models/layoutprops';
-import Cookies from 'js-cookie';
 import { GetServerSideProps } from 'next';
-import { useEffect } from 'react';
 
 const Login: NextPageWithLayout = () => {
   return (
