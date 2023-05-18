@@ -1,9 +1,7 @@
-import { getHouseContext } from '@/contexts/getHouse';
-import { AnimatePresence, Variants, motion, useMotionValue, useTransform } from 'framer-motion';
+import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { wrap } from 'popmotion';
-import { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { GrCaretNext, GrCaretPrevious } from 'react-icons/gr';
-import Skeleton from 'react-loading-skeleton';
 
 const variants = {
   enter: (direction: number) => {
@@ -74,12 +72,12 @@ const Carousel = ({ arrImg }: CarouselProps) => {
 
   return (
     <>
-      <motion.div
-        className="w-full h-full relative flex overflow-hidden rounded-xl"
-        onHoverStart={handleOnEnter}
-        onHoverEnd={handleOnLeave}>
-        <AnimatePresence initial={false} custom={direction}>
-
+      <AnimatePresence initial={false}>
+        <motion.div
+          className="w-full h-full relative flex overflow-hidden rounded-xl"
+          onHoverStart={handleOnEnter}
+          onHoverEnd={handleOnLeave}>
+          <AnimatePresence initial={false} custom={direction}>
             <motion.img
               key={page}
               src={arrImg[imageIndex].Path}
@@ -106,46 +104,47 @@ const Carousel = ({ arrImg }: CarouselProps) => {
                 }
               }}
             />
-        </AnimatePresence>
-        <motion.button
-          variants={variantsBtn}
-          onClick={() => paginate(-1)}
-          initial={isHover ? 'hiddenLeft' : 'showLeft'}
-          animate={isHover ? 'showLeft' : 'hiddenLeft'}
-          whileHover={{ scale: 1.1, backgroundColor: 'rgba(239, 68, 68, .6)' }}
-          transition={{ duration: 0.5, type: 'tween' }}
-          className={`${styleBtn} left-[10px] mobile:hidden tablet:hidden `}>
-          <GrCaretPrevious />
-        </motion.button>
-        <motion.button
-          variants={variantsBtn}
-          onClick={() => paginate(1)}
-          initial={isHover ? 'showRight' : 'hiddenRight'}
-          whileHover={{ scale: 1.1, backgroundColor: 'rgba(239, 68, 68, .6)' }}
-          animate={isHover ? 'hiddenRight' : 'showRight'}
-          transition={{ duration: 0.5, type: 'tween' }}
-          className={`${styleBtn} right-[10px] mobile:hidden tablet:hidden `}>
-          <GrCaretNext />
-        </motion.button>
+          </AnimatePresence>
+          <motion.button
+            variants={variantsBtn}
+            onClick={() => paginate(-1)}
+            initial={isHover ? 'hiddenLeft' : 'showLeft'}
+            animate={isHover ? 'showLeft' : 'hiddenLeft'}
+            whileHover={{ scale: 1.1, backgroundColor: 'rgba(239, 68, 68, .6)' }}
+            transition={{ duration: 0.5, type: 'tween' }}
+            className={`${styleBtn} left-[10px] mobile:hidden tablet:hidden `}>
+            <GrCaretPrevious />
+          </motion.button>
+          <motion.button
+            variants={variantsBtn}
+            onClick={() => paginate(1)}
+            initial={isHover ? 'showRight' : 'hiddenRight'}
+            whileHover={{ scale: 1.1, backgroundColor: 'rgba(239, 68, 68, .6)' }}
+            animate={isHover ? 'hiddenRight' : 'showRight'}
+            transition={{ duration: 0.5, type: 'tween' }}
+            className={`${styleBtn} right-[10px] mobile:hidden tablet:hidden `}>
+            <GrCaretNext />
+          </motion.button>
 
-        {/* mobile and tablet button */}
-        <motion.button
-          variants={variantsBtn}
-          onClick={() => paginate(-1)}
-          whileTap={{ scale: 1.1, backgroundColor: 'rgba(239, 68, 68, .6)' }}
-          transition={{ duration: 0.5, type: 'tween' }}
-          className={`${styleBtn} left-[10px] laptop:hidden desktop:hidden`}>
-          <GrCaretPrevious />
-        </motion.button>
-        <motion.button
-          variants={variantsBtn}
-          onClick={() => paginate(1)}
-          whileTap={{ scale: 1.1, backgroundColor: 'rgba(239, 68, 68, .6)' }}
-          transition={{ duration: 0.5, type: 'tween' }}
-          className={`${styleBtn} right-[10px] laptop:hidden desktop:hidden`}>
-          <GrCaretNext />
-        </motion.button>
-      </motion.div>
+          {/* mobile and tablet button */}
+          <motion.button
+            variants={variantsBtn}
+            onClick={() => paginate(-1)}
+            whileTap={{ scale: 1.1, backgroundColor: 'rgba(239, 68, 68, .6)' }}
+            transition={{ duration: 0.5, type: 'tween' }}
+            className={`${styleBtn} left-[10px] laptop:hidden desktop:hidden`}>
+            <GrCaretPrevious />
+          </motion.button>
+          <motion.button
+            variants={variantsBtn}
+            onClick={() => paginate(1)}
+            whileTap={{ scale: 1.1, backgroundColor: 'rgba(239, 68, 68, .6)' }}
+            transition={{ duration: 0.5, type: 'tween' }}
+            className={`${styleBtn} right-[10px] laptop:hidden desktop:hidden`}>
+            <GrCaretNext />
+          </motion.button>
+        </motion.div>
+      </AnimatePresence>
     </>
   );
 };

@@ -66,6 +66,16 @@ const HeaderMain = () => {
       }
     };
 
+    const handleOnClickLogin2 = (event: any) => {
+      if (isFirstLoading) return;
+      mask.current?.classList.remove('animate-transparentAnimateLogin2');
+      loginPanel.current?.classList.remove('animate-slideUpLogin');
+      mask.current?.classList.add('animate-transparentAnimateLoginReverse2');
+      loginPanel.current?.classList.add('animate-slideDownLogin');
+      setIsLoginClick(false);
+      return;
+    };
+
     // animate for dynamic event
     const handleIsClick = () => {
       if (isLoginClick) {
@@ -83,6 +93,8 @@ const HeaderMain = () => {
     };
 
     document.addEventListener('mousedown', handleOnclickLogin);
+    document.addEventListener('scroll', handleOnMask);
+    document.addEventListener('scroll', handleOnClickLogin2);
     handleIsClick();
     setIsFirstLoading(false);
   }, [isLoginClick]);
@@ -103,8 +115,7 @@ const HeaderMain = () => {
           }
           className="w-screen h-screen bg-mask absolute z-40 flex
         overflow-hidden "
-          id="maskFilter"
-        >
+          id="maskFilter">
           <FormFilter />
         </motion.div>
       </AnimatePresence>
@@ -113,8 +124,7 @@ const HeaderMain = () => {
         className="w-screen h-screen transition-all duration-500 bg-mask absolute z-40 flex
         overflow-hidden invisible
         "
-        ref={mask}
-      >
+        ref={mask}>
         <div className="w-full h-full flex">
           <div className="w-fit  h-fit bg-white m-auto rounded-3xl" ref={loginPanel}>
             <LoginPanel>
@@ -128,8 +138,7 @@ const HeaderMain = () => {
         className="w-screen h-screen invisible transition-all duration-500 bg-mask absolute z-20"
         id="mask"
         onClick={handleOnMask}
-        onScroll={handleOnMask}
-      ></div>
+        onScroll={handleOnMask}></div>
       <HeaderForm>
         <ControlPlan />
       </HeaderForm>

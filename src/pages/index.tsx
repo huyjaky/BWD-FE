@@ -6,6 +6,7 @@ import EmptyLayout from '@/components/layouts/empty';
 import ShowHouse from '@/components/main/showHouse/showHouse';
 import TypeHouse from '@/components/main/typeHouse';
 import HeaderMain from '@/components/rootMaskHeader/headerMain';
+import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 import { getHouseContext } from '@/contexts/getHouse';
 import { userAccContext } from '@/contexts/userAcc';
 import { house_ } from '@/models/house';
@@ -29,7 +30,8 @@ interface HomeProps {
 
 const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
   const { user, setUser } = useContext(userAccContext);
-  const { house, setHouse } = useContext(getHouseContext);
+  const { house, setHouse, isLoading, setIsLoading } = useContext(getHouseContext);
+  const { setIsClickOutSide } = useContext(filterFormAnimateContext);
 
   console.log(user);
   if (!user_?.UserId) {
@@ -45,6 +47,13 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
     setUser({ ...user, ...user_ });
   }
   console.log(house);
+
+  useEffect(()=>{
+    const handleOnScroll = (event: any) =>{
+      setIsClickOutSide(false);
+    }
+    document.addEventListener('scroll', handleOnScroll);
+  }, []);
 
   useEffect(() => {
     const fetchHouseApi = async () => {

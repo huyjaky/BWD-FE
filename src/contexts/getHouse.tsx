@@ -8,61 +8,33 @@ interface getHouseProps {
 interface getHouseData {
   house: house_[];
   setHouse: (payload: house_[]) => void;
+  isLoading: boolean,
+  setIsLoading: (payload: boolean) => void;
+
 }
 
 const getHouseDataDefault: getHouseData = {
-  // house: {
-  //   houseDetail: {
-  //     HouseId: '',
-  //     Title: '',
-  //     DateUp: new Date(),
-  //     Price: 0,
-  //     Area: '',
-  //     NumsOfBed: 1,
-  //     NumsOfBath: 1,
-  //     PostBy: '',
-  //     AddressId: '',
-  //     JudicalId: '',
-  //     Des: ''
-  //   },
-  //   address: {
-  //     countryRegion: '',
-  //     locality: '',
-  //     adminDistrict: '',
-  //     adminDistrict2: '',
-  //     countryRegionIso2: '',
-  //     houseNumber: '',
-  //     postalCode: '',
-  //     addressLine: '',
-  //     streetName: '',
-  //     formattedAddress: '',
-  //     latitude: '',
-  //     longitude: ''
-  //   },
-  //   useracc: {
-  //     UserId: '',
-  //     UserName: '',
-  //     Password: '',
-  //     Birth: new Date(),
-  //     Gmail: '',
-  //     Sex: '',
-  //     Decentralization: '',
-  //     PersonCode: '',
-  //     CustomerType: '',
-  //     error: ''
-  //   }
-  // },
   house: [],
-  setHouse: () => {}
+  setHouse: () => {},
+  isLoading: true,
+  setIsLoading: ()=>{}
 };
 
 export const getHouseContext = createContext<getHouseData>(getHouseDataDefault);
 
 const GetHouseProvider = ({ children }: getHouseProps) => {
+  const [isLoading, setIsLoading_] = useState(getHouseDataDefault.isLoading);
   const [house, setHouse_] = useState(getHouseDataDefault.house);
-  const setHouse = (payload: house_[]) => setHouse_(payload);
+  const setIsLoading = (payload: boolean) => setIsLoading_(payload);
+  const setHouse = (payload: house_[]) => {
+    if (house.length != 0){
+      setHouse_({...house, ...payload})
+    } else {
+      setHouse_(payload);
+    }
+  };
 
-  const getHouseDynamicData = { house, setHouse };
+  const getHouseDynamicData = { house, setHouse, isLoading, setIsLoading };
   return (
     <getHouseContext.Provider value={getHouseDynamicData}>{children}</getHouseContext.Provider>
   );
