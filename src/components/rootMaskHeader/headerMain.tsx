@@ -29,6 +29,7 @@ const HeaderMain = () => {
     const checkIn_Out: HTMLElement | null = document.getElementById('checkin_out-popup');
     const who: HTMLElement | null = document.getElementById('who-popup');
 
+    if (isFirstLoading) return;
     scaleUp?.classList.remove('animate-slideDownHeader');
     link?.classList.remove('animate-slideDownControl');
     ControlHeader?.classList.remove('animate-slideDownControl');

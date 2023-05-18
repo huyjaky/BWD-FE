@@ -6,6 +6,7 @@ interface FilterProps {
   isInvisible: string | null;
 }
 
+
 const Filter = ({ isInvisible }: FilterProps) => {
   const buttonFilter = useRef<HTMLInputElement>(null);
   const { setIsClickOutSide } = useContext(filterFormAnimateContext);
@@ -20,8 +21,7 @@ const Filter = ({ isInvisible }: FilterProps) => {
         <div
           className="flex m-auto p-3 border-2 rounded-2xl border-slate-800 "
           ref={buttonFilter}
-          onClick={handleOnClickFilter}
-        >
+          onClick={handleOnClickFilter}>
           <div className="flex w-fit h-[30px] m-auto">
             <HiOutlineFilter className="w-[30px] h-full" />
             <div className="w-fit h-full flex items-center">
