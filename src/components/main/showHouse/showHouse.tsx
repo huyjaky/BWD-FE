@@ -19,15 +19,12 @@ const variants: Variants = {
 };
 
 
-
-
-
 const ShowHouse = () => {
   const arrTempLoading: number[] = Array.from({ length: 13 }, (_, index) => index);
 
   const { house, setHouse, isLoading, setIsLoading } = useContext(getHouseContext);
   useEffect(() => {
-    setIsLoading(false);
+    if (house.length != 0) setIsLoading(false);
   }, [house]);
   return (
     <div>
@@ -39,7 +36,7 @@ const ShowHouse = () => {
                 key={index}
                 initial={{ opacity: 0,  display: 'none' }}
                 animate={{ opacity: 1, display: 'block'}}
-                transition={{ delay: (index + 1) * 0.3 }}
+                transition={{ delay: (index + 1) * 0.1 }}
                 className="w-full h-[400px] ">
                 <div className="w-full h-[300px]">
                   <Carousel arrImg={item.arrImg} />
@@ -62,12 +59,13 @@ const ShowHouse = () => {
             );
           })}
 
+
           {arrTempLoading.map((item: number, index: number) => {
             return (
               <motion.div
-                variants={variants}
-                animate={isLoading ? 'showLoading' : 'hiddenLoading'}
-                transition={{ delay: (index + 1) * 0.3 }}
+                initial={!isLoading ?{ opacity: 1, display: 'block'} : {}}
+                animate={!isLoading ?{ opacity: 0,  display: 'none' }: {}}
+                transition={{ delay: (index + 1) * 0.1 }}
                 key={index}>
                 <SkeletonShowHouse />
               </motion.div>
