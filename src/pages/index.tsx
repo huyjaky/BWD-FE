@@ -15,7 +15,7 @@ import { userAcc } from '@/models/userAcc';
 import { withIronSessionSsr } from 'iron-session/next';
 import { GetServerSideProps } from 'next';
 import { Montserrat } from 'next/font/google';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
 const monsterrat = Montserrat({
@@ -33,20 +33,17 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
   const { house, setHouse, isLoading, setIsLoading } = useContext(getHouseContext);
   const { setIsClickOutSide } = useContext(filterFormAnimateContext);
 
-  console.log(user);
   if (!user_?.UserId) {
     const { data, error, mutate, isValidating } = useSWR(`/get/useracc/UserName/${user.UserName}`, {
       revalidateOnFocus: false
     });
 
     useEffect(() => {
-      console.log(data);
       setUser({ ...user, ...data?.data?.data });
     }, [data]);
   } else if (user_?.UserId && !user.UserId) {
     setUser({ ...user, ...user_ });
   }
-  console.log(house);
 
   useEffect(()=>{
     const handleOnScroll = (event: any) =>{

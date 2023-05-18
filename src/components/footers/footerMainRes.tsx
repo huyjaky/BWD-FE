@@ -7,7 +7,6 @@ import { BiSearch } from "react-icons/bi";
 
 const FooterMainRes = () => {
   const {user} = useContext(userAccContext);
-  console.log(user);
   useEffect(()=>{ }, [user]);
   return (
     <div

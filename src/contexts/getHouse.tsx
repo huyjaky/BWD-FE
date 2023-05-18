@@ -24,7 +24,7 @@ export const getHouseContext = createContext<getHouseData>(getHouseDataDefault);
 
 const GetHouseProvider = ({ children }: getHouseProps) => {
   const [isLoading, setIsLoading_] = useState(getHouseDataDefault.isLoading);
-  const [house, setHouse_] = useState(getHouseDataDefault.house);
+  const [house, setHouse_] = useState<house_[]>(getHouseDataDefault.house);
   const setIsLoading = (payload: boolean) => setIsLoading_(payload);
   const setHouse = (payload: house_[]) => {
     if (house.length != 0){
