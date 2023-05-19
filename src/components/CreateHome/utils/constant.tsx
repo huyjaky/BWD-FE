@@ -63,8 +63,8 @@ export const categoriesStep2 = [
   { name: 'Desert', icon: <Desert className="w-[45px] h-[45px]" /> }
 ];
 export const categoriesStep8 = [
-  { name: 'Me', icon: <Me className="w-[45px] h-[45px]" /> },
-  { name: 'My family', icon: <MyFamily className="w-[45px] h-[45px]" /> },
+  { name: 'Me', icon: <Me className="" /> },
+  { name: 'My family', icon: <MyFamily className="" /> },
   { name: 'Other guests', icon: < OtherGuess className="w-[45px] h-[45px]" /> },
   { name: 'Roommates', icon: < Roommates className="w-[45px] h-[45px]" /> }
 ];
