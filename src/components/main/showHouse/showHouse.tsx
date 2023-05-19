@@ -1,13 +1,12 @@
 import { houseApi } from '@/api-client/houseApi';
 import SkeletonShowHouse from '@/components/skeletonLoading/skletonShowHouse';
+import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 import { getHouseContext } from '@/contexts/getHouse';
 import { house_ } from '@/models/house';
-import { VariantLabels, Variants, motion } from 'framer-motion';
+import { Variants, motion } from 'framer-motion';
 import { useContext, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Carousel from './carousel';
-import { array } from 'yup';
-import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 
 const variants: Variants = {
   show: {
@@ -16,7 +15,7 @@ const variants: Variants = {
   hidden: {
     opacity: [1, 0],
     transition: {
-      delay: .1
+      delay: 0.1
     },
     transitionEnd: {
       display: 'none'
@@ -27,11 +26,10 @@ const variants: Variants = {
 const ShowHouse = () => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
   const { house, setHouse, isLoading, setIsLoading } = useContext(getHouseContext);
-  const {isShow, setIsShow} = useContext(filterFormAnimateContext)
+  const { isShow, setIsShow } = useContext(filterFormAnimateContext);
   const [page, setPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
-  const [isFirstLoading, setIsFirstLoading] = useState(true);
 
   const handleScroll = () => {
     const mask: HTMLElement | null = document.getElementById('mask');
@@ -46,6 +44,16 @@ const ShowHouse = () => {
 
     // -------------------------------------------------------------------
     if (isShow) {
+      scaleUp?.classList.remove('animate-slideDownHeader');
+      link?.classList.remove('animate-slideDownControl');
+      ControlHeader?.classList.remove('animate-slideDownControl');
+      mask?.classList.remove('animate-transparentAnimate');
+      controlBar?.classList.remove('animate-showAnimate');
+
+      where?.classList.remove('animate-transparentAnimate');
+      checkIn_Out?.classList.remove('animate-transparentAnimate');
+      who?.classList.remove('animate-transparentAnimate');
+      // -------------------------------------------------------------------
       scaleUp?.classList.add('animate-slideUpHeader');
       link?.classList.add('animate-slideUpControl');
       ControlHeader?.classList.add('animate-slideUpControl');
@@ -61,7 +69,6 @@ const ShowHouse = () => {
   useEffect(() => {
     document.addEventListener('scroll', handleScroll);
   }, [isShow]);
-
 
   useEffect(() => {
     setHouseTemp([...house]);
@@ -84,7 +91,7 @@ const ShowHouse = () => {
   }, [hasMore, houseTemp]);
 
   useEffect(() => {
-    if (houseTemp.length > 0){
+    if (houseTemp.length > 0) {
       console.log('check');
       setIsLoading(false);
     }
@@ -132,10 +139,7 @@ const ShowHouse = () => {
           ))}
 
           {arrTempLoading.map((item: number, index: number) => (
-            <motion.div
-              variants={variants}
-              animate={isLoading ? 'show' : 'hidden'}
-              key={index}>
+            <motion.div variants={variants} animate={isLoading ? 'show' : 'hidden'} key={index}>
               <SkeletonShowHouse />
             </motion.div>
           ))}

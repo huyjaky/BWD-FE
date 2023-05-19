@@ -1,4 +1,3 @@
-import axiosClient from '@/api-client/axiosClient';
 import { houseApi } from '@/api-client/houseApi';
 import { sessionOptions } from '@/api-client/session';
 import FooterMainRes from '@/components/footers/footerMainRes';
@@ -15,7 +14,7 @@ import { userAcc } from '@/models/userAcc';
 import { withIronSessionSsr } from 'iron-session/next';
 import { GetServerSideProps } from 'next';
 import { Montserrat } from 'next/font/google';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import useSWR from 'swr';
 
 const monsterrat = Montserrat({
