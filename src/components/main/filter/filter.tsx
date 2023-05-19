@@ -17,11 +17,11 @@ const Filter = ({ isInvisible }: FilterProps) => {
 
   return (
     <>
-      <div className={`w-[150px] h-[80px] flex ${isInvisible}`}>
+      <div className={`w-[150px] h-[80px] flex ${isInvisible}`} onClick={handleOnClickFilter}>
         <div
           className="flex m-auto p-3 border-2 rounded-2xl border-slate-800 cursor-pointer"
           ref={buttonFilter}
-          onClick={handleOnClickFilter}>
+          >
           <div className="flex w-fit h-[30px] m-auto">
             <HiOutlineFilter className="w-[30px] h-full" />
             <div className="w-fit h-full flex items-center">
