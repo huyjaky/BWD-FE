@@ -30,6 +30,8 @@ const ShowHouse = () => {
   const [hasMore, setHasMore] = useState(true);
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
 
+  // cai nay lam truoc khi hoc framer motion nen khong dung framer ma dung
+  // animation chay bang com
   const handleScroll = () => {
     const mask: HTMLElement | null = document.getElementById('mask');
     const scaleUp: HTMLElement | null = document.getElementById('scaleUp');
@@ -65,10 +67,12 @@ const ShowHouse = () => {
       setIsShow(false);
     }
   };
+  // bat su kien cho animation tren
   useEffect(() => {
     document.addEventListener('scroll', handleScroll);
   }, [isShow]);
 
+  // khi house duoc fetch lan dau pages/index
   useEffect(() => {
     setHouseTemp([...house]);
   }, [house]);
@@ -79,12 +83,13 @@ const ShowHouse = () => {
       if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
         setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
       } else {
-        setHasMore(false);
+        setHasMore(false); // cai nay de kiem tra xem da fetch het du lieu hay chua
       }
     } catch (error) {
       console.log(error);
     }
   };
+
   useEffect(() => {
     if (houseTemp.length > 0 && isLoading == true) {
       console.log('check');
@@ -135,11 +140,12 @@ const ShowHouse = () => {
             </motion.div>
           ))}
 
-          {isLoading && arrTempLoading.map((item: number, index: number) => (
-            <motion.div variants={variants} animate={isLoading ? 'show' : 'hidden'} key={index}>
-              <SkeletonShowHouse />
-            </motion.div>
-          ))}
+          {isLoading &&
+            arrTempLoading.map((item: number, index: number) => (
+              <motion.div variants={variants} animate={isLoading ? 'show' : 'hidden'} key={index}>
+                <SkeletonShowHouse />
+              </motion.div>
+            ))}
         </InfiniteScroll>
       </motion.div>
     </div>

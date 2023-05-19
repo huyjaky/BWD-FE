@@ -32,6 +32,7 @@ const HeaderMain = () => {
 
   const handleOnMask = (event: any) => {
     // add animate by hand beacause i its ez to fixed :")))
+    // animate cua header va cai nay de dong header
     const mask: HTMLElement | null = document.getElementById('mask');
     const scaleUp: HTMLElement | null = document.getElementById('scaleUp');
 
@@ -67,7 +68,7 @@ const HeaderMain = () => {
   };
 
   useEffect(() => {
-    // animate
+    // animate de mo popup login
     const handleOnclickLogin = (event: any) => {
       const isClick = loginPanel.current?.contains(event.target);
       if (!isClick && isLoginClick) {
@@ -80,6 +81,7 @@ const HeaderMain = () => {
       }
     };
 
+    // animate de dong popup login
     const handleOnClickLogin2 = (event: any) => {
       if (isFirstLoading) return;
       mask.current?.classList.remove('animate-transparentAnimateLogin2');
