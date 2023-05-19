@@ -45,22 +45,6 @@ export default function Step8CHome() {
                                     mobile:grid-cols-1
                     "
             >
-<<<<<<< HEAD
-              {categoriesStep8.map((category, index) => (
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ type: "spring", stiffness: 35, delay: 0.3 * index }}
-                >
-                  <ChooDesPl
-                    title={category.name}
-                    icon={category.icon}
-                    type={type}
-                    selected={selected}
-                    setselected={setselected}
-                  />
-                </motion.div>
-=======
               {categoriesStep8.map((category) => (
                 <ChooDesPl
                   title={category.name}
@@ -71,7 +55,6 @@ export default function Step8CHome() {
                   selectedMany={[]}
                   setselectedMany={() => {}}
                 />
->>>>>>> Huy
               ))}
             </div>
             <div>

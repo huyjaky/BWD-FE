@@ -67,6 +67,7 @@ const ShowHouse = () => {
       setIsShow(false);
     }
   };
+
   // bat su kien cho animation tren
   useEffect(() => {
     document.addEventListener('scroll', handleScroll);

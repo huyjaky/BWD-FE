@@ -8,6 +8,7 @@ import PriceRange from './filterFormComponent/priceRange';
 import PropertyHouse from './filterFormComponent/property';
 import { filterContext } from '@/contexts/filter';
 import { filterForm } from '@/models/filter';
+import { houseApi } from '@/api-client/houseApi';
 
 const variantsAmenities: Variants = {
   showMore: {
@@ -24,6 +25,7 @@ const variantsAmenities: Variants = {
 const FormFilter = () => {
   const [show, setShow] = useState(false);
   const { filterForm, setFilterForm } = useContext(filterContext);
+
   const { isClickOutSide, setIsClickOutSide } = useContext(filterFormAnimateContext);
   const formFilter = useRef<HTMLInputElement>(null);
 
@@ -42,6 +44,12 @@ const FormFilter = () => {
   }, []);
 
   useEffect(() => {}, [show]);
+
+  const fetchData = async () => {
+    console.log(filterForm);
+    const houseFil = await houseApi.noneAuthFilter(filterForm);
+  }
+
 
   return (
     <>
@@ -145,8 +153,8 @@ const FormFilter = () => {
               <motion.button
                 className="w-[200px] h-[40px] rounded-lg border-2"
                 whileHover={{ backgroundColor: 'rgba(255, 56, 92, 0.8)', color: 'white' }}
-                whileTap={{ scale: 0.9 }}
-              >
+                onClick={event => fetchData()}
+                whileTap={{ scale: 0.9 }} >
                 Submit
               </motion.button>
             </div>

@@ -45,13 +45,8 @@ export default function Step1CHome() {
             className="w-[50%] tablet:w-[100%]
                         mobile:w-[100%]"
           >
-<<<<<<< HEAD
-            <video className='w-fit h-fit' preload='auto' autoPlay={true} muted={true}>
-              <source src='./Step1.mp4' className='w-full h-full' />
-=======
             <video className="w-fit h-fit" preload="auto" autoPlay={true} muted={true}>
               <source src="./Step1.mp4" className="w-full h-full" />
->>>>>>> Huy
             </video>
           </div>
         </div>
