@@ -115,7 +115,7 @@ const FormFilter = () => {
             </div>
           </div>
 
-          <div className="w-full border-t-2 flex items-center flex-2">
+          <div className="w-full border-t-2 flex items-center flex-2 py-3">
             <div className="flex-1 flex justify-start">
               <div
                 className="m-auto underline"

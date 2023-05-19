@@ -6,7 +6,6 @@ import { useContext, useEffect, useState } from 'react';
 import { selectPopoverContext } from '@/contexts';
 
 const ControlPlan = () => {
-  const [isFirstLoading, setIsFirstLoading] = useState(true);
   const arrLink: { ref: string; title: string }[] = [
     {
       ref: '',
@@ -56,43 +55,6 @@ const ControlPlan = () => {
     who?.classList.remove('animate-transparentAnimateReverse');
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const mask: HTMLElement | null = document.getElementById('mask');
-      const scaleUp: HTMLElement | null = document.getElementById('scaleUp');
-
-      const ControlHeader: HTMLElement | null = document.getElementById('ControlHeader');
-      const link: HTMLElement | null = document.getElementById('link');
-      const controlBar: HTMLElement | null = document.getElementById('controlBar');
-      const where: HTMLElement | null = document.getElementById('where-popup');
-      const checkIn_Out: HTMLElement | null = document.getElementById('checkin_out-popup');
-      const who: HTMLElement | null = document.getElementById('who-popup');
-
-      if (isFirstLoading) return;
-      scaleUp?.classList.remove('animate-slideDownHeader');
-      link?.classList.remove('animate-slideDownControl');
-      ControlHeader?.classList.remove('animate-slideDownControl');
-      mask?.classList.remove('animate-transparentAnimate');
-      controlBar?.classList.remove('animate-showAnimate');
-
-      where?.classList.remove('animate-transparentAnimate');
-      checkIn_Out?.classList.remove('animate-transparentAnimate');
-      who?.classList.remove('animate-transparentAnimate');
-      // -------------------------------------------------------------------
-      scaleUp?.classList.add('animate-slideUpHeader');
-      link?.classList.add('animate-slideUpControl');
-      ControlHeader?.classList.add('animate-slideUpControl');
-      mask?.classList.add('animate-transparentAnimateReverse');
-      controlBar?.classList.add('animate-hiddenAnimate');
-
-      where?.classList.add('animate-transparentAnimateReverse');
-      checkIn_Out?.classList.add('animate-transparentAnimateReverse');
-      who?.classList.add('animate-transparentAnimateReverse');
-      console.log('scroll');
-    };
-    document.addEventListener('scroll', handleScroll);
-    setIsFirstLoading(false);
-  }, [isFirstLoading]);
 
   return (
     <>
