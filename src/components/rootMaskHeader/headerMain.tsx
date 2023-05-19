@@ -5,13 +5,27 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import ControlPlan from './controlPlan/controlPlan';
 import HeaderForm from '../headers/headerForm/HeaderForm';
 import FormFilter from '../main/filter/formFilter/formFilter';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
+
+const variants: Variants = {
+  show : {
+    display: 'flex',
+    opacity: [0,1],
+
+  },
+  hidden: {
+    opacity: [1, 0],
+    transitionEnd: {
+      display: 'none'
+    }
+  }
+}
 
 const HeaderMain = () => {
   const { setPlaceList } = useContext(placeListContext);
   const { isLoginClick, setIsLoginClick } = useContext(selectPopoverContext);
-  const { isClickOutSide } = useContext(filterFormAnimateContext);
+  const { isClickOutSide, setIsClickOutSide } = useContext(filterFormAnimateContext);
   const [isFirstLoading, setIsFirstLoading] = useState(true);
 
   const loginPanel = useRef<HTMLInputElement>(null);
@@ -101,22 +115,19 @@ const HeaderMain = () => {
     setIsFirstLoading(false);
   }, [isLoginClick]);
 
-
+useEffect(()=>{} ,[isClickOutSide])
   return (
     <>
       <AnimatePresence initial={false}>
         <motion.div
-          initial={
-            isClickOutSide
-              ? { opacity: 0, visibility: 'hidden' }
-              : { opacity: 1, visibility: 'visible' }
-          }
+          variants={variants}
           animate={
             isClickOutSide
-              ? { opacity: 1, visibility: 'visible' }
-              : { opacity: 0, visibility: 'hidden' }
+              ? 'show'
+              : 'hidden'
           }
-          className="w-screen h-screen bg-mask absolute z-40 flex
+          transition={{duration: .5}}
+          className="w-screen h-screen bg-mask absolute z-40
         overflow-hidden "
           id="maskFilter">
           <FormFilter />
