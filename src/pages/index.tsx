@@ -25,7 +25,7 @@ const monsterrat = Montserrat({
 });
 interface HomeProps {
   user_: userAcc;
-  props: any
+  props: any;
 }
 
 const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
@@ -45,10 +45,10 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
     setUser({ ...user, ...user_ });
   }
 
-  useEffect(()=>{
-    const handleOnScroll = (event: any) =>{
+  useEffect(() => {
+    const handleOnScroll = (event: any) => {
       setIsClickOutSide(false);
-    }
+    };
     document.addEventListener('scroll', handleOnScroll);
   }, []);
 

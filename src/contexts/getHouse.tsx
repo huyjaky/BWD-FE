@@ -8,16 +8,15 @@ interface getHouseProps {
 interface getHouseData {
   house: house_[];
   setHouse: (payload: house_[]) => void;
-  isLoading: boolean,
+  isLoading: boolean;
   setIsLoading: (payload: boolean) => void;
-
 }
 
 const getHouseDataDefault: getHouseData = {
   house: [],
   setHouse: () => {},
   isLoading: true,
-  setIsLoading: ()=>{}
+  setIsLoading: () => {}
 };
 
 export const getHouseContext = createContext<getHouseData>(getHouseDataDefault);
@@ -27,8 +26,8 @@ const GetHouseProvider = ({ children }: getHouseProps) => {
   const [house, setHouse_] = useState<house_[]>(getHouseDataDefault.house);
   const setIsLoading = (payload: boolean) => setIsLoading_(payload);
   const setHouse = (payload: house_[]) => {
-    if (house.length != 0){
-      setHouse_({...house, ...payload})
+    if (house.length != 0) {
+      setHouse_({ ...house, ...payload });
     } else {
       setHouse_(payload);
     }

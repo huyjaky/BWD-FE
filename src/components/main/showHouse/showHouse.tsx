@@ -21,19 +21,18 @@ const ShowHouse = () => {
 
   const getMoreHouse = async () => {
     try {
-      const moreHouse = await houseApi.noneAuthHouseApi(houseTemp.length/10 + 1);
+      const moreHouse = await houseApi.noneAuthHouseApi(houseTemp.length / 10 + 1);
       if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
         setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
       } else {
         console.log('has more');
-        setHasMore(false)
+        setHasMore(false);
       }
-
     } catch (error) {
       console.log(error);
     }
   };
-  useEffect(()=>{}, [hasMore])
+  useEffect(() => {}, [hasMore]);
 
   useEffect(() => {
     console.log(houseTemp);
@@ -42,27 +41,27 @@ const ShowHouse = () => {
 
   return (
     <div>
-      <motion.div className="w-full h-fit py-20" id='scroll-inf'>
+      <motion.div className="w-full h-fit py-20 pb-28" id="scroll-inf">
         <InfiniteScroll
           dataLength={houseTemp.length}
           next={getMoreHouse}
           hasMore={hasMore}
           loader={
-            <motion.div
-              transition={{ delay: 0.1 }}
-              >
+            <motion.div transition={{ delay: 0.1 }}>
               <SkeletonShowHouse />
             </motion.div>
           }
           className="w-full h-fit grid grid-cols-houseBox gap-x-5 gap-y-8"
-          endMessage={<span>Nothing more to show</span>}>
+          endMessage={<span>Nothing more to show</span>}
+        >
           {houseTemp.map((item: house_, index: number) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, display: 'none' }}
               animate={{ opacity: 1, display: 'block' }}
               transition={{ delay: (index + 1) * 0.1 }}
-              className="w-full h-[400px] ">
+              className="w-full h-[400px] "
+            >
               <div className="w-full h-[300px]">
                 <Carousel arrImg={item.arrImg} />
               </div>
@@ -88,7 +87,8 @@ const ShowHouse = () => {
               initial={!isLoading ? { opacity: 1, display: 'block' } : {}}
               animate={!isLoading ? { opacity: 0, display: 'none' } : {}}
               transition={{ delay: (index + 1) * 0.1 }}
-              key={index}>
+              key={index}
+            >
               <SkeletonShowHouse />
             </motion.div>
           ))}

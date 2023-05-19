@@ -12,6 +12,12 @@ import { filterForm } from '@/models/filter';
 const variantsAmenities: Variants = {
   showMore: {
     height: 100
+  },
+  show: {
+    translateY: [2000, 0]
+  },
+  hidden: {
+    translateY: [0, 2000]
   }
 };
 
@@ -28,7 +34,6 @@ const FormFilter = () => {
         const isClickOutSide_ = formFilter_.contains(event.target);
         if (!isClickOutSide_) {
           setIsClickOutSide(false);
-
         }
       }
     };
@@ -42,9 +47,9 @@ const FormFilter = () => {
     <>
       <AnimatePresence initial={false}>
         <motion.div
-
-          animate={isClickOutSide ? { translateY: 0} : { translateY: 2000 }}
-          transition={{ duration: .5, type: 'tween' }}
+          variants={variantsAmenities}
+          animate={isClickOutSide ? 'show' : 'hidden'}
+          transition={{ duration: 0.5, type: 'tween' }}
           className="w-[800px] h-[calc(100vh-50px)] bg-white m-auto rounded-3xl overflow-hidden flex flex-col"
           ref={formFilter}
         >

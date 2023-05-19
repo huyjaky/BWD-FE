@@ -9,10 +9,9 @@ import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 
 const variants: Variants = {
-  show : {
+  show: {
     display: 'flex',
-    opacity: [0,1],
-
+    opacity: [0, 1]
   },
   hidden: {
     opacity: [1, 0],
@@ -20,7 +19,7 @@ const variants: Variants = {
       display: 'none'
     }
   }
-}
+};
 
 const HeaderMain = () => {
   const { setPlaceList } = useContext(placeListContext);
@@ -88,10 +87,7 @@ const HeaderMain = () => {
       mask.current?.classList.add('animate-transparentAnimateLoginReverse2');
       loginPanel.current?.classList.add('animate-slideDownLogin');
       setIsLoginClick(false);
-      handleOnMask(null);
     };
-
-
 
     // animate for dynamic event
     const handleIsClick = () => {
@@ -115,21 +111,18 @@ const HeaderMain = () => {
     setIsFirstLoading(false);
   }, [isLoginClick]);
 
-useEffect(()=>{} ,[isClickOutSide])
+  useEffect(() => {}, [isClickOutSide]);
   return (
     <>
       <AnimatePresence initial={false}>
         <motion.div
           variants={variants}
-          animate={
-            isClickOutSide
-              ? 'show'
-              : 'hidden'
-          }
-          transition={{duration: .5}}
+          animate={isClickOutSide ? 'show' : 'hidden'}
+          transition={{ duration: 0.5 }}
           className="w-screen h-screen bg-mask absolute z-40
         overflow-hidden "
-          id="maskFilter">
+          id="maskFilter"
+        >
           <FormFilter />
         </motion.div>
       </AnimatePresence>
@@ -138,7 +131,8 @@ useEffect(()=>{} ,[isClickOutSide])
         className="w-screen h-screen transition-all duration-500 bg-mask absolute z-40 flex
         overflow-hidden invisible
         "
-        ref={mask}>
+        ref={mask}
+      >
         <div className="w-full h-full flex">
           <div className="w-fit  h-fit bg-white m-auto rounded-3xl" ref={loginPanel}>
             <LoginPanel>
@@ -151,7 +145,8 @@ useEffect(()=>{} ,[isClickOutSide])
       <div
         className="w-screen h-screen invisible transition-all duration-500 bg-mask absolute z-20"
         id="mask"
-        onClick={handleOnMask}></div>
+        onClick={handleOnMask}
+      ></div>
       <HeaderForm>
         <ControlPlan />
       </HeaderForm>

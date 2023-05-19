@@ -10,7 +10,7 @@ import SelectPopoverProvider from '@/contexts/selectPopover';
 import PlaceListProvider from '@/contexts/placeList';
 import SelectPlaceProvider from '@/contexts/selectPlace';
 import 'rc-slider/assets/index.css';
-import 'react-loading-skeleton/dist/skeleton.css'
+import 'react-loading-skeleton/dist/skeleton.css';
 
 import { Poppins } from 'next/font/google';
 import UserAccProvider from '@/contexts/userAcc';

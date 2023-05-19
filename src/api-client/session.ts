@@ -9,7 +9,7 @@ export const sessionOptions: IronSessionOptions = {
   cookieOptions: {
     secure: process.env.NODE_ENV === 'production',
     maxAge: 3600
-  },
+  }
 };
 
 // This is where we specify the typings of req.session.*
