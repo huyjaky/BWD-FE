@@ -27,8 +27,7 @@ const ShowHouse = () => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
   const { house, setHouse, isLoading, setIsLoading } = useContext(getHouseContext);
   const { isShow, setIsShow } = useContext(filterFormAnimateContext);
-  const [page, setPage] = useState<number>(1);
-  const [hasMore, setHasMore] = useState<boolean>(true);
+  const [hasMore, setHasMore] = useState(true);
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
 
   const handleScroll = () => {
@@ -87,15 +86,13 @@ const ShowHouse = () => {
     }
   };
   useEffect(() => {
-    console.log(houseTemp);
-  }, [hasMore, houseTemp]);
-
-  useEffect(() => {
-    if (houseTemp.length > 0) {
+    if (houseTemp.length > 0 && isLoading == true) {
       console.log('check');
       setIsLoading(false);
     }
-  }, [setIsLoading]);
+  }, [houseTemp]);
+
+  useEffect(() => {}, [setIsLoading, hasMore]);
 
   return (
     <div>
@@ -138,7 +135,7 @@ const ShowHouse = () => {
             </motion.div>
           ))}
 
-          {arrTempLoading.map((item: number, index: number) => (
+          {isLoading && arrTempLoading.map((item: number, index: number) => (
             <motion.div variants={variants} animate={isLoading ? 'show' : 'hidden'} key={index}>
               <SkeletonShowHouse />
             </motion.div>

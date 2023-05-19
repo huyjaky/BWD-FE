@@ -18,8 +18,6 @@ import GetHouseProvider from '@/contexts/getHouse';
 import MobileContolPanelProvider from '@/contexts/mobileControlPanel';
 import UserAccProvider from '@/contexts/userAcc';
 import { Poppins } from 'next/font/google';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 const poppins = Poppins({
   subsets: ['latin'],
   weight: ['200', '400', '600', '800'],
@@ -30,11 +28,7 @@ const poppins = Poppins({
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const Layout = Component.Layout ?? EmptyLayout;
-  const { pathname } = useRouter();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
 
   return (
     <>

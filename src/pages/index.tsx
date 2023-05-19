@@ -14,6 +14,7 @@ import { userAcc } from '@/models/userAcc';
 import { withIronSessionSsr } from 'iron-session/next';
 import { GetServerSideProps } from 'next';
 import { Montserrat } from 'next/font/google';
+import { useRouter } from 'next/router';
 import { useContext, useEffect, useMemo } from 'react';
 import useSWR from 'swr';
 
@@ -31,6 +32,12 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
   const { user, setUser } = useContext(userAccContext);
   const { house, setHouse, isLoading, setIsLoading } = useContext(getHouseContext);
   const { setIsClickOutSide } = useContext(filterFormAnimateContext);
+
+  const { pathname } = useRouter();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   if (!user_?.UserId) {
     const { data, error, mutate, isValidating } = useSWR(`/get/useracc/UserName/${user.UserName}`, {

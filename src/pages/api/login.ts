@@ -65,7 +65,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
       {
         target: process.env.API_URL_AUTH,
         changeOrigin: true,
-        selfHandleResponse: true
+        selfHandleResponse: true,
+        timeout: 10000
       },
       function (err) {
         res.status(500).send('Oops, something went wrong.');
