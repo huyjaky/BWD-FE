@@ -26,7 +26,9 @@ const ButtonAccount = () => {
         controlBar.current?.classList.add('animate-controlPanelSlideUp');
       }
     };
+
     document.addEventListener('mousedown', handleControlPanel);
+    document.addEventListener('scroll', handleControlPanel);
   }, []);
 
   useEffect(() => {}, [user]);

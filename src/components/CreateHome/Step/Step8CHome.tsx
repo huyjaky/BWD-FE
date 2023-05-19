@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 export default function Step8CHome() {
   const [selected, setselected] = useState('');
 
-  const type = 'select1'
+  const type = 'select1';
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -16,8 +16,8 @@ export default function Step8CHome() {
     >
       <div className="w-[98vw] px-[80px] mt-10">
         <div
-          className="w-[60%] ml-auto mr-auto pl-[70px] 
-                    mobile:pl-[0px] 
+          className="w-[60%] ml-auto mr-auto pl-[70px]
+                    mobile:pl-[0px]
 
                 "
         >
@@ -45,6 +45,7 @@ export default function Step8CHome() {
                                     mobile:grid-cols-1
                     "
             >
+<<<<<<< HEAD
               {categoriesStep8.map((category, index) => (
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
@@ -59,6 +60,18 @@ export default function Step8CHome() {
                     setselected={setselected}
                   />
                 </motion.div>
+=======
+              {categoriesStep8.map((category) => (
+                <ChooDesPl
+                  title={category.name}
+                  icon={category.icon}
+                  type={type}
+                  selected={selected}
+                  setselected={setselected}
+                  selectedMany={[]}
+                  setselectedMany={() => {}}
+                />
+>>>>>>> Huy
               ))}
             </div>
             <div>

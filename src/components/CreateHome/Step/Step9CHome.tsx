@@ -44,10 +44,9 @@ export default function Step9CHome() {
             className="w-[55%] tablet:w-[100%]
                         mobile:w-[100%]"
           >
-            <video className='w-fit h-fit' preload='auto' autoPlay={true} muted={true}>
-              <source src='./Step2.mp4' className='w-full h-full' />
+            <video className="w-fit h-fit" preload="auto" autoPlay={true} muted={true}>
+              <source src="./Step2.mp4" className="w-full h-full" />
             </video>
-
           </div>
         </div>
       </div>

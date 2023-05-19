@@ -56,10 +56,10 @@ const Who = () => {
     }
   };
   return (
-    <div className="w-full h-full flex justify-end">
+    <div className="w-full h-full flex justify-end mobile:justify-center tablet:justify-center">
       <div
         className="w-[350px] h-full bg-white rounded-2xl pointer-events-auto box-border
-        p-6
+        p-6 mobile:w-full tablet:w-full
       "
         id="who-popup"
       >
@@ -67,11 +67,11 @@ const Who = () => {
           {guestArr.map((item, index) => {
             return (
               <div
-                className={`w-full ${index == guestArr.length - 1 ? '' : 'border-b-2'} flex`}
+                className={`w-full ${index == guestArr.length - 1 ? '' : 'border-b-2'} flex `}
                 key={index}
               >
                 {/* title and des */}
-                <div className="flex-1 h-full flex flex-col">
+                <div className="flex-1 h-full flex flex-col tablet:text-center mobile:text-center">
                   <span className="w-full m-auto mb-0 font-bold">{item.title}</span>
                   <span className="w-full m-auto mt-0">{item.des}</span>
                 </div>

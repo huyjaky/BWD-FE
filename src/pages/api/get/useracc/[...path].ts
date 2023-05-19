@@ -69,9 +69,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
     res.status(200).json({ message: 'fetch Done', data: user });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: 'Something wrong', error: error});
+    res.status(500).json({ message: 'Something wrong', error: error });
   }
 };
 
 export default withIronSessionApiRoute(handler, sessionOptions);
-

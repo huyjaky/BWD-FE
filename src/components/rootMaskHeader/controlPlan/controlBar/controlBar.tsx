@@ -5,6 +5,7 @@ import { BiSearch } from 'react-icons/bi';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 import { format } from 'date-fns';
 import SearchBox from '@/components/searchBox/searchBox';
+import { mobileContolPanelContext } from '@/contexts/mobileControlPanel';
 interface Place {
   address: string;
   latitude: number | null;
@@ -35,7 +36,7 @@ const ControlBar = () => {
   const handleCreate = async (data: Place) => {};
 
   return (
-    <div className="w-full h-full flex relative">
+    <div className="w-full h-full flex relative  mobile:text-[12px]">
       <div className="flex-[0.6] flex">
         <div
           className="flex-col flex m-auto w-full rounded-full box-border pl-7
@@ -50,7 +51,7 @@ const ControlBar = () => {
 
           {/* the input cho nay lam sau */}
           <form action="" onSubmit={handleSubmit(onSubmit)}>
-            <SearchBox />
+            <SearchBox styleBox={null} />
             <div>{errors.address && <p>{errors.address.message}</p>}</div>
           </form>
         </div>
@@ -96,10 +97,12 @@ const ControlBar = () => {
             <span>Add guests</span>
           </div>
 
-          <div className="flex-1 flex box-border p-3 w-full relative z-10">
-            <div className="rounded-full w-full h-full bg-red-500 flex ">
-              <BiSearch className="w-[30px] h-[30px] m-auto text-white" />
-              <span className="text-white font-semibold m-auto ml-0">Search</span>
+          <div className="flex-1 flex box-border p-3 w-full relative z-10 mobile:py-5 tablet:py-5 ">
+            <div className="rounded-full w-full h-full bg-red-500 flex    ">
+              <BiSearch className="w-[30px] h-[30px] m-auto text-white tablet:w-[20px] tablet:h-[20px] mobile:w-[20px] mobile:h-[20px]" />
+              <span className="text-white font-semibold m-auto ml-0 tablet:hidden mobile:hidden">
+                Search
+              </span>
             </div>
           </div>
         </div>

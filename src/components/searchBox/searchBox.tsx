@@ -3,12 +3,16 @@ import { selectPlaceContext } from '@/contexts/selectPlace';
 import placeSearch from '@/hooks/placeSearch';
 import { useContext, useEffect } from 'react';
 
+// interface SearchBoxProps {
+//   onSelectAddress: (address: string, latitude: number | null, longitude: number | null) => void;
+//   defaultValue: string;
+// }
+
 interface SearchBoxProps {
-  onSelectAddress: (address: string, latitude: number | null, longitude: number | null) => void;
-  defaultValue: string;
+  styleBox: string | null;
 }
 
-const SearchBox = () => {
+const SearchBox = ({ styleBox }: SearchBoxProps) => {
   const { address, setAddress } = useContext(selectPlaceContext);
   const { setPlaceList, setIsLoading, isFetch, setIsFetch } = useContext(placeListContext);
 
@@ -42,23 +46,21 @@ const SearchBox = () => {
   }, [address.address.formattedAddress]);
 
   return (
-    <div>
-      <input
-        type="text"
-        name="input-place"
-        id=""
-        placeholder={'Search your locations'}
-        className="outline-none focus:border-b-2 focus:border-slate-600 w-[calc(100%-40px)]"
-        onChange={(event) => {
-          setAddress({
-            ...address,
-            address: { ...address.address, formattedAddress: event.target.value }
-          });
-          setIsFetch(true);
-        }}
-        value={address.address.formattedAddress}
-      />
-    </div>
+    <input
+      type="text"
+      name="input-place"
+      id=""
+      placeholder={'Search your locations'}
+      className={`outline-none focus:border-b-2 focus:border-slate-600 w-[calc(100%-40px)] ${styleBox}`}
+      onChange={(event) => {
+        setAddress({
+          ...address,
+          address: { ...address.address, formattedAddress: event.target.value }
+        });
+        setIsFetch(true);
+      }}
+      value={address.address.formattedAddress}
+    />
   );
 };
 
