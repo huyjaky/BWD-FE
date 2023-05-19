@@ -2,43 +2,47 @@ import { houseApi } from '@/api-client/houseApi';
 import SkeletonShowHouse from '@/components/skeletonLoading/skletonShowHouse';
 import { getHouseContext } from '@/contexts/getHouse';
 import { house_ } from '@/models/house';
-import { motion } from 'framer-motion';
+import { VariantLabels, Variants, motion } from 'framer-motion';
 import { useContext, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Carousel from './carousel';
 import { array } from 'yup';
+import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
+
+const variants: Variants = {
+  show: {
+    opacity: [0, 1]
+  },
+  hidden: {
+    opacity: [1, 0],
+    transitionEnd: {
+      display: 'none'
+    }
+  }
+};
 
 const ShowHouse = () => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
   const { house, setHouse, isLoading, setIsLoading } = useContext(getHouseContext);
+  const {isShow, setIsShow} = useContext(filterFormAnimateContext)
   const [page, setPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
   const [isFirstLoading, setIsFirstLoading] = useState(true);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const mask: HTMLElement | null = document.getElementById('mask');
-      const scaleUp: HTMLElement | null = document.getElementById('scaleUp');
+  const handleScroll = () => {
+    const mask: HTMLElement | null = document.getElementById('mask');
+    const scaleUp: HTMLElement | null = document.getElementById('scaleUp');
 
-      const ControlHeader: HTMLElement | null = document.getElementById('ControlHeader');
-      const link: HTMLElement | null = document.getElementById('link');
-      const controlBar: HTMLElement | null = document.getElementById('controlBar');
-      const where: HTMLElement | null = document.getElementById('where-popup');
-      const checkIn_Out: HTMLElement | null = document.getElementById('checkin_out-popup');
-      const who: HTMLElement | null = document.getElementById('who-popup');
+    const ControlHeader: HTMLElement | null = document.getElementById('ControlHeader');
+    const link: HTMLElement | null = document.getElementById('link');
+    const controlBar: HTMLElement | null = document.getElementById('controlBar');
+    const where: HTMLElement | null = document.getElementById('where-popup');
+    const checkIn_Out: HTMLElement | null = document.getElementById('checkin_out-popup');
+    const who: HTMLElement | null = document.getElementById('who-popup');
 
-      if (isFirstLoading) return;
-      scaleUp?.classList.remove('animate-slideDownHeader');
-      link?.classList.remove('animate-slideDownControl');
-      ControlHeader?.classList.remove('animate-slideDownControl');
-      mask?.classList.remove('animate-transparentAnimate');
-      controlBar?.classList.remove('animate-showAnimate');
-
-      where?.classList.remove('animate-transparentAnimate');
-      checkIn_Out?.classList.remove('animate-transparentAnimate');
-      who?.classList.remove('animate-transparentAnimate');
-      // -------------------------------------------------------------------
+    // -------------------------------------------------------------------
+    if (isShow) {
       scaleUp?.classList.add('animate-slideUpHeader');
       link?.classList.add('animate-slideUpControl');
       ControlHeader?.classList.add('animate-slideUpControl');
@@ -48,11 +52,13 @@ const ShowHouse = () => {
       where?.classList.add('animate-transparentAnimateReverse');
       checkIn_Out?.classList.add('animate-transparentAnimateReverse');
       who?.classList.add('animate-transparentAnimateReverse');
-      console.log('scroll');
-    };
+      setIsShow(false);
+    }
+  };
+  useEffect(() => {
     document.addEventListener('scroll', handleScroll);
-    setIsFirstLoading(false);
-  }, [isFirstLoading]);
+  }, [isShow]);
+
 
   useEffect(() => {
     setHouseTemp([...house]);
@@ -71,12 +77,13 @@ const ShowHouse = () => {
       console.log(error);
     }
   };
-  useEffect(() => {}, [hasMore]);
-
   useEffect(() => {
     console.log(houseTemp);
-    setIsLoading(false);
-  }, [houseTemp, setIsLoading]);
+  }, [hasMore, houseTemp]);
+
+  useEffect(() => {
+    if (houseTemp.length > 0) setIsLoading(false);
+  }, [setIsLoading]);
 
   return (
     <div>
@@ -86,21 +93,19 @@ const ShowHouse = () => {
           next={getMoreHouse}
           hasMore={hasMore}
           loader={
-            <motion.div transition={{ delay: 0.1 }}>
+            <motion.div transition={{ delay: 0.3 }}>
               <SkeletonShowHouse />
             </motion.div>
           }
           className="w-full h-fit grid grid-cols-houseBox gap-x-5 gap-y-8"
-          endMessage={<span>Nothing more to show</span>}
-        >
+          endMessage={<div></div>}>
           {houseTemp.map((item: house_, index: number) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, display: 'none' }}
               animate={{ opacity: 1, display: 'block' }}
               transition={{ delay: (index + 1) * 0.1 }}
-              className="w-full h-[400px] "
-            >
+              className="w-full h-[400px] ">
               <div className="w-full h-[300px]">
                 <Carousel arrImg={item.arrImg} />
               </div>
@@ -123,11 +128,10 @@ const ShowHouse = () => {
 
           {arrTempLoading.map((item: number, index: number) => (
             <motion.div
-              initial={!isLoading ? { opacity: 1, display: 'block' } : {}}
-              animate={!isLoading ? { opacity: 0, display: 'none' } : {}}
-              transition={{ delay: (index + 1) * 0.1 }}
-              key={index}
-            >
+              variants={variants}
+              animate={!isLoading ? 'show' : 'hidden'}
+              transition={{ delay: (index + 1) * 0.2 }}
+              key={index}>
               <SkeletonShowHouse />
             </motion.div>
           ))}

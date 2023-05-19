@@ -4,8 +4,10 @@ import ControlBar from './controlBar/controlBar';
 import Popover from './controlBar/popOver';
 import { useContext, useEffect, useState } from 'react';
 import { selectPopoverContext } from '@/contexts';
+import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 
 const ControlPlan = () => {
+  const {isShow, setIsShow} = useContext(filterFormAnimateContext)
   const arrLink: { ref: string; title: string }[] = [
     {
       ref: '',
@@ -53,6 +55,7 @@ const ControlPlan = () => {
     where?.classList.remove('animate-transparentAnimateReverse');
     checkIn_Out?.classList.remove('animate-transparentAnimateReverse');
     who?.classList.remove('animate-transparentAnimateReverse');
+    setIsShow(true);
   };
 
 

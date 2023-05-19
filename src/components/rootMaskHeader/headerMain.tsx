@@ -143,7 +143,7 @@ const HeaderMain = () => {
       </div>
 
       <div
-        className="w-screen h-screen invisible transition-all duration-500 bg-mask absolute z-20"
+        className="w-screen h-screen invisible opacity-0 bg-mask absolute z-20"
         id="mask"
         onClick={handleOnMask}
       ></div>
