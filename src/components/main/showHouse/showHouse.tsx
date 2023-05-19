@@ -15,6 +15,9 @@ const variants: Variants = {
   },
   hidden: {
     opacity: [1, 0],
+    transition: {
+      delay: .1
+    },
     transitionEnd: {
       display: 'none'
     }
@@ -70,7 +73,6 @@ const ShowHouse = () => {
       if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
         setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
       } else {
-        console.log('has more');
         setHasMore(false);
       }
     } catch (error) {
@@ -82,7 +84,10 @@ const ShowHouse = () => {
   }, [hasMore, houseTemp]);
 
   useEffect(() => {
-    if (houseTemp.length > 0) setIsLoading(false);
+    if (houseTemp.length > 0){
+      console.log('check');
+      setIsLoading(false);
+    }
   }, [setIsLoading]);
 
   return (
@@ -129,8 +134,7 @@ const ShowHouse = () => {
           {arrTempLoading.map((item: number, index: number) => (
             <motion.div
               variants={variants}
-              animate={!isLoading ? 'show' : 'hidden'}
-              transition={{ delay: (index + 1) * 0.2 }}
+              animate={isLoading ? 'show' : 'hidden'}
               key={index}>
               <SkeletonShowHouse />
             </motion.div>
