@@ -17,6 +17,8 @@ import { Montserrat } from 'next/font/google';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useMemo } from 'react';
 import useSWR from 'swr';
+import FooterTest from '@/components/footers/footerMain';
+import FooterRooms from '@/components/footers/footerRooms';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -39,7 +41,7 @@ const variants: Variants = {
 
 const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
   const { user, setUser } = useContext(userAccContext);
-  const { house, setHouse, isLoading, setIsLoading } = useContext(getHouseContext);
+  const { isFilter } = useContext(getHouseContext);
   const { isClickOutSide } = useContext(filterFormAnimateContext);
 
   const { pathname } = useRouter();
@@ -49,7 +51,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
   }, [pathname]);
 
   if (!user_?.UserId) {
-    const { data, error, mutate, isValidating } = useSWR(`/get/useracc/UserName/${user.UserName}`, {
+    const { data, error, mutate } = useSWR(`/get/useracc/UserName/${user.UserName}`, {
       revalidateOnFocus: false
     });
 
@@ -60,7 +62,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
     setUser({ ...user, ...user_ });
   }
 
-  useEffect(() => {}, [house]);
+  useEffect(() => {}, [isFilter]);
 
   return (
     <>
@@ -69,10 +71,17 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
         <div className="w-full h-fit px-[80px] box-border">
           <TypeHouse />
 
-          <motion.div variants={variants} animate="show">
-            <ShowHouse infShow="noneAuthHouseApi" />
-          </motion.div>
+          {isFilter ? (
+            <motion.div variants={variants} animate="show">
+              <ShowHouse infShow="noneAuthFilter" />
+            </motion.div>
+          ) : (
+            <motion.div variants={variants} animate="show">
+              <ShowHouse infShow="noneAuthHouseApi" />
+            </motion.div>
+          )}
         </div>
+        <FooterRooms/>
         <FooterMainRes />
       </main>
     </>

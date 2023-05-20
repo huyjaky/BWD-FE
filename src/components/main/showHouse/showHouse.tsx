@@ -87,7 +87,9 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
       setHouseTemp(arr.data as house_[]);
     }
   };
-  fetchHouseApi();
+  useEffect(() => {
+    fetchHouseApi();
+  }, [houseTemp]);
 
   const getMoreHouse = async () => {
     try {
@@ -153,7 +155,6 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
               </div>
             </motion.div>
           ))}
-
           {houseTemp.length == 0 &&
             arrTempLoading.map((item: number, index: number) => (
               <motion.div
@@ -164,6 +165,7 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
               </motion.div>
             ))}
         </InfiniteScroll>
+
       </motion.div>
     </div>
   );
