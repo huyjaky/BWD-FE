@@ -25,11 +25,16 @@ const variants: Variants = {
 
 const ShowHouse = () => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
-  const { house, setHouse, isLoading, setIsLoading } = useContext(getHouseContext);
   const { isShow, setIsShow } = useContext(filterFormAnimateContext);
   const [hasMore, setHasMore] = useState(true);
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
 
+  const fetchHouseApi = async () => {
+    if (houseTemp.length != 0 ) return;
+    const arr = await houseApi.noneAuthHouseApi(1);
+    setHouseTemp(arr.data as house_[]);
+  };
+  fetchHouseApi();
   // cai nay lam truoc khi hoc framer motion nen khong dung framer ma dung
   // animation chay bang com
   const handleScroll = () => {
@@ -73,10 +78,6 @@ const ShowHouse = () => {
     document.addEventListener('scroll', handleScroll);
   }, [isShow]);
 
-  // khi house duoc fetch lan dau pages/index
-  useEffect(() => {
-    setHouseTemp([...house]);
-  }, [house]);
 
   const getMoreHouse = async () => {
     try {
@@ -91,14 +92,8 @@ const ShowHouse = () => {
     }
   };
 
-  useEffect(() => {
-    if (houseTemp.length > 0 && isLoading == true) {
-      console.log('check');
-      setIsLoading(false);
-    }
-  }, [houseTemp]);
+  useEffect(() => {}, [houseTemp, hasMore]);
 
-  useEffect(() => {}, [setIsLoading, hasMore]);
 
   return (
     <div>
@@ -141,9 +136,9 @@ const ShowHouse = () => {
             </motion.div>
           ))}
 
-          {isLoading &&
+          { houseTemp.length == 0 &&
             arrTempLoading.map((item: number, index: number) => (
-              <motion.div variants={variants} animate={isLoading ? 'show' : 'hidden'} key={index}>
+              <motion.div variants={variants} animate={houseTemp.length == 0 ? 'show' : 'hidden'} key={index}>
                 <SkeletonShowHouse />
               </motion.div>
             ))}

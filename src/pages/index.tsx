@@ -51,24 +51,8 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
     setUser({ ...user, ...user_ });
   }
 
-  // useEffect(() => {
-  //   const handleOnScroll = (event: any) => {
-  //     if (isClickOutSide) {
-  //       event.preventDefault()
-  //     }
-  //   };
-  //   document.addEventListener('scroll', handleOnScroll);
-  // }, []);
-
-
-
   useEffect(() => {
-    const fetchHouseApi = async () => {
-      if (house.length != 0) return;
-      const arr = await houseApi.noneAuthHouseApi(1);
-      setHouse(arr.data as house_[]);
-    };
-    fetchHouseApi();
+
   }, [house]);
 
   return (
