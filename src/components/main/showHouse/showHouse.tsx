@@ -113,14 +113,16 @@ const ShowHouse = () => {
             </motion.div>
           }
           className="w-full h-fit grid grid-cols-houseBox gap-x-5 gap-y-8"
-          endMessage={<div></div>}>
+          endMessage={<div></div>}
+        >
           {houseTemp.map((item: house_, index: number) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, display: 'none' }}
               animate={{ opacity: 1, display: 'block' }}
               transition={{ delay: (index + 1) * 0.1 }}
-              className="w-full h-[400px] ">
+              className="w-full h-[400px] "
+            >
               <div className="w-full h-[300px]">
                 <Carousel arrImg={item.arrImg} />
               </div>

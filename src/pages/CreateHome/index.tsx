@@ -64,11 +64,20 @@ function CreateHome(): JSX.Element {
   return (
     <div className="">
       <Header />
-      <AnimatePresence >
-        {currentStep > 0 && currentStep <= 17 && currentStep === steps[currentStep - 1].number && isMounted && steps[currentStep - 1].component}
+      <AnimatePresence>
+        {currentStep > 0 &&
+          currentStep <= 17 &&
+          currentStep === steps[currentStep - 1].number &&
+          isMounted &&
+          steps[currentStep - 1].component}
       </AnimatePresence>
 
-      <ProcessBar steps={steps} handleBackStep={handleBackStep} handleNextStep={handleNextStep} currentStep={currentStep} />
+      <ProcessBar
+        steps={steps}
+        handleBackStep={handleBackStep}
+        handleNextStep={handleNextStep}
+        currentStep={currentStep}
+      />
     </div>
   );
 }

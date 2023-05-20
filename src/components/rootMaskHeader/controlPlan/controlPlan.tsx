@@ -7,7 +7,7 @@ import { selectPopoverContext } from '@/contexts';
 import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 
 const ControlPlan = () => {
-  const {isShow, setIsShow} = useContext(filterFormAnimateContext)
+  const { isShow, setIsShow } = useContext(filterFormAnimateContext);
   const arrLink: { ref: string; title: string }[] = [
     {
       ref: '',
@@ -57,7 +57,6 @@ const ControlPlan = () => {
     who?.classList.remove('animate-transparentAnimateReverse');
     setIsShow(true);
   };
-
 
   return (
     <>

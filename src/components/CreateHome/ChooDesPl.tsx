@@ -43,7 +43,6 @@ hover:border-[2px] hover:border-black
         backgroundColor: title === selected || selectedMany.includes(title) ? '#F7F7F7' : '',
         borderColor: title === selected || selectedMany.includes(title) ? 'black' : ''
       }}
-
       onClick={handleOnclick}
     >
       <div className="w-[45px] h-[45px] mb-2">{icon}</div>

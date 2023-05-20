@@ -10,7 +10,8 @@ const Filter = ({ isInvisible }: FilterProps) => {
   const buttonFilter = useRef<HTMLInputElement>(null);
   const { setIsClickOutSide } = useContext(filterFormAnimateContext);
 
-  const handleOnClickFilter = (event: any) => {
+  const handleOnClickFilter = async (event: any) => {
+    window.scrollTo(0, 0);
     setIsClickOutSide(true);
   };
 

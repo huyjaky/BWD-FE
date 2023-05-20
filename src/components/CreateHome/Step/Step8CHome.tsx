@@ -26,15 +26,17 @@ export default function Step8CHome() {
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.1 }}
-                className="text-[32px] font-semibold w-[530px] leading-10 mb-3 ">
+                transition={{ type: 'spring', stiffness: 35, delay: 0.1 }}
+                className="text-[32px] font-semibold w-[530px] leading-10 mb-3 "
+              >
                 Who else might be there?
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
-                className="text-[18px] text-[#717171]">
+                transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
+                className="text-[18px] text-[#717171]"
+              >
                 Guests need to know whether they’ll encounter other people during their stay.
               </motion.p>
             </div>
@@ -61,8 +63,9 @@ export default function Step8CHome() {
               <motion.p
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.7 }}
-                className="text-[18px] text-[#717171]">
+                transition={{ type: 'spring', stiffness: 35, delay: 0.7 }}
+                className="text-[18px] text-[#717171]"
+              >
                 We’ll show this information on your listing and in search results.
               </motion.p>
             </div>

@@ -9,6 +9,7 @@ import PropertyHouse from './filterFormComponent/property';
 import { filterContext } from '@/contexts/filter';
 import { filterForm } from '@/models/filter';
 import { houseApi } from '@/api-client/houseApi';
+import HostLanguage from './filterFormComponent/hostLanguage';
 
 const variantsAmenities: Variants = {
   showMore: {
@@ -44,12 +45,12 @@ const FormFilter = () => {
   }, []);
 
   useEffect(() => {}, [show]);
+  useEffect(() => {}, [isClickOutSide]);
 
   const fetchData = async () => {
     console.log(filterForm);
     const houseFil = await houseApi.noneAuthFilter(filterForm);
-  }
-
+  };
 
   return (
     <>
@@ -121,7 +122,17 @@ const FormFilter = () => {
                 </motion.button>
               </div>
             </div>
+
+
+          {/* host language */}
+            <div className="w-full h-fit mb-5 py-10">
+              <div className="w-full h-fit flex flex-col ">
+                <span className="font-bold text-[25px] mb-5">Host language</span>
+                <HostLanguage/>
+              </div>
+            </div>
           </div>
+
 
           <div className="w-full border-t-2 flex items-center flex-2 py-3">
             <div className="flex-1 flex justify-start">
@@ -153,8 +164,12 @@ const FormFilter = () => {
               <motion.button
                 className="w-[200px] h-[40px] rounded-lg border-2"
                 whileHover={{ backgroundColor: 'rgba(255, 56, 92, 0.8)', color: 'white' }}
-                onClick={event => fetchData()}
-                whileTap={{ scale: 0.9 }} >
+                onClick={(event) => {
+                  setIsClickOutSide(false);
+                  console.log('click');
+                }}
+                whileTap={{ scale: 0.9 }}
+              >
                 Submit
               </motion.button>
             </div>

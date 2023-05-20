@@ -31,7 +31,7 @@ interface HomeProps {
 const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
   const { user, setUser } = useContext(userAccContext);
   const { house, setHouse, isLoading, setIsLoading } = useContext(getHouseContext);
-  const { setIsClickOutSide } = useContext(filterFormAnimateContext);
+  const { isClickOutSide } = useContext(filterFormAnimateContext);
 
   const { pathname } = useRouter();
 
@@ -51,12 +51,14 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
     setUser({ ...user, ...user_ });
   }
 
-  useEffect(() => {
-    const handleOnScroll = (event: any) => {
-      setIsClickOutSide(false);
-    };
-    document.addEventListener('scroll', handleOnScroll);
-  }, []);
+  // useEffect(() => {
+  //   const handleOnScroll = (event: any) => {
+  //     if (isClickOutSide) {
+  //       event.preventDefault()
+  //     }
+  //   };
+  //   document.addEventListener('scroll', handleOnScroll);
+  // }, []);
 
   useEffect(() => {
     const fetchHouseApi = async () => {
