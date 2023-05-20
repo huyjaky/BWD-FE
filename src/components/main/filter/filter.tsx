@@ -13,6 +13,7 @@ const Filter = ({ isInvisible }: FilterProps) => {
   const handleOnClickFilter = async (event: any) => {
     window.scrollTo(0, 0);
     setIsClickOutSide(true);
+    document.body.style.overflow = 'hidden'
   };
 
   return (

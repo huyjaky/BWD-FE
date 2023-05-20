@@ -37,6 +37,8 @@ const FormFilter = () => {
         const isClickOutSide_ = formFilter_.contains(event.target);
         if (!isClickOutSide_) {
           setIsClickOutSide(false);
+          document.body.style.overflow = 'scroll';
+          document.body.style.overflowX = 'hidden';
         }
       }
     };
@@ -60,8 +62,7 @@ const FormFilter = () => {
           animate={isClickOutSide ? 'show' : 'hidden'}
           transition={{ duration: 0.5, type: 'tween' }}
           className="w-[800px] h-[calc(100vh-50px)] bg-white m-auto rounded-3xl overflow-hidden flex flex-col"
-          ref={formFilter}
-        >
+          ref={formFilter}>
           {/* header formfilter */}
           <div className=" flex-2 w-full border-b-2 flex relative">
             <span className="m-auto font-semibold text-[23px]">Filter</span>
@@ -106,8 +107,7 @@ const FormFilter = () => {
                   className="overflow-hidden"
                   variants={variantsAmenities}
                   animate={show ? { height: 700, opacity: 1 } : { height: 0, opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                >
+                  transition={{ duration: 0.4 }}>
                   <Amenities typeAmenities="features" />
                   <Amenities typeAmenities="location" />
                   <Amenities typeAmenities="safety" />
@@ -116,23 +116,20 @@ const FormFilter = () => {
                   className="w-[300px] rounded-lg border-2"
                   whileHover={{ backgroundColor: 'rgba(255, 56, 92, 0.8)', color: 'white' }}
                   whileTap={{ scale: 0.9 }}
-                  onClick={(event) => setShow(!show)}
-                >
+                  onClick={(event) => setShow(!show)}>
                   <span className="text-[20px]">{show ? 'Show less' : 'Show more'}</span>
                 </motion.button>
               </div>
             </div>
 
-
-          {/* host language */}
+            {/* host language */}
             <div className="w-full h-fit mb-5 py-10">
               <div className="w-full h-fit flex flex-col ">
                 <span className="font-bold text-[25px] mb-5">Host language</span>
-                <HostLanguage/>
+                <HostLanguage />
               </div>
             </div>
           </div>
-
 
           <div className="w-full border-t-2 flex items-center flex-2 py-3">
             <div className="flex-1 flex justify-start">
@@ -155,8 +152,7 @@ const FormFilter = () => {
                     hostLanguage: 'vietnam'
                   };
                   setFilterForm(filterFormTemp);
-                }}
-              >
+                }}>
                 Clear all
               </div>
             </div>
@@ -166,10 +162,10 @@ const FormFilter = () => {
                 whileHover={{ backgroundColor: 'rgba(255, 56, 92, 0.8)', color: 'white' }}
                 onClick={(event) => {
                   setIsClickOutSide(false);
-                  console.log('click');
+                  document.body.style.overflow = 'scroll';
+                  document.body.style.overflowX = 'hidden';
                 }}
-                whileTap={{ scale: 0.9 }}
-              >
+                whileTap={{ scale: 0.9 }}>
                 Submit
               </motion.button>
             </div>

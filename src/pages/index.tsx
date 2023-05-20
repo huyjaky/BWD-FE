@@ -60,6 +60,8 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
   //   document.addEventListener('scroll', handleOnScroll);
   // }, []);
 
+
+
   useEffect(() => {
     const fetchHouseApi = async () => {
       if (house.length != 0) return;
@@ -71,9 +73,10 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
 
   return (
     <>
-      <main className={`${monsterrat.className} relative overflow-hidden`} id="root">
+      <main className={`${monsterrat.className} relative overflow-hidden`} id="root" >
         <HeaderMain />
-        <div className="w-full h-fit px-[80px] box-border">
+        <div className="w-full h-fit px-[80px] box-border"
+        >
           <TypeHouse />
           <ShowHouse />
         </div>

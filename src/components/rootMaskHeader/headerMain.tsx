@@ -124,7 +124,6 @@ const HeaderMain = () => {
           className="w-screen h-screen bg-mask absolute z-40
         overflow-hidden "
           id="maskFilter"
-          onScroll={event => event.preventDefault()}
         >
           <FormFilter />
         </motion.div>
