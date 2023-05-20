@@ -5,7 +5,7 @@ export const houseApi = {
   noneAuthHouseApi(page: number) {
     return axiosClient.get(`/get/house/page/${page}`);
   },
-  noneAuthFilter(payload: filterForm) {
-    return axiosClient.post('/get/house/filter', payload);
+  noneAuthFilter(payload: filterForm, page: number) {
+    return axiosClient.post(`/get/house/filter/${page}`, payload);
   }
 };

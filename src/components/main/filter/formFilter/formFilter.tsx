@@ -50,8 +50,7 @@ const FormFilter = () => {
   useEffect(() => {}, [isClickOutSide]);
 
   const fetchData = async () => {
-    console.log(filterForm);
-    const houseFil = await houseApi.noneAuthFilter(filterForm);
+    const houseFil = await houseApi.noneAuthFilter(filterForm, 1);
   };
 
   return (
@@ -164,6 +163,7 @@ const FormFilter = () => {
                   setIsClickOutSide(false);
                   document.body.style.overflow = 'scroll';
                   document.body.style.overflowX = 'hidden';
+                  fetchData();
                 }}
                 whileTap={{ scale: 0.9 }}>
                 Submit

@@ -1,4 +1,4 @@
-import { houseApi } from '@/api-client/houseApi';
+import { Variants, motion } from 'framer-motion';
 import { sessionOptions } from '@/api-client/session';
 import FooterMainRes from '@/components/footers/footerMainRes';
 import EmptyLayout from '@/components/layouts/empty';
@@ -28,6 +28,15 @@ interface HomeProps {
   props: any;
 }
 
+const variants: Variants = {
+  show: {
+    opacity: [0, 1],
+    transition: {
+      duration: 1
+    }
+  }
+};
+
 const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
   const { user, setUser } = useContext(userAccContext);
   const { house, setHouse, isLoading, setIsLoading } = useContext(getHouseContext);
@@ -51,18 +60,18 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
     setUser({ ...user, ...user_ });
   }
 
-  useEffect(() => {
-
-  }, [house]);
+  useEffect(() => {}, [house]);
 
   return (
     <>
-      <main className={`${monsterrat.className} relative overflow-hidden`} id="root" >
+      <main className={`${monsterrat.className} relative overflow-hidden`} id="root">
         <HeaderMain />
-        <div className="w-full h-fit px-[80px] box-border"
-        >
+        <div className="w-full h-fit px-[80px] box-border">
           <TypeHouse />
-          <ShowHouse />
+
+          <motion.div variants={variants} animate="show">
+            <ShowHouse infShow="noneAuthHouseApi" />
+          </motion.div>
         </div>
         <FooterMainRes />
       </main>
