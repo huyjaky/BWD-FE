@@ -1,16 +1,15 @@
+import { filterContext } from '@/contexts/filter';
 import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
+import { getHouseContext } from '@/contexts/getHouse';
+import { filterForm } from '@/models/filter';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { useContext, useEffect, useRef, useState } from 'react';
-import { IoMdClose } from 'react-icons/io';
 import Amenities from './filterFormComponent/amenities/amenities';
 import BedsBathRooms from './filterFormComponent/bedsBathrooms';
+import HostLanguage from './filterFormComponent/hostLanguage';
 import PriceRange from './filterFormComponent/priceRange';
 import PropertyHouse from './filterFormComponent/property';
-import { filterContext } from '@/contexts/filter';
-import { filterForm } from '@/models/filter';
-import { houseApi } from '@/api-client/houseApi';
-import HostLanguage from './filterFormComponent/hostLanguage';
-import { getHouseContext } from '@/contexts/getHouse';
+import {GrClose} from 'react-icons/gr'
 
 const variantsAmenities: Variants = {
   showMore: {
@@ -77,8 +76,6 @@ const FormFilter = () => {
     setIsClickOutSide(false);
     document.body.style.overflow = 'scroll';
     document.body.style.overflowX = 'hidden';
-    console.log(isEmpty());
-
     setIsFilter(!isEmpty());
   };
 
@@ -89,11 +86,22 @@ const FormFilter = () => {
           variants={variantsAmenities}
           animate={isClickOutSide ? 'show' : 'hidden'}
           transition={{ duration: 0.5, type: 'tween' }}
-          className="w-[800px] h-[calc(100vh-50px)] bg-white m-auto rounded-3xl overflow-hidden flex flex-col"
+          className="w-[800px] h-[calc(100vh-50px)] bg-white m-auto rounded-3xl overflow-hidden
+          flex flex-col
+          mobile:mt-0 mobile:rounded-none mobile:w-screen mobile:h-[calc(100vh-70px)]
+          tablet:h-[calc(100vh-90px)] tablet:mt-[10px]
+          "
           ref={formFilter}>
           {/* header formfilter */}
           <div className=" flex-2 w-full border-b-2 flex relative">
             <span className="m-auto font-semibold text-[23px]">Filter</span>
+            <motion.button className='absolute w-[70px] h-full flex'
+            onClick={event => setIsClickOutSide(false)}
+            >
+              <div className='w-fit h-full m-auto'>
+                <GrClose className='text-[30px]'/>
+              </div>
+            </motion.button>
           </div>
 
           {/* content formfilter */}

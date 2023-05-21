@@ -18,14 +18,19 @@ const Filter = ({ isInvisible }: FilterProps) => {
 
   return (
     <>
-      <div className={`w-[150px] h-[80px] flex ${isInvisible}`} onClick={handleOnClickFilter}>
+      <div className={`w-[150px] h-[80px] flex ${isInvisible} mobile:h-full mobile:w-[100px]
+tablet:h-full tablet:w-[100px]
+      `} onClick={handleOnClickFilter}>
         <div
-          className="flex m-auto p-3 border-2 rounded-2xl border-slate-800 cursor-pointer"
+          className="flex m-auto p-3 border-2 rounded-2xl border-slate-800 cursor-pointer
+          mobile:w-[50px] mobile:h-full mobile:p-0 mobile:border-0
+          tablet:w-[50px] tablet:h-full tablet:p-0 tablet:border-0
+          "
           ref={buttonFilter}
         >
-          <div className="flex w-fit h-[30px] m-auto">
-            <HiOutlineFilter className="w-[30px] h-full" />
-            <div className="w-fit h-full flex items-center">
+          <div className="flex w-fit h-[30px] m-auto  mobile:h-full tablet:h-full">
+            <HiOutlineFilter className="w-[30px] h-full m-auto " />
+            <div className="w-fit h-full flex items-center mobile:hidden tablet:hidden">
               <span className="font-semibold">Filters</span>
             </div>
           </div>
