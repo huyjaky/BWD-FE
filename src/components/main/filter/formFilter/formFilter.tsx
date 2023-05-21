@@ -26,7 +26,7 @@ const variantsAmenities: Variants = {
 const FormFilter = () => {
   const [show, setShow] = useState(false);
   const { filterForm, setFilterForm } = useContext(filterContext);
-  const { setIsFilter } = useContext(getHouseContext);
+  const { setIsFilter, isFilter } = useContext(getHouseContext);
   const { isClickOutSide, setIsClickOutSide } = useContext(filterFormAnimateContext);
   const formFilter = useRef<HTMLInputElement>(null);
 
@@ -76,7 +76,11 @@ const FormFilter = () => {
     setIsClickOutSide(false);
     document.body.style.overflow = 'scroll';
     document.body.style.overflowX = 'hidden';
-    setIsFilter(!isEmpty());
+    if (isEmpty()) {
+      setIsFilter(0);
+    } else {
+      setIsFilter(isFilter+1);
+    }
   };
 
   return (

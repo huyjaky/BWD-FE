@@ -129,7 +129,8 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
   useEffect(() => {
     setHouseTemp([]);
     setHasMore(true);
-  }, [infShow]);
+  }, [infShow, isFilter]);
+
 
   return (
     <div>
