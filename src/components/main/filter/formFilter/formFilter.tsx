@@ -1,13 +1,15 @@
+import { filterContext } from '@/contexts/filter';
 import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
+import { getHouseContext } from '@/contexts/getHouse';
+import { filterForm } from '@/models/filter';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { useContext, useEffect, useRef, useState } from 'react';
-import { IoMdClose } from 'react-icons/io';
 import Amenities from './filterFormComponent/amenities/amenities';
 import BedsBathRooms from './filterFormComponent/bedsBathrooms';
+import HostLanguage from './filterFormComponent/hostLanguage';
 import PriceRange from './filterFormComponent/priceRange';
 import PropertyHouse from './filterFormComponent/property';
-import { filterContext } from '@/contexts/filter';
-import { filterForm } from '@/models/filter';
+import { GrClose } from 'react-icons/gr';
 
 const variantsAmenities: Variants = {
   showMore: {
@@ -24,6 +26,7 @@ const variantsAmenities: Variants = {
 const FormFilter = () => {
   const [show, setShow] = useState(false);
   const { filterForm, setFilterForm } = useContext(filterContext);
+  const { setIsFilter, isFilter } = useContext(getHouseContext);
   const { isClickOutSide, setIsClickOutSide } = useContext(filterFormAnimateContext);
   const formFilter = useRef<HTMLInputElement>(null);
 
@@ -34,6 +37,8 @@ const FormFilter = () => {
         const isClickOutSide_ = formFilter_.contains(event.target);
         if (!isClickOutSide_) {
           setIsClickOutSide(false);
+          document.body.style.overflow = 'scroll';
+          document.body.style.overflowX = 'hidden';
         }
       }
     };
@@ -42,6 +47,44 @@ const FormFilter = () => {
   }, []);
 
   useEffect(() => {}, [show]);
+  useEffect(() => {}, [isClickOutSide]);
+
+  const isEmpty = () => {
+    const emptyObj = {
+      maxPrice: 250,
+      minPrice: 10,
+      beds: 0,
+      bathRooms: 0,
+      typeHouse: [],
+      amenities: {
+        essentials: [],
+        features: [],
+        location: [],
+        safety: []
+      },
+      hostLanguage: ''
+    };
+
+    const emptyObjJson = JSON.stringify(emptyObj);
+    const filterFormJson = JSON.stringify(filterForm);
+
+    if (emptyObjJson === filterFormJson) return true;
+    return false;
+  };
+
+  const fetchData = async () => {
+    setIsClickOutSide(false);
+    document.body.style.overflow = 'scroll';
+    document.body.style.overflowX = 'hidden';
+
+    console.log(filterForm);
+
+    if (isEmpty()) {
+      setIsFilter(0);
+    } else {
+      setIsFilter(isFilter+1);
+    }
+  };
 
   return (
     <>
@@ -50,12 +93,22 @@ const FormFilter = () => {
           variants={variantsAmenities}
           animate={isClickOutSide ? 'show' : 'hidden'}
           transition={{ duration: 0.5, type: 'tween' }}
-          className="w-[800px] h-[calc(100vh-50px)] bg-white m-auto rounded-3xl overflow-hidden flex flex-col"
-          ref={formFilter}
-        >
+          className="w-[800px] h-[calc(100vh-50px)] bg-white m-auto rounded-3xl overflow-hidden
+          flex flex-col
+          mobile:mt-0 mobile:rounded-none mobile:w-screen mobile:h-[calc(100vh-70px)]
+          tablet:h-[calc(100vh-90px)] tablet:mt-[10px]
+          "
+          ref={formFilter}>
           {/* header formfilter */}
           <div className=" flex-2 w-full border-b-2 flex relative">
             <span className="m-auto font-semibold text-[23px]">Filter</span>
+            <motion.button
+              className="absolute w-[70px] h-full flex desktop:hidden laptop:hidden"
+              onClick={(event) => setIsClickOutSide(false)}>
+              <div className="w-fit h-full m-auto">
+                <GrClose className="text-[30px]" />
+              </div>
+            </motion.button>
           </div>
 
           {/* content formfilter */}
@@ -97,20 +150,40 @@ const FormFilter = () => {
                   className="overflow-hidden"
                   variants={variantsAmenities}
                   animate={show ? { height: 700, opacity: 1 } : { height: 0, opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                >
+                  transition={{ duration: 0.4 }}>
                   <Amenities typeAmenities="features" />
                   <Amenities typeAmenities="location" />
                   <Amenities typeAmenities="safety" />
                 </motion.div>
-                <motion.button
-                  className="w-[300px] rounded-lg border-2"
-                  whileHover={{ backgroundColor: 'rgba(255, 56, 92, 0.8)', color: 'white' }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={(event) => setShow(!show)}
-                >
-                  <span className="text-[20px]">{show ? 'Show less' : 'Show more'}</span>
-                </motion.button>
+                <div className="w-fit h-fit flex items-center">
+                  <motion.button
+                    className="w-[300px] rounded-lg border-2 mr-2"
+                    whileHover={{ backgroundColor: 'rgba(255, 56, 92, 0.8)', color: 'white' }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={(event) => setShow(!show)}>
+                    <span className="text-[20px]">{show ? 'Show less' : 'Show more'}</span>
+                  </motion.button>
+                  <span className=''>
+                    {!show &&
+                    (filterForm.amenities.features.length != 0 ||
+                      filterForm.amenities.location.length != 0 ||
+                      filterForm.amenities.safety.length != 0)
+                      ? ` you have filled in ${
+                          filterForm.amenities.features.length +
+                          filterForm.amenities.location.length +
+                          filterForm.amenities.safety.length
+                        } options`
+                      : ''}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* host language */}
+            <div className="w-full h-fit mb-5 py-10">
+              <div className="w-full h-fit flex flex-col ">
+                <span className="font-bold text-[25px] mb-5">Host language</span>
+                <HostLanguage />
               </div>
             </div>
           </div>
@@ -133,11 +206,10 @@ const FormFilter = () => {
                       location: [],
                       safety: []
                     },
-                    hostLanguage: 'vietnam'
+                    hostLanguage: ''
                   };
                   setFilterForm(filterFormTemp);
-                }}
-              >
+                }}>
                 Clear all
               </div>
             </div>
@@ -145,8 +217,8 @@ const FormFilter = () => {
               <motion.button
                 className="w-[200px] h-[40px] rounded-lg border-2"
                 whileHover={{ backgroundColor: 'rgba(255, 56, 92, 0.8)', color: 'white' }}
-                whileTap={{ scale: 0.9 }}
-              >
+                onClick={fetchData}
+                whileTap={{ scale: 0.9 }}>
                 Submit
               </motion.button>
             </div>

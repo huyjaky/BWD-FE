@@ -16,15 +16,18 @@ export default function Step7CHome() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1 }}
-      className="w-[98vw] px-[80px]">
-      <div className="w-[52%] mobile:w-[100%] ml-auto mr-auto pl-[60px] mobile:pl-0 mt-[80px]
+      className="w-[98vw] px-[80px]"
+    >
+      <div
+        className="w-[52%] mobile:w-[100%] ml-auto mr-auto pl-[60px] mobile:pl-0 mt-[80px]
                       tablet:w-[80%] laptop:w-[80%]
-      ">
+      "
+      >
         <div>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ type: "spring", stiffness: 35, delay: 0.1 }}
+            transition={{ type: 'spring', stiffness: 35, delay: 0.1 }}
             className="text-[32px] font-semibold leading-9 mb-5
                         mobile:text-[26px]
                         "
@@ -36,8 +39,9 @@ export default function Step7CHome() {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
-                className="flex justify-between py-[24px] border-b-[1px]">
+                transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
+                className="flex justify-between py-[24px] border-b-[1px]"
+              >
                 <div>
                   <h1 className="text-[18px] font-semibold">Private and attached</h1>
                   <p className="text-[#717171]">
@@ -67,8 +71,9 @@ export default function Step7CHome() {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.3 }}
-                className="flex justify-between py-[24px] border-b-[1px]">
+                transition={{ type: 'spring', stiffness: 35, delay: 0.3 }}
+                className="flex justify-between py-[24px] border-b-[1px]"
+              >
                 <div>
                   <h1 className="text-[18px] font-semibold ">Dedicated</h1>
                   <p className="text-[#717171]">
@@ -96,8 +101,9 @@ export default function Step7CHome() {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.4 }}
-                className="flex justify-between py-[24px]">
+                transition={{ type: 'spring', stiffness: 35, delay: 0.4 }}
+                className="flex justify-between py-[24px]"
+              >
                 <div>
                   <h1 className="text-[18px] font-semibold ">Shared</h1>
                   <p className="text-[#717171]">It’s shared with other people.</p>

@@ -18,6 +18,7 @@ module.exports = {
       },
       colors: {
         mask: 'rgba(105,105,105, 0.4)',
+        redIcon: 'rgba(255, 56, 92, 0.8)'
       },
       keyframes: {
         hiddenAnimate: {

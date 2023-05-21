@@ -6,34 +6,22 @@ interface getHouseProps {
 }
 
 interface getHouseData {
-  house: house_[];
-  setHouse: (payload: house_[]) => void;
-  isLoading: boolean;
-  setIsLoading: (payload: boolean) => void;
+  isFilter: number,
+  setIsFilter: (payload: number) => void;
 }
 
 const getHouseDataDefault: getHouseData = {
-  house: [],
-  setHouse: () => {},
-  isLoading: true,
-  setIsLoading: () => {}
+  isFilter: 0,
+  setIsFilter: () => {}
 };
 
 export const getHouseContext = createContext<getHouseData>(getHouseDataDefault);
 
 const GetHouseProvider = ({ children }: getHouseProps) => {
-  const [isLoading, setIsLoading_] = useState(getHouseDataDefault.isLoading);
-  const [house, setHouse_] = useState<house_[]>(getHouseDataDefault.house);
-  const setIsLoading = (payload: boolean) => setIsLoading_(payload);
-  const setHouse = (payload: house_[]) => {
-    if (house.length != 0) {
-      setHouse_({ ...house, ...payload });
-    } else {
-      setHouse_(payload);
-    }
-  };
+  const [isFilter, setIsFilter_] = useState(getHouseDataDefault.isFilter);
+  const setIsFilter = (payload: number) => setIsFilter_(payload);
 
-  const getHouseDynamicData = { house, setHouse, isLoading, setIsLoading };
+  const getHouseDynamicData = { isFilter, setIsFilter};
   return (
     <getHouseContext.Provider value={getHouseDynamicData}>{children}</getHouseContext.Provider>
   );

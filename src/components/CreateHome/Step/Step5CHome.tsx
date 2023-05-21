@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 const Step5CHome: React.FC = () => {
   const [toggle, setToggle] = useState(false);
   return (
+<<<<<<< HEAD
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -15,6 +16,12 @@ const Step5CHome: React.FC = () => {
       <div className='px-6 sm:px-52 md:px-44 lg:px-52 xl:px-96 mt-[80px]'>
         <div className='mb-6'>
           <h1 className='font-sans text-2xl ml-2 md:ml-0 md:text-4xl font-semibold text-[#222222] mb-4'>
+=======
+    <div className="w-full h-screen">
+      <div className="px-6 sm:px-52 md:px-44 lg:px-52 xl:px-96 mt-[80px]">
+        <div className="mb-6">
+          <h1 className="font-sans text-2xl ml-2 md:ml-0 md:text-4xl font-semibold text-[#222222] mb-4">
+>>>>>>> Huy
             Confirm your address
           </h1>
           <p className="font-sans text-sm ml-2 md:ml-0 md:text-lg text-[#717171]">
@@ -151,8 +158,8 @@ const Step5CHome: React.FC = () => {
         </div>
       </div>
 
-      <div className='w-ful h-[80px]'></div>
-    </motion.div >
+      <div className="w-ful h-[80px]"></div>
+    </div>
   );
 };
 

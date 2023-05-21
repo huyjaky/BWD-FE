@@ -12,9 +12,7 @@ const Where = () => {
   const { selected } = useContext(selectPopoverContext);
   const [address_, setAddress_] = useState<addressSearch>();
 
-  useEffect(() => {
-    console.log('fetching success', placeList);
-  }, [placeList, isLoading]);
+  useEffect(() => {}, [placeList, isLoading]);
 
   useEffect(() => {
     const fetchLocation = async () => {
@@ -40,6 +38,8 @@ const Where = () => {
     setPlaceList([]);
     setIsFetch(false);
   };
+
+  console.log(address);
 
   return (
     <>

@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { categoriesStep10, safetyitems, standoutamenities } from '../utils/constant';
 import { useInView } from 'react-intersection-observer';
 import ChooDesPl from '../ChooDesPl';
-import {motion} from 'framer-motion';
-
+import { motion } from 'framer-motion';
 
 export default function Step10Home() {
   // set Active thì để ngoài như này kh đc để trong lớp con
@@ -12,32 +11,26 @@ export default function Step10Home() {
 
   const type = 'selectMany';
 
-
-
   const [refButton, inViewButton] = useInView({
     triggerOnce: true, // Kích hoạt chỉ một lần khi vào khung nhìn
-    threshold: 0.01, // Ngưỡng nhìn thấy (tỷ lệ của phần tử nằm trong khung nhìn)
-  })
+    threshold: 0.01 // Ngưỡng nhìn thấy (tỷ lệ của phần tử nằm trong khung nhìn)
+  });
 
   const [ref2, inView2] = useInView({
     triggerOnce: true, // Kích hoạt chỉ một lần khi vào khung nhìn
-    threshold: 0.02, // Ngưỡng nhìn thấy (tỷ lệ của phần tử nằm trong khung nhìn)
-  })
+    threshold: 0.02 // Ngưỡng nhìn thấy (tỷ lệ của phần tử nằm trong khung nhìn)
+  });
 
   const animationVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
+    visible: { opacity: 1, y: 0 }
   };
-
-
-
 
   return (
     <motion.div
       className="w-[98vw] px-[80px]
                         mobile:px-0
         "
-
     >
       <div
         className="w-[60%] ml-auto mr-auto pl-[70px] mb-[150px]
@@ -55,8 +48,9 @@ export default function Step10Home() {
               <motion.p
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
-                className="text-[18px] text-[#717171]">
+                transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
+                className="text-[18px] text-[#717171]"
+              >
                 You can add more amenities after you publish your listing.
               </motion.p>
             </div>
@@ -82,8 +76,9 @@ export default function Step10Home() {
           </div>
           <div className="mb-[22px]">
             <motion.div
-              transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
-              className="h-[24px] mb-[22px] tablet:mb-[62px] mobile:mb-[92px] w-[100%]  ml-auto mr-auto ">
+              transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
+              className="h-[24px] mb-[22px] tablet:mb-[62px] mobile:mb-[92px] w-[100%]  ml-auto mr-auto "
+            >
               <p className="text-[18px] text-black font-semibold">
                 Do you have any standout amenities?
               </p>
@@ -112,10 +107,11 @@ export default function Step10Home() {
             <div ref={ref2}>
               <motion.div
                 initial="hidden"
-                animate={inView2 ? "visible" : "hidden"}
+                animate={inView2 ? 'visible' : 'hidden'}
                 variants={animationVariants}
-                transition={{ type: "spring", stiffness: 35, delay: 0.1 }}
-                className="h-[24px] mb-[22px] tablet:mb-[62px] mobile:mb-[92px] w-[100%]  ml-auto mr-auto ">
+                transition={{ type: 'spring', stiffness: 35, delay: 0.1 }}
+                className="h-[24px] mb-[22px] tablet:mb-[62px] mobile:mb-[92px] w-[100%]  ml-auto mr-auto "
+              >
                 <p className="text-[18px] text-black font-semibold">
                   Do you have any of the following safety amenities?
                 </p>

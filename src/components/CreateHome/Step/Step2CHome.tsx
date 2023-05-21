@@ -15,13 +15,15 @@ export default function Step2CHome() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1 }}
-      className="w-[98vw] px-[80px] h-[800px]">
+      className="w-[98vw] px-[80px] h-[800px]"
+    >
       <div className="w-[60%] ml-auto mr-auto pl-[70px] ">
         <div className="flex flex-col px-10">
-          <motion.div className="mb-[32px] h-[72px] "
+          <motion.div
+            className="mb-[32px] h-[72px] "
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ type: "spring", stiffness: 35 }}
+            transition={{ type: 'spring', stiffness: 35 }}
           >
             <h1 className="text-[32px] font-semibold w-[530px] leading-10 ">
               Which of these best describes &nbsp; &nbsp;your place?
