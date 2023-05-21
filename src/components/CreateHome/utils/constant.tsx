@@ -14,10 +14,10 @@ import { TropicalIcon } from '../../../../Icon_BnB_svg';
 import { VineYardIcon } from '../../../../Icon_BnB_svg';
 import { BeachFronts } from '../../../../Icon_BnB_svg';
 
-import { Me } from '../../../../Icon_BnB_svg';
-import { MyFamily } from '../../../../Icon_BnB_svg';
-import { OtherGuess } from '../../../../Icon_BnB_svg';
-import { Roommates } from '../../../../Icon_BnB_svg';
+import { AiOutlineUser } from 'react-icons/ai';
+import { MdFamilyRestroom } from 'react-icons/md'
+import { HiOutlineUsers } from 'react-icons/hi'
+import { TbFriends } from 'react-icons/tb'
 
 import { Wifi } from '../../../../Icon_BnB_svg';
 import { TV } from '../../../../Icon_BnB_svg';
@@ -63,10 +63,10 @@ export const categoriesStep2 = [
   { name: 'Desert', icon: <Desert className="w-[45px] h-[45px]" /> }
 ];
 export const categoriesStep8 = [
-  { name: 'Me', icon: <Me className="" /> },
-  { name: 'My family', icon: <MyFamily className="" /> },
-  { name: 'Other guests', icon: < OtherGuess className="w-[45px] h-[45px]" /> },
-  { name: 'Roommates', icon: < Roommates className="w-[45px] h-[45px]" /> }
+  { name: 'Me', icon: <AiOutlineUser className="w-[40px] h-[45px]" /> },
+  { name: 'My family', icon: <MdFamilyRestroom className="w-[40px] h-[45px]" /> },
+  { name: 'Other guests', icon: < HiOutlineUsers className="w-[40px] h-[45px]" /> },
+  { name: 'Roommates', icon: < TbFriends className="w-[40px] h-[45px]" /> }
 ];
 export const categoriesStep10 = [
   { name: 'Wifi', icon: <Wifi className="w-[45px] h-[45px]" /> },
