@@ -77,12 +77,12 @@ const FormFilter = () => {
     document.body.style.overflow = 'scroll';
     document.body.style.overflowX = 'hidden';
 
-    console.log(filterForm);
-
-    if (isEmpty()) {
-      setIsFilter(0);
-    } else {
+    // neu du lieu co ton tai thi la fetch lai du lieu neu khong thi bo qua
+    if (!isEmpty()) {
       setIsFilter(isFilter+1);
+      return;
+    } else {
+      return;
     }
   };
 
@@ -163,7 +163,7 @@ const FormFilter = () => {
                     onClick={(event) => setShow(!show)}>
                     <span className="text-[20px]">{show ? 'Show less' : 'Show more'}</span>
                   </motion.button>
-                  <span className=''>
+                  <span className="">
                     {!show &&
                     (filterForm.amenities.features.length != 0 ||
                       filterForm.amenities.location.length != 0 ||

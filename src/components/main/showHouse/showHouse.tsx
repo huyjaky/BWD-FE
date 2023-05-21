@@ -8,6 +8,7 @@ import { Variants, motion } from 'framer-motion';
 import { useContext, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Carousel from './carousel';
+import { selectPlaceContext } from '@/contexts/selectPlace';
 
 const variants: Variants = {
   show: {
@@ -32,6 +33,7 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
   const { isShow, setIsShow } = useContext(filterFormAnimateContext);
   const { filterForm } = useContext(filterContext);
+  const {address} = useContext(selectPlaceContext);
   const { isFilter } = useContext(getHouseContext);
   const [hasMore, setHasMore] = useState(true);
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
@@ -91,7 +93,7 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
       }
       setHouseTemp(arr.data as house_[]);
     } else if (infShow === 'noneAuthFilter') {
-      const arr = await houseApi[infShow](filterForm, 1);
+      const arr = await houseApi[infShow]({filter: filterForm, selectPlace: address}, 1);
       if (arr.data.length == 0) {
         setHasMore(false);
         return;
@@ -114,7 +116,7 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
           setHasMore(false); // cai nay de kiem tra xem da fetch het du lieu hay chua
         }
       } else if (infShow === 'noneAuthFilter') {
-        const moreHouse = await houseApi[infShow](filterForm, houseTemp.length / 10 + 1);
+        const moreHouse = await houseApi[infShow]({filter: filterForm, selectPlace: address}, houseTemp.length / 10 + 1);
         if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
           setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
         } else {

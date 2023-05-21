@@ -1,11 +1,13 @@
+import SearchBox from '@/components/searchBox/searchBox';
 import { selectPopoverContext } from '@/contexts';
+import { filterContext } from '@/contexts/filter';
+import { getHouseContext } from '@/contexts/getHouse';
+import { mobileContolPanelContext } from '@/contexts/mobileControlPanel';
+import { selectPlaceContext } from '@/contexts/selectPlace';
+import { format } from 'date-fns';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BiSearch } from 'react-icons/bi';
-import { selectPlaceContext } from '@/contexts/selectPlace';
-import { format } from 'date-fns';
-import SearchBox from '@/components/searchBox/searchBox';
-import { mobileContolPanelContext } from '@/contexts/mobileControlPanel';
 interface Place {
   address: string;
   latitude: number | null;
@@ -14,17 +16,72 @@ interface Place {
 
 const ControlBar = () => {
   const [submit, setSubmit] = useState(false);
-  const { selected, setSelected } = useContext(selectPopoverContext);
+  const { setSelected } = useContext(selectPopoverContext);
   const { address } = useContext(selectPlaceContext);
+  const {isFilter, setIsFilter} = useContext(getHouseContext)
+
+  const handleOnMask = (event: any) => {
+    // add animate by hand beacause i its ez to fixed :")))
+    // animate cua header va cai nay de dong header
+    const mask: HTMLElement | null = document.getElementById('mask');
+    const scaleUp: HTMLElement | null = document.getElementById('scaleUp');
+
+    const ControlHeader: HTMLElement | null = document.getElementById('ControlHeader');
+    const link: HTMLElement | null = document.getElementById('link');
+    const controlBar: HTMLElement | null = document.getElementById('controlBar');
+    const where: HTMLElement | null = document.getElementById('where-popup');
+    const checkIn_Out: HTMLElement | null = document.getElementById('checkin_out-popup');
+    const who: HTMLElement | null = document.getElementById('who-popup');
+
+    scaleUp?.classList.remove('animate-slideDownHeader');
+    link?.classList.remove('animate-slideDownControl');
+    ControlHeader?.classList.remove('animate-slideDownControl');
+    mask?.classList.remove('animate-transparentAnimate');
+    controlBar?.classList.remove('animate-showAnimate');
+
+    where?.classList.remove('animate-transparentAnimate');
+    checkIn_Out?.classList.remove('animate-transparentAnimate');
+    who?.classList.remove('animate-transparentAnimate');
+    // -------------------------------------------------------------------
+    scaleUp?.classList.add('animate-slideUpHeader');
+    link?.classList.add('animate-slideUpControl');
+    ControlHeader?.classList.add('animate-slideUpControl');
+    mask?.classList.add('animate-transparentAnimateReverse');
+    controlBar?.classList.add('animate-hiddenAnimate');
+
+    where?.classList.add('animate-transparentAnimateReverse');
+    checkIn_Out?.classList.add('animate-transparentAnimateReverse');
+    who?.classList.add('animate-transparentAnimateReverse');
+  };
+
+  const isEmpty = ()=>{
+    if (!address.address.formattedAddress) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  const fetchData = (event: any) => {
+    if (isEmpty()) {
+      return;
+    } else {
+      setIsFilter(isFilter+1);
+      return;
+    }
+  }
 
   const onSelected = (event: any) => {
     setSelected(event.currentTarget.id);
   };
 
+  // validate while submit
   const onSubmit = (data: Place) => {
     setSubmit(true);
     handleCreate(data);
   };
+
+  // form validate
   const {
     register,
     handleSubmit,
@@ -34,6 +91,11 @@ const ControlBar = () => {
   } = useForm<Place>({ defaultValues: {} });
 
   const handleCreate = async (data: Place) => {};
+
+  useEffect(()=>{
+    const temp = document.getElementById('btn-search-header');
+    temp?.addEventListener('click', handleOnMask);
+  },[])
 
   return (
     <div className="w-full h-full flex relative  mobile:text-[12px]">
@@ -45,8 +107,7 @@ const ControlBar = () => {
                 before:shadow-xl
                 "
           id="where"
-          onClick={onSelected}
-        >
+          onClick={onSelected}>
           <span>Where</span>
 
           {/* the input cho nay lam sau */}
@@ -65,8 +126,7 @@ const ControlBar = () => {
                 before:shadow-xl
                 "
             id="checkin"
-            onClick={onSelected}
-          >
+            onClick={onSelected}>
             <span>Check in</span>
             <span className="text-[12px]">{format(address.checkInDay, 'eeee, ddMMM')}</span>
           </div>
@@ -77,8 +137,7 @@ const ControlBar = () => {
                 before:shadow-xl
                 "
             id="checkout"
-            onClick={onSelected}
-          >
+            onClick={onSelected}>
             <span>Check out</span>
             <span className="text-[12px]">{format(address.checkOutDay, 'eeee, ddMMM')}</span>
           </div>
@@ -91,15 +150,14 @@ const ControlBar = () => {
                 before:shadow-xl
                 "
             id="who"
-            onClick={onSelected}
-          >
+            onClick={onSelected}>
             <span>Who</span>
             <span>Add guests</span>
           </div>
 
           <div className="flex-1 flex box-border p-3 w-full relative z-10 mobile:py-5 tablet:py-5 ">
-            <div className="rounded-full w-full h-full bg-red-500 flex "
-              
+            <div className="rounded-full w-full h-full bg-red-500 flex " id='btn-search-header'
+              onClick={fetchData}
             >
               <BiSearch className="w-[30px] h-[30px] m-auto text-white tablet:w-[20px] tablet:h-[20px] mobile:w-[20px] mobile:h-[20px]" />
               <span className="text-white font-semibold m-auto ml-0 tablet:hidden mobile:hidden">
