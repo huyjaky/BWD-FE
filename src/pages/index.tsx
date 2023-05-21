@@ -42,7 +42,6 @@ const variants: Variants = {
 const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
   const { user, setUser } = useContext(userAccContext);
   const { isFilter } = useContext(getHouseContext);
-  const { isClickOutSide } = useContext(filterFormAnimateContext);
 
   const { pathname } = useRouter();
 
@@ -71,17 +70,22 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
         <div className="w-full h-fit px-[80px] box-border">
           <TypeHouse />
 
-          {isFilter ? (
-            <motion.div variants={variants} animate="show">
+            <motion.div
+              variants={variants}
+              className={isFilter ? '' : 'hidden'}
+              animate="show" >
               <ShowHouse infShow="noneAuthFilter" />
             </motion.div>
-          ) : (
-            <motion.div variants={variants} animate="show">
+
+            <motion.div
+              variants={variants}
+              className={!isFilter || isFilter == null ? '' : 'hidden'}
+              animate="show">
               <ShowHouse infShow="noneAuthHouseApi" />
             </motion.div>
-          )}
+
         </div>
-        <FooterRooms/>
+        <FooterRooms />
         <FooterMainRes />
       </main>
     </>

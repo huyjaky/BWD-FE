@@ -10,6 +10,7 @@ import { filterContext } from '@/contexts/filter';
 import { filterForm } from '@/models/filter';
 import { houseApi } from '@/api-client/houseApi';
 import HostLanguage from './filterFormComponent/hostLanguage';
+import { getHouseContext } from '@/contexts/getHouse';
 
 const variantsAmenities: Variants = {
   showMore: {
@@ -26,7 +27,7 @@ const variantsAmenities: Variants = {
 const FormFilter = () => {
   const [show, setShow] = useState(false);
   const { filterForm, setFilterForm } = useContext(filterContext);
-
+  const { setIsFilter } = useContext(getHouseContext);
   const { isClickOutSide, setIsClickOutSide } = useContext(filterFormAnimateContext);
   const formFilter = useRef<HTMLInputElement>(null);
 
@@ -49,8 +50,34 @@ const FormFilter = () => {
   useEffect(() => {}, [show]);
   useEffect(() => {}, [isClickOutSide]);
 
+  const isEmpty = () => {
+    const emptyObj = {
+      maxPrice: 250,
+      minPrice: 10,
+      beds: 0,
+      bathRooms: 0,
+      typeHouse: [],
+      amenities: {
+        essentials: [],
+        features: [],
+        location: [],
+        safety: []
+      },
+      hostLanguage: 'Vietnam'
+    };
+
+    const emptyObjJson = JSON.stringify(emptyObj);
+    const filterFormJson = JSON.stringify(filterForm);
+
+    if (emptyObjJson === filterFormJson) return true;
+    return false;
+  };
+
   const fetchData = async () => {
-    const houseFil = await houseApi.noneAuthFilter(filterForm, 1);
+    setIsClickOutSide(false);
+    document.body.style.overflow = 'scroll';
+    document.body.style.overflowX = 'hidden';
+    setIsFilter(!isEmpty());
   };
 
   return (
@@ -159,12 +186,7 @@ const FormFilter = () => {
               <motion.button
                 className="w-[200px] h-[40px] rounded-lg border-2"
                 whileHover={{ backgroundColor: 'rgba(255, 56, 92, 0.8)', color: 'white' }}
-                onClick={(event) => {
-                  setIsClickOutSide(false);
-                  document.body.style.overflow = 'scroll';
-                  document.body.style.overflowX = 'hidden';
-                  fetchData();
-                }}
+                onClick={fetchData}
                 whileTap={{ scale: 0.9 }}>
                 Submit
               </motion.button>

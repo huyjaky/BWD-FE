@@ -7,9 +7,7 @@ const HostLanguage = () => {
     'English', 'Vietnam'
   ]
 
-  useEffect(()=>{
-    console.log(filterForm);
-  }, [filterForm.hostLanguage])
+  useEffect(()=>{}, [filterForm.hostLanguage])
 
   return (
     <div className="w-full h-fit">

@@ -1,12 +1,13 @@
 import { houseApi } from '@/api-client/houseApi';
 import SkeletonShowHouse from '@/components/skeletonLoading/skletonShowHouse';
+import { filterContext } from '@/contexts/filter';
 import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
+import { getHouseContext } from '@/contexts/getHouse';
 import { house_ } from '@/models/house';
 import { Variants, motion } from 'framer-motion';
 import { useContext, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Carousel from './carousel';
-import { filterContext } from '@/contexts/filter';
 
 const variants: Variants = {
   show: {
@@ -31,6 +32,7 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
   const { isShow, setIsShow } = useContext(filterFormAnimateContext);
   const { filterForm } = useContext(filterContext);
+  const {isFilter} = useContext(getHouseContext);
   const [hasMore, setHasMore] = useState(true);
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
 
@@ -91,6 +93,7 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
     fetchHouseApi();
   }, [houseTemp]);
 
+  // get more house de lay them nha khi scroll xuoong cuoi cung https://www.npmjs.com/package/react-infinite-scroll-component
   const getMoreHouse = async () => {
     try {
       if (infShow === 'noneAuthHouseApi') {
@@ -113,7 +116,7 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
     }
   };
 
-  useEffect(() => {}, [houseTemp, hasMore]);
+  useEffect(() => {}, [houseTemp, hasMore, isFilter]);
 
   return (
     <div>
