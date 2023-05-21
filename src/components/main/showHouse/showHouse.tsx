@@ -74,6 +74,8 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
     }
   };
 
+  console.log(houseTemp);
+
   // bat su kien cho animation tren
   useEffect(() => {
     document.addEventListener('scroll', handleScroll);

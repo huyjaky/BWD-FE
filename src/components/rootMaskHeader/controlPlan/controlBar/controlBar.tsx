@@ -98,7 +98,9 @@ const ControlBar = () => {
           </div>
 
           <div className="flex-1 flex box-border p-3 w-full relative z-10 mobile:py-5 tablet:py-5 ">
-            <div className="rounded-full w-full h-full bg-red-500 flex    ">
+            <div className="rounded-full w-full h-full bg-red-500 flex "
+              
+            >
               <BiSearch className="w-[30px] h-[30px] m-auto text-white tablet:w-[20px] tablet:h-[20px] mobile:w-[20px] mobile:h-[20px]" />
               <span className="text-white font-semibold m-auto ml-0 tablet:hidden mobile:hidden">
                 Search

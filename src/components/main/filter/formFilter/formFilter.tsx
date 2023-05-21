@@ -76,6 +76,9 @@ const FormFilter = () => {
     setIsClickOutSide(false);
     document.body.style.overflow = 'scroll';
     document.body.style.overflowX = 'hidden';
+
+    console.log(filterForm);
+
     if (isEmpty()) {
       setIsFilter(0);
     } else {
