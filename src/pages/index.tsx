@@ -1,18 +1,21 @@
 import { houseApi } from '@/api-client/houseApi';
 import { sessionOptions } from '@/api-client/session';
+import FooterMainRes from '@/components/footers/footerMainRes';
 import EmptyLayout from '@/components/layouts/empty';
+import ShowHouse from '@/components/main/showHouse/showHouse';
 import TypeHouse from '@/components/main/typeHouse';
 import HeaderMain from '@/components/rootMaskHeader/headerMain';
+import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 import { getHouseContext } from '@/contexts/getHouse';
 import { userAccContext } from '@/contexts/userAcc';
 import { house_ } from '@/models/house';
 import { NextPageWithLayout } from '@/models/layoutprops';
 import { userAcc } from '@/models/userAcc';
-import { motion } from 'framer-motion';
 import { withIronSessionSsr } from 'iron-session/next';
 import { GetServerSideProps } from 'next';
 import { Montserrat } from 'next/font/google';
-import { useContext, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useContext, useEffect, useMemo } from 'react';
 import useSWR from 'swr';
 
 const monsterrat = Montserrat({
@@ -27,40 +30,52 @@ interface HomeProps {
 
 const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
   const { user, setUser } = useContext(userAccContext);
-  const {house, setHouse} = useContext(getHouseContext);
+  const { house, setHouse, isLoading, setIsLoading } = useContext(getHouseContext);
+  const { setIsClickOutSide } = useContext(filterFormAnimateContext);
+
+  const { pathname } = useRouter();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   if (!user_?.UserId) {
     const { data, error, mutate, isValidating } = useSWR(`/get/useracc/UserName/${user.UserName}`, {
-      revalidateOnFocus: false,
-      revalidateOnMount: false
+      revalidateOnFocus: false
     });
+
     useEffect(() => {
       setUser({ ...user, ...data?.data?.data });
-      return () => {};
     }, [data]);
   } else if (user_?.UserId && !user.UserId) {
     setUser({ ...user, ...user_ });
   }
 
   useEffect(() => {
-    const fetchHouseApi = async() =>{
+    const handleOnScroll = (event: any) => {
+      setIsClickOutSide(false);
+    };
+    document.addEventListener('scroll', handleOnScroll);
+  }, []);
+
+  useEffect(() => {
+    const fetchHouseApi = async () => {
       if (house.length != 0) return;
-      const arr = await houseApi.noneAuthHouseApi();
-      setHouse(arr.data as house_[])
-    }
+      const arr = await houseApi.noneAuthHouseApi(1);
+      setHouse(arr.data as house_[]);
+    };
     fetchHouseApi();
   }, [house]);
 
   return (
     <>
-      <main className={`${monsterrat.className} relative `} id="root">
+      <main className={`${monsterrat.className} relative overflow-hidden`} id="root">
         <HeaderMain />
-        <div className="w-full h-fit">
+        <div className="w-full h-fit px-[80px] box-border">
           <TypeHouse />
-          <motion.div className="w-full h-fit">
-
-          </motion.div>
+          <ShowHouse />
         </div>
+        <FooterMainRes />
       </main>
     </>
   );

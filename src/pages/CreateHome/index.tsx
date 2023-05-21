@@ -20,6 +20,7 @@ import Step17CHome from '@/components/CreateHome/Step/Step17CHome';
 import { AnimatePresence } from 'framer-motion';
 
 import ProcessBar from '../../components/CreateHome/ProcessBar/ProccessBar';
+import { GetServerSideProps } from 'next';
 function CreateHome(): JSX.Element {
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -57,7 +58,7 @@ function CreateHome(): JSX.Element {
     { number: 14, component: <Step14CHome /> },
     { number: 15, component: <Step15CHome /> },
     { number: 16, component: <Step16CHome /> },
-    { number: 17, component: <Step17CHome /> },
+    { number: 17, component: <Step17CHome /> }
   ];
 
   return (
@@ -71,5 +72,17 @@ function CreateHome(): JSX.Element {
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const cookies = req.cookies.access_token;
+  if (!cookies) {
+    res.setHeader('location', '/login');
+    res.statusCode = 302;
+    res.end();
+    return { props: {} };
+  }
+
+  return { props: {} };
+};
 
 export default CreateHome;

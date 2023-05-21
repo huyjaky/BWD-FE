@@ -7,7 +7,7 @@ export default function Step2CHome() {
   // để trong lớp con thì khi render ra mỗi class sẽ có 1 state
   const [selected, setselected] = useState('');
 
-  const type = 'select1'
+  const type = 'select1';
 
   return (
     <motion.div
@@ -34,23 +34,16 @@ export default function Step2CHome() {
                                     mobile:grid-cols-1
                     "
           >
-            {categoriesStep2.map((category, index) => (
-              <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index, duration: "0.5" }}
-
-              >
-                <ChooDesPl
-                  title={category.name}
-                  icon={category.icon}
-                  selected={selected}
-                  setselected={setselected}
-                  type={type}
-                />
-              </motion.div>
-
-
+            {categoriesStep2.map((category) => (
+              <ChooDesPl
+                title={category.name}
+                icon={category.icon}
+                selected={selected}
+                setselected={setselected}
+                type={type}
+                selectedMany={[]}
+                setselectedMany={() => {}}
+              />
             ))}
           </div>
         </div>

@@ -12,6 +12,12 @@ import { filterForm } from '@/models/filter';
 const variantsAmenities: Variants = {
   showMore: {
     height: 100
+  },
+  show: {
+    translateY: [2000, 0]
+  },
+  hidden: {
+    translateY: [0, 2000]
   }
 };
 
@@ -41,23 +47,19 @@ const FormFilter = () => {
     <>
       <AnimatePresence initial={false}>
         <motion.div
-          initial={
-            isClickOutSide
-              ? { visibility: 'hidden', translateY: 2000 }
-              : { translateY: 0, visibility: 'visible' }
-          }
-          animate={isClickOutSide ? { translateY: 0, visibility: 'visible' } : { translateY: 2000 }}
+          variants={variantsAmenities}
+          animate={isClickOutSide ? 'show' : 'hidden'}
           transition={{ duration: 0.5, type: 'tween' }}
           className="w-[800px] h-[calc(100vh-50px)] bg-white m-auto rounded-3xl overflow-hidden flex flex-col"
           ref={formFilter}
         >
           {/* header formfilter */}
-          <div className=" flex-1 w-full border-b-2 flex relative">
+          <div className=" flex-2 w-full border-b-2 flex relative">
             <span className="m-auto font-semibold text-[23px]">Filter</span>
           </div>
 
           {/* content formfilter */}
-          <div className="w-full flex-[10] h-[75vh] overflow-x-hidden  overflow-scroll box-border p-10">
+          <div className="w-full flex-[9] h-[75vh] overflow-x-hidden  overflow-scroll box-border p-10">
             {/* price range */}
             <div className="w-full h-fit mb-5">
               {/* header pricerange */}
@@ -113,7 +115,7 @@ const FormFilter = () => {
             </div>
           </div>
 
-          <div className="w-full border-t-2 flex items-center flex-1">
+          <div className="w-full border-t-2 flex items-center flex-2 py-3">
             <div className="flex-1 flex justify-start">
               <div
                 className="m-auto underline"

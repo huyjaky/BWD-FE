@@ -2,10 +2,12 @@ import Link from 'next/link';
 import { BiSearch } from 'react-icons/bi';
 import ControlBar from './controlBar/controlBar';
 import Popover from './controlBar/popOver';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { selectPopoverContext } from '@/contexts';
+import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 
 const ControlPlan = () => {
+  const {isShow, setIsShow} = useContext(filterFormAnimateContext)
   const arrLink: { ref: string; title: string }[] = [
     {
       ref: '',
@@ -36,7 +38,6 @@ const ControlPlan = () => {
     const where: HTMLElement | null = document.getElementById('where-popup');
     const checkIn_Out: HTMLElement | null = document.getElementById('checkin_out-popup');
     const who: HTMLElement | null = document.getElementById('who-popup');
-
     scaleUp?.classList.add('animate-slideDownHeader');
     link?.classList.add('animate-slideDownControl');
     controlBar?.classList.add('animate-showAnimate');
@@ -54,7 +55,9 @@ const ControlPlan = () => {
     where?.classList.remove('animate-transparentAnimateReverse');
     checkIn_Out?.classList.remove('animate-transparentAnimateReverse');
     who?.classList.remove('animate-transparentAnimateReverse');
+    setIsShow(true);
   };
+
 
   return (
     <>

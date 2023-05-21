@@ -1,17 +1,25 @@
+import { mobileContolPanelContext } from '@/contexts/mobileControlPanel';
 import Link from 'next/link';
-import { ReactNode } from 'react';
+import { ReactNode, useContext } from 'react';
 import { FaAirbnb } from 'react-icons/fa';
+import { FiSearch } from 'react-icons/fi';
 import { TbWorld } from 'react-icons/tb';
 import ButtonAccount from '../buttonAccount/ButtonAccount';
-
+import { motion } from 'framer-motion';
+import ControlPlanMobile from '@/components/main/mobile/controlPlaneMobile';
 interface HeaderFormProps {
   children: ReactNode;
 }
 
 const HeaderForm = ({ children }: HeaderFormProps) => {
+  const { isShow, setIsShow } = useContext(mobileContolPanelContext);
   return (
     <div className="w-full h-[80px] relative bg-white z-30">
-      <header className="w-full h-[80px] border-b-2 flex justify-center px-[80px] box-border absolute">
+      <header
+        className="w-full h-[80px] border-b-2 flex justify-center px-[80px]
+      tablet:hidden mobile:hidden
+      box-border absolute"
+      >
         <div className="w-full h-full flex relative">
           {/* logo container */}
           <Link
@@ -49,6 +57,19 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
             <ButtonAccount />
           </div>
         </div>
+      </header>
+      <header className="w-full h-[80px] desktop:hidden laptop:hidden  box-border py-3 px-[80px]">
+        <motion.div
+          className="w-full h-full shadow-xl rounded-full box-border px-4 py-2 flex cursor-pointer"
+          onClick={(event) => setIsShow(true)}
+        >
+          <FiSearch className="h-full text-[30px] text-center" />
+          <div className="h-full w-fit flex flex-col ml-5 box-border">
+            <span className="font-semibold">Anywhere</span>
+            <span className="text-[14px]">Anyweek & Addguests</span>
+          </div>
+        </motion.div>
+        <ControlPlanMobile />
       </header>
     </div>
   );

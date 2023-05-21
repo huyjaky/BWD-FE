@@ -10,8 +10,11 @@ module.exports = {
       screens: {
         desktop: { min: '1401px' },
         laptop: { max: '1400px', min: '1150px' },
-        tablet: { max: '1149px', min: '800px' },
-        mobile: { max: '799px' }
+        tablet: { max: '1149px', min: '950px' },
+        mobile: { max: '949px' }
+      },
+      gridTemplateColumns: {
+        houseBox: 'repeat(auto-fill, minmax(300px, 1fr))'
       },
       colors: {
         mask: 'rgba(105,105,105, 0.4)',
@@ -90,17 +93,17 @@ module.exports = {
       },
       animation: {
         showAnimate: 'showAnimate .1s forwards',
-        hiddenAnimate: 'hiddenAnimate .5s forwards',
-        slideDownHeader: 'slideDownHeader .5s ease-in-out forwards, hiddenAnimate .5s forwards',
-        slideDownControl: 'showAnimate .1s forwards ,slideDownControl .5s ease-in-out forwards',
+        hiddenAnimate: 'hiddenAnimate .3s forwards',
+        slideDownHeader: 'slideDownHeader .3s ease-in-out forwards, hiddenAnimate .3s forwards',
+        slideDownControl: 'showAnimate .1s forwards ,slideDownControl .3s ease-in-out forwards',
 
-        slideUpControl: 'slideUpControl .5s ease-in-out forwards',
-        slideUpHeader: 'showAnimate .1s forwards,slideUpHeader .6s ease-in-out forwards',
+        slideUpControl: 'slideUpControl .3s ease-in-out forwards',
+        slideUpHeader: 'showAnimate .1s forwards,slideUpHeader .3s ease-in-out forwards',
 
         // header
-        transparentAnimate: 'showAnimate .1s forwards, transparentAnimate .5s ease-in-out forwards',
+        transparentAnimate: 'showAnimate .1s forwards, transparentAnimate .3s ease-in-out forwards',
         transparentAnimateReverse:
-          'transparentAnimateReverse .5s ease-in-out forwards, hiddenAnimate .5s ease-in-out forwards ',
+          'transparentAnimateReverse .3s ease-in-out forwards, hiddenAnimate .3s ease-in-out forwards ',
 
         // login
         transparentAnimateLogin: 'transparentAnimate .5s ease-in-out forwards',

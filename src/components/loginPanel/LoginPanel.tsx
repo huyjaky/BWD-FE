@@ -80,7 +80,9 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
   // fetch accesstoken , navigate as well as do animte
   const onSubmit: SubmitHandler<LoginInterface> = async (data_) => {
     const login_ = await authApi.login(data_);
+
     if (login_?.status != 200) {
+      console.log(login_);
       setError('username', { type: 'validate', message: 'Wrong username or password!' });
       setError('password', { type: 'validate', message: 'Wrong username or password!' });
       return;

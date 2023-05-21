@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 export default function Step8CHome() {
   const [selected, setselected] = useState('');
 
-  const type = 'select1'
+  const type = 'select1';
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -16,8 +16,8 @@ export default function Step8CHome() {
     >
       <div className="w-[98vw] px-[80px] mt-10">
         <div
-          className="w-[60%] ml-auto mr-auto pl-[70px] 
-                    mobile:pl-[0px] 
+          className="w-[60%] ml-auto mr-auto pl-[70px]
+                    mobile:pl-[0px]
 
                 "
         >
