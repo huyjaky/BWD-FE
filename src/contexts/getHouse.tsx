@@ -6,12 +6,12 @@ interface getHouseProps {
 }
 
 interface getHouseData {
-  isFilter: boolean | null,
+  isFilter: boolean ,
   setIsFilter: (payload: boolean) => void;
 }
 
 const getHouseDataDefault: getHouseData = {
-  isFilter: null,
+  isFilter: false,
   setIsFilter: () => {}
 };
 
@@ -19,7 +19,7 @@ export const getHouseContext = createContext<getHouseData>(getHouseDataDefault);
 
 const GetHouseProvider = ({ children }: getHouseProps) => {
   const [isFilter, setIsFilter_] = useState(getHouseDataDefault.isFilter);
-  const setIsFilter = (payload: boolean | null) => setIsFilter_(payload);
+  const setIsFilter = (payload: boolean) => setIsFilter_(payload);
 
   const getHouseDynamicData = { isFilter, setIsFilter};
   return (

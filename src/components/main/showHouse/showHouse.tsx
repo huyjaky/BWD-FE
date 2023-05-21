@@ -32,7 +32,7 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
   const { isShow, setIsShow } = useContext(filterFormAnimateContext);
   const { filterForm } = useContext(filterContext);
-  const {isFilter} = useContext(getHouseContext);
+  const { isFilter } = useContext(getHouseContext);
   const [hasMore, setHasMore] = useState(true);
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
 
@@ -83,9 +83,17 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
     if (houseTemp.length != 0) return;
     if (infShow === 'noneAuthHouseApi') {
       const arr = await houseApi[infShow](1);
+      if (arr.data.length == 0) {
+        setHasMore(false); // neu nhu du lieu tra ve la khong co lan dau tien thi khong xuat hien nx
+        return;
+      }
       setHouseTemp(arr.data as house_[]);
     } else if (infShow === 'noneAuthFilter') {
       const arr = await houseApi[infShow](filterForm, 1);
+      if (arr.data.length == 0) {
+        setHasMore(false);
+        return;
+      }
       setHouseTemp(arr.data as house_[]);
     }
   };
@@ -116,7 +124,12 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
     }
   };
 
-  useEffect(() => {}, [houseTemp, hasMore, isFilter]);
+  useEffect(() => {}, [houseTemp, hasMore]);
+
+  useEffect(() => {
+    setHouseTemp([]);
+    setHasMore(true);
+  }, [infShow]);
 
   return (
     <div>
@@ -131,7 +144,7 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
             </motion.div>
           }
           className="w-full h-fit grid grid-cols-houseBox gap-x-5 gap-y-8"
-          endMessage={<div></div>}>
+          endMessage={<div>No more values</div>}>
           {houseTemp.map((item: house_, index: number) => (
             <motion.div
               key={index}
@@ -158,7 +171,8 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
               </div>
             </motion.div>
           ))}
-          {houseTemp.length == 0 &&
+
+          {houseTemp.length == 0 && hasMore == true &&
             arrTempLoading.map((item: number, index: number) => (
               <motion.div
                 variants={variants}
@@ -168,7 +182,6 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
               </motion.div>
             ))}
         </InfiniteScroll>
-
       </motion.div>
     </div>
   );

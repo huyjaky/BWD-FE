@@ -63,7 +63,7 @@ const FormFilter = () => {
         location: [],
         safety: []
       },
-      hostLanguage: 'Vietnam'
+      hostLanguage: ''
     };
 
     const emptyObjJson = JSON.stringify(emptyObj);
@@ -77,6 +77,8 @@ const FormFilter = () => {
     setIsClickOutSide(false);
     document.body.style.overflow = 'scroll';
     document.body.style.overflowX = 'hidden';
+    console.log(isEmpty());
+
     setIsFilter(!isEmpty());
   };
 
@@ -175,7 +177,7 @@ const FormFilter = () => {
                       location: [],
                       safety: []
                     },
-                    hostLanguage: 'vietnam'
+                    hostLanguage: ''
                   };
                   setFilterForm(filterFormTemp);
                 }}>
