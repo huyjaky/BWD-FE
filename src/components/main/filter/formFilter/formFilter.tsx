@@ -9,7 +9,7 @@ import BedsBathRooms from './filterFormComponent/bedsBathrooms';
 import HostLanguage from './filterFormComponent/hostLanguage';
 import PriceRange from './filterFormComponent/priceRange';
 import PropertyHouse from './filterFormComponent/property';
-import {GrClose} from 'react-icons/gr'
+import { GrClose } from 'react-icons/gr';
 
 const variantsAmenities: Variants = {
   showMore: {
@@ -95,11 +95,11 @@ const FormFilter = () => {
           {/* header formfilter */}
           <div className=" flex-2 w-full border-b-2 flex relative">
             <span className="m-auto font-semibold text-[23px]">Filter</span>
-            <motion.button className='absolute w-[70px] h-full flex'
-            onClick={event => setIsClickOutSide(false)}
-            >
-              <div className='w-fit h-full m-auto'>
-                <GrClose className='text-[30px]'/>
+            <motion.button
+              className="absolute w-[70px] h-full flex desktop:hidden laptop:hidden"
+              onClick={(event) => setIsClickOutSide(false)}>
+              <div className="w-fit h-full m-auto">
+                <GrClose className="text-[30px]" />
               </div>
             </motion.button>
           </div>
@@ -148,13 +148,27 @@ const FormFilter = () => {
                   <Amenities typeAmenities="location" />
                   <Amenities typeAmenities="safety" />
                 </motion.div>
-                <motion.button
-                  className="w-[300px] rounded-lg border-2"
-                  whileHover={{ backgroundColor: 'rgba(255, 56, 92, 0.8)', color: 'white' }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={(event) => setShow(!show)}>
-                  <span className="text-[20px]">{show ? 'Show less' : 'Show more'}</span>
-                </motion.button>
+                <div className="w-fit h-fit flex items-center">
+                  <motion.button
+                    className="w-[300px] rounded-lg border-2 mr-2"
+                    whileHover={{ backgroundColor: 'rgba(255, 56, 92, 0.8)', color: 'white' }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={(event) => setShow(!show)}>
+                    <span className="text-[20px]">{show ? 'Show less' : 'Show more'}</span>
+                  </motion.button>
+                  <span className=''>
+                    {!show &&
+                    (filterForm.amenities.features.length != 0 ||
+                      filterForm.amenities.location.length != 0 ||
+                      filterForm.amenities.safety.length != 0)
+                      ? ` you have filled in ${
+                          filterForm.amenities.features.length +
+                          filterForm.amenities.location.length +
+                          filterForm.amenities.safety.length
+                        } options`
+                      : ''}
+                  </span>
+                </div>
               </div>
             </div>
 
