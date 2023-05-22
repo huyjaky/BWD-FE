@@ -24,7 +24,8 @@ module.exports = {
         ]
       },
       gridTemplateColumns:{
-        layoutPicture: '1fr 1fr 1fr 1fr'
+        houseBox: 'repeat(auto-fill, minmax(300px, 1fr))',
+        layoutPicture: '1fr 1fr 1fr 1fr',
       },
       gridTemplateRows: {
         layoutPicture: '225px 225px'

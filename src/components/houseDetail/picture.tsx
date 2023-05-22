@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+import { BiMenu } from 'react-icons/bi';
 interface PictureProps {
   arrImg: { Path: string }[];
 }
@@ -5,16 +7,25 @@ interface PictureProps {
 const Picture = ({ arrImg }: PictureProps) => {
   return (
     <div
-      className="w-full h-[450px] grid
+      className="w-full h-[450px] grid gap-3 rounded-3xl overflow-hidden mt-7
     grid-cols-layoutPicture grid-rows-layoutPicture grid-areas-layoutPicture
+    relative
     ">
-      <div className="grid-in-h1">
-        <img src={arrImg[0].Path} alt="" className="object-cover" />
-      </div>
-      <img src={arrImg[1].Path} alt="" className="grid-in-h2 " />
-      <img src={arrImg[2].Path} alt="" className="grid-in-h3" />
-      <img src={arrImg[3].Path} alt="" className="grid-in-h4" />
-      <img src={arrImg[4].Path} alt="" className="grid-in-h5" />
+      <img src={arrImg[0].Path} alt="" className="grid-in-h1 object-cover w-full h-full" />
+      <img src={arrImg[1].Path} alt="" className="grid-in-h2 object-cover w-full h-full" />
+      <img src={arrImg[2].Path} alt="" className="grid-in-h3 object-cover w-full h-full" />
+      <img src={arrImg[3].Path} alt="" className="grid-in-h4 object-cover w-full h-full" />
+      <img src={arrImg[4].Path} alt="" className="grid-in-h5 object-cover w-full h-full" />
+      <motion.div
+      whileTap={{scale: .8}}
+      className="absolute w-[160px] h-[40px] bg-white right-10 bottom-5 rounded-xl
+      flex cursor-pointer
+      ">
+        <div className='w-fit h-fit flex items-center m-auto' >
+          <BiMenu className="text-[20px]" />
+          <span className='text-[15px]'>Show all photos</span>
+        </div>
+      </motion.div>
     </div>
   );
 };
