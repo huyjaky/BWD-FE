@@ -1,4 +1,5 @@
 import { authApi } from '@/api-client';
+import { userApi } from '@/api-client/userApi';
 import { selectPopoverContext } from '@/contexts';
 import { userAccContext } from '@/contexts/userAcc';
 import useAuth from '@/hooks/useAuth';
@@ -6,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
 import { ReactNode, useContext, useEffect, useRef } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import useSWR from 'swr';
 import * as yup from 'yup';
 
 interface LoginPanelProps {
@@ -87,11 +89,26 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
       setError('password', { type: 'validate', message: 'Wrong username or password!' });
       return;
     }
-    router.push('/', undefined, { shallow: true });
-    setUser({ ...user, UserName: data_.username });
-    if (login_?.status == 200 && login_?.data) {
-      setIsLoginClick(false);
+
+    if (router.asPath === '/login') {
+      router.push('/', undefined, { shallow: true });
+      setUser({ ...user, UserName: data_.username });
+      if (login_?.status == 200 && login_?.data) {
+        setIsLoginClick(false);
+      }
+      return;
     }
+
+    const user_ = await userApi.userInfor(data_.username, 'UserName' );
+    if (user_.status != 200) {
+      setError('username', { type: 'validate', message: 'Have error!' });
+      setError('password', { type: 'validate', message: 'Have error!' });
+      return;
+    }
+    setUser({...user, ...user_?.data?.data});
+    if (user_?.status == 200 && user_?.data?.data) {
+        setIsLoginClick(false);
+      }
   };
 
   return (

@@ -1,7 +1,7 @@
 import FooterMainRes from '@/components/footers/footerMainRes';
 import FooterRooms from '@/components/footers/footerRooms';
 import Picture from '@/components/houseDetail/picture';
-import ShowAllHouse from '@/components/houseDetail/showAllHouse';
+import ShowAllHouse from '@/components/houseDetail/showAllHousePt/showAllHouse';
 import TitleHouse from '@/components/houseDetail/titleHouse';
 import HeaderMain from '@/components/rootMaskHeader/headerMain';
 import { house_ } from '@/models/house';
@@ -27,7 +27,7 @@ const HouseDetail = ({ houseDetail }: HouseDetailProps) => {
             <TitleHouse title={houseDetail.Title} address={houseDetail.address} />
 
             <Picture arrImg={houseDetail.arrImg} />
-            <ShowAllHouse />
+            <ShowAllHouse arrImg={houseDetail.arrImg}/>
           </div>
           <FooterRooms />
           <FooterMainRes />

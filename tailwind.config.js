@@ -30,17 +30,19 @@ module.exports = {
           'h4 h4',
           'h5 h6',
           'h7 h9',
-          'h8 h9'
+          'h8 h9',
+          'h10 h11',
+          'h10 h12'
         ]
       },
       gridTemplateColumns:{
         houseBox: 'repeat(auto-fill, minmax(300px, 1fr))',
         layoutPicture: '1fr 1fr 1fr 1fr',
-        layoutShowAllPt: '375px 375px'
+        layoutShowAllPt: '350px 350px'
       },
       gridTemplateRows: {
         layoutPicture: '225px 225px',
-        layoutShowAllPt: '250px'
+        layoutShowAllPt: '200px'
       },
 
       colors: {
