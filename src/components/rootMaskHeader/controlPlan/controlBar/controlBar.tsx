@@ -26,7 +26,6 @@ const ControlBar = () => {
     // add animate by hand beacause i its ez to fixed :")))
     // animate cua header va cai nay de dong header
 
-
     const mask: HTMLElement | null = document.getElementById('mask');
     const scaleUp: HTMLElement | null = document.getElementById('scaleUp');
 
@@ -57,8 +56,8 @@ const ControlBar = () => {
     checkIn_Out?.classList.add('animate-transparentAnimateReverse');
     who?.classList.add('animate-transparentAnimateReverse');
 
-  if (router.asPath !== '/') {
-      router.push('/', undefined, {shallow: true});
+    if (router.asPath !== '/') {
+      router.push('/', undefined, { shallow: true });
     }
   };
 
@@ -103,7 +102,6 @@ const ControlBar = () => {
   useEffect(() => {
     const temp = document.getElementById('btn-search-header');
     temp?.addEventListener('click', handleOnMask);
-
   }, []);
 
   return (

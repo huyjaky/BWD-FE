@@ -48,7 +48,7 @@ const swipePower = (offset: number, velocity: number) => {
 
 interface CarouselProps {
   arrImg: { Path: string }[];
-  houseId: string
+  houseId: string;
 }
 
 const styleBtn =
@@ -90,7 +90,9 @@ const Carousel = ({ arrImg, houseId }: CarouselProps) => {
               initial="enter"
               animate="center"
               exit="exit"
-              onDoubleClick={event => router.push(`/house/${houseId}`, undefined, {shallow: true})}
+              onDoubleClick={(event) =>
+                router.push(`/house/${houseId}`, undefined, { shallow: true })
+              }
               className="w-full h-full absolute object-cover"
               transition={{
                 x: { type: 'spring', stiffness: 200, damping: 30 },

@@ -1,14 +1,15 @@
-import FooterMainRes from "@/components/footers/footerMainRes";
-import FooterRooms from "@/components/footers/footerRooms";
-import Picture from "@/components/houseDetail/picture";
-import TitleHouse from "@/components/houseDetail/titleHouse";
-import HeaderMain from "@/components/rootMaskHeader/headerMain";
-import { house_ } from "@/models/house";
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
-import { Montserrat } from "next/font/google";
+import FooterMainRes from '@/components/footers/footerMainRes';
+import FooterRooms from '@/components/footers/footerRooms';
+import Picture from '@/components/houseDetail/picture';
+import ShowAllHouse from '@/components/houseDetail/showAllHouse';
+import TitleHouse from '@/components/houseDetail/titleHouse';
+import HeaderMain from '@/components/rootMaskHeader/headerMain';
+import { house_ } from '@/models/house';
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
+import { Montserrat } from 'next/font/google';
 
 interface HouseDetailProps {
-  houseDetail: house_
+  houseDetail: house_;
 }
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -19,24 +20,24 @@ const monsterrat = Montserrat({
 const HouseDetail = ({ houseDetail }: HouseDetailProps) => {
   return (
     <div className="w-full h-fit">
-          <>
-      <main className={`${monsterrat.className} relative overflow-hidden box-border`} id="root">
-        <HeaderMain />
-        <div className="w-[1150px] h-fit  mobile:px-[20px] box-border m-auto">
-          <TitleHouse title={houseDetail.Title} address={houseDetail.address}/>
+      <>
+        <main className={`${monsterrat.className} relative overflow-hidden box-border`} id="root">
+          <HeaderMain />
+          <div className="w-[1150px] h-fit  mobile:px-[20px] box-border m-auto">
+            <TitleHouse title={houseDetail.Title} address={houseDetail.address} />
 
-          <Picture arrImg={houseDetail.arrImg}/>
-
-        </div>
-        <FooterRooms />
-        <FooterMainRes />
-      </main>
-    </>
+            <Picture arrImg={houseDetail.arrImg} />
+            <ShowAllHouse />
+          </div>
+          <FooterRooms />
+          <FooterMainRes />
+        </main>
+      </>
     </div>
-  )
-}
+  );
+};
 
-let cachedHouseDetail: house_[] = []
+let cachedHouseDetail: house_[] = [];
 
 export const getStaticPaths: GetStaticPaths = async () => {
   if (cachedHouseDetail.length == 0) {
@@ -48,8 +49,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths,
     fallback: true
-  }
-}
+  };
+};
 
 export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
   if (cachedHouseDetail.length == 0) {
@@ -62,7 +63,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsC
       houseDetail: houseDetailData
     },
     revalidate: 60
-  }
-}
+  };
+};
 
 export default HouseDetail;

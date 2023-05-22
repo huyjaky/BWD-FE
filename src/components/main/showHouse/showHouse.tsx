@@ -165,23 +165,23 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
               className="w-full h-[400px] "
             >
               <div className="w-full h-[300px]">
-                <Carousel arrImg={item.arrImg} houseId={item.HouseId}/>
+                <Carousel arrImg={item.arrImg} houseId={item.HouseId} />
               </div>
               <Link href={`/house/${item.HouseId}`}>
-              <div className="h-[100px] w-full box-border p-4">
-                <div className="w-full h-fit flex font-semibold">
-                  <div className="flex-[2]">
-                    <span>
-                      {item.address.adminDistrict2}, {item.address.countryRegion}
-                    </span>
+                <div className="h-[100px] w-full box-border p-4">
+                  <div className="w-full h-fit flex font-semibold">
+                    <div className="flex-[2]">
+                      <span>
+                        {item.address.adminDistrict2}, {item.address.countryRegion}
+                      </span>
+                    </div>
+                    <div className="flex-1 flex justify-end">star</div>
                   </div>
-                  <div className="flex-1 flex justify-end">star</div>
+                  <div className="w-full h-fit mt-1">{item.useracc.UserName}</div>
+                  <div className="w-full h-fit mt-1 ">
+                    <span className="font-semibold">&#36;{item.Price}</span> night
+                  </div>
                 </div>
-                <div className="w-full h-fit mt-1">{item.useracc.UserName}</div>
-                <div className="w-full h-fit mt-1 ">
-                  <span className="font-semibold">&#36;{item.Price}</span> night
-                </div>
-              </div>
               </Link>
             </motion.div>
           ))}

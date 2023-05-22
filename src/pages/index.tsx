@@ -61,9 +61,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
     setUser({ ...user, ...user_ });
   }
 
-  useEffect(() => {
-    console.log(isFilter);
-  }, [isFilter]);
+  useEffect(() => {}, [isFilter]);
 
   return (
     <>
