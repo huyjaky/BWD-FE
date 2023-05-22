@@ -5,6 +5,7 @@ import { getHouseContext } from '@/contexts/getHouse';
 import { mobileContolPanelContext } from '@/contexts/mobileControlPanel';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 import { format } from 'date-fns';
+import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BiSearch } from 'react-icons/bi';
@@ -19,10 +20,13 @@ const ControlBar = () => {
   const { setSelected } = useContext(selectPopoverContext);
   const { address } = useContext(selectPlaceContext);
   const { isFilter, setIsFilter } = useContext(getHouseContext);
+  const router = useRouter();
 
   const handleOnMask = (event: any) => {
     // add animate by hand beacause i its ez to fixed :")))
     // animate cua header va cai nay de dong header
+
+
     const mask: HTMLElement | null = document.getElementById('mask');
     const scaleUp: HTMLElement | null = document.getElementById('scaleUp');
 
@@ -52,6 +56,10 @@ const ControlBar = () => {
     where?.classList.add('animate-transparentAnimateReverse');
     checkIn_Out?.classList.add('animate-transparentAnimateReverse');
     who?.classList.add('animate-transparentAnimateReverse');
+
+  if (router.asPath !== '/') {
+      router.push('/', undefined, {shallow: true});
+    }
   };
 
   const isEmpty = () => {
@@ -95,6 +103,7 @@ const ControlBar = () => {
   useEffect(() => {
     const temp = document.getElementById('btn-search-header');
     temp?.addEventListener('click', handleOnMask);
+
   }, []);
 
   return (

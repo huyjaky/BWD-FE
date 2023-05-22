@@ -16,6 +16,20 @@ module.exports = {
       gridTemplateColumns: {
         houseBox: 'repeat(auto-fill, minmax(300px, 1fr))'
       },
+
+      gridTemplateAreas:{
+        layoutPicture: [
+          'h1 h1 h2 h3',
+          'h1 h1 h4 h5'
+        ]
+      },
+      gridTemplateColumns:{
+        layoutPicture: '1fr 1fr 1fr 1fr'
+      },
+      gridTemplateRows: {
+        layoutPicture: '225px 225px'
+      },
+
       colors: {
         mask: 'rgba(105,105,105, 0.4)',
         redIcon: 'rgba(255, 56, 92, 0.8)'
@@ -137,6 +151,7 @@ module.exports = {
     }
   },
   plugins: [
-    require('tailwind-scrollbar-hide')
+    require('tailwind-scrollbar-hide'),
+    require('@savvywombat/tailwindcss-grid-areas')
   ]
 };

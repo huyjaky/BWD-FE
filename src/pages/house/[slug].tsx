@@ -1,14 +1,37 @@
+import FooterMainRes from "@/components/footers/footerMainRes";
+import FooterRooms from "@/components/footers/footerRooms";
+import Picture from "@/components/houseDetail/picture";
+import TitleHouse from "@/components/houseDetail/titleHouse";
+import HeaderMain from "@/components/rootMaskHeader/headerMain";
 import { house_ } from "@/models/house";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
+import { Montserrat } from "next/font/google";
 
 interface HouseDetailProps {
   houseDetail: house_
 }
+const monsterrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['200', '400', '600', '800'],
+  variable: '--font-monsterrat'
+});
 
 const HouseDetail = ({ houseDetail }: HouseDetailProps) => {
   return (
     <div className="w-full h-fit">
-      
+          <>
+      <main className={`${monsterrat.className} relative overflow-hidden box-border`} id="root">
+        <HeaderMain />
+        <div className="w-[1150px] h-fit  mobile:px-[20px] box-border m-auto">
+          <TitleHouse title={houseDetail.Title} address={houseDetail.address}/>
+
+          <Picture arrImg={houseDetail.arrImg}/>
+
+        </div>
+        <FooterRooms />
+        <FooterMainRes />
+      </main>
+    </>
     </div>
   )
 }
