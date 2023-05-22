@@ -26,7 +26,7 @@ const Step5CHome: React.FC = () => {
               className="w-full min-h-[56px] cursor-pointer border-[#717171] outline-none m-0 pt-[26px] pr-[36px] pb-[10px] pl-[12px] bg-transparent rounded-md focus:ring-0  overflow-y-scroll"
               name="countryCode"
               id="countryCode"
-            // size='12'
+              // size='12'
             >
               <option value="AF">Afghanistan - AF</option>
               <option value="AF">Afghanistan - AF</option>
@@ -130,12 +130,14 @@ const Step5CHome: React.FC = () => {
                 aria-describedby="pin-type-toggle-description"
                 role="switch"
                 type="button"
-                className={`${toggle ? 'bg-black' : 'bg-[#b0b0b0]'
-                  } rounded-[32px] h-8 w-12 min-w-[48px] relative cursor-pointer`}
+                className={`${
+                  toggle ? 'bg-black' : 'bg-[#b0b0b0]'
+                } rounded-[32px] h-8 w-12 min-w-[48px] relative cursor-pointer`}
               >
                 <div
-                  className={`${toggle ? 'right-[-1px] border-black' : 'left-[-1px] border-[#b0b0b0]'
-                    } top-[1px] absolute bg-white h-[30px] w-[30px] rounded-[50%] border-2 flex items-center justify-center`}
+                  className={`${
+                    toggle ? 'right-[-1px] border-black' : 'left-[-1px] border-[#b0b0b0]'
+                  } top-[1px] absolute bg-white h-[30px] w-[30px] rounded-[50%] border-2 flex items-center justify-center`}
                 >
                   {toggle && <TiTick />}
                 </div>

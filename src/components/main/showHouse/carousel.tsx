@@ -1,4 +1,5 @@
 import { AnimatePresence, Variants, motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 import { wrap } from 'popmotion';
 import { useState } from 'react';
 import { GrCaretNext, GrCaretPrevious } from 'react-icons/gr';
@@ -47,14 +48,16 @@ const swipePower = (offset: number, velocity: number) => {
 
 interface CarouselProps {
   arrImg: { Path: string }[];
+  houseId: string
 }
 
 const styleBtn =
   'absolute top-[calc(50%-20px)] z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center ';
 
-const Carousel = ({ arrImg }: CarouselProps) => {
+const Carousel = ({ arrImg, houseId }: CarouselProps) => {
   const [[page, direction], setPage] = useState([0, 0]);
   const [isHover, setIsHover] = useState(false);
+  const router = useRouter();
 
   const imageIndex = wrap(0, arrImg.length, page);
 
@@ -87,6 +90,7 @@ const Carousel = ({ arrImg }: CarouselProps) => {
               initial="enter"
               animate="center"
               exit="exit"
+              onDoubleClick={event => router.push(`/house/${houseId}`, undefined, {shallow: true})}
               className="w-full h-full absolute object-cover"
               transition={{
                 x: { type: 'spring', stiffness: 200, damping: 30 },

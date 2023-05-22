@@ -18,7 +18,7 @@ const ControlBar = () => {
   const [submit, setSubmit] = useState(false);
   const { setSelected } = useContext(selectPopoverContext);
   const { address } = useContext(selectPlaceContext);
-  const {isFilter, setIsFilter} = useContext(getHouseContext)
+  const { isFilter, setIsFilter } = useContext(getHouseContext);
 
   const handleOnMask = (event: any) => {
     // add animate by hand beacause i its ez to fixed :")))
@@ -54,22 +54,22 @@ const ControlBar = () => {
     who?.classList.add('animate-transparentAnimateReverse');
   };
 
-  const isEmpty = ()=>{
+  const isEmpty = () => {
     if (!address.address.formattedAddress) {
-      return true
+      return true;
     } else {
-      return false
+      return false;
     }
-  }
+  };
 
   const fetchData = (event: any) => {
     if (isEmpty()) {
       return;
     } else {
-      setIsFilter(isFilter+1);
+      setIsFilter(isFilter + 1);
       return;
     }
-  }
+  };
 
   const onSelected = (event: any) => {
     setSelected(event.currentTarget.id);
@@ -92,10 +92,10 @@ const ControlBar = () => {
 
   const handleCreate = async (data: Place) => {};
 
-  useEffect(()=>{
+  useEffect(() => {
     const temp = document.getElementById('btn-search-header');
     temp?.addEventListener('click', handleOnMask);
-  },[])
+  }, []);
 
   return (
     <div className="w-full h-full flex relative  mobile:text-[12px]">
@@ -107,7 +107,8 @@ const ControlBar = () => {
                 before:shadow-xl
                 "
           id="where"
-          onClick={onSelected}>
+          onClick={onSelected}
+        >
           <span>Where</span>
 
           {/* the input cho nay lam sau */}
@@ -126,7 +127,8 @@ const ControlBar = () => {
                 before:shadow-xl
                 "
             id="checkin"
-            onClick={onSelected}>
+            onClick={onSelected}
+          >
             <span>Check in</span>
             <span className="text-[12px]">{format(address.checkInDay, 'eeee, ddMMM')}</span>
           </div>
@@ -137,7 +139,8 @@ const ControlBar = () => {
                 before:shadow-xl
                 "
             id="checkout"
-            onClick={onSelected}>
+            onClick={onSelected}
+          >
             <span>Check out</span>
             <span className="text-[12px]">{format(address.checkOutDay, 'eeee, ddMMM')}</span>
           </div>
@@ -150,13 +153,16 @@ const ControlBar = () => {
                 before:shadow-xl
                 "
             id="who"
-            onClick={onSelected}>
+            onClick={onSelected}
+          >
             <span>Who</span>
             <span>Add guests</span>
           </div>
 
           <div className="flex-1 flex box-border p-3 w-full relative z-10 mobile:py-5 tablet:py-5 ">
-            <div className="rounded-full w-full h-full bg-red-500 flex " id='btn-search-header'
+            <div
+              className="rounded-full w-full h-full bg-red-500 flex "
+              id="btn-search-header"
               onClick={fetchData}
             >
               <BiSearch className="w-[30px] h-[30px] m-auto text-white tablet:w-[20px] tablet:h-[20px] mobile:w-[20px] mobile:h-[20px]" />

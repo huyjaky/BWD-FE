@@ -61,7 +61,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
     setUser({ ...user, ...user_ });
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(isFilter);
   }, [isFilter]);
 
@@ -73,7 +73,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
           <TypeHouse />
 
           <motion.div variants={variants} animate="show">
-            <ShowHouse infShow={isFilter!=0 ? 'noneAuthFilter' : 'noneAuthHouseApi'} />
+            <ShowHouse infShow={isFilter != 0 ? 'noneAuthFilter' : 'noneAuthHouseApi'} />
           </motion.div>
         </div>
         <FooterRooms />
