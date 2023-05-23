@@ -39,7 +39,6 @@ const Where = () => {
     setIsFetch(false);
   };
 
-  console.log(address);
 
   return (
     <>

@@ -149,6 +149,7 @@ const HeaderMain = () => {
         id="mask"
         onClick={handleOnMask}
       ></div>
+
       <HeaderForm>
         <ControlPlan />
       </HeaderForm>

@@ -27,7 +27,7 @@ const FormFilter = () => {
   const [show, setShow] = useState(false);
   const { filterForm, setFilterForm } = useContext(filterContext);
   const { setIsFilter, isFilter } = useContext(getHouseContext);
-  const { isClickOutSide, setIsClickOutSide } = useContext(filterFormAnimateContext);
+  const { isShowAllPt, isClickOutSide, setIsClickOutSide } = useContext(filterFormAnimateContext);
   const formFilter = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const FormFilter = () => {
       if (formFilter.current) {
         const formFilter_ = formFilter.current;
         const isClickOutSide_ = formFilter_.contains(event.target);
-        if (!isClickOutSide_) {
+        if (!isClickOutSide_ && isShowAllPt) {
           setIsClickOutSide(false);
           document.body.style.overflow = 'scroll';
           document.body.style.overflowX = 'hidden';
@@ -47,7 +47,7 @@ const FormFilter = () => {
   }, []);
 
   useEffect(() => {}, [show]);
-  useEffect(() => {}, [isClickOutSide]);
+  useEffect(() => {}, [isClickOutSide, isShowAllPt]);
 
   const isEmpty = () => {
     const emptyObj = {
@@ -77,12 +77,12 @@ const FormFilter = () => {
     document.body.style.overflow = 'scroll';
     document.body.style.overflowX = 'hidden';
 
-    console.log(filterForm);
-
-    if (isEmpty()) {
-      setIsFilter(0);
+    // neu du lieu co ton tai thi la fetch lai du lieu neu khong thi bo qua
+    if (!isEmpty()) {
+      setIsFilter(isFilter + 1);
+      return;
     } else {
-      setIsFilter(isFilter+1);
+      return;
     }
   };
 
@@ -98,13 +98,15 @@ const FormFilter = () => {
           mobile:mt-0 mobile:rounded-none mobile:w-screen mobile:h-[calc(100vh-70px)]
           tablet:h-[calc(100vh-90px)] tablet:mt-[10px]
           "
-          ref={formFilter}>
+          ref={formFilter}
+        >
           {/* header formfilter */}
           <div className=" flex-2 w-full border-b-2 flex relative">
             <span className="m-auto font-semibold text-[23px]">Filter</span>
             <motion.button
               className="absolute w-[70px] h-full flex desktop:hidden laptop:hidden"
-              onClick={(event) => setIsClickOutSide(false)}>
+              onClick={(event) => setIsClickOutSide(false)}
+            >
               <div className="w-fit h-full m-auto">
                 <GrClose className="text-[30px]" />
               </div>
@@ -150,7 +152,8 @@ const FormFilter = () => {
                   className="overflow-hidden"
                   variants={variantsAmenities}
                   animate={show ? { height: 700, opacity: 1 } : { height: 0, opacity: 0 }}
-                  transition={{ duration: 0.4 }}>
+                  transition={{ duration: 0.4 }}
+                >
                   <Amenities typeAmenities="features" />
                   <Amenities typeAmenities="location" />
                   <Amenities typeAmenities="safety" />
@@ -160,10 +163,11 @@ const FormFilter = () => {
                     className="w-[300px] rounded-lg border-2 mr-2"
                     whileHover={{ backgroundColor: 'rgba(255, 56, 92, 0.8)', color: 'white' }}
                     whileTap={{ scale: 0.9 }}
-                    onClick={(event) => setShow(!show)}>
+                    onClick={(event) => setShow(!show)}
+                  >
                     <span className="text-[20px]">{show ? 'Show less' : 'Show more'}</span>
                   </motion.button>
-                  <span className=''>
+                  <span className="">
                     {!show &&
                     (filterForm.amenities.features.length != 0 ||
                       filterForm.amenities.location.length != 0 ||
@@ -209,7 +213,8 @@ const FormFilter = () => {
                     hostLanguage: ''
                   };
                   setFilterForm(filterFormTemp);
-                }}>
+                }}
+              >
                 Clear all
               </div>
             </div>
@@ -218,7 +223,8 @@ const FormFilter = () => {
                 className="w-[200px] h-[40px] rounded-lg border-2"
                 whileHover={{ backgroundColor: 'rgba(255, 56, 92, 0.8)', color: 'white' }}
                 onClick={fetchData}
-                whileTap={{ scale: 0.9 }}>
+                whileTap={{ scale: 0.9 }}
+              >
                 Submit
               </motion.button>
             </div>

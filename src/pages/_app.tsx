@@ -18,6 +18,8 @@ import GetHouseProvider from '@/contexts/getHouse';
 import MobileContolPanelProvider from '@/contexts/mobileControlPanel';
 import UserAccProvider from '@/contexts/userAcc';
 import { Poppins } from 'next/font/google';
+import { SessionProvider } from 'next-auth/react';
+import { AppProps } from 'next/app';
 const poppins = Poppins({
   subsets: ['latin'],
   weight: ['200', '400', '600', '800'],
@@ -26,7 +28,10 @@ const poppins = Poppins({
 
 // const circular = Flow_Circular
 
-export default function App({ Component, pageProps }: AppPropsWithLayout) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps }
+}: AppPropsWithLayout) {
   const Layout = Component.Layout ?? EmptyLayout;
 
   return (
@@ -40,11 +45,13 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
                   <FilterProvider>
                     <GetHouseProvider>
                       <MobileContolPanelProvider>
-                        <Layout>
-                          <div className={`${poppins.className}`}>
-                            <Component {...pageProps} />
-                          </div>
-                        </Layout>
+                        <SessionProvider session={session}>
+                          <Layout>
+                            <div className={`${poppins.className}`}>
+                              <Component {...pageProps} />
+                            </div>
+                          </Layout>
+                        </SessionProvider>
                       </MobileContolPanelProvider>
                     </GetHouseProvider>
                   </FilterProvider>

@@ -6,15 +6,10 @@ import { motion } from 'framer-motion';
 const Step5CHome: React.FC = () => {
   const [toggle, setToggle] = useState(false);
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1 }}
-      className='w-full h-screen'>
-      <div className='px-6 sm:px-52 md:px-44 lg:px-52 xl:px-96 mt-[80px]'>
-        <div className='mb-6'>
-          <h1 className='font-sans text-2xl ml-2 md:ml-0 md:text-4xl font-semibold text-[#222222] mb-4'>
+    <div className="w-full h-screen">
+      <div className="px-6 sm:px-52 md:px-44 lg:px-52 xl:px-96 mt-[80px]">
+        <div className="mb-6">
+          <h1 className="font-sans text-2xl ml-2 md:ml-0 md:text-4xl font-semibold text-[#222222] mb-4">
             Confirm your address
           </h1>
           <p className="font-sans text-sm ml-2 md:ml-0 md:text-lg text-[#717171]">
@@ -31,7 +26,7 @@ const Step5CHome: React.FC = () => {
               className="w-full min-h-[56px] cursor-pointer border-[#717171] outline-none m-0 pt-[26px] pr-[36px] pb-[10px] pl-[12px] bg-transparent rounded-md focus:ring-0  overflow-y-scroll"
               name="countryCode"
               id="countryCode"
-            // size='12'
+              // size='12'
             >
               <option value="AF">Afghanistan - AF</option>
               <option value="AF">Afghanistan - AF</option>
@@ -135,12 +130,14 @@ const Step5CHome: React.FC = () => {
                 aria-describedby="pin-type-toggle-description"
                 role="switch"
                 type="button"
-                className={`${toggle ? 'bg-black' : 'bg-[#b0b0b0]'
-                  } rounded-[32px] h-8 w-12 min-w-[48px] relative cursor-pointer`}
+                className={`${
+                  toggle ? 'bg-black' : 'bg-[#b0b0b0]'
+                } rounded-[32px] h-8 w-12 min-w-[48px] relative cursor-pointer`}
               >
                 <div
-                  className={`${toggle ? 'right-[-1px] border-black' : 'left-[-1px] border-[#b0b0b0]'
-                    } top-[1px] absolute bg-white h-[30px] w-[30px] rounded-[50%] border-2 flex items-center justify-center`}
+                  className={`${
+                    toggle ? 'right-[-1px] border-black' : 'left-[-1px] border-[#b0b0b0]'
+                  } top-[1px] absolute bg-white h-[30px] w-[30px] rounded-[50%] border-2 flex items-center justify-center`}
                 >
                   {toggle && <TiTick />}
                 </div>
@@ -152,7 +149,7 @@ const Step5CHome: React.FC = () => {
       </div>
 
       <div className="w-ful h-[80px]"></div>
-    </motion.div>
+    </div>
   );
 };
 

@@ -6,7 +6,7 @@ interface getHouseProps {
 }
 
 interface getHouseData {
-  isFilter: number,
+  isFilter: number;
   setIsFilter: (payload: number) => void;
 }
 
@@ -21,7 +21,7 @@ const GetHouseProvider = ({ children }: getHouseProps) => {
   const [isFilter, setIsFilter_] = useState(getHouseDataDefault.isFilter);
   const setIsFilter = (payload: number) => setIsFilter_(payload);
 
-  const getHouseDynamicData = { isFilter, setIsFilter};
+  const getHouseDynamicData = { isFilter, setIsFilter };
   return (
     <getHouseContext.Provider value={getHouseDynamicData}>{children}</getHouseContext.Provider>
   );

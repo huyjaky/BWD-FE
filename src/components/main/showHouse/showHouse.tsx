@@ -8,6 +8,9 @@ import { Variants, motion } from 'framer-motion';
 import { useContext, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Carousel from './carousel';
+import { selectPlaceContext } from '@/contexts/selectPlace';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const variants: Variants = {
   show: {
@@ -32,7 +35,9 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
   const { isShow, setIsShow } = useContext(filterFormAnimateContext);
   const { filterForm } = useContext(filterContext);
+  const { address } = useContext(selectPlaceContext);
   const { isFilter } = useContext(getHouseContext);
+  const router = useRouter();
   const [hasMore, setHasMore] = useState(true);
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
 
@@ -74,8 +79,6 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
     }
   };
 
-  console.log(houseTemp);
-
   // bat su kien cho animation tren
   useEffect(() => {
     document.addEventListener('scroll', handleScroll);
@@ -91,7 +94,7 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
       }
       setHouseTemp(arr.data as house_[]);
     } else if (infShow === 'noneAuthFilter') {
-      const arr = await houseApi[infShow](filterForm, 1);
+      const arr = await houseApi[infShow]({ filter: filterForm, selectPlace: address }, 1);
       if (arr.data.length == 0) {
         setHasMore(false);
         return;
@@ -114,7 +117,10 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
           setHasMore(false); // cai nay de kiem tra xem da fetch het du lieu hay chua
         }
       } else if (infShow === 'noneAuthFilter') {
-        const moreHouse = await houseApi[infShow](filterForm, houseTemp.length / 10 + 1);
+        const moreHouse = await houseApi[infShow](
+          { filter: filterForm, selectPlace: address },
+          houseTemp.length / 10 + 1
+        );
         if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
           setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
         } else {
@@ -133,7 +139,6 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
     setHasMore(true);
   }, [infShow, isFilter]);
 
-
   return (
     <div>
       <motion.div className="w-full h-fit py-20 pb-28" id="scroll-inf">
@@ -147,40 +152,46 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
             </motion.div>
           }
           className="w-full h-fit grid grid-cols-houseBox gap-x-5 gap-y-8"
-          endMessage={<div>No more values</div>}>
+          endMessage={<div>No more values</div>}
+        >
           {houseTemp.map((item: house_, index: number) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, display: 'none' }}
               animate={{ opacity: 1, display: 'block' }}
               transition={{ delay: (index + 1) * 0.1 }}
-              className="w-full h-[400px] ">
+              className="w-full h-[400px] "
+            >
               <div className="w-full h-[300px]">
-                <Carousel arrImg={item.arrImg} />
+                <Carousel arrImg={item.arrImg} houseId={item.HouseId} />
               </div>
-              <div className="h-[100px] w-full box-border p-4">
-                <div className="w-full h-fit flex font-semibold">
-                  <div className="flex-[2]">
-                    <span>
-                      {item.address.adminDistrict2}, {item.address.countryRegion}
-                    </span>
+              <Link href={`/house/${item.HouseId}`}>
+                <div className="h-[100px] w-full box-border p-4">
+                  <div className="w-full h-fit flex font-semibold">
+                    <div className="flex-[2]">
+                      <span>
+                        {item.address.adminDistrict2}, {item.address.countryRegion}
+                      </span>
+                    </div>
+                    <div className="flex-1 flex justify-end">star</div>
                   </div>
-                  <div className="flex-1 flex justify-end">star</div>
+                  <div className="w-full h-fit mt-1">{item.useracc.UserName}</div>
+                  <div className="w-full h-fit mt-1 ">
+                    <span className="font-semibold">&#36;{item.Price}</span> night
+                  </div>
                 </div>
-                <div className="w-full h-fit mt-1">{item.useracc.UserName}</div>
-                <div className="w-full h-fit mt-1 ">
-                  <span className="font-semibold">&#36;{item.Price}</span> night
-                </div>
-              </div>
+              </Link>
             </motion.div>
           ))}
 
-          {houseTemp.length == 0 && hasMore == true &&
+          {houseTemp.length == 0 &&
+            hasMore == true &&
             arrTempLoading.map((item: number, index: number) => (
               <motion.div
                 variants={variants}
                 animate={houseTemp.length == 0 ? 'show' : 'hidden'}
-                key={index}>
+                key={index}
+              >
                 <SkeletonShowHouse />
               </motion.div>
             ))}
