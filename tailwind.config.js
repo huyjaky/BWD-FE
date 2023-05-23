@@ -167,6 +167,7 @@ module.exports = {
   },
   plugins: [
     require('tailwind-scrollbar-hide'),
-    require('@savvywombat/tailwindcss-grid-areas')
+    require('@savvywombat/tailwindcss-grid-areas'),
+    require("daisyui")
   ]
 };
