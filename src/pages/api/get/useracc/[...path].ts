@@ -56,16 +56,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
       });
       proxy.once('proxyRes', handleUserResponse);
     });
-
     const user: userAcc = JSON.parse(userResponse);
-
-    req.session = req.session ?? {};
-    req.session.props = {
-      user_: user,
-      props: undefined
-    };
-    await req.session.save();
-
     res.status(200).json({ message: 'fetch Done', data: user });
   } catch (error) {
     console.log(error);

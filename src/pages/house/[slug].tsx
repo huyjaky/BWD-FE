@@ -8,6 +8,8 @@ import { house_ } from '@/models/house';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { Montserrat } from 'next/font/google';
 import { NextApiRequest } from 'next';
+import { NextPageWithLayout } from '@/models/layoutprops';
+import Auth from '@/components/layouts/auth';
 
 interface HouseDetailProps {
   houseDetail: house_;
@@ -18,7 +20,7 @@ const monsterrat = Montserrat({
   variable: '--font-monsterrat'
 });
 
-const HouseDetail = ({ houseDetail }: HouseDetailProps) => {
+const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({ houseDetail }: HouseDetailProps) => {
   return (
     <div className="w-full h-fit">
       <>
@@ -39,6 +41,8 @@ const HouseDetail = ({ houseDetail }: HouseDetailProps) => {
 };
 
 let cachedHouseDetail: house_[] = [];
+
+HouseDetail.Layout = Auth;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   if (cachedHouseDetail.length == 0) {

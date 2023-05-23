@@ -1,7 +1,7 @@
 import { sessionOptions } from '@/api-client/session';
 import FooterMainRes from '@/components/footers/footerMainRes';
 import FooterRooms from '@/components/footers/footerRooms';
-import EmptyLayout from '@/components/layouts/empty';
+import Auth from '@/components/layouts/auth';
 import ShowHouse from '@/components/main/showHouse/showHouse';
 import TypeHouse from '@/components/main/typeHouse';
 import HeaderMain from '@/components/rootMaskHeader/headerMain';
@@ -80,7 +80,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
   );
 };
 
-Home.Layout = EmptyLayout;
+Home.Layout = Auth;
 
 export default Home;
 

@@ -1,13 +1,12 @@
-import { authApi } from '@/api-client';
 import { userApi } from '@/api-client/userApi';
 import { selectPopoverContext } from '@/contexts';
 import { userAccContext } from '@/contexts/userAcc';
 import useAuth from '@/hooks/useAuth';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { ReactNode, useContext, useEffect, useRef } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import useSWR from 'swr';
 import * as yup from 'yup';
 
 interface LoginPanelProps {
@@ -27,6 +26,7 @@ type LoginInterface = yup.InferType<typeof schema>;
 
 const LoginPanel = ({ children }: LoginPanelProps) => {
   const { login } = useAuth();
+  const { data: session } = useSession();
   const { user, setUser } = useContext(userAccContext);
   const { setIsLoginClick } = useContext(selectPopoverContext);
   const router = useRouter();
@@ -81,34 +81,26 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
 
   // fetch accesstoken , navigate as well as do animte
   const onSubmit: SubmitHandler<LoginInterface> = async (data_) => {
-    const login_ = await authApi.login(data_);
+    const login_ = await signIn('credentials', {
+      username: data_.username,
+      password: data_.password,
+      redirect: false
+    });
 
-    if (login_?.status != 200) {
-      console.log(login_);
+    if (!login_?.ok) {
       setError('username', { type: 'validate', message: 'Wrong username or password!' });
       setError('password', { type: 'validate', message: 'Wrong username or password!' });
       return;
     }
+    setUser({ ...user, ...session?.userAcc });
 
+    if (login_?.ok) {
+      setIsLoginClick(false);
+    }
     if (router.asPath === '/login') {
       router.push('/', undefined, { shallow: true });
-      setUser({ ...user, UserName: data_.username });
-      if (login_?.status == 200 && login_?.data) {
-        setIsLoginClick(false);
-      }
-      return;
     }
-
-    const user_ = await userApi.userInfor(data_.username, 'UserName' );
-    if (user_.status != 200) {
-      setError('username', { type: 'validate', message: 'Have error!' });
-      setError('password', { type: 'validate', message: 'Have error!' });
-      return;
-    }
-    setUser({...user, ...user_?.data?.data});
-    if (user_?.status == 200 && user_?.data?.data) {
-        setIsLoginClick(false);
-      }
+    return;
   };
 
   return (
@@ -125,15 +117,13 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="w-full h-full grid grid-cols-1 grid-rows-2 mb-3
-            "
-        >
+            ">
           {/* form input username */}
           <div
             className={`border-2 rounded-t-xl box-border p-3 h-[70px] ${
               errors?.username?.message ? 'border-red-500' : ''
             }`}
-            ref={divRef}
-          >
+            ref={divRef}>
             <div className="w-full h-full flex items-center" ref={title_username}>
               <span>
                 User name
@@ -157,8 +147,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
             className={`border-2 rounded-b-xl box-border p-3 h-[70px] ${
               errors?.password?.message ? 'border-red-500' : ''
             }`}
-            ref={divRef2}
-          >
+            ref={divRef2}>
             <div className="w-full h-full flex items-center" ref={title_password}>
               <span>
                 Password
