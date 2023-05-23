@@ -20,6 +20,7 @@ import UserAccProvider from '@/contexts/userAcc';
 import { Poppins } from 'next/font/google';
 import { SessionProvider } from 'next-auth/react';
 import { AppProps } from 'next/app';
+import IsShowPtProvider from '@/contexts/isShowPt';
 const poppins = Poppins({
   subsets: ['latin'],
   weight: ['200', '400', '600', '800'],
@@ -46,11 +47,13 @@ export default function App({
                     <GetHouseProvider>
                       <MobileContolPanelProvider>
                         <SessionProvider session={session}>
-                          <Layout>
-                            <div className={`${poppins.className}`}>
-                              <Component {...pageProps} />
-                            </div>
-                          </Layout>
+                          <IsShowPtProvider>
+                            <Layout>
+                              <div className={`${poppins.className}`}>
+                                <Component {...pageProps} />
+                              </div>
+                            </Layout>
+                          </IsShowPtProvider>
                         </SessionProvider>
                       </MobileContolPanelProvider>
                     </GetHouseProvider>

@@ -85,13 +85,13 @@ function CreateHome(): JSX.Element {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const cookies = req.cookies.access_token;
-  if (!cookies) {
-    res.setHeader('location', '/login');
-    res.statusCode = 302;
-    res.end();
-    return { props: {} };
-  }
+  // const cookies = req.cookies.access_token;
+  // if (!cookies) {
+  //   res.setHeader('location', '/login');
+  //   res.statusCode = 302;
+  //   res.end();
+  //   return { props: {} };
+  // }
 
   return { props: {} };
 };
