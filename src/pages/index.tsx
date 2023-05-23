@@ -45,17 +45,6 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  // if (!user_?.UserId) {
-  //   const { data, error, mutate } = useSWR(`/get/useracc/UserName/${user.UserName}`, {
-  //     revalidateOnFocus: false
-  //   });
-
-  //   useEffect(() => {
-  //     setUser({ ...user, ...data?.data?.data });
-  //   }, [data]);
-  // } else if (user_?.UserId && !user.UserId) {
-  //   setUser({ ...user, ...user_ });
-  // }
   if (user_?.UserId && user.UserId) {
     setUser({ ...user, ...user_ });
   }
