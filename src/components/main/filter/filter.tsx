@@ -14,6 +14,7 @@ const Filter = ({ isInvisible }: FilterProps) => {
     window.scrollTo(0, 0);
     setIsClickOutSide(true);
     document.body.style.overflow = 'hidden';
+    console.log('filter');
   };
 
   return (

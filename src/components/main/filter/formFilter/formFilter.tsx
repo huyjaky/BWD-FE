@@ -27,7 +27,7 @@ const FormFilter = () => {
   const [show, setShow] = useState(false);
   const { filterForm, setFilterForm } = useContext(filterContext);
   const { setIsFilter, isFilter } = useContext(getHouseContext);
-  const { isClickOutSide, setIsClickOutSide } = useContext(filterFormAnimateContext);
+  const { isShowAllPt, isClickOutSide, setIsClickOutSide } = useContext(filterFormAnimateContext);
   const formFilter = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const FormFilter = () => {
       if (formFilter.current) {
         const formFilter_ = formFilter.current;
         const isClickOutSide_ = formFilter_.contains(event.target);
-        if (!isClickOutSide_) {
+        if (!isClickOutSide_ && isShowAllPt) {
           setIsClickOutSide(false);
           document.body.style.overflow = 'scroll';
           document.body.style.overflowX = 'hidden';
@@ -47,7 +47,7 @@ const FormFilter = () => {
   }, []);
 
   useEffect(() => {}, [show]);
-  useEffect(() => {}, [isClickOutSide]);
+  useEffect(() => {}, [isClickOutSide, isShowAllPt]);
 
   const isEmpty = () => {
     const emptyObj = {
