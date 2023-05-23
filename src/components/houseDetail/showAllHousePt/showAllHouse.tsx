@@ -50,7 +50,7 @@ const ShowAllHouse = ({ arrImg }: ShowAllHouseProps) => {
 
   for (let index = 0; index < count; index++) {
     part.push(
-      <div className="grid gap-3 grid-areas-layoutShowAllPt grid-cols-layoutShowAllPt grid-rows-layoutShowAllPt">
+      <div key={index} className="grid gap-3 grid-areas-layoutShowAllPt grid-cols-layoutShowAllPt grid-rows-layoutShowAllPt">
         {element()}
       </div>
     );
@@ -59,6 +59,7 @@ const ShowAllHouse = ({ arrImg }: ShowAllHouseProps) => {
   for (let index = 0; index < extra; index++) {
     extraElement.push(
       <motion.img
+      key={index}
         whileHover={{opacity: .4}}
         src={arrImg[pointer].Path}
         alt=""

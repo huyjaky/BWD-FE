@@ -7,6 +7,7 @@ import HeaderMain from '@/components/rootMaskHeader/headerMain';
 import { house_ } from '@/models/house';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { Montserrat } from 'next/font/google';
+import { NextApiRequest } from 'next';
 
 interface HouseDetailProps {
   houseDetail: house_;
