@@ -7,7 +7,7 @@ interface filterFormAnimateProps {
 interface filterFormAnimateData {
   isClickOutSide: boolean;
   isShow: boolean;
-  setIsShow: (payload:boolean) =>void;
+  setIsShow: (payload: boolean) => void;
   setIsClickOutSide: (payload: boolean) => void;
 }
 
@@ -15,7 +15,7 @@ const filterFormAnimateDataDefault: filterFormAnimateData = {
   isClickOutSide: false,
   setIsClickOutSide: () => {},
   isShow: false,
-  setIsShow: ()=>{}
+  setIsShow: () => {}
 };
 
 export const filterFormAnimateContext = createContext<filterFormAnimateData>(

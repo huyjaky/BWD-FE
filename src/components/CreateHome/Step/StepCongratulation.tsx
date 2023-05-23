@@ -1,9 +1,15 @@
 import React from 'react'
 import Signature from '../../../../public/assets/signature.jpg'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 export default function StepCongratulation() {
     return (
-        <div className='w-[100%] h-screen bg-[#1B191B] text-white flex items-center justify-center '>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            className='w-[100%] h-screen bg-[#1B191B] text-white flex items-center justify-center '>
             <div className='bg-[#1B191B] flex items-center mobile:flex-col tablet:flex-col'>
                 <div className='w-[50%] mobile:mt-[200px]'>
                     <video className='w-[100%] h-fit' loop={true} preload='auto' autoPlay={true} muted={true}>
@@ -37,6 +43,6 @@ export default function StepCongratulation() {
             </div>
 
 
-        </div>
+        </motion.div>
     )
 }

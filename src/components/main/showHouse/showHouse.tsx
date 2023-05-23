@@ -1,5 +1,6 @@
 import { houseApi } from '@/api-client/houseApi';
 import SkeletonShowHouse from '@/components/skeletonLoading/skletonShowHouse';
+import { filterContext } from '@/contexts/filter';
 import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 import { getHouseContext } from '@/contexts/getHouse';
 import { house_ } from '@/models/house';
@@ -23,10 +24,15 @@ const variants: Variants = {
   }
 };
 
-const ShowHouse = () => {
+interface ShowHouseProps {
+  infShow: 'noneAuthHouseApi' | 'noneAuthFilter';
+}
+
+const ShowHouse = ({ infShow }: ShowHouseProps) => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
-  const { house, setHouse, isLoading, setIsLoading } = useContext(getHouseContext);
   const { isShow, setIsShow } = useContext(filterFormAnimateContext);
+  const { filterForm } = useContext(filterContext);
+  const { isFilter } = useContext(getHouseContext);
   const [hasMore, setHasMore] = useState(true);
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
 
@@ -67,37 +73,66 @@ const ShowHouse = () => {
       setIsShow(false);
     }
   };
+
+  console.log(houseTemp);
+
   // bat su kien cho animation tren
   useEffect(() => {
     document.addEventListener('scroll', handleScroll);
   }, [isShow]);
 
-  // khi house duoc fetch lan dau pages/index
+  const fetchHouseApi = async () => {
+    if (houseTemp.length != 0) return;
+    if (infShow === 'noneAuthHouseApi') {
+      const arr = await houseApi[infShow](1);
+      if (arr.data.length == 0) {
+        setHasMore(false); // neu nhu du lieu tra ve la khong co lan dau tien thi khong xuat hien nx
+        return;
+      }
+      setHouseTemp(arr.data as house_[]);
+    } else if (infShow === 'noneAuthFilter') {
+      const arr = await houseApi[infShow](filterForm, 1);
+      if (arr.data.length == 0) {
+        setHasMore(false);
+        return;
+      }
+      setHouseTemp(arr.data as house_[]);
+    }
+  };
   useEffect(() => {
-    setHouseTemp([...house]);
-  }, [house]);
+    fetchHouseApi();
+  }, [houseTemp]);
 
+  // get more house de lay them nha khi scroll xuoong cuoi cung https://www.npmjs.com/package/react-infinite-scroll-component
   const getMoreHouse = async () => {
     try {
-      const moreHouse = await houseApi.noneAuthHouseApi(houseTemp.length / 10 + 1);
-      if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
-        setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
-      } else {
-        setHasMore(false); // cai nay de kiem tra xem da fetch het du lieu hay chua
+      if (infShow === 'noneAuthHouseApi') {
+        const moreHouse = await houseApi[infShow](houseTemp.length / 10 + 1);
+        if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
+          setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
+        } else {
+          setHasMore(false); // cai nay de kiem tra xem da fetch het du lieu hay chua
+        }
+      } else if (infShow === 'noneAuthFilter') {
+        const moreHouse = await houseApi[infShow](filterForm, houseTemp.length / 10 + 1);
+        if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
+          setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
+        } else {
+          setHasMore(false); // cai nay de kiem tra xem da fetch het du lieu hay chua
+        }
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    if (houseTemp.length > 0 && isLoading == true) {
-      console.log('check');
-      setIsLoading(false);
-    }
-  }, [houseTemp]);
+  useEffect(() => {}, [houseTemp, hasMore]);
 
-  useEffect(() => {}, [setIsLoading, hasMore]);
+  useEffect(() => {
+    setHouseTemp([]);
+    setHasMore(true);
+  }, [infShow, isFilter]);
+
 
   return (
     <div>
@@ -112,7 +147,7 @@ const ShowHouse = () => {
             </motion.div>
           }
           className="w-full h-fit grid grid-cols-houseBox gap-x-5 gap-y-8"
-          endMessage={<div></div>}>
+          endMessage={<div>No more values</div>}>
           {houseTemp.map((item: house_, index: number) => (
             <motion.div
               key={index}
@@ -140,9 +175,12 @@ const ShowHouse = () => {
             </motion.div>
           ))}
 
-          {isLoading &&
+          {houseTemp.length == 0 && hasMore == true &&
             arrTempLoading.map((item: number, index: number) => (
-              <motion.div variants={variants} animate={isLoading ? 'show' : 'hidden'} key={index}>
+              <motion.div
+                variants={variants}
+                animate={houseTemp.length == 0 ? 'show' : 'hidden'}
+                key={index}>
                 <SkeletonShowHouse />
               </motion.div>
             ))}

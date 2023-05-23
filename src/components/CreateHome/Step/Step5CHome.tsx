@@ -151,8 +151,8 @@ const Step5CHome: React.FC = () => {
         </div>
       </div>
 
-      <div className='w-ful h-[80px]'></div>
-    </motion.div >
+      <div className="w-ful h-[80px]"></div>
+    </motion.div>
   );
 };
 

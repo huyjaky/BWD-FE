@@ -1,14 +1,11 @@
 import React from 'react';
 import { IoLocationSharp } from 'react-icons/io5';
 
-
 const Map: React.FC = () => {
   const map =
     'https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/105.804817,21.028509,11,5/700x700?access_token=pk.eyJ1IjoiamFqYWphamF1IiwiYSI6ImNsaDJyNzUydjAzazgzcnFtc3R5enE4eXgifQ.FmwGbD5cLVub495LlJUlbw';
   return (
-    <div
-
-      className="w-[100%] h-[279px] overflow-hidden rounded-2xl relative">
+    <div className="w-[100%] h-[279px] overflow-hidden rounded-2xl relative">
       {/* search input */}
       <div className="absolute w-full flex justify-center top-6">
         <div className="w-[85%] relative">

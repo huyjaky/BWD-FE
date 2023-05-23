@@ -1,4 +1,4 @@
-import { houseApi } from '@/api-client/houseApi';
+import { Variants, motion } from 'framer-motion';
 import { sessionOptions } from '@/api-client/session';
 import FooterMainRes from '@/components/footers/footerMainRes';
 import EmptyLayout from '@/components/layouts/empty';
@@ -17,6 +17,8 @@ import { Montserrat } from 'next/font/google';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useMemo } from 'react';
 import useSWR from 'swr';
+import FooterTest from '@/components/footers/footerMain';
+import FooterRooms from '@/components/footers/footerRooms';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -28,10 +30,18 @@ interface HomeProps {
   props: any;
 }
 
+const variants: Variants = {
+  show: {
+    opacity: [0, 1],
+    transition: {
+      duration: 1
+    }
+  }
+};
+
 const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
   const { user, setUser } = useContext(userAccContext);
-  const { house, setHouse, isLoading, setIsLoading } = useContext(getHouseContext);
-  const { setIsClickOutSide } = useContext(filterFormAnimateContext);
+  const { isFilter } = useContext(getHouseContext);
 
   const { pathname } = useRouter();
 
@@ -40,7 +50,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
   }, [pathname]);
 
   if (!user_?.UserId) {
-    const { data, error, mutate, isValidating } = useSWR(`/get/useracc/UserName/${user.UserName}`, {
+    const { data, error, mutate } = useSWR(`/get/useracc/UserName/${user.UserName}`, {
       revalidateOnFocus: false
     });
 
@@ -51,30 +61,22 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
     setUser({ ...user, ...user_ });
   }
 
-  useEffect(() => {
-    const handleOnScroll = (event: any) => {
-      setIsClickOutSide(false);
-    };
-    document.addEventListener('scroll', handleOnScroll);
-  }, []);
-
-  useEffect(() => {
-    const fetchHouseApi = async () => {
-      if (house.length != 0) return;
-      const arr = await houseApi.noneAuthHouseApi(1);
-      setHouse(arr.data as house_[]);
-    };
-    fetchHouseApi();
-  }, [house]);
+  useEffect(()=>{
+    console.log(isFilter);
+  }, [isFilter]);
 
   return (
     <>
       <main className={`${monsterrat.className} relative overflow-hidden`} id="root">
         <HeaderMain />
-        <div className="w-full h-fit px-[80px] box-border">
+        <div className="w-full h-fit px-[80px] mobile:px-[20px] box-border">
           <TypeHouse />
-          <ShowHouse />
+
+          <motion.div variants={variants} animate="show">
+            <ShowHouse infShow={isFilter!=0 ? 'noneAuthFilter' : 'noneAuthHouseApi'} />
+          </motion.div>
         </div>
+        <FooterRooms />
         <FooterMainRes />
       </main>
     </>

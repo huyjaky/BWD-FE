@@ -4,7 +4,6 @@ import { FiMinus } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 
 export default function Step6CHome() {
-
   const [guestCount, setguestCount] = useState(1);
 
   const [BedroomCount, setBedroomCount] = useState(1);
@@ -21,14 +20,15 @@ export default function Step6CHome() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1 }}
-      className="w-[98vw] h-[700px] px-[80px] tablet:px-[50px] mt-10">
+      className="w-[98vw] h-[700px] px-[80px] tablet:px-[50px] mt-10"
+    >
       <div className="w-[60%] tablet:w-[80%] laptop:w-[80%] mobile:w-[100%] ml-auto mr-auto pl-[70px] mobile:pl-0 ">
         <div>
           <div>
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ type: "spring", stiffness: 35, delay: 0.1 }}
+              transition={{ type: 'spring', stiffness: 35, delay: 0.1 }}
               className="text-[32px] font-semibold
                         mobile:text-[26px]
                         tablet:text-[26px]
@@ -39,16 +39,18 @@ export default function Step6CHome() {
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
-              className="text-[18px] py-[18px] text-[#717171]">
+              transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
+              className="text-[18px] py-[18px] text-[#717171]"
+            >
               You'll add more details later, like bed types.
             </motion.h2>
             <div className="flex flex-col justify-between">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.3 }}
-                className="flex justify-between py-[24px] border-b-[1px]">
+                transition={{ type: 'spring', stiffness: 35, delay: 0.3 }}
+                className="flex justify-between py-[24px] border-b-[1px]"
+              >
                 <div>
                   <h1 className="text-[18px] ">Guests</h1>
                 </div>
@@ -75,8 +77,9 @@ export default function Step6CHome() {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.4 }}
-                className="flex justify-between py-[24px] border-b-[1px]">
+                transition={{ type: 'spring', stiffness: 35, delay: 0.4 }}
+                className="flex justify-between py-[24px] border-b-[1px]"
+              >
                 <div>
                   <h1 className="text-[18px] ">Bedrooms</h1>
                 </div>
@@ -101,8 +104,9 @@ export default function Step6CHome() {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.5 }}
-                className="flex justify-between py-[24px] border-b-[1px]">
+                transition={{ type: 'spring', stiffness: 35, delay: 0.5 }}
+                className="flex justify-between py-[24px] border-b-[1px]"
+              >
                 <div>
                   <h1 className="text-[18px] ">Beds</h1>
                 </div>
@@ -127,8 +131,9 @@ export default function Step6CHome() {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.6 }}
-                className="flex justify-between py-[24px] ">
+                transition={{ type: 'spring', stiffness: 35, delay: 0.6 }}
+                className="flex justify-between py-[24px] "
+              >
                 <div>
                   <h1 className="text-[18px] ">Bathrooms</h1>
                 </div>
@@ -154,7 +159,7 @@ export default function Step6CHome() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ type: "spring", stiffness: 35, delay: 0.7 }}
+              transition={{ type: 'spring', stiffness: 35, delay: 0.7 }}
             >
               <div>
                 <h2 className="text-[18px] font-semibold py-[18px]">

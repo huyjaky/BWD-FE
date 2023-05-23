@@ -23,7 +23,7 @@ const filterDataDefault: filterData = {
       location: [],
       safety: []
     },
-    hostLanguage: 'vietnam'
+    hostLanguage: ''
   },
   setFilterForm: (payload: filterForm) => {}
 };
