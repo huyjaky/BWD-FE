@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { categoriesStep10, safetyitems, standoutamenities } from '../utils/constant';
 import { useInView } from 'react-intersection-observer';
 import ChooDesPl from '../ChooDesPl';
-import {motion} from 'framer-motion';
+import { motion } from 'framer-motion';
 
 
 export default function Step10Home() {
@@ -19,6 +19,12 @@ export default function Step10Home() {
     threshold: 0.01, // Ngưỡng nhìn thấy (tỷ lệ của phần tử nằm trong khung nhìn)
   })
 
+  const [refButton2, inViewButton2] = useInView({
+    triggerOnce: true, // Kích hoạt chỉ một lần khi vào khung nhìn
+    threshold: 0.01, // Ngưỡng nhìn thấy (tỷ lệ của phần tử nằm trong khung nhìn)
+  })
+
+
   const [ref2, inView2] = useInView({
     triggerOnce: true, // Kích hoạt chỉ một lần khi vào khung nhìn
     threshold: 0.02, // Ngưỡng nhìn thấy (tỷ lệ của phần tử nằm trong khung nhìn)
@@ -34,6 +40,10 @@ export default function Step10Home() {
 
   return (
     <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1 }}
       className="w-[98vw] px-[80px]
                         mobile:px-0
         "
@@ -49,7 +59,11 @@ export default function Step10Home() {
         <div className="flex flex-col px-10 w-[100%]">
           <div className="mb-[32px]">
             <div className="mb-[32px] h-[82px] tablet:mb-[62px] mobile:mb-[152px] w-[100%] ml-auto mr-auto ">
-              <motion.h1 className="text-[32px] font-semibold w-[100%] leading-10 mb-3">
+              <motion.h1
+                initial={{ opacity: 0, y: -30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
+                className="text-[32px] font-semibold w-[100%] leading-10 mb-3">
                 Tell guests what your place has to offer
               </motion.h1>
               <motion.p
@@ -67,16 +81,24 @@ export default function Step10Home() {
                                     mobile:grid-cols-1
                     "
             >
-              {categoriesStep10.map((category) => (
-                <ChooDesPl
-                  title={category.name}
-                  icon={category.icon}
-                  type={type}
-                  selectedMany={selectedMany}
-                  setselectedMany={setselectedMany}
-                  selected={''}
-                  setselected={() => {}}
-                />
+              {categoriesStep10.map((category, index) => (
+                <motion.div
+                  variants={animationVariants}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{ type: "spring", stiffness: 35, delay: 0.1 * index }}
+                >
+                  <ChooDesPl
+                    title={category.name}
+                    icon={category.icon}
+                    type={type}
+                    selectedMany={selectedMany}
+                    setselectedMany={setselectedMany}
+                    selected={''}
+                    setselected={() => { }}
+                  />
+                </motion.div>
+
               ))}
             </div>
           </div>
@@ -95,16 +117,26 @@ export default function Step10Home() {
                                     mobile:grid-cols-1
                     "
             >
-              {standoutamenities.map((category) => (
-                <ChooDesPl
-                  title={category.name}
-                  icon={category.icon}
-                  type={type}
-                  selectedMany={selectedMany}
-                  setselectedMany={setselectedMany}
-                  selected={''}
-                  setselected={() => {}}
-                />
+              {standoutamenities.map((category, index) => (
+                <div ref={refButton2}>
+                  <motion.div
+                    initial="hidden"
+                    animate={inViewButton2 ? "visible" : "hidden"}
+                    variants={animationVariants}
+                    transition={{ type: "spring", stiffness: 35, delay: 0.1 * index }}
+                  >
+                    <ChooDesPl
+                      title={category.name}
+                      icon={category.icon}
+                      type={type}
+                      selectedMany={selectedMany}
+                      setselectedMany={setselectedMany}
+                      selected={''}
+                      setselected={() => { }}
+                    />
+                  </motion.div>
+                </div>
+
               ))}
             </div>
           </div>
@@ -128,16 +160,26 @@ export default function Step10Home() {
                                     mobile:grid-cols-1
                     "
             >
-              {safetyitems.map((category) => (
-                <ChooDesPl
-                  title={category.name}
-                  icon={category.icon}
-                  type={type}
-                  selectedMany={selectedMany}
-                  setselectedMany={setselectedMany}
-                  selected={''}
-                  setselected={() => {}}
-                />
+              {safetyitems.map((category, index) => (
+                <div ref={refButton}>
+                  <motion.div
+                    initial="hidden"
+                    animate={inViewButton ? "visible" : "hidden"}
+                    variants={animationVariants}
+                    transition={{ type: "spring", stiffness: 35, delay: 0.1 * index }}
+                  >
+                    <ChooDesPl
+                      title={category.name}
+                      icon={category.icon}
+                      type={type}
+                      selectedMany={selectedMany}
+                      setselectedMany={setselectedMany}
+                      selected={''}
+                      setselected={() => { }}
+                    />
+                  </motion.div>
+                </div>
+
               ))}
             </div>
           </div>

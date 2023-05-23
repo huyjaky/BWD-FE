@@ -21,6 +21,7 @@ import { AnimatePresence } from 'framer-motion';
 
 import ProcessBar from '../../components/CreateHome/ProcessBar/ProccessBar';
 import { GetServerSideProps } from 'next';
+import StepCongratulation from '@/components/CreateHome/Step/StepCongratulation';
 function CreateHome(): JSX.Element {
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -58,17 +59,22 @@ function CreateHome(): JSX.Element {
     { number: 14, component: <Step14CHome /> },
     { number: 15, component: <Step15CHome /> },
     { number: 16, component: <Step16CHome /> },
-    { number: 17, component: <Step17CHome /> }
+    { number: 17, component: <Step17CHome /> },
+    { number: 18, component: <StepCongratulation /> },
   ];
 
   return (
     <div className="">
-      <Header />
+      {currentStep <= 17 &&
+        <Header />
+      }
       <AnimatePresence >
-        {currentStep > 0 && currentStep <= 17 && currentStep === steps[currentStep - 1].number && isMounted && steps[currentStep - 1].component}
+        {currentStep > 0 && currentStep <= 18 && currentStep === steps[currentStep - 1].number && isMounted && steps[currentStep - 1].component}
       </AnimatePresence>
 
-      <ProcessBar steps={steps} handleBackStep={handleBackStep} handleNextStep={handleNextStep} currentStep={currentStep} />
+      {currentStep <= 17 &&
+        <ProcessBar steps={steps} handleBackStep={handleBackStep} handleNextStep={handleNextStep} currentStep={currentStep} />
+      }
     </div>
   );
 }

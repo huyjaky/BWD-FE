@@ -50,6 +50,13 @@ export { default as TynihomeIcon } from './tinyhomes.svg'
 export { default as VineYardIcon } from './vineYards.svg'
 export { default as Room } from './Room.svg'
 export { default as ShareRoom } from './SharedRoom.svg'
+export { default as AnyReview } from './AnyReview.svg'
+export { default as SuperHost } from './SuperHost.svg'
+export { default as ContactSupport } from './ContactSupport.svg'
+export { default as Inbox } from './Inbox.svg'
+export { default as CreateList } from './CreateList.svg'
+export { default as Calendar } from './Calendar.svg'
+export { default as Today } from './Today.svg'
 
 
 

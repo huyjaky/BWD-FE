@@ -27,15 +27,22 @@ export default function Step3CHome() {
         </div>
         <div className="">
           {categoriesStep3.map((categorie, index) => (
-            <ChooTypeHo
-              key={index}
-              selected={selected}
-              setselected={setselected}
-              name={categorie.name}
-              icon={categorie.icon}
-              description={categorie.description}
-              type=""
-            />
+            <motion.div
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 35, delay: 0.3 * index }}
+            >
+              <ChooTypeHo
+                key={index}
+                selected={selected}
+                setselected={setselected}
+                name={categorie.name}
+                icon={categorie.icon}
+                description={categorie.description}
+                type=""
+              />
+            </motion.div>
+
           ))}
         </div>
       </div>

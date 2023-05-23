@@ -132,6 +132,9 @@ module.exports = {
       },
       borderColor: {
         colorBorderBottom: 'rgb(221,221,221)'
+      },
+      boxShadow: {
+        shadowHeadhost: '0 8px 32px 0 rgba(31,38,135,.37)'
       }
     }
   },

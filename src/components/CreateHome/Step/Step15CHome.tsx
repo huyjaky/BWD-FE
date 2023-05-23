@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
-
+import { motion } from 'framer-motion';
 export default function Step15CHome() {
   const [selectedOption, setSelectedOption] = useState<string>();
 
@@ -7,7 +7,11 @@ export default function Step15CHome() {
     setSelectedOption((prevState) => event.target.value);
   };
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1 }}
       className="w-[98vw] px-[80px]
                         mobile:px-0
                         mobile:pb-20
@@ -23,29 +27,38 @@ export default function Step15CHome() {
         <div className="flex flex-col px-10 w-[100%]">
           <div className="mb-[32px]">
             <div className="mb-[62px] h-[82px] tablet:mb-[62px] laptop:mb-[22px] mobile:mb-[152px] w-[100%] ml-auto mr-auto ">
-              <h1
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
                 className="text-[32px] font-semibold w-[100%] leading-10 mb-3
                         "
               >
                 Choose who to welcome for your first reservation
-              </h1>
-              <p className="text-[18px] text-[#717171] ">
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: -30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
+                className="text-[18px] text-[#717171] ">
                 After your first guest, anyone can book your place.{' '}
                 <span className="underline">Learn more</span>
-              </p>
+              </motion.p>
             </div>
             <div className="">
-              <div
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 35, delay: 0.1 }}
                 className={`flex flex-col my-[16px] p-[24px] border
-                            ${
-                              selectedOption === 'AnyAirbnbguest'
-                                ? 'bg-[#F7F7F7] border-[2px] hover:border-black border-black'
-                                : 'border-gray-200 border-[2px] hover:border-black'
-                            }
+                            ${selectedOption === 'AnyAirbnbguest'
+                    ? 'bg-[#F7F7F7] border-[2px] hover:border-black border-black'
+                    : 'border-gray-200 border-[2px] hover:border-black'
+                  }
                              rounded-[14px] hover:border-black cursor-pointer
                             `}
               >
-                <div className="flex items-center justify-center cursor-pointer">
+                <motion.div className="flex items-center justify-center cursor-pointer">
                   <div>
                     <input
                       value="AnyAirbnbguest"
@@ -74,7 +87,7 @@ export default function Step15CHome() {
                   >
                     Any Airbnb guest
                   </label>
-                </div>
+                </motion.div>
                 <div className="flex justify-start">
                   <label
                     htmlFor="bordered-radio-1"
@@ -83,13 +96,15 @@ export default function Step15CHome() {
                     Get reservations faster when you welcome anyone from the Airbnb community.
                   </label>
                 </div>
-              </div>
-              <div
-                className={`flex flex-col p-[24px] rounded-[14px] cursor-pointer  ${
-                  selectedOption === 'AnExperiancedguest'
-                    ? 'bg-[#F7F7F7] border-[2px] hover:border-black border-black'
-                    : 'border-gray-200 border-[2px] hover:border-black'
-                }`}
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 35, delay: 0.3 }}
+                className={`flex flex-col p-[24px] rounded-[14px] cursor-pointer  ${selectedOption === 'AnExperiancedguest'
+                  ? 'bg-[#F7F7F7] border-[2px] hover:border-black border-black'
+                  : 'border-gray-200 border-[2px] hover:border-black'
+                  }`}
               >
                 <div className="flex justify-center items-center cursor-pointer">
                   <div className="cursor-pointer">
@@ -119,11 +134,11 @@ export default function Step15CHome() {
                     offer tips for how to be a great Host.
                   </label>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

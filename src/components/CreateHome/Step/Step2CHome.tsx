@@ -34,16 +34,23 @@ export default function Step2CHome() {
                                     mobile:grid-cols-1
                     "
           >
-            {categoriesStep2.map((category) => (
-              <ChooDesPl
-                title={category.name}
-                icon={category.icon}
-                selected={selected}
-                setselected={setselected}
-                type={type}
-                selectedMany={[]}
-                setselectedMany={() => {}}
-              />
+            {categoriesStep2.map((category, index) => (
+              <motion.div
+                initial={{ opacity: 0, y: -30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 35, delay: 0.1 * index }}
+              >
+                <ChooDesPl
+                  title={category.name}
+                  icon={category.icon}
+                  selected={selected}
+                  setselected={setselected}
+                  type={type}
+                  selectedMany={[]}
+                  setselectedMany={() => { }}
+                />
+              </motion.div>
+
             ))}
           </div>
         </div>

@@ -3,6 +3,7 @@ import { BsPlusLg } from 'react-icons/bs';
 import { RxMinus } from 'react-icons/rx';
 import { RiErrorWarningFill } from 'react-icons/ri';
 import { HiOutlineInformationCircle } from 'react-icons/hi';
+import { motion } from 'framer-motion';
 
 export default function Step16CHome() {
   const [money, setMoney] = useState<number>(0);
@@ -23,7 +24,11 @@ export default function Step16CHome() {
   };
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1 }}
       className="w-[98vw] px-[80px]
                         mobile:px-0
         "
@@ -39,15 +44,25 @@ export default function Step16CHome() {
           <div className="mb-[32px]">
             <div className="mb-[32px] h-[82px] tablet:mb-[62px] mobile:mb-[152px] w-[100%] ml-auto mr-auto ">
               <div className="mb-[22px]">
-                <h1
+                <motion.h1
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
                   className="text-[32px] font-semibold w-[100%] leading-10 mb-3
                         "
                 >
                   Now, set your price
-                </h1>
-                <p className="text-[18px] text-[#717171] ">You can change it anytime.</p>
+                </motion.h1>
+                <motion.p
+                  initial={{ opacity: 0, y: -30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
+                  className="text-[18px] text-[#717171] ">You can change it anytime.</motion.p>
               </div>
-              <div
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
                 className="w-[95%] bg-[#F7F7F7] h-[320px] border rounded-[12px] p-[32px] flex flex-col items-center
                                             mobile:h-[260px]
                             "
@@ -70,9 +85,8 @@ export default function Step16CHome() {
                         type="text"
                         value={`$${money}`}
                         onChange={handleMoney}
-                        className={`my-[8px] mx-[12px] w-[98%] h-[98%] border border-black rounded-[8px] text-[48px] text-center ${
-                          error ? ' bg-red-50 border border-red-500 text-red-900' : ''
-                        }
+                        className={`my-[8px] mx-[12px] w-[98%] h-[98%] border border-black rounded-[8px] text-[48px] text-center ${error ? ' bg-red-50 border border-red-500 text-red-900' : ''
+                          }
                                             `}
                       />
                     </div>
@@ -99,8 +113,11 @@ export default function Step16CHome() {
                     <HiOutlineInformationCircle className="absolute right-3 bottom-[5px]" />
                   </button>
                 </div>
-              </div>
-              <label
+              </motion.div>
+              <motion.label
+                initial={{ opacity: 0, y: -30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
                 htmlFor="helper-checkbox"
                 className="w-[95%] cursor-pointer bg-[#F7F7F7] h-[120px] mobile:h-[150px] border rounded-[12px] mt-[20px] px-[32px] py-0 pt-[20px] flex  justify-between "
               >
@@ -124,11 +141,11 @@ export default function Step16CHome() {
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                 </div>
-              </label>
+              </motion.label>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
