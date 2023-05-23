@@ -87,7 +87,9 @@ const ShowAllHouse = ({ arrImg }: ShowAllHouseProps) => {
   const { isShowAllPt, setIsShowAllPt } = useContext(filterFormAnimateContext);
   const [isFirstLoading, setIsFirstLoading] = useState(true);
 
-  useEffect(() => {}, [isShowAllPt]);
+  useEffect(() => {
+    console.log(index);
+  }, [isShowAllPt, index]);
 
   return (
     <>
@@ -102,7 +104,11 @@ const ShowAllHouse = ({ arrImg }: ShowAllHouseProps) => {
           <div className="w-full h-fit absolute top-0 ">
             <motion.button
               whileTap={{ scale: 0.8 }}
-              onClick={(event) => setIsShowAllPt(false)}
+              onClick={(event) => {setIsShowAllPt(false);
+                document.body.style.overflow = 'scroll';
+                document.body.style.overflowX = 'hidden';
+
+              }}
               className="w-[100px] h-[100px] cursor-pointer flex">
               <IoChevronBackOutline className="text-[50px] m-auto" />
             </motion.button>
@@ -120,13 +126,7 @@ const ShowAllHouse = ({ arrImg }: ShowAllHouseProps) => {
 
         </div>
       </motion.div>
-      <AnimatePresence>
-        {index && (
-          <motion.div layoutId={index}>
-            <motion.h1>check hinh </motion.h1>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
     </>
   );
 };
