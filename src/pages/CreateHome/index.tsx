@@ -65,21 +65,28 @@ function CreateHome(): JSX.Element {
 
   return (
     <div className="">
-      <Header />
+      {currentStep > 0 && currentStep <= 17
+        && <Header />
+      }
+
+
       <AnimatePresence>
         {currentStep > 0 &&
-          currentStep <= 17 &&
+          currentStep <= 18 &&
           currentStep === steps[currentStep - 1].number &&
           isMounted &&
           steps[currentStep - 1].component}
       </AnimatePresence>
 
-      <ProcessBar
-        steps={steps}
-        handleBackStep={handleBackStep}
-        handleNextStep={handleNextStep}
-        currentStep={currentStep}
-      />
+      {currentStep > 0 && currentStep <= 17
+        && <ProcessBar
+          steps={steps}
+          handleBackStep={handleBackStep}
+          handleNextStep={handleNextStep}
+          currentStep={currentStep}
+        />
+      }
+
     </div>
   );
 }

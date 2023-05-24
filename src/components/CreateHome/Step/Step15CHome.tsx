@@ -68,7 +68,7 @@ export default function Step15CHome() {
                       name="bordered-radio"
                       checked={selectedOption === 'AnyAirbnbguest'}
                       className="w-4 h-4
-                                        text-blue-600
+                                        text-black
                                         bg-gray-100
                                         border-gray-300
                                         focus:ring-black
@@ -115,7 +115,7 @@ export default function Step15CHome() {
                       id="bordered-radio-2"
                       type="radio"
                       name="bordered-radio"
-                      className="w-4 h-4 cursor-pointer text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                      className="w-4 h-4 cursor-pointer text-black bg-gray-100 border-gray-300 focus:ring-black dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     />
                   </div>
                   <label

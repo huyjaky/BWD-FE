@@ -17,7 +17,7 @@ module.exports = {
         houseBox: 'repeat(auto-fill, minmax(300px, 1fr))'
       },
 
-      gridTemplateAreas:{
+      gridTemplateAreas: {
         layoutPicture: [
           'h1 h1 h2 h3',
           'h1 h1 h4 h5'
@@ -35,7 +35,7 @@ module.exports = {
           'h10 h12'
         ]
       },
-      gridTemplateColumns:{
+      gridTemplateColumns: {
         houseBox: 'repeat(auto-fill, minmax(300px, 1fr))',
         layoutPicture: '1fr 1fr 1fr 1fr',
         layoutShowAllPt: '350px 350px'
@@ -171,6 +171,7 @@ module.exports = {
   plugins: [
     require('tailwind-scrollbar-hide'),
     require('@savvywombat/tailwindcss-grid-areas'),
-    require("daisyui")
+    require("daisyui"),
+    require("flowbite/plugin")
   ]
 };

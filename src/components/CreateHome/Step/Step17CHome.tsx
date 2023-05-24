@@ -59,7 +59,7 @@ export default function Step17CHome() {
                     id="security-camera"
                     type="checkbox"
                     value=""
-                    className="w-[24px] h-[24px] text-white rounded-[20px] checked:bg-black"
+                    className="w-[24px] h-[24px] text-white rounded-[20px] checked:bg-black focus:ring-black dark:focus:ring-black"
                   />
                 </motion.div>
                 <motion.div
@@ -68,7 +68,7 @@ export default function Step17CHome() {
                   transition={{ type: "spring", stiffness: 35, delay: 0.3 }}
                   className="flex items-center mb-4 justify-between">
                   <div>
-                    <label htmlFor="Weapons" className="text-[16px] text-gray-900 ">
+                    <label htmlFor="Weapons" className="text-[16px]  focus:ring-black dark:focus:ring-black  text-gray-900 ">
                       Weapons
                     </label>
                   </div>
@@ -76,7 +76,7 @@ export default function Step17CHome() {
                     id="Weapons"
                     type="checkbox"
                     value=""
-                    className="w-[24px] h-[24px] text-white rounded-[20px] checked:bg-black"
+                    className="w-[24px] h-[24px] text-white rounded-[20px] checked:bg-black focus:ring-black dark:focus:ring-black"
                   />
                 </motion.div>
                 <motion.div
@@ -93,7 +93,7 @@ export default function Step17CHome() {
                     id="Dangerous-animals"
                     type="checkbox"
                     value=""
-                    className="w-[24px] h-[24px] text-white rounded-[20px] checked:bg-black"
+                    className="w-[24px] h-[24px] text-white rounded-[20px] checked:bg-black focus:ring-black dark:focus:ring-black"
                   />
                 </motion.div>
               </div>
