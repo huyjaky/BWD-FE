@@ -30,4 +30,5 @@ export interface house_ {
   address: address;
   useracc: userAcc;
   arrImg: { Path: string }[];
+  placeOffer: {PlaceOfferId: string, PlaceOffer: string, PathIcon: string}[],
 }

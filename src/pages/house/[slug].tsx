@@ -41,9 +41,13 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({ houseDetail }: Hous
             <ShowAllHouse arrImg={houseDetail.arrImg} />
             <div className="w-full h-fit mt-10 ">
               <div className="w-full h-fit flex">
-                <Host userAcc={houseDetail.useracc} />
+                <Host userAcc={houseDetail.useracc} placeOffer={houseDetail.placeOffer}/>
                 <div className='flex-[5] bg-slate-600'>
-                    check
+                    <div className='w-full h-[400px] bg-emerald-300
+                      sticky top-0
+                    '>
+                        check
+                    </div>
                 </div>
               </div>
             </div>
