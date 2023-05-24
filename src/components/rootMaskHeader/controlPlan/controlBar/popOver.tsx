@@ -17,9 +17,9 @@ const Popover = () => {
     >
       <div className="w-full h-full flex">
         {selected === 'where' && <Where />}
-        {selected === 'who' && <Who />}
-        {selected === 'checkin' && <CheckIn_Out />}
-        {selected === 'checkout' && <CheckIn_Out />}
+        {selected === 'who' && <Who styleWho={null}/>}
+        {selected === 'checkin' && <CheckIn_Out styleHorizontal={'tablet:hidden mobile:hidden'} styleVerical={' laptop:hidden desktop:hidden'}/>}
+        {selected === 'checkout' && <CheckIn_Out styleHorizontal={'tablet:hidden mobile:hidden'} styleVerical={' laptop:hidden desktop:hidden'}/>}
       </div>
     </div>
   );

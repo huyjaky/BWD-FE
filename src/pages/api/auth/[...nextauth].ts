@@ -10,7 +10,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
     session: {
       strategy: 'jwt',
       maxAge: 24 * 60 * 60,
-      updateAge: 24 * 60 * 60,
+      // updateAge: 24 * 60 * 60,
     },
     jwt: {
       maxAge: 24 * 60 * 60

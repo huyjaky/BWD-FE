@@ -12,6 +12,7 @@ import { NextPageWithLayout } from '@/models/layoutprops';
 import Auth from '@/components/layouts/auth';
 import Carousel from '@/components/main/showHouse/carousel';
 import Host from '@/components/houseDetail/host';
+import Bill from '@/components/houseDetail/bill';
 
 interface HouseDetailProps {
   houseDetail: house_;
@@ -26,7 +27,7 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({ houseDetail }: Hous
   return (
     <div className="w-full h-fit">
       <>
-        <main className={`${monsterrat.className} relative overflow-hidden box-border`} id="root">
+        <main className={`${monsterrat.className} relative box-border`} id="root">
           <HeaderMain />
           <div
             className="w-[1150px] h-fit
@@ -39,16 +40,12 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({ houseDetail }: Hous
               <Carousel arrImg={houseDetail.arrImg} houseId={houseDetail.HouseId} />
             </div>
             <ShowAllHouse arrImg={houseDetail.arrImg} />
-            <div className="w-full h-fit mt-10 ">
-              <div className="w-full h-fit flex">
-                <Host userAcc={houseDetail.useracc} placeOffer={houseDetail.placeOffer}/>
-                <div className='flex-[5] bg-slate-600'>
-                    <div className='w-full h-[400px] bg-emerald-300
-                      sticky top-0
-                    '>
-                        check
-                    </div>
-                </div>
+            <div className="w-full h-fit mt-10  ">
+              <div className="w-full h-fit flex box-border mobile:flex-col">
+                <Host userAcc={houseDetail.useracc} placeOffer={houseDetail.placeOffer} />
+                <article className="flex-[5] ml-5">
+                  <Bill houseDetail={houseDetail} />
+                </article>
               </div>
             </div>
           </div>

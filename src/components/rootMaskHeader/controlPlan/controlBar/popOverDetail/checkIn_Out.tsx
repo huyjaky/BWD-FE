@@ -3,7 +3,12 @@ import { selectPlaceContext } from '@/contexts/selectPlace';
 import { addDays } from 'date-fns';
 import { useContext, useEffect, useState } from 'react';
 import { DateRangePicker } from 'react-date-range';
-const CheckIn_Out = () => {
+interface CheckIn_OutProps {
+  styleVerical: string | null;
+  styleHorizontal: string | null;
+}
+
+const CheckIn_Out = ({styleVerical, styleHorizontal}: CheckIn_OutProps) => {
   const { address, setAddress } = useContext(selectPlaceContext);
 
   const { selected } = useContext(selectPopoverContext);
@@ -28,7 +33,7 @@ const CheckIn_Out = () => {
   return (
     <div className="w-full h-full bg-white rounded-2xl pointer-events-auto" id="checkin_out-popup">
       <div className="p-8 w-full h-full flex items-center justify-center ">
-        <div className="w-full h-full tablet:hidden mobile:hidden">
+      <div className={`w-full h-full ${styleHorizontal}`}>
           <DateRangePicker
             onChange={(item: any) => handleOnChange(item)}
             showPreview={true}
@@ -36,11 +41,12 @@ const CheckIn_Out = () => {
             months={2}
             ranges={date_}
             direction="horizontal"
-            rangeColors={['rgb(239 68 68)']}
             className="w-full h-full font-semibold "
+            rangeColors={['rgb(239 68 68)']}
           />
         </div>
-        <div className="w-full h-full laptop:hidden desktop:hidden flex overflow-scroll overflow-x-hidden">
+        <div className={`w-full h-full  flex
+        overflow-scroll overflow-x-hidden ${styleVerical}`}>
           <DateRangePicker
             onChange={(item: any) => handleOnChange(item)}
             showPreview={true}

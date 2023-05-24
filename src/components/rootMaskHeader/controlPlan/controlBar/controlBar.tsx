@@ -1,8 +1,6 @@
 import SearchBox from '@/components/searchBox/searchBox';
 import { selectPopoverContext } from '@/contexts';
-import { filterContext } from '@/contexts/filter';
 import { getHouseContext } from '@/contexts/getHouse';
-import { mobileContolPanelContext } from '@/contexts/mobileControlPanel';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 import { format } from 'date-fns';
 import { useRouter } from 'next/router';
