@@ -10,6 +10,8 @@ import { Montserrat } from 'next/font/google';
 import { NextApiRequest } from 'next';
 import { NextPageWithLayout } from '@/models/layoutprops';
 import Auth from '@/components/layouts/auth';
+import Carousel from '@/components/main/showHouse/carousel';
+import Host from '@/components/houseDetail/host';
 
 interface HouseDetailProps {
   houseDetail: house_;
@@ -26,11 +28,25 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({ houseDetail }: Hous
       <>
         <main className={`${monsterrat.className} relative overflow-hidden box-border`} id="root">
           <HeaderMain />
-          <div className="w-[1150px] h-fit  mobile:px-[20px] box-border m-auto">
+          <div
+            className="w-[1150px] h-fit
+          tablet:w-screen mobile:w-screen
+          box-border m-auto">
             <TitleHouse title={houseDetail.Title} address={houseDetail.address} />
 
             <Picture arrImg={houseDetail.arrImg} />
-            <ShowAllHouse arrImg={houseDetail.arrImg}/>
+            <div className="w-screen h-[500px] laptop:hidden desktop:hidden flex justify-center box-border ">
+              <Carousel arrImg={houseDetail.arrImg} houseId={houseDetail.HouseId} />
+            </div>
+            <ShowAllHouse arrImg={houseDetail.arrImg} />
+            <div className="w-full h-fit mt-10 ">
+              <div className="w-full h-fit flex">
+                <Host userAcc={houseDetail.useracc} />
+                <div className='flex-[5] bg-slate-600'>
+                    check
+                </div>
+              </div>
+            </div>
           </div>
           <FooterRooms />
           <FooterMainRes />

@@ -24,7 +24,7 @@ const Picture = ({ arrImg }: PictureProps) => {
       <div
         className="w-full h-[450px] grid gap-3 rounded-3xl overflow-hidden mt-7
     grid-cols-layoutPicture grid-rows-layoutPicture grid-areas-layoutPicture
-    relative
+    relative mobile:hidden tablet:hidden
     ">
         <img
           src={arrImg[0].Path}
