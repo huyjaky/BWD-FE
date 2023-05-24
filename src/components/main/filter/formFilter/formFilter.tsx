@@ -10,6 +10,7 @@ import HostLanguage from './filterFormComponent/hostLanguage';
 import PriceRange from './filterFormComponent/priceRange';
 import PropertyHouse from './filterFormComponent/property';
 import { GrClose } from 'react-icons/gr';
+import { IsShowPtContext } from '@/contexts/isShowPt';
 
 const variantsAmenities: Variants = {
   showMore: {
@@ -28,26 +29,28 @@ const FormFilter = () => {
   const { filterForm, setFilterForm } = useContext(filterContext);
   const { setIsFilter, isFilter } = useContext(getHouseContext);
   const { isClickOutSide, setIsClickOutSide } = useContext(filterFormAnimateContext);
+  const {isShowAllPt} = useContext(IsShowPtContext);
   const formFilter = useRef<HTMLInputElement>(null);
+
+
 
   useEffect(() => {
     const handleOnClickOutSide = (event: any) => {
       if (formFilter.current) {
         const formFilter_ = formFilter.current;
         const isClickOutSide_ = formFilter_.contains(event.target);
-        if (!isClickOutSide_) {
-          setIsClickOutSide(false);
+        if (!isClickOutSide_ ) {
           document.body.style.overflow = 'scroll';
           document.body.style.overflowX = 'hidden';
+          setIsClickOutSide(false);
         }
       }
     };
 
     document.addEventListener('mousedown', handleOnClickOutSide);
-  }, []);
+  }, [isShowAllPt]);
 
   useEffect(() => {}, [show]);
-  useEffect(() => {}, [isClickOutSide]);
 
   const isEmpty = () => {
     const emptyObj = {
@@ -77,12 +80,12 @@ const FormFilter = () => {
     document.body.style.overflow = 'scroll';
     document.body.style.overflowX = 'hidden';
 
-    console.log(filterForm);
-
-    if (isEmpty()) {
-      setIsFilter(0);
+    // neu du lieu co ton tai thi la fetch lai du lieu neu khong thi bo qua
+    if (!isEmpty()) {
+      setIsFilter(isFilter + 1);
+      return;
     } else {
-      setIsFilter(isFilter+1);
+      return;
     }
   };
 
@@ -96,7 +99,7 @@ const FormFilter = () => {
           className="w-[800px] h-[calc(100vh-50px)] bg-white m-auto rounded-3xl overflow-hidden
           flex flex-col
           mobile:mt-0 mobile:rounded-none mobile:w-screen mobile:h-[calc(100vh-70px)]
-          tablet:h-[calc(100vh-90px)] tablet:mt-[10px]
+          tablet:h-[calc(100vh-90px)] tablet:mt-[10px] z-40
           "
           ref={formFilter}>
           {/* header formfilter */}
@@ -163,7 +166,7 @@ const FormFilter = () => {
                     onClick={(event) => setShow(!show)}>
                     <span className="text-[20px]">{show ? 'Show less' : 'Show more'}</span>
                   </motion.button>
-                  <span className=''>
+                  <span className="">
                     {!show &&
                     (filterForm.amenities.features.length != 0 ||
                       filterForm.amenities.location.length != 0 ||

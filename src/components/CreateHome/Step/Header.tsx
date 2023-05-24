@@ -33,18 +33,18 @@ export default function Header() {
         <Image width={80} className="" src={Logo} alt=" Logo" />
       </motion.div>
 
-      <div className='flex'>
+      <div className="flex">
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ type: "spring", stiffness: 35 }}
+          transition={{ type: 'spring', stiffness: 35 }}
         >
           <ButtonHeader content="Questions?" />
         </motion.div>
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ type: "spring", stiffness: 35 }}
+          transition={{ type: 'spring', stiffness: 35 }}
         >
           <ButtonHeader content="Save & exit" />
         </motion.div>

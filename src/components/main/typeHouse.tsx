@@ -18,7 +18,6 @@ const TypeHouse = () => {
   }, []);
 
   const handleOnClickLogo = (event: any) => {
-    console.log('check');
   };
 
   const handleOnClickNext = async (event: any) => {
