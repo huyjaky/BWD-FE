@@ -2,7 +2,15 @@ import React from 'react'
 import Signature from '../../../../public/assets/signature.jpg'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/router';
 export default function StepCongratulation() {
+
+    const router = useRouter();
+
+    const handleClick = () => {
+        router.push('/hosting');
+    }
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -33,6 +41,7 @@ export default function StepCongratulation() {
                         </div>
                         <div className='mt-[22px] mobile:mb-[22px]'>
                             <button
+                                onClick={handleClick}
                                 // style={{ transition: "2s" }}
                                 className='transition ease-in-out delay-150 rounded-[10px] w-[200px] h-[48px] bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 '>
                                 Let's get started

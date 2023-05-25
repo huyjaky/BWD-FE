@@ -1,16 +1,6 @@
 import React, { useEffect, useRef, RefObject } from 'react';
 import { motion } from 'framer-motion';
 export default function Step9CHome() {
-  const videoRef: RefObject<HTMLVideoElement> = useRef(null);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.onloadedmetadata = () => {
-        videoRef.current?.play();
-      };
-    }
-  }, [videoRef]);
-
   return (
     <motion.div
       initial={{ opacity: 0 }}

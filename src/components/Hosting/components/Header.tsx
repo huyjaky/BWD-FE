@@ -8,18 +8,29 @@ import { motion } from 'framer-motion'
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'
 import MenuMobile from './MenuMobile'
 import { CreateList } from '../../../../Icon_BnB_svg'
+import { useRouter } from 'next/router';
 
 function Header(): JSX.Element {
 
-    const [activeToday, setActiveToday] = useState(true);
+    const router = useRouter();
 
-    const [activeInbox, setActiveInbox] = useState(false);
+    const handleCreatehome = () => {
+        router.push('/createhome');
+    };
 
-    const [activeCalendar, setActiveCalendar] = useState(false);
+    const [active, setActive] = useState('');
 
     const [activeMenu, setActiveMenu] = useState(false);
 
-    const [toggleMenu, settoggleMenu] = useState(false);
+    const [toggleMenu, settoggleMenu] = useState(false)
+
+    const handleActive = (title: string) => {
+        setActive(title)
+    }
+    const handleMenu = () => {
+        setActiveMenu(!activeMenu)
+        settoggleMenu(!toggleMenu);
+    }
 
     return (
         <div className='flex justify-between h-[70px] items-center px-[20px] border-[1px] border-b-[#e4e4e4]'>
@@ -32,7 +43,8 @@ function Header(): JSX.Element {
                     <ul className='flex gap-3 text-[14px] font-semibold mobile:hidden
                     '>
                         <li className='relative'><button
-                            className={`py-[10px] px-[16px] rounded-[30px] hover:bg-[#F7F7F7] ${activeToday ? 'text-black' : 'text-[#717171]'}
+                            onClick={() => handleActive('Today')}
+                            className={`py-[10px] px-[16px] rounded-[30px] hover:bg-[#F7F7F7] ${active === 'Today' ? 'text-black' : 'text-[#717171]'}
                         before:absolute before:content-[""] before:w-0 before:h-[2px] before:bg-black before:left-4 before:bottom-2
                         before::ease-in-out before:duration-500
                         hover:before:w-[60%]
@@ -40,19 +52,23 @@ function Header(): JSX.Element {
                         
                     `}>Today</button>
                         </li>
-                        <li className='relative' ><button className={`py-[10px] px-[16px] rounded-[30px] hover:bg-[#F7F7F7] ${activeInbox ? 'text-black' : 'text-[#717171]'}
+                        <li className='relative' ><button
+                            onClick={() => handleActive('Inbox')}
+                            className={`py-[10px] px-[16px] rounded-[30px] hover:bg-[#F7F7F7] ${active === 'Inbox' ? 'text-black' : 'text-[#717171]'}
                         before:absolute before:content-[""] before:w-0 before:h-[2px] before:bg-black before:left-4 before:bottom-2
                         before::ease-in-out before:duration-500
                         hover:before:w-[60%]
                     `}>Inbox</button></li>
-                        <li className='relative'><button className={`py-[10px] px-[16px] rounded-[30px] hover:bg-[#F7F7F7] ${activeCalendar ? 'text-black' : 'text-[#717171]'}
+                        <li className='relative'><button
+                            onClick={() => handleActive('Calendar')}
+                            className={`py-[10px] px-[16px] rounded-[30px] hover:bg-[#F7F7F7] ${active === 'Calendar' ? 'text-black' : 'text-[#717171]'}
                         before:absolute before:content-[""] before:w-0 before:h-[2px] before:bg-black before:left-4 before:bottom-2
                         before::ease-in-out before:duration-500
                         hover:before:w-[60%]
                     `}>Calendar</button></li>
                         <li className='relative'>
                             <button
-                                onClick={() => settoggleMenu(!toggleMenu)}
+                                onClick={() => handleMenu()}
                                 className={`py-[10px] px-[16px] rounded-[30px] hover:bg-[#F7F7F7] ${activeMenu ? 'text-black' : 'text-[#717171]'} flex items-center
                                 before:absolute before:content-[""] before:w-0 before:h-[2px] before:bg-black before:left-4 before:bottom-2
                                 before:ease-in-out before:duration-500
@@ -72,7 +88,9 @@ function Header(): JSX.Element {
                                 duration: 0.5
                             }}
                             className='text-[12px] h-[0%]'>
-                            <button className={`w-[100%] h-[100%] p-[20px] text-start flex justify-between items-center rounded-[13px] hover:bg-[#F7F7F7] ${activeMenu ? 'text-black' : 'text-[#717171]'} flex items-center justify-center
+                            <button
+                                onClick={() => handleCreatehome}
+                                className={`w-[100%] h-[100%] p-[20px] text-start flex justify-between items-center rounded-[13px] hover:bg-[#F7F7F7] ${active === "Create a new listing" ? 'text-black' : 'text-[#717171]'} flex items-center justify-center
                             `}>Create a new listing <div className='w-[20px]'><CreateList className='' /></div>
                             </button>
                         </motion.li>
@@ -82,10 +100,8 @@ function Header(): JSX.Element {
 
             <MenuMobile
                 toggleMenu={toggleMenu}
-                activeInbox={activeInbox}
-                activeCalendar={activeCalendar}
-                activeMenu={activeMenu}
-                activeToday={activeToday}
+                active={active}
+                setActive={setActive}
             />
 
             <div className='flex gap-4'>

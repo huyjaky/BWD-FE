@@ -15,9 +15,9 @@ export default function Step2CHome() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1 }}
-      className="w-[98vw] px-[80px] h-[800px]"
+      className="w-[98vw] px-[80px] h-[800px] mobile:px-0"
     >
-      <div className="w-[60%] ml-auto mr-auto pl-[70px] ">
+      <div className="w-[60%] mobile:w-[100%] tablet:w-[100%] laptop:w-[100%] ml-auto mr-auto pl-[70px] mobile:pl-0  ">
         <div className="flex flex-col px-10">
           <motion.div
             className="mb-[32px] h-[72px] "
@@ -25,7 +25,7 @@ export default function Step2CHome() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: 'spring', stiffness: 35 }}
           >
-            <h1 className="text-[32px] font-semibold w-[530px] leading-10 ">
+            <h1 className="text-[32px] font-semibold w-[530px] mobile:w-[450px] leading-10 mobile:text-[26px]">
               Which of these best describes &nbsp; &nbsp;your place?
             </h1>
           </motion.div>
@@ -33,7 +33,7 @@ export default function Step2CHome() {
             className="grid grid-cols-3 gap-[15px] w-[100%]
                                     laptop:grid-cols-2
                                     tablet:grid-cols-2
-                                    mobile:grid-cols-1
+                                    mobile:grid-cols-2
                     "
           >
             {categoriesStep2.map((category, index) => (

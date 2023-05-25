@@ -40,6 +40,7 @@ export default function Step10Home() {
       transition={{ duration: 1 }}
       className="w-[98vw] px-[80px]
                         mobile:px-0
+                        
         "
     >
       <div
@@ -47,11 +48,12 @@ export default function Step10Home() {
             mobile:pl-0
             laptop:w-[90%]
             tablet:w-[90%]
+            mobile:w-full
             "
       >
         <div className="flex flex-col px-10 w-[100%]">
           <div className="mb-[32px]">
-            <div className="mb-[32px] h-[82px] tablet:mb-[62px] mobile:mb-[152px] w-[100%] ml-auto mr-auto ">
+            <div className="mb-[32px] h-[82px] tablet:mb-[62px] mobile:mb-[100px] w-[100%] ml-auto mr-auto ">
               <motion.h1
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -72,7 +74,7 @@ export default function Step10Home() {
               className="grid grid-cols-3 gap-[15px] w-[110%]
                                     laptop:grid-cols-2
                                     tablet:grid-cols-2
-                                    mobile:grid-cols-1
+                                    mobile:grid-cols-2
                     "
             >
               {categoriesStep10.map((category, index) => (
@@ -99,17 +101,18 @@ export default function Step10Home() {
           <div className="mb-[22px]">
             <motion.div
               transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
-              className="h-[24px] mb-[22px] tablet:mb-[62px] mobile:mb-[92px] w-[100%]  ml-auto mr-auto "
+              className="h-[24px] mb-[22px] tablet:mb-[62px] mobile:mb-[40px] w-[100%]  ml-auto mr-auto "
             >
               <p className="text-[18px] text-black font-semibold">
                 Do you have any standout amenities?
               </p>
             </motion.div>
             <div
-              className="grid grid-cols-3 gap-[15px] w-[110%]
+              ref={refButton2}
+              className="grid grid-cols-3 gap-[15px] w-[100%]
                                     laptop:grid-cols-2
                                     tablet:grid-cols-2
-                                    mobile:grid-cols-1
+                                    mobile:grid-cols-2
                     "
             >
               {standoutamenities.map((category, index) => (
@@ -150,10 +153,10 @@ export default function Step10Home() {
               </motion.div>
             </div>
             <div
-              className="grid grid-cols-3 gap-[15px] w-[110%]
+              className="grid grid-cols-3 gap-[15px] w-[100%]
                                     laptop:grid-cols-2
                                     tablet:grid-cols-2
-                                    mobile:grid-cols-1
+                                    mobile:grid-cols-2
                     "
             >
               {safetyitems.map((category, index) => (

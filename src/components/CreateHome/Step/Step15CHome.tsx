@@ -18,7 +18,7 @@ export default function Step15CHome() {
         "
     >
       <div
-        className="w-[65%] ml-auto mr-auto pl-[70px] mt-[30px]
+        className="w-[65%] mobile:w-[100%] ml-auto mr-auto pl-[70px] mt-[30px]
             mobile:pl-0
             laptop:w-[90%]
             tablet:w-[90%]
@@ -130,7 +130,7 @@ export default function Step15CHome() {
                     htmlFor="bordered-radio-2"
                     className="w-full text-sm cursor-pointer font-medium text-gray-900 dark:text-gray-300"
                   >
-                    For your first guest, welcome someone with a good track record on Airbnb who can
+                    For your first guest, welcome someone with a good track record on Olympus who can
                     offer tips for how to be a great Host.
                   </label>
                 </div>

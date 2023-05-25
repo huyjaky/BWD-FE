@@ -14,10 +14,10 @@ export default function Step8CHome() {
       exit={{ opacity: 0 }}
       transition={{ duration: 1 }}
     >
-      <div className="w-[98vw] px-[80px] mt-10">
+      <div className="w-[98vw] px-[80px] mt-10 mobile:px-0">
         <div
           className="w-[60%] ml-auto mr-auto pl-[70px]
-                    mobile:pl-[0px]
+                    mobile:pl-0] mobile:w-[100%]
 
                 "
         >
@@ -44,7 +44,7 @@ export default function Step8CHome() {
               className="grid grid-cols-3 gap-[15px] w-[100%] mb-6
                                     laptop:grid-cols-2
                                     tablet:grid-cols-2
-                                    mobile:grid-cols-1
+                                    mobile:grid-cols-2
                     "
             >
               {categoriesStep8.map((category) => (
@@ -55,7 +55,7 @@ export default function Step8CHome() {
                   selected={selected}
                   setselected={setselected}
                   selectedMany={[]}
-                  setselectedMany={() => {}}
+                  setselectedMany={() => { }}
                 />
               ))}
             </div>

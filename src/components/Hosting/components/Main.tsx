@@ -183,12 +183,12 @@ function Main(): JSX.Element {
                             whileInView="onscreen"
                             viewport={{ amount: 1 }}
                             className='text-[26px] font-semibold mb-[24px]'>Resources and tips</motion.h1>
-                        <div className='flex h-[293px] mobile:h-fit w-[full] gap-5 mobile:justify-center tablet:justify-center mobile:flex-col'
+                        <div className='flex h-[293px] mobile:h-fit w-[full] gap-5 mobile:gap-0 mobile:flex-col mobile:items-center mobile:justify-center tablet:justify-center '
                         >
                             {
                                 Resourcesandtips.map((Resourceandtip, index) => (
                                     <motion.div
-                                        className='w-[100%]'
+                                        className='w-[100%]  flex items-center justify-center '
                                         variants={buttonVariants}
                                         initial="offscreen"
                                         whileInView="onscreen"
