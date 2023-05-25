@@ -27,7 +27,7 @@ export default function Step17CHome() {
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.1 }}
+                transition={{ type: 'spring', stiffness: 35, delay: 0.1 }}
                 className="text-[32px] font-semibold w-[100%] leading-10 mb-3
                         "
               >
@@ -39,8 +39,9 @@ export default function Step17CHome() {
                 <motion.h1
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
-                  className="flex items-center text-[18px] font-semibold">
+                  transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
+                  className="flex items-center text-[18px] font-semibold"
+                >
                   Does your place have any of these? <RiErrorWarningLine className="ml-2" />{' '}
                 </motion.h1>
               </div>
@@ -48,8 +49,9 @@ export default function Step17CHome() {
                 <motion.div
                   initial={{ opacity: 0, y: -30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
-                  className="flex items-center mb-4 justify-between">
+                  transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
+                  className="flex items-center mb-4 justify-between"
+                >
                   <div>
                     <label htmlFor="security-camera" className="text-[16px] text-gray-900 ">
                       Security camera(s)
@@ -65,8 +67,9 @@ export default function Step17CHome() {
                 <motion.div
                   initial={{ opacity: 0, y: -30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ type: "spring", stiffness: 35, delay: 0.3 }}
-                  className="flex items-center mb-4 justify-between">
+                  transition={{ type: 'spring', stiffness: 35, delay: 0.3 }}
+                  className="flex items-center mb-4 justify-between"
+                >
                   <div>
                     <label htmlFor="Weapons" className="text-[16px] text-gray-900 ">
                       Weapons
@@ -82,8 +85,9 @@ export default function Step17CHome() {
                 <motion.div
                   initial={{ opacity: 0, y: -30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ type: "spring", stiffness: 35, delay: 0.4 }}
-                  className="flex items-center mb-4 justify-between">
+                  transition={{ type: 'spring', stiffness: 35, delay: 0.4 }}
+                  className="flex items-center mb-4 justify-between"
+                >
                   <div>
                     <label htmlFor="Dangerous-animals" className="text-[16px] text-gray-900 ">
                       Dangerous animals
@@ -101,8 +105,9 @@ export default function Step17CHome() {
             <motion.div
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
-              className="pt-[48px]">
+              transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
+              className="pt-[48px]"
+            >
               <h1 className="mb-2 text-[18px] text-[#717171] font-semibold">
                 Important things to know
               </h1>

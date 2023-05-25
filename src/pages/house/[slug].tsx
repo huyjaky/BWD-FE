@@ -36,7 +36,8 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
           <div
             className="w-[1150px] h-fit
           tablet:w-screen mobile:w-screen
-          box-border m-auto">
+          box-border m-auto"
+          >
             <TitleHouse title={houseDetail.Title} address={houseDetail.address} />
 
             <Picture arrImg={houseDetail.arrImg} />
@@ -44,7 +45,7 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
               <Carousel arrImg={houseDetail.arrImg} houseId={houseDetail.HouseId} />
             </div>
             <ShowAllHouse arrImg={houseDetail.arrImg} />
-            <div className="w-full h-fit mt-10  ">
+            <div className="w-full h-fit mt-10">
               <div className="w-full h-fit flex box-border mobile:flex-col">
                 <Host userAcc={houseDetail.useracc} placeOffer={houseDetail.placeOffer} />
                 <article className="flex-[5] ml-5">
@@ -58,7 +59,6 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
               longitude={houseDetail.address.longitude}
               keyMapBox={keyMapBox}
             />
-            
           </div>
           <FooterRooms />
           <FooterMainRes />

@@ -17,8 +17,7 @@ const TypeHouse = () => {
     }
   }, []);
 
-  const handleOnClickLogo = (event: any) => {
-  };
+  const handleOnClickLogo = (event: any) => {};
 
   const handleOnClickNext = async (event: any) => {
     if (slide.current) {

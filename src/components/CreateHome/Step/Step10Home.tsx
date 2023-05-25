@@ -18,9 +18,8 @@ export default function Step10Home() {
 
   const [refButton2, inViewButton2] = useInView({
     triggerOnce: true, // Kích hoạt chỉ một lần khi vào khung nhìn
-    threshold: 0.01, // Ngưỡng nhìn thấy (tỷ lệ của phần tử nằm trong khung nhìn)
-  })
-
+    threshold: 0.01 // Ngưỡng nhìn thấy (tỷ lệ của phần tử nằm trong khung nhìn)
+  });
 
   const [ref2, inView2] = useInView({
     triggerOnce: true, // Kích hoạt chỉ một lần khi vào khung nhìn
@@ -55,8 +54,9 @@ export default function Step10Home() {
               <motion.h1
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
-                className="text-[32px] font-semibold w-[100%] leading-10 mb-3">
+                transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
+                className="text-[32px] font-semibold w-[100%] leading-10 mb-3"
+              >
                 Tell guests what your place has to offer
               </motion.h1>
               <motion.p
@@ -80,7 +80,7 @@ export default function Step10Home() {
                   variants={animationVariants}
                   initial="hidden"
                   animate="visible"
-                  transition={{ type: "spring", stiffness: 35, delay: 0.1 * index }}
+                  transition={{ type: 'spring', stiffness: 35, delay: 0.1 * index }}
                 >
                   <ChooDesPl
                     title={category.name}
@@ -89,10 +89,9 @@ export default function Step10Home() {
                     selectedMany={selectedMany}
                     setselectedMany={setselectedMany}
                     selected={''}
-                    setselected={() => { }}
+                    setselected={() => {}}
                   />
                 </motion.div>
-
               ))}
             </div>
           </div>
@@ -116,9 +115,9 @@ export default function Step10Home() {
                 <div ref={refButton2}>
                   <motion.div
                     initial="hidden"
-                    animate={inViewButton2 ? "visible" : "hidden"}
+                    animate={inViewButton2 ? 'visible' : 'hidden'}
                     variants={animationVariants}
-                    transition={{ type: "spring", stiffness: 35, delay: 0.1 * index }}
+                    transition={{ type: 'spring', stiffness: 35, delay: 0.1 * index }}
                   >
                     <ChooDesPl
                       title={category.name}
@@ -127,11 +126,10 @@ export default function Step10Home() {
                       selectedMany={selectedMany}
                       setselectedMany={setselectedMany}
                       selected={''}
-                      setselected={() => { }}
+                      setselected={() => {}}
                     />
                   </motion.div>
                 </div>
-
               ))}
             </div>
           </div>
@@ -160,9 +158,9 @@ export default function Step10Home() {
                 <div ref={refButton}>
                   <motion.div
                     initial="hidden"
-                    animate={inViewButton ? "visible" : "hidden"}
+                    animate={inViewButton ? 'visible' : 'hidden'}
                     variants={animationVariants}
-                    transition={{ type: "spring", stiffness: 35, delay: 0.1 * index }}
+                    transition={{ type: 'spring', stiffness: 35, delay: 0.1 * index }}
                   >
                     <ChooDesPl
                       title={category.name}
@@ -171,11 +169,10 @@ export default function Step10Home() {
                       selectedMany={selectedMany}
                       setselectedMany={setselectedMany}
                       selected={''}
-                      setselected={() => { }}
+                      setselected={() => {}}
                     />
                   </motion.div>
                 </div>
-
               ))}
             </div>
           </div>

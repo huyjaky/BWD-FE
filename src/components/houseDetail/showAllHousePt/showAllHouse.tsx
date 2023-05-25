@@ -17,8 +17,6 @@ interface ShowAllHouseProps {
   arrImg: { Path: string }[];
 }
 
-
-
 const ShowAllHouse = ({ arrImg }: ShowAllHouseProps) => {
   const [select, setSelect] = useState<string | null>('');
 
@@ -31,11 +29,12 @@ const ShowAllHouse = ({ arrImg }: ShowAllHouseProps) => {
         variants={variants}
         initial={isFirstLoading ? false : 'hidden'}
         animate={isShowAllPt ? 'show' : 'hidden'}
-        transition={{duration: .6}}
+        transition={{ duration: 0.6 }}
         onClickCapture={(event) => {
           document.body.style.overflow = 'hidden';
         }}
-        className="fixed left-0 w-screen h-screen z-[500] bg-white">
+        className="fixed left-0 w-screen h-screen z-[500] bg-white"
+      >
         <div className="h-full w-full relative flex">
           {/* header */}
           <div className="w-full h-fit absolute top-0 ">
@@ -46,7 +45,8 @@ const ShowAllHouse = ({ arrImg }: ShowAllHouseProps) => {
                 document.body.style.overflow = 'scroll';
                 document.body.style.overflowX = 'hidden';
               }}
-              className="w-[100px] h-[100px] cursor-pointer flex">
+              className="w-[100px] h-[100px] cursor-pointer flex"
+            >
               <IoChevronBackOutline className="text-[50px] m-auto" />
             </motion.button>
           </div>

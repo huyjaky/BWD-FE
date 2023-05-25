@@ -4,7 +4,7 @@ import { TbBrandGmail } from 'react-icons/tb';
 
 interface HostProps {
   userAcc: userAcc;
-  placeOffer: {PlaceOfferId: string, PlaceOffer: string, PathIcon: string}[]
+  placeOffer: { PlaceOfferId: string; PlaceOffer: string; PathIcon: string }[];
 }
 
 const variants: Variants = {
@@ -23,8 +23,9 @@ const Host = ({ userAcc, placeOffer }: HostProps) => {
         <motion.div variants={variants} whileInView="inView" className="w-fit h-fit m-auto">
           {/* host card */}
           <motion.div
-          whileHover={{scale: 1.1}}
-          className="w-[400px] h-[250px] bg-white rounded-2xl flex flex-col shadow-2xl">
+            whileHover={{ scale: 1.1 }}
+            className="w-[400px] h-[250px] bg-white rounded-2xl flex flex-col shadow-2xl"
+          >
             <div className="w-fit h-fit m-auto text-center">
               <img src={userAcc.Image} alt="" className="w-[120px] h-[120px] rounded-full" />
               <span className="font-semibold text-[30px]">{userAcc.UserName}</span>
@@ -45,18 +46,25 @@ const Host = ({ userAcc, placeOffer }: HostProps) => {
         <div className="w-full mb-5 mt-5">
           <span className="text-[30px]">What this place offers</span>
         </div>
-        <div className='w-full grid grid-cols-2'>
-          {placeOffer.map((item: {PlaceOfferId: string, PlaceOffer: string, PathIcon: string}, index: number)=>{
-            return (
-              <motion.div
-              whileInView={{y:[20, 0], opacity: [0, 1]}}
-              transition={{duration: .6, delay: .2 * index}}
-              className='w-full h-fit flex items-center' key={index} >
-                <img src={item.PathIcon} alt="" className='w-[35px] h-[35px]'/>
-                <span className='text-[25px]'>{item.PlaceOffer}</span>
-              </motion.div>
-            )
-          })}
+        <div className="w-full grid grid-cols-2">
+          {placeOffer.map(
+            (
+              item: { PlaceOfferId: string; PlaceOffer: string; PathIcon: string },
+              index: number
+            ) => {
+              return (
+                <motion.div
+                  whileInView={{ y: [20, 0], opacity: [0, 1] }}
+                  transition={{ duration: 0.6, delay: 0.2 * index }}
+                  className="w-full h-fit flex items-center"
+                  key={index}
+                >
+                  <img src={item.PathIcon} alt="" className="w-[35px] h-[35px]" />
+                  <span className="text-[25px]">{item.PlaceOffer}</span>
+                </motion.div>
+              );
+            }
+          )}
         </div>
       </div>
     </div>

@@ -17,7 +17,8 @@ export default function Step14CHome() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1 }}
-      className="mt-[88px] w-[98vw]">
+      className="mt-[88px] w-[98vw]"
+    >
       <div className="w-[80%] ml-auto mr-auto">
         <div
           className="px-[80px] flex  items-center w-[100%]

@@ -8,7 +8,7 @@ interface CheckIn_OutProps {
   styleHorizontal: string | null;
 }
 
-const CheckIn_Out = ({styleVerical, styleHorizontal}: CheckIn_OutProps) => {
+const CheckIn_Out = ({ styleVerical, styleHorizontal }: CheckIn_OutProps) => {
   const { address, setAddress } = useContext(selectPlaceContext);
 
   const { selected } = useContext(selectPopoverContext);
@@ -33,7 +33,7 @@ const CheckIn_Out = ({styleVerical, styleHorizontal}: CheckIn_OutProps) => {
   return (
     <div className="w-full h-full bg-white rounded-2xl pointer-events-auto" id="checkin_out-popup">
       <div className="p-8 w-full h-full flex items-center justify-center ">
-      <div className={`w-full h-full ${styleHorizontal}`}>
+        <div className={`w-full h-full ${styleHorizontal}`}>
           <DateRangePicker
             onChange={(item: any) => handleOnChange(item)}
             showPreview={true}
@@ -45,8 +45,10 @@ const CheckIn_Out = ({styleVerical, styleHorizontal}: CheckIn_OutProps) => {
             rangeColors={['rgb(239 68 68)']}
           />
         </div>
-        <div className={`w-full h-full  flex
-        overflow-scroll overflow-x-hidden ${styleVerical}`}>
+        <div
+          className={`w-full h-full  flex
+        overflow-scroll overflow-x-hidden ${styleVerical}`}
+        >
           <DateRangePicker
             onChange={(item: any) => handleOnChange(item)}
             showPreview={true}

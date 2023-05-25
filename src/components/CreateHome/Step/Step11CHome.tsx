@@ -25,7 +25,7 @@ export default function Step11CHome() {
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
+                transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
                 className="text-[32px] font-semibold w-[100%] leading-10 mb-3
                         "
               >
@@ -34,8 +34,9 @@ export default function Step11CHome() {
               <motion.p
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
-                className="text-[18px] text-[#717171]">
+                transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
+                className="text-[18px] text-[#717171]"
+              >
                 You'll need 5 photos to get started. You can add more or make changes later.
               </motion.p>
             </div>

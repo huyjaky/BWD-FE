@@ -60,7 +60,7 @@ function CreateHome(): JSX.Element {
     { number: 15, component: <Step15CHome /> },
     { number: 16, component: <Step16CHome /> },
     { number: 17, component: <Step17CHome /> },
-    { number: 18, component: <StepCongratulation /> },
+    { number: 18, component: <StepCongratulation /> }
   ];
 
   return (
