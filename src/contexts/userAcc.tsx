@@ -5,7 +5,13 @@ interface userAccProps {
   children: ReactNode;
 }
 
-const userAccDefaultData: { user: userAcc; setUser: (payload: userAcc) => void } = {
+interface userrAccData {
+  user: userAcc;
+  setUser: (payload: userAcc) => void;
+  resetDataUser: () => void;
+}
+
+const userAccDefaultData: userrAccData = {
   user: {
     UserId: '',
     UserName: '',
@@ -19,18 +25,18 @@ const userAccDefaultData: { user: userAcc; setUser: (payload: userAcc) => void }
     Image: '',
     error: ''
   },
-  setUser: () => {}
+  setUser: () => {},
+  resetDataUser: () => {}
 };
 
-export const userAccContext = createContext<{ user: userAcc; setUser: (payload: userAcc) => void }>(
-  userAccDefaultData
-);
+export const userAccContext = createContext<userrAccData>(userAccDefaultData);
 
 const UserAccProvider = ({ children }: userAccProps) => {
   const [user, setUser_] = useState(userAccDefaultData.user);
   const setUser = (payload: userAcc) => setUser_(payload);
+  const resetDataUser = () => setUser_(userAccDefaultData.user);
 
-  const userAccDynamicData = { user, setUser };
+  const userAccDynamicData = { user, setUser, resetDataUser };
 
   return <userAccContext.Provider value={userAccDynamicData}>{children}</userAccContext.Provider>;
 };

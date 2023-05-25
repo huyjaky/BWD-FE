@@ -23,7 +23,7 @@ const variants: Variants = {
 
 const ButtonAccount = () => {
   const { setIsLoginClick } = useContext(selectPopoverContext);
-  const { user } = useContext(userAccContext);
+  const { user, resetDataUser } = useContext(userAccContext);
   const [isClick, setIsClick] = useState(false);
   const controlBar = useRef<HTMLInputElement>(null);
 
@@ -45,15 +45,17 @@ const ButtonAccount = () => {
       className="w-fit p-1 rounded-full bg-white flex border-gray-400 hover:shadow-lg
             transition-all duration-500 border-2 relative"
       ref={controlBar}
-      onClick={() => { setIsClick(!isClick); console.log('isClick', isClick);}}>
-
+      onClick={() => {
+        setIsClick(!isClick);
+        console.log('isClick', isClick);
+      }}>
       <BsList className="w-[30px] h-[30px]" />
       <HiUserCircle className="w-[40px] h-[30px] " />
       <AnimatePresence initial={false}>
         <motion.div
           variants={variants}
           animate={isClick ? 'show' : 'hidden'}
-          transition={{duration: .5}}
+          transition={{ duration: 0.5 }}
           className="absolute translate-y-16 w-[250px] h-fit shadow-2xl right-0 rounded-2xl bg-white
           overflow-hidden
       ">
@@ -70,11 +72,16 @@ const ButtonAccount = () => {
               <>
                 <button className="w-full py-4 text-left px-5">Manage listings</button>
                 <button className="w-full py-4 text-left px-5">Account</button>
-                <button className="w-full py-4 text-left px-5"
-                onClick={async ()=>{const logout = await signOut({
-                  redirect: false
-                })}}
-                >Logout</button>
+                <button
+                  className="w-full py-4 text-left px-5"
+                  onClick={async () => {
+                    const logout = await signOut({
+                      redirect: false
+                    });
+                    resetDataUser();
+                  }}>
+                  Logout
+                </button>
               </>
             )}
           </div>
