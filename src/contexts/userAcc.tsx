@@ -16,6 +16,7 @@ const userAccDefaultData: { user: userAcc; setUser: (payload: userAcc) => void }
     Decentralization: '',
     PersonCode: '',
     CustomerType: '',
+    Image: '',
     error: ''
   },
   setUser: () => {}

@@ -30,7 +30,7 @@ export default function Step15CHome() {
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
+                transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
                 className="text-[32px] font-semibold w-[100%] leading-10 mb-3
                         "
               >
@@ -39,8 +39,9 @@ export default function Step15CHome() {
               <motion.p
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
-                className="text-[18px] text-[#717171] ">
+                transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
+                className="text-[18px] text-[#717171] "
+              >
                 After your first guest, anyone can book your place.{' '}
                 <span className="underline">Learn more</span>
               </motion.p>
@@ -49,12 +50,13 @@ export default function Step15CHome() {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.1 }}
+                transition={{ type: 'spring', stiffness: 35, delay: 0.1 }}
                 className={`flex flex-col my-[16px] p-[24px] border
-                            ${selectedOption === 'AnyAirbnbguest'
-                    ? 'bg-[#F7F7F7] border-[2px] hover:border-black border-black'
-                    : 'border-gray-200 border-[2px] hover:border-black'
-                  }
+                            ${
+                              selectedOption === 'AnyAirbnbguest'
+                                ? 'bg-[#F7F7F7] border-[2px] hover:border-black border-black'
+                                : 'border-gray-200 border-[2px] hover:border-black'
+                            }
                              rounded-[14px] hover:border-black cursor-pointer
                             `}
               >
@@ -100,11 +102,12 @@ export default function Step15CHome() {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.3 }}
-                className={`flex flex-col p-[24px] rounded-[14px] cursor-pointer  ${selectedOption === 'AnExperiancedguest'
-                  ? 'bg-[#F7F7F7] border-[2px] hover:border-black border-black'
-                  : 'border-gray-200 border-[2px] hover:border-black'
-                  }`}
+                transition={{ type: 'spring', stiffness: 35, delay: 0.3 }}
+                className={`flex flex-col p-[24px] rounded-[14px] cursor-pointer  ${
+                  selectedOption === 'AnExperiancedguest'
+                    ? 'bg-[#F7F7F7] border-[2px] hover:border-black border-black'
+                    : 'border-gray-200 border-[2px] hover:border-black'
+                }`}
               >
                 <div className="flex justify-center items-center cursor-pointer">
                   <div className="cursor-pointer">

@@ -1,4 +1,3 @@
-import { house_ } from '@/models/house';
 import { ReactNode, createContext, useState } from 'react';
 
 interface getHouseProps {

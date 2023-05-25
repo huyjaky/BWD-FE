@@ -40,7 +40,7 @@ export default function Step2CHome() {
               <motion.div
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.1 * index }}
+                transition={{ type: 'spring', stiffness: 35, delay: 0.1 * index }}
               >
                 <ChooDesPl
                   title={category.name}
@@ -49,10 +49,9 @@ export default function Step2CHome() {
                   setselected={setselected}
                   type={type}
                   selectedMany={[]}
-                  setselectedMany={() => { }}
+                  setselectedMany={() => {}}
                 />
               </motion.div>
-
             ))}
           </div>
         </div>

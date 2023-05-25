@@ -47,7 +47,7 @@ export default function Step16CHome() {
                 <motion.h1
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
+                  transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
                   className="text-[32px] font-semibold w-[100%] leading-10 mb-3
                         "
                 >
@@ -56,13 +56,16 @@ export default function Step16CHome() {
                 <motion.p
                   initial={{ opacity: 0, y: -30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
-                  className="text-[18px] text-[#717171] ">You can change it anytime.</motion.p>
+                  transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
+                  className="text-[18px] text-[#717171] "
+                >
+                  You can change it anytime.
+                </motion.p>
               </div>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
+                transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
                 className="w-[95%] bg-[#F7F7F7] h-[320px] border rounded-[12px] p-[32px] flex flex-col items-center
                                             mobile:h-[260px]
                             "
@@ -85,8 +88,9 @@ export default function Step16CHome() {
                         type="text"
                         value={`$${money}`}
                         onChange={handleMoney}
-                        className={`my-[8px] mx-[12px] w-[98%] h-[98%] border border-black rounded-[8px] text-[48px] text-center ${error ? ' bg-red-50 border border-red-500 text-red-900' : ''
-                          }
+                        className={`my-[8px] mx-[12px] w-[98%] h-[98%] border border-black rounded-[8px] text-[48px] text-center ${
+                          error ? ' bg-red-50 border border-red-500 text-red-900' : ''
+                        }
                                             `}
                       />
                     </div>
@@ -117,7 +121,7 @@ export default function Step16CHome() {
               <motion.label
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
+                transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
                 htmlFor="helper-checkbox"
                 className="w-[95%] cursor-pointer bg-[#F7F7F7] h-[120px] mobile:h-[150px] border rounded-[12px] mt-[20px] px-[32px] py-0 pt-[20px] flex  justify-between "
               >

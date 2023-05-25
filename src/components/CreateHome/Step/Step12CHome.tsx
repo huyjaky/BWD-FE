@@ -43,7 +43,7 @@ export default function Step12CHome() {
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
+                transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
                 className="text-[32px] font-semibold w-[100%] leading-10 mb-3
                         "
               >
@@ -52,8 +52,9 @@ export default function Step12CHome() {
               <motion.p
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
-                className="text-[18px] text-[#717171]">
+                transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
+                className="text-[18px] text-[#717171]"
+              >
                 Short titles work best. Have fun with it—you can always change it later.
               </motion.p>
             </div>
@@ -61,7 +62,7 @@ export default function Step12CHome() {
               <motion.textarea
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
+                transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
                 value={character}
                 onChange={handleChange}
                 id="message"
@@ -71,8 +72,9 @@ export default function Step12CHome() {
               <motion.div
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
-                className="mt-2">
+                transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
+                className="mt-2"
+              >
                 <span className="text-gray-400 ">{characterCount}/32</span>
               </motion.div>
               {warning && (

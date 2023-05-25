@@ -14,7 +14,7 @@ const proxy = httpProxy.createProxyServer();
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<any>) {
   return new Promise(async () => {
-    const session = await getSession({req});
+    const session = await getSession({ req });
     const temp = session?.token?.accessToken;
 
     const cookies = new Cookies(req, res);

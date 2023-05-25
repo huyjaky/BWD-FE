@@ -22,6 +22,7 @@
     "iron-session": "^6.3.1",
     "js-cookie": "^3.0.5",
     "mapbox-gl": "^2.14.1",
+    "moment": "^2.29.4",
     "next": "13.3.0",
     "next-auth": "^4.22.1",
     "popmotion": "^11.0.5",

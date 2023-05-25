@@ -45,7 +45,7 @@ export default function Step13CHome() {
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
+                transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
                 className="text-[32px] font-semibold w-[100%] leading-10 mb-3
                         "
               >
@@ -54,14 +54,17 @@ export default function Step13CHome() {
               <motion.p
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
-                className="text-[18px] text-[#717171]">Share what makes your place special.</motion.p>
+                transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
+                className="text-[18px] text-[#717171]"
+              >
+                Share what makes your place special.
+              </motion.p>
             </div>
             <div>
               <motion.textarea
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
+                transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
                 value={character}
                 onChange={handleChange}
                 id="message"
@@ -71,15 +74,16 @@ export default function Step13CHome() {
               <motion.div
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
-                className="mt-2">
+                transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
+                className="mt-2"
+              >
                 <span className="text-gray-400 ">{characterCount}/500</span>
               </motion.div>
               {warning && (
                 <motion.div
                   initial={{ opacity: 0, y: -30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ type: "spring", stiffness: 35, delay: 0.2 }}
+                  transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
                 >
                   <span className="flex items-center text-red-500 text-[12px]">
                     <RiErrorWarningFill /> The maximum number of characters allowed is 32.

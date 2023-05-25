@@ -2,7 +2,11 @@ import { selectPopoverContext } from '@/contexts';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 import { useContext, useEffect } from 'react';
 
-const Who = () => {
+interface WhoProps {
+  styleWho: string | null;
+}
+
+const Who = ({ styleWho }: WhoProps) => {
   const { selected } = useContext(selectPopoverContext);
   const { address, setAddress } = useContext(selectPlaceContext);
 
@@ -56,7 +60,9 @@ const Who = () => {
     }
   };
   return (
-    <div className="w-full h-full flex justify-end mobile:justify-center tablet:justify-center">
+    <div
+      className={`${styleWho} w-full h-full flex justify-end mobile:justify-center tablet:justify-center`}
+    >
       <div
         className="w-[350px] h-full bg-white rounded-2xl pointer-events-auto box-border
         p-6 mobile:w-full tablet:w-full

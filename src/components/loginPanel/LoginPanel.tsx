@@ -117,13 +117,15 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="w-full h-full grid grid-cols-1 grid-rows-2 mb-3
-            ">
+            "
+        >
           {/* form input username */}
           <div
             className={`border-2 rounded-t-xl box-border p-3 h-[70px] ${
               errors?.username?.message ? 'border-red-500' : ''
             }`}
-            ref={divRef}>
+            ref={divRef}
+          >
             <div className="w-full h-full flex items-center" ref={title_username}>
               <span>
                 User name
@@ -147,7 +149,8 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
             className={`border-2 rounded-b-xl box-border p-3 h-[70px] ${
               errors?.password?.message ? 'border-red-500' : ''
             }`}
-            ref={divRef2}>
+            ref={divRef2}
+          >
             <div className="w-full h-full flex items-center" ref={title_password}>
               <span>
                 Password

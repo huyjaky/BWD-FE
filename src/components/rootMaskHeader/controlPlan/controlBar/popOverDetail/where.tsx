@@ -39,7 +39,6 @@ const Where = () => {
     setIsFetch(false);
   };
 
-
   return (
     <>
       {placeList?.length != 0 && address.address.formattedAddress && (

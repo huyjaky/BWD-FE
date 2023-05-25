@@ -9,26 +9,25 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
   return await NextAuth(req, res, {
     session: {
       strategy: 'jwt',
-      maxAge: 24 * 60 * 60,
-      updateAge: 24 * 60 * 60,
+      maxAge: 24 * 60 * 60
+      // updateAge: 24 * 60 * 60,
     },
     jwt: {
       maxAge: 24 * 60 * 60
     },
     callbacks: {
-      async jwt ({token, user}: {token: JWT, user:  User | AdapterUser}): Promise<JWT> {
+      async jwt({ token, user }: { token: JWT; user: User | AdapterUser }): Promise<JWT> {
         if (user) {
-          token.loginVl = user
+          token.loginVl = user;
         }
         return token;
       },
 
       async session({ session, token, user }) {
-        session.token = {...token?.loginVl?.token};
-        session.userAcc = {...token?.loginVl?.userAcc};
+        session.token = { ...token?.loginVl?.token };
+        session.userAcc = { ...token?.loginVl?.userAcc };
         return session;
-      },
-
+      }
     },
     providers: [
       CredentialsProvider({

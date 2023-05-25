@@ -19,17 +19,18 @@ const MaskPt = ({ Path, setPath }: MaskPtProps) => {
     return (
       <>
         {/* <AnimatePresence initial={Path }> */}
-          <motion.div
-            variants={maskVariants}
-            initial={Path ? {display: 'flex'} : false}
-            animate="hidden"
-            className="fixed flex top-0 left-0 w-screen h-screen bg-mask
+        <motion.div
+          variants={maskVariants}
+          initial={Path ? { display: 'flex' } : false}
+          animate="hidden"
+          className="fixed flex top-0 left-0 w-screen h-screen bg-mask
         box-border py-3
-        ">
-            <div className="w-[1000px] m-auto h-fit overflow-hidden">
-              <img src={Path ? Path : ''} alt="" className="m-auto  rounded-2xl" />
-            </div>
-          </motion.div>
+        "
+        >
+          <div className="w-[1000px] m-auto h-fit overflow-hidden">
+            <img src={Path ? Path : ''} alt="" className="m-auto  rounded-2xl" />
+          </div>
+        </motion.div>
         {/* </AnimatePresence> */}
       </>
     );
@@ -41,7 +42,8 @@ const MaskPt = ({ Path, setPath }: MaskPtProps) => {
         className="fixed flex top-0 left-0 w-screen h-screen bg-mask
       box-border py-3 z-[50]
       "
-        onClick={() => setPath(null)}>
+        onClick={() => setPath(null)}
+      >
         <div className="w-[1000px] m-auto h-full overflow-hidden flex">
           <motion.img
             transition={{ type: 'spring' }}

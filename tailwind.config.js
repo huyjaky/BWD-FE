@@ -18,10 +18,7 @@ module.exports = {
       },
 
       gridTemplateAreas: {
-        layoutPicture: [
-          'h1 h1 h2 h3',
-          'h1 h1 h4 h5'
-        ],
+        layoutPicture: ['h1 h1 h2 h3', 'h1 h1 h4 h5'],
         layoutShowAllPt: [
           'h1 h1',
           'h1 h1',
@@ -112,14 +109,7 @@ module.exports = {
           '100%': { height: '0px' }
         },
 
-        controlPanelSlideDown: {
-          '0%': { height: '0px' },
-          '100%': { height: '230px' }
-        },
-        controlPanelSlideUp: {
-          '0%': { height: '230px' },
-          '100%': { height: '0px' }
-        }
+
       },
       animation: {
         showAnimate: 'showAnimate .1s forwards',
@@ -146,11 +136,6 @@ module.exports = {
         boxInputLoginFocus_inputReverse: 'boxInputLoginFocus_inputReverse .5s ease-in-out forwards',
         boxInputLoginFocus_title: 'boxInputLoginFocus_title .5s ease-in-out forwards',
         boxInputLoginFocus_titleReverse: 'boxInputLoginFocus_titleReverse .5s ease-in-out forwards',
-
-        controlPanelSlideDown:
-          'showAnimate .1s forwards, controlPanelSlideDown .5s ease-in-out forwards',
-        controlPanelSlideUp:
-          'controlPanelSlideUp .5s ease-in-out forwards, hiddenAnimate .5s forwards',
 
         transparentAnimateLogin2:
           'showAnimate .1s forwards, transparentAnimate .5s ease-in-out forwards ',
