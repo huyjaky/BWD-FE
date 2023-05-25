@@ -1,21 +1,22 @@
 import FooterMainRes from '@/components/footers/footerMainRes';
 import FooterRooms from '@/components/footers/footerRooms';
+import Bill from '@/components/houseDetail/bill';
+import Host from '@/components/houseDetail/host';
+import MapBox from '@/components/houseDetail/map';
 import Picture from '@/components/houseDetail/picture';
 import ShowAllHouse from '@/components/houseDetail/showAllHousePt/showAllHouse';
 import TitleHouse from '@/components/houseDetail/titleHouse';
-import HeaderMain from '@/components/rootMaskHeader/headerMain';
-import { house_ } from '@/models/house';
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
-import { Montserrat } from 'next/font/google';
-import { NextApiRequest } from 'next';
-import { NextPageWithLayout } from '@/models/layoutprops';
 import Auth from '@/components/layouts/auth';
 import Carousel from '@/components/main/showHouse/carousel';
-import Host from '@/components/houseDetail/host';
-import Bill from '@/components/houseDetail/bill';
+import HeaderMain from '@/components/rootMaskHeader/headerMain';
+import { house_ } from '@/models/house';
+import { NextPageWithLayout } from '@/models/layoutprops';
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
+import { Montserrat } from 'next/font/google';
 
 interface HouseDetailProps {
   houseDetail: house_;
+  keyMapBox: string;
 }
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -23,7 +24,10 @@ const monsterrat = Montserrat({
   variable: '--font-monsterrat'
 });
 
-const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({ houseDetail }: HouseDetailProps) => {
+const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
+  houseDetail,
+  keyMapBox
+}: HouseDetailProps) => {
   return (
     <div className="w-full h-fit">
       <>
@@ -48,6 +52,13 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({ houseDetail }: Hous
                 </article>
               </div>
             </div>
+
+            <MapBox
+              latitude={houseDetail.address.latitude}
+              longitude={houseDetail.address.longitude}
+              keyMapBox={keyMapBox}
+            />
+            
           </div>
           <FooterRooms />
           <FooterMainRes />
@@ -80,9 +91,11 @@ export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsC
     cachedHouseDetail = await slug.json();
   }
   const houseDetailData = cachedHouseDetail.find((house: house_) => house.HouseId === params?.slug);
+  const keyMapBox = process.env.ACCESS_TOKEN_MAPBOX;
   return {
     props: {
-      houseDetail: houseDetailData
+      houseDetail: houseDetailData,
+      keyMapBox: keyMapBox
     },
     revalidate: 60
   };

@@ -29,14 +29,14 @@ const Bill = ({ houseDetail }: BillProps) => {
   return (
     <div
       className="w-full h-fit bg-white rounded-2xl
-                    shadow-2xl sticky top-4">
+                    shadow-2xl sticky top-4 ">
       <div className="w-full h-full box-border p-5">
         <div className="w-full">
           <span className="text-[40px] font-semibold">&#36;{houseDetail.Price}</span>
         </div>
 
-        <div className="dropdown w-full border-2 border-red-500 rounded-xl">
-          <label tabIndex={0} className="btn m-1 w-full justify-start">
+        <div  className="dropdown w-full border-2 border-red-500 rounded-xl">
+          <label tabIndex={0} className="btn m-1 w-full justify-start text-[25px]">
             {Bill.checkInDay.getDate() !== new Date().getDate()
               ? moment(Bill.checkInDay).format('MM-DD-YYYY')
               : 'Select date'}
@@ -55,14 +55,15 @@ const Bill = ({ houseDetail }: BillProps) => {
                 // moveRangeOnFirstSelection={false}
                 date={Bill.checkInDay}
                 color="rgb(239 68 68)"
-                className=" font-semibold m-auto text-[50px]"
+
+                className=" font-bold m-auto text-3xl"
               />
             </li>
           </ul>
         </div>
 
-        <div className="dropdown w-full border-2 border-red-500 rounded-xl mt-2">
-          <label tabIndex={0} className="btn m-1 w-full justify-start">
+        <div className="dropdown w-full border-2 border-red-500 rounded-xl mt-2 ">
+          <label tabIndex={0} className="btn m-1 w-full justify-start text-[25]">
             Guests
           </label>
           <ul
@@ -72,12 +73,12 @@ const Bill = ({ houseDetail }: BillProps) => {
                           transition-all duration-500 w-full mt-[85px]
                           ">
             <li className='w-full h-fit'>
-              <Who styleWho={'justify-center'}/>
+              <Who styleWho={'justify-center  '}/>
             </li>
           </ul>
         </div>
 
-        <motion.button className='mt-2 w-full h-[50px] bg-red-500 rounded-xl text-white font-semibold'>
+        <motion.button className='mt-2  w-full h-[50px] bg-red-500 rounded-xl text-white font-semibold'>
           Reverse
         </motion.button>
       </div>

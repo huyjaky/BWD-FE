@@ -48,10 +48,13 @@ const Host = ({ userAcc, placeOffer }: HostProps) => {
         <div className='w-full grid grid-cols-2'>
           {placeOffer.map((item: {PlaceOfferId: string, PlaceOffer: string, PathIcon: string}, index: number)=>{
             return (
-              <div className='w-full h-fit flex items-center' key={index} >
-                <img src={item.PathIcon} alt="" className='w-[50px] h-[50px]'/>
+              <motion.div
+              whileInView={{y:[20, 0], opacity: [0, 1]}}
+              transition={{duration: .6, delay: .2 * index}}
+              className='w-full h-fit flex items-center' key={index} >
+                <img src={item.PathIcon} alt="" className='w-[35px] h-[35px]'/>
                 <span className='text-[25px]'>{item.PlaceOffer}</span>
-              </div>
+              </motion.div>
             )
           })}
         </div>
