@@ -20,8 +20,8 @@ const selectPlaceDefaultData: selectPlaceData = {
       addressLine: '',
       streetName: '',
       formattedAddress: '',
-      latitude: '',
-      longitude: ''
+      latitude: 0,
+      longitude: 0
     },
     checkInDay: new Date(),
     checkOutDay: new Date(),
