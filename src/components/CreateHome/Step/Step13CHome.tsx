@@ -1,11 +1,12 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState, useContext,useEffect } from 'react';
 import { RiErrorWarningFill } from 'react-icons/ri';
 import { motion } from 'framer-motion';
+import { newHouseContext } from '../../../contexts/createHome';
 
 export default function Step13CHome() {
-  const [character, setCharacter] = useState(
-    "You'll have a great time at this comfortable place to stay."
-  );
+  const { state, dispatch } = useContext(newHouseContext);
+
+  const [character, setCharacter] = useState(state.description);
 
   const [warning, setWarning] = useState(false);
 
@@ -22,6 +23,10 @@ export default function Step13CHome() {
 
   const characterCount = character.length;
 
+  useEffect(() => {
+    dispatch({type: 'STEP13', payload: character})
+  }, [character])
+  
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -66,6 +71,7 @@ export default function Step13CHome() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
                 value={character}
+                placeholder="You'll have a great time at this comfortable place to stay."
                 onChange={handleChange}
                 id="message"
                 rows={7}

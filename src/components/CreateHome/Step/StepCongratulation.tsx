@@ -1,8 +1,12 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import Signature from '../../../../public/assets/signature.jpg';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { newHouseContext } from '../../../contexts/createHome';
+
 export default function StepCongratulation() {
+    const { state } = useContext(newHouseContext);
+    console.log(state)
   return (
     <motion.div
       initial={{ opacity: 0 }}

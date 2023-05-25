@@ -1,9 +1,14 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState, useContext, useEffect } from 'react';
 import { RiErrorWarningFill } from 'react-icons/ri';
 import { motion } from 'framer-motion';
+import { newHouseContext } from '../../../contexts/createHome';
+import { stat } from 'fs';
+
 
 export default function Step12CHome() {
-  const [character, setCharacter] = useState('');
+    const { state, dispatch } = useContext(newHouseContext);
+
+  const [character, setCharacter] = useState(state.title);
 
   const [warning, setWarning] = useState(false);
 
@@ -20,6 +25,9 @@ export default function Step12CHome() {
 
   const characterCount = character.length;
 
+  useEffect(() => {
+    dispatch({type: 'STEP12', payload: character})
+  }, [character])
   return (
     <motion.div
       initial={{ opacity: 0 }}

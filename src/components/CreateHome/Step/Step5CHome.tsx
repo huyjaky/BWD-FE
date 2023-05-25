@@ -1,10 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { TiTick } from 'react-icons/ti';
 import MapLocate from '../Map/MapLocate';
 import { motion } from 'framer-motion';
+import { newHouseContext } from '../../../contexts/createHome';
 
 const Step5CHome: React.FC = () => {
+  const { state, dispatch } = useContext(newHouseContext);
   const [toggle, setToggle] = useState(false);
+  const [country, setCountry] = useState(state.addressConfirmation.country);
+  const [subAddress, setSubAddress] = useState({
+    address1: state.addressConfirmation.subAddress[0],
+    address2: state.addressConfirmation.subAddress[1],
+    address3: state.addressConfirmation.subAddress[2],
+    address4: state.addressConfirmation.subAddress[3]
+  });
+  const [city, setCity] = useState(state.addressConfirmation.city);
+  const [province, setProvince] = useState(state.addressConfirmation.province);
+  const [postCode, setPostCode] = useState(state.addressConfirmation.postCode);
+  function addCountry(event: React.ChangeEvent<HTMLSelectElement>): void {
+    const selectedCountry = event.currentTarget.value;
+    setCountry((prev) => selectedCountry);
+  }
+  function subAddressHandler(event: React.ChangeEvent<HTMLInputElement>): void {
+    const { name, value } = event.target;
+    setSubAddress((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  }
+  function cityValueHandler(event: React.ChangeEvent<HTMLInputElement>): void {
+    const city = event.currentTarget.value;
+    setCity((prev) => city);
+  }
+  function provinceValueHandler(event: React.ChangeEvent<HTMLInputElement>): void {
+    const province = event.currentTarget.value;
+    setProvince((prev) => province);
+  }
+  function postCodeValueHandler(event: React.ChangeEvent<HTMLInputElement>): void {
+    const post = event.currentTarget.value;
+    setPostCode((prev) => post);
+  }
+   useEffect(() => {
+     dispatch({
+       type: 'STEP5',
+       payload: {
+         country: country,
+         subAddress: Object.values(subAddress),
+         city: city,
+         province: province,
+         postCode: postCode
+       }
+     });
+   }, [country, subAddress, city, province, postCode]);
   return (
     <div className="w-full h-screen">
       <div className="px-6 sm:px-52 md:px-44 lg:px-52 xl:px-96 mt-[80px]">
@@ -27,7 +74,8 @@ const Step5CHome: React.FC = () => {
               name="countryCode"
               id="countryCode"
               // size='12'
-            >
+              value={country}
+              onChange={addCountry}>
               <option value="AF">Afghanistan - AF</option>
               <option value="AF">Afghanistan - AF</option>
               <option value="AL">Albania - AL</option>
@@ -59,6 +107,9 @@ const Step5CHome: React.FC = () => {
           <div className="w-full rounded-tr-md rounded-tl-md border-[#717171] border-b-[1px]">
             <input
               type="text"
+              name="address1"
+              onChange={subAddressHandler}
+              value={subAddress.address1}
               placeholder="Address line 1"
               className="w-full rounded-md border-none h-[50px] focus:ring-1 focus:ring-black placeholder:p-2 placeholder:font-medium"
             />
@@ -66,6 +117,9 @@ const Step5CHome: React.FC = () => {
           <div className="w-full rounded-tr-md rounded-tl-md border-[#717171] border-b-[1px]  ">
             <input
               type="text"
+              name="address2"
+              onChange={subAddressHandler}
+              value={subAddress.address2}
               placeholder="Address line 2 (if applicable)"
               className="w-full rounded-md border-none h-[50px] focus:ring-1 focus:ring-black placeholder:p-2 placeholder:font-medium"
             />
@@ -73,6 +127,9 @@ const Step5CHome: React.FC = () => {
           <div className="w-full rounded-tr-md rounded-tl-md border-[#717171] border-b-[1px]">
             <input
               type="text"
+              name="address3"
+              onChange={subAddressHandler}
+              value={subAddress.address3}
               placeholder="Address line 3 (if applicable)"
               className="w-full rounded-md border-none h-[50px] focus:ring-1 focus:ring-black placeholder:p-2 placeholder:font-medium"
             />
@@ -80,6 +137,9 @@ const Step5CHome: React.FC = () => {
           <div className="w-full rounded-tr-md rounded-tl-md border-[#717171] border-b-[1px] ">
             <input
               type="text"
+              name="address4"
+              onChange={subAddressHandler}
+              value={subAddress.address4}
               placeholder="Address line 4 (if applicable)"
               className="w-full rounded-md border-none h-[50px] focus:ring-1 focus:ring-black placeholder:p-2 placeholder:font-medium"
             />
@@ -88,18 +148,24 @@ const Step5CHome: React.FC = () => {
             <input
               type="text"
               placeholder="City/village (if applicable)"
+              onChange={cityValueHandler}
+              value={city}
               className="w-full rounded-md border-none h-[50px] focus:ring-1 focus:ring-black placeholder:p-2 placeholder:font-medium"
             />
           </div>
           <div className="w-full rounded-tr-md rounded-tl-md border-[#717171] border-b-[1px]">
             <input
               type="text"
+              onChange={provinceValueHandler}
+              value={province}
               placeholder="Country/province/territory (if applicable)"
               className="w-full rounded-md border-none h-[50px] focus:ring-1 focus:ring-black placeholder:p-2 placeholder:font-medium"
             />
           </div>
           <div className="w-full border-[#717171]">
             <input
+              onChange={postCodeValueHandler}
+              value={postCode}
               placeholder="Post code (if applicable)"
               type="text"
               className="w-full rounded-md border-none h-[50px] focus:ring-1 focus:ring-black placeholder:p-2 placeholder:font-medium"
@@ -132,13 +198,11 @@ const Step5CHome: React.FC = () => {
                 type="button"
                 className={`${
                   toggle ? 'bg-black' : 'bg-[#b0b0b0]'
-                } rounded-[32px] h-8 w-12 min-w-[48px] relative cursor-pointer`}
-              >
+                } rounded-[32px] h-8 w-12 min-w-[48px] relative cursor-pointer`}>
                 <div
                   className={`${
                     toggle ? 'right-[-1px] border-black' : 'left-[-1px] border-[#b0b0b0]'
-                  } top-[1px] absolute bg-white h-[30px] w-[30px] rounded-[50%] border-2 flex items-center justify-center`}
-                >
+                  } top-[1px] absolute bg-white h-[30px] w-[30px] rounded-[50%] border-2 flex items-center justify-center`}>
                   {toggle && <TiTick />}
                 </div>
               </button>

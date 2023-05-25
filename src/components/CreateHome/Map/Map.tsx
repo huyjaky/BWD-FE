@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { newHouseContext } from '../../../contexts/createHome';
 import { IoLocationSharp } from 'react-icons/io5';
 
 const Map: React.FC = () => {
+  const {state,dispatch} = useContext(newHouseContext)
+  const [address, setAddress] = useState(state.address)
+  function addressValueHandler(event: React.ChangeEvent<HTMLInputElement>): void{
+    const addressValue = event.currentTarget.value;
+    setAddress(prev => addressValue)
+  }
+  useEffect(() => {
+    dispatch({ type: 'STEP4', payload: address });
+  }, [address])
   const map =
     'https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/105.804817,21.028509,11,5/700x700?access_token=pk.eyJ1IjoiamFqYWphamF1IiwiYSI6ImNsaDJyNzUydjAzazgzcnFtc3R5enE4eXgifQ.FmwGbD5cLVub495LlJUlbw';
   return (
@@ -13,6 +23,8 @@ const Map: React.FC = () => {
             className="w-full h-16 outline-none border-none rounded-[2.5rem] shadow-md focus:ring-0 indent-12 font-bold text-lg text-[#222]"
             type="text"
             placeholder="Enter your address"
+            onChange={addressValueHandler}
+            value={address}
           />
           <IoLocationSharp size={25} className="absolute left-5 top-5" color="#222222" />
         </div>
