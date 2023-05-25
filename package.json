@@ -19,7 +19,6 @@
     "flowbite-react": "^0.4.4",
     "framer-motion": "^10.12.9",
     "http-proxy": "^1.18.1",
-    "iron-session": "^6.3.1",
     "js-cookie": "^3.0.5",
     "mapbox-gl": "^2.14.1",
     "moment": "^2.29.4",

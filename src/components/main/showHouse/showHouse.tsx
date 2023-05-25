@@ -11,6 +11,8 @@ import Carousel from './carousel';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import {AiOutlineHeart,AiFillHeart } from 'react-icons/ai';
+
 
 const variants: Variants = {
   show: {
@@ -152,18 +154,26 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
             </motion.div>
           }
           className="w-full h-fit grid grid-cols-houseBox gap-x-5 gap-y-8"
-          endMessage={<div>No more values</div>}
-        >
+          endMessage={<div>No more values</div>}>
           {houseTemp.map((item: house_, index: number) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, display: 'none' }}
               animate={{ opacity: 1, display: 'block' }}
               transition={{ delay: (index + 1) * 0.1 }}
-              className="w-full h-[400px] "
-            >
-              <div className="w-full h-[300px]">
+              className="w-full h-[400px] ">
+              <div className="w-full h-[300px] relative">
                 <Carousel arrImg={item.arrImg} houseId={item.HouseId} />
+
+                {/* heart */}
+                <label className="swap swap-flip text-[30px] z-10 absolute right-2 top-2
+                  text-red-500
+                ">
+                  <input type="checkbox" />
+                  <motion.div whileTap={{scale: [.8, 1.3]}} className="swap-on"><AiFillHeart/></motion.div>
+                  <motion.div whileTap={{scale: [.8, 1.3]}} className="swap-off"><AiOutlineHeart/></motion.div>
+                </label>
+
               </div>
               <Link href={`/house/${item.HouseId}`}>
                 <div className="h-[100px] w-full box-border p-4">
@@ -190,8 +200,7 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
               <motion.div
                 variants={variants}
                 animate={houseTemp.length == 0 ? 'show' : 'hidden'}
-                key={index}
-              >
+                key={index}>
                 <SkeletonShowHouse />
               </motion.div>
             ))}

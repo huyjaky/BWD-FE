@@ -91,6 +91,8 @@ const TypeHouse = () => {
           {imgArr?.map((item: { title: string; path: string }, index: number) => {
             return (
               <motion.div
+                whileInView={{opacity:[0,1], x: [-20, 0]}}
+                transition={{duration: .1, delay: .1 * index}}
                 key={index}
                 className="w-fit h-full flex flex-col mx-[20px] box-border
             py-3 relative after:absolute after:w-0 after:h-[3px] after:bottom-0 after:bg-slate-600

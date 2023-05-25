@@ -1,4 +1,3 @@
-import { sessionOptions } from '@/api-client/session';
 import FooterMainRes from '@/components/footers/footerMainRes';
 import FooterRooms from '@/components/footers/footerRooms';
 import Auth from '@/components/layouts/auth';
@@ -10,8 +9,8 @@ import { userAccContext } from '@/contexts/userAcc';
 import { NextPageWithLayout } from '@/models/layoutprops';
 import { userAcc } from '@/models/userAcc';
 import { Variants, motion } from 'framer-motion';
-import { withIronSessionSsr } from 'iron-session/next';
 import { GetServerSideProps } from 'next';
+import { getSession } from 'next-auth/react';
 import { Montserrat } from 'next/font/google';
 import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
@@ -73,16 +72,13 @@ Home.Layout = Auth;
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = withIronSessionSsr(
-  async ({ req, res, params }) => {
-    const user = req.session.props?.user_;
-    // if user available not callback api from server
-    if (user?.UserId) {
-      return {
-        props: { ...req.session.props }
-      };
-    }
-    return { props: {} };
-  },
-  sessionOptions
-);
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = await getSession();
+  // if user available not callback api from server
+  if (session?.userAcc) {
+    return {
+      props: { ...session.userAcc }
+    };
+  }
+  return { props: {} };
+};

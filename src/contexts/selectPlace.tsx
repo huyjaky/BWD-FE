@@ -1,4 +1,3 @@
-import { address } from '@/models/address';
 import { addressSearch } from '@/models/addressSearch';
 import { selectPlaceData } from '@/models/place';
 import { ReactNode, createContext, useState } from 'react';
