@@ -148,7 +148,6 @@ const ControlPlan = () => {
               id="header-control_bar-list-index-1"
               onClick={(event) => {
                 onSelected('where');
-                document.body.style.overflow = 'hidden';
               }}>
               Anywhere
             </button>

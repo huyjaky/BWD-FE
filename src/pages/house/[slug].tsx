@@ -11,6 +11,7 @@ import Carousel from '@/components/main/showHouse/carousel';
 import HeaderMain from '@/components/rootMaskHeader/headerMain';
 import { house_ } from '@/models/house';
 import { NextPageWithLayout } from '@/models/layoutprops';
+import { AnimatePresence } from 'framer-motion';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { Montserrat } from 'next/font/google';
 
@@ -29,10 +30,16 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
   keyMapBox
 }: HouseDetailProps) => {
   return (
-    <div className="w-full h-fit">
-      <>
+    <>
+
+
+      <div className="w-full h-fit">
         <main className={`${monsterrat.className} relative box-border`} id="root">
-          <HeaderMain />
+          <AnimatePresence initial={false}>
+
+            <HeaderMain />
+          </AnimatePresence>
+
           <div
             className="w-[1150px] h-fit
           tablet:w-screen mobile:w-screen
@@ -63,8 +70,8 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
           <FooterRooms />
           <FooterMainRes />
         </main>
-      </>
-    </div>
+      </div>
+    </>
   );
 };
 

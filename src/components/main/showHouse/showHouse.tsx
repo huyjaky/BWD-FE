@@ -6,12 +6,16 @@ import { getHouseContext } from '@/contexts/getHouse';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 import { userAccContext } from '@/contexts/userAcc';
 import { house_ } from '@/models/house';
-import { Variants, motion } from 'framer-motion';
+import { AnimatePresence, Variants, motion } from 'framer-motion';
 import Link from 'next/link';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Carousel from './carousel';
+import { HiUserCircle } from 'react-icons/hi';
+import HostUser from '@/components/houseDetail/host/hostUser';
+import { userAcc } from '@/models/userAcc';
+import { ImMap } from 'react-icons/im';
 
 const variants: Variants = {
   show: {
@@ -25,7 +29,35 @@ const variants: Variants = {
     transitionEnd: {
       display: 'none'
     }
-  }
+  },
+  iconAnimate: {
+    borderRadius: [
+      '50% 50% 20% 80% / 25% 80% 20% 75%',
+      '67% 33% 47% 53% / 37% 20% 80% 63%',
+      '39% 61% 47% 53% / 37% 40% 60% 63%',
+      '39% 61% 82% 18% / 74% 40% 60% 26%',
+      '50% 50% 53% 47% / 26% 22% 78% 74%',
+      '50% 50% 20% 80% / 25% 80% 20% 75%',
+      '30% 70% 70% 30% / 30% 52% 48% 70%',
+      '20% 80% 20% 80% / 20% 80% 20% 80%',
+    ],
+    transition: {
+      duration: 10,
+      repeat: Infinity,
+      type: 'tween'
+    }
+  },
+
+  showMask: {
+    display: 'flex',
+    opacity: [0, 1]
+  },
+  hiddenMask: {
+    opacity: [1, 0],
+    transitionEnd: {
+      display: 'none'
+    }
+  },
 };
 
 interface ShowHouseProps {
@@ -41,6 +73,9 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
   const { isFilter } = useContext(getHouseContext);
   const [hasMore, setHasMore] = useState(true);
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
+  const maskUser = useRef<HTMLInputElement>(null);
+  const [isOpenMask, setIsOpenMask] = useState(false);
+  const [selectUser, setSelectUser] = useState<userAcc>();
 
   const fetchHouseApi = async () => {
     if (houseTemp.length != 0) return;
@@ -90,7 +125,7 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
     }
   };
 
-  useEffect(() => {}, [houseTemp, hasMore]);
+  useEffect(() => { }, [houseTemp, hasMore]);
 
   useEffect(() => {
     setHouseTemp([]);
@@ -104,6 +139,7 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
       setIsLoginClick(true);
       return;
     }
+    console.log('creaste');
     const addHouseFavorite = await houseApi.authFavoriteHouse(HouseId, user.UserId);
     if (addHouseFavorite.status != 200) {
       console.log('Have err ');
@@ -115,8 +151,9 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
 
   // bo khoai danh sahc yeu thich
   const handleOnClickUnFavorite = async (event: any, HouseId: string) => {
-    const addHouseFavorite = await houseApi.authUnFavoriteHouse(HouseId, user.UserId);
-    if (addHouseFavorite.status != 200) {
+    const removeHouseFavorite = await houseApi.authUnFavoriteHouse(HouseId, user.UserId);
+    console.log(removeHouseFavorite);
+    if (removeHouseFavorite.status != 200) {
       console.log('Have err ');
       return;
     } else {
@@ -124,8 +161,34 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
     }
   };
 
+  const handleOnClickOutSide = (event: any) => {
+    const isClickInSide = maskUser.current?.contains(event.target);
+    if (!isClickInSide) {
+      setIsOpenMask(false);
+      return;
+    } else {
+      return;
+    }
+  }
+
   return (
     <div>
+      <AnimatePresence initial={false}>
+
+        <motion.div
+          variants={variants}
+          animate={isOpenMask ? 'showMask' : 'hiddenMask'}
+          onClick={handleOnClickOutSide}
+          className='fixed w-screen h-screen bg-mask z-50 top-0 left-0 '>
+          <motion.div className='w-fit h-fit bg-[#f0efe9] p-7 m-auto mt-[10%] rounded-2xl'
+            ref={maskUser}
+          >
+            <HostUser imgPath={selectUser?.Image} gmail={selectUser?.Gmail} userName={selectUser?.UserName} />
+          </motion.div>
+        </motion.div>
+      </AnimatePresence>
+
+
       <motion.div className="w-full h-fit py-20 pb-28" id="scroll-inf">
         <InfiniteScroll
           dataLength={houseTemp.length}
@@ -162,21 +225,48 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
                         setIsLoginClick(true);
                         return;
                       }
+                      if (event.currentTarget.checked) {
+                        handleOnClickFavorite(event, item.HouseId)
+                      } else {
+                        handleOnClickUnFavorite(event, item.HouseId)
+                      }
                     }}
                   />
                   <motion.div
-                    onClick={(event) => handleOnClickFavorite(event, item.HouseId)}
                     whileTap={{ scale: [0.8, 1.3] }}
                     className="swap-on">
                     <AiFillHeart />
                   </motion.div>
+
                   <motion.div
-                    onClick={(event) => handleOnClickUnFavorite(event, item.HouseId)}
                     whileTap={{ scale: [0.8, 1.3] }}
                     className="swap-off">
                     <AiOutlineHeart />
                   </motion.div>
+
                 </label>
+
+                <motion.button
+                  variants={variants}
+                  onClick={() => {
+                    setSelectUser(item.useracc);
+                    setIsOpenMask(true);
+                  }}
+                  animate='iconAnimate'
+                  className='absolute w-[60px] h-[60px]
+                left-3 bottom-3 z-20 rounded-full overflow-hidden
+                '>
+                  {item.useracc.Image ?
+                    <img src={item.useracc.Image} alt="" className='' />
+                    : <HiUserCircle />}
+                </motion.button>
+
+                <motion.button
+
+                className='absolute top-3 right-16 text-red-500 text-[35px] z-10'>
+                  <ImMap/>
+                </motion.button>
+
               </div>
               <Link href={`/house/${item.HouseId}`}>
                 <div className="h-[100px] w-full box-border p-4">

@@ -8,7 +8,7 @@ import { getHouseContext } from '@/contexts/getHouse';
 import { userAccContext } from '@/contexts/userAcc';
 import { NextPageWithLayout } from '@/models/layoutprops';
 import { userAcc } from '@/models/userAcc';
-import { Variants, motion } from 'framer-motion';
+import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { GetServerSideProps } from 'next';
 import { getServerSession } from 'next-auth';
 import { Montserrat } from 'next/font/google';
@@ -49,12 +49,15 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
     setUser({ ...user, ...user_ });
   }
 
-  useEffect(() => {}, [isFilter]);
+  useEffect(() => { }, [isFilter]);
 
   return (
     <>
       <main className={`${monsterrat.className} relative overflow-hidden`} id="root">
-        <HeaderMain />
+        <AnimatePresence initial={false}>
+
+          <HeaderMain />
+        </AnimatePresence>
         <div className="w-full h-fit px-[80px] mobile:px-[20px] box-border">
           <TypeHouse />
 
