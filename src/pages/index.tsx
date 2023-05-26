@@ -10,10 +10,11 @@ import { NextPageWithLayout } from '@/models/layoutprops';
 import { userAcc } from '@/models/userAcc';
 import { Variants, motion } from 'framer-motion';
 import { GetServerSideProps } from 'next';
-import { getSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
 import { Montserrat } from 'next/font/google';
 import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
+import { authOptions } from './api/auth/[...nextauth]';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -73,7 +74,8 @@ Home.Layout = Auth;
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const session = await getSession();
+  const session = await getServerSession(req, res, authOptions);
+
   // if user available not callback api from server
   if (session?.userAcc) {
     return {

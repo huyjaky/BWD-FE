@@ -24,7 +24,7 @@ const variants: Variants = {
 const HeaderMain = () => {
   const { setPlaceList } = useContext(placeListContext);
   const { isLoginClick, setIsLoginClick } = useContext(selectPopoverContext);
-  const { isClickOutSide, setIsClickOutSide } = useContext(filterFormAnimateContext);
+  const { isClickOutSide, setIsClickOutSide, isShowHeader, setIsShowHeader } = useContext(filterFormAnimateContext);
   const [isFirstLoading, setIsFirstLoading] = useState(true);
 
   const loginPanel = useRef<HTMLInputElement>(null);
@@ -43,7 +43,7 @@ const HeaderMain = () => {
     const checkIn_Out: HTMLElement | null = document.getElementById('checkin_out-popup');
     const who: HTMLElement | null = document.getElementById('who-popup');
 
-    if (isFirstLoading) return;
+    if (isFirstLoading ) return;
     scaleUp?.classList.remove('animate-slideDownHeader');
     link?.classList.remove('animate-slideDownControl');
     ControlHeader?.classList.remove('animate-slideDownControl');
@@ -64,6 +64,8 @@ const HeaderMain = () => {
     checkIn_Out?.classList.add('animate-transparentAnimateReverse');
     who?.classList.add('animate-transparentAnimateReverse');
 
+    document.body.style.overflow = 'scroll'
+    document.body.style.overflowX = 'hidden'
     setPlaceList([]);
   };
 

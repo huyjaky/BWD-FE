@@ -7,7 +7,8 @@ import { selectPopoverContext } from '@/contexts';
 import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 
 const ControlPlan = () => {
-  const { isShow, setIsShow } = useContext(filterFormAnimateContext);
+  const { isShow, setIsShow, setIsShowHeader, isShowHeader } = useContext(filterFormAnimateContext);
+  const [isFirstLoading, setIsFirstLoading] = useState(true);
   const arrLink: { ref: string; title: string }[] = [
     {
       ref: '',
@@ -38,6 +39,7 @@ const ControlPlan = () => {
     const where: HTMLElement | null = document.getElementById('where-popup');
     const checkIn_Out: HTMLElement | null = document.getElementById('checkin_out-popup');
     const who: HTMLElement | null = document.getElementById('who-popup');
+    if (isFirstLoading) return;
     scaleUp?.classList.add('animate-slideDownHeader');
     link?.classList.add('animate-slideDownControl');
     controlBar?.classList.add('animate-showAnimate');
@@ -57,6 +59,10 @@ const ControlPlan = () => {
     who?.classList.remove('animate-transparentAnimateReverse');
     setIsShow(true);
   };
+
+  useEffect(()=>{
+    setIsFirstLoading(false);
+  }, [])
 
   return (
     <>
