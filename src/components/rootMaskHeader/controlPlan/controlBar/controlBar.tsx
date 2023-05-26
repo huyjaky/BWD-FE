@@ -7,6 +7,8 @@ import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BiSearch } from 'react-icons/bi';
+import {motion} from 'framer-motion';
+import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 interface Place {
   address: string;
   latitude: number | null;
@@ -15,44 +17,13 @@ interface Place {
 
 const ControlBar = () => {
   const [submit, setSubmit] = useState(false);
+  const {isShowHeader, setIsShowHeader} = useContext(filterFormAnimateContext)
   const { setSelected } = useContext(selectPopoverContext);
   const { address } = useContext(selectPlaceContext);
   const { isFilter, setIsFilter } = useContext(getHouseContext);
   const router = useRouter();
 
   const handleOnMask = (event: any) => {
-    // add animate by hand beacause i its ez to fixed :")))
-    // animate cua header va cai nay de dong header
-
-    const mask: HTMLElement | null = document.getElementById('mask');
-    const scaleUp: HTMLElement | null = document.getElementById('scaleUp');
-
-    const ControlHeader: HTMLElement | null = document.getElementById('ControlHeader');
-    const link: HTMLElement | null = document.getElementById('link');
-    const controlBar: HTMLElement | null = document.getElementById('controlBar');
-    const where: HTMLElement | null = document.getElementById('where-popup');
-    const checkIn_Out: HTMLElement | null = document.getElementById('checkin_out-popup');
-    const who: HTMLElement | null = document.getElementById('who-popup');
-
-    scaleUp?.classList.remove('animate-slideDownHeader');
-    link?.classList.remove('animate-slideDownControl');
-    ControlHeader?.classList.remove('animate-slideDownControl');
-    mask?.classList.remove('animate-transparentAnimate');
-    controlBar?.classList.remove('animate-showAnimate');
-
-    where?.classList.remove('animate-transparentAnimate');
-    checkIn_Out?.classList.remove('animate-transparentAnimate');
-    who?.classList.remove('animate-transparentAnimate');
-    // -------------------------------------------------------------------
-    scaleUp?.classList.add('animate-slideUpHeader');
-    link?.classList.add('animate-slideUpControl');
-    ControlHeader?.classList.add('animate-slideUpControl');
-    mask?.classList.add('animate-transparentAnimateReverse');
-    controlBar?.classList.add('animate-hiddenAnimate');
-
-    where?.classList.add('animate-transparentAnimateReverse');
-    checkIn_Out?.classList.add('animate-transparentAnimateReverse');
-    who?.classList.add('animate-transparentAnimateReverse');
 
     if (router.asPath !== '/') {
       router.push('/', undefined, { shallow: true });
@@ -103,8 +74,10 @@ const ControlBar = () => {
   }, []);
 
   return (
-    <div className="w-full h-full flex relative  mobile:text-[12px]">
+    <div className="w-full h-full flex relative mobile:text-[12px]">
       <div className="flex-[0.6] flex">
+
+        {/* animation where */}
         <div
           className="flex-col flex m-auto w-full rounded-full box-border pl-7
                 z-10 relative before:absolute before:w-full before:h-[calc(100%+25px)] before:-translate-y-[calc(15%+1px)]
@@ -122,6 +95,7 @@ const ControlBar = () => {
             <div>{errors.address && <p>{errors.address.message}</p>}</div>
           </form>
         </div>
+
       </div>
       <div className="flex-1 flex">
         <div className="flex-1 flex">
