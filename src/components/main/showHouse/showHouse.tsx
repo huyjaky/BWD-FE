@@ -1,18 +1,17 @@
 import { houseApi } from '@/api-client/houseApi';
 import SkeletonShowHouse from '@/components/skeletonLoading/skletonShowHouse';
+import { selectPopoverContext } from '@/contexts';
 import { filterContext } from '@/contexts/filter';
-import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 import { getHouseContext } from '@/contexts/getHouse';
+import { selectPlaceContext } from '@/contexts/selectPlace';
+import { userAccContext } from '@/contexts/userAcc';
 import { house_ } from '@/models/house';
 import { Variants, motion } from 'framer-motion';
+import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Carousel from './carousel';
-import { selectPlaceContext } from '@/contexts/selectPlace';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import {AiOutlineHeart,AiFillHeart } from 'react-icons/ai';
-
 
 const variants: Variants = {
   show: {
@@ -35,56 +34,13 @@ interface ShowHouseProps {
 
 const ShowHouse = ({ infShow }: ShowHouseProps) => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
-  const { isShow, setIsShow } = useContext(filterFormAnimateContext);
+  const { setIsLoginClick } = useContext(selectPopoverContext);
   const { filterForm } = useContext(filterContext);
+  const { user } = useContext(userAccContext);
   const { address } = useContext(selectPlaceContext);
   const { isFilter } = useContext(getHouseContext);
-  const router = useRouter();
   const [hasMore, setHasMore] = useState(true);
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
-
-  // cai nay lam truoc khi hoc framer motion nen khong dung framer ma dung
-  // animation chay bang com
-  const handleScroll = () => {
-    const mask: HTMLElement | null = document.getElementById('mask');
-    const scaleUp: HTMLElement | null = document.getElementById('scaleUp');
-
-    const ControlHeader: HTMLElement | null = document.getElementById('ControlHeader');
-    const link: HTMLElement | null = document.getElementById('link');
-    const controlBar: HTMLElement | null = document.getElementById('controlBar');
-    const where: HTMLElement | null = document.getElementById('where-popup');
-    const checkIn_Out: HTMLElement | null = document.getElementById('checkin_out-popup');
-    const who: HTMLElement | null = document.getElementById('who-popup');
-
-    // -------------------------------------------------------------------
-    if (isShow) {
-      scaleUp?.classList.remove('animate-slideDownHeader');
-      link?.classList.remove('animate-slideDownControl');
-      ControlHeader?.classList.remove('animate-slideDownControl');
-      mask?.classList.remove('animate-transparentAnimate');
-      controlBar?.classList.remove('animate-showAnimate');
-
-      where?.classList.remove('animate-transparentAnimate');
-      checkIn_Out?.classList.remove('animate-transparentAnimate');
-      who?.classList.remove('animate-transparentAnimate');
-      // -------------------------------------------------------------------
-      scaleUp?.classList.add('animate-slideUpHeader');
-      link?.classList.add('animate-slideUpControl');
-      ControlHeader?.classList.add('animate-slideUpControl');
-      mask?.classList.add('animate-transparentAnimateReverse');
-      controlBar?.classList.add('animate-hiddenAnimate');
-
-      where?.classList.add('animate-transparentAnimateReverse');
-      checkIn_Out?.classList.add('animate-transparentAnimateReverse');
-      who?.classList.add('animate-transparentAnimateReverse');
-      setIsShow(false);
-    }
-  };
-
-  // bat su kien cho animation tren
-  useEffect(() => {
-    document.addEventListener('scroll', handleScroll);
-  }, [isShow]);
 
   const fetchHouseApi = async () => {
     if (houseTemp.length != 0) return;
@@ -106,7 +62,7 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
   };
   useEffect(() => {
     fetchHouseApi();
-  }, [houseTemp]);
+  }, []);
 
   // get more house de lay them nha khi scroll xuoong cuoi cung https://www.npmjs.com/package/react-infinite-scroll-component
   const getMoreHouse = async () => {
@@ -141,6 +97,33 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
     setHasMore(true);
   }, [infShow, isFilter]);
 
+  // them vao danh sach yeu thich
+  const handleOnClickFavorite = async (event: any, HouseId: string) => {
+    if (!user.UserId) {
+      event.preventDefault();
+      setIsLoginClick(true);
+      return;
+    }
+    const addHouseFavorite = await houseApi.authFavoriteHouse(HouseId, user.UserId);
+    if (addHouseFavorite.status != 200) {
+      console.log('Have err ');
+      return;
+    } else {
+      return;
+    }
+  };
+
+  // bo khoai danh sahc yeu thich
+  const handleOnClickUnFavorite = async (event: any, HouseId: string) => {
+    const addHouseFavorite = await houseApi.authUnFavoriteHouse(HouseId, user.UserId);
+    if (addHouseFavorite.status != 200) {
+      console.log('Have err ');
+      return;
+    } else {
+      return;
+    }
+  };
+
   return (
     <div>
       <motion.div className="w-full h-fit py-20 pb-28" id="scroll-inf">
@@ -153,30 +136,47 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
               <SkeletonShowHouse />
             </motion.div>
           }
-          style={{overflow: 'hidden'}}
+          style={{ overflow: 'hidden' }}
           className="w-full h-fit grid grid-cols-houseBox gap-x-5 gap-y-8 "
           endMessage={<div>No more values</div>}>
           {houseTemp.map((item: house_, index: number) => (
             <motion.div
               key={index}
-              whileInView={{y: [20, 0]}}
+              whileInView={{ y: [20, 0] }}
               initial={{ opacity: 0, display: 'none' }}
               animate={{ opacity: 1, display: 'block' }}
-              transition={{ delay: (index) * 0.1 }}
+              transition={{ delay: index * 0.1 }}
               className="w-full h-[400px] ">
               <div className="w-full h-[300px] relative">
                 <Carousel arrImg={item.arrImg} houseId={item.HouseId} />
 
                 {/* heart */}
-                <label className="swap swap-flip text-[40px] z-10 absolute right-2 top-2
+                <label
+                  className="swap swap-flip text-[40px] z-10 absolute right-2 top-2
                   text-red-500 ">
-                  <input type="checkbox" />
-                  <motion.div whileTap={{scale: [.8, 1.3]}} className="swap-on"><AiFillHeart/></motion.div>
-                  <motion.div whileTap={{scale: [.8, 1.3]}} className="swap-off"><AiOutlineHeart/></motion.div>
+                  <input
+                    type="checkbox"
+                    onClick={(event) => {
+                      if (!user.UserId) {
+                        event.preventDefault();
+                        setIsLoginClick(true);
+                        return;
+                      }
+                    }}
+                  />
+                  <motion.div
+                    onClick={(event) => handleOnClickFavorite(event, item.HouseId)}
+                    whileTap={{ scale: [0.8, 1.3] }}
+                    className="swap-on">
+                    <AiFillHeart />
+                  </motion.div>
+                  <motion.div
+                    onClick={(event) => handleOnClickUnFavorite(event, item.HouseId)}
+                    whileTap={{ scale: [0.8, 1.3] }}
+                    className="swap-off">
+                    <AiOutlineHeart />
+                  </motion.div>
                 </label>
-
-
-
               </div>
               <Link href={`/house/${item.HouseId}`}>
                 <div className="h-[100px] w-full box-border p-4">
