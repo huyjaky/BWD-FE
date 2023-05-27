@@ -83,6 +83,7 @@ const FormFilter = () => {
       setIsFilter(isFilter + 1);
       return;
     } else {
+      setIsFilter(0);
       return;
     }
   };
