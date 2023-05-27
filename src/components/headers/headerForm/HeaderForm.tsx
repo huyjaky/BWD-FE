@@ -8,12 +8,14 @@ import { FiSearch } from 'react-icons/fi';
 import { TbWorld } from 'react-icons/tb';
 import ButtonAccount from '../buttonAccount/ButtonAccount';
 import Filter from '@/components/main/filter/filter';
+import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 interface HeaderFormProps {
   children: ReactNode;
 }
 
 const HeaderForm = ({ children }: HeaderFormProps) => {
   const { isShow, setIsShow } = useContext(mobileContolPanelContext);
+  const {setIsShowHeader} = useContext(filterFormAnimateContext);
   return (
     <div className="w-full h-[80px] relative bg-white z-30" id='header-root'>
       <header
@@ -25,6 +27,7 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
           {/* logo container */}
           <Link
             href={'/'}
+            onClick={()=>setIsShowHeader(false)}
             className="desktop:flex-1 laptop:mr-7  flex items-center text-red-500
             z-30
             "

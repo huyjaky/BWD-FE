@@ -31,7 +31,6 @@ const HeaderMain = () => {
   const mask = useRef<HTMLInputElement>(null);
 
   const handleOnMask = (event: any) => {
-
     setPlaceList([]);
   };
 

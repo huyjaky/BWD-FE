@@ -83,7 +83,7 @@ const TypeHouse = () => {
         </div>
 
         <motion.div
-          className="grid grid-flow-col w-fit h-fit box-border px-10"
+          className="grid grid-flow-col w-fit h-fit box-border px-10 invisible"
           animate={{ x }}
           dragConstraints={{ right: 0, left: -width }}
           transition={{ type: 'spring' }}
@@ -91,7 +91,7 @@ const TypeHouse = () => {
           {imgArr?.map((item: { title: string; path: string }, index: number) => {
             return (
               <motion.div
-                animate={{opacity:[0,1], x: [-30, 0]}}
+                animate={{opacity:[0,1], x: [-30, 0], visibility: 'visible'}}
                 transition={{duration: .1, delay: .1 * index}}
                 key={index}
                 className="w-fit h-full flex flex-col mx-[20px] box-border

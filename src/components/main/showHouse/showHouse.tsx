@@ -93,7 +93,7 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
   const [isOpenMaskMap, setIsOpenMaskMap] = useState(false);
 
   console.log(houseTemp);
-  
+
   const fetchHouseApi = async () => {
     if (houseTemp.length != 0) return;
     if (infShow === 'noneAuthHouseApi') {
@@ -262,11 +262,11 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
                   }}
                   animate='iconAnimate'
                   className='absolute w-[60px] h-[60px]
-                left-3 bottom-3 z-20 rounded-full overflow-hidden
+                left-3 bottom-3 z-10 rounded-full overflow-hidden
                 '>
                   {item.useracc.Image ?
-                    <img src={item.useracc.Image} alt="" className='' />
-                    : <HiUserCircle />}
+                    <img src={item.useracc.Image} alt="" className='w-full h-full object-cover' />
+                    : <HiUserCircle className='w-full h-full'/>}
                 </motion.button>
 
 

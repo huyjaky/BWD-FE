@@ -31,7 +31,9 @@ const ControlBar = () => {
   };
 
   const isEmpty = () => {
-    if (!address.address.formattedAddress) {
+    if (!address.address.formattedAddress &&
+      (!address.guest.adults && !address.guest.childrens && !address.guest.infants)
+      ) {
       return true;
     } else {
       return false;
