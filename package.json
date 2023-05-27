@@ -15,8 +15,6 @@
     "cookies": "^0.8.0",
     "daisyui": "^2.51.6",
     "date-fns": "^2.30.0",
-    "flowbite": "^1.6.5",
-    "flowbite-react": "^0.4.6",
     "framer-motion": "^10.12.9",
     "http-proxy": "^1.18.1",
     "js-cookie": "^3.0.5",
