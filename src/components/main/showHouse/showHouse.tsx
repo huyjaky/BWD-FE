@@ -1,21 +1,22 @@
 import { houseApi } from '@/api-client/houseApi';
+import HostUser from '@/components/houseDetail/host/hostUser';
 import SkeletonShowHouse from '@/components/skeletonLoading/skletonShowHouse';
-import { selectPopoverContext } from '@/contexts';
 import { filterContext } from '@/contexts/filter';
 import { getHouseContext } from '@/contexts/getHouse';
 import { selectPlaceContext } from '@/contexts/selectPlace';
-import { userAccContext } from '@/contexts/userAcc';
+import { address } from '@/models/address';
 import { house_ } from '@/models/house';
+import { userAcc } from '@/models/userAcc';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import Link from 'next/link';
-import { useContext, useEffect, useRef, useState } from 'react';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { HiUserCircle } from 'react-icons/hi';
+import { ImLocation2, ImMap } from 'react-icons/im';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Carousel from './carousel';
-import { HiUserCircle } from 'react-icons/hi';
-import HostUser from '@/components/houseDetail/host/hostUser';
-import { userAcc } from '@/models/userAcc';
-import { ImMap } from 'react-icons/im';
+import Heart from './heart';
+import { Map, MapRef, Marker, NavigationControl } from 'react-map-gl';
+import MapEach from './mapEach';
 
 const variants: Variants = {
   show: {
@@ -58,24 +59,40 @@ const variants: Variants = {
       display: 'none'
     }
   },
+
+
+  showMaskMap: {
+    visibility: 'visible',
+    opacity: [0, 1]
+  },
+  hiddenMaskMap: {
+    opacity: [1, 0],
+    transitionEnd: {
+      visibility: 'hidden'
+    }
+  },
+
+
 };
 
 interface ShowHouseProps {
   infShow: 'noneAuthHouseApi' | 'noneAuthFilter';
+  keyMapBox: string;
 }
 
-const ShowHouse = ({ infShow }: ShowHouseProps) => {
+const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
-  const { setIsLoginClick } = useContext(selectPopoverContext);
   const { filterForm } = useContext(filterContext);
-  const { user } = useContext(userAccContext);
   const { address } = useContext(selectPlaceContext);
   const { isFilter } = useContext(getHouseContext);
   const [hasMore, setHasMore] = useState(true);
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
   const maskUser = useRef<HTMLInputElement>(null);
+  const maskMap = useRef<HTMLInputElement>(null);
   const [isOpenMask, setIsOpenMask] = useState(false);
   const [selectUser, setSelectUser] = useState<userAcc>();
+  const [selectLocale, setSelectLocale] = useState<{ longitude: number, latitude: number, zoom: number }>();
+  const [isOpenMaskMap, setIsOpenMaskMap] = useState(false);
 
   const fetchHouseApi = async () => {
     if (houseTemp.length != 0) return;
@@ -132,36 +149,8 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
     setHasMore(true);
   }, [infShow, isFilter]);
 
-  // them vao danh sach yeu thich
-  const handleOnClickFavorite = async (event: any, HouseId: string) => {
-    if (!user.UserId) {
-      event.preventDefault();
-      setIsLoginClick(true);
-      return;
-    }
-    console.log('creaste');
-    const addHouseFavorite = await houseApi.authFavoriteHouse(HouseId, user.UserId);
-    if (addHouseFavorite.status != 200) {
-      console.log('Have err ');
-      return;
-    } else {
-      return;
-    }
-  };
 
-  // bo khoai danh sahc yeu thich
-  const handleOnClickUnFavorite = async (event: any, HouseId: string) => {
-    const removeHouseFavorite = await houseApi.authUnFavoriteHouse(HouseId, user.UserId);
-    console.log(removeHouseFavorite);
-    if (removeHouseFavorite.status != 200) {
-      console.log('Have err ');
-      return;
-    } else {
-      return;
-    }
-  };
-
-  const handleOnClickOutSide = (event: any) => {
+  const handleOnClickOutSideMaskUser = (event: any) => {
     const isClickInSide = maskUser.current?.contains(event.target);
     if (!isClickInSide) {
       setIsOpenMask(false);
@@ -171,6 +160,18 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
     }
   }
 
+  const handleOnClickOutSideMaskMap = (event: any) => {
+    const isClickInSide = maskMap.current?.contains(event.target);
+    console.log(isClickInSide);
+    if (!isClickInSide) {
+      setIsOpenMaskMap(false);
+      return;
+    } else {
+      return;
+    }
+  }
+
+
   return (
     <div>
       <AnimatePresence initial={false}>
@@ -178,7 +179,7 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
         <motion.div
           variants={variants}
           animate={isOpenMask ? 'showMask' : 'hiddenMask'}
-          onClick={handleOnClickOutSide}
+          onClick={handleOnClickOutSideMaskUser}
           className='fixed w-screen h-screen bg-mask z-50 top-0 left-0 '>
           <motion.div className='w-fit h-fit bg-[#f0efe9] p-7 m-auto mt-[10%] rounded-2xl'
             ref={maskUser}
@@ -186,6 +187,28 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
             <HostUser imgPath={selectUser?.Image} gmail={selectUser?.Gmail} userName={selectUser?.UserName} />
           </motion.div>
         </motion.div>
+
+
+      </AnimatePresence>
+
+
+      <AnimatePresence initial={false}>
+        <motion.div
+          variants={variants}
+          animate={isOpenMaskMap ? 'showMaskMap' : 'hiddenMaskMap'}
+          onClick={handleOnClickOutSideMaskMap}
+          className='fixed w-screen h-screen bg-mask z-50 top-0 left-0 flex '>
+          <div
+            ref={maskMap}
+            className='w-[50%] h-fit bg-[#f0efe9] p-7 m-auto rounded-2xl' >
+            <MapEach longitude={selectLocale?.longitude ? selectLocale.longitude : 1}
+              latitude={selectLocale?.latitude ? selectLocale?.latitude : 1}
+              zoom={selectLocale?.zoom ? selectLocale.zoom : 15}
+              keyMapBox={keyMapBox}
+            />
+          </div>
+        </motion.div>
+
       </AnimatePresence>
 
 
@@ -214,37 +237,22 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
                 <Carousel arrImg={item.arrImg} houseId={item.HouseId} />
 
                 {/* heart */}
-                <label
-                  className="swap swap-flip text-[40px] z-10 absolute right-2 top-2
-                  text-red-500 ">
-                  <input
-                    type="checkbox"
-                    onClick={(event) => {
-                      if (!user.UserId) {
-                        event.preventDefault();
-                        setIsLoginClick(true);
-                        return;
-                      }
-                      if (event.currentTarget.checked) {
-                        handleOnClickFavorite(event, item.HouseId)
-                      } else {
-                        handleOnClickUnFavorite(event, item.HouseId)
-                      }
-                    }}
-                  />
-                  <motion.div
-                    whileTap={{ scale: [0.8, 1.3] }}
-                    className="swap-on">
-                    <AiFillHeart />
-                  </motion.div>
+                <Heart HouseId={item.HouseId} />
 
-                  <motion.div
-                    whileTap={{ scale: [0.8, 1.3] }}
-                    className="swap-off">
-                    <AiOutlineHeart />
-                  </motion.div>
 
-                </label>
+                <motion.button
+                  whileHover={{ scale: 1.2 }}
+                  onClick={() => {
+                    setIsOpenMaskMap(true);
+                    setSelectLocale({
+                      latitude: item.address.latitude,
+                      longitude: item.address.longitude,
+                      zoom: 15
+                    })
+                  }}
+                  className='absolute top-3 right-12 text-red-500 text-[25px] z-10'>
+                  <ImMap />
+                </motion.button>
 
                 <motion.button
                   variants={variants}
@@ -261,11 +269,6 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
                     : <HiUserCircle />}
                 </motion.button>
 
-                <motion.button
-
-                className='absolute top-3 right-16 text-red-500 text-[35px] z-10'>
-                  <ImMap/>
-                </motion.button>
 
               </div>
               <Link href={`/house/${item.HouseId}`}>

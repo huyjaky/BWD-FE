@@ -23,6 +23,7 @@ const monsterrat = Montserrat({
 });
 interface HomeProps {
   user_: userAcc;
+  keyMapBox: string;
   props: any;
 }
 
@@ -35,7 +36,7 @@ const variants: Variants = {
   }
 };
 
-const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
+const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBox }: HomeProps) => {
   const { user, setUser } = useContext(userAccContext);
   const { isFilter } = useContext(getHouseContext);
 
@@ -62,7 +63,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
           <TypeHouse />
 
           <motion.div variants={variants} animate="show">
-            <ShowHouse infShow={isFilter != 0 ? 'noneAuthFilter' : 'noneAuthHouseApi'} />
+            <ShowHouse infShow={isFilter != 0 ? 'noneAuthFilter' : 'noneAuthHouseApi'} keyMapBox={keyMapBox}/>
           </motion.div>
         </div>
         <FooterRooms />
@@ -78,12 +79,15 @@ export default Home;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getServerSession(req, res, authOptions);
+  const keyMapBox = process.env.ACCESS_TOKEN_MAPBOX;
 
   // if user available not callback api from server
   if (session?.userAcc) {
     return {
-      props: { ...session.userAcc }
+      props: { ...session.userAcc, keyMapBox: keyMapBox }
     };
   }
-  return { props: {} };
+  return { props: {
+    keyMapBox: keyMapBox
+  } };
 };
