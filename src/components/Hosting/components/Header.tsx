@@ -89,7 +89,7 @@ function Header(): JSX.Element {
                             }}
                             className='text-[12px] h-[0%]'>
                             <button
-                                onClick={() => handleCreatehome}
+                                onClick={handleCreatehome}
                                 className={`w-[100%] h-[100%] p-[20px] text-start flex justify-between items-center rounded-[13px] hover:bg-[#F7F7F7] ${active === "Create a new listing" ? 'text-black' : 'text-[#717171]'} flex items-center justify-center
                             `}>Create a new listing <div className='w-[20px]'><CreateList className='' /></div>
                             </button>
