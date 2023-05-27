@@ -2,6 +2,8 @@ import React from 'react';
 import Signature from '../../../../public/assets/signature.jpg';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
+import Link from 'next/link';
 export default function StepCongratulation() {
   return (
     <motion.div
@@ -48,12 +50,13 @@ export default function StepCongratulation() {
               />
             </div>
             <div className="mt-[22px] mobile:mb-[22px]">
-              <button
-                // style={{ transition: "2s" }}
-                className="transition ease-in-out delay-150 rounded-[10px] w-[200px] h-[48px] bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 "
-              >
-                Let's get started
-              </button>
+              <Link href="/hosting">
+                <button
+                  className=" rounded-[10px] w-[200px] h-[48px] bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500  transition-all ease-in"
+                >
+                  Let's get started
+                </button>
+              </Link>
             </div>
           </div>
         </div>

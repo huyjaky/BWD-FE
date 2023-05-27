@@ -10,6 +10,30 @@ export default function Step7CHome() {
 
   const [SharedCount, setSharedCount] = useState(0);
 
+  const handleprivateCount = () => {
+    if (privateCount <= 0) {
+      return
+    } else {
+      setprivateCount(prev => prev - 0.5);
+    }
+  }
+
+  const handleDedicatedCount = () => {
+    if (DedicatedCount <= 0) {
+      return
+    } else {
+      setDedicatedCount(prev => prev - 0.5);
+    }
+  }
+
+  const handleSharedCount = () => {
+    if (SharedCount <= 0) {
+      return
+    } else {
+      setSharedCount(prev => prev - 0.5);
+    }
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -52,7 +76,7 @@ export default function Step7CHome() {
                   <button
                     className="border-[1px] rounded-[50%] border-[#b0b0b0] ease-in duration-300
                                                         hover:border-black"
-                    onClick={() => setprivateCount((prev) => prev - 0.5)}
+                    onClick={handleprivateCount}
                   >
                     <FiMinus className="w-[32px] h-[32px] p-[5px]" />
                   </button>
@@ -84,7 +108,7 @@ export default function Step7CHome() {
                   <button
                     className="border-[1px] rounded-[50%] border-[#b0b0b0] ease-in duration-300
                                                         hover:border-black"
-                    onClick={() => setDedicatedCount((prev) => prev - 0.5)}
+                    onClick={handleDedicatedCount}
                   >
                     <FiMinus className="w-[32px] h-[32px] p-[5px]" />
                   </button>
@@ -112,7 +136,7 @@ export default function Step7CHome() {
                   <button
                     className="border-[1px] rounded-[50%] border-[#b0b0b0] ease-in duration-300
                                                         hover:border-black"
-                    onClick={() => setSharedCount((prev) => prev - 0.5)}
+                    onClick={handleSharedCount}
                   >
                     <FiMinus className="w-[32px] h-[32px] p-[5px] " />
                   </button>

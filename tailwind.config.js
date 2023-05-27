@@ -3,7 +3,8 @@ module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}'
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./node_modules/flowbite-react/**/*.js",
   ],
   theme: {
     extend: {
@@ -156,7 +157,9 @@ module.exports = {
   plugins: [
     require('tailwind-scrollbar-hide'),
     require('@savvywombat/tailwindcss-grid-areas'),
-    require('daisyui')
+    require('daisyui'),
+    require("flowbite/plugin")
+
   ],
   daisyui: {
     themes: true,

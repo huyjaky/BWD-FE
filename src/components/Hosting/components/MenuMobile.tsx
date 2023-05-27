@@ -3,6 +3,7 @@ import React from 'react';
 import { Calendar, CreateList, Inbox, Today } from '../../../../Icon_BnB_svg';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 interface MenuMobileProps {
   toggleMenu: boolean;
   activeInbox: boolean;
@@ -22,9 +23,8 @@ const MenuMobile: React.FC<MenuMobileProps> = ({
     <div
       className={`z-0 flex-col bg-[rgba(255,255,255,.25)]
                         shadow-shadowHeadhost  rounded-[13px] absolute
-                        right-[20px] top-[80px] ${
-                          !toggleMenu ? 'hidden' : ''
-                        } tablet:hidden desktop:hidden laptop:hidden`}
+                        right-[20px] top-[80px] ${!toggleMenu ? 'hidden' : ''
+        } tablet:hidden desktop:hidden laptop:hidden`}
     >
       {/* blur: độ đục của màu */}
       <ul
@@ -36,9 +36,8 @@ const MenuMobile: React.FC<MenuMobileProps> = ({
       >
         <li className="relative">
           <button
-            className={`w-[100%] h-[40px] p-[20px] text-start flex justify-between items-center rounded-b-none rounded-t-[13px] hover:bg-[#F7F7F7] ${
-              activeToday ? 'text-black' : 'text-[#717171]'
-            }
+            className={`w-[100%] h-[40px] p-[20px] text-start flex justify-between items-center rounded-b-none rounded-t-[13px] hover:bg-[#F7F7F7] ${activeToday ? 'text-black' : 'text-[#717171]'
+              }
                     `}
           >
             Today <Today />
@@ -47,9 +46,8 @@ const MenuMobile: React.FC<MenuMobileProps> = ({
         </li>
         <li>
           <button
-            className={`w-[100%] h-[40px] p-[20px] text-start flex justify-between items-center rounded-none hover:bg-[#F7F7F7] ${
-              activeInbox ? 'text-black' : 'text-[#717171]'
-            }
+            className={`w-[100%] h-[40px] p-[20px] text-start flex justify-between items-center rounded-none hover:bg-[#F7F7F7] ${activeInbox ? 'text-black' : 'text-[#717171]'
+              }
                     `}
           >
             Inbox
@@ -58,9 +56,8 @@ const MenuMobile: React.FC<MenuMobileProps> = ({
         </li>
         <li>
           <button
-            className={`w-[100%] h-[40px] p-[20px] text-start flex justify-between items-center rounded-none hover:bg-[#F7F7F7] ${
-              activeCalendar ? 'text-black' : 'text-[#717171]'
-            }
+            className={`w-[100%] h-[40px] p-[20px] text-start flex justify-between items-center rounded-none hover:bg-[#F7F7F7] ${activeCalendar ? 'text-black' : 'text-[#717171]'
+              }
                     `}
           >
             Calendar
@@ -68,14 +65,16 @@ const MenuMobile: React.FC<MenuMobileProps> = ({
           </button>
         </li>
         <li>
-          <button
-            className={`w-[100%] h-[44px] p-[20px] text-start flex justify-between items-center rounded-t-none rounded-b-[13px] hover:bg-[#F7F7F7] ${
-              activeMenu ? 'text-black' : 'text-[#717171]'
-            } flex items-center justify-center
+          <Link href="/createhome">
+            <button
+              className={`w-[100%] h-[44px] p-[20px] text-start flex justify-between items-center rounded-t-none rounded-b-[13px] hover:bg-[#F7F7F7] ${activeMenu ? 'text-black' : 'text-[#717171]'
+                } flex items-center justify-center
                     `}
-          >
-            Create a new listing <CreateList className="" />
-          </button>
+            >
+              Create a new listing <CreateList className="" />
+            </button>
+          </Link>
+
         </li>
       </ul>
     </div>

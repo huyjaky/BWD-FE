@@ -1,15 +1,6 @@
-import React, { RefObject, useEffect, useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 export default function Step1CHome() {
-  const videoRef: RefObject<HTMLVideoElement> = useRef(null);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.onloadedmetadata = () => {
-        videoRef.current?.play();
-      };
-    }
-  }, [videoRef]);
 
   return (
     <motion.div
@@ -17,7 +8,7 @@ export default function Step1CHome() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1 }}
-      className="mt-[48px] w-[98vw] h-[800px]"
+      className="mt-[48px] w-[98vw] h-[100vh - 56px] mobile:h-[100vh]"
     >
       <div className="w-[80%] ml-auto mr-auto">
         <div
@@ -36,7 +27,7 @@ export default function Step1CHome() {
             <h1 className="text-[48px] leading-[54px] font-semibold mb-[24px]">
               Tell us about your place
             </h1>
-            <p className="font-normal text-[18px]">
+            <p className="font-normal text-[18px] mobile:pb-[100px]">
               In this step, we'll ask you which type of property you have and if guests will book
               the entire place or just a room. Then let us know the location and how many guests can
               stay.
