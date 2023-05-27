@@ -4,18 +4,16 @@ import SkeletonShowHouse from '@/components/skeletonLoading/skletonShowHouse';
 import { filterContext } from '@/contexts/filter';
 import { getHouseContext } from '@/contexts/getHouse';
 import { selectPlaceContext } from '@/contexts/selectPlace';
-import { address } from '@/models/address';
 import { house_ } from '@/models/house';
 import { userAcc } from '@/models/userAcc';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import Link from 'next/link';
-import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { HiUserCircle } from 'react-icons/hi';
-import { ImLocation2, ImMap } from 'react-icons/im';
+import { ImMap } from 'react-icons/im';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Carousel from './carousel';
 import Heart from './heart';
-import { Map, MapRef, Marker, NavigationControl } from 'react-map-gl';
 import MapEach from './mapEach';
 
 const variants: Variants = {
@@ -94,6 +92,8 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
   const [selectLocale, setSelectLocale] = useState<{ longitude: number, latitude: number, zoom: number }>();
   const [isOpenMaskMap, setIsOpenMaskMap] = useState(false);
 
+  console.log(houseTemp);
+  
   const fetchHouseApi = async () => {
     if (houseTemp.length != 0) return;
     if (infShow === 'noneAuthHouseApi') {
@@ -114,7 +114,7 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
   };
   useEffect(() => {
     fetchHouseApi();
-  }, []);
+  }, [houseTemp]);
 
   // get more house de lay them nha khi scroll xuoong cuoi cung https://www.npmjs.com/package/react-infinite-scroll-component
   const getMoreHouse = async () => {
