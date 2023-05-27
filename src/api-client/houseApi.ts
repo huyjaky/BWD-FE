@@ -8,5 +8,11 @@ export const houseApi = {
   },
   noneAuthFilter(payload: { filter: filterForm; selectPlace: addressSearch }, page: number) {
     return axiosClient.post(`/get/house/filter/${page}`, payload);
+  },
+  authFavoriteHouse(HouseId: string, UserId: string) {
+    return axiosClient.post(`/create/favorite`, {HouseId: HouseId, UserId: UserId});
+  },
+  authUnFavoriteHouse (HouseId: string, UserId: string ) {
+    return axiosClient.post(`/delete/favorite`, {HouseId: HouseId, UserId: UserId});
   }
 };

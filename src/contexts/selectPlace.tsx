@@ -1,4 +1,3 @@
-import { address } from '@/models/address';
 import { addressSearch } from '@/models/addressSearch';
 import { selectPlaceData } from '@/models/place';
 import { ReactNode, createContext, useState } from 'react';
@@ -20,8 +19,8 @@ const selectPlaceDefaultData: selectPlaceData = {
       addressLine: '',
       streetName: '',
       formattedAddress: '',
-      latitude: '',
-      longitude: ''
+      latitude: 0,
+      longitude: 0
     },
     checkInDay: new Date(),
     checkOutDay: new Date(),

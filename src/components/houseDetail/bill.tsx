@@ -24,7 +24,6 @@ const Bill = ({ houseDetail }: BillProps) => {
     setBill({ ...Bill, guest: { ...Bill.guest, ...address.guest } });
   }, [address]);
 
-  console.log(Bill.guest);
 
   return (
     <div

@@ -94,7 +94,7 @@ const Carousel = ({ arrImg, houseId }: CarouselProps) => {
                 router.push(`/house/${houseId}`, undefined, { shallow: true });
               }}
               onTouchEnd={() => {
-                router.push(`/house/${houseId}`, undefined, { shallow: true });
+                // router.push(`/house/${houseId}`, undefined, { shallow: true });
               }}
               className="w-full h-full absolute object-cover"
               transition={{

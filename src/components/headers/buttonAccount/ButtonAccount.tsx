@@ -50,7 +50,11 @@ const ButtonAccount = () => {
         console.log('isClick', isClick);
       }}>
       <BsList className="w-[30px] h-[30px]" />
-      <HiUserCircle className="w-[40px] h-[30px] " />
+      {user.Image ? (
+        <img src={user.Image} className="w-[30px] h-[30px] rounded-full" />
+      ) : (
+        <HiUserCircle className="w-[40px] h-[30px] " />
+      )}
       <AnimatePresence initial={false}>
         <motion.div
           variants={variants}
