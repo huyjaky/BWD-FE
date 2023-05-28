@@ -19,10 +19,6 @@ function Main(): JSX.Element {
         },
         onscreen: {
             opacity: 1,
-            transition: {
-                type: "spring",
-                duration: 1
-            }
         }
     };
     const buttonVariants: Variants = {
@@ -33,10 +29,6 @@ function Main(): JSX.Element {
         onscreen: {
             opacity: 1,
             y: 0,
-            transition: {
-                type: "spring",
-                duration: 1
-            }
         }
     };
 
@@ -181,7 +173,7 @@ function Main(): JSX.Element {
                             variants={componentVariants}
                             initial="offscreen"
                             whileInView="onscreen"
-                            viewport={{ amount: 1 }}
+                            viewport={{ amount: 0.5 }}
                             className='text-[26px] font-semibold mb-[24px]'>Resources and tips</motion.h1>
                         <div className='flex h-[293px] mobile:h-fit w-[full] gap-5 mobile:gap-0 mobile:flex-col mobile:items-center mobile:justify-center tablet:justify-center '
                         >
@@ -192,8 +184,7 @@ function Main(): JSX.Element {
                                         variants={buttonVariants}
                                         initial="offscreen"
                                         whileInView="onscreen"
-                                        viewport={{ amount: 1 }}
-                                        transition={{ type: "spring", stiffness: 35, delay: 0.1 * index }}
+                                        transition={{ type: "spring", delay: 0.1 * index }}
                                     >
                                         <ResourceAndTip ImgLink={Resourceandtip.ImgLink} title={Resourceandtip.title} />
                                     </motion.div>
