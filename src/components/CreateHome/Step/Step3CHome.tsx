@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 import ChooTypeHo from '../ChooTypeHo';
 import { categoriesStep3 } from '../utils/constant';
 import { motion } from 'framer-motion';
+import { newHouseContext } from '../../../contexts/createHome';
 
 export default function Step3CHome() {
-  const [selected, setselected] = useState('');
+  const { state, dispatch } = useContext(newHouseContext);
+  const [selected, setselected] = useState(state.place);
+
+  useEffect(() => {
+    dispatch({ type: 'STEP3', payload: selected });
+  }, [selected]);
   return (
     <motion.div
       initial={{ opacity: 0 }}

@@ -13,6 +13,8 @@ import { Surfing } from '../../../../Icon_BnB_svg';
 import { TropicalIcon } from '../../../../Icon_BnB_svg';
 import { VineYardIcon } from '../../../../Icon_BnB_svg';
 import { BeachFronts } from '../../../../Icon_BnB_svg';
+import { Apartment } from '../../../../Icon_BnB_svg';
+import { Guesthouse } from '../../../../Icon_BnB_svg';
 
 import { AiOutlineUser } from 'react-icons/ai';
 import { MdFamilyRestroom } from 'react-icons/md';
@@ -41,9 +43,6 @@ import { SmokeA } from '../../../../Icon_BnB_svg';
 import { Firstaid } from '../../../../Icon_BnB_svg';
 import { FireExting } from '../../../../Icon_BnB_svg';
 import { Carbonmono } from '../../../../Icon_BnB_svg';
-
-import { Room } from '../../../../Icon_BnB_svg';
-import { ShareRoom } from '../../../../Icon_BnB_svg';
 
 export const categoriesStep2 = [
   { name: 'Home', icon: <House className="w-[45px] h-[45px]" /> },
@@ -102,13 +101,13 @@ export const categoriesStep3 = [
     description: 'Guests have the whole place to themselves.'
   },
   {
-    name: 'A room',
-    icon: <Room className="w-[45px] h-[45px]" />,
-    description: 'Guests have their own room in a home, plus access to shared spaces.'
+    name: 'Apartment',
+    icon: <Apartment className="w-[45px] h-[45px]" />,
+    description: 'Spacious Apartment with Private Rooms and Shared Amenities.'
   },
   {
-    name: 'A shared room',
-    icon: <ShareRoom className="w-[45px] h-[45px]" />,
+    name: 'Guesthouse',
+    icon: <Guesthouse className="w-[45px] h-[45px]" />,
     description: 'Guests sleep in a room or common area that may be shared with you or others.'
   }
 ];

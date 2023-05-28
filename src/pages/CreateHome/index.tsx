@@ -18,6 +18,7 @@ import Step15CHome from '@/components/CreateHome/Step/Step15CHome';
 import Step16CHome from '@/components/CreateHome/Step/Step16CHome';
 import Step17CHome from '@/components/CreateHome/Step/Step17CHome';
 import { AnimatePresence } from 'framer-motion';
+import {CreateHouseProvider} from '../../contexts/createHome'
 
 import ProcessBar from '../../components/CreateHome/ProcessBar/ProccessBar';
 import { GetServerSideProps } from 'next';
@@ -64,6 +65,8 @@ function CreateHome(): JSX.Element {
   ];
 
   return (
+    <CreateHouseProvider>
+
     <div className="">
       {currentStep > 0 && currentStep <= 17 && <Header />}
 
@@ -75,15 +78,17 @@ function CreateHome(): JSX.Element {
           steps[currentStep - 1].component}
       </AnimatePresence>
 
-      {currentStep > 0 && currentStep <= 17 && (
-        <ProcessBar
-          steps={steps}
+      {currentStep > 0 && currentStep <= 17
+        && <ProcessBar
+        steps={steps}
           handleBackStep={handleBackStep}
           handleNextStep={handleNextStep}
           currentStep={currentStep}
-        />
-      )}
+          />
+        }
+
     </div>
+        </CreateHouseProvider>
   );
 }
 
