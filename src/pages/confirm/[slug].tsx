@@ -73,6 +73,7 @@ const Confirm = ({ houseDetail, keyMapBox }: ConfirmProps) => {
       setMaskGuests(true);
       return;
     }
+    
   };
 
   const maskGuests_ = (event: any) => {
