@@ -12,27 +12,27 @@ export default function Step7CHome() {
 
   const handleprivateCount = () => {
     if (privateCount <= 0) {
-      return
+      return;
     } else {
-      setprivateCount(prev => prev - 0.5);
+      setprivateCount((prev) => prev - 0.5);
     }
-  }
+  };
 
   const handleDedicatedCount = () => {
     if (DedicatedCount <= 0) {
-      return
+      return;
     } else {
-      setDedicatedCount(prev => prev - 0.5);
+      setDedicatedCount((prev) => prev - 0.5);
     }
-  }
+  };
 
   const handleSharedCount = () => {
     if (SharedCount <= 0) {
-      return
+      return;
     } else {
-      setSharedCount(prev => prev - 0.5);
+      setSharedCount((prev) => prev - 0.5);
     }
-  }
+  };
 
   return (
     <motion.div

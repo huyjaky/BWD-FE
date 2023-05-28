@@ -38,7 +38,7 @@ const variants: Variants = {
       '50% 50% 53% 47% / 26% 22% 78% 74%',
       '50% 50% 20% 80% / 25% 80% 20% 75%',
       '30% 70% 70% 30% / 30% 52% 48% 70%',
-      '20% 80% 20% 80% / 20% 80% 20% 80%',
+      '20% 80% 20% 80% / 20% 80% 20% 80%'
     ],
     transition: {
       duration: 10,
@@ -58,7 +58,6 @@ const variants: Variants = {
     }
   },
 
-
   showMaskMap: {
     visibility: 'visible',
     opacity: [0, 1]
@@ -68,9 +67,7 @@ const variants: Variants = {
     transitionEnd: {
       visibility: 'hidden'
     }
-  },
-
-
+  }
 };
 
 interface ShowHouseProps {
@@ -89,7 +86,11 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
   const maskMap = useRef<HTMLInputElement>(null);
   const [isOpenMask, setIsOpenMask] = useState(false);
   const [selectUser, setSelectUser] = useState<userAcc>();
-  const [selectLocale, setSelectLocale] = useState<{ longitude: number, latitude: number, zoom: number }>();
+  const [selectLocale, setSelectLocale] = useState<{
+    longitude: number;
+    latitude: number;
+    zoom: number;
+  }>();
   const [isOpenMaskMap, setIsOpenMaskMap] = useState(false);
 
   console.log(houseTemp);
@@ -142,13 +143,12 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
     }
   };
 
-  useEffect(() => { }, [houseTemp, hasMore]);
+  useEffect(() => {}, [houseTemp, hasMore]);
 
   useEffect(() => {
     setHouseTemp([]);
     setHasMore(true);
   }, [infShow, isFilter]);
-
 
   const handleOnClickOutSideMaskUser = (event: any) => {
     const isClickInSide = maskUser.current?.contains(event.target);
@@ -158,7 +158,7 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
     } else {
       return;
     }
-  }
+  };
 
   const handleOnClickOutSideMaskMap = (event: any) => {
     const isClickInSide = maskMap.current?.contains(event.target);
@@ -169,48 +169,47 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
     } else {
       return;
     }
-  }
-
+  };
 
   return (
     <div>
       <AnimatePresence initial={false}>
-
         <motion.div
           variants={variants}
           animate={isOpenMask ? 'showMask' : 'hiddenMask'}
           onClick={handleOnClickOutSideMaskUser}
-          className='fixed w-screen h-screen bg-mask z-50 top-0 left-0 '>
-          <motion.div className='w-fit h-fit bg-[#f0efe9] p-7 m-auto mt-[10%] rounded-2xl'
+          className="fixed w-screen h-screen bg-mask z-50 top-0 left-0 "
+        >
+          <motion.div
+            className="w-fit h-fit bg-[#f0efe9] p-7 m-auto mt-[10%] rounded-2xl"
             ref={maskUser}
           >
-            <HostUser imgPath={selectUser?.Image} gmail={selectUser?.Gmail} userName={selectUser?.UserName} />
+            <HostUser
+              imgPath={selectUser?.Image}
+              gmail={selectUser?.Gmail}
+              userName={selectUser?.UserName}
+            />
           </motion.div>
         </motion.div>
-
-
       </AnimatePresence>
-
 
       <AnimatePresence initial={false}>
         <motion.div
           variants={variants}
           animate={isOpenMaskMap ? 'showMaskMap' : 'hiddenMaskMap'}
           onClick={handleOnClickOutSideMaskMap}
-          className='fixed w-screen h-screen bg-mask z-50 top-0 left-0 flex '>
-          <div
-            ref={maskMap}
-            className='w-[50%] h-fit bg-[#f0efe9] p-7 m-auto rounded-2xl' >
-            <MapEach longitude={selectLocale?.longitude ? selectLocale.longitude : 1}
+          className="fixed w-screen h-screen bg-mask z-50 top-0 left-0 flex "
+        >
+          <div ref={maskMap} className="w-[50%] h-fit bg-[#f0efe9] p-7 m-auto rounded-2xl">
+            <MapEach
+              longitude={selectLocale?.longitude ? selectLocale.longitude : 1}
               latitude={selectLocale?.latitude ? selectLocale?.latitude : 1}
               zoom={selectLocale?.zoom ? selectLocale.zoom : 15}
               keyMapBox={keyMapBox}
             />
           </div>
         </motion.div>
-
       </AnimatePresence>
-
 
       <motion.div className="w-full h-fit py-20 pb-28" id="scroll-inf">
         <InfiniteScroll
@@ -224,7 +223,8 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
           }
           style={{ overflow: 'hidden' }}
           className="w-full h-fit grid grid-cols-houseBox gap-x-5 gap-y-8 "
-          endMessage={<div>No more values</div>}>
+          endMessage={<div>No more values</div>}
+        >
           {houseTemp.map((item: house_, index: number) => (
             <motion.div
               key={index}
@@ -232,13 +232,13 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
               initial={{ opacity: 0, display: 'none' }}
               animate={{ opacity: 1, display: 'block' }}
               transition={{ delay: index * 0.1 }}
-              className="w-full h-[400px] ">
+              className="w-full h-[400px] "
+            >
               <div className="w-full h-[300px] relative">
                 <Carousel arrImg={item.arrImg} houseId={item.HouseId} />
 
                 {/* heart */}
                 <Heart HouseId={item.HouseId} />
-
 
                 <motion.button
                   whileHover={{ scale: 1.2 }}
@@ -248,9 +248,10 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
                       latitude: item.address.latitude,
                       longitude: item.address.longitude,
                       zoom: 15
-                    })
+                    });
                   }}
-                  className='absolute top-3 right-12 text-red-500 text-[25px] z-10'>
+                  className="absolute top-3 right-12 text-red-500 text-[25px] z-10"
+                >
                   <ImMap />
                 </motion.button>
 
@@ -260,16 +261,17 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
                     setSelectUser(item.useracc);
                     setIsOpenMask(true);
                   }}
-                  animate='iconAnimate'
-                  className='absolute w-[60px] h-[60px]
+                  animate="iconAnimate"
+                  className="absolute w-[60px] h-[60px]
                 left-3 bottom-3 z-10 rounded-full overflow-hidden
-                '>
-                  {item.useracc.Image ?
-                    <img src={item.useracc.Image} alt="" className='w-full h-full object-cover' />
-                    : <HiUserCircle className='w-full h-full'/>}
+                "
+                >
+                  {item.useracc.Image ? (
+                    <img src={item.useracc.Image} alt="" className="w-full h-full object-cover" />
+                  ) : (
+                    <HiUserCircle className="w-full h-full" />
+                  )}
                 </motion.button>
-
-
               </div>
               <Link href={`/house/${item.HouseId}`}>
                 <div className="h-[100px] w-full box-border p-4">
@@ -296,7 +298,8 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
               <motion.div
                 variants={variants}
                 animate={houseTemp.length == 0 ? 'show' : 'hidden'}
-                key={index}>
+                key={index}
+              >
                 <SkeletonShowHouse />
               </motion.div>
             ))}

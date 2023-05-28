@@ -86,7 +86,6 @@ const ControlPlan = () => {
   // animate by hand again :")))"
   const handleOnScaleDown = (event: any) => {
     setIsShowHeader(true);
-
   };
 
   const isClickOutSide = (event: any) => {
@@ -96,7 +95,6 @@ const ControlPlan = () => {
       setIsShowHeader(false);
       return;
     }
-
   };
 
   useEffect(() => {
@@ -115,7 +113,8 @@ const ControlPlan = () => {
             <motion.div
               variants={variants}
               animate={isShowHeader ? 'showUpLinkControl' : 'hiddenLinkControl'}
-              className="m-auto mt-3 flex w-full justify-between">
+              className="m-auto mt-3 flex w-full justify-between"
+            >
               {arrLink.map((item, index) => {
                 return (
                   <Link
@@ -125,7 +124,8 @@ const ControlPlan = () => {
                     before:bottom-0 before:h-[2px]  before:w-0 before:absolute
                     before:bg-slate-500 hover:before:w-full before:transition-all
                     before:duration-200
-                  ">
+                  "
+                  >
                     {item.title}
                   </Link>
                 );
@@ -142,25 +142,29 @@ const ControlPlan = () => {
             rounded-full border-slate-400
           "
             id="scaleUp"
-            onClick={handleOnScaleDown}>
+            onClick={handleOnScaleDown}
+          >
             <button
               className="flex-1 h-full"
               id="header-control_bar-list-index-1"
               onClick={(event) => {
                 onSelected('where');
-              }}>
+              }}
+            >
               Anywhere
             </button>
             <button
               className="flex-1 border-x-2 border-slate-400 h-full"
               id="header-control_bar-list-index-2"
-              onClick={(event) => onSelected('checkin')}>
+              onClick={(event) => onSelected('checkin')}
+            >
               Any week
             </button>
             <button
               className="flex-1 h-full"
               id="header-control_bar-list-index-4"
-              onClick={(event) => onSelected('who')}>
+              onClick={(event) => onSelected('who')}
+            >
               Add guests
             </button>
             <button className="rounded-full w-[30px] h-[30px] bg-red-500 flex">
@@ -183,13 +187,15 @@ const ControlPlan = () => {
       before:h-full before:right-0 before:top-0 before:absolute
       before:w-[calc(100vw-(100vw-100%)/2)] before:bg-white before:-z-10
       "
-        id="ControlHeader">
+        id="ControlHeader"
+      >
         <div
           className="w-[850px] tablet:w-full h-[90%] box-border rounded-full m-auto flex
           text-[15px] transition-all duration-300 border-2  overflow-hidden
           cursor-pointer
         "
-          id="controlBar">
+          id="controlBar"
+        >
           <ControlBar />
           <Popover />
         </div>

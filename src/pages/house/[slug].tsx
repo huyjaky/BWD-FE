@@ -31,24 +31,21 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
 }: HouseDetailProps) => {
   return (
     <>
-
-
       <div className="w-full h-fit">
         <main className={`${monsterrat.className} relative box-border`} id="root">
           <AnimatePresence initial={false}>
-
             <HeaderMain />
           </AnimatePresence>
 
           <div
             className="w-[1150px] h-fit
-          tablet:w-screen mobile:w-screen
+          tablet:w-screen mobile:w-screen mobile:px-4
           box-border m-auto"
           >
             <TitleHouse title={houseDetail.Title} address={houseDetail.address} />
 
             <Picture arrImg={houseDetail.arrImg} />
-            <div className="w-screen h-[500px] laptop:hidden desktop:hidden flex justify-center box-border ">
+            <div className="w-full h-[500px] laptop:hidden desktop:hidden flex justify-center box-border ">
               <Carousel arrImg={houseDetail.arrImg} houseId={houseDetail.HouseId} />
             </div>
             <ShowAllHouse arrImg={houseDetail.arrImg} />

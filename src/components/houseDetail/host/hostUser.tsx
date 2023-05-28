@@ -20,7 +20,7 @@ const variants: Variants = {
       '50% 50% 53% 47% / 26% 22% 78% 74%',
       '50% 50% 20% 80% / 25% 80% 20% 75%',
       '30% 70% 70% 30% / 30% 52% 48% 70%',
-      '20% 80% 20% 80% / 20% 80% 20% 80%',
+      '20% 80% 20% 80% / 20% 80% 20% 80%'
     ],
     transition: {
       duration: 10,
@@ -36,7 +36,8 @@ const HostUser = ({ imgPath, userName, gmail }: HostUserProps) => {
       {/* host card */}
       <motion.div
         whileHover={{ scale: 1.1 }}
-        className="w-[400px] h-[250px] bg-white rounded-2xl flex flex-col shadow-2xl">
+        className="w-[400px] h-[250px] bg-white rounded-2xl flex flex-col shadow-2xl"
+      >
         <div className="w-fit h-fit m-auto text-center">
           <motion.img
             variants={variants}

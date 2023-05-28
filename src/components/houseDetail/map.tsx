@@ -10,7 +10,6 @@ interface MapBoxProps {
 }
 
 const MapBox = ({ longitude, latitude, keyMapBox }: MapBoxProps) => {
-
   const [viewPort, setViewPort] = useState({
     longitude: longitude,
     latitude: latitude,
@@ -28,12 +27,11 @@ const MapBox = ({ longitude, latitude, keyMapBox }: MapBoxProps) => {
         className="w-full h-fit"
       >
         <Map
-
           style={{
             width: '100%',
             height: '400px',
             borderRadius: '20px',
-            border: '3px solid red',
+            border: '3px solid red'
           }}
           scrollZoom={false}
           initialViewState={{
@@ -41,7 +39,6 @@ const MapBox = ({ longitude, latitude, keyMapBox }: MapBoxProps) => {
             latitude: viewPort.latitude,
             zoom: 15
           }}
-
           mapboxAccessToken={keyMapBox}
           mapStyle={'mapbox://styles/jajajajau/cli2mlj4702e201r0gwyg2dun'}
         >
@@ -58,6 +55,6 @@ const MapBox = ({ longitude, latitude, keyMapBox }: MapBoxProps) => {
         </Map>
       </motion.div>
     </div>
-  )
-}
+  );
+};
 export default MapBox;

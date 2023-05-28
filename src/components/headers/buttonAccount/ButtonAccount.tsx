@@ -48,7 +48,8 @@ const ButtonAccount = () => {
       onClick={() => {
         setIsClick(!isClick);
         console.log('isClick', isClick);
-      }}>
+      }}
+    >
       <BsList className="w-[30px] h-[30px]" />
       {user.Image ? (
         <img src={user.Image} className="w-[30px] h-[30px] rounded-full" />
@@ -62,13 +63,15 @@ const ButtonAccount = () => {
           transition={{ duration: 0.5 }}
           className="absolute translate-y-16 w-[250px] h-fit shadow-2xl right-0 rounded-2xl bg-white
           overflow-hidden
-      ">
+      "
+        >
           <div className="w-full h-fit border-b-2">
             {!user?.UserId ? (
               <>
                 <button
                   className="w-full py-4 text-left px-5"
-                  onClick={(event) => setIsLoginClick(true)}>
+                  onClick={(event) => setIsLoginClick(true)}
+                >
                   Login
                 </button>
               </>
@@ -83,7 +86,8 @@ const ButtonAccount = () => {
                       redirect: false
                     });
                     resetDataUser();
-                  }}>
+                  }}
+                >
                   Logout
                 </button>
               </>

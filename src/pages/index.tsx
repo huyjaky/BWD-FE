@@ -50,20 +50,22 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBox }: HomePr
     setUser({ ...user, ...user_ });
   }
 
-  useEffect(() => { }, [isFilter]);
+  useEffect(() => {}, [isFilter]);
 
   return (
     <>
       <main className={`${monsterrat.className} relative overflow-hidden`} id="root">
         <AnimatePresence initial={false}>
-
           <HeaderMain />
         </AnimatePresence>
         <div className="w-full h-fit px-[80px] mobile:px-[20px] box-border">
           <TypeHouse />
 
           <motion.div variants={variants} animate="show">
-            <ShowHouse infShow={isFilter != 0 ? 'noneAuthFilter' : 'noneAuthHouseApi'} keyMapBox={keyMapBox}/>
+            <ShowHouse
+              infShow={isFilter != 0 ? 'noneAuthFilter' : 'noneAuthHouseApi'}
+              keyMapBox={keyMapBox}
+            />
           </motion.div>
         </div>
         <FooterRooms />
@@ -87,7 +89,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       props: { ...session.userAcc, keyMapBox: keyMapBox }
     };
   }
-  return { props: {
-    keyMapBox: keyMapBox
-  } };
+  return {
+    props: {
+      keyMapBox: keyMapBox
+    }
+  };
 };

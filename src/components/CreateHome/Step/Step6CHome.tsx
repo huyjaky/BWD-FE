@@ -16,32 +16,32 @@ export default function Step6CHome() {
 
   const handleGuestCount = () => {
     if (guestCount <= 0) {
-      return
+      return;
     } else {
-      setguestCount(prev => prev - 1)
+      setguestCount((prev) => prev - 1);
     }
-  }
+  };
   const handleBedroomCount = () => {
     if (BedroomCount <= 0) {
-      return
+      return;
     } else {
-      setBedroomCount(prev => prev - 1)
+      setBedroomCount((prev) => prev - 1);
     }
-  }
+  };
   const handleBedsCount = () => {
     if (BedsCount <= 0) {
-      return
+      return;
     } else {
-      setBedsCount(prev => prev - 1)
+      setBedsCount((prev) => prev - 1);
     }
-  }
+  };
   const handleBathroomCount = () => {
     if (BathroomCount <= 0) {
-      return
+      return;
     } else {
-      setBathroomCount(prev => prev - 1)
+      setBathroomCount((prev) => prev - 1);
     }
-  }
+  };
 
   return (
     <motion.div

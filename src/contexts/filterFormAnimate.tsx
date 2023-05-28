@@ -9,8 +9,8 @@ interface filterFormAnimateData {
   isShow: boolean;
   setIsShow: (payload: boolean) => void;
   setIsClickOutSide: (payload: boolean) => void;
-  isShowHeader: boolean,
-  setIsShowHeader: (payload: boolean) => void
+  isShowHeader: boolean;
+  setIsShowHeader: (payload: boolean) => void;
 }
 
 const filterFormAnimateDataDefault: filterFormAnimateData = {
@@ -19,7 +19,7 @@ const filterFormAnimateDataDefault: filterFormAnimateData = {
   isShow: false,
   setIsShow: () => {},
   isShowHeader: false,
-  setIsShowHeader: () =>{}
+  setIsShowHeader: () => {}
 };
 
 export const filterFormAnimateContext = createContext<filterFormAnimateData>(

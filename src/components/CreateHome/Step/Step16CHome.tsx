@@ -88,8 +88,9 @@ export default function Step16CHome() {
                         type="text"
                         value={`$${money}`}
                         onChange={handleMoney}
-                        className={`my-[8px] mx-[12px] w-[98%] h-[98%] border border-black rounded-[8px] text-[48px] text-center ${error ? ' bg-red-50 border border-red-500 text-red-900' : ''
-                          }
+                        className={`my-[8px] mx-[12px] w-[98%] h-[98%] border border-black rounded-[8px] text-[48px] text-center ${
+                          error ? ' bg-red-50 border border-red-500 text-red-900' : ''
+                        }
                                             `}
                       />
                     </div>

@@ -1,5 +1,6 @@
 import SearchBox from '@/components/searchBox/searchBox';
 import { selectPopoverContext } from '@/contexts';
+import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 import { getHouseContext } from '@/contexts/getHouse';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 import { format } from 'date-fns';
@@ -7,8 +8,6 @@ import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BiSearch } from 'react-icons/bi';
-import {motion} from 'framer-motion';
-import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 interface Place {
   address: string;
   latitude: number | null;
@@ -17,23 +16,24 @@ interface Place {
 
 const ControlBar = () => {
   const [submit, setSubmit] = useState(false);
-  const {isShowHeader, setIsShowHeader} = useContext(filterFormAnimateContext)
   const { setSelected } = useContext(selectPopoverContext);
   const { address } = useContext(selectPlaceContext);
   const { isFilter, setIsFilter } = useContext(getHouseContext);
   const router = useRouter();
 
   const handleOnMask = (event: any) => {
-
     if (router.asPath !== '/') {
       router.push('/', undefined, { shallow: true });
     }
   };
 
   const isEmpty = () => {
-    if (!address.address.formattedAddress &&
-      (!address.guest.adults && !address.guest.childrens && !address.guest.infants)
-      ) {
+    if (
+      !address.address.formattedAddress &&
+      !address.guest.adults &&
+      !address.guest.childrens &&
+      !address.guest.infants
+    ) {
       return true;
     } else {
       return false;
@@ -78,7 +78,6 @@ const ControlBar = () => {
   return (
     <div className="w-full h-full flex relative mobile:text-[12px]">
       <div className="flex-[0.6] flex">
-
         {/* animation where */}
         <div
           className="flex-col flex m-auto w-full rounded-full box-border pl-7
@@ -97,7 +96,6 @@ const ControlBar = () => {
             <div>{errors.address && <p>{errors.address.message}</p>}</div>
           </form>
         </div>
-
       </div>
       <div className="flex-1 flex">
         <div className="flex-1 flex">
@@ -137,7 +135,13 @@ const ControlBar = () => {
             onClick={onSelected}
           >
             <span>Who</span>
-            <span>Add guests</span>
+            <span>
+              {address.guest.adults != 0 || address.guest.childrens != 0
+                ? address.guest.adults + address.guest.childrens + ' guests'
+                : 'Add guests '}
+
+              {address.guest.infants != 0 && ', ' + address.guest.infants + ' infants'}
+            </span>
           </div>
 
           <div className="flex-1 flex box-border p-3 w-full relative z-10 mobile:py-5 tablet:py-5 ">

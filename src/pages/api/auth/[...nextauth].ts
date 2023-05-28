@@ -56,51 +56,51 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 
 export const authOptions: NextAuthOptions = {
   // your configs
-    secret: process.env.SECRET_COOKIE_PASSWORD,
-    session: {
-      strategy: 'jwt',
-      maxAge: 24 * 60 * 60
-      // updateAge: 24 * 60 * 60,
-    },
-    jwt: {
-      maxAge: 24 * 60 * 60
-    },
-    callbacks: {
-      async jwt({ token, user }: { token: JWT; user: User | AdapterUser }): Promise<JWT> {
-        if (user) {
-          token.loginVl = user;
-        }
-        return token;
-      },
-
-      async session({ session, token, user }) {
-        session.token = { ...token?.loginVl?.token };
-        session.userAcc = { ...token?.loginVl?.userAcc };
-        return session;
+  secret: process.env.SECRET_COOKIE_PASSWORD,
+  session: {
+    strategy: 'jwt',
+    maxAge: 24 * 60 * 60
+    // updateAge: 24 * 60 * 60,
+  },
+  jwt: {
+    maxAge: 24 * 60 * 60
+  },
+  callbacks: {
+    async jwt({ token, user }: { token: JWT; user: User | AdapterUser }): Promise<JWT> {
+      if (user) {
+        token.loginVl = user;
       }
+      return token;
     },
-    providers: [
-      CredentialsProvider({
-        name: 'Credentials',
-        credentials: {
-          username: { label: 'Username', type: 'text' },
-          password: { label: 'Password', type: 'password' }
-        },
-        async authorize(credentials, req) {
-          const accessToken = await fetch(process.env.API_URL_AUTH + '/api/login', {
-            method: 'POST',
-            body: JSON.stringify(credentials),
-            headers: { 'Content-Type': 'application/json' }
-          });
-          const token = await accessToken.json();
 
-          if (accessToken.ok && token) {
-            return token;
-          }
-          return null;
+    async session({ session, token, user }) {
+      session.token = { ...token?.loginVl?.token };
+      session.userAcc = { ...token?.loginVl?.userAcc };
+      return session;
+    }
+  },
+  providers: [
+    CredentialsProvider({
+      name: 'Credentials',
+      credentials: {
+        username: { label: 'Username', type: 'text' },
+        password: { label: 'Password', type: 'password' }
+      },
+      async authorize(credentials, req) {
+        const accessToken = await fetch(process.env.API_URL_AUTH + '/api/login', {
+          method: 'POST',
+          body: JSON.stringify(credentials),
+          headers: { 'Content-Type': 'application/json' }
+        });
+        const token = await accessToken.json();
+
+        if (accessToken.ok && token) {
+          return token;
         }
-      })
-    ]
-}
+        return null;
+      }
+    })
+  ]
+};
 
 export default NextAuth(authOptions);

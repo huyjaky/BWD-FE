@@ -7,8 +7,6 @@ interface HostProps {
   placeOffer: { PlaceOfferId: string; PlaceOffer: string; PathIcon: string }[];
 }
 
-
-
 const Host = ({ userAcc, placeOffer }: HostProps) => {
   return (
     <div className="flex-[7] flex flex-col">
@@ -16,8 +14,7 @@ const Host = ({ userAcc, placeOffer }: HostProps) => {
         <span className="text-[30px]">Meet your host</span>
       </div>
       <div className="w-full rounded-2xl h-[550px] bg-[#f0efe9] flex">
-
-        <HostUser imgPath={userAcc.Image} userName={userAcc.UserName} gmail={userAcc.Gmail}/>
+        <HostUser imgPath={userAcc.Image} userName={userAcc.UserName} gmail={userAcc.Gmail} />
       </div>
 
       <div className="mt-10 border-t-2 border-slate-800">

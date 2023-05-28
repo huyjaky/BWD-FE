@@ -60,10 +60,9 @@ export default function Step8CHome() {
                     selected={selected}
                     setselected={setselected}
                     selectedMany={[]}
-                    setselectedMany={() => { }}
+                    setselectedMany={() => {}}
                   />
                 </motion.div>
-
               ))}
             </div>
             <div>

@@ -24,7 +24,8 @@ const variants: Variants = {
 const HeaderMain = () => {
   const { setPlaceList } = useContext(placeListContext);
   const { isLoginClick, setIsLoginClick } = useContext(selectPopoverContext);
-  const { isClickOutSide, setIsClickOutSide, isShowHeader, setIsShowHeader } = useContext(filterFormAnimateContext);
+  const { isClickOutSide, setIsClickOutSide, isShowHeader, setIsShowHeader } =
+    useContext(filterFormAnimateContext);
   const [isFirstLoading, setIsFirstLoading] = useState(true);
 
   const loginPanel = useRef<HTMLInputElement>(null);

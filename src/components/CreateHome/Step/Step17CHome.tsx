@@ -71,7 +71,10 @@ export default function Step17CHome() {
                   className="flex items-center mb-4 justify-between"
                 >
                   <div>
-                    <label htmlFor="Weapons" className="text-[16px]  focus:ring-black dark:focus:ring-black  text-gray-900 ">
+                    <label
+                      htmlFor="Weapons"
+                      className="text-[16px]  focus:ring-black dark:focus:ring-black  text-gray-900 "
+                    >
                       Weapons
                     </label>
                   </div>
