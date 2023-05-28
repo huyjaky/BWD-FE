@@ -89,9 +89,8 @@ export default function Step16CHome() {
                         type="text"
                         value={`$${money}`}
                         onChange={handleMoney}
-                        className={`my-[8px] mx-[12px] w-[98%] h-[98%] border border-black rounded-[8px] text-[48px] text-center ${
-                          error ? ' bg-red-50 border border-red-500 text-red-900' : ''
-                        }
+                        className={`my-[8px] mx-[12px] w-[98%] h-[98%] border border-black rounded-[8px] text-[48px] text-center ${error ? ' bg-red-50 border border-red-500 text-red-900' : ''
+                          }
                                             `}
                       />
                     </div>
@@ -141,7 +140,7 @@ export default function Step16CHome() {
                     aria-describedby="helper-checkbox-text"
                     type="checkbox"
                     value=""
-                    className="w-4 h-4 text-black bg-gray-100 border-gray-300 rounded focus:ring-black dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="w-4 h-4 text-black "
                   />
                 </div>
               </motion.label> */}

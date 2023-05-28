@@ -15,7 +15,7 @@ interface HeaderFormProps {
 const HeaderForm = ({ children }: HeaderFormProps) => {
   const { isShow, setIsShow } = useContext(mobileContolPanelContext);
   return (
-    <div className="w-full h-[80px] relative bg-white z-30">
+    <div className="w-full h-[80px] relative bg-white z-30" id='header-root'>
       <header
         className="w-full h-[80px] border-b-2 flex justify-center px-[80px]
       tablet:hidden mobile:hidden

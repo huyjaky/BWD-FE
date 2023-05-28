@@ -1,5 +1,4 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import Cookies from 'cookies';
 import httpProxy from 'http-proxy';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
@@ -17,9 +16,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
     const session = await getSession({ req });
     const temp = session?.token?.accessToken;
 
-    const cookies = new Cookies(req, res);
-    const accessToken = cookies.get('access_token');
-    if (accessToken) {
+    if (temp) {
       req.headers.Authorization = `Bearer ${temp}`;
     }
 

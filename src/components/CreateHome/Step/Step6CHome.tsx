@@ -33,6 +33,35 @@ export default function Step6CHome() {
     });
   }, [guestCount, BedroomCount, BedsCount, BathroomCount, showExtraRow]);
 
+  const handleGuestCount = () => {
+    if (guestCount <= 0) {
+      return
+    } else {
+      setguestCount(prev => prev - 1)
+    }
+  }
+  const handleBedroomCount = () => {
+    if (BedroomCount <= 0) {
+      return
+    } else {
+      setBedroomCount(prev => prev - 1)
+    }
+  }
+  const handleBedsCount = () => {
+    if (BedsCount <= 0) {
+      return
+    } else {
+      setBedsCount(prev => prev - 1)
+    }
+  }
+  const handleBathroomCount = () => {
+    if (BathroomCount <= 0) {
+      return
+    } else {
+      setBathroomCount(prev => prev - 1)
+    }
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -73,7 +102,12 @@ export default function Step6CHome() {
                   <button
                     className={`border-[1px] rounded-[50%] border-[#b0b0b0] ease-in duration-300 hover:border-black `}
                     style={{}}
+<<<<<<< HEAD
                     onClick={() => setguestCount((prev) => prev - 1)}>
+=======
+                    onClick={handleGuestCount}
+                  >
+>>>>>>> origin/minh
                     <FiMinus className={`w-[32px] h-[32px] p-[5px] `} />
                   </button>
                   <span className="text-[16px] w-[16px]">{guestCount}</span>
@@ -99,7 +133,12 @@ export default function Step6CHome() {
                   <button
                     className="border-[1px] rounded-[50%] border-[#b0b0b0] ease-in duration-300
                                                         hover:border-black"
+<<<<<<< HEAD
                     onClick={() => setBedroomCount((prev) => (prev > 1 ? prev - 1 : 1))}>
+=======
+                    onClick={handleBedroomCount}
+                  >
+>>>>>>> origin/minh
                     <FiMinus className="w-[32px] h-[32px] p-[5px]" />
                   </button>
                   <span className="text-[16px] w-[16px]">{BedroomCount}</span>
@@ -123,7 +162,12 @@ export default function Step6CHome() {
                   <button
                     className="border-[1px] rounded-[50%] border-[#b0b0b0] ease-in duration-300
                                                         hover:border-black"
+<<<<<<< HEAD
                     onClick={() => setBedsCount((prev) => (prev > 1 ? prev - 1 : 1))}>
+=======
+                    onClick={handleBedsCount}
+                  >
+>>>>>>> origin/minh
                     <FiMinus className="w-[32px] h-[32px] p-[5px] " />
                   </button>
                   <span className="text-[16px] w-[16px]">{BedsCount}</span>
@@ -147,7 +191,12 @@ export default function Step6CHome() {
                   <button
                     className="border-[1px] rounded-[50%] border-[#b0b0b0] ease-in duration-300
                                                         hover:border-black"
+<<<<<<< HEAD
                     onClick={() => setBathroomCount((prev) => (prev > 1 ? prev - 1 : 1))}>
+=======
+                    onClick={handleBathroomCount}
+                  >
+>>>>>>> origin/minh
                     <FiMinus className="w-[32px] h-[32px] p-[5px] " />
                   </button>
                   <span className="text-[16px] w-[16px]">{BathroomCount}</span>

@@ -8,12 +8,13 @@ import { getHouseContext } from '@/contexts/getHouse';
 import { userAccContext } from '@/contexts/userAcc';
 import { NextPageWithLayout } from '@/models/layoutprops';
 import { userAcc } from '@/models/userAcc';
-import { Variants, motion } from 'framer-motion';
+import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { GetServerSideProps } from 'next';
-import { getSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
 import { Montserrat } from 'next/font/google';
 import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
+import { authOptions } from './api/auth/[...nextauth]';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -22,6 +23,7 @@ const monsterrat = Montserrat({
 });
 interface HomeProps {
   user_: userAcc;
+  keyMapBox: string;
   props: any;
 }
 
@@ -34,7 +36,7 @@ const variants: Variants = {
   }
 };
 
-const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
+const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBox }: HomeProps) => {
   const { user, setUser } = useContext(userAccContext);
   const { isFilter } = useContext(getHouseContext);
 
@@ -48,17 +50,20 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props }: HomeProps) => {
     setUser({ ...user, ...user_ });
   }
 
-  useEffect(() => {}, [isFilter]);
+  useEffect(() => { }, [isFilter]);
 
   return (
     <>
       <main className={`${monsterrat.className} relative overflow-hidden`} id="root">
-        <HeaderMain />
+        <AnimatePresence initial={false}>
+
+          <HeaderMain />
+        </AnimatePresence>
         <div className="w-full h-fit px-[80px] mobile:px-[20px] box-border">
           <TypeHouse />
 
           <motion.div variants={variants} animate="show">
-            <ShowHouse infShow={isFilter != 0 ? 'noneAuthFilter' : 'noneAuthHouseApi'} />
+            <ShowHouse infShow={isFilter != 0 ? 'noneAuthFilter' : 'noneAuthHouseApi'} keyMapBox={keyMapBox}/>
           </motion.div>
         </div>
         <FooterRooms />
@@ -73,12 +78,16 @@ Home.Layout = Auth;
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const session = await getSession();
+  const session = await getServerSession(req, res, authOptions);
+  const keyMapBox = process.env.ACCESS_TOKEN_MAPBOX;
+
   // if user available not callback api from server
   if (session?.userAcc) {
     return {
-      props: { ...session.userAcc }
+      props: { ...session.userAcc, keyMapBox: keyMapBox }
     };
   }
-  return { props: {} };
+  return { props: {
+    keyMapBox: keyMapBox
+  } };
 };
