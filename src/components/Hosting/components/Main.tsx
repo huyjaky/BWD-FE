@@ -101,33 +101,6 @@ function Main(): JSX.Element {
                     You don't have any guest reviews to write.
                   </span>
                 </div>
-
-                <div>
-                  <div className='pb-[64px]'>
-                    <motion.h1
-                      variants={componentVariants}
-                      initial="offscreen"
-                      whileInView="onscreen"
-                      viewport={{ amount: 0.5 }}
-                      className='text-[26px] font-semibold mb-[24px]'>Resources and tips</motion.h1>
-                    <div className='flex h-[293px] mobile:h-fit w-[full] gap-5 mobile:gap-0 mobile:flex-col mobile:items-center mobile:justify-center tablet:justify-center '
-                    >
-                      {
-                        Resourcesandtips.map((Resourceandtip, index) => (
-                          <motion.div
-                            className='w-[100%]  flex items-center justify-center '
-                            variants={buttonVariants}
-                            initial="offscreen"
-                            whileInView="onscreen"
-                            transition={{ type: "spring", delay: 0.1 * index }}
-                          >
-                            <ResourceAndTip ImgLink={Resourceandtip.ImgLink} title={Resourceandtip.title} />
-                          </motion.div>
-                        ))
-                      }
-                    </div>
-                  </div>
-                </div>
               </div>
             </motion.div>
           </div >
