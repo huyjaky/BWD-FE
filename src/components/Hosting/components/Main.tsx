@@ -76,6 +76,7 @@ function Main(): JSX.Element {
                                     whileInView={{ opacity: 1 }}
                                     viewport={{ amount: 0.5 }}
                                     className=''
+                                    key={index}
                                     transition={{ type: "spring", stiffness: 35, delay: 0.1 * index }}
                                 >
                                     <ButtonReservations selected={selected} setSelected={setSelected} content={reservation.title} number={reservation.number} />
@@ -97,6 +98,7 @@ function Main(): JSX.Element {
                                 </div>
                             </div>
                         </motion.div>
+
                     </div>
                 </div>
             </div>
@@ -181,6 +183,7 @@ function Main(): JSX.Element {
                                     <motion.div
                                         className='w-[100%]  flex items-center justify-center '
                                         variants={buttonVariants}
+                                        key={index}
                                         initial="offscreen"
                                         whileInView="onscreen"
                                         transition={{ type: "spring", delay: 0.1 * index }}
