@@ -97,8 +97,9 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
   const [isOpenMaskMap, setIsOpenMaskMap] = useState(false);
 
   const fetchHouseApi = async () => {
-    if (houseTemp.length != 0 || !user.UserId) return;
-    if (infShow === 'noneAuthHouseApi') {
+    if (houseTemp.length != 0 ) return;
+    // neu user login thi userid se thay doi nen phai chia ra nhieu truong hop
+    if (infShow === 'noneAuthHouseApi' && user.UserId) {
       const arr = await houseApi[infShow](1, user.UserId);
       if (arr.data.length == 0) {
         setHasMore(false); // neu nhu du lieu tra ve la khong co lan dau tien thi khong xuat hien nx
@@ -109,6 +110,13 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
       const arr = await houseApi[infShow]({ filter: filterForm, selectPlace: address }, 1);
       if (arr.data.length == 0) {
         setHasMore(false);
+        return;
+      }
+      setHouseTemp(arr.data as house_[]);
+    } else if (infShow === 'noneAuthHouseApi' && !user.UserId) {
+      const arr = await houseApi[infShow](1, user.UserId);
+      if (arr.data.length == 0) {
+        setHasMore(false); // neu nhu du lieu tra ve la khong co lan dau tien thi khong xuat hien nx
         return;
       }
       setHouseTemp(arr.data as house_[]);
@@ -149,7 +157,7 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
   useEffect(() => {
     setHouseTemp([]);
     setHasMore(true);
-  }, [infShow, isFilter]);
+  }, [infShow, isFilter, user]);
 
   const handleOnClickOutSideMaskUser = (event: any) => {
     const isClickInSide = maskUser.current?.contains(event.target);
