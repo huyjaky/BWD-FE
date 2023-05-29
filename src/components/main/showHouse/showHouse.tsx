@@ -8,13 +8,15 @@ import { house_ } from '@/models/house';
 import { userAcc } from '@/models/userAcc';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import Link from 'next/link';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { HiUserCircle } from 'react-icons/hi';
 import { ImMap } from 'react-icons/im';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Carousel from './carousel';
 import Heart from './heart';
 import MapEach from './mapEach';
+import { userAccContext } from '@/contexts/userAcc';
+import { useSession } from 'next-auth/react';
 
 const variants: Variants = {
   show: {
@@ -79,6 +81,7 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
   const { filterForm } = useContext(filterContext);
   const { address } = useContext(selectPlaceContext);
+  const {user, setUser} = useContext(userAccContext);
   const { isFilter } = useContext(getHouseContext);
   const [hasMore, setHasMore] = useState(true);
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
@@ -93,12 +96,10 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
   }>();
   const [isOpenMaskMap, setIsOpenMaskMap] = useState(false);
 
-  console.log(houseTemp);
-
   const fetchHouseApi = async () => {
-    if (houseTemp.length != 0) return;
+    if (houseTemp.length != 0 || !user.UserId) return;
     if (infShow === 'noneAuthHouseApi') {
-      const arr = await houseApi[infShow](1);
+      const arr = await houseApi[infShow](1, user.UserId);
       if (arr.data.length == 0) {
         setHasMore(false); // neu nhu du lieu tra ve la khong co lan dau tien thi khong xuat hien nx
         return;
@@ -115,13 +116,13 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
   };
   useEffect(() => {
     fetchHouseApi();
-  }, [houseTemp]);
+  }, [houseTemp, user]);
 
   // get more house de lay them nha khi scroll xuoong cuoi cung https://www.npmjs.com/package/react-infinite-scroll-component
   const getMoreHouse = async () => {
     try {
       if (infShow === 'noneAuthHouseApi') {
-        const moreHouse = await houseApi[infShow](houseTemp.length / 10 + 1);
+        const moreHouse = await houseApi[infShow](houseTemp.length / 10 + 1, user.UserId);
         if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
           setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
         } else {
@@ -238,7 +239,7 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
                 <Carousel arrImg={item.arrImg} houseId={item.HouseId} />
 
                 {/* heart */}
-                <Heart HouseId={item.HouseId} />
+                <Heart HouseId={item.HouseId} IsFavorite={item.IsFavorite}/>
 
                 <motion.button
                   whileHover={{ scale: 1.2 }}
