@@ -1,17 +1,19 @@
+import { schedule } from "@/api-client/schedule";
 import CheckIn_Out from "@/components/rootMaskHeader/controlPlan/controlBar/popOverDetail/checkIn_Out";
 import Who from "@/components/rootMaskHeader/controlPlan/controlBar/popOverDetail/who";
 import { BillContext } from "@/contexts/bill";
 import { selectPlaceContext } from "@/contexts/selectPlace";
+import { userAccContext } from "@/contexts/userAcc";
 import { house_ } from "@/models/house";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import moment from "moment";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useContext, useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { GrPrevious } from 'react-icons/gr';
+import { BiMessageSquareError } from "react-icons/bi";
+import { GrClose, GrPrevious } from 'react-icons/gr';
 import * as yup from 'yup';
 
 interface ConfirmProps {
@@ -50,8 +52,11 @@ type ConfirmSchema = yup.InferType<typeof schema>;
 const Confirm = ({ houseDetail, keyMapBox }: ConfirmProps) => {
   const { Bill, setBill } = useContext(BillContext)
   const { address } = useContext(selectPlaceContext);
+  const { user } = useContext(userAccContext)
   const guestRef = useRef<HTMLDivElement>(null);
   const calenderRef = useRef<HTMLDivElement>(null);
+  const notificateRef = useRef<HTMLDivElement>(null);
+  const [maskNotificate, setMaskNotificate] = useState<boolean>(false);
   const [maskGuests, setMaskGuests] = useState<boolean>(false);
   const [maskCalender, setMaskCalender] = useState<boolean>(false);
 
@@ -73,7 +78,24 @@ const Confirm = ({ houseDetail, keyMapBox }: ConfirmProps) => {
       setMaskGuests(true);
       return;
     }
-    
+    const createSchedule = await schedule.createSchedule({
+      HouseId: houseDetail.HouseId,
+      UserId: user.UserId,
+      PhoneNumber: data.phoneNumber + '',
+      Date: Bill.checkInDay,
+      Adults: Bill.guest.adults,
+      Childrens: Bill.guest.childrens,
+      Infants: Bill.guest.infants
+    });
+
+    if (createSchedule.status != 200) {
+      console.log('have err with create schedule');
+      return;
+    } else {
+      if (createSchedule.data.isExist == true) {
+        setMaskNotificate(true);
+      }
+    }
   };
 
   const maskGuests_ = (event: any) => {
@@ -92,6 +114,14 @@ const Confirm = ({ houseDetail, keyMapBox }: ConfirmProps) => {
     }
   }
 
+  const maskNotificate_ = (event: any) => {
+    const isClickMaskNotificate = notificateRef.current?.contains(event.target);
+    if (!isClickMaskNotificate) {
+      setMaskNotificate(false);
+      return;
+    }
+  }
+
   return (
     <>
       <AnimatePresence initial={false}>
@@ -103,7 +133,7 @@ const Confirm = ({ houseDetail, keyMapBox }: ConfirmProps) => {
           className="fixed w-screen h-screen bg-mask flex z-30">
           <motion.div className="w-fit h-fit m-auto"
             ref={guestRef}>
-            <Who styleWho={'justify-center'} />
+            <Who styleWho={'justify-center w-[800px] h-[500px]'} />
           </motion.div>
         </motion.div>
       </AnimatePresence>
@@ -115,10 +145,39 @@ const Confirm = ({ houseDetail, keyMapBox }: ConfirmProps) => {
           onClick={maskCalender_}
           className="fixed w-screen h-screen bg-mask flex z-30">
           <motion.div className="w-fit h-fit m-auto"
-            ref={calenderRef}>
+            ref={notificateRef}>
             <CheckIn_Out styleHorizontal={'mobile:hidden tablet:hidden'}
-              styleVerical={'laptop:hidden desktop:hidden'}
-            />
+              styleVerical={'laptop:hidden desktop:hidden'} />
+          </motion.div>
+        </motion.div>
+      </AnimatePresence>
+
+      <AnimatePresence initial={false}>
+        <motion.div
+          variants={variants}
+          animate={maskNotificate ? 'showMask' : 'hiddenMask'}
+          onClick={maskNotificate_}
+          className="fixed w-screen h-screen bg-mask flex z-30">
+          <motion.div className="w-fit h-fit m-auto"
+            ref={notificateRef}>
+            <motion.div className="w-fit relative h-fit text-center bg-white rounded-2xl p-7 border-2 border-red-500
+            ">
+              <button
+                onClick={(event) => setMaskNotificate(false)}
+                className="absolute right-3 top-2">
+                <GrClose />
+              </button>
+              <div className="flex items-center">
+                <BiMessageSquareError className="mr-2 text-[25px] text-red-500"/> you must be cancelled before create new one schedule apointment
+              </div>
+
+              <Link href={''}>
+                <button className="w-full mt-2 bg-red-400 rounded-2xl text-white">
+                  Go to your schedule
+                </button>
+              </Link>
+
+            </motion.div>
           </motion.div>
         </motion.div>
       </AnimatePresence>
@@ -246,6 +305,7 @@ const Confirm = ({ houseDetail, keyMapBox }: ConfirmProps) => {
     </>
   )
 }
+
 
 let cachedHouseDetail: house_[] = [];
 

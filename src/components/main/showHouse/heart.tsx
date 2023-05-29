@@ -7,9 +7,10 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
 interface HeartProps {
   HouseId: string;
+  IsFavorite: boolean
 }
 
-const Heart = ({ HouseId }: HeartProps) => {
+const Heart = ({ HouseId, IsFavorite }: HeartProps) => {
   const { user } = useContext(userAccContext);
   const { setIsLoginClick } = useContext(selectPopoverContext);
   const handleOnClickFavorite = async (event: any, HouseId: string) => {
@@ -48,20 +49,40 @@ const Heart = ({ HouseId }: HeartProps) => {
             setIsLoginClick(true);
             return;
           }
-          if (event.currentTarget.checked) {
+          if (event.currentTarget.checked && IsFavorite == false) {
             handleOnClickFavorite(event, HouseId);
           } else {
             handleOnClickUnFavorite(event, HouseId);
           }
+
+          if (event.currentTarget.checked && IsFavorite == true) {
+            handleOnClickUnFavorite(event, HouseId);
+          } else {
+            handleOnClickFavorite(event, HouseId);
+          }
         }}
       />
-      <motion.div whileTap={{ scale: [0.8, 1.3] }} className="swap-on">
-        <AiFillHeart />
-      </motion.div>
+      {IsFavorite ?
+        <>
+          <motion.div whileTap={{ scale: [0.8, 1.3] }} className="swap-off">
+            <AiFillHeart />
+          </motion.div>
 
-      <motion.div whileTap={{ scale: [0.8, 1.3] }} className="swap-off">
-        <AiOutlineHeart />
-      </motion.div>
+          <motion.div whileTap={{ scale: [0.8, 1.3] }} className="swap-on">
+            <AiOutlineHeart />
+          </motion.div>
+        </>
+        :
+        <>
+          <motion.div whileTap={{ scale: [0.8, 1.3] }} className="swap-on">
+            <AiFillHeart />
+          </motion.div>
+
+          <motion.div whileTap={{ scale: [0.8, 1.3] }} className="swap-off">
+            <AiOutlineHeart />
+          </motion.div>
+        </>
+      }
     </motion.label>
   );
 };
