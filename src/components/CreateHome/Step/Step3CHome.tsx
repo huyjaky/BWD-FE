@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ChooTypeHo from '../ChooTypeHo';
 import { categoriesStep3 } from '../utils/constant';
 import { motion } from 'framer-motion';

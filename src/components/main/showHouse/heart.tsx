@@ -7,7 +7,7 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
 interface HeartProps {
   HouseId: string;
-  IsFavorite: boolean
+  IsFavorite: boolean;
 }
 
 const Heart = ({ HouseId, IsFavorite }: HeartProps) => {
@@ -62,7 +62,7 @@ const Heart = ({ HouseId, IsFavorite }: HeartProps) => {
           }
         }}
       />
-      {IsFavorite ?
+      {IsFavorite ? (
         <>
           <motion.div whileTap={{ scale: [0.8, 1.3] }} className="swap-off">
             <AiFillHeart />
@@ -72,7 +72,7 @@ const Heart = ({ HouseId, IsFavorite }: HeartProps) => {
             <AiOutlineHeart />
           </motion.div>
         </>
-        :
+      ) : (
         <>
           <motion.div whileTap={{ scale: [0.8, 1.3] }} className="swap-on">
             <AiFillHeart />
@@ -82,7 +82,7 @@ const Heart = ({ HouseId, IsFavorite }: HeartProps) => {
             <AiOutlineHeart />
           </motion.div>
         </>
-      }
+      )}
     </motion.label>
   );
 };

@@ -7,7 +7,7 @@ interface Children {
 type Action = {
   type: string;
   payload: any;
-}
+};
 
 type houseDataType = {
   type: string;
@@ -25,7 +25,7 @@ type houseDataType = {
     bedrooms: number;
     beds: number;
     bathrooms: number;
-    hasLock: 'yes' | 'no' | null
+    hasLock: 'yes' | 'no' | null;
   };
   kindOfBathrooms: {
     private: number;
@@ -54,19 +54,19 @@ const initHouseData: houseDataType = {
     subAddress: [],
     city: '',
     province: '',
-    postCode: '',
+    postCode: ''
   },
   placeInfo: {
     guests: 1,
     bedrooms: 1,
     beds: 1,
     bathrooms: 1,
-    hasLock: null,
+    hasLock: null
   },
   kindOfBathrooms: {
     private: 0,
     dedicated: 0,
-    shared: 0,
+    shared: 0
   },
   encounter: '',
   amenities: [],
@@ -77,15 +77,14 @@ const initHouseData: houseDataType = {
   note: {
     camera: false,
     weapons: false,
-    dangerAnimals: false,
+    dangerAnimals: false
   }
-}
+};
 
 const newHouseContext = createContext<{ state: houseDataType; dispatch: React.Dispatch<Action> }>({
   state: initHouseData,
   dispatch: () => {}
 });
-
 
 function reducer(state: houseDataType, action: Action): houseDataType {
   switch (action.type) {
@@ -185,7 +184,9 @@ function reducer(state: houseDataType, action: Action): houseDataType {
 function CreateHouseProvider({ children }: Children) {
   const [state, dispatch] = useReducer(reducer, initHouseData);
 
-  return <newHouseContext.Provider value={{ state, dispatch }}>{children}</newHouseContext.Provider>;
+  return (
+    <newHouseContext.Provider value={{ state, dispatch }}>{children}</newHouseContext.Provider>
+  );
 }
 
 export { newHouseContext, CreateHouseProvider };

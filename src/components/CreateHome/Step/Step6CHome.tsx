@@ -68,7 +68,8 @@ export default function Step6CHome() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1 }}
-      className="w-[98vw] h-[700px] px-[80px] tablet:px-[50px] mt-10">
+      className="w-[98vw] h-[700px] px-[80px] tablet:px-[50px] mt-10"
+    >
       <div className="w-[60%] tablet:w-[80%] laptop:w-[80%] mobile:w-[100%] ml-auto mr-auto pl-[70px] mobile:pl-0 ">
         <div>
           <div>
@@ -79,14 +80,16 @@ export default function Step6CHome() {
               className="text-[32px] font-semibold
                         mobile:text-[26px]
                         tablet:text-[26px]
-                        ">
+                        "
+            >
               Share some basics about your place
             </motion.h1>
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
-              className="text-[18px] py-[18px] text-[#717171]">
+              className="text-[18px] py-[18px] text-[#717171]"
+            >
               You'll add more details later, like bed types.
             </motion.h2>
             <div className="flex flex-col justify-between">
@@ -94,7 +97,8 @@ export default function Step6CHome() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ type: 'spring', stiffness: 35, delay: 0.3 }}
-                className="flex justify-between py-[24px] border-b-[1px]">
+                className="flex justify-between py-[24px] border-b-[1px]"
+              >
                 <div>
                   <h1 className="text-[18px] ">Guests</h1>
                 </div>
@@ -109,7 +113,8 @@ export default function Step6CHome() {
                   <span className="text-[16px] w-[16px]">{guestCount}</span>
                   <button
                     className="border-[1px] rounded-[50%] border-[#b0b0b0] ease-in duration-300
-                                                        hover:border-black">
+                                                        hover:border-black"
+                  >
                     <BsPlus
                       className="w-[32px] h-[32px] p-[5px]"
                       onClick={() => setguestCount((prev) => prev + 1)}
@@ -121,7 +126,8 @@ export default function Step6CHome() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ type: 'spring', stiffness: 35, delay: 0.4 }}
-                className="flex justify-between py-[24px] border-b-[1px]">
+                className="flex justify-between py-[24px] border-b-[1px]"
+              >
                 <div>
                   <h1 className="text-[18px] ">Bedrooms</h1>
                 </div>
@@ -137,7 +143,8 @@ export default function Step6CHome() {
                   <button
                     className="border-[1px] rounded-[50%] border-[#b0b0b0] ease-in duration-300
                                                         hover:border-black"
-                    onClick={() => setBedroomCount((prev) => prev + 1)}>
+                    onClick={() => setBedroomCount((prev) => prev + 1)}
+                  >
                     <BsPlus className="w-[32px] h-[32px] p-[5px]" />
                   </button>
                 </div>
@@ -146,7 +153,8 @@ export default function Step6CHome() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ type: 'spring', stiffness: 35, delay: 0.5 }}
-                className="flex justify-between py-[24px] border-b-[1px]">
+                className="flex justify-between py-[24px] border-b-[1px]"
+              >
                 <div>
                   <h1 className="text-[18px] ">Beds</h1>
                 </div>
@@ -162,7 +170,8 @@ export default function Step6CHome() {
                   <button
                     className="border-[1px] rounded-[50%] border-[#b0b0b0] ease-in duration-300
                                                         hover:border-black"
-                    onClick={() => setBedsCount((prev) => prev + 1)}>
+                    onClick={() => setBedsCount((prev) => prev + 1)}
+                  >
                     <BsPlus className="w-[32px] h-[32px] p-[5px]" />
                   </button>
                 </div>
@@ -171,7 +180,8 @@ export default function Step6CHome() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ type: 'spring', stiffness: 35, delay: 0.6 }}
-                className="flex justify-between py-[24px] ">
+                className="flex justify-between py-[24px] "
+              >
                 <div>
                   <h1 className="text-[18px] ">Bathrooms</h1>
                 </div>
@@ -187,7 +197,8 @@ export default function Step6CHome() {
                   <button
                     className="border-[1px] rounded-[50%] border-[#b0b0b0] ease-in duration-300
                                                         hover:border-black"
-                    onClick={() => setBathroomCount((prev) => prev + 1)}>
+                    onClick={() => setBathroomCount((prev) => prev + 1)}
+                  >
                     <BsPlus className="w-[32px] h-[32px] p-[5px]" />
                   </button>
                 </div>
@@ -196,7 +207,8 @@ export default function Step6CHome() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ type: 'spring', stiffness: 35, delay: 0.7 }}>
+              transition={{ type: 'spring', stiffness: 35, delay: 0.7 }}
+            >
               <div>
                 <h2 className="text-[18px] font-semibold py-[18px]">
                   Does every bedroom have a lock?
@@ -217,7 +229,8 @@ export default function Step6CHome() {
                     />
                     <label
                       htmlFor="default-radio-1"
-                      className="ml-3 text-[16px]  text-gray-900 dark:text-gray-300">
+                      className="ml-3 text-[16px]  text-gray-900 dark:text-gray-300"
+                    >
                       Yes
                     </label>
                   </div>
@@ -237,7 +250,8 @@ export default function Step6CHome() {
                       />
                       <label
                         htmlFor="default-radio-2"
-                        className="ml-3 text-[16px] text-gray-900 dark:text-gray-300">
+                        className="ml-3 text-[16px] text-gray-900 dark:text-gray-300"
+                      >
                         No
                       </label>
                     </div>

@@ -21,7 +21,7 @@ const Bill = ({ houseDetail }: BillProps) => {
     setBill({ ...Bill, checkInDay: item });
   };
 
-  useEffect(() => { }, [Bill.checkInDay]);
+  useEffect(() => {}, [Bill.checkInDay]);
 
   useEffect(() => {
     setBill({ ...Bill, guest: { ...Bill.guest, ...address.guest } });
@@ -86,11 +86,17 @@ const Bill = ({ houseDetail }: BillProps) => {
         </div>
         <Link href={`/confirm/${houseDetail.HouseId}`}>
           <motion.button
-            onClick={(event) => {setBill({ ...Bill, image: houseDetail.arrImg[0].Path,
-              title: houseDetail.Title, formatedAddress: houseDetail.address.formattedAddress,
-              price: houseDetail.Price
-            });}}
-            className="mt-2  w-full h-[50px] bg-red-500 rounded-xl text-white font-semibold">
+            onClick={(event) => {
+              setBill({
+                ...Bill,
+                image: houseDetail.arrImg[0].Path,
+                title: houseDetail.Title,
+                formatedAddress: houseDetail.address.formattedAddress,
+                price: houseDetail.Price
+              });
+            }}
+            className="mt-2  w-full h-[50px] bg-red-500 rounded-xl text-white font-semibold"
+          >
             Reverse
           </motion.button>
         </Link>

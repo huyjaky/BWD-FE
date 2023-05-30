@@ -4,19 +4,19 @@ import SkeletonShowHouse from '@/components/skeletonLoading/skletonShowHouse';
 import { filterContext } from '@/contexts/filter';
 import { getHouseContext } from '@/contexts/getHouse';
 import { selectPlaceContext } from '@/contexts/selectPlace';
+import { userAccContext } from '@/contexts/userAcc';
 import { house_ } from '@/models/house';
 import { userAcc } from '@/models/userAcc';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { HiUserCircle } from 'react-icons/hi';
 import { ImMap } from 'react-icons/im';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Carousel from './carousel';
 import Heart from './heart';
 import MapEach from './mapEach';
-import { userAccContext } from '@/contexts/userAcc';
-import { useSession } from 'next-auth/react';
 
 const variants: Variants = {
   show: {
@@ -73,7 +73,7 @@ const variants: Variants = {
 };
 
 interface ShowHouseProps {
-  infShow: 'noneAuthHouseApi' | 'noneAuthFilter';
+  infShow: 'noneAuthHouseApi' | 'noneAuthFilter' | 'authListHouse';
   keyMapBox: string;
 }
 
@@ -110,7 +110,6 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
         return;
       }
       setHouseTemp(arr.data as house_[]);
-
     } else if (infShow === 'noneAuthHouseApi' && status === 'unauthenticated') {
       console.log('check un');
       const arr = await houseApi[infShow](1, '');
@@ -119,7 +118,6 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
         return;
       }
       setHouseTemp(arr.data as house_[]);
-
     } else if (infShow === 'noneAuthFilter' && status === 'unauthenticated') {
       const arr = await houseApi[infShow]({ filter: filterForm, selectPlace: address }, 1, '');
       if (arr.data.length == 0) {
@@ -128,7 +126,20 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
       }
       setHouseTemp(arr.data as house_[]);
     } else if (infShow === 'noneAuthFilter' && status === 'authenticated') {
-      const arr = await houseApi[infShow]({ filter: filterForm, selectPlace: address }, 1, temp.UserId);
+      const arr = await houseApi[infShow](
+        { filter: filterForm, selectPlace: address },
+        1,
+        temp.UserId
+      );
+      if (arr.data.length == 0) {
+        setHasMore(false);
+        return;
+      }
+      setHouseTemp(arr.data as house_[]);
+    } else if (infShow === 'authListHouse' && status === 'authenticated') {
+      const arr = await houseApi[infShow](
+        temp.UserId
+      );
       if (arr.data.length == 0) {
         setHasMore(false);
         return;
@@ -150,7 +161,6 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
   const getMoreHouse = async () => {
     try {
       if (infShow === 'noneAuthHouseApi') {
-
         console.log('get more house ');
         const moreHouse = await houseApi[infShow](houseTemp.length / 10 + 1, user.UserId);
         if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
@@ -161,7 +171,17 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
       } else if (infShow === 'noneAuthFilter') {
         const moreHouse = await houseApi[infShow](
           { filter: filterForm, selectPlace: address },
-          houseTemp.length / 10 + 1, user.UserId
+          houseTemp.length / 10 + 1,
+          user.UserId
+        );
+        if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
+          setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
+        } else {
+          setHasMore(false); // cai nay de kiem tra xem da fetch het du lieu hay chua
+        }
+      } else if (infShow === 'authListHouse') {
+        const moreHouse = await houseApi[infShow](
+          user.UserId
         );
         if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
           setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
@@ -175,7 +195,6 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
   };
 
   useEffect(() => { }, [houseTemp, hasMore]);
-
 
   const handleOnClickOutSideMaskUser = (event: any) => {
     const isClickInSide = maskUser.current?.contains(event.target);

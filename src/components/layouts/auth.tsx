@@ -6,19 +6,19 @@ import { useContext, useEffect } from 'react';
 
 const Auth = ({ children }: LayoutProps) => {
   const { data: session, status } = useSession();
-  const {isFilter} = useContext(getHouseContext)
+  const { isFilter } = useContext(getHouseContext);
   const { setUser, user } = useContext(userAccContext);
-  useEffect(()=>{
-    const setuser = async () =>{
+  useEffect(() => {
+    const setuser = async () => {
       const temp = await session?.userAcc;
       if (temp) {
-        setUser({...user, ...temp});
+        setUser({ ...user, ...temp });
       } else {
-        setUser ({...user, UserId: 'none user'});
+        setUser({ ...user, UserId: 'none user' });
       }
-    }
+    };
     setuser();
-  }, [isFilter, status])
+  }, [isFilter, status]);
 
   return <>{children}</>;
 };

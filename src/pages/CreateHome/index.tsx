@@ -18,7 +18,7 @@ import Step15CHome from '@/components/CreateHome/Step/Step15CHome';
 import Step16CHome from '@/components/CreateHome/Step/Step16CHome';
 import Step17CHome from '@/components/CreateHome/Step/Step17CHome';
 import { AnimatePresence } from 'framer-motion';
-import {CreateHouseProvider} from '../../contexts/createHome'
+import { CreateHouseProvider } from '../../contexts/createHome';
 
 import ProcessBar from '../../components/CreateHome/ProcessBar/ProccessBar';
 import { GetServerSideProps } from 'next';
@@ -66,29 +66,27 @@ function CreateHome(): JSX.Element {
 
   return (
     <CreateHouseProvider>
+      <div className="">
+        {currentStep > 0 && currentStep <= 17 && <Header />}
 
-    <div className="">
-      {currentStep > 0 && currentStep <= 17 && <Header />}
+        <AnimatePresence>
+          {currentStep > 0 &&
+            currentStep <= 18 &&
+            currentStep === steps[currentStep - 1].number &&
+            isMounted &&
+            steps[currentStep - 1].component}
+        </AnimatePresence>
 
-      <AnimatePresence>
-        {currentStep > 0 &&
-          currentStep <= 18 &&
-          currentStep === steps[currentStep - 1].number &&
-          isMounted &&
-          steps[currentStep - 1].component}
-      </AnimatePresence>
-
-      {currentStep > 0 && currentStep <= 17
-        && <ProcessBar
-        steps={steps}
-          handleBackStep={handleBackStep}
-          handleNextStep={handleNextStep}
-          currentStep={currentStep}
+        {currentStep > 0 && currentStep <= 17 && (
+          <ProcessBar
+            steps={steps}
+            handleBackStep={handleBackStep}
+            handleNextStep={handleNextStep}
+            currentStep={currentStep}
           />
-        }
-
-    </div>
-        </CreateHouseProvider>
+        )}
+      </div>
+    </CreateHouseProvider>
   );
 }
 

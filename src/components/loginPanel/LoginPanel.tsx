@@ -33,7 +33,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
   const divRef = useRef<HTMLInputElement>(null);
   const title_username = useRef<HTMLInputElement>(null);
   const input_username = useRef<HTMLInputElement>(null);
-  const {setIsFilter, isFilter} = useContext(getHouseContext)
+  const { setIsFilter, isFilter } = useContext(getHouseContext);
 
   const divRef2 = useRef<HTMLInputElement>(null);
   const title_password = useRef<HTMLInputElement>(null);

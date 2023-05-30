@@ -3,15 +3,15 @@ import { newHouseContext } from '../../../contexts/createHome';
 import { IoLocationSharp } from 'react-icons/io5';
 
 const Map: React.FC = () => {
-  const {state,dispatch} = useContext(newHouseContext)
-  const [address, setAddress] = useState(state.address)
-  function addressValueHandler(event: React.ChangeEvent<HTMLInputElement>): void{
+  const { state, dispatch } = useContext(newHouseContext);
+  const [address, setAddress] = useState(state.address);
+  function addressValueHandler(event: React.ChangeEvent<HTMLInputElement>): void {
     const addressValue = event.currentTarget.value;
-    setAddress(prev => addressValue)
+    setAddress((prev) => addressValue);
   }
   useEffect(() => {
     dispatch({ type: 'STEP4', payload: address });
-  }, [address])
+  }, [address]);
   const map =
     'https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/105.804817,21.028509,11,5/700x700?access_token=pk.eyJ1IjoiamFqYWphamF1IiwiYSI6ImNsaDJyNzUydjAzazgzcnFtc3R5enE4eXgifQ.FmwGbD5cLVub495LlJUlbw';
   return (

@@ -1,2 +1,2 @@
 export * from './selectPopover';
-export * from './bill'
+export * from './bill';
