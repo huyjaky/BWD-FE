@@ -22,5 +22,7 @@ export const houseApi = {
   authListHouse (UserId: string) {
     return axiosClient.get(`/get/house/userid/${UserId}`);
   },
-
+  authFavoriteList (UserId: string) {
+    return axiosClient.get(`/get/house/userid/favorite/${UserId}`);
+  }
 };

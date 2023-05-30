@@ -102,7 +102,7 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
     const temp = await session?.userAcc;
     console.log(status, infShow);
     // neu user login thi userid se thay doi nen phai chia ra nhieu truong hop
-    if (infShow === 'noneAuthHouseApi' && status === 'authenticated' ) {
+    if (infShow === 'noneAuthHouseApi' && status === 'authenticated') {
       const arr = await houseApi['noneAuthHouseApi'](1, temp.UserId);
       if (arr.data.length == 0) {
         setHasMore(false); // neu nhu du lieu tra ve la khong co lan dau tien thi khong xuat hien nx
@@ -144,6 +144,15 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
         return;
       }
       setHouseTemp(arr.data as house_[]);
+    } else if (infShow === 'favoriteHouse' && status === 'authenticated') {
+      const arr = await houseApi['authFavoriteList'](
+        temp.UserId
+      );
+      if (arr.data.length == 0) {
+        setHasMore(false);
+        return;
+      }
+      setHouseTemp(arr.data as house_[]);
     }
   };
 
@@ -158,7 +167,7 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
 
   // get more house de lay them nha khi scroll xuoong cuoi cung https://www.npmjs.com/package/react-infinite-scroll-component
   const getMoreHouse = async () => {
-    if (infShow === 'favoriteHouse' ) {
+    if (infShow === 'favoriteHouse') {
       setHasMore(false);
     }
     try {
