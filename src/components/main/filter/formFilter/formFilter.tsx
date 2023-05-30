@@ -80,7 +80,7 @@ const FormFilter = () => {
 
     // neu du lieu co ton tai thi la fetch lai du lieu neu khong thi bo qua
     if (!isEmpty()) {
-      setIsFilter(isFilter + 1);
+      setIsFilter((isFilter+1)*isFilter);
       return;
     } else {
       setIsFilter(0);

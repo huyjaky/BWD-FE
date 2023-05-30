@@ -50,7 +50,9 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBox }: HomePr
     setUser({ ...user, ...user_ });
   }
 
-  useEffect(() => {}, [isFilter]);
+  useEffect(() => {
+    console.log(isFilter);
+  }, [isFilter]);
 
   return (
     <>
@@ -63,7 +65,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBox }: HomePr
 
           <motion.div variants={variants} animate="show">
             <ShowHouse
-              infShow={isFilter != 0 ? 'noneAuthFilter' : 'noneAuthHouseApi'}
+              infShow={isFilter != 0 ?  (isFilter > 0 ? 'noneAuthFilter' : 'favoriteHouse') : 'noneAuthHouseApi' }
               keyMapBox={keyMapBox}
             />
           </motion.div>

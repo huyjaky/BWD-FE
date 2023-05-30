@@ -16,7 +16,11 @@ export const houseApi = {
   authFavoriteHouse(HouseId: string, UserId: string) {
     return axiosClient.post(`/create/favorite`, { HouseId: HouseId, UserId: UserId });
   },
+  authUnFavoriteHouse(HouseId: string, UserId: string) {
+    return axiosClient.post(`/delete/favorite`, { HouseId: HouseId, UserId: UserId });
+  },
   authListHouse (UserId: string) {
     return axiosClient.get(`/get/house/userid/${UserId}`);
-  }
+  },
+
 };

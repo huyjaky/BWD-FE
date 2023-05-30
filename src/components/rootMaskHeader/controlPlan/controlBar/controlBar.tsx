@@ -44,7 +44,7 @@ const ControlBar = () => {
     if (isEmpty()) {
       return;
     } else {
-      setIsFilter(isFilter + 1);
+      setIsFilter((isFilter+1)*isFilter);
       return;
     }
   };
