@@ -24,46 +24,14 @@ const variants: Variants = {
 const HeaderMain = () => {
   const { setPlaceList } = useContext(placeListContext);
   const { isLoginClick, setIsLoginClick } = useContext(selectPopoverContext);
-  const { isClickOutSide, setIsClickOutSide } = useContext(filterFormAnimateContext);
+  const { isClickOutSide, setIsClickOutSide, isShowHeader, setIsShowHeader } =
+    useContext(filterFormAnimateContext);
   const [isFirstLoading, setIsFirstLoading] = useState(true);
 
   const loginPanel = useRef<HTMLInputElement>(null);
   const mask = useRef<HTMLInputElement>(null);
 
   const handleOnMask = (event: any) => {
-    // add animate by hand beacause i its ez to fixed :")))
-    // animate cua header va cai nay de dong header
-    const mask: HTMLElement | null = document.getElementById('mask');
-    const scaleUp: HTMLElement | null = document.getElementById('scaleUp');
-
-    const ControlHeader: HTMLElement | null = document.getElementById('ControlHeader');
-    const link: HTMLElement | null = document.getElementById('link');
-    const controlBar: HTMLElement | null = document.getElementById('controlBar');
-    const where: HTMLElement | null = document.getElementById('where-popup');
-    const checkIn_Out: HTMLElement | null = document.getElementById('checkin_out-popup');
-    const who: HTMLElement | null = document.getElementById('who-popup');
-
-    if (isFirstLoading) return;
-    scaleUp?.classList.remove('animate-slideDownHeader');
-    link?.classList.remove('animate-slideDownControl');
-    ControlHeader?.classList.remove('animate-slideDownControl');
-    mask?.classList.remove('animate-transparentAnimate');
-    controlBar?.classList.remove('animate-showAnimate');
-
-    where?.classList.remove('animate-transparentAnimate');
-    checkIn_Out?.classList.remove('animate-transparentAnimate');
-    who?.classList.remove('animate-transparentAnimate');
-    // -------------------------------------------------------------------
-    scaleUp?.classList.add('animate-slideUpHeader');
-    link?.classList.add('animate-slideUpControl');
-    ControlHeader?.classList.add('animate-slideUpControl');
-    mask?.classList.add('animate-transparentAnimateReverse');
-    controlBar?.classList.add('animate-hiddenAnimate');
-
-    where?.classList.add('animate-transparentAnimateReverse');
-    checkIn_Out?.classList.add('animate-transparentAnimateReverse');
-    who?.classList.add('animate-transparentAnimateReverse');
-
     setPlaceList([]);
   };
 
@@ -144,11 +112,14 @@ const HeaderMain = () => {
         </div>
       </div>
 
-      <div
-        className="w-screen h-screen invisible opacity-0 bg-mask absolute z-20"
+      {/* aniamte mask */}
+      <motion.div
+        variants={variants}
+        animate={isShowHeader ? 'show' : 'hidden'}
+        className="w-screen h-screen opacity-0 bg-mask absolute z-20"
         id="mask"
         onClick={handleOnMask}
-      ></div>
+      ></motion.div>
 
       <HeaderForm>
         <ControlPlan />

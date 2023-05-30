@@ -1,4 +1,5 @@
 import { selectPopoverContext } from '@/contexts';
+import { BillContext } from '@/contexts/bill';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 import { addDays } from 'date-fns';
 import { useContext, useEffect, useState } from 'react';
@@ -10,6 +11,7 @@ interface CheckIn_OutProps {
 
 const CheckIn_Out = ({ styleVerical, styleHorizontal }: CheckIn_OutProps) => {
   const { address, setAddress } = useContext(selectPlaceContext);
+  const {Bill, setBill} = useContext(BillContext);
 
   const { selected } = useContext(selectPopoverContext);
   const [date_, setDate_] = useState([
@@ -24,6 +26,7 @@ const CheckIn_Out = ({ styleVerical, styleHorizontal }: CheckIn_OutProps) => {
 
   useEffect(() => {
     setAddress({ ...address, checkInDay: date_[0]?.startDate, checkOutDay: date_[0]?.endDate });
+    setBill({...Bill, checkInDay: date_[0]?.startDate});
   }, [date_]);
 
   const handleOnChange = (item: any) => {
@@ -38,6 +41,7 @@ const CheckIn_Out = ({ styleVerical, styleHorizontal }: CheckIn_OutProps) => {
             onChange={(item: any) => handleOnChange(item)}
             showPreview={true}
             moveRangeOnFirstSelection={false}
+            minDate={new Date()}
             months={2}
             ranges={date_}
             direction="horizontal"
@@ -53,6 +57,7 @@ const CheckIn_Out = ({ styleVerical, styleHorizontal }: CheckIn_OutProps) => {
             onChange={(item: any) => handleOnChange(item)}
             showPreview={true}
             moveRangeOnFirstSelection={false}
+            minDate={new Date()}
             months={2}
             ranges={date_}
             direction="vertical"

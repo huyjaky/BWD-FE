@@ -6,7 +6,10 @@ interface BillContextProps {
 
 interface Bill {
   checkInDay: Date;
-  house: any;
+  image: string;
+  title: string,
+  formatedAddress: string,
+  price: number,
   guest: {
     adults: number;
     childrens: number;
@@ -21,7 +24,10 @@ interface BillContextData {
 
 const BillContextDataDefault: BillContextData = {
   Bill: {
-    house: {},
+    image: '',
+    title: '',
+    formatedAddress: '',
+    price: 0,
     checkInDay: new Date(),
     guest: {
       adults: 0,

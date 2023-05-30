@@ -3,7 +3,11 @@ import { MdLanguage } from 'react-icons/md';
 import { AiFillFacebook, AiFillTwitterSquare, AiFillInstagram } from 'react-icons/ai';
 export default function FooterRooms() {
   return (
-    <div className="bg-ColorBgFooter px-[24px] desktop:px-[80px] pt-4 laptop:px-[80px]">
+    <div
+      className="bg-ColorBgFooter px-[24px] desktop:px-[80px] pt-4 laptop:px-[80px]
+    mobile:mb-[70px] tablet:mb-[70px]
+    "
+    >
       <div
         className="desktop:flex desktop:justify-between desktop:border-b desktop:border-colorBorderBottom
                 laptop:flex laptop:justify-between laptop:border-b laptop:border-colorBorderBottom
@@ -16,8 +20,12 @@ export default function FooterRooms() {
             "
         >
           <h1 className="font-semibold">Support</h1>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">Help Center</p>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">AirCover</p>
+          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+            Help Center
+          </p>
+          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+            AirCover
+          </p>
           <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Supporting people with disabilities
           </p>
@@ -32,7 +40,7 @@ export default function FooterRooms() {
           </p>
         </div>
         <div
-          className="border-b border-colorBorderBottom  pb-[24px] mb-[24px] leading-7 
+          className="border-b border-colorBorderBottom  pb-[24px] mb-[24px] leading-7
                     desktop:border-none
                     laptop:border-none
                 "
@@ -78,16 +86,24 @@ export default function FooterRooms() {
                 "
         >
           <h1 className="font-semibold">Airbnb</h1>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">Newsroom</p>
+          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+            Newsroom
+          </p>
           <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Learn about new features
           </p>
           <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Letter from our founders
           </p>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">Careers</p>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">Investors</p>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">Gift cards</p>
+          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+            Careers
+          </p>
+          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+            Investors
+          </p>
+          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+            Gift cards
+          </p>
         </div>
       </div>
       <div
@@ -126,8 +142,8 @@ export default function FooterRooms() {
         </div>
         <div className="">
           <ul className="flex flex-col desktop:flex-row laptop:flex-row relative">
-            <li className='flex items-center mt-1'>
-              <p className='text-[13px] font-thin' >&copy; 2023 Airbnb,Inc.</p>
+            <li className="flex items-center mt-1">
+              <p className="text-[13px] font-thin">&copy; 2023 Airbnb,Inc.</p>
             </li>
 
             <li>

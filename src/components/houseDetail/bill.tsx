@@ -6,6 +6,8 @@ import { Calendar } from 'react-date-range';
 import Who from '../rootMaskHeader/controlPlan/controlBar/popOverDetail/who';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { title } from 'process';
 
 interface BillProps {
   houseDetail: house_;
@@ -19,12 +21,11 @@ const Bill = ({ houseDetail }: BillProps) => {
     setBill({ ...Bill, checkInDay: item });
   };
 
-  useEffect(() => {}, [Bill.checkInDay]);
+  useEffect(() => { }, [Bill.checkInDay]);
+
   useEffect(() => {
     setBill({ ...Bill, guest: { ...Bill.guest, ...address.guest } });
   }, [address]);
-
-  console.log(Bill.guest);
 
   return (
     <div
@@ -65,7 +66,11 @@ const Bill = ({ houseDetail }: BillProps) => {
 
         <div className="dropdown w-full border-2 border-red-500 rounded-xl mt-2 ">
           <label tabIndex={0} className="btn m-1 w-full justify-start text-[25px]">
-            Guests
+            {Bill.guest.adults != 0 || Bill.guest.childrens != 0
+              ? Bill.guest.adults + Bill.guest.childrens + ' guests'
+              : 'Guests '}
+
+            {Bill.guest.infants != 0 && ', ' + Bill.guest.infants + ' infants'}
           </label>
           <ul
             tabIndex={0}
@@ -79,10 +84,16 @@ const Bill = ({ houseDetail }: BillProps) => {
             </li>
           </ul>
         </div>
-
-        <motion.button className="mt-2  w-full h-[50px] bg-red-500 rounded-xl text-white font-semibold">
-          Reverse
-        </motion.button>
+        <Link href={`/confirm/${houseDetail.HouseId}`}>
+          <motion.button
+            onClick={(event) => {setBill({ ...Bill, image: houseDetail.arrImg[0].Path,
+              title: houseDetail.Title, formatedAddress: houseDetail.address.formattedAddress,
+              price: houseDetail.Price
+            });}}
+            className="mt-2  w-full h-[50px] bg-red-500 rounded-xl text-white font-semibold">
+            Reverse
+          </motion.button>
+        </Link>
       </div>
     </div>
   );

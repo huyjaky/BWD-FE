@@ -57,6 +57,8 @@ export { default as Inbox } from './Inbox.svg'
 export { default as CreateList } from './CreateList.svg'
 export { default as Calendar } from './Calendar.svg'
 export { default as Today } from './Today.svg'
+export { default as Apartment } from './Apartment.svg'
+export { default as Guesthouse } from './GuestHouse.svg'
 
 
 

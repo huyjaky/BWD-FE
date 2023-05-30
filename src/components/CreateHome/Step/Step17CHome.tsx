@@ -84,7 +84,8 @@ export default function Step17CHome() {
                   <div>
                     <label
                       htmlFor="Weapons"
-                      className="text-[16px]  focus:ring-black dark:focus:ring-black  text-gray-900 ">
+                      className="text-[16px]  focus:ring-black dark:focus:ring-black  text-gray-900 "
+                    >
                       Weapons
                     </label>
                   </div>

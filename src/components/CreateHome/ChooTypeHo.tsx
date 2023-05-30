@@ -26,7 +26,7 @@ const ChooTypeHo: React.FC<ChooTypeHoProps> = ({
 
   return (
     <button
-      className="w-[100%] mb-3 border-[2px] border-[rgb(221,221,221) rounded-[12px] hover:border-[2px] hover:border-black"
+      className="w-[100%] mb-3 border-[2px] border-[rgb(221,221,221) rounded-[12px] hover:border-[2px] hover:border-black transition active:scale-[0.95]"
       style={{
         backgroundColor: name === selected ? '#F7F7F7' : '',
         borderColor: name === selected ? 'black' : ''

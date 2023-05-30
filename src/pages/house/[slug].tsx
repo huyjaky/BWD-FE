@@ -1,7 +1,7 @@
 import FooterMainRes from '@/components/footers/footerMainRes';
 import FooterRooms from '@/components/footers/footerRooms';
 import Bill from '@/components/houseDetail/bill';
-import Host from '@/components/houseDetail/host';
+import Host from '@/components/houseDetail/host/host';
 import MapBox from '@/components/houseDetail/map';
 import Picture from '@/components/houseDetail/picture';
 import ShowAllHouse from '@/components/houseDetail/showAllHousePt/showAllHouse';
@@ -11,6 +11,7 @@ import Carousel from '@/components/main/showHouse/carousel';
 import HeaderMain from '@/components/rootMaskHeader/headerMain';
 import { house_ } from '@/models/house';
 import { NextPageWithLayout } from '@/models/layoutprops';
+import { AnimatePresence } from 'framer-motion';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { Montserrat } from 'next/font/google';
 
@@ -29,19 +30,22 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
   keyMapBox
 }: HouseDetailProps) => {
   return (
-    <div className="w-full h-fit">
-      <>
+    <>
+      <div className="w-full h-fit">
         <main className={`${monsterrat.className} relative box-border`} id="root">
-          <HeaderMain />
+          <AnimatePresence initial={false}>
+            <HeaderMain />
+          </AnimatePresence>
+
           <div
             className="w-[1150px] h-fit
-          tablet:w-screen mobile:w-screen
+          tablet:w-screen mobile:w-screen mobile:px-4
           box-border m-auto"
           >
             <TitleHouse title={houseDetail.Title} address={houseDetail.address} />
 
             <Picture arrImg={houseDetail.arrImg} />
-            <div className="w-screen h-[500px] laptop:hidden desktop:hidden flex justify-center box-border ">
+            <div className="w-full h-[500px] laptop:hidden desktop:hidden flex justify-center box-border ">
               <Carousel arrImg={houseDetail.arrImg} houseId={houseDetail.HouseId} />
             </div>
             <ShowAllHouse arrImg={houseDetail.arrImg} />
@@ -63,8 +67,8 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
           <FooterRooms />
           <FooterMainRes />
         </main>
-      </>
-    </div>
+      </div>
+    </>
   );
 };
 

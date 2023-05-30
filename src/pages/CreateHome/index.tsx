@@ -72,10 +72,7 @@ function CreateHome(): JSX.Element {
     <CreateHouseProvider>
 
     <div className="">
-      {currentStep > 0 && currentStep <= 17
-        && <Header />
-      }
-
+      {currentStep > 0 && currentStep <= 17 && <Header />}
 
       <AnimatePresence>
         {currentStep > 0 &&

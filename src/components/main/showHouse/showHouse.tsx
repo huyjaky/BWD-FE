@@ -1,18 +1,20 @@
 import { houseApi } from '@/api-client/houseApi';
+import HostUser from '@/components/houseDetail/host/hostUser';
 import SkeletonShowHouse from '@/components/skeletonLoading/skletonShowHouse';
 import { filterContext } from '@/contexts/filter';
-import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 import { getHouseContext } from '@/contexts/getHouse';
+import { selectPlaceContext } from '@/contexts/selectPlace';
 import { house_ } from '@/models/house';
-import { Variants, motion } from 'framer-motion';
-import { useContext, useEffect, useState } from 'react';
+import { userAcc } from '@/models/userAcc';
+import { AnimatePresence, Variants, motion } from 'framer-motion';
+import Link from 'next/link';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { HiUserCircle } from 'react-icons/hi';
+import { ImMap } from 'react-icons/im';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Carousel from './carousel';
-import { selectPlaceContext } from '@/contexts/selectPlace';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import {AiOutlineHeart,AiFillHeart } from 'react-icons/ai';
-
+import Heart from './heart';
+import MapEach from './mapEach';
 
 const variants: Variants = {
   show: {
@@ -26,65 +28,72 @@ const variants: Variants = {
     transitionEnd: {
       display: 'none'
     }
+  },
+  iconAnimate: {
+    borderRadius: [
+      '50% 50% 20% 80% / 25% 80% 20% 75%',
+      '67% 33% 47% 53% / 37% 20% 80% 63%',
+      '39% 61% 47% 53% / 37% 40% 60% 63%',
+      '39% 61% 82% 18% / 74% 40% 60% 26%',
+      '50% 50% 53% 47% / 26% 22% 78% 74%',
+      '50% 50% 20% 80% / 25% 80% 20% 75%',
+      '30% 70% 70% 30% / 30% 52% 48% 70%',
+      '20% 80% 20% 80% / 20% 80% 20% 80%'
+    ],
+    transition: {
+      duration: 10,
+      repeat: Infinity,
+      type: 'tween'
+    }
+  },
+
+  showMask: {
+    display: 'flex',
+    opacity: [0, 1]
+  },
+  hiddenMask: {
+    opacity: [1, 0],
+    transitionEnd: {
+      display: 'none'
+    }
+  },
+
+  showMaskMap: {
+    visibility: 'visible',
+    opacity: [0, 1]
+  },
+  hiddenMaskMap: {
+    opacity: [1, 0],
+    transitionEnd: {
+      visibility: 'hidden'
+    }
   }
 };
 
 interface ShowHouseProps {
   infShow: 'noneAuthHouseApi' | 'noneAuthFilter';
+  keyMapBox: string;
 }
 
-const ShowHouse = ({ infShow }: ShowHouseProps) => {
+const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
-  const { isShow, setIsShow } = useContext(filterFormAnimateContext);
   const { filterForm } = useContext(filterContext);
   const { address } = useContext(selectPlaceContext);
   const { isFilter } = useContext(getHouseContext);
-  const router = useRouter();
   const [hasMore, setHasMore] = useState(true);
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
+  const maskUser = useRef<HTMLInputElement>(null);
+  const maskMap = useRef<HTMLInputElement>(null);
+  const [isOpenMask, setIsOpenMask] = useState(false);
+  const [selectUser, setSelectUser] = useState<userAcc>();
+  const [selectLocale, setSelectLocale] = useState<{
+    longitude: number;
+    latitude: number;
+    zoom: number;
+  }>();
+  const [isOpenMaskMap, setIsOpenMaskMap] = useState(false);
 
-  // cai nay lam truoc khi hoc framer motion nen khong dung framer ma dung
-  // animation chay bang com
-  const handleScroll = () => {
-    const mask: HTMLElement | null = document.getElementById('mask');
-    const scaleUp: HTMLElement | null = document.getElementById('scaleUp');
-
-    const ControlHeader: HTMLElement | null = document.getElementById('ControlHeader');
-    const link: HTMLElement | null = document.getElementById('link');
-    const controlBar: HTMLElement | null = document.getElementById('controlBar');
-    const where: HTMLElement | null = document.getElementById('where-popup');
-    const checkIn_Out: HTMLElement | null = document.getElementById('checkin_out-popup');
-    const who: HTMLElement | null = document.getElementById('who-popup');
-
-    // -------------------------------------------------------------------
-    if (isShow) {
-      scaleUp?.classList.remove('animate-slideDownHeader');
-      link?.classList.remove('animate-slideDownControl');
-      ControlHeader?.classList.remove('animate-slideDownControl');
-      mask?.classList.remove('animate-transparentAnimate');
-      controlBar?.classList.remove('animate-showAnimate');
-
-      where?.classList.remove('animate-transparentAnimate');
-      checkIn_Out?.classList.remove('animate-transparentAnimate');
-      who?.classList.remove('animate-transparentAnimate');
-      // -------------------------------------------------------------------
-      scaleUp?.classList.add('animate-slideUpHeader');
-      link?.classList.add('animate-slideUpControl');
-      ControlHeader?.classList.add('animate-slideUpControl');
-      mask?.classList.add('animate-transparentAnimateReverse');
-      controlBar?.classList.add('animate-hiddenAnimate');
-
-      where?.classList.add('animate-transparentAnimateReverse');
-      checkIn_Out?.classList.add('animate-transparentAnimateReverse');
-      who?.classList.add('animate-transparentAnimateReverse');
-      setIsShow(false);
-    }
-  };
-
-  // bat su kien cho animation tren
-  useEffect(() => {
-    document.addEventListener('scroll', handleScroll);
-  }, [isShow]);
+  console.log(houseTemp);
 
   const fetchHouseApi = async () => {
     if (houseTemp.length != 0) return;
@@ -141,8 +150,67 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
     setHasMore(true);
   }, [infShow, isFilter]);
 
+  const handleOnClickOutSideMaskUser = (event: any) => {
+    const isClickInSide = maskUser.current?.contains(event.target);
+    if (!isClickInSide) {
+      setIsOpenMask(false);
+      return;
+    } else {
+      return;
+    }
+  };
+
+  const handleOnClickOutSideMaskMap = (event: any) => {
+    const isClickInSide = maskMap.current?.contains(event.target);
+    console.log(isClickInSide);
+    if (!isClickInSide) {
+      setIsOpenMaskMap(false);
+      return;
+    } else {
+      return;
+    }
+  };
+
   return (
     <div>
+      <AnimatePresence initial={false}>
+        <motion.div
+          variants={variants}
+          animate={isOpenMask ? 'showMask' : 'hiddenMask'}
+          onClick={handleOnClickOutSideMaskUser}
+          className="fixed w-screen h-screen bg-mask z-50 top-0 left-0 "
+        >
+          <motion.div
+            className="w-fit h-fit bg-[#f0efe9] p-7 m-auto mt-[10%] rounded-2xl"
+            ref={maskUser}
+          >
+            <HostUser
+              imgPath={selectUser?.Image}
+              gmail={selectUser?.Gmail}
+              userName={selectUser?.UserName}
+            />
+          </motion.div>
+        </motion.div>
+      </AnimatePresence>
+
+      <AnimatePresence initial={false}>
+        <motion.div
+          variants={variants}
+          animate={isOpenMaskMap ? 'showMaskMap' : 'hiddenMaskMap'}
+          onClick={handleOnClickOutSideMaskMap}
+          className="fixed w-screen h-screen bg-mask z-50 top-0 left-0 flex "
+        >
+          <div ref={maskMap} className="w-[50%] h-fit bg-[#f0efe9] p-7 m-auto rounded-2xl">
+            <MapEach
+              longitude={selectLocale?.longitude ? selectLocale.longitude : 1}
+              latitude={selectLocale?.latitude ? selectLocale?.latitude : 1}
+              zoom={selectLocale?.zoom ? selectLocale.zoom : 15}
+              keyMapBox={keyMapBox}
+            />
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
       <motion.div className="w-full h-fit py-20 pb-28" id="scroll-inf">
         <InfiniteScroll
           dataLength={houseTemp.length}
@@ -153,27 +221,57 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
               <SkeletonShowHouse />
             </motion.div>
           }
-          className="w-full h-fit grid grid-cols-houseBox gap-x-5 gap-y-8"
-          endMessage={<div>No more values</div>}>
+          style={{ overflow: 'hidden' }}
+          className="w-full h-fit grid grid-cols-houseBox gap-x-5 gap-y-8 "
+          endMessage={<div>No more values</div>}
+        >
           {houseTemp.map((item: house_, index: number) => (
             <motion.div
               key={index}
+              whileInView={{ y: [20, 0] }}
               initial={{ opacity: 0, display: 'none' }}
               animate={{ opacity: 1, display: 'block' }}
-              transition={{ delay: (index + 1) * 0.1 }}
-              className="w-full h-[400px] ">
+              transition={{ delay: index * 0.1 }}
+              className="w-full h-[400px] "
+            >
               <div className="w-full h-[300px] relative">
                 <Carousel arrImg={item.arrImg} houseId={item.HouseId} />
 
                 {/* heart */}
-                <label className="swap swap-flip text-[30px] z-10 absolute right-2 top-2
-                  text-red-500
-                ">
-                  <input type="checkbox" />
-                  <motion.div whileTap={{scale: [.8, 1.3]}} className="swap-on"><AiFillHeart/></motion.div>
-                  <motion.div whileTap={{scale: [.8, 1.3]}} className="swap-off"><AiOutlineHeart/></motion.div>
-                </label>
+                <Heart HouseId={item.HouseId} />
 
+                <motion.button
+                  whileHover={{ scale: 1.2 }}
+                  onClick={() => {
+                    setIsOpenMaskMap(true);
+                    setSelectLocale({
+                      latitude: item.address.latitude,
+                      longitude: item.address.longitude,
+                      zoom: 15
+                    });
+                  }}
+                  className="absolute top-3 right-12 text-red-500 text-[25px] z-10"
+                >
+                  <ImMap />
+                </motion.button>
+
+                <motion.button
+                  variants={variants}
+                  onClick={() => {
+                    setSelectUser(item.useracc);
+                    setIsOpenMask(true);
+                  }}
+                  animate="iconAnimate"
+                  className="absolute w-[60px] h-[60px]
+                left-3 bottom-3 z-10 rounded-full overflow-hidden
+                "
+                >
+                  {item.useracc.Image ? (
+                    <img src={item.useracc.Image} alt="" className="w-full h-full object-cover" />
+                  ) : (
+                    <HiUserCircle className="w-full h-full" />
+                  )}
+                </motion.button>
               </div>
               <Link href={`/house/${item.HouseId}`}>
                 <div className="h-[100px] w-full box-border p-4">
@@ -200,7 +298,8 @@ const ShowHouse = ({ infShow }: ShowHouseProps) => {
               <motion.div
                 variants={variants}
                 animate={houseTemp.length == 0 ? 'show' : 'hidden'}
-                key={index}>
+                key={index}
+              >
                 <SkeletonShowHouse />
               </motion.div>
             ))}

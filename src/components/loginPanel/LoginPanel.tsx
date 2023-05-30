@@ -1,4 +1,3 @@
-import { userApi } from '@/api-client/userApi';
 import { selectPopoverContext } from '@/contexts';
 import { userAccContext } from '@/contexts/userAcc';
 import useAuth from '@/hooks/useAuth';
@@ -13,7 +12,7 @@ interface LoginPanelProps {
   children: ReactNode;
 }
 
-// const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
 const schema = yup
   .object({

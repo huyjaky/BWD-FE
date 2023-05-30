@@ -74,15 +74,8 @@ export default function Step15CHome() {
                       checked={selectedOption === 'AnyAirbnbguest'}
                       className="w-4 h-4
                                         text-black
-                                        bg-gray-100
-                                        border-gray-300
-                                        focus:ring-black
-                                        dark:focus:ring-blue-600
-                                        dark:ring-offset-gray-800
-                                        focus:ring-2
-                                        dark:bg-gray-700
-                                        dark:border-gray-600
-                                        cursor-pointer
+                                        rounded-[50%]
+                                        bg-black
                                        "
                     />
                   </div>
@@ -108,7 +101,8 @@ export default function Step15CHome() {
                   selectedOption === 'AnExperiancedguest'
                     ? 'bg-[#F7F7F7] border-[2px] hover:border-black border-black'
                     : 'border-gray-200 border-[2px] hover:border-black'
-                }`}>
+                }`}
+             >
                 <div className="flex justify-center items-center cursor-pointer">
                   <div className="cursor-pointer">
                     <input
@@ -118,7 +112,7 @@ export default function Step15CHome() {
                       id="bordered-radio-2"
                       type="radio"
                       name="bordered-radio"
-                      className="w-4 h-4 cursor-pointer text-black bg-gray-100 border-gray-300 focus:ring-black dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                      className="w-4 h-4 cursor-pointer "
                     />
                   </div>
                   <label

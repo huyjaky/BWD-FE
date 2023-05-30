@@ -8,7 +8,7 @@ function Step4CHome(): JSX.Element {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1 }}
-      className="flex justify-start mt-10 md:justify-center w-full h-screen"
+      className="flex justify-start mt-10 md:justify-center w-full h-[100vh -56px]"
     >
       <div className="">
         <div className="">
