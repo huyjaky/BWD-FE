@@ -81,7 +81,8 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
   const { filterForm } = useContext(filterContext);
   const { address } = useContext(selectPlaceContext);
-  const {user, setUser} = useContext(userAccContext);
+  const { data: session, status } = useSession();
+  const { user, setUser } = useContext(userAccContext);
   const { isFilter } = useContext(getHouseContext);
   const [hasMore, setHasMore] = useState(true);
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
@@ -97,15 +98,28 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
   const [isOpenMaskMap, setIsOpenMaskMap] = useState(false);
 
   const fetchHouseApi = async () => {
-    if (houseTemp.length != 0 ) return;
+    if (houseTemp.length != 0 || status === 'loading') return;
+    const temp = await session?.userAcc;
+    console.log(status, infShow);
     // neu user login thi userid se thay doi nen phai chia ra nhieu truong hop
-    if (infShow === 'noneAuthHouseApi' && user.UserId) {
-      const arr = await houseApi[infShow](1, user.UserId);
+    if (infShow === 'noneAuthHouseApi' && status === 'authenticated') {
+      console.log('check auth');
+      const arr = await houseApi[infShow](1, temp.UserId);
       if (arr.data.length == 0) {
         setHasMore(false); // neu nhu du lieu tra ve la khong co lan dau tien thi khong xuat hien nx
         return;
       }
       setHouseTemp(arr.data as house_[]);
+
+    } else if (infShow === 'noneAuthHouseApi' && status === 'unauthenticated') {
+      console.log('check un');
+      const arr = await houseApi[infShow](1, '');
+      if (arr.data.length == 0) {
+        setHasMore(false); // neu nhu du lieu tra ve la khong co lan dau tien thi khong xuat hien nx
+        return;
+      }
+      setHouseTemp(arr.data as house_[]);
+
     } else if (infShow === 'noneAuthFilter') {
       const arr = await houseApi[infShow]({ filter: filterForm, selectPlace: address }, 1);
       if (arr.data.length == 0) {
@@ -113,23 +127,24 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
         return;
       }
       setHouseTemp(arr.data as house_[]);
-    } else if (infShow === 'noneAuthHouseApi' && !user.UserId) {
-      const arr = await houseApi[infShow](1, user.UserId);
-      if (arr.data.length == 0) {
-        setHasMore(false); // neu nhu du lieu tra ve la khong co lan dau tien thi khong xuat hien nx
-        return;
-      }
-      setHouseTemp(arr.data as house_[]);
     }
   };
+
+  useEffect(() => {
+    setHouseTemp([]);
+    setHasMore(true);
+  }, [infShow, isFilter, status]);
+
   useEffect(() => {
     fetchHouseApi();
-  }, [houseTemp, user]);
+  }, [houseTemp]);
 
   // get more house de lay them nha khi scroll xuoong cuoi cung https://www.npmjs.com/package/react-infinite-scroll-component
   const getMoreHouse = async () => {
     try {
       if (infShow === 'noneAuthHouseApi') {
+
+        console.log('get more house ');
         const moreHouse = await houseApi[infShow](houseTemp.length / 10 + 1, user.UserId);
         if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
           setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
@@ -152,12 +167,8 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
     }
   };
 
-  useEffect(() => {}, [houseTemp, hasMore]);
+  useEffect(() => { }, [houseTemp, hasMore]);
 
-  useEffect(() => {
-    setHouseTemp([]);
-    setHasMore(true);
-  }, [infShow, isFilter, user]);
 
   const handleOnClickOutSideMaskUser = (event: any) => {
     const isClickInSide = maskUser.current?.contains(event.target);
@@ -247,7 +258,7 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
                 <Carousel arrImg={item.arrImg} houseId={item.HouseId} />
 
                 {/* heart */}
-                <Heart HouseId={item.HouseId} IsFavorite={item.IsFavorite}/>
+                <Heart HouseId={item.HouseId} IsFavorite={item.IsFavorite} />
 
                 <motion.button
                   whileHover={{ scale: 1.2 }}

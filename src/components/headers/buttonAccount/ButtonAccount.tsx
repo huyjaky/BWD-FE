@@ -66,7 +66,7 @@ const ButtonAccount = () => {
       "
         >
           <div className="w-full h-fit border-b-2">
-            {!user?.UserId ? (
+            {user?.UserId == 'none user' ? (
               <>
                 <button
                   className="w-full py-4 text-left px-5"
