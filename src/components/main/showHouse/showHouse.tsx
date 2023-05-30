@@ -120,8 +120,15 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
       }
       setHouseTemp(arr.data as house_[]);
 
-    } else if (infShow === 'noneAuthFilter') {
-      const arr = await houseApi[infShow]({ filter: filterForm, selectPlace: address }, 1);
+    } else if (infShow === 'noneAuthFilter' && status === 'unauthenticated') {
+      const arr = await houseApi[infShow]({ filter: filterForm, selectPlace: address }, 1, '');
+      if (arr.data.length == 0) {
+        setHasMore(false);
+        return;
+      }
+      setHouseTemp(arr.data as house_[]);
+    } else if (infShow === 'noneAuthFilter' && status === 'authenticated') {
+      const arr = await houseApi[infShow]({ filter: filterForm, selectPlace: address }, 1, temp.UserId);
       if (arr.data.length == 0) {
         setHasMore(false);
         return;
@@ -154,7 +161,7 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
       } else if (infShow === 'noneAuthFilter') {
         const moreHouse = await houseApi[infShow](
           { filter: filterForm, selectPlace: address },
-          houseTemp.length / 10 + 1
+          houseTemp.length / 10 + 1, user.UserId
         );
         if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
           setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
