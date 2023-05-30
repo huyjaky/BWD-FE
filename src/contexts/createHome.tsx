@@ -9,7 +9,8 @@ type Action = {
   payload: any;
 }
 
-type houseDataType = {
+export type houseDataType = {
+  [key: string]: any;
   type: string;
   place: string;
   address: string;
@@ -25,7 +26,7 @@ type houseDataType = {
     bedrooms: number;
     beds: number;
     bathrooms: number;
-    hasLock: 'yes' | 'no' | null
+    hasLock: 'yes' | 'no' | null;
   };
   kindOfBathrooms: {
     private: number;

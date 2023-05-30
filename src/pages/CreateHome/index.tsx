@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Header from '../../components/CreateHome/Step/Header';
 import Step1CHome from '../../components/CreateHome/Step/Step1CHome';
 import Step2CHome from '../../components/CreateHome/Step/Step2CHome';
@@ -19,6 +19,7 @@ import Step16CHome from '@/components/CreateHome/Step/Step16CHome';
 import Step17CHome from '@/components/CreateHome/Step/Step17CHome';
 import { AnimatePresence } from 'framer-motion';
 import {CreateHouseProvider} from '../../contexts/createHome'
+import {newHouseContext} from '../../contexts/createHome'
 
 import ProcessBar from '../../components/CreateHome/ProcessBar/ProccessBar';
 import { GetServerSideProps } from 'next';
@@ -43,28 +44,31 @@ function CreateHome(): JSX.Element {
     }, 1000); // Thời gian delay trước khi chuyển sang component tiếp theo
   };
 
-  const steps = [
-    { number: 1, component: <Step1CHome /> },
-    { number: 2, component: <Step2CHome /> },
-    { number: 3, component: <Step3CHome /> },
-    { number: 4, component: <Step4CHome /> },
-    { number: 5, component: <Step5CHome /> },
-    { number: 6, component: <Step6CHome /> },
-    { number: 7, component: <Step7CHome /> },
-    { number: 8, component: <Step8CHome /> },
-    { number: 9, component: <Step9CHome /> },
-    { number: 10, component: <Step10Home /> },
-    { number: 11, component: <Step11CHome /> },
-    { number: 12, component: <Step12CHome /> },
-    { number: 13, component: <Step13CHome /> },
-    { number: 14, component: <Step14CHome /> },
-    { number: 15, component: <Step15CHome /> },
-    { number: 16, component: <Step16CHome /> },
-    { number: 17, component: <Step17CHome /> },
-    { number: 18, component: <StepCongratulation /> }
+  const {state} = useContext(newHouseContext)
+
+  let steps = [
+    { number: 1, component: <Step1CHome />,data: '' },
+    { number: 2, component: <Step2CHome /> ,data:  'type'},
+    { number: 3, component: <Step3CHome /> ,data: 'place'  },
+    { number: 4, component: <Step4CHome /> ,data: 'address' },
+    { number: 5, component: <Step5CHome /> ,data: 'addressConfirmation' },
+    { number: 6, component: <Step6CHome /> ,data: 'placeInfo'  },
+    { number: 7, component: <Step7CHome /> ,data: 'kindOfBathrooms'  },
+    { number: 8, component: <Step8CHome /> ,data: 'encounter'  },
+    { number: 9, component: <Step9CHome /> , data: ''},
+    { number: 10, component: <Step10Home /> ,data: 'amenities'  },
+    { number: 11, component: <Step11CHome />,data: ''   },
+    { number: 12, component: <Step12CHome /> ,data: 'title'  },
+    { number: 13, component: <Step13CHome /> ,data: 'description'  },
+    { number: 14, component: <Step14CHome /> , data: ''},
+    { number: 15, component: <Step15CHome /> ,data: 'guest'  },
+    { number: 16, component: <Step16CHome /> ,data: 'price'  },
+    { number: 17, component: <Step17CHome /> ,data: 'note'  },
+    { number: 18, component: <StepCongratulation /> ,data: ''}
   ];
 
   return (
+
     <CreateHouseProvider>
 
     <div className="">
@@ -83,10 +87,11 @@ function CreateHome(): JSX.Element {
 
       {currentStep > 0 && currentStep <= 17
         && <ProcessBar
-        steps={steps}
+          steps={steps}
           handleBackStep={handleBackStep}
           handleNextStep={handleNextStep}
           currentStep={currentStep}
+          // data={state}
           />
         }
 
