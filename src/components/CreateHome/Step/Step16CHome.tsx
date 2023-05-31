@@ -27,8 +27,8 @@ export default function Step16CHome() {
     }
   };
 
-  useEffect(() =>{
-    dispatch({type: 'STEP16', payload: money})
+  useEffect(() => {
+    dispatch({ type: 'STEP16', payload: money })
   }, [money])
   return (
     <motion.div
@@ -89,9 +89,8 @@ export default function Step16CHome() {
                         type="text"
                         value={`$${money}`}
                         onChange={handleMoney}
-                        className={`my-[8px] mx-[12px] w-[98%] h-[98%] border border-black rounded-[8px] text-[48px] text-center ${
-                          error ? ' bg-red-50 border border-red-500 text-red-900' : ''
-                        }
+                        className={`my-[8px] mx-[12px] w-[98%] h-[98%] border border-black rounded-[8px] text-[48px] text-center ${error ? ' bg-red-50 border border-red-500 text-red-900' : ''
+                          }
                                             `}
                       />
                     </div>
@@ -119,7 +118,7 @@ export default function Step16CHome() {
                   </button>
                 </div>
               </motion.div>
-              {/* <motion.label
+              <motion.label
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
@@ -144,7 +143,7 @@ export default function Step16CHome() {
                     className="w-4 h-4 text-black "
                   />
                 </div>
-              </motion.label> */}
+              </motion.label>
             </div>
           </div>
         </div>
