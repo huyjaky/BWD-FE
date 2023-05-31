@@ -58,7 +58,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
         console.log('ok');
         setValidated(true);
       }  else if (typeof state[steps[currentStep - 1].data] === 'object') {
-        if (currentStep === 7) {
+        if (currentStep === 7 || currentStep === 17) {
           setValidated(true);
         } else {
           const object = state[steps[currentStep - 1].data];
@@ -101,7 +101,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
         <motion.div variants={buttonVariants} initial="initial" whileHover="hover">
           <motion.button
             className={`py-4 px-8 text-white font-semibold text-[16px] rounded-xl inline mr- ${
-              isValidated ? 'bg-black' : 'bg-gray-600'
+              isValidated ? 'bg-black' : 'bg-gray-600 '
             }`}
             onClick={handleNextStep}
             disabled={!isValidated}>
