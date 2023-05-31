@@ -94,7 +94,7 @@ const FormFilter = () => {
         <motion.div
           variants={variantsAmenities}
           animate={isClickOutSide ? 'show' : 'hidden'}
-          transition={{ duration: 0.5, type: 'tween' }}
+          transition={{ duration: 0.5, type: 'spring' }}
           className="w-[800px] h-[calc(100vh-50px)] bg-white m-auto rounded-3xl overflow-hidden
           flex flex-col
           mobile:mt-0 mobile:rounded-none mobile:w-screen mobile:h-[calc(100vh-70px)]
@@ -197,7 +197,7 @@ const FormFilter = () => {
           <div className="w-full border-t-2 flex items-center flex-2 py-3">
             <div className="flex-1 flex justify-start">
               <div
-                className="m-auto underline"
+                className="m-auto underline cursor-pointer"
                 onClick={(event) => {
                   const filterFormTemp: filterForm = {
                     ...filterForm,

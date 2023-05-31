@@ -48,6 +48,18 @@ const variants: Variants = {
       type: 'tween'
     }
   },
+  iconAnimateBg: {
+    borderRadius: [
+      '60% 40% 30% 70% / 60% 30% 70% 40%',
+      '30% 60% 70% 40% / 50% 60% 30% 60%',
+      '60% 40% 30% 70% / 60% 30% 70% 40%'
+    ],
+    transition: {
+      duration: 10,
+      repeat: Infinity,
+      type: 'tween'
+    }
+  },
 
   showMask: {
     display: 'flex',
@@ -68,6 +80,14 @@ const variants: Variants = {
     opacity: [1, 0],
     transitionEnd: {
       visibility: 'hidden'
+    }
+  },
+  hoverItem: {
+    scale: 1.03,
+    boxShadow: 'rgba(240, 46, 170, 0.4) -5px 5px, rgba(240, 46, 170, 0.3) -10px 10px, rgba(240, 46, 170, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, rgba(240, 46, 170, 0.05) -25px 25px',
+    transition: {
+      delay: 0,
+      type: 'spring'
     }
   }
 };
@@ -279,18 +299,21 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
             </motion.div>
           }
           style={{ overflow: 'hidden' }}
-          className="w-full h-fit grid grid-cols-houseBox gap-x-5 gap-y-8 "
+          className="w-full h-fit grid grid-cols-houseBox gap-x-9 gap-y-8 px-7 py-8"
           endMessage={<div>No more values</div>}
+
         >
           {houseTemp.map((item: house_, index: number) => {
             return (
               <motion.div
                 key={index}
-                whileInView={{ x: [-10, 0] }}
+                // whileInView={{ x: [-10, 0] }}
+                variants={variants}
                 initial={{ opacity: 0, display: 'none' }}
                 animate={{ opacity: 1, display: 'block' }}
-                transition={{ delay: index * 0.05, type: 'spring' }}
-                className="w-full h-[400px] "
+                whileHover='hoverItem'
+                transition={{ type: 'spring' }}
+                className="w-full h-[400px] rounded-2xl box-border"
               >
                 <div className="w-full h-[300px] relative">
                   <Carousel arrImg={item.arrImg} houseId={item.HouseId} />
@@ -315,6 +338,16 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
                     <ImMap />
                   </motion.button>
 
+                  {/* bg icon */}
+                  <motion.button
+                    variants={variants}
+                    animate="iconAnimateBg"
+                    className="absolute w-[60px] scale-110 h-[60px] transition-all opacity-60
+                left-3 bottom-3 rounded-full overflow-hidden z-10 bg-red-500
+                "
+                  >
+                  </motion.button>
+
                   <motion.button
                     variants={variants}
                     onClick={() => {
@@ -322,8 +355,8 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
                       setIsOpenMask(true);
                     }}
                     animate="iconAnimate"
-                    className="absolute w-[60px] h-[60px]
-                left-3 bottom-3 z-10 rounded-full overflow-hidden
+                    className="absolute w-[60px] h-[60px] transition-all
+                left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl
                 "
                   >
                     {item.useracc.Image ? (
@@ -332,6 +365,9 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
                       <HiUserCircle className="w-full h-full" />
                     )}
                   </motion.button>
+
+
+
                 </div>
                 <Link href={`/house/${item.HouseId}`}>
                   <div className="h-[100px] w-full box-border p-4">
