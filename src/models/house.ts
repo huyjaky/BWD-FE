@@ -29,6 +29,7 @@ export interface house_ {
   JudicalId: string;
   address: address;
   useracc: userAcc;
+  IsFavorite: boolean;
   arrImg: { Path: string }[];
   placeOffer: { PlaceOfferId: string; PlaceOffer: string; PathIcon: string }[];
 }

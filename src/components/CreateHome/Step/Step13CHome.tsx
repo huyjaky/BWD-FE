@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, useContext,useEffect } from 'react';
+import React, { ChangeEvent, useState, useContext, useEffect } from 'react';
 import { RiErrorWarningFill } from 'react-icons/ri';
 import { motion } from 'framer-motion';
 import { newHouseContext } from '../../../contexts/createHome';
@@ -24,9 +24,9 @@ export default function Step13CHome() {
   const characterCount = character.length;
 
   useEffect(() => {
-    dispatch({type: 'STEP13', payload: character})
-  }, [character])
-  
+    dispatch({ type: 'STEP13', payload: character });
+  }, [character]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}

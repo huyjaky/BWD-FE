@@ -4,6 +4,7 @@ import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 import { getHouseContext } from '@/contexts/getHouse';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 import { format } from 'date-fns';
+import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -19,6 +20,7 @@ const ControlBar = () => {
   const { setSelected } = useContext(selectPopoverContext);
   const { address } = useContext(selectPlaceContext);
   const { isFilter, setIsFilter } = useContext(getHouseContext);
+  const {setIsShowHeader} = useContext(filterFormAnimateContext);
   const router = useRouter();
 
   const handleOnMask = (event: any) => {
@@ -44,7 +46,8 @@ const ControlBar = () => {
     if (isEmpty()) {
       return;
     } else {
-      setIsFilter(isFilter + 1);
+      setIsShowHeader(false);
+      setIsFilter(isFilter*isFilter+1);
       return;
     }
   };
@@ -145,7 +148,8 @@ const ControlBar = () => {
           </div>
 
           <div className="flex-1 flex box-border p-3 w-full relative z-10 mobile:py-5 tablet:py-5 ">
-            <div
+            <motion.div
+              whileTap={{scale: .8}}
               className="rounded-full w-full h-full bg-red-500 flex "
               id="btn-search-header"
               onClick={fetchData}
@@ -154,7 +158,7 @@ const ControlBar = () => {
               <span className="text-white font-semibold m-auto ml-0 tablet:hidden mobile:hidden">
                 Search
               </span>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

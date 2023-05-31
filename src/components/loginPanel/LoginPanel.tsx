@@ -1,4 +1,5 @@
 import { selectPopoverContext } from '@/contexts';
+import { getHouseContext } from '@/contexts/getHouse';
 import { userAccContext } from '@/contexts/userAcc';
 import useAuth from '@/hooks/useAuth';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -32,6 +33,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
   const divRef = useRef<HTMLInputElement>(null);
   const title_username = useRef<HTMLInputElement>(null);
   const input_username = useRef<HTMLInputElement>(null);
+  const { setIsFilter, isFilter } = useContext(getHouseContext);
 
   const divRef2 = useRef<HTMLInputElement>(null);
   const title_password = useRef<HTMLInputElement>(null);
@@ -92,10 +94,10 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
       return;
     }
     setUser({ ...user, ...session?.userAcc });
-
     if (login_?.ok) {
       setIsLoginClick(false);
     }
+    setIsFilter(0);
     if (router.asPath === '/login') {
       router.push('/', undefined, { shallow: true });
     }

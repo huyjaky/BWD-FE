@@ -7,9 +7,9 @@ interface BillContextProps {
 interface Bill {
   checkInDay: Date;
   image: string;
-  title: string,
-  formatedAddress: string,
-  price: number,
+  title: string;
+  formatedAddress: string;
+  price: number;
   guest: {
     adults: number;
     childrens: number;

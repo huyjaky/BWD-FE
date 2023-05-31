@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ChooTypeHo from '../ChooTypeHo';
 import { categoriesStep3 } from '../utils/constant';
 import { motion } from 'framer-motion';
@@ -36,6 +36,7 @@ export default function Step3CHome() {
             <motion.div
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
+              key={index}
               transition={{ type: 'spring', stiffness: 35, delay: 0.3 * index }}
             >
               <ChooTypeHo

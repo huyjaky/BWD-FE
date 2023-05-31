@@ -24,7 +24,11 @@ import {newHouseContext} from '../../contexts/createHome'
 import ProcessBar from '../../components/CreateHome/ProcessBar/ProccessBar';
 import { GetServerSideProps } from 'next';
 import StepCongratulation from '@/components/CreateHome/Step/StepCongratulation';
-function CreateHome(): JSX.Element {
+interface CreateHomeProps{
+  keyMapBox: string
+}
+
+function CreateHome({keyMapBox}: CreateHomeProps): JSX.Element {
   const [currentStep, setCurrentStep] = useState(1);
 
   const [isMounted, setIsMounted] = useState(true);
@@ -50,8 +54,8 @@ function CreateHome(): JSX.Element {
     { number: 1, component: <Step1CHome />,data: '' },
     { number: 2, component: <Step2CHome /> ,data:  'type'},
     { number: 3, component: <Step3CHome /> ,data: 'place'  },
-    { number: 4, component: <Step4CHome /> ,data: 'address' },
-    { number: 5, component: <Step5CHome /> ,data: 'addressConfirmation' },
+    { number: 4, component: <Step4CHome keyMapBox={keyMapBox}/> ,data: 'address' },
+    { number: 5, component: <Step5CHome keyMapBox={keyMapBox}/> ,data: 'addressConfirmation' },
     { number: 6, component: <Step6CHome /> ,data: 'placeInfo'  },
     { number: 7, component: <Step7CHome /> ,data: 'kindOfBathrooms'  },
     { number: 8, component: <Step8CHome /> ,data: 'encounter'  },
@@ -70,9 +74,16 @@ function CreateHome(): JSX.Element {
   return (
 
     <CreateHouseProvider>
+      <div className="">
+        {currentStep > 0 && currentStep <= 17 && <Header />}
 
-    <div className="">
-      {currentStep > 0 && currentStep <= 17 && <Header />}
+        <AnimatePresence>
+          {currentStep > 0 &&
+            currentStep <= 18 &&
+            currentStep === steps[currentStep - 1].number &&
+            isMounted &&
+            steps[currentStep - 1].component}
+        </AnimatePresence>
 
       <AnimatePresence>
         {currentStep > 0 &&
@@ -91,9 +102,8 @@ function CreateHome(): JSX.Element {
           // data={state}
           />
         }
-
-    </div>
-        </CreateHouseProvider>
+      </div>
+    </CreateHouseProvider>
   );
 }
 
@@ -105,8 +115,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   //   res.end();
   //   return { props: {} };
   // }
+  const keyMapBox = process.env.ACCESS_TOKEN_MAPBOX;
 
-  return { props: {} };
+  return {
+    props: {
+      keyMapBox: keyMapBox
+    }
+  };
 };
 
 export default CreateHome;

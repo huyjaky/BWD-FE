@@ -13,20 +13,20 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 import { SWRConfig } from 'swr';
 
+import BillProvider from '@/contexts/bill';
 import FilterProvider from '@/contexts/filter';
 import FilterFormAnimateProvider from '@/contexts/filterFormAnimate';
 import GetHouseProvider from '@/contexts/getHouse';
+import IsShowPtProvider from '@/contexts/isShowPt';
 import MobileContolPanelProvider from '@/contexts/mobileControlPanel';
 import UserAccProvider from '@/contexts/userAcc';
-import { Poppins } from 'next/font/google';
 import { SessionProvider } from 'next-auth/react';
-import { AppProps } from 'next/app';
-import IsShowPtProvider from '@/contexts/isShowPt';
-import BillProvider from '@/contexts/bill';
-const poppins = Poppins({
+import { Montserrat } from 'next/font/google';
+
+const monsterrat = Montserrat({
   subsets: ['latin'],
   weight: ['200', '400', '600', '800'],
-  variable: '--font-poppins'
+  variable: '--font-monsterrat'
 });
 
 // const circular = Flow_Circular
@@ -52,7 +52,7 @@ export default function App({
                           <SessionProvider session={session}>
                             <IsShowPtProvider>
                               <Layout>
-                                <div className={`${poppins.className}`}>
+                                <div className={`${monsterrat.className}`}>
                                   <Component {...pageProps} />
                                 </div>
                               </Layout>

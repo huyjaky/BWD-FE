@@ -1,16 +1,29 @@
 import Header from '@/components/Hosting/components/Header';
 import Main from '@/components/Hosting/components/Main';
 import FooterRooms from '@/components/footers/footerRooms';
-import React from 'react';
+import { GetServerSideProps } from 'next';
 
-function index(): JSX.Element {
+interface indexProps{
+  keyMapBox: string;
+}
+
+function index({keyMapBox}: indexProps): JSX.Element {
   return (
     <div>
       <Header />
-      <Main />
+      <Main keyMapBox={keyMapBox}/>
       <FooterRooms />
     </div>
   );
 }
 
 export default index;
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const keyMapBox = process.env.ACCESS_TOKEN_MAPBOX;
+  return {
+    props: {
+      keyMapBox: keyMapBox
+    }
+  };
+};

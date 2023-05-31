@@ -3,9 +3,15 @@ import { TiTick } from 'react-icons/ti';
 import MapLocate from '../Map/MapLocate';
 import { motion } from 'framer-motion';
 import { newHouseContext } from '../../../contexts/createHome';
+import MapEach from '@/components/main/showHouse/mapEach';
+import { selectPlaceContext } from '@/contexts/selectPlace';
+interface Step5CHome {
+  keyMapBox: string
+}
 
-const Step5CHome: React.FC = () => {
+const Step5CHome: React.FC<Step5CHome> = ({keyMapBox}: Step5CHome) => {
   const { state, dispatch } = useContext(newHouseContext);
+  const {address} = useContext(selectPlaceContext);
   const [toggle, setToggle] = useState(false);
   const [country, setCountry] = useState(state.addressConfirmation.country);
   const [subAddress, setSubAddress] = useState({
@@ -40,18 +46,18 @@ const Step5CHome: React.FC = () => {
     const post = event.currentTarget.value;
     setPostCode((prev) => post);
   }
-   useEffect(() => {
-     dispatch({
-       type: 'STEP5',
-       payload: {
-         country: country,
-         subAddress: Object.values(subAddress),
-         city: city,
-         province: province,
-         postCode: postCode
-       }
-     });
-   }, [country, subAddress, city, province, postCode]);
+  useEffect(() => {
+    dispatch({
+      type: 'STEP5',
+      payload: {
+        country: country,
+        subAddress: Object.values(subAddress),
+        city: city,
+        province: province,
+        postCode: postCode
+      }
+    });
+  }, [country, subAddress, city, province, postCode]);
   return (
     <div className="w-full h-screen">
       <div className="px-6 sm:px-52 md:px-44 lg:px-52 xl:px-96 mt-[80px]">
@@ -75,7 +81,8 @@ const Step5CHome: React.FC = () => {
               id="countryCode"
               // size='12'
               value={country}
-              onChange={addCountry}>
+              onChange={addCountry}
+            >
               <option value="AF">Afghanistan - AF</option>
               <option value="AF">Afghanistan - AF</option>
               <option value="AL">Albania - AL</option>
@@ -198,17 +205,21 @@ const Step5CHome: React.FC = () => {
                 type="button"
                 className={`${
                   toggle ? 'bg-black' : 'bg-[#b0b0b0]'
-                } rounded-[32px] h-8 w-12 min-w-[48px] relative cursor-pointer`}>
+                } rounded-[32px] h-8 w-12 min-w-[48px] relative cursor-pointer`}
+              >
                 <div
                   className={`${
                     toggle ? 'right-[-1px] border-black' : 'left-[-1px] border-[#b0b0b0]'
-                  } top-[1px] absolute bg-white h-[30px] w-[30px] rounded-[50%] border-2 flex items-center justify-center`}>
+                  } top-[1px] absolute bg-white h-[30px] w-[30px] rounded-[50%] border-2 flex items-center justify-center`}
+                >
                   {toggle && <TiTick />}
                 </div>
               </button>
             </div>
           </div>
-          <MapLocate />
+          <MapEach keyMapBox={keyMapBox} latitude={address.address.latitude}
+          longitude={address.address.longitude} zoom={15}
+          />
         </div>
       </div>
 

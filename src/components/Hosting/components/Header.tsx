@@ -53,7 +53,7 @@ function Header(): JSX.Element {
                         before::ease-in-out before:duration-500
                         hover:before:w-[60%]
 
-                        
+
                     `}
               >
                 Today

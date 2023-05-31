@@ -4,9 +4,11 @@ import SkeletonShowHouse from '@/components/skeletonLoading/skletonShowHouse';
 import { filterContext } from '@/contexts/filter';
 import { getHouseContext } from '@/contexts/getHouse';
 import { selectPlaceContext } from '@/contexts/selectPlace';
+import { userAccContext } from '@/contexts/userAcc';
 import { house_ } from '@/models/house';
 import { userAcc } from '@/models/userAcc';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { HiUserCircle } from 'react-icons/hi';
@@ -46,6 +48,18 @@ const variants: Variants = {
       type: 'tween'
     }
   },
+  iconAnimateBg: {
+    borderRadius: [
+      '60% 40% 30% 70% / 60% 30% 70% 40%',
+      '30% 60% 70% 40% / 50% 60% 30% 60%',
+      '60% 40% 30% 70% / 60% 30% 70% 40%'
+    ],
+    transition: {
+      duration: 10,
+      repeat: Infinity,
+      type: 'tween'
+    }
+  },
 
   showMask: {
     display: 'flex',
@@ -67,11 +81,19 @@ const variants: Variants = {
     transitionEnd: {
       visibility: 'hidden'
     }
+  },
+  hoverItem: {
+    scale: 1.03,
+    boxShadow: 'rgba(240, 46, 170, 0.4) -5px 5px, rgba(240, 46, 170, 0.3) -10px 10px, rgba(240, 46, 170, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, rgba(240, 46, 170, 0.05) -25px 25px',
+    transition: {
+      delay: 0,
+      type: 'spring'
+    }
   }
 };
 
 interface ShowHouseProps {
-  infShow: 'noneAuthHouseApi' | 'noneAuthFilter';
+  infShow: 'noneAuthHouseApi' | 'noneAuthFilter' | 'authListHouse' | 'favoriteHouse';
   keyMapBox: string;
 }
 
@@ -79,6 +101,8 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
   const { filterForm } = useContext(filterContext);
   const { address } = useContext(selectPlaceContext);
+  const { data: session, status } = useSession();
+  const { user, setUser } = useContext(userAccContext);
   const { isFilter } = useContext(getHouseContext);
   const [hasMore, setHasMore] = useState(true);
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
@@ -93,35 +117,84 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
   }>();
   const [isOpenMaskMap, setIsOpenMaskMap] = useState(false);
 
-  console.log(houseTemp);
-
   const fetchHouseApi = async () => {
-    if (houseTemp.length != 0) return;
-    if (infShow === 'noneAuthHouseApi') {
-      const arr = await houseApi[infShow](1);
+    if (houseTemp.length != 0 || status === 'loading') return;
+    const temp = await session?.userAcc;
+    console.log(status, infShow);
+    // neu user login thi userid se thay doi nen phai chia ra nhieu truong hop
+    if (infShow === 'noneAuthHouseApi' && status === 'authenticated') {
+      const arr = await houseApi['noneAuthHouseApi'](1, temp.UserId);
       if (arr.data.length == 0) {
         setHasMore(false); // neu nhu du lieu tra ve la khong co lan dau tien thi khong xuat hien nx
         return;
       }
       setHouseTemp(arr.data as house_[]);
-    } else if (infShow === 'noneAuthFilter') {
-      const arr = await houseApi[infShow]({ filter: filterForm, selectPlace: address }, 1);
+    } else if (infShow === 'noneAuthHouseApi' && status === 'unauthenticated') {
+      console.log('check un');
+      const arr = await houseApi[infShow](1, '');
       if (arr.data.length == 0) {
+        setHasMore(false); // neu nhu du lieu tra ve la khong co lan dau tien thi khong xuat hien nx
+        return;
+      }
+      setHouseTemp(arr.data as house_[]);
+    } else if (infShow === 'noneAuthFilter' && status === 'unauthenticated') {
+      const arr = await houseApi[infShow]({ filter: filterForm, selectPlace: address }, 1, '');
+      if (arr.data.length == 0) {
+        setHasMore(false);
+        return;
+      }
+      setHouseTemp(arr.data as house_[]);
+    } else if (infShow === 'noneAuthFilter' && status === 'authenticated') {
+      const arr = await houseApi[infShow](
+        { filter: filterForm, selectPlace: address },
+        1,
+        temp.UserId
+      );
+      if (arr.data.length == 0) {
+        setHasMore(false);
+        return;
+      }
+      setHouseTemp(arr.data as house_[]);
+    } else if (infShow === 'authListHouse' && status === 'authenticated') {
+      const arr = await houseApi[infShow](
+        temp.UserId
+      );
+      if (arr.data.length == 0) {
+        setHasMore(false);
+        return;
+      }
+      setHouseTemp(arr.data as house_[]);
+    } else if (infShow === 'favoriteHouse' && status === 'authenticated') {
+      const arr = await houseApi['authFavoriteList'](
+        temp.UserId
+      );
+      if (arr.data?.length == 0) {
         setHasMore(false);
         return;
       }
       setHouseTemp(arr.data as house_[]);
     }
   };
+
+  useEffect(() => {
+    setHouseTemp([]);
+    setHasMore(true);
+    console.log('showhouse1');
+  }, [infShow, isFilter, status]);
+
   useEffect(() => {
     fetchHouseApi();
   }, [houseTemp]);
 
   // get more house de lay them nha khi scroll xuoong cuoi cung https://www.npmjs.com/package/react-infinite-scroll-component
   const getMoreHouse = async () => {
+    if (infShow === 'favoriteHouse') {
+      setHasMore(false);
+    }
     try {
       if (infShow === 'noneAuthHouseApi') {
-        const moreHouse = await houseApi[infShow](houseTemp.length / 10 + 1);
+        console.log('get more house ');
+        const moreHouse = await houseApi[infShow](houseTemp.length / 10 + 1, user.UserId);
         if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
           setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
         } else {
@@ -130,7 +203,17 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
       } else if (infShow === 'noneAuthFilter') {
         const moreHouse = await houseApi[infShow](
           { filter: filterForm, selectPlace: address },
-          houseTemp.length / 10 + 1
+          houseTemp.length / 10 + 1,
+          user.UserId
+        );
+        if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
+          setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
+        } else {
+          setHasMore(false); // cai nay de kiem tra xem da fetch het du lieu hay chua
+        }
+      } else if (infShow === 'authListHouse') {
+        const moreHouse = await houseApi[infShow](
+          user.UserId
         );
         if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
           setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
@@ -143,12 +226,7 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
     }
   };
 
-  useEffect(() => {}, [houseTemp, hasMore]);
-
-  useEffect(() => {
-    setHouseTemp([]);
-    setHasMore(true);
-  }, [infShow, isFilter]);
+  useEffect(() => { }, [houseTemp, hasMore]);
 
   const handleOnClickOutSideMaskUser = (event: any) => {
     const isClickInSide = maskUser.current?.contains(event.target);
@@ -222,75 +300,97 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
             </motion.div>
           }
           style={{ overflow: 'hidden' }}
-          className="w-full h-fit grid grid-cols-houseBox gap-x-5 gap-y-8 "
+          className="w-full h-fit grid grid-cols-houseBox gap-x-9 gap-y-8 px-7 py-8"
           endMessage={<div>No more values</div>}
+
         >
-          {houseTemp.map((item: house_, index: number) => (
-            <motion.div
-              key={index}
-              whileInView={{ y: [20, 0] }}
-              initial={{ opacity: 0, display: 'none' }}
-              animate={{ opacity: 1, display: 'block' }}
-              transition={{ delay: index * 0.1 }}
-              className="w-full h-[400px] "
-            >
-              <div className="w-full h-[300px] relative">
-                <Carousel arrImg={item.arrImg} houseId={item.HouseId} />
+          {houseTemp.map((item: house_, index: number) => {
+            return (
+              <motion.div
+                key={index}
+                // whileInView={{ x: [-10, 0] }}
+                variants={variants}
+                initial={{ opacity: 0, display: 'none' }}
+                animate={{ opacity: 1, display: 'block' }}
+                whileHover='hoverItem'
+                transition={{ type: 'spring' }}
+                className="w-full h-[400px] rounded-2xl box-border"
+              >
+                <div className="w-full h-[300px] relative">
+                  <Carousel arrImg={item.arrImg} houseId={item.HouseId} />
 
-                {/* heart */}
-                <Heart HouseId={item.HouseId} />
+                  {/* heart */}
+                  {infShow !== 'authListHouse' &&
+                    <Heart HouseId={item.HouseId} IsFavorite={item.IsFavorite} />
+                  }
 
-                <motion.button
-                  whileHover={{ scale: 1.2 }}
-                  onClick={() => {
-                    setIsOpenMaskMap(true);
-                    setSelectLocale({
-                      latitude: item.address.latitude,
-                      longitude: item.address.longitude,
-                      zoom: 15
-                    });
-                  }}
-                  className="absolute top-3 right-12 text-red-500 text-[25px] z-10"
-                >
-                  <ImMap />
-                </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.2 }}
+                    onClick={() => {
+                      setIsOpenMaskMap(true);
+                      setSelectLocale({
+                        latitude: item.address.latitude,
+                        longitude: item.address.longitude,
+                        zoom: 15
+                      });
+                    }}
+                    className={`absolute top-3 right-12 ${infShow === 'authListHouse' ? 'right-2' : ''} text-red-500 text-[25px] z-10`}
+                  >
+                    <ImMap />
+                  </motion.button>
 
-                <motion.button
-                  variants={variants}
-                  onClick={() => {
-                    setSelectUser(item.useracc);
-                    setIsOpenMask(true);
-                  }}
-                  animate="iconAnimate"
-                  className="absolute w-[60px] h-[60px]
-                left-3 bottom-3 z-10 rounded-full overflow-hidden
+                  {/* bg icon */}
+                  <motion.button
+                    variants={variants}
+                    animate="iconAnimateBg"
+                    className="absolute w-[60px] scale-110 h-[60px] transition-all opacity-60
+                left-3 bottom-3 rounded-full overflow-hidden z-10 bg-red-500
                 "
-                >
-                  {item.useracc.Image ? (
-                    <img src={item.useracc.Image} alt="" className="w-full h-full object-cover" />
-                  ) : (
-                    <HiUserCircle className="w-full h-full" />
-                  )}
-                </motion.button>
-              </div>
-              <Link href={`/house/${item.HouseId}`}>
-                <div className="h-[100px] w-full box-border p-4">
-                  <div className="w-full h-fit flex font-semibold">
-                    <div className="flex-[2]">
-                      <span>
-                        {item.address.adminDistrict2}, {item.address.countryRegion}
-                      </span>
-                    </div>
-                    <div className="flex-1 flex justify-end">star</div>
-                  </div>
-                  <div className="w-full h-fit mt-1">{item.useracc.UserName}</div>
-                  <div className="w-full h-fit mt-1 ">
-                    <span className="font-semibold">&#36;{item.Price}</span> night
-                  </div>
+                  >
+                  </motion.button>
+
+                  <motion.button
+                    variants={variants}
+                    onClick={() => {
+                      setSelectUser(item.useracc);
+                      setIsOpenMask(true);
+                    }}
+                    animate="iconAnimate"
+                    className="absolute w-[60px] h-[60px] transition-all
+                left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl
+                "
+                  >
+                    {item.useracc.Image ? (
+                      <img src={item.useracc.Image} alt="" className="w-full h-full object-cover" />
+                    ) : (
+                      <HiUserCircle className="w-full h-full" />
+                    )}
+                  </motion.button>
+
+
+
                 </div>
-              </Link>
-            </motion.div>
-          ))}
+                <Link href={`/house/${item.HouseId}`}>
+                  <div className="h-[100px] w-full box-border p-4">
+                    <div className="w-full h-fit flex font-semibold">
+                      <div className="flex-[2]">
+                        <span>
+                          {item.address.adminDistrict2}, {item.address.countryRegion}
+                        </span>
+                      </div>
+                      <div className="flex-1 flex justify-end">star</div>
+                    </div>
+                    <div className="w-full h-fit mt-1">{item.useracc.UserName}</div>
+                    <div className="w-full h-fit mt-1 ">
+                      <span className="font-semibold">&#36;{item.Price}</span> night
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            )
+
+
+          })}
 
           {houseTemp.length == 0 &&
             hasMore == true &&

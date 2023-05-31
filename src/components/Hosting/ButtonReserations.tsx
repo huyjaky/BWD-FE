@@ -21,7 +21,7 @@ const ButtonReservations: React.FC<ButtonreservationProps> = ({
           ? 'border-black bg-[#F7F7F7]'
           : 'border-colorButtonHeader bg-transparent'
       } rounded-[32px] h-[40px]
-             hover:border-black ease-in duration-200 mr-[16px] mb-[16px] text-[14px]`}
+            hover:border-black ease-in duration-200 mr-[16px] mb-[16px] text-[14px]`}
     >
       {content}
       <span className="ml-1">({number})</span>

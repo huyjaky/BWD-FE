@@ -1,7 +1,11 @@
 import React from 'react';
 import Map from '../Map/Map';
 import { motion } from 'framer-motion';
-function Step4CHome(): JSX.Element {
+interface Step4CHomeProps{
+  keyMapBox:string
+}
+
+function Step4CHome({keyMapBox}: Step4CHomeProps): JSX.Element {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -10,7 +14,7 @@ function Step4CHome(): JSX.Element {
       transition={{ duration: 1 }}
       className="flex justify-start mt-10 md:justify-center w-full h-[100vh -56px]"
     >
-      <div className="">
+      <div className="w-[1000px]">
         <div className="">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -29,7 +33,7 @@ function Step4CHome(): JSX.Element {
             Your address is only shared with guests after they’ve made a reservation.
           </motion.p>
         </div>
-        <Map />
+        <Map keyMapBox={keyMapBox}/>
       </div>
     </motion.div>
   );
