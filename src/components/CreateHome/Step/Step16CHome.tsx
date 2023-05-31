@@ -27,6 +27,20 @@ export default function Step16CHome() {
     }
   };
 
+  function cre (){
+    setError(false)
+    setMoney(prev => prev + 1000)
+  }
+  function incre (){
+    if(money >= 1000){
+      setError(false)
+      setMoney(prev => prev - 1000)
+    } else {
+      setError(true)
+      setMoney(0)
+    }
+  }
+
   useEffect(() =>{
     dispatch({type: 'STEP16', payload: money})
   }, [money])
@@ -74,7 +88,7 @@ export default function Step16CHome() {
                             ">
                 <div className=" flex items-center flex-col w-[100%]">
                   <div className="flex items-center justify-around w-[430px] pb-[16px]">
-                    <button className="border border-[#717171] w-[55px] h-[48px] flex justify-center items-center rounded-full hover:border-black">
+                    <button onClick={incre} className="border border-[#717171] w-[55px] h-[48px] flex justify-center items-center rounded-full hover:border-black">
                       <span>
                         <RxMinus />
                       </span>
@@ -96,7 +110,7 @@ export default function Step16CHome() {
                       />
                     </div>
 
-                    <button className="border border-[#717171] w-[55px] ml-3 h-[48px] flex justify-center items-center rounded-full hover:border-black">
+                    <button onClick={cre} className="border border-[#717171] w-[55px] ml-3 h-[48px] flex justify-center items-center rounded-full hover:border-black">
                       <BsPlusLg />
                     </button>
                   </div>
