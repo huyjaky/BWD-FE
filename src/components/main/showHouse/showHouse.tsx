@@ -168,7 +168,7 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
       const arr = await houseApi['authFavoriteList'](
         temp.UserId
       );
-      if (arr.data.length == 0) {
+      if (arr.data?.length == 0) {
         setHasMore(false);
         return;
       }
@@ -179,6 +179,7 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
   useEffect(() => {
     setHouseTemp([]);
     setHasMore(true);
+    console.log('showhouse1');
   }, [infShow, isFilter, status]);
 
   useEffect(() => {

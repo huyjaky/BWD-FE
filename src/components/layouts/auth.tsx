@@ -18,6 +18,7 @@ const Auth = ({ children }: LayoutProps) => {
       }
     };
     setuser();
+    console.log('auth');
   }, [isFilter, status]);
 
   return <>{children}</>;

@@ -48,8 +48,6 @@ const FormFilter = () => {
     document.addEventListener('mousedown', handleOnClickOutSide);
   }, [isShowAllPt]);
 
-  useEffect(() => {}, [show]);
-
   const isEmpty = () => {
     const emptyObj = {
       maxPrice: 250,

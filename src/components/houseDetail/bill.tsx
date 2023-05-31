@@ -25,6 +25,7 @@ const Bill = ({ houseDetail }: BillProps) => {
 
   useEffect(() => {
     setBill({ ...Bill, guest: { ...Bill.guest, ...address.guest } });
+    console.log('bill');
   }, [address]);
 
   return (

@@ -23,7 +23,11 @@ import { CreateHouseProvider } from '../../contexts/createHome';
 import ProcessBar from '../../components/CreateHome/ProcessBar/ProccessBar';
 import { GetServerSideProps } from 'next';
 import StepCongratulation from '@/components/CreateHome/Step/StepCongratulation';
-function CreateHome(): JSX.Element {
+interface CreateHomeProps{
+  keyMapBox: string
+}
+
+function CreateHome({keyMapBox}: CreateHomeProps): JSX.Element {
   const [currentStep, setCurrentStep] = useState(1);
 
   const [isMounted, setIsMounted] = useState(true);
@@ -47,8 +51,8 @@ function CreateHome(): JSX.Element {
     { number: 1, component: <Step1CHome /> },
     { number: 2, component: <Step2CHome /> },
     { number: 3, component: <Step3CHome /> },
-    { number: 4, component: <Step4CHome /> },
-    { number: 5, component: <Step5CHome /> },
+    { number: 4, component: <Step4CHome keyMapBox={keyMapBox}/> },
+    { number: 5, component: <Step5CHome keyMapBox={keyMapBox}/> },
     { number: 6, component: <Step6CHome /> },
     { number: 7, component: <Step7CHome /> },
     { number: 8, component: <Step8CHome /> },
@@ -98,8 +102,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   //   res.end();
   //   return { props: {} };
   // }
+  const keyMapBox = process.env.ACCESS_TOKEN_MAPBOX;
 
-  return { props: {} };
+  return {
+    props: {
+      keyMapBox: keyMapBox
+    }
+  };
 };
 
 export default CreateHome;

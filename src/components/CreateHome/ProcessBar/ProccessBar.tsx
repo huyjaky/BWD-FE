@@ -37,7 +37,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   handleNextStep
 }) => {
   return (
-    <div className="fixed bottom-0 left-0 w-full h-[80px] items-center bg-white">
+    <div className="fixed bottom-0 left-0 w-full h-[80px] items-center bg-white z-40">
       <div className="w-full bg-gray-200  h-2 ">
         <motion.div
           className="bg-black h-2 "
@@ -46,7 +46,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
           transition={{ duration: 1 }}
         ></motion.div>
       </div>
-      <div className="flex items-center justify-between mt-2">
+      <div className="flex items-center justify-between mt-2 ">
         <motion.button
           variants={buttonVariants}
           initial="initial"

@@ -3,9 +3,15 @@ import { TiTick } from 'react-icons/ti';
 import MapLocate from '../Map/MapLocate';
 import { motion } from 'framer-motion';
 import { newHouseContext } from '../../../contexts/createHome';
+import MapEach from '@/components/main/showHouse/mapEach';
+import { selectPlaceContext } from '@/contexts/selectPlace';
+interface Step5CHome {
+  keyMapBox: string
+}
 
-const Step5CHome: React.FC = () => {
+const Step5CHome: React.FC<Step5CHome> = ({keyMapBox}: Step5CHome) => {
   const { state, dispatch } = useContext(newHouseContext);
+  const {address} = useContext(selectPlaceContext);
   const [toggle, setToggle] = useState(false);
   const [country, setCountry] = useState(state.addressConfirmation.country);
   const [subAddress, setSubAddress] = useState({
@@ -211,7 +217,9 @@ const Step5CHome: React.FC = () => {
               </button>
             </div>
           </div>
-          <MapLocate />
+          <MapEach keyMapBox={keyMapBox} latitude={address.address.latitude}
+          longitude={address.address.longitude} zoom={15}
+          />
         </div>
       </div>
 

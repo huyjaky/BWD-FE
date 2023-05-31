@@ -35,20 +35,6 @@ const Heart = ({ HouseId, IsFavorite }: HeartProps) => {
     }
   };
 
-  // useEffect(()=>{
-  //   const handleOnClick = async () =>{
-  //     if (IsFavorite && isClickHeart) {
-  //       await handleOnClickUnFavorite(HouseId);
-  //     } else if (IsFavorite && !isClickHeart) {
-  //       await handleOnClickFavorite(HouseId)
-  //     } else if (!IsFavorite && isClickHeart) {
-  //       await handleOnClickFavorite(HouseId)
-  //     } else if (!IsFavorite && !isClickHeart) {
-  //       await handleOnClickUnFavorite(HouseId);
-  //     }
-  //   }
-  //   handleOnClick();
-  // }, [isClickHeart])
 
   return (
     <motion.label

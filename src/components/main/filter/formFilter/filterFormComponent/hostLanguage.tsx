@@ -5,8 +5,6 @@ const HostLanguage = () => {
   const { filterForm, setFilterForm } = useContext(filterContext);
   const arrLanguage: string[] = ['English', 'Vietnam'];
 
-  useEffect(() => { }, [filterForm.hostLanguage]);
-
   return (
     <div className="w-full h-fit">
       <div className="w-full grid grid-cols-2">

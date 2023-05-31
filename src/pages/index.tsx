@@ -82,7 +82,7 @@ Home.Layout = Auth;
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const session = await getServerSession(req, res, authOptions);
+    const session = await getServerSession(req, res, authOptions);
   const keyMapBox = process.env.ACCESS_TOKEN_MAPBOX;
 
   // if user available not callback api from server
