@@ -28,7 +28,6 @@ const PropertyHouse = () => {
     }
   ];
   const { filterForm, setFilterForm } = useContext(filterContext);
-  useEffect(() => {}, [filterForm]);
 
   return (
     <div className="grid grid-cols-3 grid-rows-1">

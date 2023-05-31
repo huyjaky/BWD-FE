@@ -4,9 +4,8 @@ import { motion } from 'framer-motion';
 import { newHouseContext } from '../../../contexts/createHome';
 import { stat } from 'fs';
 
-
 export default function Step12CHome() {
-    const { state, dispatch } = useContext(newHouseContext);
+  const { state, dispatch } = useContext(newHouseContext);
 
   const [character, setCharacter] = useState(state.title);
 
@@ -26,8 +25,8 @@ export default function Step12CHome() {
   const characterCount = character.length;
 
   useEffect(() => {
-    dispatch({type: 'STEP12', payload: character})
-  }, [character])
+    dispatch({ type: 'STEP12', payload: character });
+  }, [character]);
   return (
     <motion.div
       initial={{ opacity: 0 }}

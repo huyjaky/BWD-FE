@@ -1,9 +1,8 @@
-import React, { useState,useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ChooDesPl from '../ChooDesPl';
 import { categoriesStep8 } from '../utils/constant';
 import { motion } from 'framer-motion';
 import { newHouseContext } from '../../../contexts/createHome';
-
 
 export default function Step8CHome() {
   const { state, dispatch } = useContext(newHouseContext);
@@ -12,8 +11,8 @@ export default function Step8CHome() {
   const type = 'select1';
 
   useEffect(() => {
-    dispatch({type: 'STEP8', payload: selected})
-  }, [selected])
+    dispatch({ type: 'STEP8', payload: selected });
+  }, [selected]);
   return (
     <motion.div
       initial={{ opacity: 0 }}

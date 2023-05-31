@@ -11,7 +11,7 @@ interface CheckIn_OutProps {
 
 const CheckIn_Out = ({ styleVerical, styleHorizontal }: CheckIn_OutProps) => {
   const { address, setAddress } = useContext(selectPlaceContext);
-  const {Bill, setBill} = useContext(BillContext);
+  const { Bill, setBill } = useContext(BillContext);
 
   const { selected } = useContext(selectPopoverContext);
   const [date_, setDate_] = useState([
@@ -26,7 +26,7 @@ const CheckIn_Out = ({ styleVerical, styleHorizontal }: CheckIn_OutProps) => {
 
   useEffect(() => {
     setAddress({ ...address, checkInDay: date_[0]?.startDate, checkOutDay: date_[0]?.endDate });
-    setBill({...Bill, checkInDay: date_[0]?.startDate});
+    setBill({ ...Bill, checkInDay: date_[0]?.startDate });
   }, [date_]);
 
   const handleOnChange = (item: any) => {
