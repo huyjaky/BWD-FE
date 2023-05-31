@@ -307,85 +307,79 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
           {houseTemp.map((item: house_, index: number) => {
             return (
               <motion.div
-                key={index}
-                // whileInView={{ x: [-10, 0] }}
-                variants={variants}
                 initial={{ opacity: 0, display: 'none' }}
                 animate={{ opacity: 1, display: 'block' }}
-                whileHover='hoverItem'
-                transition={{ type: 'spring' }}
-                className="w-full h-[400px] rounded-2xl box-border"
+                transition={{ type: 'tween', delay: index * .1 }}
+                key={index}
               >
-                <div className="w-full h-[300px] relative">
-                  <Carousel arrImg={item.arrImg} houseId={item.HouseId} />
+                <motion.div
+                  // whileInView={{ x: [-10, 0] }}
+                  variants={variants}
+                  whileHover='hoverItem'
+                  transition={{ type: 'spring' }}
+                  className="w-full h-[400px] rounded-2xl box-border"
+                >
+                  <div className="w-full h-[300px] relative">
+                    <Carousel arrImg={item.arrImg} houseId={item.HouseId} />
 
-                  {/* heart */}
-                  {infShow !== 'authListHouse' &&
-                    <Heart HouseId={item.HouseId} IsFavorite={item.IsFavorite} />
-                  }
+                    {/* heart */}
+                    {infShow !== 'authListHouse' &&
+                      <Heart HouseId={item.HouseId} IsFavorite={item.IsFavorite} />
+                    }
 
-                  <motion.button
-                    whileHover={{ scale: 1.2 }}
-                    onClick={() => {
-                      setIsOpenMaskMap(true);
-                      setSelectLocale({
-                        latitude: item.address.latitude,
-                        longitude: item.address.longitude,
-                        zoom: 15
-                      });
-                    }}
-                    className={`absolute top-3 right-12 ${infShow === 'authListHouse' ? 'right-2' : ''} text-red-500 text-[25px] z-10`}
-                  >
-                    <ImMap />
-                  </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 1.2 }}
+                      onClick={() => {
+                        setIsOpenMaskMap(true);
+                        setSelectLocale({
+                          latitude: item.address.latitude,
+                          longitude: item.address.longitude,
+                          zoom: 15
+                        });
+                      }}
+                      className={`absolute top-3 right-12 ${infShow === 'authListHouse' ? 'right-2' : ''} text-red-500 text-[25px] z-10`}
+                    >
+                      <ImMap />
+                    </motion.button>
 
-                  {/* bg icon */}
-                  <motion.button
-                    variants={variants}
-                    animate="iconAnimateBg"
-                    className="absolute w-[60px] scale-110 h-[60px] transition-all opacity-60
-                left-3 bottom-3 rounded-full overflow-hidden z-10 bg-red-500
-                "
-                  >
-                  </motion.button>
 
-                  <motion.button
-                    variants={variants}
-                    onClick={() => {
-                      setSelectUser(item.useracc);
-                      setIsOpenMask(true);
-                    }}
-                    animate="iconAnimate"
-                    className="absolute w-[60px] h-[60px] transition-all
+
+                    <motion.button
+                      onClick={() => {
+                        setSelectUser(item.useracc);
+                        setIsOpenMask(true);
+                      }}
+                      className="absolute w-[60px] h-[60px] transition-all
                 left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl
                 "
-                  >
-                    {item.useracc.Image ? (
-                      <img src={item.useracc.Image} alt="" className="w-full h-full object-cover" />
-                    ) : (
-                      <HiUserCircle className="w-full h-full" />
-                    )}
-                  </motion.button>
+                    >
+                      {item.useracc.Image ? (
+                        <img src={item.useracc.Image} alt="" className="w-full h-full object-cover" />
+                      ) : (
+                        <HiUserCircle className="w-full h-full" />
+                      )}
+                    </motion.button>
 
 
 
-                </div>
-                <Link href={`/house/${item.HouseId}`}>
-                  <div className="h-[100px] w-full box-border p-4">
-                    <div className="w-full h-fit flex font-semibold">
-                      <div className="flex-[2]">
-                        <span>
-                          {item.address.adminDistrict2}, {item.address.countryRegion}
-                        </span>
-                      </div>
-                      <div className="flex-1 flex justify-end">star</div>
-                    </div>
-                    <div className="w-full h-fit mt-1">{item.useracc.UserName}</div>
-                    <div className="w-full h-fit mt-1 ">
-                      <span className="font-semibold">&#36;{item.Price}</span> night
-                    </div>
                   </div>
-                </Link>
+                  <Link href={`/house/${item.HouseId}`}>
+                    <div className="h-[100px] w-full box-border p-4">
+                      <div className="w-full h-fit flex font-semibold">
+                        <div className="flex-[2]">
+                          <span>
+                            {item.address.adminDistrict2}, {item.address.countryRegion}
+                          </span>
+                        </div>
+                        <div className="flex-1 flex justify-end">star</div>
+                      </div>
+                      <div className="w-full h-fit mt-1">{item.useracc.UserName}</div>
+                      <div className="w-full h-fit mt-1 ">
+                        <span className="font-semibold">&#36;{item.Price}</span> night
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
               </motion.div>
             )
 

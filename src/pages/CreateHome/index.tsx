@@ -85,14 +85,6 @@ function CreateHome({keyMapBox}: CreateHomeProps): JSX.Element {
             steps[currentStep - 1].component}
         </AnimatePresence>
 
-      <AnimatePresence>
-        {currentStep > 0 &&
-          currentStep <= 18 &&
-          currentStep === steps[currentStep - 1].number &&
-          isMounted &&
-          steps[currentStep - 1].component}
-      </AnimatePresence>
-
       {currentStep > 0 && currentStep <= 17
         && <ProcessBar
           steps={steps}
