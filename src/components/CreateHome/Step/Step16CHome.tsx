@@ -13,7 +13,11 @@ export default function Step16CHome() {
 
   const [error, setError] = useState<boolean>(false);
 
+
+
+  // hàm handleInput đc chạy vào khi mình chỉnh tiền bằng tay, nhấn nút tăng giảm onChange không có tác dụng
   const handleMoney = (event: ChangeEvent<HTMLInputElement>) => {
+
     const inputValue = event.target.value;
 
     const moneyValue = parseInt(inputValue.slice(1));
@@ -21,28 +25,42 @@ export default function Step16CHome() {
     if (moneyValue <= 0 || isNaN(moneyValue)) {
       setError(true);
       setMoney(0);
+    } else if (moneyValue >= 0 && moneyValue < 10) {
+      setError(true);
+      setMoney(moneyValue);
     } else {
       setError(false);
       setMoney(moneyValue);
     }
   };
 
-  function cre (){
-    setError(false)
-    setMoney(prev => prev + 1000)
-  }
-  function incre (){
-    if(money >= 1000){
+  function cre() {
+    if (money >= 10) {
       setError(false)
-      setMoney(prev => prev - 1000)
-    } else {
+      setMoney(prev => prev + 1)
+    } else if (money < 10 && money >= 0) {
+      setError(true)
+      setMoney(prev => prev + 1)
+    }
+
+  }
+  function incre() {
+    if (money > 10) {
+      setError(false)
+      setMoney(prev => prev - 1)
+    }
+    else if (money <= 10 && money > 0) {
+      setError(true)
+      setMoney(prev => prev - 1)
+    }
+    else {
       setError(true)
       setMoney(0)
     }
   }
 
-  useEffect(() =>{
-    dispatch({type: 'STEP16', payload: money})
+  useEffect(() => {
+    dispatch({ type: 'STEP16', payload: money })
   }, [money])
   return (
     <motion.div
@@ -93,7 +111,9 @@ export default function Step16CHome() {
               >
                 <div className=" flex items-center flex-col w-[100%]">
                   <div className="flex items-center justify-around w-[430px] pb-[16px]">
-                    <button onClick={incre} className="border border-[#717171] w-[55px] h-[48px] flex justify-center items-center rounded-full hover:border-black">
+                    <button
+                      disabled={money < 1}
+                      onClick={incre} className={`border w-[55px] h-[48px] flex justify-center items-center rounded-full ${money >= 1 ? 'hover:border-black text-black border-[#717171]' : 'bg-[#FFF] text-[#EBEBEB] border-[#EBEBEB]'}`}>
                       <span>
                         <RxMinus />
                       </span>
@@ -101,7 +121,7 @@ export default function Step16CHome() {
 
                     <div
                       className={`w-[400px] h-[96px]
-                                                        mobile:w-[200px] mobile:h-[56px]
+                                  mobile:w-[200px] mobile:h-[56px]
                                         `}
                     >
                       <input
@@ -109,14 +129,17 @@ export default function Step16CHome() {
                         type="text"
                         value={`$${money}`}
                         onChange={handleMoney}
-                        className={`my-[8px] mx-[12px] w-[98%] h-[98%] border border-black rounded-[8px] text-[48px] text-center ${
-                          error ? ' bg-red-50 border border-red-500 text-red-900' : ''
-                        }
+                        className={`my-[8px] mx-[12px] w-[98%] h-[98%] border border-black rounded-[8px] text-[48px] text-center ${error ? ' bg-red-50 border border-red-500 text-red-900' : ''
+                          }
                                             `}
                       />
                     </div>
 
-                    <button onClick={cre} className="border border-[#717171] w-[55px] ml-3 h-[48px] flex justify-center items-center rounded-full hover:border-black">
+                    <button
+                      disabled={money > 10000}
+                      onClick={cre}
+                      className={`border ml-3 w-[55px] h-[48px] flex justify-center items-center rounded-full ${money <= 10000 ? 'hover:border-black text-black border-[#717171]' : 'bg-[#FFF] text-[#EBEBEB] border-[#EBEBEB]'}`}
+                    >
                       <BsPlusLg />
                     </button>
                   </div>
@@ -127,44 +150,18 @@ export default function Step16CHome() {
                     <div className="flex justify-center items-center pt-3">
                       <RiErrorWarningFill className="text-[14px] text-[#C13515]" />{' '}
                       <span className="text-[12px] text-[#C13515]">
-                        Please enter a base price between ₫234,680 and ₫234,679,747.
+                        Please enter a base price between $10 and $10,000.
                       </span>
                     </div>
                   )}
                 </div>
-                <div className="flex items-center text-[18px] relative pt-[16px]">
-                  Places like yours in your area usually <br /> range from ₫398,861 to ₫664,768
+                <div className="flex items-center text-[18px] relative pt-[16px] text-center">
+                  Places like yours in your area usually <br /> range from $10 to $42.5
                   <button>
                     <HiOutlineInformationCircle className="absolute right-3 bottom-[5px]" />
                   </button>
                 </div>
               </motion.div>
-              {/* <motion.label
-                initial={{ opacity: 0, y: -30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ type: 'spring', stiffness: 35, delay: 0.2 }}
-                htmlFor="helper-checkbox"
-                className="w-[95%] cursor-pointer bg-[#F7F7F7] h-[120px] mobile:h-[150px] border rounded-[12px] mt-[20px] px-[32px] py-0 pt-[20px] flex  justify-between ">
-                <div className="flex flex-col justify-start h-5 ">
-                  <label
-                    htmlFor="helper-checkbox"
-                    className=" text-[18px] font-semibold text-gray-900 cursor-pointer">
-                    Get booked faster
-                  </label>
-                  <p id="helper-checkbox-text" className="text-[18px] font-normal text-gray-500 ">
-                    Offer 20% off on your first 3 bookings to help your place stand out. Get details
-                  </p>
-                </div>
-                <div className="ml-2 text-sm">
-                  <input
-                    id="helper-checkbox"
-                    aria-describedby="helper-checkbox-text"
-                    type="checkbox"
-                    value=""
-                    className="w-4 h-4 text-black "
-                  />
-                </div>
-              </motion.label> */}
             </div>
           </div>
         </div>
