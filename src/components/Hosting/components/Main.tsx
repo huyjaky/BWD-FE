@@ -6,11 +6,11 @@ import ResourceAndTip from '../ResourceAndTip';
 import { motion, Variants } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import ShowHouse from '@/components/main/showHouse/showHouse';
-interface mainProps{
+interface mainProps {
   keyMapBox: string;
 }
 
-function Main({keyMapBox}: mainProps): JSX.Element {
+function Main({ keyMapBox }: mainProps): JSX.Element {
   const [selected, setSelected] = useState('');
 
   const [refButton, inViewButton] = useInView({
@@ -99,11 +99,19 @@ function Main({keyMapBox}: mainProps): JSX.Element {
               initial="offscreen"
               whileInView="onscreen"
               className="bg-[#F7F7F7] h-fit flex items-center justify-center rounded-[12px] box-border
-              px-4
+              px-4 transition-all
               "
             >
-              <div className='w-full h-fit'>
-                <ShowHouse infShow='authListHouse' keyMapBox={keyMapBox}/>
+              <div className='w-full h-fit transition-all duration-1000'>
+                <motion.div className={`w-full h-fit ${selected === 'Currently hosting' ? '' : 'hidden'}`}>
+                  <ShowHouse infShow='authListHouse' keyMapBox={keyMapBox} />
+                </motion.div>
+                <div className={`${selected === 'Currently hosting' ? 'hidden' : ''} flex flex-col items-center justify-center gap-4 py-24 `}>
+                  <AnyReview />
+                  <span className='text-[14px] h-[36px] w-[200px] text-center'>
+                    You don't have any guest reviews to write.
+                  </span>
+                </div>
               </div>
             </motion.div>
           </div>

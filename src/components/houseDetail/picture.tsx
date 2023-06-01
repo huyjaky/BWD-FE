@@ -13,7 +13,6 @@ const Picture = ({ arrImg }: PictureProps) => {
 
   const handleOnClick = () => {
     setIsShowAllPt(true);
-
     document.body.style.overflow = 'hidden';
   };
 

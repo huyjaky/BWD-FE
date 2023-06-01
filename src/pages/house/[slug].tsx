@@ -9,11 +9,14 @@ import TitleHouse from '@/components/houseDetail/titleHouse';
 import Auth from '@/components/layouts/auth';
 import Carousel from '@/components/main/showHouse/carousel';
 import HeaderMain from '@/components/rootMaskHeader/headerMain';
+import { IsShowPtContext } from '@/contexts/isShowPt';
 import { house_ } from '@/models/house';
 import { NextPageWithLayout } from '@/models/layoutprops';
 import { AnimatePresence } from 'framer-motion';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { Montserrat } from 'next/font/google';
+import { useContext } from 'react';
+import { BiMenu } from 'react-icons/bi';
 
 interface HouseDetailProps {
   houseDetail: house_;
@@ -29,6 +32,12 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
   houseDetail,
   keyMapBox
 }: HouseDetailProps) => {
+  const { setIsShowAllPt } = useContext(IsShowPtContext);
+  const handleOnClick = () => {
+    setIsShowAllPt(true);
+    document.body.style.overflow = 'hidden';
+  };
+
   return (
     <>
       <div className="w-full h-fit">
@@ -45,8 +54,16 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
             <TitleHouse title={houseDetail.Title} address={houseDetail.address} />
 
             <Picture arrImg={houseDetail.arrImg} />
-            <div className="w-full h-[500px] laptop:hidden desktop:hidden flex justify-center box-border ">
+            <div className="w-full h-[500px] laptop:hidden desktop:hidden flex justify-center box-border relative">
               <Carousel arrImg={houseDetail.arrImg} houseId={houseDetail.HouseId} />
+              <div
+              onClick={handleOnClick}
+               className='absolute right-4 bottom-4 w-fit h-fit
+              rounded-xl p-3
+               bg-white z-50 flex items-center'>
+                <BiMenu className="text-[24px] " />
+                <span className="text-[19px]">Show all photos</span>
+              </div>
             </div>
             <ShowAllHouse arrImg={houseDetail.arrImg} />
             <div className="w-full h-fit mt-10">

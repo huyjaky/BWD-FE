@@ -8,6 +8,8 @@ interface filterProps {
 interface filterData {
   filterForm: filterForm;
   setFilterForm: (payload: filterForm) => void;
+  resetFilterForm: () => void;
+  isEmpty: () => boolean
 }
 
 const filterDataDefault: filterData = {
@@ -25,7 +27,9 @@ const filterDataDefault: filterData = {
     },
     hostLanguage: ''
   },
-  setFilterForm: (payload: filterForm) => {}
+  setFilterForm: (payload: filterForm) => { },
+  resetFilterForm: () => { },
+  isEmpty: () => true
 };
 
 export const filterContext = createContext<filterData>(filterDataDefault);
@@ -33,8 +37,18 @@ export const filterContext = createContext<filterData>(filterDataDefault);
 const FilterProvider = ({ children }: filterProps) => {
   const [filterForm, setFilterForm_] = useState(filterDataDefault.filterForm);
   const setFilterForm = (payload: filterForm) => setFilterForm_(payload);
+  const resetFilterForm = () => setFilterForm_(filterDataDefault.filterForm);
+  const isEmpty = () => {
+    const emptyObjJson = JSON.stringify(filterDataDefault.filterForm);
+    const filterFormJson = JSON.stringify(filterForm);
+    if (filterFormJson === emptyObjJson) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
-  const filterDynamicData = { filterForm, setFilterForm };
+  const filterDynamicData = { filterForm, setFilterForm, resetFilterForm, isEmpty };
 
   return <filterContext.Provider value={filterDynamicData}>{children}</filterContext.Provider>;
 };

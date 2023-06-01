@@ -33,7 +33,25 @@ const variants: Variants = {
     transition: {
       duration: 1
     }
-  }
+  },
+  showTypeHouse: {
+    opacity: [0, 1],
+    display: 'flex',
+    transition: {
+      duration: .5,
+      delay: .2
+    }
+  },
+  hiddenTypeHouse: {
+    opacity: [1, 0],
+    transitionEnd: {
+      display: 'none',
+    },
+    transition: {
+      duration: .5,
+    }
+  },
+
 };
 
 const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBox }: HomeProps) => {
@@ -50,9 +68,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBox }: HomePr
     setUser({ ...user, ...user_ });
   }
 
-  useEffect(() => {
-    console.log(isFilter);
-  }, [isFilter]);
+  useEffect(() => { }, [isFilter]);
 
   return (
     <>
@@ -61,11 +77,25 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBox }: HomePr
           <HeaderMain />
         </AnimatePresence>
         <div className="w-full h-fit px-[80px] mobile:px-[20px] box-border">
-          <TypeHouse />
+          <motion.div
+            variants={variants}
+            animate={isFilter < 0 ? 'hiddenTypeHouse' : 'showTypeHouse'}
+          >
+            <TypeHouse />
+          </motion.div>
+
+          {isFilter < 0 ?
+            <motion.div
+            animate={{opacity: [0, 1]}}
+            transition={{delay: .5}}
+            className='text-[50px] mt-[20px] font-semibold'>Whistlist</motion.div>
+            :
+            <></>
+          }
 
           <motion.div variants={variants} animate="show">
             <ShowHouse
-              infShow={isFilter != 0 ?  (isFilter > 0 ? 'noneAuthFilter' : 'favoriteHouse') : 'noneAuthHouseApi' }
+              infShow={isFilter != 0 ? (isFilter > 0 ? 'noneAuthFilter' : 'favoriteHouse') : 'noneAuthHouseApi'}
               keyMapBox={keyMapBox}
             />
           </motion.div>
@@ -82,7 +112,7 @@ Home.Layout = Auth;
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-    const session = await getServerSession(req, res, authOptions);
+  const session = await getServerSession(req, res, authOptions);
   const keyMapBox = process.env.ACCESS_TOKEN_MAPBOX;
 
   // if user available not callback api from server

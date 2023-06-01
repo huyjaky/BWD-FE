@@ -1,4 +1,6 @@
+import Filter from '@/components/main/filter/filter';
 import ControlPlanMobile from '@/components/main/mobile/controlPlaneMobile';
+import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 import { mobileContolPanelContext } from '@/contexts/mobileControlPanel';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -7,8 +9,8 @@ import { FaAirbnb } from 'react-icons/fa';
 import { FiSearch } from 'react-icons/fi';
 import { TbWorld } from 'react-icons/tb';
 import ButtonAccount from '../buttonAccount/ButtonAccount';
-import Filter from '@/components/main/filter/filter';
-import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
+import { getHouseContext } from '@/contexts/getHouse';
+import { filterContext } from '@/contexts/filter';
 interface HeaderFormProps {
   children: ReactNode;
 }
@@ -16,6 +18,8 @@ interface HeaderFormProps {
 const HeaderForm = ({ children }: HeaderFormProps) => {
   const { isShow, setIsShow } = useContext(mobileContolPanelContext);
   const { setIsShowHeader } = useContext(filterFormAnimateContext);
+  const  {isFilter, setIsFilter} = useContext(getHouseContext);
+  const {resetFilterForm} = useContext(filterContext)
   return (
     <div className="w-full h-[80px] relative bg-white z-30" id="header-root">
       <header
@@ -27,7 +31,11 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
           {/* logo container */}
           <Link
             href={'/'}
-            onClick={() => setIsShowHeader(false)}
+            onClick={() => {
+              setIsShowHeader(false);
+              setIsFilter(0);
+              resetFilterForm();
+            }}
             className="desktop:flex-1 laptop:mr-7  flex items-center text-red-500
             z-30
             "
@@ -44,7 +52,7 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
           <div className="flex-1 flex items-center justify-end z-30">
             {/* airbnb your home */}
             <Link
-              href={''}
+              href={'/hosting'}
               className="rounded-full bg-white h-fit box-content px-4 py-2
             hover:bg-slate-300 tablet:hidden mobile:hidden
           "
