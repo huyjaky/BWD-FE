@@ -22,6 +22,7 @@ import MobileContolPanelProvider from '@/contexts/mobileControlPanel';
 import UserAccProvider from '@/contexts/userAcc';
 import { SessionProvider } from 'next-auth/react';
 import { Montserrat } from 'next/font/google';
+import AmountTabHostingProviders from '@/contexts/amountTabHosting';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -51,11 +52,13 @@ export default function App({
                         <BillProvider>
                           <SessionProvider session={session}>
                             <IsShowPtProvider>
-                              <Layout>
-                                <div className={`${monsterrat.className}`}>
-                                  <Component {...pageProps} />
-                                </div>
-                              </Layout>
+                              <AmountTabHostingProviders>
+                                <Layout>
+                                  <div className={`${monsterrat.className}`}>
+                                    <Component {...pageProps} />
+                                  </div>
+                                </Layout>
+                              </AmountTabHostingProviders>
                             </IsShowPtProvider>
                           </SessionProvider>
                         </BillProvider>

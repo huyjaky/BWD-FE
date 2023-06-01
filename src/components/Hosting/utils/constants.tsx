@@ -4,8 +4,8 @@ import PricingStrategy from '../img/PricingStrategy.webp';
 import setCalendarAndBooking from '../img/setCalendarAndBooking.webp';
 
 export const reservations = [
-  { title: 'Checking out', number: 0 },
   { title: 'Currently hosting', number: 0 },
+  { title: 'Checking out', number: 0 },
   { title: 'Arriving soon', number: 0 },
   { title: 'Upcoming', number: 0 },
   { title: 'Pending review', number: 0 }

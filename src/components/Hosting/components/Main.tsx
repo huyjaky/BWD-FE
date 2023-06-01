@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Resourcesandtips, reservations } from '../utils/constants';
 import ButtonReservations from '../ButtonReserations';
 import { AnyReview, ContactSupport, SuperHost } from '../../../../Icon_BnB_svg';
@@ -6,13 +6,14 @@ import ResourceAndTip from '../ResourceAndTip';
 import { motion, Variants } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import ShowHouse from '@/components/main/showHouse/showHouse';
+import { AmountTabHostingContext } from '@/contexts/amountTabHosting';
 interface mainProps {
   keyMapBox: string;
 }
 
 function Main({ keyMapBox }: mainProps): JSX.Element {
   const [selected, setSelected] = useState('');
-
+  const {currentHosting} = useContext(AmountTabHostingContext)
   const [refButton, inViewButton] = useInView({
     // Kích hoạt nhiều lần khi vào khung nhìn
     threshold: 0.01 // Ngưỡng nhìn thấy (tỷ lệ của phần tử nằm trong khung nhìn)
@@ -41,6 +42,10 @@ function Main({ keyMapBox }: mainProps): JSX.Element {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 }
   };
+
+  useEffect(()=>{
+    console.log(currentHosting);
+  }, [currentHosting])
 
   return (
     <div className="w-[100%]">
@@ -89,8 +94,7 @@ function Main({ keyMapBox }: mainProps): JSX.Element {
                     selected={selected}
                     setSelected={setSelected}
                     content={reservation.title}
-                    number={reservation.number}
-                  />
+                    number={reservation.title === 'Currently hosting' ? currentHosting : 0} />
                 </motion.div>
               ))}
             </motion.div>

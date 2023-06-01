@@ -17,6 +17,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Carousel from './carousel';
 import Heart from './heart';
 import MapEach from './mapEach';
+import { AmountTabHostingContext } from '@/contexts/amountTabHosting';
 
 const variants: Variants = {
   show: {
@@ -101,6 +102,7 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
   const { filterForm } = useContext(filterContext);
   const { address } = useContext(selectPlaceContext);
+  const {setCurrentHosting} = useContext(AmountTabHostingContext)
   const { data: session, status } = useSession();
   const { user, setUser } = useContext(userAccContext);
   const { isFilter } = useContext(getHouseContext);
@@ -190,6 +192,7 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
   const getMoreHouse = async () => {
     if (infShow === 'favoriteHouse') {
       setHasMore(false);
+      return;
     }
     try {
       if (infShow === 'noneAuthHouseApi') {
@@ -226,7 +229,7 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
     }
   };
 
-  useEffect(() => { }, [houseTemp, hasMore]);
+  useEffect(() => { setCurrentHosting(houseTemp.length) }, [houseTemp, hasMore]);
 
   const handleOnClickOutSideMaskUser = (event: any) => {
     const isClickInSide = maskUser.current?.contains(event.target);
