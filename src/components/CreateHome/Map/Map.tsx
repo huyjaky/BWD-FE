@@ -19,9 +19,11 @@ const Map: React.FC<MapProps> = ({keyMapBox}: MapProps) => {
     setAddress_((prev) => addressValue);
   }
   useEffect(() => {
-    dispatch({ type: 'STEP4', payload: address_ });
-  }, [address_]);
-  useEffect(()=>{}, [address]);
+    dispatch({ type: 'STEP4', payload: address});
+  }, [address]);
+  useEffect(()=>{
+    console.log(state)
+  }, [state]);
   return (
     <div className="w-[100%] h-fit overflow-hidden rounded-2xl relative px-3 py-2">
       {/* search box */}
