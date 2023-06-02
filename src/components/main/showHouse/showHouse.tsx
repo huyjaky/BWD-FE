@@ -161,6 +161,7 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
       const arr = await houseApi[infShow](
         temp.UserId
       );
+      console.log('auth authlisthouse', arr);
       if (arr.data.length == 0) {
         setHasMore(false);
         return;

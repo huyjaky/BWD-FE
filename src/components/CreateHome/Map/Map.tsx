@@ -22,21 +22,20 @@ const Map: React.FC<MapProps> = ({keyMapBox}: MapProps) => {
     dispatch({ type: 'STEP4', payload: address});
   }, [address]);
   useEffect(()=>{
-    console.log(state)
-  }, [state]);
+    console.log(address.address);
+  }, [state, address.address.formattedAddress]);
+
   return (
     <div className="w-[100%] h-fit overflow-hidden rounded-2xl relative px-3 py-2">
       {/* search box */}
       <div className='w-full h-fit relative'>
-        <SearchBox styleBox={'w-full rounded-2xl h-[70px] px-2  shadow-xl'}/>
-        <div className='w-full h-fit absolute z-20'>
-          <Where />
-        </div>
+        <SearchBox styleBox={'w-full rounded-2xl h-[70px] px-2 shadow-xl'}/>
+
       </div>
 
       <div className='w-full h-[400px] mt-5'>
         <MapEach keyMapBox={keyMapBox} latitude={address.address.latitude}
-        longitude={address.address.longitude} zoom={15}
+        longitude={address.address.longitude} zoom={address.address.formattedAddress ? 15 : 0}
         />
 
       </div>

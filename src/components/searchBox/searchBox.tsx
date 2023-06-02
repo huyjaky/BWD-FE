@@ -1,66 +1,52 @@
+import { useContext, useEffect } from 'react';
 import { placeListContext } from '@/contexts/placeList';
 import { selectPlaceContext } from '@/contexts/selectPlace';
-import placeSearch from '@/hooks/placeSearch';
-import { useContext, useEffect } from 'react';
-
-// interface SearchBoxProps {
-//   onSelectAddress: (address: string, latitude: number | null, longitude: number | null) => void;
-//   defaultValue: string;
-// }
+import Head from 'next/head';
+import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 
 interface SearchBoxProps {
   styleBox: string | null;
 }
 
+
 const SearchBox = ({ styleBox }: SearchBoxProps) => {
   const { address, setAddress } = useContext(selectPlaceContext);
   const { setPlaceList, setIsLoading, isFetch, setIsFetch } = useContext(placeListContext);
+  const { isShowHeader, setIsShowHeader } = useContext(filterFormAnimateContext)
 
   useEffect(() => {
-    const fetchLocation = async () => {
-      // return while address null while select one in spaceList suggest
-      if (!address.address.formattedAddress || !isFetch) return;
+    Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
+      callback: onLoad,
+    });
 
-      // loading is running while fetching api
-      setIsLoading(true);
-      const placeList_ = await placeSearch().placeSearch_({
-        address: address.address.formattedAddress
-      });
+    function onLoad() {
+      var options = { maxResults: 5, businessSuggestions: true };
+      var manager = new Microsoft.Maps.AutosuggestManager(options);
+      manager.attachAutosuggest('#searchBox', '#searchBoxContainer', selectedSuggestion);
+    }
 
-      if (placeList_) {
-        setIsLoading(false);
-        setPlaceList(placeList_);
-        return;
-      }
-
-      console.log('Something went wrong searchBox');
-    };
-
-    // auto getAPI after .3s user typed
-    const debounceFetch = setTimeout(() => {
-      fetchLocation();
-    }, 500);
-    return () => {
-      clearTimeout(debounceFetch);
-    };
-  }, [address.address.formattedAddress]);
+    function selectedSuggestion(suggestionResult: any) {
+      setIsShowHeader(true);
+      console.log(suggestionResult);
+      setAddress({ ...address, address: {...address.address,...suggestionResult?.address, ...suggestionResult?.location} });
+    }
+  }, [])
+  useEffect(()=>{console.log('address', address);}, [address])
 
   return (
-    <input
-      type="text"
-      name="input-place"
-      id=""
-      placeholder={'Search your locations'}
-      className={`outline-none focus:border-b-2 focus:border-slate-600 w-[calc(100%-40px)] ${styleBox}`}
-      onChange={(event) => {
-        setAddress({
-          ...address,
-          address: { ...address.address, formattedAddress: event.target.value }
-        });
-        setIsFetch(true);
-      }}
-      value={address.address.formattedAddress}
-    />
+    <>
+      <div id='searchBoxContainer' className=''>
+        <input
+          type='text'
+          name='input-place'
+          id='searchBox'
+          placeholder='Search your locations'
+          className={`outline-none focus:border-b-2 focus:border-slate-600 w-[calc(100%-40px)] ${styleBox}
+          pointer-events-auto text-ellipsis
+          `}
+        />
+      </div>
+    </>
   );
 };
 

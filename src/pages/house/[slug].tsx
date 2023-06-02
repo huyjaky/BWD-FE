@@ -15,6 +15,7 @@ import { NextPageWithLayout } from '@/models/layoutprops';
 import { AnimatePresence } from 'framer-motion';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { Montserrat } from 'next/font/google';
+import Head from 'next/head';
 import { useContext } from 'react';
 import { BiMenu } from 'react-icons/bi';
 
@@ -40,6 +41,14 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
 
   return (
     <>
+      <Head>
+        <script
+          type='text/javascript'
+          src={`https://www.bing.com/api/maps/mapcontrol?key=AiWimzL8WC5fWxhKerTLiSvd63qgv22WhCiBLgm63xMJ-nn1Mv9SMqYpLPB4nkMI`}
+          async
+          defer
+        ></script>
+      </Head>
       <div className="w-full h-fit">
         <main className={`${monsterrat.className} relative box-border`} id="root">
           <AnimatePresence initial={false}>
@@ -57,8 +66,8 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
             <div className="w-full h-[500px] laptop:hidden desktop:hidden flex justify-center box-border relative">
               <Carousel arrImg={houseDetail.arrImg} houseId={houseDetail.HouseId} />
               <div
-              onClick={handleOnClick}
-               className='absolute right-4 bottom-4 w-fit h-fit
+                onClick={handleOnClick}
+                className='absolute right-4 bottom-4 w-fit h-fit
               rounded-xl p-3
                bg-white z-50 flex items-center'>
                 <BiMenu className="text-[24px] " />

@@ -110,6 +110,7 @@ function Main({ keyMapBox }: mainProps): JSX.Element {
                 <motion.div className={`w-full h-fit ${selected === 'Currently hosting' ? '' : 'hidden'}`}>
                   <ShowHouse infShow='authListHouse' keyMapBox={keyMapBox} />
                 </motion.div>
+
                 <div className={`${selected === 'Currently hosting' ? 'hidden' : ''} flex flex-col items-center justify-center gap-4 py-24 `}>
                   <AnyReview />
                   <span className='text-[14px] h-[36px] w-[200px] text-center'>

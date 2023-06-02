@@ -91,7 +91,9 @@ const ControlPlan = () => {
   const isClickOutSide = (event: any) => {
     const isClickHeaderRoot = document.getElementById('header-root')?.contains(event.target);
     const isClickHeaderControl = refHeaderControl.current?.contains(event.target);
+    // console.log(isClickSelectPlace);
     if (!isClickHeaderRoot && !isClickHeaderControl) {
+      console.log('isClickout side controlplan');
       setIsShowHeader(false);
       return;
     }
@@ -191,7 +193,7 @@ const ControlPlan = () => {
       >
         <div
           className="w-[850px] tablet:w-full h-[90%] box-border rounded-full m-auto flex
-          text-[15px] transition-all duration-300 border-2  overflow-hidden
+          text-[15px] transition-all duration-300 border-2
           cursor-pointer
         "
           id="controlBar"

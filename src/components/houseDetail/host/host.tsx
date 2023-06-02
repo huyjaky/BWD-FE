@@ -34,7 +34,7 @@ const Host = ({ userAcc, placeOffer }: HostProps) => {
                   className="w-full h-fit flex items-center"
                   key={index}
                 >
-                  <img src={item.PathIcon} alt="" className="w-[35px] h-[35px]" />
+                  <img src={'http://localhost:4000/api/img/path/'+item.PathIcon} alt="" className="text-[30px]" />
                   <span className="text-[25px]">{item.PlaceOffer}</span>
                 </motion.div>
               );

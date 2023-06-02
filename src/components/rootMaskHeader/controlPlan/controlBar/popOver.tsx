@@ -16,6 +16,7 @@ const Popover = () => {
       onClick={(event) => event.stopPropagation()}
     >
       <div className="w-full h-full flex">
+
         {selected === 'where' && <Where />}
         {selected === 'who' && <Who styleWho={null} />}
         {selected === 'checkin' && (

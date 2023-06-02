@@ -15,6 +15,7 @@ import { Montserrat } from 'next/font/google';
 import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
 import { authOptions } from './api/auth/[...nextauth]';
+import Head from 'next/head';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -72,6 +73,14 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBox }: HomePr
 
   return (
     <>
+      <Head>
+        <script
+          type='text/javascript'
+          src={`https://www.bing.com/api/maps/mapcontrol?key=AiWimzL8WC5fWxhKerTLiSvd63qgv22WhCiBLgm63xMJ-nn1Mv9SMqYpLPB4nkMI`}
+          async
+          defer
+        ></script>
+      </Head>
       <main className={`${monsterrat.className} relative overflow-hidden`} id="root">
         <AnimatePresence initial={false}>
           <HeaderMain />
