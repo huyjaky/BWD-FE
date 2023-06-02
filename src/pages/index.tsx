@@ -73,15 +73,12 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBox }: HomePr
 
   return (
     <>
-      <Head>
-        <script
-          type='text/javascript'
-          src={`https://www.bing.com/api/maps/mapcontrol?key=AiWimzL8WC5fWxhKerTLiSvd63qgv22WhCiBLgm63xMJ-nn1Mv9SMqYpLPB4nkMI`}
-          async
-          defer
-        ></script>
-      </Head>
-      <main className={`${monsterrat.className} relative overflow-hidden`} id="root">
+
+      <motion.main
+      initial={{opacity: 0, display: 'none'}}
+      animate={{opacity: 1, display: 'block'}}
+      transition={{delay: 1, duration: .7}}
+      className={`${monsterrat.className} relative overflow-hidden`} id="root">
         <AnimatePresence initial={false}>
           <HeaderMain />
         </AnimatePresence>
@@ -111,7 +108,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBox }: HomePr
         </div>
         <FooterRooms />
         <FooterMainRes />
-      </main>
+      </motion.main>
     </>
   );
 };

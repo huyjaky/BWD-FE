@@ -23,6 +23,9 @@ import UserAccProvider from '@/contexts/userAcc';
 import { SessionProvider } from 'next-auth/react';
 import { Montserrat } from 'next/font/google';
 import AmountTabHostingProviders from '@/contexts/amountTabHosting';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -37,9 +40,18 @@ export default function App({
   pageProps: { session, ...pageProps }
 }: AppPropsWithLayout) {
   const Layout = Component.Layout ?? EmptyLayout;
+  const router = useRouter();
 
   return (
     <>
+      <Head>
+        <script
+          type='text/javascript'
+          src={`https://www.bing.com/api/maps/mapcontrol?key=AiWimzL8WC5fWxhKerTLiSvd63qgv22WhCiBLgm63xMJ-nn1Mv9SMqYpLPB4nkMI`}
+          async
+          defer
+        ></script>
+      </Head>
       <SWRConfig value={{ fetcher: (url) => axiosClient.get(url), shouldRetryOnError: false }}>
         <SelectPopoverProvider>
           <PlaceListProvider>
@@ -53,11 +65,35 @@ export default function App({
                           <SessionProvider session={session}>
                             <IsShowPtProvider>
                               <AmountTabHostingProviders>
-                                <Layout>
-                                  <div className={`${monsterrat.className}`}>
-                                    <Component {...pageProps} />
-                                  </div>
-                                </Layout>
+                                <AnimatePresence mode='wait' >
+                                  <motion.div
+                                    key={router.route}
+                                    initial='initialState'
+                                    animate='animateState'
+                                    exit='exitState'
+                                    transition={{ duration: 1 }}
+                                    variants={{
+                                      initialState: {
+                                        opacity: 0,
+                                        clipPath: 'circle(0.2% at 100% 0)',
+                                      },
+                                      animateState: {
+                                        opacity: 1,
+                                        clipPath: 'circle(142.0% at 100% 0)',
+                                      },
+                                      exitState: {
+                                        clipPath: 'circle(0.2% at 100% 0)',
+                                      }
+                                    }}
+                                  >
+                                    <Layout>
+                                      <div className={`${monsterrat.className} bg-white
+                                        `}>
+                                        <Component {...pageProps} />
+                                      </div>
+                                    </Layout>
+                                  </motion.div>
+                                </AnimatePresence>
                               </AmountTabHostingProviders>
                             </IsShowPtProvider>
                           </SessionProvider>

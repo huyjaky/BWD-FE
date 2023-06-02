@@ -1,16 +1,17 @@
 import { filterContext } from '@/contexts/filter';
 import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 import { getHouseContext } from '@/contexts/getHouse';
+import { IsShowPtContext } from '@/contexts/isShowPt';
+import { selectPlaceContext } from '@/contexts/selectPlace';
 import { filterForm } from '@/models/filter';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { useContext, useEffect, useRef, useState } from 'react';
+import { GrClose } from 'react-icons/gr';
 import Amenities from './filterFormComponent/amenities/amenities';
 import BedsBathRooms from './filterFormComponent/bedsBathrooms';
 import HostLanguage from './filterFormComponent/hostLanguage';
 import PriceRange from './filterFormComponent/priceRange';
 import PropertyHouse from './filterFormComponent/property';
-import { GrClose } from 'react-icons/gr';
-import { IsShowPtContext } from '@/contexts/isShowPt';
 
 const variantsAmenities: Variants = {
   showMore: {
@@ -29,6 +30,7 @@ const FormFilter = () => {
   const { filterForm, setFilterForm } = useContext(filterContext);
   const { setIsFilter, isFilter } = useContext(getHouseContext);
   const { isClickOutSide, setIsClickOutSide } = useContext(filterFormAnimateContext);
+  const { address, setAddress } = useContext(selectPlaceContext)
   const { isShowAllPt } = useContext(IsShowPtContext);
   const formFilter = useRef<HTMLInputElement>(null);
 
@@ -78,7 +80,7 @@ const FormFilter = () => {
 
     // neu du lieu co ton tai thi la fetch lai du lieu neu khong thi bo qua
     if (!isEmpty()) {
-      setIsFilter(isFilter*isFilter+1);
+      setIsFilter(isFilter * isFilter + 1);
       return;
     } else {
       setIsFilter(0);
@@ -169,14 +171,13 @@ const FormFilter = () => {
                   </motion.button>
                   <span className="">
                     {!show &&
-                    (filterForm.amenities.features.length != 0 ||
-                      filterForm.amenities.location.length != 0 ||
-                      filterForm.amenities.safety.length != 0)
-                      ? ` you have filled in ${
-                          filterForm.amenities.features.length +
-                          filterForm.amenities.location.length +
-                          filterForm.amenities.safety.length
-                        } options`
+                      (filterForm.amenities.features.length != 0 ||
+                        filterForm.amenities.location.length != 0 ||
+                        filterForm.amenities.safety.length != 0)
+                      ? ` you have filled in ${filterForm.amenities.features.length +
+                      filterForm.amenities.location.length +
+                      filterForm.amenities.safety.length
+                      } options`
                       : ''}
                   </span>
                 </div>
@@ -212,7 +213,22 @@ const FormFilter = () => {
                     },
                     hostLanguage: ''
                   };
+                  const addressTemp = {
+                    countryRegion: '',
+                    locality: '',
+                    adminDistrict: '',
+                    adminDistrict2: '',
+                    countryRegionIso2: '',
+                    houseNumber: '',
+                    postalCode: '',
+                    addressLine: '',
+                    streetName: '',
+                    formattedAddress: '',
+                    latitude: 0,
+                    longitude: 0
+                  }
                   setFilterForm(filterFormTemp);
+                  setAddress({...address, address: {...address.address, ...addressTemp}});
                 }}
               >
                 Clear all

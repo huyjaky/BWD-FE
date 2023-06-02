@@ -41,6 +41,8 @@ const SearchBox = ({ styleBox }: SearchBoxProps) => {
           name='input-place'
           id='searchBox'
           placeholder='Search your locations'
+          onChange={(event: any)=> setAddress({...address, address: {...address.address, formattedAddress: event.target.value}})}
+          value={address.address.formattedAddress}
           className={`outline-none focus:border-b-2 focus:border-slate-600 w-[calc(100%-40px)] ${styleBox}
           pointer-events-auto text-ellipsis
           `}
