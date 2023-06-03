@@ -7,10 +7,10 @@ interface MapEachProps {
   longitude: number;
   latitude: number;
   zoom: number;
-  keyMapBox: string;
+  keyMapBing: string;
 }
 
-const MapEach = ({ latitude, longitude, zoom, keyMapBox }: MapEachProps) => {
+const MapEach = ({ latitude, longitude, zoom, keyMapBing }: MapEachProps) => {
   const [viewPort, setViewPort] = useState<{
     longitude: number;
     latitude: number;
@@ -22,37 +22,29 @@ const MapEach = ({ latitude, longitude, zoom, keyMapBox }: MapEachProps) => {
   });
 
   useEffect(() => {
-    setViewPort((prevViewport) => ({
-      ...prevViewport,
-      ...{ longitude: longitude, latitude: latitude, zoom: zoom }
-    }));
+    const map_ = document.getElementById('MapEach');
+    if (map_) {
+      var map = new Microsoft.Maps.Map(
+        map_,
+        {
+          /* No need to set credentials if already passed in URL */
+          center: new Microsoft.Maps.Location(latitude, longitude),
+          mapTypeId: Microsoft.Maps.MapTypeId.road,
+          zoom: zoom,
+          credentials: keyMapBing
+        }
+      );
+      var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), undefined);
+      var layer = new Microsoft.Maps.Layer();
+      layer.add(pushpin);
+      map.layers.insert(layer);
+    }
   }, [latitude, longitude, zoom]);
 
   return (
-    <Map
-      style={{
-        width: '100%',
-        height: '400px',
-        borderRadius: '20px',
-        border: '3px solid red'
-      }}
-      {...viewPort} // cai nay de xac dinh vi tri khi thay doi latitude va longitude
-      scrollZoom={false}
-      onMove={(event) => setViewPort(event.viewState)} // cho phep nguoi dung co the keo tha
-      mapStyle={'mapbox://styles/jajajajau/cli2mlj4702e201r0gwyg2dun'}
-      mapboxAccessToken={keyMapBox}
-    >
-      <NavigationControl showCompass={true} />
-      <Marker latitude={latitude} longitude={longitude} anchor="center" scale={viewPort.zoom}>
-        <motion.div
-          animate={{ scale: [1, 1.2] }}
-          transition={{ repeat: Infinity, type: 'spring', duration: 1 }}
-          className="block"
-        >
-          <ImLocation2 className="text-[40px] text-red-500" />
-        </motion.div>
-      </Marker>
-    </Map>
+    <div className='w-full h-[500px] rounded-3xl border-2 border-red-400 overflow-hidden'>
+      <div id='MapEach'></div>
+    </div>
   );
 };
 

@@ -61,7 +61,7 @@ export default function Step15CHome() {
                 transition={{ type: 'spring', stiffness: 35, delay: 0.1 }}
                 className={`flex flex-col my-[16px] p-[24px] border
                             ${
-                              selectedOption === 'AnyAirbnbguest'
+                              selectedOption === 'Anyolympusguest'
                                 ? 'bg-[#F7F7F7] border-[2px] hover:border-black border-black'
                                 : 'border-gray-200 border-[2px] hover:border-black'
                             }
@@ -71,12 +71,12 @@ export default function Step15CHome() {
                 <motion.div className="flex items-center justify-center cursor-pointer">
                   <div>
                     <input
-                      value="AnyAirbnbguest"
+                      value="Anyolympusguest"
                       onChange={handleRadioChange}
                       id="bordered-radio-1"
                       type="radio"
                       name="bordered-radio"
-                      checked={selectedOption === 'AnyAirbnbguest'}
+                      checked={selectedOption === 'Anyolympusguest'}
                       className="w-4 h-4
                                         text-black
                                         rounded-[50%]
@@ -88,7 +88,7 @@ export default function Step15CHome() {
                     htmlFor="bordered-radio-1"
                     className="w-full cursor-pointer ml-2 text-[18px] font-semibold text-black "
                   >
-                    Any Airbnb guest
+                    Any olympus guest
                   </label>
                 </motion.div>
                 <div className="flex justify-start">
@@ -96,7 +96,7 @@ export default function Step15CHome() {
                     htmlFor="bordered-radio-1"
                     className="w-full ml-6 cursor-pointer text-sm font-medium text-gray-900 dark:text-gray-300"
                   >
-                    Get reservations faster when you welcome anyone from the Airbnb community.
+                    Get reservations faster when you welcome anyone from the olympus community.
                   </label>
                 </div>
               </motion.div>

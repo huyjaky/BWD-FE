@@ -21,17 +21,19 @@ import { BiMenu } from 'react-icons/bi';
 
 interface HouseDetailProps {
   houseDetail: house_;
-  keyMapBox: string;
+  keyMapBing: string;
+  link: string
 }
 const monsterrat = Montserrat({
   subsets: ['latin'],
   weight: ['200', '400', '600', '800'],
-  variable: '--font-monsterrat'
+  variable: '--font-monsterrat',
 });
 
 const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
   houseDetail,
-  keyMapBox
+  keyMapBing,
+  link
 }: HouseDetailProps) => {
   const { setIsShowAllPt } = useContext(IsShowPtContext);
   const handleOnClick = () => {
@@ -77,7 +79,7 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
             <ShowAllHouse arrImg={houseDetail.arrImg} />
             <div className="w-full h-fit mt-10">
               <div className="w-full h-fit flex box-border mobile:flex-col">
-                <Host userAcc={houseDetail.useracc} placeOffer={houseDetail.placeOffer} />
+                <Host link={link} userAcc={houseDetail.useracc} placeOffer={houseDetail.placeOffer} />
                 <article className="flex-[5] ml-5">
                   <Bill houseDetail={houseDetail} />
                 </article>
@@ -87,7 +89,7 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
             <MapBox
               latitude={houseDetail.address.latitude}
               longitude={houseDetail.address.longitude}
-              keyMapBox={keyMapBox}
+              keyMapBing={keyMapBing}
             />
           </div>
           <FooterRooms />
@@ -103,8 +105,9 @@ let cachedHouseDetail: house_[] = [];
 HouseDetail.Layout = Auth;
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const link = process.env.API_URL_PATH
   if (cachedHouseDetail.length == 0) {
-    const slug = await fetch('http://localhost:4000/api/get/house/page');
+    const slug = await fetch(`${link}/api/get/house/page`);
     cachedHouseDetail = await slug.json();
   }
 
@@ -116,16 +119,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
+  const link = process.env.API_URL_PATH
   if (cachedHouseDetail.length == 0) {
-    const slug = await fetch('http://localhost:4000/api/get/house/page');
+    const slug = await fetch(`${link}/api/get/house/page`);
     cachedHouseDetail = await slug.json();
   }
   const houseDetailData = cachedHouseDetail.find((house: house_) => house.HouseId === params?.slug);
-  const keyMapBox = process.env.ACCESS_TOKEN_MAPBOX;
+  const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
   return {
     props: {
       houseDetail: houseDetailData,
-      keyMapBox: keyMapBox
+      keyMapBing: keyMapBing,
+      link: link
     },
     revalidate: 60
   };

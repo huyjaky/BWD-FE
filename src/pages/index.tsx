@@ -15,7 +15,6 @@ import { Montserrat } from 'next/font/google';
 import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
 import { authOptions } from './api/auth/[...nextauth]';
-import Head from 'next/head';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -24,7 +23,7 @@ const monsterrat = Montserrat({
 });
 interface HomeProps {
   user_: userAcc;
-  keyMapBox: string;
+  keyMapBing: string;
   props: any;
 }
 
@@ -55,7 +54,7 @@ const variants: Variants = {
 
 };
 
-const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBox }: HomeProps) => {
+const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeProps) => {
   const { user, setUser } = useContext(userAccContext);
   const { isFilter } = useContext(getHouseContext);
 
@@ -75,8 +74,8 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBox }: HomePr
     <>
 
       <motion.main
-      initial={{opacity: 0, display: 'none'}}
-      animate={{opacity: 1, display: 'block'}}
+      initial={{opacity: 0}}
+      animate={{opacity: 1}}
       transition={{delay: 1, duration: .7}}
       className={`${monsterrat.className} relative overflow-hidden`} id="root">
         <AnimatePresence initial={false}>
@@ -102,7 +101,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBox }: HomePr
           <motion.div variants={variants} animate="show">
             <ShowHouse
               infShow={isFilter != 0 ? (isFilter > 0 ? 'noneAuthFilter' : 'favoriteHouse') : 'noneAuthHouseApi'}
-              keyMapBox={keyMapBox}
+              keyMapBing={keyMapBing}
             />
           </motion.div>
         </div>
@@ -119,17 +118,17 @@ export default Home;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getServerSession(req, res, authOptions);
-  const keyMapBox = process.env.ACCESS_TOKEN_MAPBOX;
+  const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
 
   // if user available not callback api from server
   if (session?.userAcc) {
     return {
-      props: { ...session.userAcc, keyMapBox: keyMapBox }
+      props: { ...session.userAcc, keyMapBing: keyMapBing }
     };
   }
   return {
     props: {
-      keyMapBox: keyMapBox
+      keyMapBing: keyMapBing
     }
   };
 };

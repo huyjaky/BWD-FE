@@ -4,6 +4,8 @@ import EmptyLayout from '@/components/layouts/empty';
 import LoginPanel from '@/components/loginPanel/LoginPanel';
 import { NextPageWithLayout } from '@/models/layoutprops';
 import { GetServerSideProps } from 'next';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../api/auth/[...nextauth]';
 
 const Login: NextPageWithLayout = () => {
   return (
@@ -24,13 +26,14 @@ const Login: NextPageWithLayout = () => {
 Login.Layout = EmptyLayout;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  // const cookies = req.cookies.access_token;
-  // if (cookies) {
-  //   res.setHeader('location', '/');
-  //   res.statusCode = 302;
-  //   res.end();
-  //   return { props: {} };
-  // }
+  const session = await getServerSession(req, res, authOptions);
+
+  if (session?.userAcc) {
+    res.setHeader('location', '/');
+    res.statusCode = 302;
+    res.end();
+    return { props: {} };
+  }
   return { props: {} };
 };
 

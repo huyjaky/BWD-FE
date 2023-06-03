@@ -8,10 +8,10 @@ import { useInView } from 'react-intersection-observer';
 import ShowHouse from '@/components/main/showHouse/showHouse';
 import { AmountTabHostingContext } from '@/contexts/amountTabHosting';
 interface mainProps {
-  keyMapBox: string;
+  keyMapBing: string;
 }
 
-function Main({ keyMapBox }: mainProps): JSX.Element {
+function Main({ keyMapBing }: mainProps): JSX.Element {
   const [selected, setSelected] = useState('');
   const {currentHosting} = useContext(AmountTabHostingContext)
   const [refButton, inViewButton] = useInView({
@@ -57,7 +57,7 @@ function Main({ keyMapBox }: mainProps): JSX.Element {
           viewport={{ amount: 0.5 }}
           className="w-[100%] pt-[64px]"
         >
-          <h1 className="text-[32px] font-semibold">Welcome back, Minh</h1>
+          <h1 className="text-[32px] font-semibold">Welcome back</h1>
         </motion.div>
         <div className="w-[100%] py-[64px]">
           <div className="">
@@ -108,7 +108,7 @@ function Main({ keyMapBox }: mainProps): JSX.Element {
             >
               <div className='w-full h-fit transition-all duration-1000'>
                 <motion.div className={`w-full h-fit ${selected === 'Currently hosting' ? '' : 'hidden'}`}>
-                  <ShowHouse infShow='authListHouse' keyMapBox={keyMapBox} />
+                  <ShowHouse infShow='authListHouse' keyMapBing={keyMapBing} />
                 </motion.div>
 
                 <div className={`${selected === 'Currently hosting' ? 'hidden' : ''} flex flex-col items-center justify-center gap-4 py-24 `}>

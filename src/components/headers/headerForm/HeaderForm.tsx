@@ -5,12 +5,12 @@ import { mobileContolPanelContext } from '@/contexts/mobileControlPanel';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ReactNode, useContext } from 'react';
-import { FaAirbnb } from 'react-icons/fa';
 import { FiSearch } from 'react-icons/fi';
 import { TbWorld } from 'react-icons/tb';
 import ButtonAccount from '../buttonAccount/ButtonAccount';
 import { getHouseContext } from '@/contexts/getHouse';
 import { filterContext } from '@/contexts/filter';
+import Image from 'next/image';
 interface HeaderFormProps {
   children: ReactNode;
 }
@@ -40,9 +40,9 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
             z-30
             "
           >
-            <FaAirbnb className="h-[50px] w-[50px] mr-1" />
+            <Image src="/icon.png" alt="" width={50} height={50}/>
             <div className="text-[30px] w-0 overflow-hidden desktop:w-fit font-semibold">
-              airbnb
+              olympus
             </div>
           </Link>
 
@@ -50,14 +50,14 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
 
           {/* controlbar */}
           <div className="flex-1 flex items-center justify-end z-30">
-            {/* airbnb your home */}
+            {/* olympus your home */}
             <Link
               href={'/hosting'}
               className="rounded-full bg-white h-fit box-content px-4 py-2
             hover:bg-slate-300 tablet:hidden mobile:hidden
           "
             >
-              <span className="font-semibold">Airbnb your home</span>
+              <span className="font-semibold">olympus your home</span>
             </Link>
             {/* translate */}
             <Link

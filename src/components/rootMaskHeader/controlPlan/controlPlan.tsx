@@ -93,7 +93,6 @@ const ControlPlan = () => {
     const isClickHeaderControl = refHeaderControl.current?.contains(event.target);
     // console.log(isClickSelectPlace);
     if (!isClickHeaderRoot && !isClickHeaderControl) {
-      console.log('isClickout side controlplan');
       setIsShowHeader(false);
       return;
     }

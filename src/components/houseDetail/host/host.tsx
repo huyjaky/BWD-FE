@@ -5,9 +5,10 @@ import HostUser from './hostUser';
 interface HostProps {
   userAcc: userAcc;
   placeOffer: { PlaceOfferId: string; PlaceOffer: string; PathIcon: string }[];
+  link:string
 }
 
-const Host = ({ userAcc, placeOffer }: HostProps) => {
+const Host = ({ userAcc, placeOffer, link }: HostProps) => {
   return (
     <div className="flex-[7] flex flex-col">
       <div className="w-full mb-5 ">
@@ -34,7 +35,7 @@ const Host = ({ userAcc, placeOffer }: HostProps) => {
                   className="w-full h-fit flex items-center"
                   key={index}
                 >
-                  <img src={'http://localhost:4000/api/img/path/'+item.PathIcon} alt="" className="text-[30px]" />
+                  <img src={`${link}/api/img/path/`+item.PathIcon} alt="" className="text-[30px]" />
                   <span className="text-[25px]">{item.PlaceOffer}</span>
                 </motion.div>
               );

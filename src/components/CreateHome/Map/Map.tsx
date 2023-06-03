@@ -7,10 +7,10 @@ import { selectPlaceContext } from '@/contexts/selectPlace';
 import Where from '@/components/rootMaskHeader/controlPlan/controlBar/popOverDetail/where';
 
 interface MapProps{
-  keyMapBox: string;
+  keyMapBing: string;
 }
 
-const Map: React.FC<MapProps> = ({keyMapBox}: MapProps) => {
+const Map: React.FC<MapProps> = ({keyMapBing}: MapProps) => {
   const { state, dispatch } = useContext(newHouseContext);
   const {address , setAddress} = useContext(selectPlaceContext)
   const [address_, setAddress_] = useState(state.address);
@@ -34,7 +34,7 @@ const Map: React.FC<MapProps> = ({keyMapBox}: MapProps) => {
       </div>
 
       <div className='w-full h-[400px] mt-5'>
-        <MapEach keyMapBox={keyMapBox} latitude={address.address.latitude}
+        <MapEach keyMapBing={keyMapBing} latitude={address.address.latitude}
         longitude={address.address.longitude} zoom={address.address.formattedAddress ? 15 : 0}
         />
 

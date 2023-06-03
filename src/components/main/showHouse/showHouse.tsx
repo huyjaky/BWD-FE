@@ -95,10 +95,10 @@ const variants: Variants = {
 
 interface ShowHouseProps {
   infShow: 'noneAuthHouseApi' | 'noneAuthFilter' | 'authListHouse' | 'favoriteHouse';
-  keyMapBox: string;
+  keyMapBing: string;
 }
 
-const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
+const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
   const { filterForm } = useContext(filterContext);
   const { address } = useContext(selectPlaceContext);
@@ -191,7 +191,7 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
 
   // get more house de lay them nha khi scroll xuoong cuoi cung https://www.npmjs.com/package/react-infinite-scroll-component
   const getMoreHouse = async () => {
-    if (infShow === 'favoriteHouse') {
+    if (infShow === 'favoriteHouse' || infShow == 'authListHouse') {
       setHasMore(false);
       return;
     }
@@ -208,15 +208,6 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
         const moreHouse = await houseApi[infShow](
           { filter: filterForm, selectPlace: address },
           houseTemp.length / 10 + 1,
-          user.UserId
-        );
-        if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
-          setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
-        } else {
-          setHasMore(false); // cai nay de kiem tra xem da fetch het du lieu hay chua
-        }
-      } else if (infShow === 'authListHouse') {
-        const moreHouse = await houseApi[infShow](
           user.UserId
         );
         if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
@@ -287,7 +278,7 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
               longitude={selectLocale?.longitude ? selectLocale.longitude : 1}
               latitude={selectLocale?.latitude ? selectLocale?.latitude : 1}
               zoom={selectLocale?.zoom ? selectLocale.zoom : 15}
-              keyMapBox={keyMapBox}
+              keyMapBing={keyMapBing}
             />
           </div>
         </motion.div>
@@ -338,7 +329,7 @@ const ShowHouse = ({ infShow, keyMapBox }: ShowHouseProps) => {
                         setSelectLocale({
                           latitude: item.address.latitude,
                           longitude: item.address.longitude,
-                          zoom: 15
+                          zoom: 18
                         });
                       }}
                       className={`absolute top-3 right-12 ${infShow === 'authListHouse' ? 'right-2' : ''} text-red-500 text-[25px] z-10`}

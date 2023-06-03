@@ -1,20 +1,41 @@
 import { motion } from 'framer-motion';
 import Map, { NavigationControl, Marker } from 'react-map-gl';
 import { ImLocation2 } from 'react-icons/im';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface MapBoxProps {
   longitude: number | undefined;
   latitude: number | undefined;
-  keyMapBox: string | undefined;
+  keyMapBing: string;
 }
 
-const MapBox = ({ longitude, latitude, keyMapBox }: MapBoxProps) => {
+const MapBox = ({ longitude, latitude, keyMapBing }: MapBoxProps) => {
   const [viewPort, setViewPort] = useState({
     longitude: longitude,
     latitude: latitude,
-    keyMapBox: keyMapBox
+    keyMapBing: keyMapBing
   });
+
+  useEffect(() => {
+    const map_ = document.getElementById('Map');
+    if (map_) {
+      var map = new Microsoft.Maps.Map(
+        map_,
+        {
+          /* No need to set credentials if already passed in URL */
+          center: new Microsoft.Maps.Location(latitude, longitude),
+          mapTypeId: Microsoft.Maps.MapTypeId.road,
+          zoom: 18,
+          credentials: keyMapBing,
+          disableScrollWheelZoom: true
+        }
+      );
+      var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), undefined);
+      var layer = new Microsoft.Maps.Layer();
+      layer.add(pushpin);
+      map.layers.insert(layer);
+    }
+  }, [latitude, longitude]);
 
   return (
     <div className="w-full h-fit mt-10 border-t-2 border-slate-800 mb-10">
@@ -26,33 +47,9 @@ const MapBox = ({ longitude, latitude, keyMapBox }: MapBoxProps) => {
         transition={{ duration: 0.5 }}
         className="w-full h-fit"
       >
-        <Map
-          style={{
-            width: '100%',
-            height: '400px',
-            borderRadius: '20px',
-            border: '3px solid red'
-          }}
-          scrollZoom={false}
-          initialViewState={{
-            longitude: viewPort.longitude,
-            latitude: viewPort.latitude,
-            zoom: 15
-          }}
-          mapboxAccessToken={keyMapBox}
-          mapStyle={'mapbox://styles/jajajajau/cli2mlj4702e201r0gwyg2dun'}
-        >
-          <NavigationControl showCompass={true} />
-          <Marker latitude={viewPort.latitude} longitude={viewPort.longitude} offset={[-8, -70]}>
-            <motion.div
-              animate={{ scale: [1, 1.2] }}
-              transition={{ repeat: Infinity, type: 'spring', duration: 1 }}
-              className=""
-            >
-              <ImLocation2 className="text-[40px] text-red-500" />
-            </motion.div>
-          </Marker>
-        </Map>
+        <div className='w-full h-[500px] rounded-3xl border-2 border-red-400 overflow-hidden'>
+          <div id='Map'></div>
+        </div>
       </motion.div>
     </div>
   );

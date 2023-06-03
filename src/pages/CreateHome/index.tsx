@@ -25,11 +25,14 @@ import ProcessBar from '../../components/CreateHome/ProcessBar/ProccessBar';
 import { GetServerSideProps } from 'next';
 import StepCongratulation from '@/components/CreateHome/Step/StepCongratulation';
 import Head from 'next/head';
+import { getSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../api/auth/[...nextauth]';
 interface CreateHomeProps {
-  keyMapBox: string
+  keyMapBing: string
 }
 
-function CreateHome({ keyMapBox }: CreateHomeProps): JSX.Element {
+function CreateHome({ keyMapBing }: CreateHomeProps): JSX.Element {
   const [currentStep, setCurrentStep] = useState(1);
 
   const [isMounted, setIsMounted] = useState(true);
@@ -55,8 +58,8 @@ function CreateHome({ keyMapBox }: CreateHomeProps): JSX.Element {
     { number: 1, component: <Step1CHome />, data: '' },
     { number: 2, component: <Step2CHome />, data: 'type' },
     { number: 3, component: <Step3CHome />, data: 'place' },
-    { number: 4, component: <Step4CHome keyMapBox={keyMapBox} />, data: 'address' },
-    { number: 5, component: <Step5CHome keyMapBox={keyMapBox} />, data: 'addressConfirmation' },
+    { number: 4, component: <Step4CHome keyMapBing={keyMapBing} />, data: 'address' },
+    { number: 5, component: <Step5CHome keyMapBing={keyMapBing} />, data: 'addressConfirmation' },
     { number: 6, component: <Step6CHome />, data: 'placeInfo' },
     { number: 7, component: <Step7CHome />, data: 'kindOfBathrooms' },
     { number: 8, component: <Step8CHome />, data: 'encounter' },
@@ -110,18 +113,20 @@ function CreateHome({ keyMapBox }: CreateHomeProps): JSX.Element {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  // const cookies = req.cookies.access_token;
-  // if (!cookies) {
-  //   res.setHeader('location', '/login');
-  //   res.statusCode = 302;
-  //   res.end();
-  //   return { props: {} };
-  // }
-  const keyMapBox = process.env.ACCESS_TOKEN_MAPBOX;
+
+  const session = await getServerSession(req, res, authOptions);
+  const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
+
+  if (!session?.userAcc) {
+    res.setHeader('location', '/login');
+    res.statusCode = 302;
+    res.end();
+    return { props: {} };
+  }
 
   return {
     props: {
-      keyMapBox: keyMapBox
+      keyMapBing: keyMapBing
     }
   };
 };

@@ -6,10 +6,10 @@ import { newHouseContext } from '../../../contexts/createHome';
 import MapEach from '@/components/main/showHouse/mapEach';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 interface Step5CHome {
-  keyMapBox: string
+  keyMapBing: string
 }
 
-const Step5CHome: React.FC<Step5CHome> = ({keyMapBox}: Step5CHome) => {
+const Step5CHome: React.FC<Step5CHome> = ({keyMapBing}: Step5CHome) => {
   const { state, dispatch } = useContext(newHouseContext);
   const {address} = useContext(selectPlaceContext);
   const [toggle, setToggle] = useState(false);
@@ -217,7 +217,7 @@ const Step5CHome: React.FC<Step5CHome> = ({keyMapBox}: Step5CHome) => {
               </button>
             </div>
           </div>
-          <MapEach keyMapBox={keyMapBox} latitude={address.address.latitude}
+          <MapEach keyMapBing={keyMapBing} latitude={address.address.latitude}
           longitude={address.address.longitude} zoom={15}
           />
         </div>

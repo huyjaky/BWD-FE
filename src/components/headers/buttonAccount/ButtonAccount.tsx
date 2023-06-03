@@ -99,7 +99,7 @@ const ButtonAccount = () => {
             )}
           </div>
           <div className="w-full h-fit">
-            <button className="w-full py-4 text-left px-5">Airbnb your home</button>
+            <button className="w-full py-4 text-left px-5">olympus your home</button>
             <button className="w-full py-4 text-left px-5">Help</button>
           </div>
         </motion.div>
