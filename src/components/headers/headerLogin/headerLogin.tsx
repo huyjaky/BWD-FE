@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Faolympus } from 'react-icons/fa';
 import { TbWorld } from 'react-icons/tb';
 import { BsList } from 'react-icons/bs';
 import { HiUserCircle } from 'react-icons/hi';
@@ -10,7 +9,6 @@ const HeaderLogin = () => {
       <div className="w-[1300px] h-full flex px-10 mobile:hidden">
         {/* logo container */}
         <div className="flex-1 flex items-center text-red-500">
-          <Faolympus className="h-[50px] w-[50px] mr-1" />
           <span className="text-[30px] font-semibold tablet:hidden">olympus</span>
         </div>
 
