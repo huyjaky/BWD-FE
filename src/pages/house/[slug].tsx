@@ -114,7 +114,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = cachedHouseDetail.map((house: house_) => ({ params: { slug: house.HouseId } }));
   return {
     paths,
-    fallback: true
+    fallback: false
   };
 };
 
