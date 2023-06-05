@@ -11,32 +11,25 @@ interface SearchBoxProps {
 
 const SearchBox = ({ styleBox }: SearchBoxProps) => {
   const { address, setAddress } = useContext(selectPlaceContext);
-  const { setPlaceList, setIsLoading, isFetch, setIsFetch } = useContext(placeListContext);
   const { isShowHeader, setIsShowHeader } = useContext(filterFormAnimateContext);
   const inputBox = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    whenLoaded.then(() => {
-      Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
-        callback: onLoad,
-      });
+  whenLoaded.then(() => {
+    Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
+      callback: onLoad,
     });
+  });
 
-    function onLoad() {
-      var options = { maxResults: 5, businessSuggestions: true };
-      var manager = new Microsoft.Maps.AutosuggestManager(options);
-      manager.attachAutosuggest('#searchBox', '#searchBoxContainer', selectedSuggestion);
-    }
+  function onLoad() {
+    var options = { maxResults: 5, businessSuggestions: true };
+    var manager = new Microsoft.Maps.AutosuggestManager(options);
+    manager.attachAutosuggest('#searchBox', '#searchBoxContainer', selectedSuggestion);
+  }
 
-    function selectedSuggestion(suggestionResult: any) {
-      setIsShowHeader(true);
-      setAddress({ ...address, address: { ...address.address, ...suggestionResult?.address, ...suggestionResult?.location } });
-      const temp = inputBox.current;
-      if (temp) {
-        temp.value = suggestionResult?.address?.formattedAddress;
-      }
-    }
-  }, []);
+  function selectedSuggestion(suggestionResult: any) {
+    setIsShowHeader(true);
+    setAddress({ ...address, address: { ...address.address, ...suggestionResult?.address, ...suggestionResult?.location } });
+  }
 
   return (
     <>
@@ -45,10 +38,6 @@ const SearchBox = ({ styleBox }: SearchBoxProps) => {
           type="text"
           name="input-place"
           id="searchBox"
-          onChange={(event) => {
-            setAddress({ ...address, address: { ...address.address, formattedAddress: event.target.value } });
-          }}
-          value={address.address.formattedAddress}
           ref={inputBox}
           placeholder="Search your locations"
           className={`outline-none focus:border-b-2 focus:border-slate-600 w-[calc(100%-40px)] ${styleBox} pointer-events-auto text-ellipsis `}
