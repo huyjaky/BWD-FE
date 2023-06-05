@@ -27,7 +27,6 @@ const Heart = ({ HouseId, IsFavorite }: HeartProps) => {
   // bo khoai danh sahc yeu thich
   const handleOnClickUnFavorite = async ( event:any, HouseId: string) => {
     const removeHouseFavorite = await houseApi.authUnFavoriteHouse(HouseId, user.UserId);
-    console.log(removeHouseFavorite);
     if (removeHouseFavorite.status != 200) {
       return;
     } else {

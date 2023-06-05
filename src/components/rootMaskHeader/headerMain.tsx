@@ -98,7 +98,7 @@ const HeaderMain = () => {
       </AnimatePresence>
 
       <div
-        className="w-screen h-screen transition-all duration-500 bg-mask absolute z-40 flex
+        className="w-screen h-screen fixed top-0 left-0 transition-all duration-500 bg-mask z-40 flex
         overflow-hidden invisible
         "
         ref={mask}
