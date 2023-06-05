@@ -4,20 +4,22 @@ import { selectPlaceContext } from '@/contexts/selectPlace';
 import { whenLoaded } from "bing-maps-loader";
 import "bingmaps"; // <--  Microsoft supported types library for Microsoft.Maps
 import { useContext, useEffect, useRef } from 'react';
+
 interface SearchBoxProps {
   styleBox: string | null;
 }
 
-
 const SearchBox = ({ styleBox }: SearchBoxProps) => {
   const { address, setAddress } = useContext(selectPlaceContext);
   const { setPlaceList, setIsLoading, isFetch, setIsFetch } = useContext(placeListContext);
-  const { isShowHeader, setIsShowHeader } = useContext(filterFormAnimateContext)
+  const { isShowHeader, setIsShowHeader } = useContext(filterFormAnimateContext);
   const inputBox = useRef<HTMLInputElement>(null);
 
-  whenLoaded.then(()=>{
-    Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
-      callback: onLoad,
+  useEffect(() => {
+    whenLoaded.then(() => {
+      Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
+        callback: onLoad,
+      });
     });
 
     function onLoad() {
@@ -28,32 +30,28 @@ const SearchBox = ({ styleBox }: SearchBoxProps) => {
 
     function selectedSuggestion(suggestionResult: any) {
       setIsShowHeader(true);
-      setAddress({ ...address, address: {...address.address,...suggestionResult?.address, ...suggestionResult?.location} });
-      const temp =  inputBox.current
-      console.log(temp?.value);
+      setAddress({ ...address, address: { ...address.address, ...suggestionResult?.address, ...suggestionResult?.location } });
+      const temp = inputBox.current;
       if (temp) {
-        temp.value = suggestionResult?.address?.formattedAddress
+        temp.value = suggestionResult?.address?.formattedAddress;
       }
     }
-  })
-
-  useEffect(() => {
-
-  }, [])
-  useEffect(()=>{}, [address])
+  }, []);
 
   return (
     <>
-      <div id='searchBoxContainer' className=''>
+      <div id="searchBoxContainer" className="">
         <input
-          type='text'
-          name='input-place'
-          id='searchBox'
+          type="text"
+          name="input-place"
+          id="searchBox"
+          onChange={(event) => {
+            setAddress({ ...address, address: { ...address.address, formattedAddress: event.target.value } });
+          }}
+          value={address.address.formattedAddress}
           ref={inputBox}
-          placeholder='Search your locations'
-          className={`outline-none focus:border-b-2 focus:border-slate-600 w-[calc(100%-40px)] ${styleBox}
-          pointer-events-auto text-ellipsis
-          `}
+          placeholder="Search your locations"
+          className={`outline-none focus:border-b-2 focus:border-slate-600 w-[calc(100%-40px)] ${styleBox} pointer-events-auto text-ellipsis `}
         />
       </div>
     </>

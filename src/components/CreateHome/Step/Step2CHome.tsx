@@ -42,6 +42,7 @@ export default function Step2CHome() {
             {categoriesStep2.map((category, index) => (
               <motion.div
                 initial={{ opacity: 0, y: -30 }}
+                key={index}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ type: 'spring', stiffness: 35, delay: 0.1 * index }}
               >
