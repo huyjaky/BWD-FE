@@ -1,9 +1,9 @@
-import { useContext, useEffect } from 'react';
+import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 import { placeListContext } from '@/contexts/placeList';
 import { selectPlaceContext } from '@/contexts/selectPlace';
-import Head from 'next/head';
-import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
-
+import { whenLoaded } from "bing-maps-loader";
+import "bingmaps"; // <--  Microsoft supported types library for Microsoft.Maps
+import { useContext, useEffect, useRef } from 'react';
 interface SearchBoxProps {
   styleBox: string | null;
 }
@@ -13,8 +13,9 @@ const SearchBox = ({ styleBox }: SearchBoxProps) => {
   const { address, setAddress } = useContext(selectPlaceContext);
   const { setPlaceList, setIsLoading, isFetch, setIsFetch } = useContext(placeListContext);
   const { isShowHeader, setIsShowHeader } = useContext(filterFormAnimateContext)
+  const inputBox = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
+  whenLoaded.then(()=>{
     Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
       callback: onLoad,
     });
@@ -27,11 +28,19 @@ const SearchBox = ({ styleBox }: SearchBoxProps) => {
 
     function selectedSuggestion(suggestionResult: any) {
       setIsShowHeader(true);
-      console.log(suggestionResult);
       setAddress({ ...address, address: {...address.address,...suggestionResult?.address, ...suggestionResult?.location} });
+      const temp =  inputBox.current
+      console.log(temp?.value);
+      if (temp) {
+        temp.value = suggestionResult?.address?.formattedAddress
+      }
     }
+  })
+
+  useEffect(() => {
+
   }, [])
-  useEffect(()=>{console.log('address', address);}, [address])
+  useEffect(()=>{}, [address])
 
   return (
     <>
@@ -40,9 +49,8 @@ const SearchBox = ({ styleBox }: SearchBoxProps) => {
           type='text'
           name='input-place'
           id='searchBox'
+          ref={inputBox}
           placeholder='Search your locations'
-          onChange={(event: any)=> setAddress({...address, address: {...address.address, formattedAddress: event.target.value}})}
-          value={address.address.formattedAddress}
           className={`outline-none focus:border-b-2 focus:border-slate-600 w-[calc(100%-40px)] ${styleBox}
           pointer-events-auto text-ellipsis
           `}

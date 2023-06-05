@@ -26,6 +26,7 @@ import AmountTabHostingProviders from '@/contexts/amountTabHosting';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import Script from 'next/script';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -44,14 +45,7 @@ export default function App({
 
   return (
     <>
-      <Head>
-        <script
-          type='text/javascript'
-          src={`https://www.bing.com/api/maps/mapcontrol?key=AiWimzL8WC5fWxhKerTLiSvd63qgv22WhCiBLgm63xMJ-nn1Mv9SMqYpLPB4nkMI`}
-          async
-          defer
-        ></script>
-      </Head>
+
       <SWRConfig value={{ fetcher: (url) => axiosClient.get(url), shouldRetryOnError: false }}>
         <SelectPopoverProvider>
           <PlaceListProvider>

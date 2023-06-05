@@ -77,14 +77,6 @@ function CreateHome({ keyMapBing }: CreateHomeProps): JSX.Element {
 
   return (
     <>
-      <Head>
-        <script
-          type='text/javascript'
-          src={`https://www.bing.com/api/maps/mapcontrol?key=AiWimzL8WC5fWxhKerTLiSvd63qgv22WhCiBLgm63xMJ-nn1Mv9SMqYpLPB4nkMI`}
-          async
-          defer
-        ></script>
-      </Head>
       <CreateHouseProvider>
         <div className="">
           {currentStep > 0 && currentStep <= 17 && <Header />}

@@ -43,14 +43,6 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
 
   return (
     <>
-      <Head>
-        <script
-          type='text/javascript'
-          src={`https://www.bing.com/api/maps/mapcontrol?key=AiWimzL8WC5fWxhKerTLiSvd63qgv22WhCiBLgm63xMJ-nn1Mv9SMqYpLPB4nkMI`}
-          async
-          defer
-        ></script>
-      </Head>
       <div className="w-full h-fit">
         <main className={`${monsterrat.className} relative box-border`} id="root">
           <AnimatePresence initial={false}>

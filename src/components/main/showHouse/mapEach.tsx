@@ -1,8 +1,5 @@
-import { motion } from 'framer-motion';
+import { whenLoaded } from "bing-maps-loader";
 import { useEffect, useState } from 'react';
-import { ImLocation2 } from 'react-icons/im';
-import { Map, Marker, NavigationControl } from 'react-map-gl';
-
 interface MapEachProps {
   longitude: number;
   latitude: number;
@@ -20,8 +17,7 @@ const MapEach = ({ latitude, longitude, zoom, keyMapBing }: MapEachProps) => {
     latitude: latitude,
     zoom: zoom
   });
-
-  useEffect(() => {
+  whenLoaded.then(() => {
     const map_ = document.getElementById('MapEach');
     if (map_) {
       var map = new Microsoft.Maps.Map(
@@ -39,11 +35,11 @@ const MapEach = ({ latitude, longitude, zoom, keyMapBing }: MapEachProps) => {
       layer.add(pushpin);
       map.layers.insert(layer);
     }
-  }, [latitude, longitude, zoom]);
+  })
 
   return (
     <div className='w-full h-[500px] rounded-3xl border-2 border-red-400 overflow-hidden'>
-      <div id='MapEach'></div>
+      <div id='MapEach' className="relative z-10"></div>
     </div>
   );
 };

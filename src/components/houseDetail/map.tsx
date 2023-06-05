@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import Map, { NavigationControl, Marker } from 'react-map-gl';
 import { ImLocation2 } from 'react-icons/im';
 import { useEffect, useState } from 'react';
-
+import { whenLoaded } from "bing-maps-loader";
 interface MapBoxProps {
   longitude: number | undefined;
   latitude: number | undefined;
@@ -16,7 +16,7 @@ const MapBox = ({ longitude, latitude, keyMapBing }: MapBoxProps) => {
     keyMapBing: keyMapBing
   });
 
-  useEffect(() => {
+  whenLoaded.then(() => {
     const map_ = document.getElementById('Map');
     if (map_) {
       var map = new Microsoft.Maps.Map(
@@ -35,7 +35,9 @@ const MapBox = ({ longitude, latitude, keyMapBing }: MapBoxProps) => {
       layer.add(pushpin);
       map.layers.insert(layer);
     }
-  }, [latitude, longitude]);
+  })
+
+  useEffect(() => {}, [latitude, longitude]);
 
   return (
     <div className="w-full h-fit mt-10 border-t-2 border-slate-800 mb-10">

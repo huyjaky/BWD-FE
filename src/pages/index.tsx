@@ -15,6 +15,9 @@ import { Montserrat } from 'next/font/google';
 import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
 import { authOptions } from './api/auth/[...nextauth]';
+import Head from 'next/head';
+import Script from 'next/script';
+import { initializeSSR } from 'bing-maps-loader';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -69,15 +72,22 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
   }
 
   useEffect(() => { }, [isFilter]);
+  useEffect(()=>{
+    initializeSSR();
+  },[])
 
   return (
     <>
-
+      <Head>
+        <Script>
+          {` window["GetMapCallback"] = () => (window["MicrosoftMapsLoaded"] = true); `}
+        </Script>
+      </Head>
       <motion.main
-      initial={{opacity: 0}}
-      animate={{opacity: 1}}
-      transition={{delay: 1, duration: .7}}
-      className={`${monsterrat.className} relative overflow-hidden`} id="root">
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: .7 }}
+        className={`${monsterrat.className} relative overflow-hidden`} id="root">
         <AnimatePresence initial={false}>
           <HeaderMain />
         </AnimatePresence>
@@ -91,9 +101,9 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
 
           {isFilter < 0 ?
             <motion.div
-            animate={{opacity: [0, 1]}}
-            transition={{delay: .5}}
-            className='text-[50px] mt-[20px] font-semibold'>Whistlist</motion.div>
+              animate={{ opacity: [0, 1] }}
+              transition={{ delay: .5 }}
+              className='text-[50px] mt-[20px] font-semibold'>Whistlist</motion.div>
             :
             <></>
           }
@@ -108,6 +118,11 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
         <FooterRooms />
         <FooterMainRes />
       </motion.main>
+      <Script
+        src='https://www.bing.com/api/maps/mapcontrol?callback=GetMapCallback&amp;key=AiWimzL8WC5fWxhKerTLiSvd63qgv22WhCiBLgm63xMJ-nn1Mv9SMqYpLPB4nkMI'
+        async={true}
+        defer={true}
+      />
     </>
   );
 };
@@ -119,7 +134,7 @@ export default Home;
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getServerSession(req, res, authOptions);
   const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
-
+  initializeSSR();
   // if user available not callback api from server
   if (session?.userAcc) {
     return {
