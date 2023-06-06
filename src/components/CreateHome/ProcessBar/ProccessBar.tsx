@@ -43,7 +43,6 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   const [isValidated, setValidated] = useState(false);
   const { state } = useContext(newHouseContext);
   useEffect(() => {
-    console.log('rerender');
     if (currentStep == 10) {
       if (state[steps[currentStep - 1].data].length > 0) {
         setValidated(true);
@@ -55,7 +54,6 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
         state[steps[currentStep - 1].data] &&
         typeof state[steps[currentStep - 1].data] !== 'object'
       ) {
-        console.log('ok');
         setValidated(true);
       } else if (typeof state[steps[currentStep - 1].data] === 'object') {
         if (currentStep === 7 || currentStep === 17) {

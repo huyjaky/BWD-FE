@@ -1,14 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Signature from '../../../../public/assets/signature.jpg';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { newHouseContext } from '../../../contexts/createHome';
 import { useRouter } from 'next/router';
 
-export default function StepCongratulation() {
+interface StepCongratulationProps {
+  api_url_path: string
+}
+
+export default function StepCongratulation({api_url_path}: StepCongratulationProps) {
   const { state } = useContext(newHouseContext);
   console.log(state);
   const router = useRouter();
+
+  useEffect(()=>{
+    
+  }, [])
 
   const handleClick = () => {
     router.push('/hosting');

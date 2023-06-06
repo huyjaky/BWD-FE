@@ -49,7 +49,6 @@ const ButtonAccount = () => {
       ref={controlBar}
       onClick={() => {
         setIsClick(!isClick);
-        console.log('isClick', isClick);
       }}
     >
       <BsList className="w-[30px] h-[30px]" />

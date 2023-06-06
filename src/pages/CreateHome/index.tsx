@@ -78,7 +78,7 @@ const CreateHome: NextPageWithLayout<CreateHomeProps> = ({ keyMapBing, api_url_p
     { number: 15, component: <Step15CHome />, data: 'guest' },
     { number: 16, component: <Step16CHome />, data: 'price' },
     { number: 17, component: <Step17CHome />, data: 'note' },
-    { number: 18, component: <StepCongratulation />, data: '' }
+    { number: 18, component: <StepCongratulation api_url_path={api_url_path} />, data: '' }
   ];
 
   return (
