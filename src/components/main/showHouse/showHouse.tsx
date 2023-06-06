@@ -85,7 +85,8 @@ const variants: Variants = {
   },
   hoverItem: {
     scale: 1.03,
-    boxShadow: 'rgba(240, 46, 170, 0.4) -5px 5px, rgba(240, 46, 170, 0.3) -10px 10px, rgba(240, 46, 170, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, rgba(240, 46, 170, 0.05) -25px 25px',
+    boxShadow:
+      'rgba(240, 46, 170, 0.4) -5px 5px, rgba(240, 46, 170, 0.3) -10px 10px, rgba(240, 46, 170, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, rgba(240, 46, 170, 0.05) -25px 25px',
     transition: {
       delay: 0,
       type: 'spring'
@@ -102,7 +103,7 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
   const { filterForm } = useContext(filterContext);
   const { address } = useContext(selectPlaceContext);
-  const {setCurrentHosting} = useContext(AmountTabHostingContext)
+  const { setCurrentHosting } = useContext(AmountTabHostingContext);
   const { data: session, status } = useSession();
   const { user, setUser } = useContext(userAccContext);
   const { isFilter } = useContext(getHouseContext);
@@ -158,9 +159,7 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
       }
       setHouseTemp(arr.data as house_[]);
     } else if (infShow === 'authListHouse' && status === 'authenticated') {
-      const arr = await houseApi[infShow](
-        temp.UserId
-      );
+      const arr = await houseApi[infShow](temp.UserId);
       console.log('auth authlisthouse', arr);
       if (arr.data.length == 0) {
         setHasMore(false);
@@ -168,9 +167,7 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
       }
       setHouseTemp(arr.data as house_[]);
     } else if (infShow === 'favoriteHouse' && status === 'authenticated') {
-      const arr = await houseApi['authFavoriteList'](
-        temp.UserId
-      );
+      const arr = await houseApi['authFavoriteList'](temp.UserId);
       if (arr.data?.length == 0) {
         setHasMore(false);
         return;
@@ -221,7 +218,9 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
     }
   };
 
-  useEffect(() => { setCurrentHosting(houseTemp.length) }, [houseTemp, hasMore]);
+  useEffect(() => {
+    setCurrentHosting(houseTemp.length);
+  }, [houseTemp, hasMore]);
 
   const handleOnClickOutSideMaskUser = (event: any) => {
     const isClickInSide = maskUser.current?.contains(event.target);
@@ -297,20 +296,19 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
           style={{ overflow: 'hidden' }}
           className="w-full h-fit grid grid-cols-houseBox gap-x-9 gap-y-8 px-7 py-8"
           endMessage={<div>No more values</div>}
-
         >
           {houseTemp.map((item: house_, index: number) => {
             return (
               <motion.div
                 initial={{ opacity: 0, display: 'none' }}
                 animate={{ opacity: 1, display: 'block' }}
-                transition={{ type: 'tween', delay: index * .1 }}
+                transition={{ type: 'tween', delay: index * 0.1 }}
                 key={index}
               >
                 <motion.div
                   // whileInView={{ x: [-10, 0] }}
                   variants={variants}
-                  whileHover='hoverItem'
+                  whileHover="hoverItem"
                   transition={{ type: 'spring' }}
                   className="w-full h-[400px] rounded-2xl box-border"
                 >
@@ -318,9 +316,9 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                     <Carousel arrImg={item.arrImg} houseId={item.HouseId} />
 
                     {/* heart */}
-                    {infShow !== 'authListHouse' &&
+                    {infShow !== 'authListHouse' && (
                       <Heart HouseId={item.HouseId} IsFavorite={item.IsFavorite} />
-                    }
+                    )}
 
                     <motion.button
                       whileHover={{ scale: 1.2 }}
@@ -332,12 +330,12 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                           zoom: 18
                         });
                       }}
-                      className={`absolute top-3 right-12 ${infShow === 'authListHouse' ? 'right-2' : ''} text-red-500 text-[25px] z-10`}
+                      className={`absolute top-3 right-12 ${
+                        infShow === 'authListHouse' ? 'right-2' : ''
+                      } text-red-500 text-[25px] z-10`}
                     >
                       <ImMap />
                     </motion.button>
-
-
 
                     <motion.button
                       onClick={() => {
@@ -349,14 +347,15 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                 "
                     >
                       {item.useracc.Image ? (
-                        <img src={item.useracc.Image} alt="" className="w-full h-full object-cover" />
+                        <img
+                          src={item.useracc.Image}
+                          alt=""
+                          className="w-full h-full object-cover"
+                        />
                       ) : (
                         <HiUserCircle className="w-full h-full" />
                       )}
                     </motion.button>
-
-
-
                   </div>
                   <Link href={`/house/${item.HouseId}`}>
                     <div className="h-[100px] w-full box-border p-4">
@@ -376,9 +375,7 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                   </Link>
                 </motion.div>
               </motion.div>
-            )
-
-
+            );
           })}
 
           {houseTemp.length == 0 &&

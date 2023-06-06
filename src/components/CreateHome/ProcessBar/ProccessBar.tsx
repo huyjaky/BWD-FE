@@ -44,20 +44,20 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   const { state } = useContext(newHouseContext);
   useEffect(() => {
     console.log('rerender');
-    if(currentStep == 10) {
-      if(state[steps[currentStep - 1].data].length > 0){
-        setValidated(true)
+    if (currentStep == 10) {
+      if (state[steps[currentStep - 1].data].length > 0) {
+        setValidated(true);
       } else {
-        setValidated(false)
+        setValidated(false);
       }
     } else if (steps[currentStep - 1].data) {
       if (
-        (state[steps[currentStep - 1].data] &&
-          typeof state[steps[currentStep - 1].data] !== 'object') 
+        state[steps[currentStep - 1].data] &&
+        typeof state[steps[currentStep - 1].data] !== 'object'
       ) {
         console.log('ok');
         setValidated(true);
-      }  else if (typeof state[steps[currentStep - 1].data] === 'object') {
+      } else if (typeof state[steps[currentStep - 1].data] === 'object') {
         if (currentStep === 7 || currentStep === 17) {
           setValidated(true);
         } else {
@@ -86,7 +86,8 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
           className="bg-black h-2 "
           style={{ borderRadius: ' 0 10px 10px 0' }}
           animate={{ width: `${(currentStep / steps.length) * 100}%` }}
-          transition={{ duration: 1 }}></motion.div>
+          transition={{ duration: 1 }}
+        ></motion.div>
       </div>
       <div className="flex items-center justify-between mt-2 ">
         <motion.button
@@ -94,7 +95,8 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
           initial="initial"
           whileHover="hover"
           className="py-4 px-8 bg-whiter text-[#222222] font-semibold text-[16px] rounded-xl inline ml-8 underline"
-          onClick={handleBackStep}>
+          onClick={handleBackStep}
+        >
           Back
         </motion.button>
 
@@ -104,7 +106,8 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
               isValidated ? 'bg-black' : 'bg-gray-600 '
             }`}
             onClick={handleNextStep}
-            disabled={!isValidated}>
+            disabled={!isValidated}
+          >
             Next
           </motion.button>
         </motion.div>

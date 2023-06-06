@@ -23,7 +23,7 @@ const HostLanguage = () => {
           );
         })}
 
-        <div className="flex-1 h-[100px] flex" >
+        <div className="flex-1 h-[100px] flex">
           <button
             onClick={(event) => setFilterForm({ ...filterForm, hostLanguage: '' })}
             className={`w-[80%] h-[70px] m-auto border-2 rounded-xl hover:bg-redIcon hover:text-white
@@ -33,7 +33,6 @@ const HostLanguage = () => {
             All
           </button>
         </div>
-
       </div>
     </div>
   );

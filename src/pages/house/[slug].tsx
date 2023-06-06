@@ -6,28 +6,30 @@ import MapBox from '@/components/houseDetail/map';
 import Picture from '@/components/houseDetail/picture';
 import ShowAllHouse from '@/components/houseDetail/showAllHousePt/showAllHouse';
 import TitleHouse from '@/components/houseDetail/titleHouse';
-import Auth from '@/components/layouts/auth';
+import AuthWithAnimate from '@/components/layouts/authWithAnimate';
 import Carousel from '@/components/main/showHouse/carousel';
 import HeaderMain from '@/components/rootMaskHeader/headerMain';
 import { IsShowPtContext } from '@/contexts/isShowPt';
 import { house_ } from '@/models/house';
 import { NextPageWithLayout } from '@/models/layoutprops';
+import { initializeSSR } from 'bing-maps-loader';
 import { AnimatePresence } from 'framer-motion';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { Montserrat } from 'next/font/google';
 import Head from 'next/head';
+import Script from 'next/script';
 import { useContext } from 'react';
 import { BiMenu } from 'react-icons/bi';
 
 interface HouseDetailProps {
   houseDetail: house_;
   keyMapBing: string;
-  link: string
+  link: string;
 }
 const monsterrat = Montserrat({
   subsets: ['latin'],
   weight: ['200', '400', '600', '800'],
-  variable: '--font-monsterrat',
+  variable: '--font-monsterrat'
 });
 
 const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
@@ -40,6 +42,7 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
     setIsShowAllPt(true);
     document.body.style.overflow = 'hidden';
   };
+  initializeSSR()
 
   return (
     <>
@@ -61,9 +64,10 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
               <Carousel arrImg={houseDetail.arrImg} houseId={houseDetail.HouseId} />
               <div
                 onClick={handleOnClick}
-                className='absolute right-4 bottom-4 w-fit h-fit
+                className="absolute right-4 bottom-4 w-fit h-fit
               rounded-xl p-3
-               bg-white z-50 flex items-center'>
+               bg-white z-50 flex items-center"
+              >
                 <BiMenu className="text-[24px] " />
                 <span className="text-[19px]">Show all photos</span>
               </div>
@@ -71,7 +75,11 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
             <ShowAllHouse arrImg={houseDetail.arrImg} />
             <div className="w-full h-fit mt-10">
               <div className="w-full h-fit flex box-border mobile:flex-col">
-                <Host link={link} userAcc={houseDetail.useracc} placeOffer={houseDetail.placeOffer} />
+                <Host
+                  link={link}
+                  userAcc={houseDetail.useracc}
+                  placeOffer={houseDetail.placeOffer}
+                />
                 <article className="flex-[5] ml-5">
                   <Bill houseDetail={houseDetail} />
                 </article>
@@ -88,16 +96,17 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
           <FooterMainRes />
         </main>
       </div>
+
     </>
   );
 };
 
 let cachedHouseDetail: house_[] = [];
 
-HouseDetail.Layout = Auth;
+HouseDetail.Layout = AuthWithAnimate;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const link = process.env.API_URL_PATH
+  const link = process.env.API_URL_PATH;
   if (cachedHouseDetail.length == 0) {
     const slug = await fetch(`${link}/api/get/house/page`);
     cachedHouseDetail = await slug.json();
@@ -111,7 +120,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
-  const link = process.env.API_URL_PATH
+  initializeSSR();
+  const link = process.env.API_URL_PATH;
   if (cachedHouseDetail.length == 0) {
     const slug = await fetch(`${link}/api/get/house/page`);
     cachedHouseDetail = await slug.json();

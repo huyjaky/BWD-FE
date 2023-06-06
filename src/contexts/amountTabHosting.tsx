@@ -1,29 +1,33 @@
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext, useState } from 'react';
 
 interface AmountTabHostingProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 interface AmountTabHostingData {
-  currentHosting: number,
-  setCurrentHosting: (payload: number) => void
+  currentHosting: number;
+  setCurrentHosting: (payload: number) => void;
 }
 
 const AmountTabHostingDataDefault: AmountTabHostingData = {
   currentHosting: 0,
-  setCurrentHosting: ()=>{},
-}
+  setCurrentHosting: () => {}
+};
 
-export const AmountTabHostingContext = createContext<AmountTabHostingData>(AmountTabHostingDataDefault)
+export const AmountTabHostingContext = createContext<AmountTabHostingData>(
+  AmountTabHostingDataDefault
+);
 
-const AmountTabHostingProviders = ({children}: AmountTabHostingProps) =>{
+const AmountTabHostingProviders = ({ children }: AmountTabHostingProps) => {
   const [currentHosting, setCurrentHosting_] = useState(AmountTabHostingDataDefault.currentHosting);
   const setCurrentHosting = (payload: number) => setCurrentHosting_(payload);
 
-  const AmountCurrentHostingDynamicData = {currentHosting, setCurrentHosting};
-  return  <AmountTabHostingContext.Provider value={AmountCurrentHostingDynamicData}>
-    {children}
-  </AmountTabHostingContext.Provider>
-}
+  const AmountCurrentHostingDynamicData = { currentHosting, setCurrentHosting };
+  return (
+    <AmountTabHostingContext.Provider value={AmountCurrentHostingDynamicData}>
+      {children}
+    </AmountTabHostingContext.Provider>
+  );
+};
 
-export default AmountTabHostingProviders
+export default AmountTabHostingProviders;

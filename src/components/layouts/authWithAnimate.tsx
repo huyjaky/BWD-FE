@@ -2,9 +2,12 @@ import { getHouseContext } from '@/contexts/getHouse';
 import { userAccContext } from '@/contexts/userAcc';
 import { LayoutProps } from '@/models/layoutprops';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
+import Animate from './animate';
+import MapOptions from './mapOptions';
 
-const Auth = ({ children }: LayoutProps) => {
+const AuthWithAnimate = ({ children }: LayoutProps) => {
   const { data: session, status } = useSession();
   const { isFilter } = useContext(getHouseContext);
   const { setUser, user } = useContext(userAccContext);
@@ -18,10 +21,16 @@ const Auth = ({ children }: LayoutProps) => {
       }
     };
     setuser();
-    console.log('auth');
   }, [isFilter, status]);
 
-  return <>{children}</>;
+  return <>
+    <MapOptions>
+
+      <Animate>
+        {children}
+      </Animate>
+    </MapOptions>
+  </>;
 };
 
-export default Auth;
+export default AuthWithAnimate;

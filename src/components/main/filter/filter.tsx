@@ -13,14 +13,14 @@ const Filter = ({ isInvisible }: FilterProps) => {
   const buttonFilter = useRef<HTMLInputElement>(null);
   const { setIsClickOutSide } = useContext(filterFormAnimateContext);
   const { filterForm, isEmpty } = useContext(filterContext);
-  const { isFilter } = useContext(getHouseContext)
+  const { isFilter } = useContext(getHouseContext);
 
   const handleOnClickFilter = async (event: any) => {
     window.scrollTo(0, 0);
     setIsClickOutSide(true);
     document.body.style.overflow = 'hidden';
   };
-  useEffect(()=>{},[isFilter, filterForm])
+  useEffect(() => {}, [isFilter, filterForm]);
 
   return (
     <>
@@ -38,21 +38,22 @@ tablet:h-full tablet:w-[100px]
           `}
           ref={buttonFilter}
         >
-          {(isEmpty() && isFilter === 0) || isFilter < 0 ?
+          {(isEmpty() && isFilter === 0) || isFilter < 0 ? (
             <></>
-            :
+          ) : (
             <motion.div
               animate={{ scale: 1.2 }}
               transition={{ repeat: Infinity, duration: 1 }}
-              className='w-[20px] h-[20px] rounded-full bg-red-400 absolute -right-1
+              className="w-[20px] h-[20px] rounded-full bg-red-400 absolute -right-1
           -top-2 flex opacity-70
-          '>
-              <div className='w-[10px] h-[10px] bg-red-600 rounded-full m-auto'></div>
+          "
+            >
+              <div className="w-[10px] h-[10px] bg-red-600 rounded-full m-auto"></div>
             </motion.div>
-          }
+          )}
           <div className="flex w-fit h-[30px] m-auto  mobile:h-full tablet:h-full">
             <HiOutlineFilter className="w-[30px] h-full m-auto " />
-            <div className='w-fit h-full flex items-center mobile:hidden tablet:hidden '>
+            <div className="w-fit h-full flex items-center mobile:hidden tablet:hidden ">
               <span className="font-semibold">Filter</span>
             </div>
           </div>

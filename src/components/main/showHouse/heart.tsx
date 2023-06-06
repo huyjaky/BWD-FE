@@ -15,7 +15,7 @@ const Heart = ({ HouseId, IsFavorite }: HeartProps) => {
   const [isClickHeart, setIsClickHeart] = useState(false);
   const { setIsLoginClick } = useContext(selectPopoverContext);
 
-  const handleOnClickFavorite = async ( event:any, HouseId: string) => {
+  const handleOnClickFavorite = async (event: any, HouseId: string) => {
     const addHouseFavorite = await houseApi.authFavoriteHouse(HouseId, user.UserId);
     if (addHouseFavorite.status != 200) {
       return;
@@ -25,7 +25,7 @@ const Heart = ({ HouseId, IsFavorite }: HeartProps) => {
   };
 
   // bo khoai danh sahc yeu thich
-  const handleOnClickUnFavorite = async ( event:any, HouseId: string) => {
+  const handleOnClickUnFavorite = async (event: any, HouseId: string) => {
     const removeHouseFavorite = await houseApi.authUnFavoriteHouse(HouseId, user.UserId);
     if (removeHouseFavorite.status != 200) {
       return;
@@ -33,7 +33,6 @@ const Heart = ({ HouseId, IsFavorite }: HeartProps) => {
       return;
     }
   };
-
 
   return (
     <motion.label
@@ -51,7 +50,7 @@ const Heart = ({ HouseId, IsFavorite }: HeartProps) => {
           }
           if (event.currentTarget?.checked && IsFavorite == false) {
             await handleOnClickFavorite(event, HouseId);
-          } else if (!event.currentTarget?.checked && IsFavorite == false){
+          } else if (!event.currentTarget?.checked && IsFavorite == false) {
             await handleOnClickUnFavorite(event, HouseId);
           }
 

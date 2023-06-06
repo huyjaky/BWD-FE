@@ -1,10 +1,12 @@
 import { schedule } from '@/api-client/schedule';
+import AuthWithAnimate from '@/components/layouts/authWithAnimate';
 import CheckIn_Out from '@/components/rootMaskHeader/controlPlan/controlBar/popOverDetail/checkIn_Out';
 import Who from '@/components/rootMaskHeader/controlPlan/controlBar/popOverDetail/who';
 import { BillContext } from '@/contexts/bill';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 import { userAccContext } from '@/contexts/userAcc';
 import { house_ } from '@/models/house';
+import { NextPageWithLayout } from '@/models/layoutprops';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import moment from 'moment';
@@ -52,7 +54,7 @@ const schema = yup
 
 type ConfirmSchema = yup.InferType<typeof schema>;
 
-const Confirm = ({ houseDetail, keyMapBox }: ConfirmProps) => {
+const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: ConfirmProps) => {
   const { Bill, setBill } = useContext(BillContext);
   const { address } = useContext(selectPlaceContext);
   const { user } = useContext(userAccContext);
@@ -104,10 +106,14 @@ const Confirm = ({ houseDetail, keyMapBox }: ConfirmProps) => {
         setMaskNotificate(true);
         return;
       }
-      router.push({
-        pathname: '/confirm/'+houseDetail.HouseId,
-        query: { slug: 'your-slug-value' }
-      }, undefined, { shallow: true });
+      router.push(
+        {
+          pathname: '/confirm/' + houseDetail.HouseId,
+          query: { slug: 'your-slug-value' }
+        },
+        undefined,
+        { shallow: true }
+      );
     }
   };
 
@@ -189,9 +195,11 @@ const Confirm = ({ houseDetail, keyMapBox }: ConfirmProps) => {
                 cancelled before create new one schedule apointment
               </div>
 
-              <Link href={{
-                pathname: `/house/${houseDetail.HouseId}`,
-              }}>
+              <Link
+                href={{
+                  pathname: `/house/${houseDetail.HouseId}`
+                }}
+              >
                 <button className="w-full mt-2 bg-red-400 rounded-2xl text-white">
                   Go to your schedule
                 </button>
@@ -270,8 +278,9 @@ const Confirm = ({ houseDetail, keyMapBox }: ConfirmProps) => {
                 <div
                   className={`w-full h-fit  relative
               after:absolute after:bottom-0 after:w-full after:h-[4px]  mt-5
-              after:bg-slate-700 after:right-0  rounded-xl ${errors.phoneNumber?.message ? 'after:bg-red-500' : ''
-                    }
+              after:bg-slate-700 after:right-0  rounded-xl ${
+                errors.phoneNumber?.message ? 'after:bg-red-500' : ''
+              }
               `}
                 >
                   <input
@@ -342,10 +351,12 @@ const Confirm = ({ houseDetail, keyMapBox }: ConfirmProps) => {
   );
 };
 
+Confirm.Layout = AuthWithAnimate;
+
 let cachedHouseDetail: house_[] = [];
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const link = process.env.API_URL_PATH
+  const link = process.env.API_URL_PATH;
   if (cachedHouseDetail.length == 0) {
     const slug = await fetch(`${link}/api/get/house/page`);
     cachedHouseDetail = await slug.json();
@@ -359,7 +370,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
-  const link = process.env.API_URL_PATH
+  const link = process.env.API_URL_PATH;
   if (cachedHouseDetail.length == 0) {
     const slug = await fetch(`${link}/api/get/house/page`);
     cachedHouseDetail = await slug.json();

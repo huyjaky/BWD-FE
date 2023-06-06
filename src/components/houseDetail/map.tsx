@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import Map, { NavigationControl, Marker } from 'react-map-gl';
 import { ImLocation2 } from 'react-icons/im';
 import { useEffect, useState } from 'react';
-import { whenLoaded } from "bing-maps-loader";
+import { whenLoaded } from 'bing-maps-loader';
 interface MapBoxProps {
   longitude: number | undefined;
   latitude: number | undefined;
@@ -19,23 +19,20 @@ const MapBox = ({ longitude, latitude, keyMapBing }: MapBoxProps) => {
   whenLoaded.then(() => {
     const map_ = document.getElementById('Map');
     if (map_) {
-      var map = new Microsoft.Maps.Map(
-        map_,
-        {
-          /* No need to set credentials if already passed in URL */
-          center: new Microsoft.Maps.Location(latitude, longitude),
-          mapTypeId: Microsoft.Maps.MapTypeId.road,
-          zoom: 18,
-          credentials: keyMapBing,
-          disableScrollWheelZoom: true
-        }
-      );
+      var map = new Microsoft.Maps.Map(map_, {
+        /* No need to set credentials if already passed in URL */
+        center: new Microsoft.Maps.Location(latitude, longitude),
+        mapTypeId: Microsoft.Maps.MapTypeId.road,
+        zoom: 18,
+        credentials: keyMapBing,
+        disableScrollWheelZoom: true
+      });
       var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), undefined);
       var layer = new Microsoft.Maps.Layer();
       layer.add(pushpin);
       map.layers.insert(layer);
     }
-  })
+  });
 
   useEffect(() => {}, [latitude, longitude]);
 
@@ -49,8 +46,8 @@ const MapBox = ({ longitude, latitude, keyMapBing }: MapBoxProps) => {
         transition={{ duration: 0.5 }}
         className="w-full h-fit"
       >
-        <div className='w-full h-[500px] rounded-3xl border-2 border-red-400 overflow-hidden'>
-          <div id='Map'></div>
+        <div className="w-full h-[500px] rounded-3xl border-2 border-red-400 overflow-hidden">
+          <div id="Map"></div>
         </div>
       </motion.div>
     </div>

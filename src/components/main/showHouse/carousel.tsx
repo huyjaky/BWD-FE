@@ -157,8 +157,6 @@ const Carousel = ({ arrImg, houseId }: CarouselProps) => {
           >
             <GrCaretNext />
           </motion.button>
-
-          
         </motion.div>
       </AnimatePresence>
     </>

@@ -13,11 +13,8 @@ export default function Step16CHome() {
 
   const [error, setError] = useState<boolean>(false);
 
-
-
   // hàm handleInput đc chạy vào khi mình chỉnh tiền bằng tay, nhấn nút tăng giảm onChange không có tác dụng
   const handleMoney = (event: ChangeEvent<HTMLInputElement>) => {
-
     const inputValue = event.target.value;
 
     const moneyValue = parseInt(inputValue.slice(1));
@@ -36,32 +33,29 @@ export default function Step16CHome() {
 
   function cre() {
     if (money >= 10) {
-      setError(false)
-      setMoney(prev => prev + 1)
+      setError(false);
+      setMoney((prev) => prev + 1);
     } else if (money < 10 && money >= 0) {
-      setError(true)
-      setMoney(prev => prev + 1)
+      setError(true);
+      setMoney((prev) => prev + 1);
     }
-
   }
   function incre() {
     if (money > 10) {
-      setError(false)
-      setMoney(prev => prev - 1)
-    }
-    else if (money <= 10 && money > 0) {
-      setError(true)
-      setMoney(prev => prev - 1)
-    }
-    else {
-      setError(true)
-      setMoney(0)
+      setError(false);
+      setMoney((prev) => prev - 1);
+    } else if (money <= 10 && money > 0) {
+      setError(true);
+      setMoney((prev) => prev - 1);
+    } else {
+      setError(true);
+      setMoney(0);
     }
   }
 
   useEffect(() => {
-    dispatch({ type: 'STEP16', payload: money })
-  }, [money])
+    dispatch({ type: 'STEP16', payload: money });
+  }, [money]);
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -113,7 +107,13 @@ export default function Step16CHome() {
                   <div className="flex items-center justify-around w-[430px] pb-[16px]">
                     <button
                       disabled={money < 1}
-                      onClick={incre} className={`border w-[55px] h-[48px] flex justify-center items-center rounded-full ${money >= 1 ? 'hover:border-black text-black border-[#717171]' : 'bg-[#FFF] text-[#EBEBEB] border-[#EBEBEB]'}`}>
+                      onClick={incre}
+                      className={`border w-[55px] h-[48px] flex justify-center items-center rounded-full ${
+                        money >= 1
+                          ? 'hover:border-black text-black border-[#717171]'
+                          : 'bg-[#FFF] text-[#EBEBEB] border-[#EBEBEB]'
+                      }`}
+                    >
                       <span>
                         <RxMinus />
                       </span>
@@ -129,8 +129,9 @@ export default function Step16CHome() {
                         type="text"
                         value={`$${money}`}
                         onChange={handleMoney}
-                        className={`my-[8px] mx-[12px] w-[98%] h-[98%] border border-black rounded-[8px] text-[48px] text-center ${error ? ' bg-red-50 border border-red-500 text-red-900' : ''
-                          }
+                        className={`my-[8px] mx-[12px] w-[98%] h-[98%] border border-black rounded-[8px] text-[48px] text-center ${
+                          error ? ' bg-red-50 border border-red-500 text-red-900' : ''
+                        }
                                             `}
                       />
                     </div>
@@ -138,7 +139,11 @@ export default function Step16CHome() {
                     <button
                       disabled={money > 10000}
                       onClick={cre}
-                      className={`border ml-3 w-[55px] h-[48px] flex justify-center items-center rounded-full ${money <= 10000 ? 'hover:border-black text-black border-[#717171]' : 'bg-[#FFF] text-[#EBEBEB] border-[#EBEBEB]'}`}
+                      className={`border ml-3 w-[55px] h-[48px] flex justify-center items-center rounded-full ${
+                        money <= 10000
+                          ? 'hover:border-black text-black border-[#717171]'
+                          : 'bg-[#FFF] text-[#EBEBEB] border-[#EBEBEB]'
+                      }`}
                     >
                       <BsPlusLg />
                     </button>

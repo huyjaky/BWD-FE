@@ -6,12 +6,12 @@ import { newHouseContext } from '../../../contexts/createHome';
 import MapEach from '@/components/main/showHouse/mapEach';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 interface Step5CHome {
-  keyMapBing: string
+  keyMapBing: string;
 }
 
-const Step5CHome: React.FC<Step5CHome> = ({keyMapBing}: Step5CHome) => {
+const Step5CHome: React.FC<Step5CHome> = ({ keyMapBing }: Step5CHome) => {
   const { state, dispatch } = useContext(newHouseContext);
-  const {address} = useContext(selectPlaceContext);
+  const { address } = useContext(selectPlaceContext);
   const [toggle, setToggle] = useState(false);
   const [country, setCountry] = useState(state.addressConfirmation.country);
   const [subAddress, setSubAddress] = useState({
@@ -217,8 +217,11 @@ const Step5CHome: React.FC<Step5CHome> = ({keyMapBing}: Step5CHome) => {
               </button>
             </div>
           </div>
-          <MapEach keyMapBing={keyMapBing} latitude={address.address.latitude}
-          longitude={address.address.longitude} zoom={15}
+          <MapEach
+            keyMapBing={keyMapBing}
+            latitude={address.address.latitude}
+            longitude={address.address.longitude}
+            zoom={15}
           />
         </div>
       </div>

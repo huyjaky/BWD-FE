@@ -13,7 +13,7 @@ interface mainProps {
 
 function Main({ keyMapBing }: mainProps): JSX.Element {
   const [selected, setSelected] = useState('');
-  const {currentHosting} = useContext(AmountTabHostingContext)
+  const { currentHosting } = useContext(AmountTabHostingContext);
   const [refButton, inViewButton] = useInView({
     // Kích hoạt nhiều lần khi vào khung nhìn
     threshold: 0.01 // Ngưỡng nhìn thấy (tỷ lệ của phần tử nằm trong khung nhìn)
@@ -43,9 +43,9 @@ function Main({ keyMapBing }: mainProps): JSX.Element {
     visible: { opacity: 1, y: 0 }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(currentHosting);
-  }, [currentHosting])
+  }, [currentHosting]);
 
   return (
     <div className="w-[100%]">
@@ -94,7 +94,8 @@ function Main({ keyMapBing }: mainProps): JSX.Element {
                     selected={selected}
                     setSelected={setSelected}
                     content={reservation.title}
-                    number={reservation.title === 'Currently hosting' ? currentHosting : 0} />
+                    number={reservation.title === 'Currently hosting' ? currentHosting : 0}
+                  />
                 </motion.div>
               ))}
             </motion.div>
@@ -106,14 +107,20 @@ function Main({ keyMapBing }: mainProps): JSX.Element {
               px-4 transition-all
               "
             >
-              <div className='w-full h-fit transition-all duration-1000'>
-                <motion.div className={`w-full h-fit ${selected === 'Currently hosting' ? '' : 'hidden'}`}>
-                  <ShowHouse infShow='authListHouse' keyMapBing={keyMapBing} />
+              <div className="w-full h-fit transition-all duration-1000">
+                <motion.div
+                  className={`w-full h-fit ${selected === 'Currently hosting' ? '' : 'hidden'}`}
+                >
+                  <ShowHouse infShow="authListHouse" keyMapBing={keyMapBing} />
                 </motion.div>
 
-                <div className={`${selected === 'Currently hosting' ? 'hidden' : ''} flex flex-col items-center justify-center gap-4 py-24 `}>
+                <div
+                  className={`${
+                    selected === 'Currently hosting' ? 'hidden' : ''
+                  } flex flex-col items-center justify-center gap-4 py-24 `}
+                >
                   <AnyReview />
-                  <span className='text-[14px] h-[36px] w-[200px] text-center'>
+                  <span className="text-[14px] h-[36px] w-[200px] text-center">
                     You don't have any guest reviews to write.
                   </span>
                 </div>

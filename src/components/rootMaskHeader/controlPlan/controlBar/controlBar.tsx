@@ -20,7 +20,7 @@ const ControlBar = () => {
   const { setSelected } = useContext(selectPopoverContext);
   const { address } = useContext(selectPlaceContext);
   const { isFilter, setIsFilter } = useContext(getHouseContext);
-  const {setIsShowHeader} = useContext(filterFormAnimateContext);
+  const { setIsShowHeader } = useContext(filterFormAnimateContext);
   const router = useRouter();
 
   const handleOnMask = (event: any) => {
@@ -47,7 +47,7 @@ const ControlBar = () => {
       return;
     } else {
       setIsShowHeader(false);
-      setIsFilter(isFilter*isFilter+1);
+      setIsFilter(isFilter * isFilter + 1);
       return;
     }
   };
@@ -131,7 +131,7 @@ const ControlBar = () => {
 
           <div className="flex-1 flex box-border p-3 w-full relative z-10 mobile:py-5 tablet:py-5 ">
             <motion.div
-              whileTap={{scale: .8}}
+              whileTap={{ scale: 0.8 }}
               className="rounded-full w-full h-full bg-red-500 flex "
               id="btn-search-header"
               onClick={fetchData}

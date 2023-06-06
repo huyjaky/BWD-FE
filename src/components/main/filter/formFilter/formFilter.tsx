@@ -30,7 +30,7 @@ const FormFilter = () => {
   const { filterForm, setFilterForm } = useContext(filterContext);
   const { setIsFilter, isFilter } = useContext(getHouseContext);
   const { isClickOutSide, setIsClickOutSide } = useContext(filterFormAnimateContext);
-  const { address, setAddress } = useContext(selectPlaceContext)
+  const { address, setAddress } = useContext(selectPlaceContext);
   const { isShowAllPt } = useContext(IsShowPtContext);
   const formFilter = useRef<HTMLInputElement>(null);
 
@@ -171,13 +171,14 @@ const FormFilter = () => {
                   </motion.button>
                   <span className="">
                     {!show &&
-                      (filterForm.amenities.features.length != 0 ||
-                        filterForm.amenities.location.length != 0 ||
-                        filterForm.amenities.safety.length != 0)
-                      ? ` you have filled in ${filterForm.amenities.features.length +
-                      filterForm.amenities.location.length +
-                      filterForm.amenities.safety.length
-                      } options`
+                    (filterForm.amenities.features.length != 0 ||
+                      filterForm.amenities.location.length != 0 ||
+                      filterForm.amenities.safety.length != 0)
+                      ? ` you have filled in ${
+                          filterForm.amenities.features.length +
+                          filterForm.amenities.location.length +
+                          filterForm.amenities.safety.length
+                        } options`
                       : ''}
                   </span>
                 </div>
@@ -226,9 +227,9 @@ const FormFilter = () => {
                     formattedAddress: '',
                     latitude: 0,
                     longitude: 0
-                  }
+                  };
                   setFilterForm(filterFormTemp);
-                  setAddress({...address, address: {...address.address, ...addressTemp}});
+                  setAddress({ ...address, address: { ...address.address, ...addressTemp } });
                 }}
               >
                 Clear all

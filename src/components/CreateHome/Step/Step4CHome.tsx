@@ -1,11 +1,11 @@
 import React from 'react';
 import Map from '../Map/Map';
 import { motion } from 'framer-motion';
-interface Step4CHomeProps{
-  keyMapBing:string
+interface Step4CHomeProps {
+  keyMapBing: string;
 }
 
-function Step4CHome({keyMapBing}: Step4CHomeProps): JSX.Element {
+function Step4CHome({ keyMapBing }: Step4CHomeProps): JSX.Element {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -33,7 +33,7 @@ function Step4CHome({keyMapBing}: Step4CHomeProps): JSX.Element {
             Your address is only shared with guests after they’ve made a reservation.
           </motion.p>
         </div>
-        <Map keyMapBing={keyMapBing}/>
+        <Map keyMapBing={keyMapBing} />
       </div>
     </motion.div>
   );

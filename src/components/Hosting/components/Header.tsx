@@ -49,8 +49,9 @@ function Header(): JSX.Element {
             <li className="relative">
               <button
                 onClick={() => handleActive('Today')}
-                className={`py-[10px] px-[16px] rounded-[30px] hover:bg-[#F7F7F7] ${active === 'Today' ? 'text-black' : 'text-[#717171]'
-                  }
+                className={`py-[10px] px-[16px] rounded-[30px] hover:bg-[#F7F7F7] ${
+                  active === 'Today' ? 'text-black' : 'text-[#717171]'
+                }
                         before:absolute before:content-[""] before:w-0 before:h-[2px] before:bg-black before:left-4 before:bottom-2
                         before::ease-in-out before:duration-500
                         hover:before:w-[60%]
@@ -64,8 +65,9 @@ function Header(): JSX.Element {
             <li className="relative">
               <button
                 onClick={() => handleActive('Inbox')}
-                className={`py-[10px] px-[16px] rounded-[30px] hover:bg-[#F7F7F7] ${active === 'Inbox' ? 'text-black' : 'text-[#717171]'
-                  }
+                className={`py-[10px] px-[16px] rounded-[30px] hover:bg-[#F7F7F7] ${
+                  active === 'Inbox' ? 'text-black' : 'text-[#717171]'
+                }
                         before:absolute before:content-[""] before:w-0 before:h-[2px] before:bg-black before:left-4 before:bottom-2
                         before::ease-in-out before:duration-500
                         hover:before:w-[60%]
@@ -77,8 +79,9 @@ function Header(): JSX.Element {
             <li className="relative">
               <button
                 onClick={() => handleActive('Calendar')}
-                className={`py-[10px] px-[16px] rounded-[30px] hover:bg-[#F7F7F7] ${active === 'Calendar' ? 'text-black' : 'text-[#717171]'
-                  }
+                className={`py-[10px] px-[16px] rounded-[30px] hover:bg-[#F7F7F7] ${
+                  active === 'Calendar' ? 'text-black' : 'text-[#717171]'
+                }
                         before:absolute before:content-[""] before:w-0 before:h-[2px] before:bg-black before:left-4 before:bottom-2
                         before::ease-in-out before:duration-500
                         hover:before:w-[60%]
@@ -90,8 +93,9 @@ function Header(): JSX.Element {
             <li className="relative">
               <button
                 onClick={() => handleMenu()}
-                className={`py-[10px] px-[16px] rounded-[30px] hover:bg-[#F7F7F7] ${activeMenu ? 'text-black' : 'text-[#717171]'
-                  } flex items-center
+                className={`py-[10px] px-[16px] rounded-[30px] hover:bg-[#F7F7F7] ${
+                  activeMenu ? 'text-black' : 'text-[#717171]'
+                } flex items-center
                                 before:absolute before:content-[""] before:w-0 before:h-[2px] before:bg-black before:left-4 before:bottom-2
                                 before:ease-in-out before:duration-500
                                 hover:before:w-[60%]
@@ -105,8 +109,9 @@ function Header(): JSX.Element {
       </div>
       <div
         className={`w-[200px] absolute right-[35%] top-[11%] bg-[rgba(255,255,255,.25)]
-                shadow-shadowHeadhost  rounded-[13px] mobile:hidden ${toggleMenu ? 'h-[40px] ease-in-out duration-500' : 'h-0'
-          }  `}
+                shadow-shadowHeadhost  rounded-[13px] mobile:hidden ${
+                  toggleMenu ? 'h-[40px] ease-in-out duration-500' : 'h-0'
+                }  `}
       >
         {toggleMenu && (
           <motion.ul className="h-full">
@@ -120,8 +125,9 @@ function Header(): JSX.Element {
             >
               <button
                 onClick={handleCreatehome}
-                className={`w-[100%] h-[100%] p-[20px] text-start flex justify-between items-center rounded-[13px] hover:bg-[#F7F7F7] ${active === 'Create a new listing' ? 'text-black' : 'text-[#717171]'
-                  } flex items-center justify-center
+                className={`w-[100%] h-[100%] p-[20px] text-start flex justify-between items-center rounded-[13px] hover:bg-[#F7F7F7] ${
+                  active === 'Create a new listing' ? 'text-black' : 'text-[#717171]'
+                } flex items-center justify-center
                             `}
               >
                 Create a new listing{' '}

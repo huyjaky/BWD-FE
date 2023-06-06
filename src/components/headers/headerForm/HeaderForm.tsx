@@ -18,8 +18,8 @@ interface HeaderFormProps {
 const HeaderForm = ({ children }: HeaderFormProps) => {
   const { isShow, setIsShow } = useContext(mobileContolPanelContext);
   const { setIsShowHeader } = useContext(filterFormAnimateContext);
-  const  {isFilter, setIsFilter} = useContext(getHouseContext);
-  const {resetFilterForm} = useContext(filterContext)
+  const { isFilter, setIsFilter } = useContext(getHouseContext);
+  const { resetFilterForm } = useContext(filterContext);
   return (
     <div className="w-full h-[80px] relative bg-white z-30" id="header-root">
       <header
@@ -40,7 +40,7 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
             z-30
             "
           >
-            <Image src="/icon.png" alt="" width={50} height={50}/>
+            <Image src="/icon.png" alt="" width={50} height={50} />
             <div className="text-[30px] w-0 overflow-hidden desktop:w-fit font-semibold">
               olympus
             </div>

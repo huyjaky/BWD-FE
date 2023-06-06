@@ -9,7 +9,7 @@ interface filterData {
   filterForm: filterForm;
   setFilterForm: (payload: filterForm) => void;
   resetFilterForm: () => void;
-  isEmpty: () => boolean
+  isEmpty: () => boolean;
 }
 
 const filterDataDefault: filterData = {
@@ -27,8 +27,8 @@ const filterDataDefault: filterData = {
     },
     hostLanguage: ''
   },
-  setFilterForm: (payload: filterForm) => { },
-  resetFilterForm: () => { },
+  setFilterForm: (payload: filterForm) => {},
+  resetFilterForm: () => {},
   isEmpty: () => true
 };
 
@@ -46,7 +46,7 @@ const FilterProvider = ({ children }: filterProps) => {
     } else {
       return false;
     }
-  }
+  };
 
   const filterDynamicData = { filterForm, setFilterForm, resetFilterForm, isEmpty };
 

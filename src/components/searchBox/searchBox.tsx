@@ -1,8 +1,8 @@
 import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 import { placeListContext } from '@/contexts/placeList';
 import { selectPlaceContext } from '@/contexts/selectPlace';
-import { whenLoaded } from "bing-maps-loader";
-import "bingmaps"; // <--  Microsoft supported types library for Microsoft.Maps
+import { whenLoaded } from 'bing-maps-loader';
+import 'bingmaps'; // <--  Microsoft supported types library for Microsoft.Maps
 import { useContext, useEffect, useRef } from 'react';
 
 interface SearchBoxProps {
@@ -16,7 +16,7 @@ const SearchBox = ({ styleBox }: SearchBoxProps) => {
 
   whenLoaded.then(() => {
     Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
-      callback: onLoad,
+      callback: onLoad
     });
   });
 
@@ -28,7 +28,10 @@ const SearchBox = ({ styleBox }: SearchBoxProps) => {
 
   function selectedSuggestion(suggestionResult: any) {
     setIsShowHeader(true);
-    setAddress({ ...address, address: { ...address.address, ...suggestionResult?.address, ...suggestionResult?.location } });
+    setAddress({
+      ...address,
+      address: { ...address.address, ...suggestionResult?.address, ...suggestionResult?.location }
+    });
   }
 
   return (

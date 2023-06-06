@@ -18,24 +18,30 @@ import Step15CHome from '@/components/CreateHome/Step/Step15CHome';
 import Step16CHome from '@/components/CreateHome/Step/Step16CHome';
 import Step17CHome from '@/components/CreateHome/Step/Step17CHome';
 import { AnimatePresence } from 'framer-motion';
-import { CreateHouseProvider } from '../../contexts/createHome'
-import { newHouseContext } from '../../contexts/createHome'
+import { CreateHouseProvider } from '../../contexts/createHome';
+import { newHouseContext } from '../../contexts/createHome';
 
 import ProcessBar from '../../components/CreateHome/ProcessBar/ProccessBar';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, GetStaticProps, GetStaticPropsContext } from 'next';
 import StepCongratulation from '@/components/CreateHome/Step/StepCongratulation';
 import Head from 'next/head';
 import { getSession } from 'next-auth/react';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]';
+import { useRouter } from 'next/router';
+import { initializeSSR } from 'bing-maps-loader';
+import Script from 'next/script';
+import { NextPageWithLayout } from '@/models/layoutprops';
+import authWithoutAnimate from '@/components/layouts/authWithoutAnimate';
 interface CreateHomeProps {
-  keyMapBing: string
+  keyMapBing: string;
+  api_url_path: string
 }
 
-function CreateHome({ keyMapBing }: CreateHomeProps): JSX.Element {
+const CreateHome: NextPageWithLayout<CreateHomeProps> = ({ keyMapBing, api_url_path }: CreateHomeProps): JSX.Element => {
   const [currentStep, setCurrentStep] = useState(1);
-
   const [isMounted, setIsMounted] = useState(true);
+  initializeSSR();
 
   const handleNextStep = () => {
     setIsMounted(false); // Gán giá trị false để unmount component
@@ -52,7 +58,7 @@ function CreateHome({ keyMapBing }: CreateHomeProps): JSX.Element {
     }, 1000); // Thời gian delay trước khi chuyển sang component tiếp theo
   };
 
-  const { state } = useContext(newHouseContext)
+  const { state } = useContext(newHouseContext);
 
   let steps = [
     { number: 1, component: <Step1CHome />, data: '' },
@@ -65,7 +71,7 @@ function CreateHome({ keyMapBing }: CreateHomeProps): JSX.Element {
     { number: 8, component: <Step8CHome />, data: 'encounter' },
     { number: 9, component: <Step9CHome />, data: '' },
     { number: 10, component: <Step10Home />, data: 'amenities' },
-    { number: 11, component: <Step11CHome />, data: '' },
+    { number: 11, component: <Step11CHome api_url_path={api_url_path}/>, data: '' },
     { number: 12, component: <Step12CHome />, data: 'title' },
     { number: 13, component: <Step13CHome />, data: 'description' },
     { number: 14, component: <Step14CHome />, data: '' },
@@ -89,36 +95,40 @@ function CreateHome({ keyMapBing }: CreateHomeProps): JSX.Element {
               steps[currentStep - 1].component}
           </AnimatePresence>
 
-          {currentStep > 0 && currentStep <= 17
-            && <ProcessBar
+          {currentStep > 0 && currentStep <= 17 && (
+            <ProcessBar
               steps={steps}
               handleBackStep={handleBackStep}
               handleNextStep={handleNextStep}
               currentStep={currentStep}
-            // data={state}
+              // data={state}
             />
-          }
+          )}
         </div>
       </CreateHouseProvider>
+
     </>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+CreateHome.Layout = authWithoutAnimate;
 
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getServerSession(req, res, authOptions);
   const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
-
+  const api_url_path = process.env.API_URL_PATH;
+  initializeSSR();
+  // if user available not callback api from server
   if (!session?.userAcc) {
     res.setHeader('location', '/login');
     res.statusCode = 302;
     res.end();
     return { props: {} };
   }
-
   return {
     props: {
-      keyMapBing: keyMapBing
+      keyMapBing: keyMapBing,
+      api_url_path: api_url_path
     }
   };
 };
