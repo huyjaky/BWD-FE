@@ -68,7 +68,7 @@ const initHouseData: houseDataType = {
     private: 0,
     dedicated: 0,
     shared: 0
-  },
+  }, 
   encounter: '',
   amenities: [],
   title: '',
