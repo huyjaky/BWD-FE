@@ -24,6 +24,7 @@ import UserAccProvider from '@/contexts/userAcc';
 import { SessionProvider } from 'next-auth/react';
 import { Montserrat } from 'next/font/google';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -42,6 +43,13 @@ export default function App({
 
   return (
     <>
+      <Head>
+        <title>Metaversus</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://stijndv.com" />
+        <link rel="stylesheet" href="https://stijndv.com/fonts/Eudoxus-Sans.css" />
+      </Head>
       <SWRConfig value={{ fetcher: (url) => axiosClient.get(url), shouldRetryOnError: false }}>
         <SelectPopoverProvider>
           <PlaceListProvider>
