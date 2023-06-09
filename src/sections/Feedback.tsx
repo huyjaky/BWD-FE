@@ -16,7 +16,8 @@ const Feedback = () => (
     >
       <motion.div
         variants={fadeIn('right', 'tween', 0.2, 1)}
-        className="flex-[0.5] lg:max-w-[370px] flex justify-end flex-col gradient-05 sm:p-8 p-4 rounded-[32px] border-[1px] border-[#6A6A6A] relative"
+        className="flex-[0.5] lg:max-w-[370px] flex justify-end flex-col gradient-05 sm:p-8 p-4 rounded-[32px]
+        border-[1px] border-[#6A6A6A] relative transition-all"
       >
         <div className="feedback-gradient" />
         <div>
@@ -37,12 +38,13 @@ const Feedback = () => (
 
       <motion.div
         variants={fadeIn('left', 'tween', 0.2, 1)}
-        className="relative flex-1 flex justify-center items-center"
+        className="relative flex-1 flex justify-center items-center transition-all"
       >
         <img
           src="/about/planet-09.png"
           alt="planet-09"
-          className="w-full lg:h-[610px] h-auto min-h-[210px] object-cover rounded-[40px]"
+          className="w-full lg:h-[610px] h-auto min-h-[210px] object-cover rounded-[40px]
+          transition-all"
         />
       </motion.div>
     </motion.div>
