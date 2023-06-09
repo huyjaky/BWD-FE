@@ -1,5 +1,6 @@
 import { Footer, Navbar } from '@/components/about';
 import { About, Explore, Feedback, GetStarted, Hero, Insights, WhatsNew, World } from '../sections';
+import { GetStaticProps, GetStaticPropsContext } from 'next';
 
 const About_ = () => (
   <div className="bg-primary-white overflow-hidden">
@@ -26,3 +27,10 @@ const About_ = () => (
 );
 
 export default About_;
+
+export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
+  return {
+    props: { },
+    revalidate: 60
+  };
+};
