@@ -25,10 +25,9 @@ const authWithoutAnimate = ({ children }: LayoutProps) => {
   }, [isFilter, status]);
 
   return <>
-
-        <MapOptions>
-          {children}
-        </MapOptions>
+    <MapOptions>
+      {children}
+    </MapOptions>
   </>;
 };
 

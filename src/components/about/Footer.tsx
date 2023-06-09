@@ -1,61 +1,35 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import HeaderMain from '../rootMaskHeader/headerMain';
+import TypeHouse from '../main/typeHouse';
+import SkeletonShowHouse from '../skeletonLoading/skletonShowHouse';
 
-import { footerVariants } from '../../utils/motion';
-import styles from '@/styles';
-import { socials } from '@/constants';
 
-const Footer = () => (
-  <motion.footer
-    variants={footerVariants}
-    initial="hidden"
-    whileInView="show"
-    className={`${styles.xPaddings} py-8 relative`}
-  >
-    <div className="footer-gradient" />
-    <div className={`${styles.innerWidth} mx-auto flex flex-col gap-8`}>
-      <div className="flex items-center justify-between flex-wrap gap-5">
-        <h4 className="font-bold md:text-[64px] text-[44px] text-black">
-          Enter the Metaverse
-        </h4>
-        <button type="button" className="flex items-center h-fit py-4 px-6 bg-[#25618B] rounded-[32px] gap-[12px]">
-          <img
-            src="/headset.svg"
-            alt="headset"
-            className="w-[24px] h-[24px] object-contain"
-          />
-          <span className="font-normal text-[16px] text-black">
-            Enter Metaverse
-          </span>
-        </button>
-      </div>
-
-      <div className="flex flex-col">
-        <div className="mb-[50px] h-[2px] bg-white opacity-10" />
-
-        <div className="flex items-center justify-between flex-wrap gap-4">
-          <h4 className="font-extrabold text-[24px] text-black">
-            METAVERUS
-          </h4>
-          <p className="font-normal text-[14px] text-black opacity-50">
-            Copyright © 2021 - 2022 Metaversus. All rights reserved.
-          </p>
-
-          <div className="flex gap-4">
-            {socials.map((social) => (
-              <img
-                key={social.name}
-                src={social.url}
-                alt={social.name}
-                className="w-[24px] h-[24px] object-contain cursor-pointer"
-              />
-            ))}
-          </div>
+const Footer = () => {
+  const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
+  return (
+    <>
+      <motion.div className='w-screen h-screen overflow-hidden mt-[100px]'>
+        <AnimatePresence initial={false}>
+          <HeaderMain />
+        </AnimatePresence>
+        <div className='w-full h-fit px-[80px] mobile:px-[20px] box-border'>
+          <TypeHouse />
         </div>
-      </div>
-    </div>
-  </motion.footer>
-);
+        <div className='w-full h-fit box-border px-[80px]'>
+          <motion.div className="w-full h-fit grid grid-cols-houseBox gap-x-9 gap-y-8 px-7 py-8 " id="scroll-inf">
+            {arrTempLoading.map((item: number, index: number) => (
+              <motion.div key={index} >
+                <SkeletonShowHouse />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+      </motion.div>
+    </>
+  )
+};
 
 export default Footer;

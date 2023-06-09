@@ -18,6 +18,7 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useContext, useEffect } from 'react';
 import { authOptions } from './api/auth/[...nextauth]';
+import authWithoutAnimate from '@/components/layouts/authWithoutAnimate';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -126,7 +127,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
   );
 };
 
-Home.Layout = AuthWithAnimate;
+Home.Layout = authWithoutAnimate;
 
 export default Home;
 
@@ -134,7 +135,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getServerSession(req, res, authOptions);
   const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
   initializeSSR();
-  // if user available not callback api from server
   if (session?.userAcc) {
     return {
       props: { ...session.userAcc, keyMapBing: keyMapBing }

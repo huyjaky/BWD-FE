@@ -101,7 +101,7 @@ export const fadeIn = (direction: any, type: any, delay: any, duration: any) => 
       type,
       delay,
       duration,
-      ease: 'easeInOut',
+      ease: 'linear',
     },
   },
 });

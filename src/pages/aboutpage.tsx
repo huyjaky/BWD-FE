@@ -22,7 +22,7 @@ const About_ = () => (
       <div className="gradient-04 z-0" />
       <Feedback />
     </div>
-    {/* <Footer /> */}
+    <Footer />
   </div>
 );
 

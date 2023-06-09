@@ -49,13 +49,13 @@ const TypeHouse = () => {
         {/* button right */}
         <div
           className="absolute w-[100px] h-full right-0 bottom-0 z-10
-          bg-gradient-to-r from-transparent via-white to-white flex
+          bg-gradient-to-r from-transparent via-white to-white
         "
         >
           {x != width * -1 && (
             <button
               className="w-[40px] h-[40px] m-auto rounded-full
-            flex mr-[10px]
+            mt-[10px] flex mr-[10px]
           "
               onClick={handleOnClickNext}
             >
