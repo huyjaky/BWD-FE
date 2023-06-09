@@ -75,7 +75,6 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
 
   return (
     <>
-
       <motion.main
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

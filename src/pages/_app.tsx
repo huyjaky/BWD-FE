@@ -39,7 +39,6 @@ export default function App({
   pageProps: { session, ...pageProps }
 }: AppPropsWithLayout) {
   const Layout = Component.Layout ?? EmptyLayout;
-  const router = useRouter();
 
   return (
     <>
