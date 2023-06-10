@@ -8,15 +8,6 @@ interface MapEachProps {
 }
 
 const MapEach = ({ latitude, longitude, zoom, keyMapBing }: MapEachProps) => {
-  const [viewPort, setViewPort] = useState<{
-    longitude: number;
-    latitude: number;
-    zoom: number;
-  }>({
-    longitude: longitude,
-    latitude: latitude,
-    zoom: zoom
-  });
   whenLoaded.then(() => {
     const map_ = document.getElementById('MapEach');
     if (map_) {

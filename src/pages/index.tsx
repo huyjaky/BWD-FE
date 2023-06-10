@@ -19,6 +19,7 @@ import Script from 'next/script';
 import { useContext, useEffect } from 'react';
 import { authOptions } from './api/auth/[...nextauth]';
 import authWithoutAnimate from '@/components/layouts/authWithoutAnimate';
+import MapEach from '@/components/main/showHouse/mapEach';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -122,6 +123,9 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
         <FooterRooms />
         <FooterMainRes />
       </motion.main>
+      {/* <div className='fixed w-[200px] h-[200px] left-0 top-0'>
+        <MapEach keyMapBing={keyMapBing} latitude={16.047079} longitude={108.206230} zoom={15}/>
+      </div> */}
 
     </>
   );
@@ -140,6 +144,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       props: { ...session.userAcc, keyMapBing: keyMapBing }
     };
   }
+
   return {
     props: {
       keyMapBing: keyMapBing

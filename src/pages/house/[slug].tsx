@@ -12,7 +12,7 @@ import HeaderMain from '@/components/rootMaskHeader/headerMain';
 import { IsShowPtContext } from '@/contexts/isShowPt';
 import { house_ } from '@/models/house';
 import { NextPageWithLayout } from '@/models/layoutprops';
-import { initializeSSR } from 'bing-maps-loader';
+import { initialize, initializeSSR } from 'bing-maps-loader';
 import { AnimatePresence } from 'framer-motion';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { Montserrat } from 'next/font/google';
@@ -107,6 +107,7 @@ HouseDetail.Layout = AuthWithAnimate;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const link = process.env.API_URL_PATH;
+  initializeSSR();
   if (cachedHouseDetail.length == 0) {
     const slug = await fetch(`${link}/api/get/house/page`);
     cachedHouseDetail = await slug.json();
