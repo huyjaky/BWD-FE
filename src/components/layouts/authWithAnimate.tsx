@@ -25,7 +25,6 @@ const AuthWithAnimate = ({ children }: LayoutProps) => {
 
   return <>
     <MapOptions>
-
       <Animate>
         {children}
       </Animate>

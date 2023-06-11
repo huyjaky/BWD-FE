@@ -34,7 +34,7 @@ function Header(): JSX.Element {
 
   return (
     <div className="flex justify-between h-[70px] items-center px-[20px] border-[1px] border-b-[#e4e4e4]">
-      <Link href={'/'}>
+      <Link href={'/homepage'}>
         <div>
           <Image width={70} height={70} src={Logo} alt="Logo" />
         </div>

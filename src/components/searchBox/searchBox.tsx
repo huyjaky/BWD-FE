@@ -14,6 +14,8 @@ const SearchBox = ({ styleBox }: SearchBoxProps) => {
   const { isShowHeader, setIsShowHeader } = useContext(filterFormAnimateContext);
   const inputBox = useRef<HTMLInputElement>(null);
 
+  // luu y la chi cho nhung doan code ve map vao useEffect con nhung doan code ve input nhap lieu thi
+  // khong duoc cho vao useEffect
   whenLoaded.then(() => {
     Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
       callback: onLoad
@@ -33,6 +35,14 @@ const SearchBox = ({ styleBox }: SearchBoxProps) => {
       address: { ...address.address, ...suggestionResult?.address, ...suggestionResult?.location }
     });
   }
+
+  useEffect(()=>{
+    const temp =  document.getElementById('searchBox');
+    temp?.addEventListener('change', (event:any)=>{
+      setAddress({...address, address:{...address.address, formattedAddress: event.target.value}});
+    })
+  },[])
+
 
   return (
     <>

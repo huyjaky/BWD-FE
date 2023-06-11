@@ -24,9 +24,7 @@ const ControlBar = () => {
   const router = useRouter();
 
   const handleOnMask = (event: any) => {
-    if (router.asPath !== '/') {
-      router.push('/', undefined, { shallow: true });
-    }
+
   };
 
   const isEmpty = () => {
@@ -43,6 +41,10 @@ const ControlBar = () => {
   };
 
   const fetchData = (event: any) => {
+    if (router.asPath !== '/homepage') {
+      setIsShowHeader(false);
+      router.push('/homepage', undefined, { shallow: true });
+    }
     if (isEmpty()) {
       return;
     } else {
@@ -71,12 +73,8 @@ const ControlBar = () => {
     watch
   } = useForm<Place>({ defaultValues: {} });
 
-  const handleCreate = async (data: Place) => {};
+  const handleCreate = async (data: Place) => { };
 
-  useEffect(() => {
-    const temp = document.getElementById('btn-search-header');
-    temp?.addEventListener('click', handleOnMask);
-  }, []);
 
   return (
     <div className="w-full h-full flex relative mobile:text-[12px]">
