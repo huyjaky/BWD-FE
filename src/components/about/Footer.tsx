@@ -24,7 +24,7 @@ const Footer = () => {
             <h4 className="font-bold md:text-[64px] text-[44px] text-black">
               JOIN WITH US
             </h4>
-            <Link href={'/'}>
+            <Link href={'/homepage'}>
 
               <motion.button
                 onClick={event => setIsTapJoin(true)}
@@ -68,7 +68,7 @@ const Footer = () => {
                     key={social.name}
                     src={social.url}
                     alt={social.name}
-                    className="w-[24px] h-[24px] object-contain cursor-pointer"
+                    className="w-[24px] h-[24px] object-contain cursor-pointer fill-slate-900"
                   />
                 ))}
               </div>

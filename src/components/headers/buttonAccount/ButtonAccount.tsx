@@ -3,6 +3,7 @@ import { getHouseContext } from '@/contexts/getHouse';
 import { userAccContext } from '@/contexts/userAcc';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { signOut } from 'next-auth/react';
+import Link from 'next/link';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { BsList } from 'react-icons/bs';
 import { HiUserCircle } from 'react-icons/hi';
@@ -41,7 +42,7 @@ const ButtonAccount = () => {
     document.addEventListener('scroll', handleControlPanel);
   }, []);
 
-  useEffect(() => {}, [user]);
+  useEffect(() => { }, [user]);
   return (
     <div
       className="w-fit p-1 rounded-full bg-white flex border-gray-400 hover:shadow-lg
@@ -101,7 +102,9 @@ const ButtonAccount = () => {
             )}
           </div>
           <div className="w-full h-fit">
-            <button className="w-full py-4 text-left px-5">olympus your home</button>
+            <Link href={'/'}>
+              <div className="w-full py-4 text-left px-5">About us</div>
+            </Link>
             <button className="w-full py-4 text-left px-5">Help</button>
           </div>
         </motion.div>

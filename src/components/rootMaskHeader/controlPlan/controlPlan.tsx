@@ -91,9 +91,7 @@ const ControlPlan = () => {
   const isClickOutSide = (event: any) => {
     const isClickHeaderRoot = document.getElementById('header-root')?.contains(event.target);
     const isClickHeaderControl = refHeaderControl.current?.contains(event.target);
-    if (event.target) {
-      
-    }
+
     if (!isClickHeaderRoot && !isClickHeaderControl) {
       setIsShowHeader(false);
       return;

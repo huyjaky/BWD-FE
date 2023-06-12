@@ -1,6 +1,8 @@
 import { Footer, Navbar } from '@/components/about';
 import { About, Explore, Feedback, GetStarted, Hero, Insights, WhatsNew, World } from '../sections';
 import { GetStaticProps, GetStaticPropsContext } from 'next';
+import { getServerSession } from 'next-auth';
+import { getSession, useSession } from 'next-auth/react';
 
 const About_ = () => (
   <div className="bg-primary-white overflow-hidden">
@@ -30,7 +32,7 @@ export default About_;
 
 export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
   return {
-    props: { },
+    props: {},
     revalidate: 60
   };
 };

@@ -11,6 +11,9 @@ import ButtonAccount from '../buttonAccount/ButtonAccount';
 import { getHouseContext } from '@/contexts/getHouse';
 import { filterContext } from '@/contexts/filter';
 import Image from 'next/image';
+import { userAccContext } from '@/contexts/userAcc';
+import { useRouter } from 'next/router';
+import { selectPopoverContext } from '@/contexts';
 interface HeaderFormProps {
   children: ReactNode;
 }
@@ -18,8 +21,11 @@ interface HeaderFormProps {
 const HeaderForm = ({ children }: HeaderFormProps) => {
   const { isShow, setIsShow } = useContext(mobileContolPanelContext);
   const { setIsShowHeader } = useContext(filterFormAnimateContext);
+  const { user, resetDataUser } = useContext(userAccContext);
   const { isFilter, setIsFilter } = useContext(getHouseContext);
   const { resetFilterForm } = useContext(filterContext);
+  const {setIsLoginClick} = useContext(selectPopoverContext)
+  const router = useRouter();
   return (
     <div className="w-full h-[80px] relative bg-white z-30" id="header-root">
       <header
@@ -51,14 +57,21 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
           {/* controlbar */}
           <div className="flex-1 flex items-center justify-end z-30">
             {/* olympus your home */}
-            <Link
-              href={'/hosting'}
+            <div
+              onClick={()=>{
+                if (user.UserId !== 'none user') {
+                  console.log(user.UserId);
+                  router.push('/hosting', undefined, {shallow: true})
+                  return;
+                }
+                setIsLoginClick(true);
+              }}
               className="rounded-full bg-white h-fit box-content px-4 py-2
-            hover:bg-slate-300 tablet:hidden mobile:hidden
+            hover:bg-slate-300 tablet:hidden mobile:hidden cursor-pointer
           "
             >
               <span className="font-semibold">olympus your home</span>
-            </Link>
+            </div>
             {/* translate */}
             <Link
               href={''}

@@ -144,7 +144,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       props: { ...session.userAcc, keyMapBing: keyMapBing }
     };
   }
-
   return {
     props: {
       keyMapBing: keyMapBing
