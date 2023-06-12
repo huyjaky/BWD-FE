@@ -5,6 +5,7 @@ import SelectPlaceProvider from '@/contexts/selectPlace';
 import SelectPopoverProvider from '@/contexts/selectPopover';
 import { AppPropsWithLayout } from '@/models/layoutprops';
 import '@/styles/globals.css';
+
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'rc-slider/assets/index.css';
 import 'react-date-range/dist/styles.css'; // main css file
@@ -12,6 +13,7 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import 'react-loading-skeleton/dist/skeleton.css';
 
 import { SWRConfig } from 'swr';
+import NextNProgress from 'nextjs-progressbar';
 
 import AmountTabHostingProviders from '@/contexts/amountTabHosting';
 import BillProvider from '@/contexts/bill';
@@ -23,8 +25,8 @@ import MobileContolPanelProvider from '@/contexts/mobileControlPanel';
 import UserAccProvider from '@/contexts/userAcc';
 import { SessionProvider } from 'next-auth/react';
 import { Montserrat } from 'next/font/google';
-import { useRouter } from 'next/router';
 import Head from 'next/head';
+import Link from 'next/link';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -32,7 +34,6 @@ const monsterrat = Montserrat({
   variable: '--font-monsterrat'
 });
 
-// const circular = Flow_Circular
 
 export default function App({
   Component,
@@ -45,9 +46,9 @@ export default function App({
       <Head>
         <title>Olympus</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="preconnect" href="https://stijndv.com" />
-        <link rel="stylesheet" href="https://stijndv.com/fonts/Eudoxus-Sans.css" />
+        <Link rel="icon" href="/favicon.ico" />
+        <Link rel="preconnect" href="https://stijndv.com" />
+        <Link rel="stylesheet" href="https://stijndv.com/fonts/Eudoxus-Sans.css" />
       </Head>
       <SWRConfig value={{ fetcher: (url) => axiosClient.get(url), shouldRetryOnError: false }}>
         <SelectPopoverProvider>
@@ -67,6 +68,7 @@ export default function App({
                                     className={`${monsterrat.className} bg-white
                                         `}
                                   >
+                                    <NextNProgress color='#B80F0A' height={10} />
                                     <Component {...pageProps} />
                                   </div>
                                 </Layout>

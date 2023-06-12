@@ -9,6 +9,7 @@
   box-sizing: border-box;
   /* font-family: "Eudoxus Sans", sans-serif; */
   scroll-behavior: smooth;
+
 }
 
 .gradient-01 {
@@ -107,3 +108,18 @@
   filter: blur(150px);
 }
 
+
+
+#nprogress .bar {
+  background: #B80F0A;
+  height: 7px;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #B80F0A, 0 0 5px #B80F0A;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: #B80F0A;
+  border-left-color: #B80F0A;
+}

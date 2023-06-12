@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { ReactNode, useContext, useEffect, useRef } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
+import nProgress from 'nprogress';
 
 interface LoginPanelProps {
   children: ReactNode;
@@ -82,6 +83,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
 
   // fetch accesstoken , navigate as well as do animte
   const onSubmit: SubmitHandler<LoginInterface> = async (data_) => {
+    nProgress.set(.4);
     const login_ = await signIn('credentials', {
       username: data_.username,
       password: data_.password,
@@ -101,6 +103,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
     if (router.asPath === '/login') {
       router.push('/', undefined, { shallow: true });
     }
+    nProgress.done();
     return;
   };
 

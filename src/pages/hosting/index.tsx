@@ -1,14 +1,12 @@
 import Header from '@/components/Hosting/components/Header';
 import Main from '@/components/Hosting/components/Main';
 import FooterRooms from '@/components/footers/footerRooms';
+import AuthWithAnimate from '@/components/layouts/authWithAnimate';
+import { NextPageWithLayout } from '@/models/layoutprops';
+import { initializeSSR } from 'bing-maps-loader';
 import { GetServerSideProps } from 'next';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]';
-import Head from 'next/head';
-import Script from 'next/script';
-import { initializeSSR } from 'bing-maps-loader';
-import { NextPageWithLayout } from '@/models/layoutprops';
-import AuthWithAnimate from '@/components/layouts/authWithAnimate';
 
 interface indexProps {
   keyMapBing: string;

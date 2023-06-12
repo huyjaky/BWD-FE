@@ -32,11 +32,6 @@ const Footer = () => {
                 type="button" className="flex items-center h-fit py-4 px-6 bg-white border-2 rounded-[32px] gap-[12px]
             border-slate-600 relative
             ">
-                <img
-                  src="/headset.svg"
-                  alt="headset"
-                  className="w-[24px] h-[24px] object-contain"
-                />
                 <span className="text-[16px] text-black font-semibold">
                   JOIN
                 </span>
