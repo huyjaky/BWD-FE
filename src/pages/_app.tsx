@@ -45,10 +45,10 @@ export default function App({
     <>
       <Head>
         <title>Olympus</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Link rel="icon" href="/favicon.ico" />
         <Link rel="preconnect" href="https://stijndv.com" />
-        <Link rel="stylesheet" href="https://stijndv.com/fonts/Eudoxus-Sans.css" />
+        <Link rel="stylesheet" href="https://stijndv.com/fonts/Eudoxus-Sans.css" /> */}
       </Head>
       <SWRConfig value={{ fetcher: (url) => axiosClient.get(url), shouldRetryOnError: false }}>
         <SelectPopoverProvider>
