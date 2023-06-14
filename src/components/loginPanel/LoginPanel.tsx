@@ -1,7 +1,6 @@
 import { selectPopoverContext } from '@/contexts';
 import { getHouseContext } from '@/contexts/getHouse';
 import { userAccContext } from '@/contexts/userAcc';
-import useAuth from '@/hooks/useAuth';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -26,7 +25,6 @@ const schema = yup
 type LoginInterface = yup.InferType<typeof schema>;
 
 const LoginPanel = ({ children }: LoginPanelProps) => {
-  const { login } = useAuth();
   const { data: session } = useSession();
   const { user, setUser } = useContext(userAccContext);
   const { setIsLoginClick } = useContext(selectPopoverContext);
