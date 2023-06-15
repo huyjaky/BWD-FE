@@ -11,11 +11,10 @@ interface StepCongratulationProps {
 
 export default function StepCongratulation({api_url_path}: StepCongratulationProps) {
   const { state } = useContext(newHouseContext);
-  console.log(state);
   const router = useRouter();
 
   useEffect(()=>{
-    
+
   }, [])
 
   const handleClick = () => {

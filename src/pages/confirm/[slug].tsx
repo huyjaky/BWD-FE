@@ -375,7 +375,6 @@ export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsC
     const slug = await fetch(`${link}/api/get/house/page`);
     cachedHouseDetail = await slug.json();
   }
-  console.log(cachedHouseDetail.length);
   const houseDetailData = cachedHouseDetail.find((house: house_) => house.HouseId === params?.slug);
   return {
     props: {
