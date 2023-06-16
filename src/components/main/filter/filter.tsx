@@ -2,7 +2,7 @@ import { filterContext } from '@/contexts/filter';
 import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 import { getHouseContext } from '@/contexts/getHouse';
 import { motion } from 'framer-motion';
-import { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { HiOutlineFilter } from 'react-icons/hi';
 
 interface FilterProps {
@@ -12,15 +12,39 @@ interface FilterProps {
 const Filter = ({ isInvisible }: FilterProps) => {
   const buttonFilter = useRef<HTMLInputElement>(null);
   const { setIsClickOutSide } = useContext(filterFormAnimateContext);
-  const { filterForm, isEmpty } = useContext(filterContext);
+  const { filterForm } = useContext(filterContext);
   const { isFilter } = useContext(getHouseContext);
+  const [isEmpty, setIsEmpty] = useState(true);
 
   const handleOnClickFilter = async (event: any) => {
     window.scrollTo(0, 0);
     setIsClickOutSide(true);
     document.body.style.overflow = 'hidden';
   };
-  useEffect(() => {}, [isFilter, filterForm]);
+  useEffect(() => {
+    const emptyObjJson = JSON.stringify(
+      {
+        maxPrice: 250,
+        minPrice: 10,
+        beds: 0,
+        bathRooms: 0,
+        typeHouse: [],
+        amenities: {
+          essentials: [],
+          features: [],
+          location: [],
+          safety: []
+        },
+        hostLanguage: ''
+      }
+    );
+    const filterFormJson = JSON.stringify(filterForm);
+    if (filterFormJson === emptyObjJson) {
+      setIsEmpty(true);
+    } else {
+      setIsEmpty(false);
+    }
+  }, [isFilter, filterForm]);
 
   return (
     <>
@@ -34,11 +58,11 @@ tablet:h-full tablet:w-[100px]
           className={`flex m-auto p-3 border-2 rounded-2xl cursor-pointer
           mobile:w-[50px] mobile:h-full mobile:p-0 mobile:border-0
           tablet:w-[50px] tablet:h-full tablet:p-0 tablet:border-0 relative
-          ${(isEmpty() && isFilter === 0) || isFilter < 0 ? ' border-slate-800' : 'border-red-500'}
+          ${(isEmpty && isFilter === 0) || isFilter < 0 ? ' border-slate-800' : 'border-red-500'}
           `}
           ref={buttonFilter}
         >
-          {(isEmpty() && isFilter === 0) || isFilter < 0 ? (
+          {(isEmpty && isFilter === 0) || isFilter < 0 ? (
             <></>
           ) : (
             <motion.div
