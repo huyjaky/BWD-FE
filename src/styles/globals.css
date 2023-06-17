@@ -2,14 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   /* font-family: "Eudoxus Sans", sans-serif; */
   scroll-behavior: smooth;
-
 }
 
 .gradient-01 {
@@ -27,12 +25,7 @@
 }
 
 .hero-gradient {
-  background: linear-gradient(
-    97.86deg,
-    #a509ff 0%,
-    #34acc7 53.65%,
-    #a134c7 100%
-  );
+  background: linear-gradient(97.86deg, #a509ff 0%, #34acc7 53.65%, #a134c7 100%);
 }
 
 .gradient-02 {
@@ -79,11 +72,7 @@
 }
 
 .gradient-05 {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.04) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 100%);
 }
 
 .feedback-gradient {
@@ -108,18 +97,16 @@
   filter: blur(150px);
 }
 
-
-
 #nprogress .bar {
-  background: #B80F0A;
+  background: #b80f0a;
   height: 7px;
 }
 
 #nprogress .peg {
-  box-shadow: 0 0 10px #B80F0A, 0 0 5px #B80F0A;
+  box-shadow: 0 0 10px #b80f0a, 0 0 5px #b80f0a;
 }
 
 #nprogress .spinner-icon {
-  border-top-color: #B80F0A;
-  border-left-color: #B80F0A;
+  border-top-color: #b80f0a;
+  border-left-color: #b80f0a;
 }

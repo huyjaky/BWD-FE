@@ -6,19 +6,20 @@ import styles from '../../styles';
 import { fadeIn } from '../../utils/motion';
 
 interface ExploreCardProps {
-  id: string,
-  imgUrl: string,
-  title: string,
-  index: number,
-  active: string,
-  handleClick: any
+  id: string;
+  imgUrl: string;
+  title: string;
+  index: number;
+  active: string;
+  handleClick: any;
 }
 
 const ExploreCard = ({ id, imgUrl, title, index, active, handleClick }: ExploreCardProps) => (
   <motion.div
     variants={fadeIn('right', 'tween', index * 0.5, 0.75)}
-    className={`relative ${active === id ? 'lg:flex-[3.5] flex-[10]' : 'lg:flex-[0.5] flex-[2]'
-      } flex items-center justify-center min-w-[170px] h-[700px]  duration-[0.7s] ease-out-flex cursor-pointer
+    className={`relative ${
+      active === id ? 'lg:flex-[3.5] flex-[10]' : 'lg:flex-[0.5] flex-[2]'
+    } flex items-center justify-center min-w-[170px] h-[700px]  duration-[0.7s] ease-out-flex cursor-pointer
       transition-[flex] `}
     onClick={() => handleClick(id)}
   >
@@ -32,26 +33,22 @@ const ExploreCard = ({ id, imgUrl, title, index, active, handleClick }: ExploreC
         {title}
       </h3>
     ) : (
-      <div className="absolute bottom-0 p-8 flex justify-start w-full flex-col bg-[rgba(0,0,0,0.5)] rounded-b-[24px] transition-all
+      <div
+        className="absolute bottom-0 p-8 flex justify-start w-full flex-col bg-[rgba(0,0,0,0.5)] rounded-b-[24px] transition-all
       ease-linear
-      ">
+      "
+      >
         <div
           className={`${styles.flexCenter} w-[60px] h-[60px] rounded-[24px] glassmorphism mb-[16px]
           transition-all ease-in-out
           `}
         >
-          <img
-            src="/about/headset.svg"
-            alt="headset"
-            className="w-1/2 h-1/2 object-contain"
-          />
+          <img src="/about/headset.svg" alt="headset" className="w-1/2 h-1/2 object-contain" />
         </div>
         <p className="font-normal text-[16px] leading-[20.16px] text-white uppercase">
           Explorer house
         </p>
-        <h2 className="mt-[24px] font-semibold sm:text-[32px] text-[24px] text-white">
-          {title}
-        </h2>
+        <h2 className="mt-[24px] font-semibold sm:text-[32px] text-[24px] text-white">{title}</h2>
       </div>
     )}
   </motion.div>

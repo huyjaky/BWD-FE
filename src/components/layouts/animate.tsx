@@ -1,13 +1,13 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { useRouter } from "next/router";
-import { ReactNode } from "react"
+import { AnimatePresence, motion } from 'framer-motion';
+import { useRouter } from 'next/router';
+import { ReactNode } from 'react';
 
 interface AnimateProps {
   children: ReactNode;
 }
 
 const Animate = ({ children }: AnimateProps) => {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <div>
       <AnimatePresence mode="wait">
@@ -33,7 +33,7 @@ const Animate = ({ children }: AnimateProps) => {
         </motion.div>
       </AnimatePresence>
     </div>
-  )
-}
+  );
+};
 
 export default Animate;

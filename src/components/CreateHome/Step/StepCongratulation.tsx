@@ -6,16 +6,14 @@ import { newHouseContext } from '../../../contexts/createHome';
 import { useRouter } from 'next/router';
 
 interface StepCongratulationProps {
-  api_url_path: string
+  api_url_path: string;
 }
 
-export default function StepCongratulation({api_url_path}: StepCongratulationProps) {
+export default function StepCongratulation({ api_url_path }: StepCongratulationProps) {
   const { state } = useContext(newHouseContext);
   const router = useRouter();
 
-  useEffect(()=>{
-
-  }, [])
+  useEffect(() => {}, []);
 
   const handleClick = () => {
     router.push('/hosting');

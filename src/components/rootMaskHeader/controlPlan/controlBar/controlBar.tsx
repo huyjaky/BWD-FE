@@ -23,9 +23,7 @@ const ControlBar = () => {
   const { setIsShowHeader } = useContext(filterFormAnimateContext);
   const router = useRouter();
 
-  const handleOnMask = (event: any) => {
-
-  };
+  const handleOnMask = (event: any) => {};
 
   const isEmpty = () => {
     if (
@@ -73,8 +71,7 @@ const ControlBar = () => {
     watch
   } = useForm<Place>({ defaultValues: {} });
 
-  const handleCreate = async (data: Place) => { };
-
+  const handleCreate = async (data: Place) => {};
 
   return (
     <div className="w-full h-full flex relative mobile:text-[12px]">

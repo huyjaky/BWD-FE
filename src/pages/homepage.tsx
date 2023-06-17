@@ -72,7 +72,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
     setUser({ ...user, ...user_ });
   }
 
-  useEffect(() => { }, [isFilter]);
+  useEffect(() => {}, [isFilter]);
   initializeSSR();
 
   return (
@@ -126,7 +126,6 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
       {/* <div className='fixed w-[200px] h-[200px] left-0 top-0'>
         <MapEach keyMapBing={keyMapBing} latitude={16.047079} longitude={108.206230} zoom={15}/>
       </div> */}
-
     </>
   );
 };

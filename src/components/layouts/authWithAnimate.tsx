@@ -23,13 +23,13 @@ const AuthWithAnimate = ({ children }: LayoutProps) => {
     setuser();
   }, [isFilter, status]);
 
-  return <>
-    <MapOptions>
-      <Animate>
-        {children}
-      </Animate>
-    </MapOptions>
-  </>;
+  return (
+    <>
+      <MapOptions>
+        <Animate>{children}</Animate>
+      </MapOptions>
+    </>
+  );
 };
 
 export default AuthWithAnimate;

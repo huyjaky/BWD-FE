@@ -24,7 +24,7 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
   const { user, resetDataUser } = useContext(userAccContext);
   const { isFilter, setIsFilter } = useContext(getHouseContext);
   const { resetFilterForm } = useContext(filterContext);
-  const {setIsLoginClick} = useContext(selectPopoverContext)
+  const { setIsLoginClick } = useContext(selectPopoverContext);
   const router = useRouter();
   return (
     <div className="w-full h-[80px] relative bg-white z-30" id="header-root">
@@ -58,10 +58,10 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
           <div className="flex-1 flex items-center justify-end z-30">
             {/* olympus your home */}
             <div
-              onClick={()=>{
+              onClick={() => {
                 if (user.UserId !== 'none user') {
                   console.log(user.UserId);
-                  router.push('/hosting', undefined, {shallow: true})
+                  router.push('/hosting', undefined, { shallow: true });
                   return;
                 }
                 setIsLoginClick(true);

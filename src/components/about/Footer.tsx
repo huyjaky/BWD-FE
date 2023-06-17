@@ -7,7 +7,6 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useState } from 'react';
 
-
 const Footer = () => {
   const [isTapJoin, setIsTapJoin] = useState<boolean>(false);
   return (
@@ -21,27 +20,23 @@ const Footer = () => {
         <div className="footer-gradient" />
         <div className={`${styles.innerWidth} mx-auto flex flex-col gap-8`}>
           <div className="flex items-center justify-between flex-wrap gap-5 roud ">
-            <h4 className="font-bold md:text-[64px] text-[44px] text-black">
-              JOIN WITH US
-            </h4>
+            <h4 className="font-bold md:text-[64px] text-[44px] text-black">JOIN WITH US</h4>
             <Link href={'/homepage'}>
-
               <motion.button
-                onClick={event => setIsTapJoin(true)}
-                whileTap={{ scale: .8 }}
-                type="button" className="flex items-center h-fit py-4 px-6 bg-white border-2 rounded-[32px] gap-[12px]
+                onClick={(event) => setIsTapJoin(true)}
+                whileTap={{ scale: 0.8 }}
+                type="button"
+                className="flex items-center h-fit py-4 px-6 bg-white border-2 rounded-[32px] gap-[12px]
             border-slate-600 relative
-            ">
-                <span className="text-[16px] text-black font-semibold">
-                  JOIN
-                </span>
+            "
+              >
+                <span className="text-[16px] text-black font-semibold">JOIN</span>
                 <motion.div
                   initial={{ visibility: 'hidden' }}
                   animate={isTapJoin ? { visibility: 'visible', scale: 100 } : {}}
                   transition={{ duration: 2, type: 'tween' }}
-                  className='absolute w-[60px] h-[60px] bg-white z-50 right-0 rounded-full pointer-events-none'>
-
-                </motion.div>
+                  className="absolute w-[60px] h-[60px] bg-white z-50 right-0 rounded-full pointer-events-none"
+                ></motion.div>
               </motion.button>
             </Link>
           </div>
@@ -50,9 +45,7 @@ const Footer = () => {
             <div className="mb-[50px] h-[2px] bg-white opacity-10" />
 
             <div className="flex items-center justify-between flex-wrap gap-4">
-              <h4 className="font-extrabold text-[24px] text-black">
-                OLYMPUS
-              </h4>
+              <h4 className="font-extrabold text-[24px] text-black">OLYMPUS</h4>
               <p className="font-normal text-[14px] text-black opacity-50">
                 Copyright © 2021 - 2022 Olympus. All rights reserved.
               </p>
@@ -72,7 +65,7 @@ const Footer = () => {
         </div>
       </motion.footer>
     </>
-  )
+  );
 };
 
 export default Footer;

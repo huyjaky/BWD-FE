@@ -15,7 +15,7 @@ const MapBox = ({ longitude, latitude, keyMapBing }: MapBoxProps) => {
     latitude: latitude,
     keyMapBing: keyMapBing
   });
-  useEffect(()=>{
+  useEffect(() => {
     whenLoaded.then(() => {
       const map_ = document.getElementById('Map');
       if (map_) {
@@ -33,8 +33,7 @@ const MapBox = ({ longitude, latitude, keyMapBing }: MapBoxProps) => {
         map.layers.insert(layer);
       }
     });
-  }, [])
-
+  }, []);
 
   useEffect(() => {}, [latitude, longitude]);
 

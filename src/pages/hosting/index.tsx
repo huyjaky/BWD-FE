@@ -21,12 +21,12 @@ const Index: NextPageWithLayout<indexProps> = ({ keyMapBing }: indexProps): JSX.
         <Main keyMapBing={keyMapBing} />
         <FooterRooms />
       </div>
-x
+      x
     </>
   );
-}
+};
 
-Index.Layout = AuthWithAnimate
+Index.Layout = AuthWithAnimate;
 
 export default Index;
 

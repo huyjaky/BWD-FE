@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 // Import React FilePond
-import { FilePond, registerPlugin } from 'react-filepond'
+import { FilePond, registerPlugin } from 'react-filepond';
 
 // Import FilePond styles
-import 'filepond/dist/filepond.min.css'
+import 'filepond/dist/filepond.min.css';
 
 // Import the Image EXIF Orientation and Image Preview plugins
 // Note: These need to be installed separately
 // `npm i filepond-plugin-image-preview filepond-plugin-image-exif-orientation --save`
-import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import { FilePondFile } from 'filepond';
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 interface Step11CHomeProps {
-  api_url_path: string
+  api_url_path: string;
 }
 
-export default function Step11CHome({api_url_path}: Step11CHomeProps) {
+export default function Step11CHome({ api_url_path }: Step11CHomeProps) {
   const [fileImg, setFileImg] = useState<any>([]);
 
   return (
@@ -59,11 +59,11 @@ export default function Step11CHome({api_url_path}: Step11CHomeProps) {
               >
                 You'll need 5 photos to get started. You can add more or make changes later.
               </motion.p>
-              <div className='mt-10'>
+              <div className="mt-10">
                 <FilePond
                   files={fileImg}
                   onupdatefiles={(fileItems: FilePondFile[]) => {
-                    setFileImg(fileItems)
+                    setFileImg(fileItems);
                   }}
                   allowMultiple={true}
                   maxFiles={30}
@@ -89,6 +89,6 @@ export default function Step11CHome({api_url_path}: Step11CHomeProps) {
           </div>
         </div>
       </div>
-    </motion.div >
+    </motion.div>
   );
 }

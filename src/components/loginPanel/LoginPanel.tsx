@@ -81,7 +81,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
 
   // fetch accesstoken , navigate as well as do animte
   const onSubmit: SubmitHandler<LoginInterface> = async (data_) => {
-    nProgress.set(.4);
+    nProgress.set(0.4);
     const login_ = await signIn('credentials', {
       username: data_.username,
       password: data_.password,

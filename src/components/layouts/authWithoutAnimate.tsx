@@ -24,11 +24,11 @@ const authWithoutAnimate = ({ children }: LayoutProps) => {
     setuser();
   }, [isFilter, status]);
 
-  return <>
-    <MapOptions>
-      {children}
-    </MapOptions>
-  </>;
+  return (
+    <>
+      <MapOptions>{children}</MapOptions>
+    </>
+  );
 };
 
 export default authWithoutAnimate;

@@ -34,7 +34,6 @@ const monsterrat = Montserrat({
   variable: '--font-monsterrat'
 });
 
-
 export default function App({
   Component,
   pageProps: { session, ...pageProps }
@@ -64,7 +63,7 @@ export default function App({
                                     className={`${monsterrat.className} bg-white
                                         `}
                                   >
-                                    <NextNProgress color='#B80F0A' height={7} />
+                                    <NextNProgress color="#B80F0A" height={7} />
                                     <Component {...pageProps} />
                                   </div>
                                 </Layout>

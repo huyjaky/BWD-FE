@@ -35,10 +35,13 @@ import { NextPageWithLayout } from '@/models/layoutprops';
 import authWithoutAnimate from '@/components/layouts/authWithoutAnimate';
 interface CreateHomeProps {
   keyMapBing: string;
-  api_url_path: string
+  api_url_path: string;
 }
 
-const CreateHome: NextPageWithLayout<CreateHomeProps> = ({ keyMapBing, api_url_path }: CreateHomeProps): JSX.Element => {
+const CreateHome: NextPageWithLayout<CreateHomeProps> = ({
+  keyMapBing,
+  api_url_path
+}: CreateHomeProps): JSX.Element => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isMounted, setIsMounted] = useState(true);
   initializeSSR();
@@ -71,7 +74,7 @@ const CreateHome: NextPageWithLayout<CreateHomeProps> = ({ keyMapBing, api_url_p
     { number: 8, component: <Step8CHome />, data: 'encounter' },
     { number: 9, component: <Step9CHome />, data: '' },
     { number: 10, component: <Step10Home />, data: 'amenities' },
-    { number: 11, component: <Step11CHome api_url_path={api_url_path}/>, data: '' },
+    { number: 11, component: <Step11CHome api_url_path={api_url_path} />, data: '' },
     { number: 12, component: <Step12CHome />, data: 'title' },
     { number: 13, component: <Step13CHome />, data: 'description' },
     { number: 14, component: <Step14CHome />, data: '' },
@@ -106,10 +109,9 @@ const CreateHome: NextPageWithLayout<CreateHomeProps> = ({ keyMapBing, api_url_p
           )}
         </div>
       </CreateHouseProvider>
-
     </>
   );
-}
+};
 
 CreateHome.Layout = authWithoutAnimate;
 

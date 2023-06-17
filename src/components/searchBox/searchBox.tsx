@@ -36,13 +36,15 @@ const SearchBox = ({ styleBox }: SearchBoxProps) => {
     });
   }
 
-  useEffect(()=>{
-    const temp =  document.getElementById('searchBox');
-    temp?.addEventListener('change', (event:any)=>{
-      setAddress({...address, address:{...address.address, formattedAddress: event.target.value}});
-    })
-  },[])
-
+  useEffect(() => {
+    const temp = document.getElementById('searchBox');
+    temp?.addEventListener('change', (event: any) => {
+      setAddress({
+        ...address,
+        address: { ...address.address, formattedAddress: event.target.value }
+      });
+    });
+  }, []);
 
   return (
     <>

@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 import { textContainer, textVariant2 } from '../../utils/motion';
 
 interface TypingTextProps {
-  title: any,
-  textStyles: string
+  title: any;
+  textStyles: string;
 }
 
 export const TypingText = ({ title, textStyles }: TypingTextProps) => (

@@ -42,7 +42,7 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
     setIsShowAllPt(true);
     document.body.style.overflow = 'hidden';
   };
-  initializeSSR()
+  initializeSSR();
 
   return (
     <>
@@ -96,7 +96,6 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
           <FooterMainRes />
         </main>
       </div>
-
     </>
   );
 };

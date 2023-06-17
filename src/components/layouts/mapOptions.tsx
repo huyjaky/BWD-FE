@@ -1,6 +1,6 @@
-import Head from "next/head";
-import Script from "next/script";
-import { ReactNode } from "react"
+import Head from 'next/head';
+import Script from 'next/script';
+import { ReactNode } from 'react';
 
 interface MapOptionsProps {
   children: ReactNode;
@@ -21,7 +21,7 @@ const MapOptions = ({ children }: MapOptionsProps) => {
         defer={true}
       />
     </>
-  )
-}
+  );
+};
 
 export default MapOptions;

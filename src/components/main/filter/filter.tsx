@@ -22,22 +22,20 @@ const Filter = ({ isInvisible }: FilterProps) => {
     document.body.style.overflow = 'hidden';
   };
   useEffect(() => {
-    const emptyObjJson = JSON.stringify(
-      {
-        maxPrice: 250,
-        minPrice: 10,
-        beds: 0,
-        bathRooms: 0,
-        typeHouse: [],
-        amenities: {
-          essentials: [],
-          features: [],
-          location: [],
-          safety: []
-        },
-        hostLanguage: ''
-      }
-    );
+    const emptyObjJson = JSON.stringify({
+      maxPrice: 250,
+      minPrice: 10,
+      beds: 0,
+      bathRooms: 0,
+      typeHouse: [],
+      amenities: {
+        essentials: [],
+        features: [],
+        location: [],
+        safety: []
+      },
+      hostLanguage: ''
+    });
     const filterFormJson = JSON.stringify(filterForm);
     if (filterFormJson === emptyObjJson) {
       setIsEmpty(true);
