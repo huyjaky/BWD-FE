@@ -1,3 +1,4 @@
+import { address } from '../models/address';
 import { ReactNode, useState, createContext, useReducer } from 'react';
 
 interface Children {
@@ -13,7 +14,7 @@ export type houseDataType = {
   [key: string]: any;
   type: string;
   place: string;
-  address: string;
+  address: address;
   addressConfirmation: {
     country: string;
     subAddress: string[];
@@ -49,7 +50,20 @@ export type houseDataType = {
 const initHouseData: houseDataType = {
   type: '',
   place: '',
-  address: '',
+  address: {
+    countryRegion: '',
+    locality: '',
+    adminDistrict: '',
+    adminDistrict2: '',
+    countryRegionIso2: '',
+    houseNumber: '',
+    postalCode: '',
+    addressLine: '',
+    streetName: '',
+    formattedAddress: '',
+    latitude: 0,
+    longitude: 0
+  },
   addressConfirmation: {
     country: '',
     subAddress: [],
