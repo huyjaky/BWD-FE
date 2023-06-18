@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { motion } from 'framer-motion';
 // Import React FilePond
-import { FilePond, registerPlugin } from 'react-filepond';
+import { FilePond, FilePondProps, registerPlugin } from 'react-filepond';
 
 // Import FilePond styles
 import 'filepond/dist/filepond.min.css';
@@ -12,7 +12,11 @@ import 'filepond/dist/filepond.min.css';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
-import { FilePondFile } from 'filepond';
+import { FilePondErrorDescription, FilePondFile } from 'filepond';
+import { imgFileContext } from '@/contexts/imgFile';
+import { isExists } from 'date-fns';
+import { url } from 'inspector';
+import axiosClient from '@/api-client/axiosClient';
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 interface Step11CHomeProps {
@@ -20,7 +24,7 @@ interface Step11CHomeProps {
 }
 
 export default function Step11CHome({ api_url_path }: Step11CHomeProps) {
-  const [fileImg, setFileImg] = useState<any>([]);
+  const { imgArr, setImgArr } = useContext(imgFileContext);
 
   return (
     <motion.div
@@ -61,14 +65,48 @@ export default function Step11CHome({ api_url_path }: Step11CHomeProps) {
               </motion.p>
               <div className="mt-10">
                 <FilePond
-                  files={fileImg}
-                  onupdatefiles={(fileItems: FilePondFile[]) => {
-                    setFileImg(fileItems);
-                  }}
+                  files={imgArr}
                   allowMultiple={true}
+                  onaddfile={(error: FilePondErrorDescription | null, file: FilePondFile) => {
+                    if (error) return;
+                    let temp = imgArr;
+                    temp.push(file);
+                    setImgArr(temp);
+                  }}
+
+                  beforeAddFile={async (file: FilePondFile) => {
+                    if (imgArr.length > 0) {
+                      const isExist = await imgArr.some((items: any) => items.filename === file.filename);
+                      console.log(isExist);
+                      return !isExist;
+                    }
+                    return true
+                  }}
+
+                  onprocessfilerevert={async (file: FilePondFile) => {
+                    try {
+                      const temp = await axiosClient.post(`/delete/img`, {nameImg: file.filename});
+                      if (temp.status == 200) {
+                        console.log(temp.data);
+                      }
+                    } catch (error) {
+                      console.log(error);
+                      return
+                    }
+                  }}
+
                   maxFiles={30}
                   maxParallelUploads={30}
-                  server={`${api_url_path}/api/post/img`}
+
+                  // server={`${api_url_path}/api/post/img`}
+                  server={{
+                    url: api_url_path + '/api',
+                    process: {
+                      url: '/post/img',
+                      method: 'POST',
+                      timeout: 120000,
+                    },
+                  }}
                   name="files" /* sets the file input name, it's filepond by default */
                   labelIdle='Drag and drop files <span class="filepond--label-action">Browse</span>'
                   acceptedFileTypes={[

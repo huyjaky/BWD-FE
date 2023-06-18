@@ -27,6 +27,7 @@ import { SessionProvider } from 'next-auth/react';
 import { Montserrat } from 'next/font/google';
 import Head from 'next/head';
 import Link from 'next/link';
+import ImgFileProvider from '@/contexts/imgFile';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -58,15 +59,17 @@ export default function App({
                           <SessionProvider session={session}>
                             <IsShowPtProvider>
                               <AmountTabHostingProviders>
-                                <Layout>
-                                  <div
-                                    className={`${monsterrat.className} bg-white
+                                <ImgFileProvider>
+                                  <Layout>
+                                    <div
+                                      className={`${monsterrat.className} bg-white
                                         `}
-                                  >
-                                    <NextNProgress color="#B80F0A" height={7} />
-                                    <Component {...pageProps} />
-                                  </div>
-                                </Layout>
+                                    >
+                                      <NextNProgress color="#B80F0A" height={7} />
+                                      <Component {...pageProps} />
+                                    </div>
+                                  </Layout>
+                                </ImgFileProvider>
                               </AmountTabHostingProviders>
                             </IsShowPtProvider>
                           </SessionProvider>
