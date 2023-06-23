@@ -278,8 +278,8 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
                 <div
                   className={`w-full h-fit  relative
               after:absolute after:bottom-0 after:w-full after:h-[4px]  mt-5
-              after:bg-slate-700 after:right-0  rounded-xl ${
-                errors.phoneNumber?.message ? 'after:bg-red-500' : ''
+              after:right-0  rounded-xl ${
+                errors.phoneNumber?.message !== undefined ? 'after:bg-red-500' : 'after:bg-slate-800'
               }
               `}
                 >
@@ -330,7 +330,7 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
                   <img
                     src={houseDetail.arrImg[0].Path}
                     alt=""
-                    className="w-full h-[300px] rounded-2xl"
+                    className="w-full h-[300px] rounded-2xl object-cover"
                   />
                   <div className="w-full flex justify-between">
                     <div className="w-fit h-fit flex flex-col">
