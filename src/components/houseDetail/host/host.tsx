@@ -32,7 +32,7 @@ const Host = ({ userAcc, placeOffer, link }: HostProps) => {
                 <motion.div
                   whileInView={{ y: [20, 0], opacity: [0, 1] }}
                   transition={{ duration: 0.6, delay: 0.2 * index }}
-                  className="w-full h-fit flex items-center"
+                  className="w-full h-fit flex items-center cursor-default"
                   key={index}
                 >
                   <img
@@ -40,7 +40,7 @@ const Host = ({ userAcc, placeOffer, link }: HostProps) => {
                     alt=""
                     className="text-[30px]"
                   />
-                  <span className="text-[25px]">{item.PlaceOffer}</span>
+                  <span className="text-[25px] text-ellipsis overflow-hidden whitespace-nowrap">{item.PlaceOffer}</span>
                 </motion.div>
               );
             }
