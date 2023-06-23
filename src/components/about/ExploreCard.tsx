@@ -16,7 +16,7 @@ interface ExploreCardProps {
 
 const ExploreCard = ({ id, imgUrl, title, index, active, handleClick }: ExploreCardProps) => (
   <motion.div
-    variants={fadeIn('right', 'tween', index * 0.5, 0.75)}
+    variants={fadeIn('right', 'tween', index * 0.3, 0.75)}
     className={`relative ${
       active === id ? 'lg:flex-[3.5] flex-[10]' : 'lg:flex-[0.5] flex-[2]'
     } flex items-center justify-center min-w-[170px] h-[700px]  duration-[0.7s] ease-out-flex cursor-pointer

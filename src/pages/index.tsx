@@ -1,11 +1,16 @@
 import { Footer, Navbar } from '@/components/about';
-import { About, Explore, Feedback, GetStarted, Hero, Insights, WhatsNew, World } from '../sections';
 import { GetStaticProps, GetStaticPropsContext } from 'next';
-import { getServerSession } from 'next-auth';
-import { getSession, useSession } from 'next-auth/react';
+import { Montserrat } from 'next/font/google';
+import { About, Explore, Feedback, GetStarted, Hero, Insights, WhatsNew, World } from '../sections';
+
+const monsterrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['200', '400', '600', '800'],
+  variable: '--font-monsterrat'
+});
 
 const About_ = () => (
-  <div className="bg-primary-white overflow-hidden">
+  <div className={`bg-primary-white overflow-hidden ${monsterrat.className}`}>
     <Navbar />
     <Hero />
     <div className="relative">

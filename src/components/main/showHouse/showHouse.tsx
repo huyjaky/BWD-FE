@@ -1,6 +1,7 @@
 import { houseApi } from '@/api-client/houseApi';
 import HostUser from '@/components/houseDetail/host/hostUser';
 import SkeletonShowHouse from '@/components/skeletonLoading/skletonShowHouse';
+import { AmountTabHostingContext } from '@/contexts/amountTabHosting';
 import { filterContext } from '@/contexts/filter';
 import { getHouseContext } from '@/contexts/getHouse';
 import { selectPlaceContext } from '@/contexts/selectPlace';
@@ -9,19 +10,26 @@ import { house_ } from '@/models/house';
 import { userAcc } from '@/models/userAcc';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useContext, useEffect, useRef, useState } from 'react';
+import { BsListNested } from 'react-icons/bs';
 import { HiUserCircle } from 'react-icons/hi';
-import { MdOutlineNearbyError } from 'react-icons/md';
 import { ImMap } from 'react-icons/im';
+import { MdOutlineNearbyError } from 'react-icons/md';
+import { RiDeleteBin5Line } from 'react-icons/ri';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Carousel from './carousel';
 import Heart from './heart';
 import MapEach from './mapEach';
-import { AmountTabHostingContext } from '@/contexts/amountTabHosting';
-import Image from 'next/image';
 
 const variants: Variants = {
+  showIconControl: {
+    width: 160
+  },
+  hiddenIconControl: {
+    width: 60
+  },
   show: {
     opacity: [0, 1]
   },
@@ -115,6 +123,10 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
   const maskMap = useRef<HTMLInputElement>(null);
   const [isOpenMask, setIsOpenMask] = useState(false);
   const [selectUser, setSelectUser] = useState<userAcc>();
+  const [isHover, setIsHover] = useState<{
+    ishover: boolean,
+    id: number
+  }>({ ishover: false, id: -1 });
   const [selectLocale, setSelectLocale] = useState<{
     longitude: number;
     latitude: number;
@@ -316,7 +328,9 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                   variants={variants}
                   whileHover="hoverItem"
                   transition={{ type: 'spring' }}
-                  className="w-full h-[400px] rounded-2xl box-border"
+                  className="w-full h-[400px] rounded-2xl box-border bg-gray-100"
+                  onHoverStart={() => { setIsHover({ ishover: true, id: index }) }}
+                  onHoverEnd={() => { setIsHover({ ishover: false, id: -1 }) }}
                 >
                   <div className="w-full h-[300px] relative">
                     <Carousel arrImg={item.arrImg} houseId={item.HouseId} />
@@ -346,15 +360,15 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                       <ImMap />
                     </motion.button>
 
+                    {/* cai nay dung trong nhung luc binh thuong */}
                     <motion.button
                       onClick={() => {
                         setSelectUser(item.useracc);
                         setIsOpenMask(true);
                       }}
-                      className="absolute w-[60px] h-[60px] transition-all
-                left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl
-                "
-                    >
+                      className={`absolute w-[60px] h-[60px] transition-all
+                left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl ${infShow === 'authListHouse'
+                          ? 'hidden' : ''}`} >
                       {item.useracc.Image ? (
                         <img
                           src={'/api/img/path/' + item.useracc.Image}
@@ -365,6 +379,51 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                         <HiUserCircle className="w-full h-full" />
                       )}
                     </motion.button>
+
+                    {/* cai nay dung trong /hosting de them sua xoa */}
+                    <motion.button
+                      variants={variants}
+                      animate={isHover.ishover && isHover.id === index ? 'showIconControl' : 'hiddenIconControl'}
+                      transition={{ type: 'spring', duration: .3 }}
+
+                      className={`absolute w-[160px] h-[60px] transition-all bg-white
+                left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl flex
+                ${infShow === 'authListHouse' ? '' : 'hidden'}`} >
+                      <div className='w-[60px] h-full rounded-full overflow-hidden'>
+                        {item.useracc.Image ? (
+                          <img
+                            src={'/api/img/path/' + item.useracc.Image}
+                            alt=""
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <HiUserCircle className="w-full h-full" />
+                        )}
+                      </div>
+
+                      <div className='w-0 relative'>
+                        <motion.div className='w-[50px] h-[60px] top-0 left-0
+                        absolute z-20 flex
+                        '>
+                          <BsListNested className='w-[40px] h-[40px] m-auto
+                          text-blue-600
+                          ' />
+                        </motion.div>
+
+                        <motion.div className='w-[50px] h-[60px] top-0 left-[50px]
+                        absolute z-20 flex
+                        '>
+                          <RiDeleteBin5Line className='w-[40px] h-[40px] m-auto
+                          text-red-500
+                          ' />
+                        </motion.div>
+
+                      </div>
+
+                    </motion.button>
+
+
+
                   </div>
                   <Link href={`/house/${item.HouseId}`}>
                     <div className="h-[100px] w-full box-border p-4">

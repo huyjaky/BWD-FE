@@ -123,51 +123,53 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
         >
           {/* form input username */}
           <div
-            className={`border-2 rounded-t-xl box-border p-3 h-[70px] ${
-              errors?.username?.message ? 'border-red-500' : ''
-            }`}
+            className={`border-2 rounded-t-xl box-border p-3 h-[90px] ${errors?.username?.message ? 'border-red-500' : ''
+              }`}
             ref={divRef}
           >
-            <div className="w-full h-full flex items-center" ref={title_username}>
-              <span>
-                User name
-                <span className="italic text-red-500">
-                  {' '}
-                  | {errors.username?.message ? ` ${errors.username.message}` : ''}
+            <div className='w-full h-full m-auto'>
+              <div className="w-full h-full flex items-center" ref={title_username}>
+                <span>
+                  User name
+                  <span className="italic text-red-500">
+                    {' '}
+                    | {errors.username?.message ? ` ${errors.username.message}` : ''}
+                  </span>
                 </span>
-              </span>
-            </div>
-            <div className="w-full h-0 mt-1 overflow-hidden" ref={input_username}>
-              <input
-                {...register('username')}
-                type="text"
-                className="w-full h-full outline-none border-b shadow-2xl"
-              />
+              </div>
+              <div className="w-full h-0 mt-2 overflow-hidden" ref={input_username}>
+                <input
+                  {...register('username')}
+                  type="text"
+                  className="w-full h-[40px] outline-none border-b shadow-2xl text-[20px]"
+                />
+              </div>
             </div>
           </div>
 
           {/* form input password */}
           <div
-            className={`border-2 rounded-b-xl box-border p-3 h-[70px] ${
-              errors?.password?.message ? 'border-red-500' : ''
-            }`}
+            className={`border-2 rounded-b-xl box-border flex p-3 h-[90px] ${errors?.password?.message ? 'border-red-500' : ''
+              }`}
             ref={divRef2}
           >
-            <div className="w-full h-full flex items-center" ref={title_password}>
-              <span>
-                Password
-                <span className="italic text-red-500">
-                  {' '}
-                  | {errors.password?.message ? ` ${errors.password.message}` : ''}
+            <div className='w-full h-full m-auto'>
+              <div className="w-full h-full flex items-center" ref={title_password}>
+                <span>
+                  Password
+                  <span className="italic text-red-500">
+                    {' '}
+                    | {errors.password?.message ? ` ${errors.password.message}` : ''}
+                  </span>
                 </span>
-              </span>
-            </div>
-            <div className="w-full h-0 mt-1 overflow-hidden" ref={input_password}>
-              <input
-                {...register('password')}
-                type="password"
-                className="w-full h-full outline-none border-b shadow-2xl"
-              />
+              </div>
+              <div className="w-full h-0 mt-2 overflow-hidden" ref={input_password}>
+                <input
+                  {...register('password')}
+                  type="password"
+                  className="w-full h-[40px] outline-none border-b shadow-2xl text-[20px]"
+                />
+              </div>
             </div>
           </div>
           <button type="submit" className="w-full h-[40px] bg-red-600 mt-5 rounded-xl">
