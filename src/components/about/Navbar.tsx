@@ -35,7 +35,7 @@ const Navbar = () => {
         <img src="/about/search.svg" alt="search" className="w-[24px] h-[24px] object-contain" />
         <h2 className="font-extrabold text-[24px] leading-[30.24px] text-black">OLYMPUS</h2>
         {/* <img src="/about/menu.svg" alt="menu" className="w-[24px] h-[24px] object-contain fill-black" /> */}
-        <BsList className='w-[40px] h-[40px] object-contain text-black' onClick={
+        <BsList className='w-[30px] h-[40px] object-contain text-black' onClick={
           () => { setIsOpen(!isOpen) }} />
 
         <motion.div
