@@ -59,8 +59,8 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.SECRET_COOKIE_PASSWORD,
   session: {
     strategy: 'jwt',
-    maxAge: 24 * 60 * 60
-    // updateAge: 24 * 60 * 60,
+    maxAge: 24 * 60 * 60,
+    updateAge: 24 * 60 * 60,
   },
   jwt: {
     maxAge: 24 * 60 * 60
@@ -68,13 +68,13 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }: { token: JWT; user: User | AdapterUser }): Promise<JWT> {
       if (user) {
-        token.loginVl = user;
+        token.loginVl = user; // o day tao mot bien trung gian de khi du lieu fetch ve roi vao day
       }
       return token;
     },
 
     async session({ session, token, user }) {
-      session.token = { ...token?.loginVl?.token };
+      session.token = { ...token?.loginVl?.token }; // chia du lieu ra thanh nhieu phan nho 
       session.userAcc = { ...token?.loginVl?.userAcc };
       return session;
     }

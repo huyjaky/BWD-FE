@@ -12,7 +12,7 @@ interface mainProps {
 }
 
 function Main({ keyMapBing }: mainProps): JSX.Element {
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState('Currently hosting');
   const { currentHosting } = useContext(AmountTabHostingContext);
   const [refButton, inViewButton] = useInView({
     // Kích hoạt nhiều lần khi vào khung nhìn
