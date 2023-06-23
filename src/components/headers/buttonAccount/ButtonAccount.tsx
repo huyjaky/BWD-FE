@@ -42,7 +42,7 @@ const ButtonAccount = () => {
     document.addEventListener('scroll', handleControlPanel);
   }, []);
 
-  useEffect(() => {}, [user]);
+  useEffect(() => { }, [user]);
   return (
     <div
       className="w-fit p-1 rounded-full bg-white flex border-gray-400 hover:shadow-lg
@@ -79,7 +79,9 @@ const ButtonAccount = () => {
               </>
             ) : (
               <>
-                <button className="w-full py-4 text-left px-5">Manage listings</button>
+                <Link href={'hosting'}>
+                  <button className="w-full py-4 text-left px-5">Manage listings</button>
+                </Link>
                 <button className="w-full py-4 text-left px-5">Account</button>
                 <button
                   onClick={() => setIsFilter((isFilter + 1) * -1)}

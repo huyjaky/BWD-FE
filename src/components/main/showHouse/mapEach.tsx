@@ -8,7 +8,7 @@ interface MapEachProps {
 }
 
 const MapEach = ({ latitude, longitude, zoom, keyMapBing }: MapEachProps) => {
-  useEffect(() => {
+  // useEffect(() => {
     whenLoaded.then(() => {
       const map_ = document.getElementById('MapEach');
       if (map_) {
@@ -25,7 +25,7 @@ const MapEach = ({ latitude, longitude, zoom, keyMapBing }: MapEachProps) => {
         map.layers.insert(layer);
       }
     });
-  }, [latitude, longitude, zoom]);
+  // }, [latitude, longitude, zoom]);
 
   return (
     <div className="w-full h-[500px] rounded-3xl border-2 border-red-400 overflow-hidden">
