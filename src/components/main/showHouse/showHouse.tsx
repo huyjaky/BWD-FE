@@ -18,6 +18,7 @@ import Carousel from './carousel';
 import Heart from './heart';
 import MapEach from './mapEach';
 import { AmountTabHostingContext } from '@/contexts/amountTabHosting';
+import Image from 'next/image';
 
 const variants: Variants = {
   show: {
@@ -319,6 +320,10 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                     {infShow !== 'authListHouse' && (
                       <Heart HouseId={item.HouseId} IsFavorite={item.IsFavorite} />
                     )}
+
+                    <div className='absolute left-2 top-2 z-20'>
+                      <Image className='fill-white' width={50} height={50} src={'/x2click.svg'} alt=''/>
+                    </div>
 
                     <motion.button
                       whileHover={{ scale: 1.2 }}

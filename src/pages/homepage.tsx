@@ -13,13 +13,9 @@ import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { GetServerSideProps } from 'next';
 import { getServerSession } from 'next-auth';
 import { Montserrat } from 'next/font/google';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Script from 'next/script';
 import { useContext, useEffect } from 'react';
 import { authOptions } from './api/auth/[...nextauth]';
-import authWithoutAnimate from '@/components/layouts/authWithoutAnimate';
-import MapEach from '@/components/main/showHouse/mapEach';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
