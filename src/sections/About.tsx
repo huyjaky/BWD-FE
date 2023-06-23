@@ -23,7 +23,7 @@ const About = () => (
         variants={fadeIn('up', 'tween', 0.2, 1)}
         className="mt-[8px] font-normal sm:text-[32px] text-[20px] text-center text-slate-700"
       >
-        Welcome to
+        Welcome to{' '}
         <span className="font-extrabold text-black">Olympus</span>, the cutting-edge real estate platform that
         leverages Artificial Intelligence <span className="font-extrabold text-black">(AI){' '}</span>
         to revolutionize your property search experience.
