@@ -12,6 +12,7 @@ import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { HiUserCircle } from 'react-icons/hi';
+import { MdOutlineNearbyError } from 'react-icons/md';
 import { ImMap } from 'react-icons/im';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Carousel from './carousel';
@@ -296,7 +297,12 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
           }
           style={{ overflow: 'hidden' }}
           className="w-full h-fit grid grid-cols-houseBox gap-x-9 gap-y-8 px-7 py-8"
-          endMessage={<div>No more values</div>}
+          endMessage={<div className='w-full h-[400px]'>
+            <div className='m-auto flex'>
+              <MdOutlineNearbyError className='w-[50px] h-[50px] text-center' />
+              <span className='m-auto ml-0 text-[24px]'> No results invalid </span>
+            </div>
+          </div>}
         >
           {houseTemp.map((item: house_, index: number) => {
             return (
@@ -321,8 +327,8 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                       <Heart HouseId={item.HouseId} IsFavorite={item.IsFavorite} />
                     )}
 
-                    <div className='absolute left-2 top-2 z-20'>
-                      <Image className='fill-white' width={50} height={50} src={'/x2click.svg'} alt=''/>
+                    <div className='absolute left-2 top-2 z-10'>
+                      <Image className='fill-white' width={50} height={50} src={'/x2click.svg'} alt='' />
                     </div>
 
                     <motion.button
@@ -335,9 +341,8 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                           zoom: 18
                         });
                       }}
-                      className={`absolute top-3 right-12 ${
-                        infShow === 'authListHouse' ? 'right-2' : ''
-                      } text-red-500 text-[25px] z-10`}
+                      className={`absolute top-3 right-12 ${infShow === 'authListHouse' ? 'right-2' : ''
+                        } text-red-500 text-[25px] z-10`}
                     >
                       <ImMap />
                     </motion.button>
@@ -353,7 +358,7 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                     >
                       {item.useracc.Image ? (
                         <img
-                          src={'/api/img/path/'+item.useracc.Image}
+                          src={'/api/img/path/' + item.useracc.Image}
                           alt=""
                           className="w-full h-full object-cover"
                         />
