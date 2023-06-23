@@ -7,16 +7,23 @@ import { initializeSSR } from 'bing-maps-loader';
 import { GetServerSideProps } from 'next';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]';
+import { Montserrat } from 'next/font/google';
 
 interface indexProps {
   keyMapBing: string;
 }
 
+const monsterrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['200', '400', '600', '800'],
+  variable: '--font-monsterrat'
+});
+
 const Index: NextPageWithLayout<indexProps> = ({ keyMapBing }: indexProps): JSX.Element => {
   initializeSSR();
   return (
     <>
-      <div>
+      <div className={`${monsterrat.className}`}>
         <Header />
         <Main keyMapBing={keyMapBing} />
         <FooterRooms />

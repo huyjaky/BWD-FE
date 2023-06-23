@@ -125,7 +125,6 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
   const fetchHouseApi = async () => {
     if (houseTemp.length != 0 || status === 'loading') return;
     const temp = await session?.userAcc;
-    console.log(status, infShow);
     // neu user login thi userid se thay doi nen phai chia ra nhieu truong hop
     if (infShow === 'noneAuthHouseApi' && status === 'authenticated') {
       const arr = await houseApi['noneAuthHouseApi'](1, temp.UserId);
