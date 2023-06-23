@@ -54,7 +54,7 @@ const ButtonAccount = () => {
     >
       <BsList className="w-[30px] h-[30px]" />
       {user.Image ? (
-        <img src={user.Image} className="w-[30px] h-[30px] rounded-full" />
+        <img src={'/api/img/path/'+user.Image} className="w-[30px] h-[30px] rounded-full" />
       ) : (
         <HiUserCircle className="w-[40px] h-[30px] " />
       )}

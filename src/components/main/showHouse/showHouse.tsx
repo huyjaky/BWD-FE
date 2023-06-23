@@ -353,7 +353,7 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                     >
                       {item.useracc.Image ? (
                         <img
-                          src={item.useracc.Image}
+                          src={'/api/img/path/'+item.useracc.Image}
                           alt=""
                           className="w-full h-full object-cover"
                         />
