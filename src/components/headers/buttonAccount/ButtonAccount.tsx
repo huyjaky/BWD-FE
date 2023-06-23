@@ -96,6 +96,7 @@ const ButtonAccount = () => {
                       redirect: false
                     });
                     resetDataUser();
+                    setIsFilter(0);
                   }}
                 >
                   Logout
