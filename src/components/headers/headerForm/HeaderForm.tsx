@@ -82,7 +82,7 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
         </div>
       </header>
       <header
-        className="w-full h-[80px] desktop:hidden laptop:hidden  box-border py-3 tablet:px-[80px]
+        className="w-full h-fit desktop:hidden laptop:hidden  box-border py-5 tablet:px-[80px]
       mobile:px-[20px] mobile:relative tablet:relative
       "
       >

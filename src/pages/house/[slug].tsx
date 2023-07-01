@@ -60,7 +60,7 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
             <TitleHouse title={houseDetail.Title} address={houseDetail.address} />
 
             <Picture arrImg={houseDetail.arrImg} />
-            <div className="w-full h-[500px] laptop:hidden desktop:hidden flex justify-center box-border relative">
+            <div className="w-full h-[500px] laptop:hidden desktop:hidden flex justify-center box-border relative z-10">
               <Carousel arrImg={houseDetail.arrImg} houseId={houseDetail.HouseId} />
               <div
                 onClick={handleOnClick}

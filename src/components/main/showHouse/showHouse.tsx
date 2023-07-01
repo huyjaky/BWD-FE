@@ -8,23 +8,20 @@ import { selectPlaceContext } from '@/contexts/selectPlace';
 import { userAccContext } from '@/contexts/userAcc';
 import { house_ } from '@/models/house';
 import { userAcc } from '@/models/userAcc';
-import { AnimatePresence, Variants, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useContext, useEffect, useRef, useState } from 'react';
-import { BsListNested } from 'react-icons/bs';
 import { HiUserCircle } from 'react-icons/hi';
 import { ImMap } from 'react-icons/im';
-import { MdOutlineNearbyError } from 'react-icons/md';
-import { RiDeleteBin5Line } from 'react-icons/ri';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Carousel from './carousel';
+import EditRemoveIcon from './componentShowHouse/editRemoveIcon';
+import EndMessage from './componentShowHouse/endMessage';
 import Heart from './heart';
 import MapEach from './mapEach';
 import { variants } from './variantsShowHouse';
-import EndMessage from './componentShowHouse/endMessage';
-import EditRemoveIcon from './componentShowHouse/editRemoveIcon';
 
 interface ShowHouseProps {
   infShow: 'noneAuthHouseApi' | 'noneAuthFilter' | 'authListHouse' | 'favoriteHouse';
@@ -198,7 +195,7 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
         </motion.div>
       </AnimatePresence>
 
-      <motion.div className="w-full h-fit py-20 pb-28" id="scroll-inf">
+      <motion.div className="w-full h-fit py-4 pb-28" id="scroll-inf">
         <InfiniteScroll
           dataLength={houseTemp.length}
           next={getMoreHouse}
@@ -284,6 +281,7 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                           src={'/api/img/path/' + item.useracc.Image}
                           alt=""
                           className="w-full h-full object-cover"
+
                         />
                       ) : (
                         <HiUserCircle className="w-full h-full" />
@@ -305,10 +303,13 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                     >
                       <div className="w-[60px] h-full rounded-full overflow-hidden">
                         {item.useracc.Image ? (
-                          <img
+                          <Image
                             src={'/api/img/path/' + item.useracc.Image}
                             alt=""
                             className="w-full h-full object-cover"
+                            width={0}
+                            height={0}
+
                           />
                         ) : (
                           <HiUserCircle className="w-full h-full" />

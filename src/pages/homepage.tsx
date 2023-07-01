@@ -2,7 +2,7 @@ import FooterMainRes from '@/components/footers/footerMainRes';
 import FooterRooms from '@/components/footers/footerRooms';
 import AuthWithAnimate from '@/components/layouts/authWithAnimate';
 import ShowHouse from '@/components/main/showHouse/showHouse';
-import TypeHouse from '@/components/main/typeHouse';
+import TypeHouse from '@/components/main/typeHouse/typeHouse';
 import HeaderMain from '@/components/rootMaskHeader/headerMain';
 import { getHouseContext } from '@/contexts/getHouse';
 import { userAccContext } from '@/contexts/userAcc';
@@ -68,7 +68,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
     setUser({ ...user, ...user_ });
   }
 
-  useEffect(() => {}, [isFilter]);
+  useEffect(() => { }, [isFilter]);
   initializeSSR();
 
   return (
@@ -83,13 +83,10 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
         <AnimatePresence initial={false}>
           <HeaderMain />
         </AnimatePresence>
+        <motion.div>
+          <TypeHouse />
+        </motion.div>
         <div className="w-full h-fit px-[80px] mobile:px-[20px] box-border">
-          <motion.div
-            variants={variants}
-            animate={isFilter < 0 ? 'hiddenTypeHouse' : 'showTypeHouse'}
-          >
-            <TypeHouse />
-          </motion.div>
 
           {isFilter < 0 ? (
             <motion.div

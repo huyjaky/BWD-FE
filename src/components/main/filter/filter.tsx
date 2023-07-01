@@ -67,14 +67,14 @@ tablet:h-full tablet:w-[100px]
               animate={{ scale: 1.2 }}
               transition={{ repeat: Infinity, duration: 1 }}
               className="w-[20px] h-[20px] rounded-full bg-red-400 absolute -right-1
-          -top-2 flex opacity-70
+          top-4 flex opacity-70
           "
             >
               <div className="w-[10px] h-[10px] bg-red-600 rounded-full m-auto"></div>
             </motion.div>
           )}
           <div className="flex w-fit h-[30px] m-auto  mobile:h-full tablet:h-full">
-            <HiOutlineFilter className="w-[30px] h-full m-auto " />
+            <HiOutlineFilter className={`w-[30px] h-full m-auto ${(isEmpty && isFilter === 0) || isFilter < 0 ? '' : 'text-red-500'}` }/>
             <div className="w-fit h-full flex items-center mobile:hidden tablet:hidden ">
               <span className="font-semibold">Filter</span>
             </div>

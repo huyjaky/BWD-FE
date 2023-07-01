@@ -23,7 +23,6 @@ const ControlBar = () => {
   const { setIsShowHeader } = useContext(filterFormAnimateContext);
   const router = useRouter();
 
-  const handleOnMask = (event: any) => {};
 
   const isEmpty = () => {
     if (

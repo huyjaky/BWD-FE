@@ -83,12 +83,7 @@ const ButtonAccount = () => {
                   <button className="w-full py-4 text-left px-5">Manage listings</button>
                 </Link>
                 <button className="w-full py-4 text-left px-5">Account</button>
-                <button
-                  onClick={() => setIsFilter((isFilter + 1) * -1)}
-                  className="w-full py-4 text-left px-5"
-                >
-                  Whislists
-                </button>
+               
                 <button
                   className="w-full py-4 text-left px-5"
                   onClick={async () => {
