@@ -102,7 +102,7 @@ const ControlBar = () => {
             id="checkin"
             onClick={onSelected}
           >
-            <span>Check in</span>
+            <span>Appointment schedule</span>
             <span className="text-[12px]">{format(address.checkInDay, 'eeee, ddMMM')}</span>
           </div>
         </div>

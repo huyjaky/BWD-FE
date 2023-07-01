@@ -123,11 +123,12 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
         >
           {/* form input username */}
           <div
-            className={`border-2 rounded-t-xl box-border p-3 h-[90px] ${errors?.username?.message ? 'border-red-500' : ''
-              }`}
+            className={`border-2 rounded-t-xl box-border p-3 h-[90px] ${
+              errors?.username?.message ? 'border-red-500' : ''
+            }`}
             ref={divRef}
           >
-            <div className='w-full h-full m-auto'>
+            <div className="w-full h-full m-auto">
               <div className="w-full h-full flex items-center" ref={title_username}>
                 <span>
                   User name
@@ -149,11 +150,12 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
 
           {/* form input password */}
           <div
-            className={`border-2 rounded-b-xl box-border flex p-3 h-[90px] ${errors?.password?.message ? 'border-red-500' : ''
-              }`}
+            className={`border-2 rounded-b-xl box-border flex p-3 h-[90px] ${
+              errors?.password?.message ? 'border-red-500' : ''
+            }`}
             ref={divRef2}
           >
-            <div className='w-full h-full m-auto'>
+            <div className="w-full h-full m-auto">
               <div className="w-full h-full flex items-center" ref={title_password}>
                 <span>
                   Password

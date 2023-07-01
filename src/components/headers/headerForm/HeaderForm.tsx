@@ -66,7 +66,8 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
                 setIsLoginClick(true);
               }}
               className="rounded-full bg-white h-fit box-content px-4 py-2
-            hover:bg-slate-300 tablet:hidden mobile:hidden cursor-pointer">
+            hover:bg-slate-300 tablet:hidden mobile:hidden cursor-pointer"
+            >
               <span className="font-semibold">olympus your home</span>
             </div>
             {/* translate */}

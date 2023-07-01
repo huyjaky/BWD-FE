@@ -119,9 +119,6 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
         <FooterRooms />
         <FooterMainRes />
       </motion.main>
-      {/* <div className='fixed w-[200px] h-[200px] left-0 top-0'>
-        <MapEach keyMapBing={keyMapBing} latitude={16.047079} longitude={108.206230} zoom={15}/>
-      </div> */}
     </>
   );
 };

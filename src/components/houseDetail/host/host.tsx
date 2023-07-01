@@ -40,7 +40,9 @@ const Host = ({ userAcc, placeOffer, link }: HostProps) => {
                     alt=""
                     className="text-[30px]"
                   />
-                  <span className="text-[25px] text-ellipsis overflow-hidden whitespace-nowrap">{item.PlaceOffer}</span>
+                  <span className="text-[25px] text-ellipsis overflow-hidden whitespace-nowrap">
+                    {item.PlaceOffer}
+                  </span>
                 </motion.div>
               );
             }

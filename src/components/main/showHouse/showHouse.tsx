@@ -22,87 +22,9 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Carousel from './carousel';
 import Heart from './heart';
 import MapEach from './mapEach';
-
-const variants: Variants = {
-  showIconControl: {
-    width: 160
-  },
-  hiddenIconControl: {
-    width: 60
-  },
-  show: {
-    opacity: [0, 1]
-  },
-  hidden: {
-    opacity: [1, 0],
-    transition: {
-      delay: 0.1
-    },
-    transitionEnd: {
-      display: 'none'
-    }
-  },
-  iconAnimate: {
-    borderRadius: [
-      '50% 50% 20% 80% / 25% 80% 20% 75%',
-      '67% 33% 47% 53% / 37% 20% 80% 63%',
-      '39% 61% 47% 53% / 37% 40% 60% 63%',
-      '39% 61% 82% 18% / 74% 40% 60% 26%',
-      '50% 50% 53% 47% / 26% 22% 78% 74%',
-      '50% 50% 20% 80% / 25% 80% 20% 75%',
-      '30% 70% 70% 30% / 30% 52% 48% 70%',
-      '20% 80% 20% 80% / 20% 80% 20% 80%'
-    ],
-    transition: {
-      duration: 10,
-      repeat: Infinity,
-      type: 'tween'
-    }
-  },
-  iconAnimateBg: {
-    borderRadius: [
-      '60% 40% 30% 70% / 60% 30% 70% 40%',
-      '30% 60% 70% 40% / 50% 60% 30% 60%',
-      '60% 40% 30% 70% / 60% 30% 70% 40%'
-    ],
-    transition: {
-      duration: 10,
-      repeat: Infinity,
-      type: 'tween'
-    }
-  },
-
-  showMask: {
-    display: 'flex',
-    opacity: [0, 1]
-  },
-  hiddenMask: {
-    opacity: [1, 0],
-    transitionEnd: {
-      display: 'none'
-    }
-  },
-
-  showMaskMap: {
-    visibility: 'visible',
-    opacity: [0, 1]
-  },
-  hiddenMaskMap: {
-    opacity: [1, 0],
-    transitionEnd: {
-      visibility: 'hidden'
-    }
-  },
-  hoverItem: {
-    scale: 1.03,
-    boxShadow:
-      'rgba(240, 46, 170, 0.4) -5px 5px, rgba(240, 46, 170, 0.3) -10px 10px, rgba(240, 46, 170, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, rgba(240, 46, 170, 0.05) -25px 25px',
-    transition: {
-      delay: 0,
-      type: 'spring'
-    }
-  }
-};
+import { variants } from './variantsShowHouse';
+import EndMessage from './componentShowHouse/endMessage';
+import EditRemoveIcon from './componentShowHouse/editRemoveIcon';
 
 interface ShowHouseProps {
   infShow: 'noneAuthHouseApi' | 'noneAuthFilter' | 'authListHouse' | 'favoriteHouse';
@@ -124,8 +46,8 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
   const [isOpenMask, setIsOpenMask] = useState(false);
   const [selectUser, setSelectUser] = useState<userAcc>();
   const [isHover, setIsHover] = useState<{
-    ishover: boolean,
-    id: number
+    ishover: boolean;
+    id: number;
   }>({ ishover: false, id: -1 });
   const [selectLocale, setSelectLocale] = useState<{
     longitude: number;
@@ -134,100 +56,81 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
   }>();
   const [isOpenMaskMap, setIsOpenMaskMap] = useState(false);
 
+  // thuc hien hanh dong khi kiem tra xem arr co ton tai hay khong
+  const isEmpty = (arr: any) => {
+    if (arr.data.length == 0) {
+      setHasMore(false); // neu nhu du lieu tra ve la khong co lan dau tien thi khong xuat hien nx
+      return;
+    }
+    setHouseTemp(arr.data as house_[]);
+  };
+
   const fetchHouseApi = async () => {
     if (houseTemp.length != 0 || status === 'loading') return;
     const temp = await session?.userAcc;
     // neu user login thi userid se thay doi nen phai chia ra nhieu truong hop
     if (infShow === 'noneAuthHouseApi' && status === 'authenticated') {
       const arr = await houseApi['noneAuthHouseApi'](1, temp.UserId);
-      if (arr.data.length == 0) {
-        setHasMore(false); // neu nhu du lieu tra ve la khong co lan dau tien thi khong xuat hien nx
-        return;
-      }
-      setHouseTemp(arr.data as house_[]);
+      return isEmpty(arr);
     } else if (infShow === 'noneAuthHouseApi' && status === 'unauthenticated') {
-      console.log('check un');
       const arr = await houseApi[infShow](1, '');
-      if (arr.data.length == 0) {
-        setHasMore(false); // neu nhu du lieu tra ve la khong co lan dau tien thi khong xuat hien nx
-        return;
-      }
-      setHouseTemp(arr.data as house_[]);
+      return isEmpty(arr);
     } else if (infShow === 'noneAuthFilter' && status === 'unauthenticated') {
       const arr = await houseApi[infShow]({ filter: filterForm, selectPlace: address }, 1, '');
-      if (arr.data.length == 0) {
-        setHasMore(false);
-        return;
-      }
-      setHouseTemp(arr.data as house_[]);
+      return isEmpty(arr);
     } else if (infShow === 'noneAuthFilter' && status === 'authenticated') {
       const arr = await houseApi[infShow](
         { filter: filterForm, selectPlace: address },
         1,
         temp.UserId
       );
-      if (arr.data.length == 0) {
-        setHasMore(false);
-        return;
-      }
-      setHouseTemp(arr.data as house_[]);
+      return isEmpty(arr);
     } else if (infShow === 'authListHouse' && status === 'authenticated') {
       const arr = await houseApi[infShow](temp.UserId);
-      console.log('auth authlisthouse', arr);
-      if (arr.data.length == 0) {
-        setHasMore(false);
-        return;
-      }
-      setHouseTemp(arr.data as house_[]);
+      return isEmpty(arr);
     } else if (infShow === 'favoriteHouse' && status === 'authenticated') {
       const arr = await houseApi['authFavoriteList'](temp.UserId);
-      if (arr.data?.length == 0) {
-        setHasMore(false);
-        return;
-      }
-      setHouseTemp(arr.data as house_[]);
+      return isEmpty(arr);
     }
   };
 
   useEffect(() => {
     setHouseTemp([]);
     setHasMore(true);
-    console.log('showhouse1');
   }, [infShow, isFilter, status]);
 
   useEffect(() => {
     fetchHouseApi();
   }, [houseTemp]);
 
-  // get more house de lay them nha khi scroll xuoong cuoi cung https://www.npmjs.com/package/react-infinite-scroll-component
+  const isExist = (moreHouse: any) => {
+    if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
+      setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
+    } else {
+      setHasMore(false); // cai nay de kiem tra xem da fetch het du lieu hay chua
+    }
+  };
+
   const getMoreHouse = async () => {
     if (infShow === 'favoriteHouse' || infShow == 'authListHouse') {
       setHasMore(false);
       return;
     }
     try {
+
+      // get more house de lay them nha khi scroll xuoong cuoi cung https://www.npmjs.com/package/react-infinite-scroll-component
+      // noi get more them du lieu khi dung infinite
       if (infShow === 'noneAuthHouseApi') {
-        console.log('get more house ');
         const moreHouse = await houseApi[infShow](houseTemp.length / 10 + 1, user.UserId);
-        if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
-          setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
-        } else {
-          setHasMore(false); // cai nay de kiem tra xem da fetch het du lieu hay chua
-        }
+        isExist(moreHouse);
       } else if (infShow === 'noneAuthFilter') {
-        const moreHouse = await houseApi[infShow](
-          { filter: filterForm, selectPlace: address },
-          houseTemp.length / 10 + 1,
-          user.UserId
-        );
-        if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
-          setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
-        } else {
-          setHasMore(false); // cai nay de kiem tra xem da fetch het du lieu hay chua
-        }
+        const moreHouse = await houseApi[infShow]( { filter: filterForm, selectPlace: address }, houseTemp.length / 10 + 1, user.UserId);
+        isExist(moreHouse);
       }
+
     } catch (error) {
       console.log(error);
+      return;
     }
   };
 
@@ -247,7 +150,6 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
 
   const handleOnClickOutSideMaskMap = (event: any) => {
     const isClickInSide = maskMap.current?.contains(event.target);
-    console.log(isClickInSide);
     if (!isClickInSide) {
       setIsOpenMaskMap(false);
       return;
@@ -308,12 +210,7 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
           }
           style={{ overflow: 'hidden' }}
           className="w-full h-fit grid grid-cols-houseBox gap-x-9 gap-y-8 px-7 py-8"
-          endMessage={<div className='w-full h-[400px]'>
-            <div className='m-auto flex'>
-              <MdOutlineNearbyError className='w-[50px] h-[50px] text-center' />
-              <span className='m-auto ml-0 text-[24px]'> No results invalid </span>
-            </div>
-          </div>}
+          endMessage={<EndMessage />}
         >
           {houseTemp.map((item: house_, index: number) => {
             return (
@@ -329,8 +226,12 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                   whileHover="hoverItem"
                   transition={{ type: 'spring' }}
                   className="w-full h-[400px] rounded-2xl box-border bg-gray-100"
-                  onHoverStart={() => { setIsHover({ ishover: true, id: index }) }}
-                  onHoverEnd={() => { setIsHover({ ishover: false, id: -1 }) }}
+                  onHoverStart={() => {
+                    setIsHover({ ishover: true, id: index });
+                  }}
+                  onHoverEnd={() => {
+                    setIsHover({ ishover: false, id: -1 });
+                  }}
                 >
                   <div className="w-full h-[300px] relative">
                     <Carousel arrImg={item.arrImg} houseId={item.HouseId} />
@@ -340,8 +241,14 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                       <Heart HouseId={item.HouseId} IsFavorite={item.IsFavorite} />
                     )}
 
-                    <div className='absolute left-2 top-2 z-10'>
-                      <Image className='fill-white' width={50} height={50} src={'/x2click.svg'} alt='' />
+                    <div className="absolute left-2 top-2 z-10">
+                      <Image
+                        className="fill-white"
+                        width={50}
+                        height={50}
+                        src={'/x2click.svg'}
+                        alt=""
+                      />
                     </div>
 
                     <motion.button
@@ -354,8 +261,9 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                           zoom: 18
                         });
                       }}
-                      className={`absolute top-3 right-12 ${infShow === 'authListHouse' ? 'right-2' : ''
-                        } text-red-500 text-[25px] z-10`}
+                      className={`absolute top-3 right-12 ${
+                        infShow === 'authListHouse' ? 'right-2' : ''
+                      } text-red-500 text-[25px] z-10`}
                     >
                       <ImMap />
                     </motion.button>
@@ -367,8 +275,10 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                         setIsOpenMask(true);
                       }}
                       className={`absolute w-[60px] h-[60px] transition-all
-                left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl ${infShow === 'authListHouse'
-                          ? 'hidden' : ''}`} >
+                left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl ${
+                  infShow === 'authListHouse' ? 'hidden' : ''
+                }`}
+                    >
                       {item.useracc.Image ? (
                         <img
                           src={'/api/img/path/' + item.useracc.Image}
@@ -383,13 +293,17 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                     {/* cai nay dung trong /hosting de them sua xoa */}
                     <motion.button
                       variants={variants}
-                      animate={isHover.ishover && isHover.id === index ? 'showIconControl' : 'hiddenIconControl'}
-                      transition={{ type: 'spring', duration: .3 }}
-
+                      animate={
+                        isHover.ishover && isHover.id === index
+                          ? 'showIconControl'
+                          : 'hiddenIconControl'
+                      }
+                      transition={{ type: 'spring', duration: 0.3 }}
                       className={`absolute w-[160px] h-[60px] transition-all bg-white
                 left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl flex
-                ${infShow === 'authListHouse' ? '' : 'hidden'}`} >
-                      <div className='w-[60px] h-full rounded-full overflow-hidden'>
+                ${infShow === 'authListHouse' ? '' : 'hidden'}`}
+                    >
+                      <div className="w-[60px] h-full rounded-full overflow-hidden">
                         {item.useracc.Image ? (
                           <img
                             src={'/api/img/path/' + item.useracc.Image}
@@ -401,29 +315,9 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                         )}
                       </div>
 
-                      <div className='w-0 relative'>
-                        <motion.div className='w-[50px] h-[60px] top-0 left-0
-                        absolute z-20 flex
-                        '>
-                          <BsListNested className='w-[40px] h-[40px] m-auto
-                          text-blue-600
-                          ' />
-                        </motion.div>
-
-                        <motion.div className='w-[50px] h-[60px] top-0 left-[50px]
-                        absolute z-20 flex
-                        '>
-                          <RiDeleteBin5Line className='w-[40px] h-[40px] m-auto
-                          text-red-500
-                          ' />
-                        </motion.div>
-
-                      </div>
+                      <EditRemoveIcon />
 
                     </motion.button>
-
-
-
                   </div>
                   <Link href={`/house/${item.HouseId}`}>
                     <div className="h-[100px] w-full box-border p-4">

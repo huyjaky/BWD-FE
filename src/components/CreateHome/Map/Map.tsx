@@ -12,18 +12,18 @@ interface MapProps {
 
 const Map: React.FC<MapProps> = ({ keyMapBing }: MapProps) => {
   const { state, dispatch } = useContext(newHouseContext);
-  const {address , setAddress} = useContext(selectPlaceContext)
+  const { address, setAddress } = useContext(selectPlaceContext);
   const [address_, setAddress_] = useState(state.address.addressLine);
   function addressValueHandler(event: React.ChangeEvent<HTMLInputElement>): void {
     const addressValue = event.currentTarget.value;
     setAddress_((prev) => addressValue);
   }
   useEffect(() => {
-    dispatch({ type: 'STEP4', payload: address.address});
+    dispatch({ type: 'STEP4', payload: address.address });
   }, [address]);
-  useEffect(()=>{
+  useEffect(() => {
     // setAddress(state.address)
-    console.log(state.address)
+    console.log(state.address);
   }, [state]);
   return (
     <div className="w-[100%] h-fit overflow-hidden rounded-2xl relative px-3 py-2">

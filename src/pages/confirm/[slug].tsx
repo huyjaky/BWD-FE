@@ -279,7 +279,9 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
                   className={`w-full h-fit  relative
               after:absolute after:bottom-0 after:w-full after:h-[4px]  mt-5
               after:right-0  rounded-xl ${
-                errors.phoneNumber?.message !== undefined ? 'after:bg-red-500' : 'after:bg-slate-800'
+                errors.phoneNumber?.message !== undefined
+                  ? 'after:bg-red-500'
+                  : 'after:bg-slate-800'
               }
               `}
                 >

@@ -60,7 +60,7 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
     maxAge: 24 * 60 * 60,
-    updateAge: 24 * 60 * 60,
+    updateAge: 24 * 60 * 60
   },
   jwt: {
     maxAge: 24 * 60 * 60
@@ -74,7 +74,7 @@ export const authOptions: NextAuthOptions = {
     },
 
     async session({ session, token, user }) {
-      session.token = { ...token?.loginVl?.token }; // chia du lieu ra thanh nhieu phan nho 
+      session.token = { ...token?.loginVl?.token }; // chia du lieu ra thanh nhieu phan nho
       session.userAcc = { ...token?.loginVl?.userAcc };
       return session;
     }

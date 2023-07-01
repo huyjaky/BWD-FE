@@ -33,7 +33,7 @@ const MapBox = ({ longitude, latitude, keyMapBing }: MapBoxProps) => {
     }
   });
 
-  useEffect(() => { }, [latitude, longitude]);
+  useEffect(() => {}, [latitude, longitude]);
 
   return (
     <div className="w-full h-fit mt-10 border-t-2 border-slate-800 mb-10">

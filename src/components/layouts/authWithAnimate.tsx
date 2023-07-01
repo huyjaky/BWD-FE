@@ -14,6 +14,7 @@ const AuthWithAnimate = ({ children }: LayoutProps) => {
   useEffect(() => {
     const setuser = async () => {
       const temp = await session?.userAcc;
+      console.log(temp);
       if (temp) {
         setUser({ ...user, ...temp });
       } else {

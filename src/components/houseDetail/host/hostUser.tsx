@@ -42,7 +42,7 @@ const HostUser = ({ imgPath, userName, gmail }: HostUserProps) => {
           <motion.img
             variants={variants}
             animate="iconAnimate"
-            src={'/api/img/path/'+imgPath}
+            src={'/api/img/path/' + imgPath}
             alt=""
             className="w-[120px] h-[120px] rounded-full"
           />
