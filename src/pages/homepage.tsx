@@ -86,8 +86,8 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
         <motion.div>
           <TypeHouse />
         </motion.div>
-        <div className="w-full h-fit px-[80px] mobile:px-[20px] box-border">
 
+        <div className="w-full h-fit px-[80px] mobile:px-[20px] box-border">
           {isFilter < 0 ? (
             <motion.div
               animate={{ opacity: [0, 1] }}
@@ -113,6 +113,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
             />
           </motion.div>
         </div>
+
         <FooterRooms />
         <FooterMainRes />
       </motion.main>

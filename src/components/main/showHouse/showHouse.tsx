@@ -303,13 +303,10 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                     >
                       <div className="w-[60px] h-full rounded-full overflow-hidden">
                         {item.useracc.Image ? (
-                          <Image
+                          <img
                             src={'/api/img/path/' + item.useracc.Image}
                             alt=""
                             className="w-full h-full object-cover"
-                            width={0}
-                            height={0}
-
                           />
                         ) : (
                           <HiUserCircle className="w-full h-full" />
