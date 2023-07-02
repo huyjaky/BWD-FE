@@ -10,19 +10,12 @@ import { house_ } from '@/models/house';
 import { userAcc } from '@/models/userAcc';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useSession } from 'next-auth/react';
-import Image from 'next/image';
-import Link from 'next/link';
 import { useContext, useEffect, useRef, useState } from 'react';
-import { HiUserCircle } from 'react-icons/hi';
-import { ImMap } from 'react-icons/im';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Carousel from './carousel';
-import EditRemoveIcon from './componentShowHouse/editRemoveIcon';
 import EndMessage from './componentShowHouse/endMessage';
-import Heart from './heart';
+import HouseCard from './componentShowHouse/houseCard';
 import MapEach from './mapEach';
 import { variants } from './variantsShowHouse';
-import HouseCard from './componentShowHouse/houseCard';
 
 interface ShowHouseProps {
   infShow: 'noneAuthHouseApi' | 'noneAuthFilter' | 'authListHouse' | 'favoriteHouse';

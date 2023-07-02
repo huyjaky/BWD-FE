@@ -7,55 +7,78 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import { motion } from "framer-motion";
+import { BsChevronDoubleDown } from "react-icons/bs";
+import { useEffect } from "react";
 
+interface SliceShowHouseProps {
+  title: string,
+  infShow: 'houseForSale' | 'houseForRent' | 'trending' | 'favoriteHouse'
+}
 
 const SlideShowHouse = () => {
   const arrTemp: number[] = [1, 2, 3, 4, 5, 6, 7];
-  return (
-    <div className="">
-      <h1 className="heading">Flower Gallery</h1>
-      <Swiper
-        effect={'coverflow'}
-        grabCursor={true}
-        centeredSlides={true}
-        slidesPerView={'auto'}
-        initialSlide={3}
-        coverflowEffect={{
-          rotate: 0,
-          stretch: 0,
-          depth: 100,
-          modifier: 2.5,
-        }}
-        pagination={{ el: '.swiper-pagination', clickable: true }}
-        navigation={{
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-          enabled: true,
-        }}
-        modules={[EffectCoverflow, Pagination, Navigation]}
-        className="swiper_container" style={{width: "calc(100vw-80px)", height: '600px'}}
-      >
-        {arrTemp.map((item: number, index:number)=>{
-          return (
-            <SwiperSlide key={index} style={{width: '400px'}}>
-              <img src={`https://i.pinimg.com/564x/37/ff/f6/37fff6210e4f360778131f6cab61d007.jpg`} alt=""
-              className="object-cover" style={{width: '400px', height: '500px'}}
-              />
-            </SwiperSlide>
-          )
-        })}
 
-        <div className="slider-controler tablet:hidden mobile:hidden">
-          <div className="swiper-button-prev slider-arrow">
-            <GrLinkPrevious />
+  useEffect(()=>{}, [])
+
+  return (
+    <>
+      <div className="">
+        <h1 className="heading">Flower Gallery</h1>
+        <Swiper
+          effect={'coverflow'}
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={'auto'}
+          initialSlide={3}
+          coverflowEffect={{
+            rotate: 0,
+            stretch: 0,
+            depth: 100,
+            modifier: 2.5,
+          }}
+          pagination={{ el: '.swiper-pagination', clickable: true }}
+          navigation={{
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+            enabled: true,
+          }}
+          modules={[EffectCoverflow, Pagination, Navigation]}
+          className="swiper_container" style={{ width: "calc(100vw-80px)", height: '600px' }}
+        >
+          {arrTemp.map((item: number, index: number) => {
+            return (
+              <SwiperSlide key={index} style={{ width: '400px' }}>
+                <img src={`https://i.pinimg.com/564x/37/ff/f6/37fff6210e4f360778131f6cab61d007.jpg`} alt=""
+                  className="object-cover" style={{ width: '400px', height: '500px' }}
+                />
+              </SwiperSlide>
+            )
+          })}
+
+          <div className="slider-controler tablet:hidden mobile:hidden">
+            <div className="swiper-button-prev slider-arrow">
+              <GrLinkPrevious />
+            </div>
+            <div className="swiper-button-next slider-arrow rounded-full">
+              <GrLinkNext />
+            </div>
+            <div className="swiper-pagination" style={{ position: 'relative', bottom: '-10px' }}></div>
           </div>
-          <div className="swiper-button-next slider-arrow rounded-full">
-            <GrLinkNext />
-          </div>
-          <div className="swiper-pagination" style={{position: 'relative', bottom: '-10px'}}></div>
+        </Swiper>
+      </div>
+      <div className="w-full h-[70px] flex hover:border-2 hover:border-red-500
+      rounded-2xl transition-all duration-500
+      ">
+        <div className="w-fit h-fit m-auto flex flex-col">
+          <motion.div className="m-auto ">
+            <BsChevronDoubleDown className="text-[30px]" />
+          </motion.div>
+          <span className="font-semibold">Show more</span>
         </div>
-      </Swiper>
-    </div>
+      </div>
+    </>
+
   );
 };
 

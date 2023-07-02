@@ -103,7 +103,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
             <></>
           )}
 
-          <motion.div variants={variants} animate="show">
+          {/* <motion.div variants={variants} animate="show">
             <ShowHouse
               infShow={
                 isFilter != 0
@@ -114,11 +114,11 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
               }
               keyMapBing={keyMapBing}
             />
-          </motion.div>
-
-          {/* <motion.div variants={variants} animate="show">
-            <TabShowHouse />
           </motion.div> */}
+
+          <motion.div variants={variants} animate="show">
+            <TabShowHouse />
+          </motion.div>
 
         </div>
 

@@ -1,7 +1,6 @@
 import { selectPopoverContext } from '@/contexts';
 import { placeListContext } from '@/contexts/placeList';
 import { selectPlaceContext } from '@/contexts/selectPlace';
-import placeSearch from '@/hooks/placeSearch';
 import { address } from '@/models/address';
 import { addressSearch } from '@/models/addressSearch';
 import { useContext, useEffect, useState } from 'react';
@@ -13,22 +12,6 @@ const Where = () => {
   const [address_, setAddress_] = useState<addressSearch>();
 
   useEffect(() => {}, [placeList, isLoading]);
-
-  useEffect(() => {
-    const fetchLocation = async () => {
-      if (!address?.address.formattedAddress) return;
-      const located = await placeSearch().locationSearch_(address.address);
-      if (located) {
-        setAddress({
-          ...address,
-          address: { ...address.address, latitude: located.latitude, longitude: located.longitude }
-        });
-        return;
-      }
-    };
-    fetchLocation();
-  }, [address_]);
-
   useEffect(() => {}, [selected]);
 
   // address for use for filter and address_ use for local component
