@@ -16,6 +16,7 @@ import { Montserrat } from 'next/font/google';
 import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
 import { authOptions } from './api/auth/[...nextauth]';
+import TabShowHouse from '@/components/main/tabShowHouse/tabShowHouse';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -87,7 +88,9 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
           <TypeHouse />
         </motion.div>
 
-        <div className="w-full h-fit px-[80px] mobile:px-[20px] box-border">
+        <div className="w-full h-fit px-[80px] box-border
+        tablet:px-0 mobile:px-0
+        ">
           {isFilter < 0 ? (
             <motion.div
               animate={{ opacity: [0, 1] }}
@@ -112,6 +115,11 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
               keyMapBing={keyMapBing}
             />
           </motion.div>
+
+          {/* <motion.div variants={variants} animate="show">
+            <TabShowHouse />
+          </motion.div> */}
+
         </div>
 
         <FooterRooms />
