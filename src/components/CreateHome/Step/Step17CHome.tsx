@@ -139,7 +139,7 @@ export default function Step17CHome() {
               </h1>
               <div className="leading-5 text-[#717171]">
                 Be sure to comply with your <span className="underline">local laws</span> and review
-                olympus's <span className="underline">nondiscrimination policy</span> and{' '}
+                Olympus's <span className="underline">nondiscrimination policy</span> and{' '}
                 <span className="underline">guest and Host fees</span>.
               </div>
             </motion.div>

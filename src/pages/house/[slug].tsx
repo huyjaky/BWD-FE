@@ -134,7 +134,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsC
       keyMapBing: keyMapBing,
       link: link
     },
-    revalidate: 60
+    revalidate: 300
   };
 };
 

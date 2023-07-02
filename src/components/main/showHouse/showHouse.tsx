@@ -80,7 +80,7 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
       const arr = await houseApi[infShow](temp.UserId);
       return isEmpty(arr);
     } else if (infShow === 'favoriteHouse' && status === 'authenticated') {
-      const arr = await houseApi['authFavoriteList'](temp.UserId);
+      const arr = await houseApi['authFavoriteList'](temp.UserId, 0);
       return isEmpty(arr);
     }
   };

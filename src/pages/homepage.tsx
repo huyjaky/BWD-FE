@@ -10,13 +10,14 @@ import { NextPageWithLayout } from '@/models/layoutprops';
 import { userAcc } from '@/models/userAcc';
 import { initializeSSR } from 'bing-maps-loader';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { getServerSession } from 'next-auth';
 import { Montserrat } from 'next/font/google';
 import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
 import { authOptions } from './api/auth/[...nextauth]';
 import TabShowHouse from '@/components/main/tabShowHouse/tabShowHouse';
+import { house_ } from '@/models/house';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -117,7 +118,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
           </motion.div> */}
 
           <motion.div variants={variants} animate="show">
-            <TabShowHouse />
+            <TabShowHouse keyMapBing={keyMapBing}/>
           </motion.div>
 
         </div>
@@ -148,3 +149,4 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     }
   };
 };
+

@@ -88,7 +88,7 @@ export default function Step15CHome() {
                     htmlFor="bordered-radio-1"
                     className="w-full cursor-pointer ml-2 text-[18px] font-semibold text-black "
                   >
-                    Any olympus guest
+                    Any Olympus guest
                   </label>
                 </motion.div>
                 <div className="flex justify-start">
@@ -96,7 +96,7 @@ export default function Step15CHome() {
                     htmlFor="bordered-radio-1"
                     className="w-full ml-6 cursor-pointer text-sm font-medium text-gray-900 dark:text-gray-300"
                   >
-                    Get reservations faster when you welcome anyone from the olympus community.
+                    Get reservations faster when you welcome anyone from the Olympus community.
                   </label>
                 </div>
               </motion.div>

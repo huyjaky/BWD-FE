@@ -9,19 +9,19 @@ const HeaderLogin = () => {
       <div className="w-[1300px] h-full flex px-10 mobile:hidden">
         {/* logo container */}
         <div className="flex-1 flex items-center text-red-500">
-          <span className="text-[30px] font-semibold tablet:hidden">olympus</span>
+          <span className="text-[30px] font-semibold tablet:hidden">Olympus</span>
         </div>
 
         {/* controlbar */}
         <div className="flex-1 flex items-center justify-end">
-          {/* olympus your home */}
+          {/* Olympus your home */}
           <Link
             href={''}
             className="rounded-full bg-white h-fit box-content px-4 py-2
             hover:bg-slate-300
           "
           >
-            <span className="font-semibold">olympus your home</span>
+            <span className="font-semibold">Olympus your home</span>
           </Link>
           {/* translate */}
           <Link href={''} className="rounded-full bg-white box-content p-1 mr-3 hover:bg-slate-300">
