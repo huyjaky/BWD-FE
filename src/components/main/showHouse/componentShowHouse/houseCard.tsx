@@ -26,6 +26,7 @@ interface HouseCardProps {
 const HouseCard = ({ index, setIsHover, item, infShow, isHover,
   setIsOpenMaskMap, setSelectLocale, setSelectUser, setIsOpenMask
 }: HouseCardProps) => {
+  
   return (
     <motion.div
       initial={{ opacity: 0, display: 'none' }}

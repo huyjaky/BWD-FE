@@ -23,7 +23,7 @@ interface TabShowHouseProps {
   keyMapBing: string
 }
 
-const TabShowHouse = ({keyMapBing}: TabShowHouseProps) => {
+const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
 
 
   const { data: session, status } = useSession();
@@ -33,14 +33,22 @@ const TabShowHouse = ({keyMapBing}: TabShowHouseProps) => {
 
 
       <div className="h-fit">
-        {status === 'authenticated' ?
-          <motion.div variants={variants} exit='exitFavor'>
-            <SlideShowHouse infShow="favoriteHouse" title="Whislist" keyMapBing={keyMapBing}/>
+        <motion.div variants={variants} exit='exitFavor' >
+          <SlideShowHouse infShow="houseForSale" title="House for sale" keyMapBing={keyMapBing} />
+        </motion.div>
+
+        <motion.div variants={variants} exit='exitFavor' >
+          <SlideShowHouse infShow="houseForRent" title="House for rent" keyMapBing={keyMapBing} />
+        </motion.div>
+
+
+        {status === 'authenticated' &&
+          <motion.div variants={variants} exit='exitFavor' >
+            <SlideShowHouse infShow="favoriteHouse" title="Whislist" keyMapBing={keyMapBing} />
           </motion.div>
-          :
-          <div></div>
         }
       </div>
+
     </>
   );
 };

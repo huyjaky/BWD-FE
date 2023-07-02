@@ -205,7 +205,7 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
         >
           {houseTemp.map((item: house_, index: number) => {
             return (
-              <HouseCard index={index} isHover={isHover}
+              <HouseCard index={index} isHover={isHover} key={index}
               infShow={infShow} item={item} setIsHover={setIsHover}
               setIsOpenMask={setIsOpenMask} setIsOpenMaskMap={setIsOpenMaskMap}
               setSelectLocale={setSelectLocale} setSelectUser={setSelectUser}/>
