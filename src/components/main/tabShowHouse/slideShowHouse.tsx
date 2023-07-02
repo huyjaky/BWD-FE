@@ -11,7 +11,7 @@ import { house_ } from "@/models/house";
 import { userAcc } from "@/models/userAcc";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSession } from "next-auth/react";
-import { useContext, useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from "react";
 import { BsChevronDoubleDown } from "react-icons/bs";
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
@@ -24,52 +24,31 @@ import { variants } from "../showHouse/variantsShowHouse";
 interface SlideShowHouseProps {
   title: string,
   infShow: 'houseForSale' | 'houseForRent' | 'trending' | 'favoriteHouse',
-  keyMapBing: string
-}
-
-
-const SlideShowHouse = ({ title, infShow, keyMapBing }: SlideShowHouseProps) => {
-  const arrTemp: number[] = [1, 2, 3, 4, 5, 6, 7];
-  const [houseTemp, setHouseTemp] = useState<house_[]>([]);
-  const { data: session, status } = useSession();
-  const maskUser = useRef<HTMLInputElement>(null);
-  const maskMap = useRef<HTMLInputElement>(null);
-  const [isOpenMask, setIsOpenMask] = useState(false);
-  const [selectUser, setSelectUser] = useState<userAcc>();
-  const [isHover, setIsHover] = useState<{
-    ishover: boolean;
-    id: number;
-  }>({ ishover: false, id: -1 });
-  const [selectLocale, setSelectLocale] = useState<{
+  keyMapBing: string,
+  setSelectUser: Dispatch<SetStateAction<userAcc | undefined>>,
+  setSelectLocale: Dispatch<SetStateAction<{
     longitude: number;
     latitude: number;
     zoom: number;
-  }>();
-  const [isOpenMaskMap, setIsOpenMaskMap] = useState(false);
-  console.log(keyMapBing);
+  } | undefined>>,
+  setIsOpenMaskMap: Dispatch<SetStateAction<boolean>>,
+  setIsOpenMask: Dispatch<SetStateAction<boolean>>,
+  isHover: {
+    ishover: boolean;
+    id: number;
+  },
+  setIsHover: Dispatch<SetStateAction<{
+    ishover: boolean;
+    id: number;
+  }>>
+}
 
+
+const SlideShowHouse = ({ title, infShow, keyMapBing, setSelectUser, setSelectLocale, setIsOpenMaskMap, setIsOpenMask, isHover, setIsHover }: SlideShowHouseProps) => {
+  const [houseTemp, setHouseTemp] = useState<house_[]>([]);
+  const { data: session, status } = useSession();
   const { filterForm, setFilterForm } = useContext(filterContext);
   const { address } = useContext(selectPlaceContext);
-
-  const handleOnClickOutSideMaskUser = (event: any) => {
-    const isClickInSide = maskUser.current?.contains(event.target);
-    if (!isClickInSide) {
-      setIsOpenMask(false);
-      return;
-    } else {
-      return;
-    }
-  };
-
-  const handleOnClickOutSideMaskMap = (event: any) => {
-    const isClickInSide = maskMap.current?.contains(event.target);
-    if (!isClickInSide) {
-      setIsOpenMaskMap(false);
-      return;
-    } else {
-      return;
-    }
-  };
 
   const isEmpty = (arr: any) => {
     setHouseTemp(arr.data as house_[]);
@@ -98,46 +77,9 @@ const SlideShowHouse = ({ title, infShow, keyMapBing }: SlideShowHouseProps) => 
   }, [status])
 
   useEffect(() => { console.log(houseTemp); }, [houseTemp])
-
   return (
     <>
-      <AnimatePresence initial={false}>
-        <motion.div
-          variants={variants}
-          animate={isOpenMask ? 'showMask' : 'hiddenMask'}
-          onClick={handleOnClickOutSideMaskUser}
-          className="fixed w-screen h-screen bg-mask z-50 top-0 left-0 "
-        >
-          <motion.div
-            className="w-fit h-fit bg-[#f0efe9] p-7 m-auto mt-[10%] rounded-2xl"
-            ref={maskUser}
-          >
-            <HostUser
-              imgPath={selectUser?.Image}
-              gmail={selectUser?.Gmail}
-              userName={selectUser?.UserName}
-            />
-          </motion.div>
-        </motion.div>
-      </AnimatePresence>
 
-      <AnimatePresence initial={false}>
-        <motion.div
-          variants={variants}
-          animate={isOpenMaskMap ? 'showMaskMap' : 'hiddenMaskMap'}
-          onClick={handleOnClickOutSideMaskMap}
-          className="fixed w-screen h-screen bg-mask z-50 top-0 left-0 flex "
-        >
-          <div ref={maskMap} className="w-[50%] h-fit bg-[#f0efe9] p-7 m-auto rounded-2xl">
-            <MapEach
-              longitude={selectLocale?.longitude ? selectLocale.longitude : 1}
-              latitude={selectLocale?.latitude ? selectLocale?.latitude : 1}
-              zoom={selectLocale?.zoom ? selectLocale.zoom : 15}
-              keyMapBing={keyMapBing}
-            />
-          </div>
-        </motion.div>
-      </AnimatePresence>
 
 
       <div className="">

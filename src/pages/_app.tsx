@@ -29,6 +29,7 @@ import { Montserrat } from 'next/font/google';
 import Head from 'next/head';
 import Link from 'next/link';
 import ImgFileProvider from '@/contexts/imgFile';
+import Script from 'next/script';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -46,6 +47,11 @@ export default function App({
     <>
       <Head>
         <title>Olympus</title>
+        <Script
+          src="https://www.bing.com/api/maps/mapcontrol?callback=GetMapCallback&amp;key=AiWimzL8WC5fWxhKerTLiSvd63qgv22WhCiBLgm63xMJ-nn1Mv9SMqYpLPB4nkMI"
+          async={true}
+          defer={true}
+        />
       </Head>
       <SWRConfig value={{ fetcher: (url) => axiosClient.get(url), shouldRetryOnError: false }}>
         <SelectPopoverProvider>

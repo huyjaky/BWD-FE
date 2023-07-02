@@ -1,4 +1,4 @@
-import { whenLoaded } from 'bing-maps-loader';
+import { initializeSSR, whenLoaded } from 'bing-maps-loader';
 import { useEffect, useState } from 'react';
 interface MapEachProps {
   longitude: number;
@@ -7,8 +7,11 @@ interface MapEachProps {
   keyMapBing: string;
 }
 
+initializeSSR();
+
 const MapEach = ({ latitude, longitude, zoom, keyMapBing }: MapEachProps) => {
   // useEffect(() => {
+  initializeSSR();
   whenLoaded.then(() => {
     const map_ = document.getElementById('MapEach');
     if (map_) {

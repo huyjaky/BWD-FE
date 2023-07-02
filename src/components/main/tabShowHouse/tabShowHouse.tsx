@@ -7,44 +7,125 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import SlideShowHouse from "./slideShowHouse";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { userAcc } from "@/models/userAcc";
 import HostUser from "@/components/houseDetail/host/hostUser";
 import MapEach from "../showHouse/mapEach";
+import { filterContext } from "@/contexts/filter";
+import { selectPlaceContext } from "@/contexts/selectPlace";
+import { house_ } from "@/models/house";
+import { variants } from "../showHouse/variantsShowHouse";
 
-const variants: Variants = {
-  exitFavor: {
-    opacity: [1, 0],
-    height: ['100%', '0']
-  }
-}
 
 interface TabShowHouseProps {
   keyMapBing: string
 }
 
 const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
+  const maskUser = useRef<HTMLInputElement>(null);
+  const maskMap = useRef<HTMLInputElement>(null);
+  const [isOpenMask, setIsOpenMask] = useState(false);
+  const [selectUser, setSelectUser] = useState<userAcc>();
+  const [selectLocale, setSelectLocale] = useState<{
+    longitude: number;
+    latitude: number;
+    zoom: number;
+  }>();
+  const [isOpenMaskMap, setIsOpenMaskMap] = useState(false);
+  const [isHover, setIsHover] = useState<{
+    ishover: boolean;
+    id: number;
+  }>({ ishover: false, id: -1 });
 
+
+
+  const handleOnClickOutSideMaskUser = (event: any) => {
+    const isClickInSide = maskUser.current?.contains(event.target);
+    if (!isClickInSide) {
+      setIsOpenMask(false);
+      return;
+    } else {
+      return;
+    }
+  };
+
+  const handleOnClickOutSideMaskMap = (event: any) => {
+    const isClickInSide = maskMap.current?.contains(event.target);
+    if (!isClickInSide) {
+      setIsOpenMaskMap(false);
+      return;
+    } else {
+      return;
+    }
+  };
 
   const { data: session, status } = useSession();
 
   return (
     <>
+      <AnimatePresence initial={false}>
+        <motion.div
+          variants={variants}
+          animate={isOpenMask ? 'showMask' : 'hiddenMask'}
+          onClick={handleOnClickOutSideMaskUser}
+          className="fixed w-screen h-screen bg-mask z-50 top-0 left-0 "
+        >
+          <motion.div
+            className="w-fit h-fit bg-[#f0efe9] p-7 m-auto mt-[10%] rounded-2xl"
+            ref={maskUser}
+          >
+            <HostUser
+              imgPath={selectUser?.Image}
+              gmail={selectUser?.Gmail}
+              userName={selectUser?.UserName}
+            />
+          </motion.div>
+        </motion.div>
+      </AnimatePresence>
 
+      <AnimatePresence initial={false}>
+        <motion.div
+          variants={variants}
+          animate={isOpenMaskMap ? 'showMaskMap' : 'hiddenMaskMap'}
+          onClick={handleOnClickOutSideMaskMap}
+          className="fixed w-screen h-screen bg-mask z-50 top-0 left-0 flex "
+        >
+          <div ref={maskMap} className="w-[50%] h-fit bg-[#f0efe9] p-7 m-auto rounded-2xl">
+            <MapEach
+              longitude={selectLocale?.longitude ? selectLocale.longitude : 1}
+              latitude={selectLocale?.latitude ? selectLocale?.latitude : 1}
+              zoom={selectLocale?.zoom ? selectLocale.zoom : 15}
+              keyMapBing={keyMapBing}
+            />
+          </div>
+        </motion.div>
+      </AnimatePresence>
 
       <div className="h-fit">
         <motion.div variants={variants} exit='exitFavor' >
-          <SlideShowHouse infShow="houseForSale" title="House for sale" keyMapBing={keyMapBing} />
+          <SlideShowHouse setIsOpenMask={setIsOpenMask} setIsOpenMaskMap={setIsOpenMaskMap}
+            setSelectLocale={setSelectLocale} setSelectUser={setSelectUser}
+            isHover={isHover} setIsHover={setIsHover}
+            infShow="houseForSale" title="House for sale" keyMapBing={keyMapBing}
+          />
         </motion.div>
 
         <motion.div variants={variants} exit='exitFavor' >
-          <SlideShowHouse infShow="houseForRent" title="House for rent" keyMapBing={keyMapBing} />
+          <SlideShowHouse setIsOpenMask={setIsOpenMask} setIsOpenMaskMap={setIsOpenMaskMap}
+            setSelectLocale={setSelectLocale} setSelectUser={setSelectUser}
+            isHover={isHover} setIsHover={setIsHover}
+            infShow="houseForRent" title="House for rent" keyMapBing={keyMapBing}
+          />
         </motion.div>
 
 
         {status === 'authenticated' &&
           <motion.div variants={variants} exit='exitFavor' >
-            <SlideShowHouse infShow="favoriteHouse" title="Whislist" keyMapBing={keyMapBing} />
+            <SlideShowHouse setIsOpenMask={setIsOpenMask} setIsOpenMaskMap={setIsOpenMaskMap}
+              setSelectLocale={setSelectLocale} setSelectUser={setSelectUser}
+              isHover={isHover} setIsHover={setIsHover}
+              infShow="favoriteHouse" title="Whislist" keyMapBing={keyMapBing}
+            />
           </motion.div>
         }
       </div>
