@@ -51,7 +51,7 @@ const SlideShowHouse = ({ title, infShow, keyMapBing, setSelectUser, setSelectLo
   const { address } = useContext(selectPlaceContext);
 
   const isEmpty = (arr: any) => {
-    setHouseTemp(arr.data as house_[]);
+    setHouseTemp(arr?.data as house_[]);
   };
 
   useEffect(() => {
@@ -108,9 +108,9 @@ const SlideShowHouse = ({ title, infShow, keyMapBing, setSelectUser, setSelectLo
             modules={[EffectCoverflow, Pagination, Navigation]}
             className="swiper_container laptop:hidden desktop:hidden" style={{ width: "calc(100vw-80px)", height: '550px' }} >
 
-            {houseTemp.length === 0 && <SwiperSlide style={{ width: '200px', paddingTop: '20px' }}>No result</SwiperSlide>}
+            {houseTemp && houseTemp.length === 0 && <SwiperSlide style={{ width: '200px', paddingTop: '20px' }}>No result</SwiperSlide>}
 
-            {houseTemp.length > 0 && houseTemp.map((item: house_, index: number) => {
+            {houseTemp && houseTemp.length > 0 && houseTemp.map((item: house_, index: number) => {
               return (
                 <SwiperSlide key={index} style={{ width: '400px', paddingTop: '20px' }}>
                   <HouseCard index={index} infShow={infShow}

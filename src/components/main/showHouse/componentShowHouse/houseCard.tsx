@@ -26,7 +26,7 @@ interface HouseCardProps {
 const HouseCard = ({ index, setIsHover, item, infShow, isHover,
   setIsOpenMaskMap, setSelectLocale, setSelectUser, setIsOpenMask
 }: HouseCardProps) => {
-  
+
   return (
     <motion.div
       initial={{ opacity: 0, display: 'none' }}
@@ -91,7 +91,7 @@ const HouseCard = ({ index, setIsHover, item, infShow, isHover,
                 left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl ${infShow === 'authListHouse' ? 'hidden' : ''
               }`}
           >
-            {item.useracc.Image ? (
+            {item.useracc.Image != undefined ? (
               <img
                 src={'/api/img/path/' + item.useracc.Image}
                 alt=""
@@ -117,7 +117,7 @@ const HouseCard = ({ index, setIsHover, item, infShow, isHover,
                 ${infShow === 'authListHouse' ? '' : 'hidden'}`}
           >
             <div className="w-[60px] h-full rounded-full overflow-hidden">
-              {item.useracc.Image ? (
+              {item.useracc.Image != undefined ? (
                 <img
                   src={'/api/img/path/' + item.useracc.Image}
                   alt=""

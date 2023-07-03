@@ -53,7 +53,7 @@ const FooterMainRes = () => {
             }
           }}
         >
-          {user.UserId ?
+          {user.UserId != undefined ?
             <div className="w-full flex justify-center flex-[4]">
               <img src={'/api/img/path/' + user.Image} alt={user.UserId} className='object-cover
             w-[40px] h-[40px] rounded-full

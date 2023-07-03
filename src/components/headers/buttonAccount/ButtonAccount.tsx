@@ -2,7 +2,7 @@ import { selectPopoverContext } from '@/contexts';
 import { getHouseContext } from '@/contexts/getHouse';
 import { userAccContext } from '@/contexts/userAcc';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { BsList } from 'react-icons/bs';
@@ -25,11 +25,10 @@ const variants: Variants = {
 };
 
 const ButtonAccount = () => {
-  const { setIsLoginClick } = useContext(selectPopoverContext);
   const { user, resetDataUser } = useContext(userAccContext);
-  const { isFilter, setIsFilter } = useContext(getHouseContext);
   const [isClick, setIsClick] = useState(false);
   const controlBar = useRef<HTMLInputElement>(null);
+  const {status} = useSession();
 
   useEffect(() => {
     // animation close control panel
@@ -43,7 +42,7 @@ const ButtonAccount = () => {
     document.addEventListener('scroll', handleControlPanel);
   }, []);
 
-  useEffect(() => {}, [user]);
+  useEffect(() => { }, [user, status]);
   return (
     <div
       className="w-fit p-1 rounded-full bg-white flex border-gray-400 hover:shadow-lg
@@ -54,11 +53,12 @@ const ButtonAccount = () => {
       }}
     >
       <BsList className="w-[30px] h-[30px]" />
-      {user.Image ? (
+      {/* {user?.Image != undefined ? (
         <img src={'/api/img/path/' + user.Image} className="w-[30px] h-[30px] rounded-full" />
       ) : (
         <HiUserCircle className="w-[40px] h-[30px] " />
-      )}
+      )} */}
+        <HiUserCircle className="w-[40px] h-[30px] " />
       <AnimatePresence initial={false}>
         <motion.div
           variants={variants}

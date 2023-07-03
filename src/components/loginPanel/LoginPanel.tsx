@@ -81,7 +81,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
 
   // fetch accesstoken , navigate as well as do animte
   const onSubmit: SubmitHandler<LoginInterface> = async (data_) => {
-    nProgress.set(0.4);
+    nProgress.set(0.6);
     const login_ = await signIn('credentials', {
       username: data_.username,
       password: data_.password,
@@ -93,8 +93,9 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
       setError('password', { type: 'validate', message: 'Wrong username or password!' });
       return;
     }
-    setUser({ ...user, ...session?.userAcc });
+
     if (login_?.ok) {
+      setUser({ ...user, ...session?.userAcc });
       setIsLoginClick(false);
     }
     setIsFilter(0);

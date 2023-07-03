@@ -1,7 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import httpProxy from 'http-proxy';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { getServerSession } from 'next-auth';
 import { getSession } from 'next-auth/react';
+import { authOptions } from './auth/[...nextauth]';
 
 export const config = {
   api: {
@@ -13,7 +15,7 @@ const proxy = httpProxy.createProxyServer();
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<any>) {
   return new Promise(async () => {
-    const session = await getSession({ req });
+    const session = await getServerSession(req, res, authOptions);
     const temp = session?.token?.accessToken;
 
     if (temp) {

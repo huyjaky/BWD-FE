@@ -17,7 +17,7 @@ const Test = () => {
   return (
     <>
       <div className='slideTabShowHouse'>
-        <TabShowHouse />
+        {/* <TabShowHouse /> */}
       </div>
     </>
   );

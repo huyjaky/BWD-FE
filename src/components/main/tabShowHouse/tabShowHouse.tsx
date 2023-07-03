@@ -1,20 +1,17 @@
 // import required modules
 
-import { AnimatePresence, Variants, motion } from "framer-motion";
+import HostUser from "@/components/houseDetail/host/hostUser";
+import { userAcc } from "@/models/userAcc";
+import { AnimatePresence, motion } from "framer-motion";
 import { useSession } from "next-auth/react";
+import { useRef, useState } from "react";
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import SlideShowHouse from "./slideShowHouse";
-import { useContext, useRef, useState } from "react";
-import { userAcc } from "@/models/userAcc";
-import HostUser from "@/components/houseDetail/host/hostUser";
 import MapEach from "../showHouse/mapEach";
-import { filterContext } from "@/contexts/filter";
-import { selectPlaceContext } from "@/contexts/selectPlace";
-import { house_ } from "@/models/house";
 import { variants } from "../showHouse/variantsShowHouse";
+import SlideShowHouse from "./slideShowHouse";
 
 
 interface TabShowHouseProps {

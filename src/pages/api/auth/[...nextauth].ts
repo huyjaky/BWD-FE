@@ -1,5 +1,6 @@
+import { ExtendedSession, ExtendedToken } from '@/types';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import NextAuth, { NextAuthOptions, User } from 'next-auth';
+import NextAuth, { Account, CallbacksOptions, NextAuthOptions, User } from 'next-auth';
 import { AdapterUser } from 'next-auth/adapters';
 import { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -54,6 +55,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 //   });
 // }
 
+
 export const authOptions: NextAuthOptions = {
   // your configs
   secret: process.env.SECRET_COOKIE_PASSWORD,
@@ -66,18 +68,28 @@ export const authOptions: NextAuthOptions = {
     maxAge: 24 * 60 * 60
   },
   callbacks: {
-    async jwt({ token, user }: { token: JWT; user: User | AdapterUser }): Promise<JWT> {
-      if (user) {
-        token.loginVl = user; // o day tao mot bien trung gian de khi du lieu fetch ve roi vao day
+    async jwt({ token, user }) {
+      const temp: any = user;
+      if (temp) {
+        token.userAcc = await temp.userAcc;
+        token.token = await temp.token;
+        console.log('FIRST TIME LOGIN EXTENDED TOKEN', token);
+        return token;
       }
+      // if (Date.now() + 5000 < (token as ExtendedToken).accessTokenExpiresAt) {
+      //   console.log("access token still valid, returning extended token");
+      //   return token;
+      // }
       return token;
     },
 
     async session({ session, token, user }) {
-      session.token = { ...token?.loginVl?.token }; // chia du lieu ra thanh nhieu phan nho
-      session.userAcc = { ...token?.loginVl?.userAcc };
+      session.userAcc = await token.userAcc;
+      session.token = await token.token;
       return session;
     }
+
+
   },
   providers: [
     CredentialsProvider({
@@ -94,7 +106,7 @@ export const authOptions: NextAuthOptions = {
         });
         const token = await accessToken.json();
 
-        if (accessToken.ok && token) {
+        if (token.userAcc) {
           return token;
         }
         return null;

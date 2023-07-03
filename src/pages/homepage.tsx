@@ -9,15 +9,16 @@ import { userAccContext } from '@/contexts/userAcc';
 import { NextPageWithLayout } from '@/models/layoutprops';
 import { userAcc } from '@/models/userAcc';
 import { initializeSSR } from 'bing-maps-loader';
-import { AnimatePresence, Variants, motion } from 'framer-motion';
+import { AnimatePresence, Variants, motion, useElementScroll } from 'framer-motion';
 import { GetServerSideProps, GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { getServerSession } from 'next-auth';
 import { Montserrat } from 'next/font/google';
 import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
-import { authOptions } from './api/auth/[...nextauth]';
+// import { authOptions } from './api/auth/[...nextauth]';
 import TabShowHouse from '@/components/main/tabShowHouse/tabShowHouse';
 import { house_ } from '@/models/house';
+import { useSession } from 'next-auth/react';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -56,19 +57,23 @@ const variants: Variants = {
   }
 };
 
+initializeSSR();
 const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeProps) => {
   const { user, setUser } = useContext(userAccContext);
   const { isFilter } = useContext(getHouseContext);
-
+  const { data: session, status } = useSession();
   const { pathname } = useRouter();
+
+  useEffect(() => {
+    if (session?.userAcc) {
+      setUser(session?.userAcc);
+    }
+
+  }, [status])
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-
-  if (user_?.UserId && user.UserId) {
-    setUser({ ...user, ...user_ });
-  }
 
   useEffect(() => { }, [isFilter]);
   initializeSSR();
@@ -118,7 +123,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
           </motion.div> */}
 
           <motion.div variants={variants} animate="show">
-            <TabShowHouse keyMapBing={keyMapBing}/>
+            <TabShowHouse keyMapBing={keyMapBing} />
           </motion.div>
 
         </div>
@@ -135,14 +140,8 @@ Home.Layout = AuthWithAnimate;
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const session = await getServerSession(req, res, authOptions);
   const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
   initializeSSR();
-  if (session?.userAcc) {
-    return {
-      props: { ...session.userAcc, keyMapBing: keyMapBing }
-    };
-  }
   return {
     props: {
       keyMapBing: keyMapBing
