@@ -55,6 +55,21 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 //   });
 // }
 
+const refreshToken = async (token: JWT) => {
+  const accessToken = await fetch(process.env.API_URL_AUTH + '/api/refresh', {
+    method: 'POST',
+    body: JSON.stringify({ refreshToken: token.token.refreshToken }),
+    headers: { 'Content-Type': 'application/json' }
+  });
+  const token_: ExtendedToken = await accessToken.json();
+  if (token_.userAcc) {
+    token.token.accessToken = token_.token.accessToken;
+    token.exp = token.exp + 3600;
+    return token;
+  }
+  return token;
+}
+
 
 export const authOptions: NextAuthOptions = {
   // your configs
@@ -68,7 +83,7 @@ export const authOptions: NextAuthOptions = {
     maxAge: 24 * 60 * 60
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       const temp: any = user;
       if (temp) {
         token.userAcc = await temp.userAcc;
@@ -76,11 +91,13 @@ export const authOptions: NextAuthOptions = {
         console.log('FIRST TIME LOGIN EXTENDED TOKEN', token);
         return token;
       }
-      // if (Date.now() + 5000 < (token as ExtendedToken).accessTokenExpiresAt) {
-      //   console.log("access token still valid, returning extended token");
-      //   return token;
-      // }
-      return token;
+      console.log(token);
+      if ((Date.now() + 300)/1000  < (token as ExtendedToken).exp) {
+        console.log("access token still valid, returning extended token");
+        return token;
+      }
+      console.log("access token expired, refreshing...");
+      return refreshToken(token)
     },
 
     async session({ session, token, user }) {
