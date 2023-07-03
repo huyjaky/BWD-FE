@@ -15,7 +15,7 @@ interface HouseCardProps {
   index: number,
   item: house_,
   isHover: { ishover: boolean; id: number; },
-  infShow: 'noneAuthHouseApi' | 'noneAuthFilter' | 'authListHouse' | 'favoriteHouse' | 'houseForSale' | 'houseForRent' | 'trending',
+  infShow: 'noneAuthHouseApi' | 'noneAuthFilter' | 'authListHouse' | 'favoriteHouse' | 'houseForSaleAuth' | 'houseForSaleUnAuth' | 'houseForRentAuth' | 'houseForRentUnAuth' | 'trending',
   setIsHover: Dispatch<SetStateAction<{ ishover: boolean; id: number; }>>,
   setIsOpenMaskMap: Dispatch<SetStateAction<boolean>>,
   setSelectLocale: Dispatch<SetStateAction<{ longitude: number; latitude: number; zoom: number; } | undefined>>,

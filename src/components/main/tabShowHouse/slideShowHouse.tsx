@@ -4,26 +4,25 @@ import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
 import { EffectCoverflow, Navigation, Pagination } from 'swiper';
 
 import { houseApi } from "@/api-client/houseApi";
-import HostUser from "@/components/houseDetail/host/hostUser";
+import SkeletonShowHouse from "@/components/skeletonLoading/skletonShowHouse";
 import { filterContext } from "@/contexts/filter";
 import { selectPlaceContext } from "@/contexts/selectPlace";
 import { house_ } from "@/models/house";
 import { userAcc } from "@/models/userAcc";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useSession } from "next-auth/react";
-import { Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 import { BsChevronDoubleDown } from "react-icons/bs";
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import HouseCard from "../showHouse/componentShowHouse/houseCard";
-import MapEach from "../showHouse/mapEach";
-import { variants } from "../showHouse/variantsShowHouse";
+import { userAccContext } from "@/contexts/userAcc";
 
 interface SlideShowHouseProps {
   title: string,
-  infShow: 'houseForSale' | 'houseForRent' | 'trending' | 'favoriteHouse',
+  infShow: 'houseForSaleAuth' | 'houseForSaleUnAuth' | 'houseForRentAuth' | 'houseForRentUnAuth' | 'trending' | 'favoriteHouse',
   keyMapBing: string,
   setSelectUser: Dispatch<SetStateAction<userAcc | undefined>>,
   setSelectLocale: Dispatch<SetStateAction<{
@@ -45,38 +44,42 @@ interface SlideShowHouseProps {
 
 
 const SlideShowHouse = ({ title, infShow, keyMapBing, setSelectUser, setSelectLocale, setIsOpenMaskMap, setIsOpenMask, isHover, setIsHover }: SlideShowHouseProps) => {
+  const arrEmpty = [1, 2, 3, 4, 5, 6, 7];
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
   const { data: session, status } = useSession();
   const { filterForm, setFilterForm } = useContext(filterContext);
   const { address } = useContext(selectPlaceContext);
+  const {user} = useContext(userAccContext);
 
   const isEmpty = (arr: any) => {
     setHouseTemp(arr?.data as house_[]);
   };
 
-  useEffect(() => {
-    const fetchAPI = async () => {
-      if (houseTemp.length != 0 || status === 'loading') return;
-      const temp = await session?.userAcc;
-      if (infShow === 'favoriteHouse') {
-        const arr = await houseApi['authFavoriteList'](temp.UserId, -1);
-        return isEmpty(arr);
-      } else if (infShow === 'houseForRent') {
-        const tempFilterForm = { ...filterForm, typeHouse: [...filterForm.typeHouse, 'HouseForRent'] };
-        const tempSelectPlace = address;
-        const arr = await houseApi['noneAuthFilter']({ filter: tempFilterForm, selectPlace: tempSelectPlace }, -1, '');
-        return isEmpty(arr);
-      } else if (infShow === 'houseForSale') {
-        const tempFilterForm = { ...filterForm, typeHouse: [...filterForm.typeHouse, 'HouseForSale'] };
-        const tempSelectPlace = address;
-        const arr = await houseApi['noneAuthFilter']({ filter: tempFilterForm, selectPlace: tempSelectPlace }, -1, '');
-        return isEmpty(arr);
-      }
+  const fetchAPI = async () => {
+    if ( status === 'loading') return;
+    const temp = await session?.userAcc;
+    if (infShow === 'favoriteHouse') {
+      const arr = await houseApi['authFavoriteList'](temp.UserId, -1);
+      return isEmpty(arr);
+    } else if (infShow === 'houseForRentUnAuth' || infShow === 'houseForRentAuth') {
+      const tempFilterForm = { ...filterForm, typeHouse: [...filterForm.typeHouse, 'HouseForRent'] };
+      const tempSelectPlace = address;
+      const arr = await houseApi['noneAuthFilter']({ filter: tempFilterForm, selectPlace: tempSelectPlace }, -1, status === 'authenticated' ? temp.UserId : '');
+      console.log('rent fetch');
+      return isEmpty(arr);
+    } else if (infShow === 'houseForSaleUnAuth' || infShow === 'houseForSaleAuth') {
+      const tempFilterForm = { ...filterForm, typeHouse: [...filterForm.typeHouse, 'HouseForSale'] };
+      const tempSelectPlace = address;
+      const arr = await houseApi['noneAuthFilter']({ filter: tempFilterForm, selectPlace: tempSelectPlace }, -1, status === 'authenticated' ? temp.UserId : '');
+      return isEmpty(arr);
     }
+  }
+
+  useEffect(() => {
     fetchAPI();
   }, [status])
 
-  useEffect(() => { console.log(houseTemp); }, [houseTemp])
+  useEffect(() => { }, [houseTemp])
   return (
     <>
 
@@ -90,6 +93,7 @@ const SlideShowHouse = ({ title, infShow, keyMapBing, setSelectUser, setSelectLo
             effect={'coverflow'}
             grabCursor={true}
             centeredSlides={true}
+            initialSlide={3}
             allowTouchMove={false}
 
             slidesPerView={'auto'}
@@ -108,7 +112,15 @@ const SlideShowHouse = ({ title, infShow, keyMapBing, setSelectUser, setSelectLo
             modules={[EffectCoverflow, Pagination, Navigation]}
             className="swiper_container laptop:hidden desktop:hidden" style={{ width: "calc(100vw-80px)", height: '550px' }} >
 
-            {houseTemp && houseTemp.length === 0 && <SwiperSlide style={{ width: '200px', paddingTop: '20px' }}>No result</SwiperSlide>}
+            {houseTemp && houseTemp.length === 0 &&
+              arrEmpty.map((item: number, index: number) => {
+                return (
+                  <SwiperSlide key={index} style={{ width: '400px', paddingTop: '20px' }}>
+                    <SkeletonShowHouse />
+                  </SwiperSlide>
+                )
+              })
+            }
 
             {houseTemp && houseTemp.length > 0 && houseTemp.map((item: house_, index: number) => {
               return (
@@ -140,6 +152,7 @@ const SlideShowHouse = ({ title, infShow, keyMapBing, setSelectUser, setSelectLo
             effect={'coverflow'}
             grabCursor={true}
             centeredSlides={true}
+            initialSlide={3}
             allowTouchMove={true}
 
             slidesPerView={'auto'}

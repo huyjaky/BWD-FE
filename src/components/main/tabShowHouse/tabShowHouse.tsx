@@ -4,7 +4,7 @@ import HostUser from "@/components/houseDetail/host/hostUser";
 import { userAcc } from "@/models/userAcc";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSession } from "next-auth/react";
-import { useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
@@ -12,6 +12,7 @@ import 'swiper/css/pagination';
 import MapEach from "../showHouse/mapEach";
 import { variants } from "../showHouse/variantsShowHouse";
 import SlideShowHouse from "./slideShowHouse";
+import { userAccContext } from "@/contexts/userAcc";
 
 
 interface TabShowHouseProps {
@@ -33,8 +34,8 @@ const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
     ishover: boolean;
     id: number;
   }>({ ishover: false, id: -1 });
-
-
+  const { data: session, status } = useSession();
+  const {user} = useContext(userAccContext)
 
   const handleOnClickOutSideMaskUser = (event: any) => {
     const isClickInSide = maskUser.current?.contains(event.target);
@@ -56,7 +57,7 @@ const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
     }
   };
 
-  const { data: session, status } = useSession();
+  useEffect(()=>{console.log(user);}, [user.UserId])
 
   return (
     <>
@@ -103,7 +104,7 @@ const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
           <SlideShowHouse setIsOpenMask={setIsOpenMask} setIsOpenMaskMap={setIsOpenMaskMap}
             setSelectLocale={setSelectLocale} setSelectUser={setSelectUser}
             isHover={isHover} setIsHover={setIsHover}
-            infShow="houseForSale" title="House for sale" keyMapBing={keyMapBing}
+            infShow={status === 'authenticated' ? 'houseForSaleAuth' : 'houseForSaleUnAuth'} title="House for sale" keyMapBing={keyMapBing}
           />
         </motion.div>
 
@@ -111,7 +112,7 @@ const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
           <SlideShowHouse setIsOpenMask={setIsOpenMask} setIsOpenMaskMap={setIsOpenMaskMap}
             setSelectLocale={setSelectLocale} setSelectUser={setSelectUser}
             isHover={isHover} setIsHover={setIsHover}
-            infShow="houseForRent" title="House for rent" keyMapBing={keyMapBing}
+            infShow={status === 'authenticated' ? 'houseForRentAuth' : 'houseForRentUnAuth'} title="House for rent" keyMapBing={keyMapBing}
           />
         </motion.div>
 
