@@ -28,7 +28,7 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
   const router = useRouter();
   return (
     <>
-      <div className='w-full h-[80px]'></div>
+      <div className="w-full h-[80px]"></div>
       <div className="w-full h-[80px]  bg-white z-30 fixed top-0" id="header-root">
         <header
           className="w-full h-[80px] border-b-2 flex justify-center px-[80px]

@@ -8,18 +8,15 @@ import DesktopLaptop from './desktopLaptop';
 import TabletMobile from './tabletMobile';
 
 const TypeHouse = () => {
-
-
-
   return (
     <>
-    <div className='mobile:hidden tablet:hidden'>
-      <DesktopLaptop />
-    </div>
+      <div className="mobile:hidden tablet:hidden">
+        <DesktopLaptop />
+      </div>
 
-    <div className='desktop:hidden laptop:hidden mt-6'>
-      <TabletMobile />
-    </div>
+      <div className="desktop:hidden laptop:hidden mt-6">
+        <TabletMobile />
+      </div>
     </>
   );
 };

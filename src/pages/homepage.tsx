@@ -68,14 +68,13 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
     if (session?.userAcc) {
       setUser(session?.userAcc);
     }
-
-  }, [status])
+  }, [status]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  useEffect(() => { }, [isFilter]);
+  useEffect(() => {}, [isFilter]);
   initializeSSR();
 
   return (
@@ -94,25 +93,27 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
           <TypeHouse />
         </motion.div>
 
-        <div className="w-full h-fit px-[80px] box-border
+        <div
+          className="w-full h-fit px-[80px] box-border
         tablet:px-0 mobile:px-0
-        ">
-          {isFilter != 'main' ?
+        "
+        >
+          {isFilter != 'main' ? (
             <motion.div variants={variants} animate="show">
               <ShowHouse
-                infShow={isFilter === 'houseForRent' || isFilter ==='houseForSale' ? 'noneAuthFilter' :
-                isFilter
-              }
+                infShow={
+                  isFilter === 'houseForRent' || isFilter === 'houseForSale'
+                    ? 'noneAuthFilter'
+                    : isFilter
+                }
                 keyMapBing={keyMapBing}
               />
             </motion.div>
-            :
+          ) : (
             <motion.div variants={variants} animate="show">
               <TabShowHouse keyMapBing={keyMapBing} />
             </motion.div>
-          }
-
-
+          )}
         </div>
 
         <FooterRooms />
@@ -135,4 +136,3 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     }
   };
 };
-

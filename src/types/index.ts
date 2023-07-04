@@ -7,14 +7,14 @@ export enum TokenError {
 }
 
 export interface ExtendedToken extends JWT {
-  accessToken: string,
-  refreshToken: string,
-  accessTokenExpiresAt: number,
-  user: User,
-  error?: TokenError
+  accessToken: string;
+  refreshToken: string;
+  accessTokenExpiresAt: number;
+  user: User;
+  error?: TokenError;
 }
 
 export interface ExtendedSession extends Session {
-  accessToken: ExtendedToken['accessToken'],
-  error: ExtendedToken['error']
+  accessToken: ExtendedToken['accessToken'];
+  error: ExtendedToken['error'];
 }

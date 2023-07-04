@@ -1,5 +1,5 @@
-import { textContainer, textVariant2 } from "@/utils/motion";
-import { motion } from "framer-motion";
+import { textContainer, textVariant2 } from '@/utils/motion';
+import { motion } from 'framer-motion';
 
 interface TypingTextProps {
   title: any;
@@ -18,7 +18,7 @@ const AnimateTitle = ({ title, textStyles }: TypingTextProps) => {
         </motion.span>
       ))}
     </motion.p>
-  )
-}
+  );
+};
 
 export default AnimateTitle;

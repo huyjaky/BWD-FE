@@ -1,33 +1,43 @@
-import { motion } from "framer-motion";
-import { variants } from "../variantsShowHouse";
-import Carousel from "../carousel";
+import { motion } from 'framer-motion';
+import { variants } from '../variantsShowHouse';
+import Carousel from '../carousel';
 import Image from 'next/image';
-import { ImMap } from "react-icons/im";
-import { HiUserCircle } from "react-icons/hi";
-import EditRemoveIcon from "./editRemoveIcon";
-import Link from "next/link";
-import { Dispatch, SetStateAction } from "react";
-import { house_ } from "@/models/house";
-import Heart from "../heart";
-import { userAcc } from "@/models/userAcc";
-import { isFilter_ } from "@/contexts/getHouse";
+import { ImMap } from 'react-icons/im';
+import { HiUserCircle } from 'react-icons/hi';
+import EditRemoveIcon from './editRemoveIcon';
+import Link from 'next/link';
+import { Dispatch, SetStateAction } from 'react';
+import { house_ } from '@/models/house';
+import Heart from '../heart';
+import { userAcc } from '@/models/userAcc';
+import { isFilter_ } from '@/contexts/getHouse';
+import { FaRegCompass } from 'react-icons/fa';
 
 interface HouseCardProps {
-  index: number,
-  item: house_,
-  isHover: { ishover: boolean; id: number; },
+  index: number;
+  item: house_;
+  isHover: { ishover: boolean; id: number };
   infShow: isFilter_['isFilter_'];
-  setIsHover: Dispatch<SetStateAction<{ ishover: boolean; id: number; }>>,
-  setIsOpenMaskMap: Dispatch<SetStateAction<boolean>>,
-  setSelectLocale: Dispatch<SetStateAction<{ longitude: number; latitude: number; zoom: number; } | undefined>>,
-  setSelectUser: Dispatch<SetStateAction<userAcc | undefined>>,
-  setIsOpenMask: Dispatch<SetStateAction<boolean>>
+  setIsHover: Dispatch<SetStateAction<{ ishover: boolean; id: number }>>;
+  setIsOpenMaskMap: Dispatch<SetStateAction<boolean>>;
+  setSelectLocale: Dispatch<
+    SetStateAction<{ longitude: number; latitude: number; zoom: number } | undefined>
+  >;
+  setSelectUser: Dispatch<SetStateAction<userAcc | undefined>>;
+  setIsOpenMask: Dispatch<SetStateAction<boolean>>;
 }
 
-const HouseCard = ({ index, setIsHover, item, infShow, isHover,
-  setIsOpenMaskMap, setSelectLocale, setSelectUser, setIsOpenMask
+const HouseCard = ({
+  index,
+  setIsHover,
+  item,
+  infShow,
+  isHover,
+  setIsOpenMaskMap,
+  setSelectLocale,
+  setSelectUser,
+  setIsOpenMask
 }: HouseCardProps) => {
-
   return (
     <motion.div
       initial={{ opacity: 0, display: 'none' }}
@@ -57,13 +67,7 @@ const HouseCard = ({ index, setIsHover, item, infShow, isHover,
           )}
 
           <div className="absolute left-2 top-2 z-10">
-            <Image
-              className="fill-white"
-              width={50}
-              height={50}
-              src={'/x2click.svg'}
-              alt=""
-            />
+            <Image className="fill-white" width={50} height={50} src={'/x2click.svg'} alt="" />
           </div>
 
           <motion.button
@@ -76,8 +80,9 @@ const HouseCard = ({ index, setIsHover, item, infShow, isHover,
                 zoom: 18
               });
             }}
-            className={`absolute top-3 right-12 ${infShow === 'authListHouse' ? 'right-2' : ''
-              } text-red-500 text-[25px] z-10`}
+            className={`absolute top-3 right-12 ${
+              infShow === 'authListHouse' ? 'right-2' : ''
+            } text-red-500 text-[25px] z-10`}
           >
             <ImMap />
           </motion.button>
@@ -89,15 +94,15 @@ const HouseCard = ({ index, setIsHover, item, infShow, isHover,
               setIsOpenMask(true);
             }}
             className={`absolute w-[60px] h-[60px] transition-all
-                left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl ${infShow === 'authListHouse' ? 'hidden' : ''
-              }`}
+                left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl ${
+                  infShow === 'authListHouse' ? 'hidden' : ''
+                }`}
           >
             {item.useracc.Image != undefined ? (
               <img
                 src={'/api/img/path/' + item.useracc.Image}
                 alt=""
                 className="w-full h-full object-cover"
-
               />
             ) : (
               <HiUserCircle className="w-full h-full" />
@@ -108,9 +113,7 @@ const HouseCard = ({ index, setIsHover, item, infShow, isHover,
           <motion.button
             variants={variants}
             animate={
-              isHover.ishover && isHover.id === index
-                ? 'showIconControl'
-                : 'hiddenIconControl'
+              isHover.ishover && isHover.id === index ? 'showIconControl' : 'hiddenIconControl'
             }
             transition={{ type: 'spring', duration: 0.3 }}
             className={`absolute w-[160px] h-[60px] transition-all bg-white
@@ -130,18 +133,17 @@ const HouseCard = ({ index, setIsHover, item, infShow, isHover,
             </div>
 
             <EditRemoveIcon />
-
           </motion.button>
         </div>
         <Link href={`/house/${item.HouseId}`}>
-          <div className="h-[100px] w-full box-border p-4">
-            <div className="w-full h-fit flex font-semibold">
+          <div className="h-[100px] w-full box-border p-4 ">
+            {/* <div className="w-full h-fit flex font-semibold">
               <div className="flex-[2]">
                 <span>
                   {item.address.adminDistrict2}, {item.address.countryRegion}
                 </span>
               </div>
-              <div className="flex-1 flex justify-end">star</div>
+              <div className="flex-1 flex justify-end">&#36;{item.Price}</div>
             </div>
             <div className="w-full h-fit mt-1">{item.useracc.UserName}</div>
             <div className="w-full h-fit mt-1 ">
@@ -149,12 +151,42 @@ const HouseCard = ({ index, setIsHover, item, infShow, isHover,
               {infShow === 'houseForRent' ?
                 <span className="font-semibold">{'/month'}</span>
                 : ''}
+            </div> */}
+            <div className="w-full grid grid-cols-2 grid-rows-3">
+              <div>
+                <span className="font-semibold">
+                  {item.address.adminDistrict2}, {item.address.countryRegion}
+                </span>
+              </div>
+              <div className="flex justify-end font-semibold">
+                <span>&#36;{item.Price}</span>
+                {infShow === 'houseForRent' ? (
+                  <span className="font-semibold">{'/month'}</span>
+                ) : (
+                  ''
+                )}
+              </div>
+              <div>
+                <span>{'Host: ' + item.useracc.UserName}</span>
+              </div>
+              <div className="flex justify-end">
+                <span>
+                  {item.NumsOfBath + ' Baths,'} {item.NumsOfBed + ' Beds'}
+                </span>
+              </div>
+              <div>
+                <span>{item.Capacity + ' m'}&sup2;</span>
+              </div>
+              <div className="flex justify-end">
+                <span>{item.Orientation} </span>{' '}
+                <FaRegCompass className="h-full ml-2 text-[20px]" />
+              </div>
             </div>
           </div>
         </Link>
       </motion.div>
     </motion.div>
-  )
-}
+  );
+};
 
 export default HouseCard;

@@ -50,7 +50,6 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
   }>();
   const [isOpenMaskMap, setIsOpenMaskMap] = useState(false);
 
-
   // thuc hien hanh dong khi kiem tra xem arr co ton tai hay khong
   const isEmpty = (arr: any) => {
     if (arr.data.length == 0) {
@@ -112,17 +111,19 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
       return;
     }
     try {
-
       // get more house de lay them nha khi scroll xuoong cuoi cung https://www.npmjs.com/package/react-infinite-scroll-component
       // noi get more them du lieu khi dung infinite
       if (infShow === 'noneAuthHouseApi') {
         const moreHouse = await houseApi[infShow](houseTemp.length / 10 + 1, user.UserId);
         isExist(moreHouse);
       } else if (infShow === 'noneAuthFilter') {
-        const moreHouse = await houseApi[infShow]({ filter: filterForm, selectPlace: address }, houseTemp.length / 10 + 1, user.UserId);
+        const moreHouse = await houseApi[infShow](
+          { filter: filterForm, selectPlace: address },
+          houseTemp.length / 10 + 1,
+          user.UserId
+        );
         isExist(moreHouse);
       }
-
     } catch (error) {
       console.log(error);
       return;
@@ -202,11 +203,20 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
           viewport={{ once: false, amount: 0.25 }}
           className={` mx-auto flex-col`}
         >
-          <AnimateTitle title={
-            isFilter === 'houseForSale' ? 'House for sale ' :
-            isFilter === 'houseForRent' ? 'House for rent' :
-            isFilter === 'favoriteHouse' ? 'Whislist' : ''
-          } textStyles=" w-full h-fit" />
+          <AnimateTitle
+            title={
+              infShow === 'authListHouse'
+                ? ''
+                : isFilter === 'houseForSale'
+                ? 'House for sale '
+                : isFilter === 'houseForRent'
+                ? 'House for rent'
+                : isFilter === 'favoriteHouse'
+                ? 'Whislist'
+                : ''
+            }
+            textStyles=" w-full h-fit"
+          />
         </motion.div>
 
         <InfiniteScroll
@@ -224,10 +234,18 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
         >
           {houseTemp.map((item: house_, index: number) => {
             return (
-              <HouseCard index={index} isHover={isHover} key={index}
-                infShow={infShow} item={item} setIsHover={setIsHover}
-                setIsOpenMask={setIsOpenMask} setIsOpenMaskMap={setIsOpenMaskMap}
-                setSelectLocale={setSelectLocale} setSelectUser={setSelectUser} />
+              <HouseCard
+                index={index}
+                isHover={isHover}
+                key={index}
+                infShow={infShow}
+                item={item}
+                setIsHover={setIsHover}
+                setIsOpenMask={setIsOpenMask}
+                setIsOpenMaskMap={setIsOpenMaskMap}
+                setSelectLocale={setSelectLocale}
+                setSelectUser={setSelectUser}
+              />
             );
           })}
 

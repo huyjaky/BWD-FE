@@ -10,9 +10,9 @@ const FooterMainRes = () => {
   const { user } = useContext(userAccContext);
 
   const [isClickProfile, setIsClickProfile] = useState<boolean>(false);
-  const profileTab = useRef<HTMLButtonElement>(null)
+  const profileTab = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => { }, [user]);
+  useEffect(() => {}, [user]);
 
   useEffect(() => {
     const handeOnClick = (event: any) => {
@@ -22,9 +22,9 @@ const FooterMainRes = () => {
         console.log('check');
         return;
       }
-    }
-    document.addEventListener('click', handeOnClick)
-  }, [])
+    };
+    document.addEventListener('click', handeOnClick);
+  }, []);
 
   return (
     <>
@@ -41,11 +41,10 @@ const FooterMainRes = () => {
           </motion.button>
         </Link>
 
-        <div className='w-[80px] h-full'>
+        <div className="w-[80px] h-full"></div>
 
-        </div>
-
-        <motion.button className="flex w-fit h-full flex-col box-border "
+        <motion.button
+          className="flex w-fit h-full flex-col box-border "
           ref={profileTab}
           onClick={(event) => {
             if (user.UserId) {
@@ -53,26 +52,27 @@ const FooterMainRes = () => {
             }
           }}
         >
-          {user.UserId != undefined ?
+          {user.UserId != undefined ? (
             <div className="w-full flex justify-center flex-[4]">
-              <img src={'/api/img/path/' + user.Image} alt={user.UserId} className='object-cover
+              <img
+                src={'/api/img/path/' + user.Image}
+                alt={user.UserId}
+                className="object-cover
             w-[40px] h-[40px] rounded-full
-            '/>
+            "
+              />
             </div>
-            :
+          ) : (
             <div className="w-full flex justify-center flex-[4]">
               <AiOutlineUser className="text-[40px] text-slate-500" />
             </div>
-          }
-          <div className="flex-1 text-slate-500"
-          >
-            {user.UserId ? 'Profile' : 'Login'}
-          </div>
+          )}
+          <div className="flex-1 text-slate-500">{user.UserId ? 'Profile' : 'Login'}</div>
         </motion.button>
         <motion.div
-
-          animate={isClickProfile ? {} : {height: 0}}
-          className='fixed bottom-[70px] w-full bg-white overflow-hidden' >
+          animate={isClickProfile ? {} : { height: 0 }}
+          className="fixed bottom-[70px] w-full bg-white overflow-hidden"
+        >
           <ListButton />
         </motion.div>
       </div>

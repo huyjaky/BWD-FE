@@ -1,10 +1,9 @@
-import { selectPopoverContext } from "@/contexts";
-import { getHouseContext } from "@/contexts/getHouse";
-import { userAccContext } from "@/contexts/userAcc";
-import { signOut } from "next-auth/react";
-import Link from "next/link";
-import { useContext } from "react";
-
+import { selectPopoverContext } from '@/contexts';
+import { getHouseContext } from '@/contexts/getHouse';
+import { userAccContext } from '@/contexts/userAcc';
+import { signOut } from 'next-auth/react';
+import Link from 'next/link';
+import { useContext } from 'react';
 
 const ListButton = () => {
   const { user, resetDataUser } = useContext(userAccContext);
@@ -50,7 +49,7 @@ const ListButton = () => {
         <button className="w-full py-4 text-left px-5">Help</button>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default ListButton;

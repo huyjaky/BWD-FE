@@ -1,6 +1,6 @@
-import { ReactElement } from "react";
-import { BiSolidBuildingHouse } from "react-icons/bi";
-import { BsBookmarkHeartFill, BsFillHouseCheckFill } from "react-icons/bs";
+import { ReactElement } from 'react';
+import { BiSolidBuildingHouse } from 'react-icons/bi';
+import { BsBookmarkHeartFill, BsFillHouseCheckFill } from 'react-icons/bs';
 import { WiStars } from 'react-icons/wi';
 export const imgArr: { title: string; path: (type: string) => ReactElement<any, any> }[] = [
   {

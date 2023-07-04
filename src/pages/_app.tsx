@@ -12,7 +12,6 @@ import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import 'react-loading-skeleton/dist/skeleton.css';
 
-
 import { SWRConfig } from 'swr';
 import NextNProgress from 'nextjs-progressbar';
 

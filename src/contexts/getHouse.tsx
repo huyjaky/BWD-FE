@@ -5,17 +5,22 @@ interface getHouseProps {
 }
 
 export interface isFilter_ {
-  isFilter_: 'noneAuthFilter' | 'favoriteHouse' | 'noneAuthHouseApi' | 'main' | 'authListHouse' |
-  'houseForSale' | 'houseForRent'  | 'trending' | 'favoriteHouse'
-  ;
+  isFilter_:
+    | 'noneAuthFilter'
+    | 'favoriteHouse'
+    | 'noneAuthHouseApi'
+    | 'main'
+    | 'authListHouse'
+    | 'houseForSale'
+    | 'houseForRent'
+    | 'trending'
+    | 'favoriteHouse';
 }
 
 interface getHouseData {
   isFilter: isFilter_['isFilter_'];
   setIsFilter: (payload: isFilter_['isFilter_']) => void;
 }
-
-
 
 const getHouseDataDefault: getHouseData = {
   isFilter: 'main',

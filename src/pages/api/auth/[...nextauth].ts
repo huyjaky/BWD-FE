@@ -68,8 +68,7 @@ const refreshToken = async (token: JWT) => {
     return token;
   }
   return token;
-}
-
+};
 
 export const authOptions: NextAuthOptions = {
   // your configs
@@ -92,12 +91,12 @@ export const authOptions: NextAuthOptions = {
         return token;
       }
       console.log(token);
-      if ((Date.now() + 300)/1000  < (token as ExtendedToken).exp) {
-        console.log("access token still valid, returning extended token");
+      if ((Date.now() + 300) / 1000 < (token as ExtendedToken).exp) {
+        console.log('access token still valid, returning extended token');
         return token;
       }
-      console.log("access token expired, refreshing...");
-      return refreshToken(token)
+      console.log('access token expired, refreshing...');
+      return refreshToken(token);
     },
 
     async session({ session, token, user }) {
@@ -105,8 +104,6 @@ export const authOptions: NextAuthOptions = {
       session.token = await token.token;
       return session;
     }
-
-
   },
   providers: [
     CredentialsProvider({

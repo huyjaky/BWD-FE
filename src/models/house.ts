@@ -29,7 +29,9 @@ export interface house_ {
   JudicalId: string;
   address: address;
   useracc: userAcc;
-  IsFavorite: boolean;
-  arrImg: { Path: string }[];
+  IsFavorite: boolean; // yeu thich nha
+  arrImg: { Path: string }[]; // Mang anh
+  Orientation: string; // Huong nha
+  Capacity: number;
   placeOffer: { PlaceOfferId: string; PlaceOffer: string; PathIcon: string }[];
 }

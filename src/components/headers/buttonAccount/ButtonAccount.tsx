@@ -28,7 +28,7 @@ const ButtonAccount = () => {
   const { user, resetDataUser } = useContext(userAccContext);
   const [isClick, setIsClick] = useState(false);
   const controlBar = useRef<HTMLInputElement>(null);
-  const {status} = useSession();
+  const { status } = useSession();
 
   useEffect(() => {
     // animation close control panel
@@ -42,7 +42,7 @@ const ButtonAccount = () => {
     document.addEventListener('scroll', handleControlPanel);
   }, []);
 
-  useEffect(() => { }, [user, status]);
+  useEffect(() => {}, [user, status]);
   return (
     <div
       className="w-fit p-1 rounded-full bg-white flex border-gray-400 hover:shadow-lg
@@ -58,7 +58,7 @@ const ButtonAccount = () => {
       ) : (
         <HiUserCircle className="w-[40px] h-[30px] " />
       )}
-        {/* <HiUserCircle className="w-[40px] h-[30px] " /> */}
+      {/* <HiUserCircle className="w-[40px] h-[30px] " /> */}
       <AnimatePresence initial={false}>
         <motion.div
           variants={variants}

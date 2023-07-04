@@ -22,7 +22,7 @@ export const houseApi = {
   authListHouse(UserId: string) {
     return axiosClient.get(`/get/house/userid/${UserId}`);
   },
-  authFavoriteList(UserId: string, offset:number) {
-    return axiosClient.post(`/get/house/userid/favorite/${UserId}`, {offset: offset});
+  authFavoriteList(UserId: string, offset: number) {
+    return axiosClient.post(`/get/house/userid/favorite/${UserId}`, { offset: offset });
   }
 };

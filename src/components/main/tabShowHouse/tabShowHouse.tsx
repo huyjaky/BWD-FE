@@ -1,22 +1,21 @@
 // import required modules
 
-import HostUser from "@/components/houseDetail/host/hostUser";
-import { userAcc } from "@/models/userAcc";
-import { AnimatePresence, motion } from "framer-motion";
-import { useSession } from "next-auth/react";
-import { useContext, useEffect, useRef, useState } from "react";
+import HostUser from '@/components/houseDetail/host/hostUser';
+import { userAcc } from '@/models/userAcc';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useSession } from 'next-auth/react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import MapEach from "../showHouse/mapEach";
-import { variants } from "../showHouse/variantsShowHouse";
-import SlideShowHouse from "./slideShowHouse";
-import { userAccContext } from "@/contexts/userAcc";
-
+import MapEach from '../showHouse/mapEach';
+import { variants } from '../showHouse/variantsShowHouse';
+import SlideShowHouse from './slideShowHouse';
+import { userAccContext } from '@/contexts/userAcc';
 
 interface TabShowHouseProps {
-  keyMapBing: string
+  keyMapBing: string;
 }
 
 const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
@@ -35,7 +34,7 @@ const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
     id: number;
   }>({ ishover: false, id: -1 });
   const { data: session, status } = useSession();
-  const {user} = useContext(userAccContext)
+  const { user } = useContext(userAccContext);
 
   const handleOnClickOutSideMaskUser = (event: any) => {
     const isClickInSide = maskUser.current?.contains(event.target);
@@ -57,7 +56,9 @@ const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
     }
   };
 
-  useEffect(()=>{console.log(user);}, [user.UserId])
+  useEffect(() => {
+    console.log(user);
+  }, [user.UserId]);
 
   return (
     <>
@@ -100,34 +101,50 @@ const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
       </AnimatePresence>
 
       <div className="h-fit mt-[70px] tablet:mt-[50px] mobile:mt-[50px]">
-        <motion.div variants={variants} exit='exitFavor' >
-          <SlideShowHouse setIsOpenMask={setIsOpenMask} setIsOpenMaskMap={setIsOpenMaskMap}
-            setSelectLocale={setSelectLocale} setSelectUser={setSelectUser}
-            isHover={isHover} setIsHover={setIsHover}
-            infShow={'houseForSale'} title="House for sale" keyMapBing={keyMapBing}
+        <motion.div variants={variants} exit="exitFavor">
+          <SlideShowHouse
+            setIsOpenMask={setIsOpenMask}
+            setIsOpenMaskMap={setIsOpenMaskMap}
+            setSelectLocale={setSelectLocale}
+            setSelectUser={setSelectUser}
+            isHover={isHover}
+            setIsHover={setIsHover}
+            infShow={'houseForSale'}
+            title="House for sale"
+            keyMapBing={keyMapBing}
           />
         </motion.div>
 
-        <motion.div variants={variants} exit='exitFavor' >
-          <SlideShowHouse setIsOpenMask={setIsOpenMask} setIsOpenMaskMap={setIsOpenMaskMap}
-            setSelectLocale={setSelectLocale} setSelectUser={setSelectUser}
-            isHover={isHover} setIsHover={setIsHover}
-            infShow={'houseForRent'} title="House for rent" keyMapBing={keyMapBing}
+        <motion.div variants={variants} exit="exitFavor">
+          <SlideShowHouse
+            setIsOpenMask={setIsOpenMask}
+            setIsOpenMaskMap={setIsOpenMaskMap}
+            setSelectLocale={setSelectLocale}
+            setSelectUser={setSelectUser}
+            isHover={isHover}
+            setIsHover={setIsHover}
+            infShow={'houseForRent'}
+            title="House for rent"
+            keyMapBing={keyMapBing}
           />
         </motion.div>
 
-
-        {status === 'authenticated' &&
-          <motion.div variants={variants} exit='exitFavor' >
-            <SlideShowHouse setIsOpenMask={setIsOpenMask} setIsOpenMaskMap={setIsOpenMaskMap}
-              setSelectLocale={setSelectLocale} setSelectUser={setSelectUser}
-              isHover={isHover} setIsHover={setIsHover}
-              infShow="favoriteHouse" title="Whislist" keyMapBing={keyMapBing}
+        {status === 'authenticated' && (
+          <motion.div variants={variants} exit="exitFavor">
+            <SlideShowHouse
+              setIsOpenMask={setIsOpenMask}
+              setIsOpenMaskMap={setIsOpenMaskMap}
+              setSelectLocale={setSelectLocale}
+              setSelectUser={setSelectUser}
+              isHover={isHover}
+              setIsHover={setIsHover}
+              infShow="favoriteHouse"
+              title="Whislist"
+              keyMapBing={keyMapBing}
             />
           </motion.div>
-        }
+        )}
       </div>
-
     </>
   );
 };

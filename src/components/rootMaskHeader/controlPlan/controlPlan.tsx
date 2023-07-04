@@ -88,8 +88,8 @@ const ControlPlan = () => {
     setIsShowHeader(true);
     const inputElement = document.getElementById('searchBox');
     if (inputElement) {
-      inputElement.focus()
-    };
+      inputElement.focus();
+    }
   };
 
   const isClickOutSide = (event: any) => {
