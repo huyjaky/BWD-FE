@@ -12,7 +12,7 @@ const Amenities = ({ typeAmenities }: AmenitiesProps) => {
   const arrAmenities_: amenities = arrAmenities;
   const { filterForm, setFilterForm } = useContext(filterContext);
 
-  useEffect(() => {}, [filterForm.amenities[typeAmenities]]);
+  useEffect(() => { }, [filterForm.amenities[typeAmenities]]);
 
   const handleOnClick = (event: any, item: string) => {
     const arrTemp = filterForm.amenities[typeAmenities];
@@ -45,10 +45,12 @@ const Amenities = ({ typeAmenities }: AmenitiesProps) => {
               key={index}
               onClick={(event) => handleOnClick(event, item)}
             >
-              <div className="w-full flex h-full box-border">
-                <CheckBox
-                  isCheckedProps={filterForm.amenities[typeAmenities].includes(item) ? true : false}
-                />{' '}
+              <div className="w-full flex h-full box-border overflow-hidden">
+                <div className='my-auto'>
+                  <CheckBox
+                    isCheckedProps={filterForm.amenities[typeAmenities].includes(item) ? true : false}
+                  />{' '}
+                </div>
                 <span
                   className="h-full flex items-center
                   ml-5 text-[19px]

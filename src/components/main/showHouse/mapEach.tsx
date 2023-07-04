@@ -5,15 +5,18 @@ interface MapEachProps {
   latitude: number;
   zoom: number;
   keyMapBing: string;
+  formattedAddress: string;
+  idMap: string;
+  style: string;
 }
 
 initializeSSR();
 
-const MapEach = ({ latitude, longitude, zoom, keyMapBing }: MapEachProps) => {
+const MapEach = ({ latitude, longitude, zoom, keyMapBing, formattedAddress, idMap, style }: MapEachProps) => {
   initializeSSR();
   useEffect(() => {
     whenLoaded.then(() => {
-      const map_ = document.getElementById('MapEach');
+      const map_ = document.getElementById('MapEach'+idMap);
       if (map_) {
         var map = new Microsoft.Maps.Map(map_, {
           /* No need to set credentials if already passed in URL */
@@ -31,9 +34,12 @@ const MapEach = ({ latitude, longitude, zoom, keyMapBing }: MapEachProps) => {
   }, [latitude, longitude, zoom]);
 
   return (
-    <div className="w-full h-[500px] rounded-3xl border-2 border-red-400 overflow-hidden">
-      <div id="MapEach" className="relative z-10"></div>
-    </div>
+    <>
+      <span className='text-[30px]'>{formattedAddress}</span>
+      <div className={`w-full rounded-3xl border-2 border-red-400 overflow-hidden ${style}`}>
+        <div id={"MapEach"+idMap} className="relative z-10"></div>
+      </div>
+    </>
   );
 };
 

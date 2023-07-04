@@ -18,14 +18,14 @@ const Popover = () => {
         {selected === 'who' && <Who styleWho={null} />}
         {selected === 'checkin' && (
           <CheckIn_Out
-            styleHorizontal={'tablet:hidden mobile:hidden'}
-            styleVerical={' laptop:hidden desktop:hidden'}
+            styleHorizontal={' mobile:hidden'}
+            styleVerical={' laptop:hidden desktop:hidden tablet:hidden'}
           />
         )}
         {selected === 'checkout' && (
           <CheckIn_Out
             styleHorizontal={'tablet:hidden mobile:hidden'}
-            styleVerical={' laptop:hidden desktop:hidden'}
+            styleVerical={' laptop:hidden desktop:hidden tablet:hidden'}
           />
         )}
       </div>

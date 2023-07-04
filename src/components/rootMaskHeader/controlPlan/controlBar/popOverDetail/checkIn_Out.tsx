@@ -3,7 +3,7 @@ import { BillContext } from '@/contexts/bill';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 import { addDays } from 'date-fns';
 import { useContext, useEffect, useState } from 'react';
-import { DateRangePicker } from 'react-date-range';
+import { DateRange, DateRangePicker } from 'react-date-range';
 interface CheckIn_OutProps {
   styleVerical: string | null;
   styleHorizontal: string | null;
@@ -35,7 +35,7 @@ const CheckIn_Out = ({ styleVerical, styleHorizontal }: CheckIn_OutProps) => {
 
   return (
     <div className="w-full h-full bg-white rounded-2xl pointer-events-auto" id="checkin_out-popup">
-      <div className="p-8 w-full h-full flex items-center justify-center ">
+      <div className="p-8 w-full h-full flex items-center justify-center mobile:p-0 ">
         <div className={`w-full h-full ${styleHorizontal}`}>
           <DateRangePicker
             onChange={(item: any) => handleOnChange(item)}
@@ -53,7 +53,7 @@ const CheckIn_Out = ({ styleVerical, styleHorizontal }: CheckIn_OutProps) => {
           className={`w-full h-full  flex
         overflow-scroll overflow-x-hidden ${styleVerical}`}
         >
-          <DateRangePicker
+          <DateRange
             onChange={(item: any) => handleOnChange(item)}
             showPreview={true}
             moveRangeOnFirstSelection={false}
@@ -62,7 +62,7 @@ const CheckIn_Out = ({ styleVerical, styleHorizontal }: CheckIn_OutProps) => {
             ranges={date_}
             direction="vertical"
             rangeColors={['rgb(239 68 68)']}
-            className=" font-semibold m-auto mt-0"
+            className=" font-semibold m-auto mt-0 w-full"
           />
         </div>
       </div>

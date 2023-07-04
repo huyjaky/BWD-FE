@@ -1,11 +1,10 @@
-import Link from 'next/link';
-import { BiSearch } from 'react-icons/bi';
-import ControlBar from './controlBar/controlBar';
-import Popover from './controlBar/popOver';
-import { useContext, useEffect, useRef, useState } from 'react';
 import { selectPopoverContext } from '@/contexts';
 import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 import { Variants, motion } from 'framer-motion';
+import Link from 'next/link';
+import { useContext, useEffect, useRef, useState } from 'react';
+import ControlBar from './controlBar/controlBar';
+import Popover from './controlBar/popOver';
 
 const variants: Variants = {
   controlHeaderShow: {
@@ -108,6 +107,8 @@ const ControlPlan = () => {
 
     setIsFirstLoading(false);
   }, []);
+
+  useEffect(()=>{}, [isShowHeader])
 
   return (
     <>

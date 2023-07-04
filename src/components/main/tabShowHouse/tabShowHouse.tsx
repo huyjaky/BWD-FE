@@ -27,6 +27,7 @@ const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
     longitude: number;
     latitude: number;
     zoom: number;
+    formattedAddress: string;
   }>();
   const [isOpenMaskMap, setIsOpenMaskMap] = useState(false);
   const [isHover, setIsHover] = useState<{
@@ -95,6 +96,9 @@ const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
               latitude={selectLocale?.latitude ? selectLocale?.latitude : 1}
               zoom={selectLocale?.zoom ? selectLocale.zoom : 15}
               keyMapBing={keyMapBing}
+              formattedAddress={selectLocale?.formattedAddress ? selectLocale.formattedAddress : ''}
+              style='h-[500px]'
+              idMap='6'
             />
           </div>
         </motion.div>

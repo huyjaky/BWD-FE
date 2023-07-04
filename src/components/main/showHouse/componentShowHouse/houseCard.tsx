@@ -6,23 +6,25 @@ import { ImMap } from 'react-icons/im';
 import { HiUserCircle } from 'react-icons/hi';
 import EditRemoveIcon from './editRemoveIcon';
 import Link from 'next/link';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useContext, useEffect } from 'react';
 import { house_ } from '@/models/house';
 import Heart from '../heart';
 import { userAcc } from '@/models/userAcc';
 import { isFilter_ } from '@/contexts/getHouse';
 import { FaRegCompass } from 'react-icons/fa';
+import { selectHouseContext } from '@/contexts/selectHouse';
 
 interface HouseCardProps {
   index: number;
   item: house_;
   isHover: { ishover: boolean; id: number };
   infShow: isFilter_['isFilter_'];
+  keyMapBing: string;
   isEdit: boolean | null;
   setIsHover: Dispatch<SetStateAction<{ ishover: boolean; id: number }>>;
   setIsOpenMaskMap: Dispatch<SetStateAction<boolean>>;
-  setSelectLocale: Dispatch<
-    SetStateAction<{ longitude: number; latitude: number; zoom: number } | undefined>
+    setSelectLocale: Dispatch<
+    SetStateAction<{ longitude: number; latitude: number; zoom: number; formattedAddress: string } | undefined>
   >;
   setSelectUser: Dispatch<SetStateAction<userAcc | undefined>>;
   setIsOpenMask: Dispatch<SetStateAction<boolean>>;
@@ -42,6 +44,12 @@ const HouseCard = ({
   setIsOpenMask,
   setIsEdit
 }: HouseCardProps) => {
+  const { selectHouse, setSelectHouse } = useContext(selectHouseContext);
+  const selectHouseHandle = async (item: house_) => {
+    await setSelectHouse({ ...selectHouse, ...item });
+    console.log(selectHouse);
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, display: 'none' }}
@@ -53,6 +61,11 @@ const HouseCard = ({
         // whileInView={{ x: [-10, 0] }}
         variants={variants}
         whileHover="hoverItem"
+
+        onClick={(event) => {
+          selectHouseHandle(item)
+        }}
+
         transition={{ type: 'spring' }}
         className="w-full h-[400px] rounded-2xl box-border bg-gray-100"
         onHoverStart={() => {
@@ -81,12 +94,12 @@ const HouseCard = ({
               setSelectLocale({
                 latitude: item.address.latitude,
                 longitude: item.address.longitude,
-                zoom: 18
+                zoom: 18,
+                formattedAddress: item.address.formattedAddress
               });
             }}
-            className={`absolute top-3 right-12 ${
-              infShow === 'authListHouse' ? 'right-2' : ''
-            } text-red-500 text-[25px] z-10`}
+            className={`absolute top-3 right-12 ${infShow === 'authListHouse' ? 'right-2' : ''
+              } text-red-500 text-[25px] z-10`}
           >
             <ImMap />
           </motion.button>
@@ -98,9 +111,8 @@ const HouseCard = ({
               setIsOpenMask(true);
             }}
             className={`absolute w-[60px] h-[60px] transition-all
-                left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl ${
-                  infShow === 'authListHouse' ? 'hidden' : ''
-                }`}
+                left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl ${infShow === 'authListHouse' ? 'hidden' : ''
+              }`}
           >
             {item.useracc.Image != undefined ? (
               <img
@@ -122,6 +134,7 @@ const HouseCard = ({
             transition={{ type: 'spring', duration: 0.3 }}
             className={`absolute w-[160px] h-[60px] transition-all bg-white
                 left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl flex
+                tablet:hidden mobile:hidden
                 ${infShow === 'authListHouse' ? '' : 'hidden'}`}
           >
             <div className="w-[60px] h-full rounded-full overflow-hidden">
@@ -136,28 +149,40 @@ const HouseCard = ({
               )}
             </div>
 
-            <EditRemoveIcon
-            isEdit={isEdit} setIsEdit={setIsEdit}
-            />
+            <EditRemoveIcon isEdit={isEdit} setIsEdit={setIsEdit} />
           </motion.button>
+
+
+          <motion.button
+            variants={variants}
+            transition={{ type: 'spring', duration: 0.3 }}
+            className={`absolute w-[160px] h-[60px] transition-all bg-white
+                left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl flex
+                laptop:hidden desktop:hidden
+                ${infShow === 'authListHouse' ? '' : 'hidden'}`}
+          >
+            <div className="w-[60px] h-full rounded-full overflow-hidden">
+              {item.useracc.Image != undefined ? (
+                <img
+                  src={'/api/img/path/' + item.useracc.Image}
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <HiUserCircle className="w-full h-full" />
+              )}
+            </div>
+            <EditRemoveIcon isEdit={isEdit} setIsEdit={setIsEdit} />
+          </motion.button>
+
+
+
+
+
+
         </div>
         <Link href={`/house/${item.HouseId}`}>
           <div className="h-[100px] w-full box-border p-4 ">
-            {/* <div className="w-full h-fit flex font-semibold">
-              <div className="flex-[2]">
-                <span>
-                  {item.address.adminDistrict2}, {item.address.countryRegion}
-                </span>
-              </div>
-              <div className="flex-1 flex justify-end">&#36;{item.Price}</div>
-            </div>
-            <div className="w-full h-fit mt-1">{item.useracc.UserName}</div>
-            <div className="w-full h-fit mt-1 ">
-              <span className="font-semibold">&#36;{item.Price}</span>
-              {infShow === 'houseForRent' ?
-                <span className="font-semibold">{'/month'}</span>
-                : ''}
-            </div> */}
             <div className="w-full grid grid-cols-2 grid-rows-3">
               <div>
                 <span className="font-semibold">

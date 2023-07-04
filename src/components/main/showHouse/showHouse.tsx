@@ -50,6 +50,7 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
     longitude: number;
     latitude: number;
     zoom: number;
+formattedAddress: string;
   }>();
   const [isOpenMaskMap, setIsOpenMaskMap] = useState(false);
 
@@ -178,7 +179,7 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
           onClick={handleOnClickOutSideEditPanel}
           className="fixed w-screen h-screen bg-mask z-50 top-0 left-0 flex" >
           <div className='w-fit h-fit m-auto' ref={editPanel}>
-            <EditForm />
+            <EditForm keyMapBing={keyMapBing  } />
           </div>
         </motion.div>
       </AnimatePresence>
@@ -215,7 +216,10 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
               longitude={selectLocale?.longitude ? selectLocale.longitude : 1}
               latitude={selectLocale?.latitude ? selectLocale?.latitude : 1}
               zoom={selectLocale?.zoom ? selectLocale.zoom : 15}
+              formattedAddress={selectLocale?.formattedAddress ? selectLocale.formattedAddress : ''}
               keyMapBing={keyMapBing}
+              style='h-[500px]'
+              idMap='4'
             />
           </div>
         </motion.div>
@@ -262,6 +266,7 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
           {houseTemp.map((item: house_, index: number) => {
             return (
               <HouseCard
+                keyMapBing={keyMapBing}
                 index={index}
                 isHover={isHover}
                 key={index}

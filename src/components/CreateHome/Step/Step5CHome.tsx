@@ -222,6 +222,9 @@ const Step5CHome: React.FC<Step5CHome> = ({ keyMapBing }: Step5CHome) => {
             latitude={address.address.latitude}
             longitude={address.address.longitude}
             zoom={15}
+            formattedAddress={address.address.formattedAddress}
+            idMap='3'
+            style='h-[500px]'
           />
         </div>
       </div>

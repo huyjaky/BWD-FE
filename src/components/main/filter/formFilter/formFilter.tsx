@@ -151,9 +151,9 @@ const FormFilter = () => {
                 <span className="font-bold text-[25px] mb-5">Amenities</span>
                 <Amenities typeAmenities="essentials" />
                 <motion.div
-                  className="overflow-hidden"
+                  className="overflow-hidden "
                   variants={variantsAmenities}
-                  animate={show ? { height: 700, opacity: 1 } : { height: 0, opacity: 0 }}
+                  animate={show ? { height: 'fit-content', opacity: 1 } : { height: 0, opacity: 0 }}
                   transition={{ duration: 0.4 }}
                 >
                   <Amenities typeAmenities="features" />

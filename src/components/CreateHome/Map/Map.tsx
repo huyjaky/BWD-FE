@@ -37,6 +37,9 @@ const Map: React.FC<MapProps> = ({ keyMapBing }: MapProps) => {
           latitude={address.address.latitude}
           longitude={address.address.longitude}
           zoom={address.address.formattedAddress ? 15 : 0}
+          idMap='2'
+          formattedAddress={address.address.formattedAddress}
+          style='h-[500px]'
         />
       </div>
     </div>

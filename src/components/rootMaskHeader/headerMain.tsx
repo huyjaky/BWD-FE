@@ -81,6 +81,8 @@ const HeaderMain = () => {
     setIsFirstLoading(false);
   }, [isLoginClick]);
 
+  useEffect(()=>{}, [isShowHeader])
+
   useEffect(() => {}, [isClickOutSide]);
   return (
     <>

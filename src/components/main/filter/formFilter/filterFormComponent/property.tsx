@@ -30,12 +30,13 @@ const PropertyHouse = () => {
   const { filterForm, setFilterForm } = useContext(filterContext);
 
   return (
-    <div className="grid grid-cols-3 grid-rows-1">
+    <div className="grid grid-cols-3 grid-rows-1 mobile:grid-cols-1 mobile:grid-rows-3">
       {arrPropertyItems.map((item: PropertyItem, index: number) => {
         return (
           <div className="w-full h-full flex justify-center" key={index}>
             <motion.button
-              className={`w-[150px] h-[130px] border-2 rounded-2xl box-border p-2
+              className={`w-[150px] h-[130px] border-2 rounded-2xl box-border p-2 mobile:w-full
+              mobile:mb-5
                             ${filterForm.typeHouse.includes(item.title) ? 'border-black' : ''}
                           `}
               variants={variantsPropertyItems}

@@ -29,10 +29,11 @@ interface SlideShowHouseProps {
   setSelectLocale: Dispatch<
     SetStateAction<
       | {
-          longitude: number;
-          latitude: number;
-          zoom: number;
-        }
+        longitude: number;
+        latitude: number;
+        zoom: number;
+        formattedAddress: string
+      }
       | undefined
     >
   >;
@@ -64,7 +65,7 @@ const SlideShowHouse = ({
   const arrEmpty = [1, 2, 3, 4, 5, 6, 7];
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
   const { data: session, status } = useSession();
-  const { filterForm, setFilterForm } = useContext(filterContext);
+  const { filterForm, setFilterForm } = useContext(filterContext)
   const { address, setAddress } = useContext(selectPlaceContext);
   const { user } = useContext(userAccContext);
   const { isFilter, setIsFilter } = useContext(getHouseContext);
@@ -111,7 +112,7 @@ const SlideShowHouse = ({
     fetchAPI();
   }, [status]);
 
-  useEffect(() => {}, [houseTemp]);
+  useEffect(() => { }, [houseTemp]);
   return (
     <>
       <div className="">
@@ -159,6 +160,7 @@ const SlideShowHouse = ({
                   <SwiperSlide key={index} style={{ width: '400px', paddingTop: '20px' }}>
                     <HouseCard
                       index={index}
+                      keyMapBing={keyMapBing}
                       infShow={infShow}
                       isHover={{ ishover: false, id: index }}
                       item={item}
