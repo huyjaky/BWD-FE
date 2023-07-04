@@ -94,7 +94,7 @@ const FormFilter = () => {
         <motion.div
           variants={variantsAmenities}
           animate={isClickOutSide ? 'show' : 'hidden'}
-          transition={{ duration: 0.5, type: 'spring' }}
+          transition={{ duration: 0.5, type: 'tween' }}
           className="w-[800px] h-[calc(100vh-50px)] bg-white m-auto rounded-3xl overflow-hidden
           flex flex-col
           mobile:mt-0 mobile:rounded-none mobile:w-screen mobile:h-[calc(100vh-70px)]

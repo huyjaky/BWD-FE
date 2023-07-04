@@ -18,6 +18,7 @@ interface HouseCardProps {
   item: house_;
   isHover: { ishover: boolean; id: number };
   infShow: isFilter_['isFilter_'];
+  isEdit: boolean | null;
   setIsHover: Dispatch<SetStateAction<{ ishover: boolean; id: number }>>;
   setIsOpenMaskMap: Dispatch<SetStateAction<boolean>>;
   setSelectLocale: Dispatch<
@@ -25,6 +26,7 @@ interface HouseCardProps {
   >;
   setSelectUser: Dispatch<SetStateAction<userAcc | undefined>>;
   setIsOpenMask: Dispatch<SetStateAction<boolean>>;
+  setIsEdit: Dispatch<SetStateAction<boolean>> | null;
 }
 
 const HouseCard = ({
@@ -33,10 +35,12 @@ const HouseCard = ({
   item,
   infShow,
   isHover,
+  isEdit,
   setIsOpenMaskMap,
   setSelectLocale,
   setSelectUser,
-  setIsOpenMask
+  setIsOpenMask,
+  setIsEdit
 }: HouseCardProps) => {
   return (
     <motion.div
@@ -132,7 +136,9 @@ const HouseCard = ({
               )}
             </div>
 
-            <EditRemoveIcon />
+            <EditRemoveIcon
+            isEdit={isEdit} setIsEdit={setIsEdit}
+            />
           </motion.button>
         </div>
         <Link href={`/house/${item.HouseId}`}>

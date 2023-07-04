@@ -167,6 +167,7 @@ const SlideShowHouse = ({
                       setIsOpenMaskMap={setIsOpenMaskMap}
                       setSelectLocale={setSelectLocale}
                       setSelectUser={setSelectUser}
+                      isEdit={null} setIsEdit={null}
                       key={index}
                     />
                   </SwiperSlide>

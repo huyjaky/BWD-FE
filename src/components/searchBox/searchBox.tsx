@@ -16,20 +16,24 @@ const SearchBox = ({ styleBox }: SearchBoxProps) => {
 
   // luu y la chi cho nhung doan code ve map vao useEffect con nhung doan code ve input nhap lieu thi
   // khong duoc cho vao useEffect
-  whenLoaded.then(() => {
-    Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
-      callback: onLoad
+  useEffect(() => {
+    whenLoaded.then(() => {
+      Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
+        callback: onLoad
+      });
     });
-  });
 
-  function onLoad() {
-    var options = { maxResults: 5, businessSuggestions: true };
-    var manager = new Microsoft.Maps.AutosuggestManager(options);
-    manager.attachAutosuggest('#searchBox', '#searchBoxContainer', selectedSuggestion);
-  }
+    function onLoad() {
+      var options = { maxResults: 5, businessSuggestions: true };
+      var manager = new Microsoft.Maps.AutosuggestManager(options);
+      manager.attachAutosuggest('#searchBox', '#searchBoxContainer', selectedSuggestion);
+    }
+  }, [])
 
   function selectedSuggestion(suggestionResult: any) {
+
     setIsShowHeader(true);
+    console.log('isSHowheader', isShowHeader);
     setAddress({
       ...address,
       address: { ...address.address, ...suggestionResult?.address, ...suggestionResult?.location }

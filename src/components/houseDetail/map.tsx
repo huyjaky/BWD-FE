@@ -15,25 +15,26 @@ const MapBox = ({ longitude, latitude, keyMapBing }: MapBoxProps) => {
     latitude: latitude,
     keyMapBing: keyMapBing
   });
-  whenLoaded.then(() => {
-    const map_ = document.getElementById('Map');
-    if (map_) {
-      var map = new Microsoft.Maps.Map(map_, {
-        /* No need to set credentials if already passed in URL */
-        center: new Microsoft.Maps.Location(latitude, longitude),
-        mapTypeId: Microsoft.Maps.MapTypeId.road,
-        zoom: 18,
-        credentials: keyMapBing,
-        disableScrollWheelZoom: true
-      });
-      var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), undefined);
-      var layer = new Microsoft.Maps.Layer();
-      layer.add(pushpin);
-      map.layers.insert(layer);
-    }
-  });
+  useEffect(() => {
+    whenLoaded.then(() => {
+      const map_ = document.getElementById('Map');
+      if (map_) {
+        var map = new Microsoft.Maps.Map(map_, {
+          /* No need to set credentials if already passed in URL */
+          center: new Microsoft.Maps.Location(latitude, longitude),
+          mapTypeId: Microsoft.Maps.MapTypeId.road,
+          zoom: 18,
+          credentials: keyMapBing,
+          disableScrollWheelZoom: true
+        });
+        var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), undefined);
+        var layer = new Microsoft.Maps.Layer();
+        layer.add(pushpin);
+        map.layers.insert(layer);
+      }
+    });
 
-  useEffect(() => {}, [latitude, longitude]);
+  }, [latitude, longitude])
 
   return (
     <div className="w-full h-fit mt-10 border-t-2 border-slate-800 mb-10">

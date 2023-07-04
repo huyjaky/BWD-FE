@@ -18,6 +18,7 @@ import HouseCard from './componentShowHouse/houseCard';
 import MapEach from './mapEach';
 import { variants } from './variantsShowHouse';
 import { staggerContainer } from '@/utils/motion';
+import EditForm from './componentShowHouse/editForm';
 
 interface ShowHouseProps {
   infShow: isFilter_['isFilter_'];
@@ -32,11 +33,13 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
   const { data: session, status } = useSession();
   const { user, setUser } = useContext(userAccContext);
   const { isFilter, setIsFilter } = useContext(getHouseContext);
-  const [hasMore, setHasMore] = useState(true);
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
   const maskUser = useRef<HTMLInputElement>(null);
   const maskMap = useRef<HTMLInputElement>(null);
-  const [isOpenMask, setIsOpenMask] = useState(false);
+  const editPanel = useRef<HTMLDivElement>(null);
+  const [isOpenMask, setIsOpenMask] = useState<boolean>(false);
+  const [hasMore, setHasMore] = useState<boolean>(true);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
   const [selectUser, setSelectUser] = useState<userAcc>();
 
   const [isHover, setIsHover] = useState<{
@@ -154,8 +157,32 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
     }
   };
 
+ const handleOnClickOutSideEditPanel = (event: any) => {
+    const isClickInSide = editPanel.current?.contains(event.target);
+    if (!isClickInSide) {
+      setIsEdit(false);
+      return;
+    } else {
+      return;
+    }
+  };
+
   return (
     <div>
+      {/* edit */}
+
+      <AnimatePresence initial={false}>
+        <motion.div
+          variants={variants}
+          animate={isEdit ? 'showMask' : 'hiddenMask'}
+          onClick={handleOnClickOutSideEditPanel}
+          className="fixed w-screen h-screen bg-mask z-50 top-0 left-0 flex" >
+          <div className='w-fit h-fit m-auto' ref={editPanel}>
+            <EditForm />
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
       <AnimatePresence initial={false}>
         <motion.div
           variants={variants}
@@ -208,12 +235,12 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
               infShow === 'authListHouse'
                 ? ''
                 : isFilter === 'houseForSale'
-                ? 'House for sale '
-                : isFilter === 'houseForRent'
-                ? 'House for rent'
-                : isFilter === 'favoriteHouse'
-                ? 'Whislist'
-                : ''
+                  ? 'House for sale '
+                  : isFilter === 'houseForRent'
+                    ? 'House for rent'
+                    : isFilter === 'favoriteHouse'
+                      ? 'Whislist'
+                      : ''
             }
             textStyles=" w-full h-fit"
           />
@@ -240,11 +267,13 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
                 key={index}
                 infShow={infShow}
                 item={item}
+                isEdit={isEdit}
                 setIsHover={setIsHover}
                 setIsOpenMask={setIsOpenMask}
                 setIsOpenMaskMap={setIsOpenMaskMap}
                 setSelectLocale={setSelectLocale}
                 setSelectUser={setSelectUser}
+                setIsEdit={setIsEdit}
               />
             );
           })}
