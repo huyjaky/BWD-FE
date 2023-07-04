@@ -24,7 +24,7 @@ export default function FooterRooms() {
             Help Center
           </p>
           <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
-            AirCover
+            OlympusCover
           </p>
           <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Supporting people with disabilities
@@ -64,7 +64,7 @@ export default function FooterRooms() {
             Olympus your home
           </p>
           <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
-            AirCover for Hosts
+            OlympusCover for Hosts
           </p>
           <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Explore hosting resources

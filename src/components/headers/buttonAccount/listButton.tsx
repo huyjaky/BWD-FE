@@ -35,7 +35,7 @@ const ListButton = () => {
                   redirect: false
                 });
                 resetDataUser();
-                setIsFilter(0);
+                setIsFilter('main');
               }}
             >
               Logout

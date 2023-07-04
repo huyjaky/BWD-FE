@@ -56,11 +56,11 @@ tablet:h-full tablet:w-[100px]
           className={`flex m-auto p-3 border-2 rounded-2xl cursor-pointer
           mobile:w-[50px] mobile:h-full mobile:p-0 mobile:border-0
           tablet:w-[50px] tablet:h-full tablet:p-0 tablet:border-0 relative
-          ${(isEmpty && isFilter === 0) || isFilter < 0 ? ' border-slate-800' : 'border-red-500'}
+          ${(isEmpty && isFilter !== 'main') || isFilter !== 'favoriteHouse' ? ' border-slate-800' : 'border-red-500'}
           `}
           ref={buttonFilter}
         >
-          {(isEmpty && isFilter === 0) || isFilter < 0 ? (
+          {(isEmpty && isFilter !== 'main') || isFilter !== 'favoriteHouse' ? (
             <></>
           ) : (
             <motion.div
@@ -74,7 +74,7 @@ tablet:h-full tablet:w-[100px]
             </motion.div>
           )}
           <div className="flex w-fit h-[30px] m-auto  mobile:h-full tablet:h-full">
-            <HiOutlineFilter className={`w-[30px] h-full m-auto ${(isEmpty && isFilter === 0) || isFilter < 0 ? '' : 'text-red-500'}` }/>
+            <HiOutlineFilter className={`w-[30px] h-full m-auto ${(isEmpty && isFilter !== 'main') || isFilter !== 'favoriteHouse' ? '' : 'text-red-500'}` }/>
             <div className="w-fit h-full flex items-center mobile:hidden tablet:hidden ">
               <span className="font-semibold">Filter</span>
             </div>

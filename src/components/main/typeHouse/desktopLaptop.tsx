@@ -44,8 +44,8 @@ const DesktopLaptop = () => {
   }, []);
 
   return (
-    <div className="fixed top-[calc(50vh-230px)] left-0 z-[15]">
-      <motion.div className='w-[70px] h-fit
+    <div className="fixed top-[calc(50vh-230px+40px)] left-0 z-[15]">
+      <motion.div className='w-[50px] h-fit
     rounded-r-2xl border-2 border-slate-500 border-l-0 bg-white z-10 overflow-hidden
     '>
 
@@ -78,7 +78,7 @@ const DesktopLaptop = () => {
               >
 
                 <motion.div className="w-full relative flex" >
-                  {item.path(`m-auto text-[58px] w-full stroke-1 hover:text-red-500 transition-all
+                  {item.path(`m-auto w-full  hover:text-red-500 transition-all
                   ${keyClickTypehouse===index ? 'bg-red-400 rounded-full text-white' : ''}
                   `)}
 

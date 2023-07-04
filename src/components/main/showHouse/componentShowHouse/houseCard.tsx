@@ -10,12 +10,13 @@ import { Dispatch, SetStateAction } from "react";
 import { house_ } from "@/models/house";
 import Heart from "../heart";
 import { userAcc } from "@/models/userAcc";
+import { isFilter_ } from "@/contexts/getHouse";
 
 interface HouseCardProps {
   index: number,
   item: house_,
   isHover: { ishover: boolean; id: number; },
-  infShow: 'noneAuthHouseApi' | 'noneAuthFilter' | 'authListHouse' | 'favoriteHouse' | 'houseForSaleAuth' | 'houseForSaleUnAuth' | 'houseForRentAuth' | 'houseForRentUnAuth' | 'trending',
+  infShow: isFilter_['isFilter_'];
   setIsHover: Dispatch<SetStateAction<{ ishover: boolean; id: number; }>>,
   setIsOpenMaskMap: Dispatch<SetStateAction<boolean>>,
   setSelectLocale: Dispatch<SetStateAction<{ longitude: number; latitude: number; zoom: number; } | undefined>>,
@@ -144,7 +145,10 @@ const HouseCard = ({ index, setIsHover, item, infShow, isHover,
             </div>
             <div className="w-full h-fit mt-1">{item.useracc.UserName}</div>
             <div className="w-full h-fit mt-1 ">
-              <span className="font-semibold">&#36;{item.Price}</span> night
+              <span className="font-semibold">&#36;{item.Price}</span>
+              {item.IsFavorite ?
+                <span className="font-semibold">{'/month'}</span>
+                : ''}
             </div>
           </div>
         </Link>

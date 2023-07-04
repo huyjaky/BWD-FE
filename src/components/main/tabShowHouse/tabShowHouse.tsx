@@ -99,12 +99,12 @@ const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
         </motion.div>
       </AnimatePresence>
 
-      <div className="h-fit">
+      <div className="h-fit mt-[70px] tablet:mt-[50px] mobile:mt-[50px]">
         <motion.div variants={variants} exit='exitFavor' >
           <SlideShowHouse setIsOpenMask={setIsOpenMask} setIsOpenMaskMap={setIsOpenMaskMap}
             setSelectLocale={setSelectLocale} setSelectUser={setSelectUser}
             isHover={isHover} setIsHover={setIsHover}
-            infShow={status === 'authenticated' ? 'houseForSaleAuth' : 'houseForSaleUnAuth'} title="House for sale" keyMapBing={keyMapBing}
+            infShow={'houseForSale'} title="House for sale" keyMapBing={keyMapBing}
           />
         </motion.div>
 
@@ -112,7 +112,7 @@ const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
           <SlideShowHouse setIsOpenMask={setIsOpenMask} setIsOpenMaskMap={setIsOpenMaskMap}
             setSelectLocale={setSelectLocale} setSelectUser={setSelectUser}
             isHover={isHover} setIsHover={setIsHover}
-            infShow={status === 'authenticated' ? 'houseForRentAuth' : 'houseForRentUnAuth'} title="House for rent" keyMapBing={keyMapBing}
+            infShow={'houseForRent'} title="House for rent" keyMapBing={keyMapBing}
           />
         </motion.div>
 

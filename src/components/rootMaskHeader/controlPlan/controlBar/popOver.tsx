@@ -1,7 +1,6 @@
 import { selectPopoverContext } from '@/contexts';
 import { useContext, useEffect } from 'react';
 import CheckIn_Out from './popOverDetail/checkIn_Out';
-import Where from './popOverDetail/where';
 import Who from './popOverDetail/who';
 
 const Popover = () => {
@@ -16,7 +15,6 @@ const Popover = () => {
       onClick={(event) => event.stopPropagation()}
     >
       <div className="w-full h-full flex">
-        {selected === 'where' && <Where />}
         {selected === 'who' && <Who styleWho={null} />}
         {selected === 'checkin' && (
           <CheckIn_Out

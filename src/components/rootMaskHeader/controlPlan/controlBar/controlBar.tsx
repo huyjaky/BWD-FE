@@ -46,7 +46,7 @@ const ControlBar = () => {
       return;
     } else {
       setIsShowHeader(false);
-      setIsFilter(isFilter * isFilter + 1);
+      setIsFilter('noneAuthFilter');
       return;
     }
   };

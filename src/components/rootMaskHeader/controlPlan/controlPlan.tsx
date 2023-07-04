@@ -86,6 +86,10 @@ const ControlPlan = () => {
   // animate by hand again :")))"
   const handleOnScaleDown = (event: any) => {
     setIsShowHeader(true);
+    const inputElement = document.getElementById('searchBox');
+    if (inputElement) {
+      inputElement.focus()
+    };
   };
 
   const isClickOutSide = (event: any) => {
@@ -107,7 +111,7 @@ const ControlPlan = () => {
 
   return (
     <>
-      <div className="w-[400px] box-border p-4 ">
+      <div className="w-[550px] box-border p-4 ">
         <div className="w-full h-full">
           {/* link */}
           <div className="w-full flex overflow-hidden mb-1 " id="link">
@@ -152,25 +156,25 @@ const ControlPlan = () => {
                 onSelected('where');
               }}
             >
-              Anywhere
+              Search Location
             </button>
             <button
               className="flex-1 border-x-2 border-slate-400 h-full"
               id="header-control_bar-list-index-2"
               onClick={(event) => onSelected('checkin')}
             >
-              Any week
+              Schedule
             </button>
             <button
               className="flex-1 h-full"
               id="header-control_bar-list-index-4"
               onClick={(event) => onSelected('who')}
             >
-              Add guests
+              Guests
             </button>
-            <button className="rounded-full w-[30px] h-[30px] bg-red-500 flex">
+            {/* <button className="rounded-full w-[30px] h-[30px] bg-red-500 flex">
               <BiSearch className="w-[20px] h-[20px] m-auto text-white" />
-            </button>
+            </button> */}
           </motion.div>
         </div>
       </div>

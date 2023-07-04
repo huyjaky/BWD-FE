@@ -4,13 +4,21 @@ interface getHouseProps {
   children: ReactNode;
 }
 
-interface getHouseData {
-  isFilter: number;
-  setIsFilter: (payload: number) => void;
+export interface isFilter_ {
+  isFilter_: 'noneAuthFilter' | 'favoriteHouse' | 'noneAuthHouseApi' | 'main' | 'authListHouse' |
+  'houseForSale' | 'houseForRent'  | 'trending' | 'favoriteHouse'
+  ;
 }
 
+interface getHouseData {
+  isFilter: isFilter_['isFilter_'];
+  setIsFilter: (payload: isFilter_['isFilter_']) => void;
+}
+
+
+
 const getHouseDataDefault: getHouseData = {
-  isFilter: 0,
+  isFilter: 'main',
   setIsFilter: () => {}
 };
 
@@ -18,7 +26,7 @@ export const getHouseContext = createContext<getHouseData>(getHouseDataDefault);
 
 const GetHouseProvider = ({ children }: getHouseProps) => {
   const [isFilter, setIsFilter_] = useState(getHouseDataDefault.isFilter);
-  const setIsFilter = (payload: number) => setIsFilter_(payload);
+  const setIsFilter = (payload: isFilter_['isFilter_']) => setIsFilter_(payload);
 
   const getHouseDynamicData = { isFilter, setIsFilter };
   return (

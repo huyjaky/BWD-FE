@@ -98,7 +98,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
       setUser({ ...user, ...session?.userAcc });
       setIsLoginClick(false);
     }
-    setIsFilter(0);
+    setIsFilter('main');
     if (router.asPath === '/login') {
       router.push('/', undefined, { shallow: true });
     }

@@ -116,7 +116,7 @@ const HeaderMain = () => {
       <motion.div
         variants={variants}
         animate={isShowHeader ? 'show' : 'hidden'}
-        className="w-screen h-screen opacity-0 bg-mask absolute z-20"
+        className="w-screen h-screen opacity-0 bg-mask z-20 fixed top-0 left-0"
         id="mask"
         onClick={handleOnMask}
       ></motion.div>

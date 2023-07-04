@@ -4,7 +4,6 @@ import { IoLocationSharp } from 'react-icons/io5';
 import SearchBox from '@/components/searchBox/searchBox';
 import MapEach from '@/components/main/showHouse/mapEach';
 import { selectPlaceContext } from '@/contexts/selectPlace';
-import Where from '@/components/rootMaskHeader/controlPlan/controlBar/popOverDetail/where';
 
 interface MapProps {
   keyMapBing: string;

@@ -3,7 +3,7 @@ import HostUser from '@/components/houseDetail/host/hostUser';
 import SkeletonShowHouse from '@/components/skeletonLoading/skletonShowHouse';
 import { AmountTabHostingContext } from '@/contexts/amountTabHosting';
 import { filterContext } from '@/contexts/filter';
-import { getHouseContext } from '@/contexts/getHouse';
+import { getHouseContext, isFilter_ } from '@/contexts/getHouse';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 import { userAccContext } from '@/contexts/userAcc';
 import { house_ } from '@/models/house';
@@ -18,7 +18,7 @@ import MapEach from './mapEach';
 import { variants } from './variantsShowHouse';
 
 interface ShowHouseProps {
-  infShow: 'noneAuthHouseApi' | 'noneAuthFilter' | 'authListHouse' | 'favoriteHouse';
+  infShow: isFilter_['isFilter_'];
   keyMapBing: string;
 }
 
@@ -36,6 +36,7 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
   const maskMap = useRef<HTMLInputElement>(null);
   const [isOpenMask, setIsOpenMask] = useState(false);
   const [selectUser, setSelectUser] = useState<userAcc>();
+  
   const [isHover, setIsHover] = useState<{
     ishover: boolean;
     id: number;
@@ -46,6 +47,7 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
     zoom: number;
   }>();
   const [isOpenMaskMap, setIsOpenMaskMap] = useState(false);
+
 
   // thuc hien hanh dong khi kiem tra xem arr co ton tai hay khong
   const isEmpty = (arr: any) => {
@@ -115,7 +117,7 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
         const moreHouse = await houseApi[infShow](houseTemp.length / 10 + 1, user.UserId);
         isExist(moreHouse);
       } else if (infShow === 'noneAuthFilter') {
-        const moreHouse = await houseApi[infShow]( { filter: filterForm, selectPlace: address }, houseTemp.length / 10 + 1, user.UserId);
+        const moreHouse = await houseApi[infShow]({ filter: filterForm, selectPlace: address }, houseTemp.length / 10 + 1, user.UserId);
         isExist(moreHouse);
       }
 
@@ -206,9 +208,9 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
           {houseTemp.map((item: house_, index: number) => {
             return (
               <HouseCard index={index} isHover={isHover} key={index}
-              infShow={infShow} item={item} setIsHover={setIsHover}
-              setIsOpenMask={setIsOpenMask} setIsOpenMaskMap={setIsOpenMaskMap}
-              setSelectLocale={setSelectLocale} setSelectUser={setSelectUser}/>
+                infShow={infShow} item={item} setIsHover={setIsHover}
+                setIsOpenMask={setIsOpenMask} setIsOpenMaskMap={setIsOpenMaskMap}
+                setSelectLocale={setSelectLocale} setSelectUser={setSelectUser} />
             );
           })}
 

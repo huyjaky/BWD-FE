@@ -97,34 +97,19 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
         <div className="w-full h-fit px-[80px] box-border
         tablet:px-0 mobile:px-0
         ">
-          {isFilter < 0 ? (
-            <motion.div
-              animate={{ opacity: [0, 1] }}
-              transition={{ delay: 0.5 }}
-              className="text-[50px] mt-[20px] font-semibold"
-            >
-              Whistlist
+          {isFilter != 'main' ?
+            <motion.div variants={variants} animate="show">
+              <ShowHouse
+                infShow={isFilter}
+                keyMapBing={keyMapBing}
+              />
             </motion.div>
-          ) : (
-            <></>
-          )}
+            :
+            <motion.div variants={variants} animate="show">
+              <TabShowHouse keyMapBing={keyMapBing} />
+            </motion.div>
+          }
 
-          {/* <motion.div variants={variants} animate="show">
-            <ShowHouse
-              infShow={
-                isFilter != 0
-                  ? isFilter > 0
-                    ? 'noneAuthFilter'
-                    : 'favoriteHouse'
-                  : 'noneAuthHouseApi'
-              }
-              keyMapBing={keyMapBing}
-            />
-          </motion.div> */}
-
-          <motion.div variants={variants} animate="show">
-            <TabShowHouse keyMapBing={keyMapBing} />
-          </motion.div>
 
         </div>
 
