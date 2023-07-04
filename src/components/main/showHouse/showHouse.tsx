@@ -230,7 +230,6 @@ formattedAddress: string;
           variants={staggerContainer(null, null)}
           initial="hidden"
           whileInView="show"
-          exit="show"
           viewport={{ once: false, amount: 0.25 }}
           className={` mx-auto flex-col`}
         >

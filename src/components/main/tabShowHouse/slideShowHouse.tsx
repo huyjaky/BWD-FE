@@ -200,14 +200,17 @@ const SlideShowHouse = ({
             const temp = filterForm.typeHouse.filter((item: string) => item != 'HouseForSale');
             temp.push('HouseForRent');
             setFilterForm({ ...filterForm, typeHouse: temp });
-            setIsFilter('noneAuthFilter');
+            setIsFilter('houseForRent');
+
           } else if (infShow === 'houseForSale') {
             const temp = filterForm.typeHouse.filter((item: string) => item != 'HouseForRent');
             temp.push('HouseForSale');
             setFilterForm({ ...filterForm, typeHouse: temp });
-            setIsFilter('noneAuthFilter');
+            setIsFilter('houseForSale');
+
           } else if (infShow === 'favoriteHouse') {
             setIsFilter(infShow);
+
           }
         }}
       >
