@@ -146,7 +146,7 @@ const HouseCard = ({ index, setIsHover, item, infShow, isHover,
             <div className="w-full h-fit mt-1">{item.useracc.UserName}</div>
             <div className="w-full h-fit mt-1 ">
               <span className="font-semibold">&#36;{item.Price}</span>
-              {item.IsFavorite ?
+              {infShow === 'houseForRent' ?
                 <span className="font-semibold">{'/month'}</span>
                 : ''}
             </div>

@@ -36,7 +36,7 @@ const Navbar = () => {
     >
       <div className="absolute w-[50%] inset-0 gradient-01" />
       <div className={`${styles.innerWidth} mx-auto flex justify-between gap-8 relative`}>
-        <img src="/about/search.svg" alt="search" className="w-[24px] h-[24px] object-contain" />
+        <div className='w-[24px] h-[24px] object-contain'></div>
         <h2 className="font-extrabold text-[24px] leading-[30.24px] text-black">Olympus</h2>
         {/* <img src="/about/menu.svg" alt="menu" className="w-[24px] h-[24px] object-contain fill-black" /> */}
         <BsList

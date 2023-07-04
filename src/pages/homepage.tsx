@@ -100,7 +100,9 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
           {isFilter != 'main' ?
             <motion.div variants={variants} animate="show">
               <ShowHouse
-                infShow={isFilter}
+                infShow={isFilter === 'houseForRent' || isFilter ==='houseForSale' ? 'noneAuthFilter' :
+                isFilter
+              }
                 keyMapBing={keyMapBing}
               />
             </motion.div>

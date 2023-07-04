@@ -5,12 +5,15 @@ import { BsStack } from "react-icons/bs";
 import { HiOutlineFilter } from "react-icons/hi";
 import { imgArr } from "../imgArr";
 import Image from 'next/image'
+import { filterContext } from "@/contexts/filter";
+import { getHouseContext } from "@/contexts/getHouse";
 
 const DesktopLaptop = () => {
   const [isHoverTypehouse, setIsHoverTypehouse] = useState<boolean>(false);
   const [keyHover, setKeyHover] = useState<number>(-1);
   const [keyHoverControl, setKeyHoverControl] = useState<number>(-1);
-
+  const { filterForm, setFilterForm } = useContext(filterContext);
+  const {isFilter, setIsFilter} = useContext(getHouseContext)
   const [keyClickTypehouse, setKeyClickTypehouse] = useState<number>(-1);
 
   const { setIsClickOutSide } = useContext(filterFormAnimateContext);
@@ -73,13 +76,33 @@ const DesktopLaptop = () => {
             return (
               <motion.div key={index} onHoverStart={() => { setIsHoverTypehouse(true); setKeyHover(index) }}
                 onHoverEnd={() => { setIsHoverTypehouse(false); setKeyHover(-1) }}
-                onClick={(event) => {setKeyClickTypehouse(index)}}
-                className="p-1"
+                onClick={(event) => {
+                  setKeyClickTypehouse(index);
+                  if (item.title === 'House for rent') {
+
+                    const temp = filterForm.typeHouse.filter((item: string) => item != 'HouseForSale')
+                    temp.push('HouseForRent')
+                    setFilterForm({ ...filterForm, typeHouse: temp })
+                    setIsFilter('houseForRent');
+
+                  } else if (item.title === 'House for sale') {
+                    const temp = filterForm.typeHouse.filter((item: string) => item != 'HouseForRent')
+                    temp.push('HouseForSale')
+                    setFilterForm({ ...filterForm, typeHouse: temp })
+                    setIsFilter('houseForSale');
+
+                  } else if (item.title === 'Whislist') {
+
+                    setIsFilter('favoriteHouse');
+
+                  }
+                }}
+                className="p-1 h-[70px]"
               >
 
-                <motion.div className="w-full relative flex" >
+                <motion.div className=" relative flex" >
                   {item.path(`m-auto w-full  hover:text-red-500 transition-all
-                  ${keyClickTypehouse===index ? 'bg-red-400 rounded-full text-white' : ''}
+                  ${keyClickTypehouse === index ? 'bg-red-400 rounded-full text-white' : ''}
                   `)}
 
                 </motion.div>

@@ -12,10 +12,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useSession } from 'next-auth/react';
 import { useContext, useEffect, useRef, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import AnimateTitle from './animateTitle';
 import EndMessage from './componentShowHouse/endMessage';
 import HouseCard from './componentShowHouse/houseCard';
 import MapEach from './mapEach';
 import { variants } from './variantsShowHouse';
+import { staggerContainer } from '@/utils/motion';
 
 interface ShowHouseProps {
   infShow: isFilter_['isFilter_'];
@@ -29,14 +31,14 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
   const { setCurrentHosting } = useContext(AmountTabHostingContext);
   const { data: session, status } = useSession();
   const { user, setUser } = useContext(userAccContext);
-  const { isFilter } = useContext(getHouseContext);
+  const { isFilter, setIsFilter } = useContext(getHouseContext);
   const [hasMore, setHasMore] = useState(true);
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
   const maskUser = useRef<HTMLInputElement>(null);
   const maskMap = useRef<HTMLInputElement>(null);
   const [isOpenMask, setIsOpenMask] = useState(false);
   const [selectUser, setSelectUser] = useState<userAcc>();
-  
+
   const [isHover, setIsHover] = useState<{
     ishover: boolean;
     id: number;
@@ -192,6 +194,21 @@ const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
       </AnimatePresence>
 
       <motion.div className="w-full h-fit py-4 pb-28" id="scroll-inf">
+        <motion.div
+          variants={staggerContainer(null, null)}
+          initial="hidden"
+          whileInView="show"
+          exit="show"
+          viewport={{ once: false, amount: 0.25 }}
+          className={` mx-auto flex-col`}
+        >
+          <AnimateTitle title={
+            isFilter === 'houseForSale' ? 'House for sale ' :
+            isFilter === 'houseForRent' ? 'House for rent' :
+            isFilter === 'favoriteHouse' ? 'Whislist' : ''
+          } textStyles=" w-full h-fit" />
+        </motion.div>
+
         <InfiniteScroll
           dataLength={houseTemp.length}
           next={getMoreHouse}

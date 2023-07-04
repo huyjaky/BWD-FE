@@ -96,8 +96,7 @@ const SlideShowHouse = ({ title, infShow, keyMapBing, setSelectUser, setSelectLo
             grabCursor={true}
             centeredSlides={true}
             initialSlide={3}
-            allowTouchMove={false}
-
+            allowTouchMove={true}
             slidesPerView={'auto'}
             coverflowEffect={{
               rotate: 0,

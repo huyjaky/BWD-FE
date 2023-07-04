@@ -5,18 +5,18 @@ import { WiStars } from 'react-icons/wi';
 export const imgArr: { title: string; path: (type: string) => ReactElement<any, any> }[] = [
   {
     title: 'House for sale',
-    path: (type: string) => <BsFillHouseCheckFill className={type+'text-[35px]'}/>
+    path: (type: string) => <BsFillHouseCheckFill className={type + 'text-[35px]'} />
   },
   {
     title: 'House for rent',
-    path: (type: string) => <BiSolidBuildingHouse className={type+'text-[35px]'}/>
+    path: (type: string) => <BiSolidBuildingHouse className={type + 'text-[35px]'} />
   },
   {
     title: 'Trending',
-    path: (type: string) => <WiStars className={type+'text-[50px]'} />
+    path: (type: string) => <WiStars className={type + 'text-[50px]'} />
   },
-{
+  {
     title: 'Whislist',
-    path: (type: string) => <BsBookmarkHeartFill className={type+'text-[35px]'} />
+    path: (type: string) => <BsBookmarkHeartFill className={type + 'text-[35px]'} />
   }
 ];
