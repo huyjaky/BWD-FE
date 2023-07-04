@@ -1,13 +1,12 @@
-import { motion } from 'framer-motion';
-import { ReactElement, useEffect, useRef, useState } from 'react';
-import { GrNext, GrPrevious } from 'react-icons/gr';
-import { HiOutlineFilter } from 'react-icons/hi';
-import Filter from '../filter/filter';
+import { ReactElement, useContext } from 'react';
 import { imgArr } from '../imgArr';
+import { filterContext } from '@/contexts/filter';
+import { getHouseContext } from '@/contexts/getHouse';
 
 
 const TabletMobile = () => {
-
+  const { filterForm, setFilterForm } = useContext(filterContext);
+  const { isFilter, setIsFilter } = useContext(getHouseContext)
   return (
     <div className='w-full h-[100px] mobile:h-fit  flex'>
 
@@ -16,7 +15,28 @@ const TabletMobile = () => {
       '>
         {imgArr.map((item: { title: string; path: (type: string) => ReactElement<any, any> }, index: number) => {
           return (
-            <div key={index} className='w-full h-full flex flex-col '>
+            <div
+              onClick={(event) => {
+                if (item.title === 'House for rent') {
+
+                  const temp = filterForm.typeHouse.filter((item: string) => item != 'HouseForSale')
+                  temp.push('HouseForRent')
+                  setFilterForm({ ...filterForm, typeHouse: temp })
+                  setIsFilter('houseForRent');
+
+                } else if (item.title === 'House for sale') {
+                  const temp = filterForm.typeHouse.filter((item: string) => item != 'HouseForRent')
+                  temp.push('HouseForSale')
+                  setFilterForm({ ...filterForm, typeHouse: temp })
+                  setIsFilter('houseForSale');
+
+                } else if (item.title === 'Whislist') {
+
+                  setIsFilter('favoriteHouse');
+
+                }
+              }}
+              key={index} className='w-full h-full flex flex-col '>
               <span className='m-auto'>
                 {item.path(' text-[55px] ')}
               </span>

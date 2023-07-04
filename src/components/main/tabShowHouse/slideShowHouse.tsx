@@ -115,7 +115,7 @@ const SlideShowHouse = ({ title, infShow, keyMapBing, setSelectUser, setSelectLo
             desktop:h-[550px] laptop:h-[550px] mobile:h-[450px] tablet:h-[450px]
             " style={{ width: "calc(100vw-80px)" }} >
 
-            {houseTemp && houseTemp.length === 0 &&
+            {houseTemp.length === 0 &&
               arrEmpty.map((item: number, index: number) => {
                 return (
                   <SwiperSlide key={index} style={{ width: '400px', paddingTop: '20px' }}>
