@@ -26,21 +26,14 @@ const SearchBox = ({ styleBox }: SearchBoxProps) => {
     function onLoad() {
       var options = { maxResults: 5, businessSuggestions: true };
       var manager = new Microsoft.Maps.AutosuggestManager(options);
-      manager.attachAutosuggest('#searchBox', '#searchBoxContainer', selectedSuggestion);
+      manager.attachAutosuggest('#searchBox', '#searchBoxContainer', (suggestionResult: any) => {
+        setIsShowHeader(true);
+        setAddress({
+          ...address,
+          address: { ...address.address, ...suggestionResult?.address, ...suggestionResult?.location }
+        });
+      });
     }
-  }, [])
-
-  function selectedSuggestion(suggestionResult: any) {
-
-    setIsShowHeader(true);
-    console.log('isSHowheader', isShowHeader);
-    setAddress({
-      ...address,
-      address: { ...address.address, ...suggestionResult?.address, ...suggestionResult?.location }
-    });
-  }
-
-  useEffect(() => {
     const temp = document.getElementById('searchBox');
     temp?.addEventListener('change', (event: any) => {
       setAddress({

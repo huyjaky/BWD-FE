@@ -11,20 +11,30 @@ import Amenities from "../../filter/formFilter/filterFormComponent/amenities/ame
 import { variantsAmenities } from "../../filter/formFilter/formFilter";
 import { whenLoaded } from "bing-maps-loader";
 import MapEdit from "./inputForm/map";
+import { FilePond, FilePondProps, registerPlugin } from 'react-filepond';
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+import { FilePondErrorDescription, FilePondFile } from 'filepond';
+import 'filepond/dist/filepond.min.css';
+import axiosClient from "@/api-client/axiosClient";
 
 interface EditFormProps {
-  keyMapBing: string
+  keyMapBing: string;
+  api_url_path: string | undefined
 }
 
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
-
-const EditForm = ({ keyMapBing }: EditFormProps) => {
+const EditForm = ({ keyMapBing, api_url_path }: EditFormProps) => {
   const { selectHouse, setSelectHouse, } = useContext(selectHouseContext);
   const styleInput = 'box-border p-3';
   const compass: string[] = ['West', 'South', 'East', 'North']
   const [tempHouse, setTempHouse] = useState<house_ | undefined>(selectHouse)
+  const [imgArr, setImgArr] = useState<any>([]);
   const [show, setShow] = useState(false);
   const [reRender, setReRender] = useState<boolean>(false);
+  const filePondRef = useRef<FilePond>(null);
   const {
     register,
     handleSubmit,
@@ -44,6 +54,10 @@ const EditForm = ({ keyMapBing }: EditFormProps) => {
 
   const onSubmit: SubmitHandler<house_> = (data) => {
     console.log('item', selectHouse);
+    if (filePondRef.current) {
+      filePondRef.current.processFiles();
+    }
+
   }
 
   const handleOnChange = async (value: any) => {
@@ -52,35 +66,6 @@ const EditForm = ({ keyMapBing }: EditFormProps) => {
       setTempHouse({ ...temp, Price: value });
     }
   }
-
-
-  const editLocale = useRef<HTMLInputElement>(null);
-
-  // luu y la chi cho nhung doan code ve map vao useEffect con nhung doan code ve input nhap lieu thi
-  // khong duoc cho vao useEffect
-
-
-  useEffect(() => {
-    whenLoaded.then(() => {
-      const map_ = document.getElementById('MapEach1');
-      console.log(map_);
-      if (map_) {
-        console.log('map exist');
-        var map = new Microsoft.Maps.Map(map_, {
-          /* No need to set credentials if already passed in URL */
-          center: new Microsoft.Maps.Location(selectHouse?.address.latitude,
-            selectHouse?.address.longitude),
-          mapTypeId: Microsoft.Maps.MapTypeId.road,
-          zoom: 18,
-          credentials: keyMapBing
-        });
-        var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), undefined);
-        var layer = new Microsoft.Maps.Layer();
-        layer.add(pushpin);
-        map.layers.insert(layer);
-      }
-    })
-  }, [reRender])
 
   return (
     <>
@@ -126,15 +111,16 @@ const EditForm = ({ keyMapBing }: EditFormProps) => {
               {/* form  */}
               <div className="w-full h-fit grid text-[25px] desktop:grid-areas-layoutEditDesktopLaptop
               laptop:grid-areas-layoutEditDesktopLaptop
-
+              grid-cols-3
               tablet:grid-areas-layoutEditTabletMobile
               mobile:grid-areas-layoutEditTabletMobile
               ">
 
                 <div className={`grid-in-locale ${styleInput}`}>
                   <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Address">
-
-                    <MapEdit keyMapBing={keyMapBing} tempHouse={tempHouse} setTempHouse={setTempHouse} />
+                    <MapEdit
+                      value={tempHouse?.address.formattedAddress || ''}
+                      keyMapBing={keyMapBing} tempHouse={tempHouse} setTempHouse={setTempHouse} />
                   </InputFormEdit>
                 </div>
 
@@ -160,9 +146,15 @@ const EditForm = ({ keyMapBing }: EditFormProps) => {
                 <div className={`grid-in-orientation ${styleInput}`}>
                   <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Orientation">
                     {/* <input type="text" className="w-full h-[50px] outline-none text-[25px]" /> */}
-                    <select {...register('Orientation')} className="select w-full outline-none text-[25px]">
-                      <option disabled selected>West</option>
+                    <select {...register('Orientation')} className="select px-0 w-full outline-none text-[25px]">
                       {compass.map((item: string, index: number) => {
+                        if (index == 0) {
+                          return (
+                            <option key={index} selected>
+                              {item}
+                            </option>
+                          )
+                        }
                         return (
                           <option key={index}>
                             {item}
@@ -253,17 +245,6 @@ const EditForm = ({ keyMapBing }: EditFormProps) => {
                           >
                             <span className="text-[20px]">{show ? 'Show less' : 'Show more'}</span>
                           </motion.button>
-                          {/* <span className="">
-                            {!show &&
-                              (filterForm.amenities.features.length != 0 ||
-                                filterForm.amenities.location.length != 0 ||
-                                filterForm.amenities.safety.length != 0)
-                              ? ` you have filled in ${filterForm.amenities.features.length +
-                              filterForm.amenities.location.length +
-                              filterForm.amenities.safety.length
-                              } options`
-                              : ''}
-                          </span> */}
                         </div>
                       </div>
                     </div>
@@ -272,20 +253,79 @@ const EditForm = ({ keyMapBing }: EditFormProps) => {
 
                 {/* chua lam phan nay */}
                 <div className={`grid-in-img ${styleInput}`}>
-                  <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="locale">
+                  <InputFormEdit styleDivAround=" before:hidden" styleFieldset="" styleLegend="" title="Images">
                     {/* <input type="text" className="w-full h-[50px] outline-none text-[25px]" /> */}
+
+                    {api_url_path !== undefined &&
+                      <div className="mb-4">
+                        <FilePond
+                          ref={filePondRef}
+                          files={imgArr}
+                          allowMultiple={true}
+                          instantUpload={false}
+                          onaddfile={(error: FilePondErrorDescription | null, file: FilePondFile) => {
+                            if (error) return;
+                            let temp = imgArr;
+                            temp.push(file);
+                            setImgArr(temp);
+                          }}
+                          beforeAddFile={async (file: FilePondFile) => {
+                            if (imgArr.length > 0) {
+                              const isExist = await imgArr.some(
+                                (items: any) => items.filename === file.filename
+                              );
+                              console.log(isExist);
+                              return !isExist;
+                            }
+                            return true;
+                          }}
+                          onprocessfilerevert={async (file: FilePondFile) => {
+                            try {
+                              const temp = await axiosClient.post(`/delete/img`, {
+                                nameImg: file.filename
+                              });
+                              if (temp.status == 200) {
+                                console.log(temp.data);
+                              }
+                            } catch (error) {
+                              console.log(error);
+                              return;
+                            }
+                          }}
+                          maxFiles={30}
+                          maxParallelUploads={30}
+                          // server={`${api_url_path}/api/post/img`}
+                          server={{
+                            url: api_url_path + '/api',
+                            process: {
+                              url: '/post/img',
+                              method: 'POST',
+                              timeout: 120000
+                            }
+                          }}
+                          name="files" /* sets the file input name, it's filepond by default */
+                          labelIdle='Drag and drop files <span class="filepond--label-action">Browse</span>'
+                          acceptedFileTypes={[
+                            'image/jpeg',
+                            'image/jpg',
+                            'image/png',
+                            'image/gif',
+                            'image/bmp',
+                            'image/svg+xml',
+                            'image/webp',
+                            'image/tiff',
+                            'image/x-icon',
+                            'application/pdf'
+                          ]}
+                        />
+                      </div>
+                    }
                   </InputFormEdit>
                 </div>
 
 
               </div>
-              {/* <fieldset className="border-2 h-fit rounded-xl pb-2 px-4">
-                <legend className="font-semibold text-[22px] ml-5">Locale</legend>
-                <div className="w-full h-fit relative before:bottom-0 before:h-[2px] before:absolute
-                    before:bg-slate-500 before:w-full before:transition-all before:duration-200">
-                  <input type="text" name="" id="" className="w-full h-[50px] outline-none text-[25px]" />
-                </div>
-              </fieldset> */}
+
 
 
             </div>

@@ -5,11 +5,12 @@ import { Dispatch, SetStateAction, useEffect } from "react";
 interface MapEditProps {
   tempHouse: house_ | undefined;
   setTempHouse: Dispatch<SetStateAction<house_ | undefined>>;
-  keyMapBing: string
+  keyMapBing: string;
+  value: string
 }
 
 
-const MapEdit = ({ setTempHouse, tempHouse, keyMapBing }: MapEditProps) => {
+const MapEdit = ({ setTempHouse, tempHouse, keyMapBing, value }: MapEditProps) => {
 
   useEffect(() => {
     whenLoaded.then(() => {
@@ -45,7 +46,7 @@ const MapEdit = ({ setTempHouse, tempHouse, keyMapBing }: MapEditProps) => {
         });
       }
     });
-  }, [tempHouse]);
+  }, [tempHouse?.address.formattedAddress]);
 
   return (
     <>
@@ -55,6 +56,7 @@ const MapEdit = ({ setTempHouse, tempHouse, keyMapBing }: MapEditProps) => {
 
       <div id="searchBoxContainer2">
         <input
+          placeholder={value}
           id="searchBox2" type="text" className="w-full h-[50px] outline-none text-[25px]" />
       </div>
     </>
@@ -62,3 +64,4 @@ const MapEdit = ({ setTempHouse, tempHouse, keyMapBing }: MapEditProps) => {
 }
 
 export default MapEdit;
+

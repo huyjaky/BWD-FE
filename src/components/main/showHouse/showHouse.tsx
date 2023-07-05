@@ -23,9 +23,10 @@ import EditForm from './componentShowHouse/editForm';
 interface ShowHouseProps {
   infShow: isFilter_['isFilter_'];
   keyMapBing: string;
+api_url_path: string | undefined;
 }
 
-const ShowHouse = ({ infShow, keyMapBing }: ShowHouseProps) => {
+const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
   const { filterForm } = useContext(filterContext);
   const { address } = useContext(selectPlaceContext);
@@ -179,7 +180,7 @@ formattedAddress: string;
           onClick={handleOnClickOutSideEditPanel}
           className="fixed w-screen h-screen bg-mask z-50 top-0 left-0 flex" >
           <div className='w-fit h-fit m-auto' ref={editPanel}>
-            <EditForm keyMapBing={keyMapBing  } />
+            <EditForm keyMapBing={keyMapBing}  api_url_path={api_url_path}/>
           </div>
         </motion.div>
       </AnimatePresence>

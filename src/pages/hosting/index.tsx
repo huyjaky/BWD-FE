@@ -11,6 +11,7 @@ import { Montserrat } from 'next/font/google';
 
 interface indexProps {
   keyMapBing: string;
+  api_url_path: string
 }
 
 const monsterrat = Montserrat({
@@ -19,13 +20,13 @@ const monsterrat = Montserrat({
   variable: '--font-monsterrat'
 });
 
-const Index: NextPageWithLayout<indexProps> = ({ keyMapBing }: indexProps): JSX.Element => {
+const Index: NextPageWithLayout<indexProps> = ({ keyMapBing, api_url_path }: indexProps): JSX.Element => {
   initializeSSR();
   return (
     <>
       <div className={`${monsterrat.className}`}>
         <Header />
-        <Main keyMapBing={keyMapBing} />
+        <Main keyMapBing={keyMapBing} api_url_path={api_url_path}/>
         <FooterRooms />
       </div>
       x
@@ -40,6 +41,7 @@ export default Index;
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getServerSession(req, res, authOptions);
   const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
+  const api_url_path = process.env.API_URL_PATH;
   initializeSSR();
   if (!session?.userAcc) {
     res.setHeader('location', '/login');
@@ -50,7 +52,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 
   return {
     props: {
-      keyMapBing: keyMapBing
+      keyMapBing: keyMapBing,
+api_url_path: api_url_path
     }
   };
 };

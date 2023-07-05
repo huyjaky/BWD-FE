@@ -9,9 +9,10 @@ import ShowHouse from '@/components/main/showHouse/showHouse';
 import { AmountTabHostingContext } from '@/contexts/amountTabHosting';
 interface mainProps {
   keyMapBing: string;
+api_url_path: string
 }
 
-function Main({ keyMapBing }: mainProps): JSX.Element {
+function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
   const [selected, setSelected] = useState('Currently hosting');
   const { currentHosting } = useContext(AmountTabHostingContext);
   const [refButton, inViewButton] = useInView({
@@ -111,7 +112,7 @@ function Main({ keyMapBing }: mainProps): JSX.Element {
                 <motion.div
                   className={`w-full h-fit ${selected === 'Currently hosting' ? '' : 'hidden'}`}
                 >
-                  <ShowHouse infShow="authListHouse" keyMapBing={keyMapBing} />
+                  <ShowHouse infShow="authListHouse" keyMapBing={keyMapBing} api_url_path={api_url_path}/>
                 </motion.div>
 
                 <div
