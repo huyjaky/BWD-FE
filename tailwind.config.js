@@ -21,17 +21,24 @@ module.exports = {
 
       gridTemplateAreas: {
         layoutPicture: ['h1 h1 h2 h3', 'h1 h1 h4 h5'],
-        layoutShowAllPt: [
-          'h1 h1',
-          'h1 h1',
-          'h2 h3',
-          'h4 h4',
-          'h4 h4',
-          'h5 h6',
-          'h7 h9',
-          'h8 h9',
-          'h10 h11',
-          'h10 h12'
+        layoutEditDesktopLaptop: [
+          'locale locale capacity',
+          'baths beds orientation',
+          'price price price',
+          'title title title',
+          'des des des',
+          'placeoffer placeoffer placeoffer',
+          'img img img'
+        ],
+        layoutEditTabletMobile: [
+          'locale locale',
+          'capacity orientation',
+          'baths beds',
+          'price price',
+          'title title',
+          'des des',
+          'placeoffer placeoffer',
+          'img img'
         ]
       },
       gridTemplateColumns: {

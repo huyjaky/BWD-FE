@@ -17,21 +17,21 @@ export interface house {
 
 export interface house_ {
   HouseId: string;
-  Title: string;
+  Title: string; //
   Des: string;
   DateUp: Date;
   PostBy: string;
-  Price: number;
+  Price: number; //
   Area: string;
-  NumsOfBed: number;
-  NumsOfBath: number;
+  NumsOfBed: number; //
+  NumsOfBath: number; //
   AddressId: string;
   JudicalId: string;
-  address: address;
+  address: address; //
   useracc: userAcc;
   IsFavorite: boolean; // yeu thich nha
-  arrImg: { Path: string }[]; // Mang anh
-  Orientation: string; // Huong nha
-  Capacity: number;
-  placeOffer: { PlaceOfferId: string; PlaceOffer: string; PathIcon: string }[];
+  arrImg: { Path: string }[]; // Mang anh //
+  Orientation: string; // Huong nha //
+  Capacity: number; //
+  placeOffer: { PlaceOfferId: string; PlaceOffer: string; PathIcon: string }[]; //
 }

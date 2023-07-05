@@ -68,7 +68,7 @@ export const selectHouseContext = createContext<selectHouseData>(selectHouseDefa
 const SelectHouseProvider = ({children}: selectHouseProps) =>{
   const [selectHouse, setSelectHouse_] = useState<house_>();
   const resetSelectHouse = () => setSelectHouse_(selectHouseDefaultData.selectHouse);
-  const setSelectHouse = (payload: house_) => setSelectHouse_(payload);
+  const setSelectHouse = (payload: house_ ) => setSelectHouse_(payload);
 
   const selectHouseDynamicData = {selectHouse, resetSelectHouse, setSelectHouse};
 

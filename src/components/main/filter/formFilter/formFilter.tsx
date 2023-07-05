@@ -13,7 +13,7 @@ import HostLanguage from './filterFormComponent/hostLanguage';
 import PriceRange from './filterFormComponent/priceRange';
 import PropertyHouse from './filterFormComponent/property';
 
-const variantsAmenities: Variants = {
+export const variantsAmenities: Variants = {
   showMore: {
     height: 100
   },

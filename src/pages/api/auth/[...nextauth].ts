@@ -87,7 +87,7 @@ export const authOptions: NextAuthOptions = {
       if (temp) {
         token.userAcc = await temp.userAcc;
         token.token = await temp.token;
-        console.log('FIRST TIME LOGIN EXTENDED TOKEN', token);
+        console.log('FIRST TIME LOGIN EXTENDED TOKEN', token.token);
         return token;
       }
       console.log(token);

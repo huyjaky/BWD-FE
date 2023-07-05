@@ -45,9 +45,10 @@ const HouseCard = ({
   setIsEdit
 }: HouseCardProps) => {
   const { selectHouse, setSelectHouse } = useContext(selectHouseContext);
-  const selectHouseHandle = async (item: house_) => {
-    await setSelectHouse({ ...selectHouse, ...item });
-    console.log(selectHouse);
+
+  const selectHouseHandle = (item: house_) => {
+    setSelectHouse({ ...selectHouse, ...item });
+    console.log(item);
   }
 
   return (
@@ -149,7 +150,7 @@ const HouseCard = ({
               )}
             </div>
 
-            <EditRemoveIcon isEdit={isEdit} setIsEdit={setIsEdit} />
+            <EditRemoveIcon isEdit={isEdit} setIsEdit={setIsEdit} item={item}/>
           </motion.button>
 
 
@@ -172,7 +173,7 @@ const HouseCard = ({
                 <HiUserCircle className="w-full h-full" />
               )}
             </div>
-            <EditRemoveIcon isEdit={isEdit} setIsEdit={setIsEdit} />
+            <EditRemoveIcon isEdit={isEdit} setIsEdit={setIsEdit} item={item}/>
           </motion.button>
 
 
