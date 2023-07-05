@@ -23,7 +23,9 @@ module.exports = {
         layoutPicture: ['h1 h1 h2 h3', 'h1 h1 h4 h5'],
         layoutEditDesktopLaptop: [
           'locale locale capacity',
-          'baths beds orientation',
+          'locale locale orientation',
+          'locale locale baths',
+          'locale locale beds',
           'price price price',
           'title title title',
           'des des des',

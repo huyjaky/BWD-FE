@@ -1,7 +1,7 @@
 import { selectHouseContext } from "@/contexts/selectHouse";
 import { house_ } from "@/models/house";
 import { motion } from "framer-motion";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import MapEach from "../mapEach";
 import InputFormEdit from "./inputForm/inputFormEdit";
@@ -9,6 +9,8 @@ import Slider from "rc-slider";
 import { number } from "yup";
 import Amenities from "../../filter/formFilter/filterFormComponent/amenities/amenities";
 import { variantsAmenities } from "../../filter/formFilter/formFilter";
+import { whenLoaded } from "bing-maps-loader";
+import MapEdit from "./inputForm/map";
 
 interface EditFormProps {
   keyMapBing: string
@@ -22,6 +24,7 @@ const EditForm = ({ keyMapBing }: EditFormProps) => {
   const compass: string[] = ['West', 'South', 'East', 'North']
   const [tempHouse, setTempHouse] = useState<house_ | undefined>(selectHouse)
   const [show, setShow] = useState(false);
+  const [reRender, setReRender] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
@@ -49,6 +52,35 @@ const EditForm = ({ keyMapBing }: EditFormProps) => {
       setTempHouse({ ...temp, Price: value });
     }
   }
+
+
+  const editLocale = useRef<HTMLInputElement>(null);
+
+  // luu y la chi cho nhung doan code ve map vao useEffect con nhung doan code ve input nhap lieu thi
+  // khong duoc cho vao useEffect
+
+
+  useEffect(() => {
+    whenLoaded.then(() => {
+      const map_ = document.getElementById('MapEach1');
+      console.log(map_);
+      if (map_) {
+        console.log('map exist');
+        var map = new Microsoft.Maps.Map(map_, {
+          /* No need to set credentials if already passed in URL */
+          center: new Microsoft.Maps.Location(selectHouse?.address.latitude,
+            selectHouse?.address.longitude),
+          mapTypeId: Microsoft.Maps.MapTypeId.road,
+          zoom: 18,
+          credentials: keyMapBing
+        });
+        var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), undefined);
+        var layer = new Microsoft.Maps.Layer();
+        layer.add(pushpin);
+        map.layers.insert(layer);
+      }
+    })
+  }, [reRender])
 
   return (
     <>
@@ -90,15 +122,6 @@ const EditForm = ({ keyMapBing }: EditFormProps) => {
               overflow-scroll overflow-x-hidden box-border p-7
               mobile:p-0
               ">
-              <div className="w-full h-fit">
-                <MapEach formattedAddress="" keyMapBing={keyMapBing}
-                  latitude={selectHouse?.address.latitude || 0}
-                  longitude={selectHouse?.address.longitude || 0}
-                  zoom={18}
-                  idMap="1"
-                  style="h-[300px]"
-                />
-              </div>
 
               {/* form  */}
               <div className="w-full h-fit grid text-[25px] desktop:grid-areas-layoutEditDesktopLaptop
@@ -107,9 +130,11 @@ const EditForm = ({ keyMapBing }: EditFormProps) => {
               tablet:grid-areas-layoutEditTabletMobile
               mobile:grid-areas-layoutEditTabletMobile
               ">
+
                 <div className={`grid-in-locale ${styleInput}`}>
                   <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Address">
-                    <input {...register('address.formattedAddress')} type="text" className="w-full h-[50px] outline-none text-[25px]" />
+
+                    <MapEdit keyMapBing={keyMapBing} tempHouse={tempHouse} setTempHouse={setTempHouse} />
                   </InputFormEdit>
                 </div>
 
