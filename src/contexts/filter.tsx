@@ -20,12 +20,7 @@ const filterDataDefault: filterData = {
     beds: 0,
     bathRooms: 0,
     typeHouse: [],
-    amenities: {
-      essentials: [],
-      features: [],
-      location: [],
-      safety: []
-    },
+    amenities: [],
     hostLanguage: ''
   },
   emptyFilterForm: {
@@ -34,12 +29,7 @@ const filterDataDefault: filterData = {
     beds: 0,
     bathRooms: 0,
     typeHouse: [],
-    amenities: {
-      essentials: [],
-      features: [],
-      location: [],
-      safety: []
-    },
+    amenities: [],
     hostLanguage: ''
   },
   setFilterForm: (payload: filterForm) => {},

@@ -28,12 +28,7 @@ const Filter = ({ isInvisible }: FilterProps) => {
       beds: 0,
       bathRooms: 0,
       typeHouse: [],
-      amenities: {
-        essentials: [],
-        features: [],
-        location: [],
-        safety: []
-      },
+      amenities: [],
       hostLanguage: ''
     });
     const filterFormJson = JSON.stringify(filterForm);

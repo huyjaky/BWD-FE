@@ -7,6 +7,8 @@ import { imgArr } from '../imgArr';
 import Image from 'next/image';
 import { filterContext } from '@/contexts/filter';
 import { getHouseContext } from '@/contexts/getHouse';
+import { useSession } from 'next-auth/react';
+import { selectPopoverContext } from '@/contexts';
 
 const DesktopLaptop = () => {
   const [isHoverTypehouse, setIsHoverTypehouse] = useState<boolean>(false);
@@ -15,7 +17,8 @@ const DesktopLaptop = () => {
   const { filterForm, setFilterForm } = useContext(filterContext);
   const { isFilter, setIsFilter } = useContext(getHouseContext);
   const [keyClickTypehouse, setKeyClickTypehouse] = useState<number>(-1);
-
+  const { data: session, status } = useSession();
+  const { setIsLoginClick } = useContext(selectPopoverContext);
   const { setIsClickOutSide } = useContext(filterFormAnimateContext);
 
   const mainDivRef = useRef<HTMLDivElement>(null);
@@ -23,7 +26,6 @@ const DesktopLaptop = () => {
 
   const classIcon = 'w-full h-[70px] p-3';
   const controlBtn: { title: string; icon: ReactElement<any, any> }[] = [
-    { title: 'Menu', icon: <BsStack className={classIcon} /> },
     { title: 'Filter', icon: <HiOutlineFilter className={classIcon} /> }
   ];
 
@@ -113,6 +115,10 @@ const DesktopLaptop = () => {
                       setFilterForm({ ...filterForm, typeHouse: temp });
                       setIsFilter('houseForSale');
                     } else if (item.title === 'Whislist') {
+                      if (status === 'unauthenticated') {
+                        setIsLoginClick(true)
+                        return;
+                      };
                       setIsFilter('favoriteHouse');
                     }
                   }}

@@ -8,6 +8,7 @@ import { GetServerSideProps } from 'next';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]';
 import { Montserrat } from 'next/font/google';
+import FooterMainRes from '@/components/footers/footerMainRes';
 
 interface indexProps {
   keyMapBing: string;
@@ -28,8 +29,8 @@ const Index: NextPageWithLayout<indexProps> = ({ keyMapBing, api_url_path }: ind
         <Header />
         <Main keyMapBing={keyMapBing} api_url_path={api_url_path}/>
         <FooterRooms />
+        <FooterMainRes />
       </div>
-      x
     </>
   );
 };

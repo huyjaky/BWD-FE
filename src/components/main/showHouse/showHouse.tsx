@@ -19,6 +19,7 @@ import MapEach from './mapEach';
 import { variants } from './variantsShowHouse';
 import { staggerContainer } from '@/utils/motion';
 import EditForm from './componentShowHouse/editForm';
+import { GrClose } from 'react-icons/gr';
 
 interface ShowHouseProps {
   infShow: isFilter_['isFilter_'];
@@ -33,7 +34,7 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
   const { setCurrentHosting } = useContext(AmountTabHostingContext);
   const { data: session, status } = useSession();
   const { user, setUser } = useContext(userAccContext);
-  const { isFilter, setIsFilter } = useContext(getHouseContext);
+  const { isFilter, setIsFilter, reRenderFilter } = useContext(getHouseContext);
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
   const maskUser = useRef<HTMLInputElement>(null);
   const maskMap = useRef<HTMLInputElement>(null);
@@ -96,7 +97,7 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
   useEffect(() => {
     setHouseTemp([]);
     setHasMore(true);
-  }, [infShow, isFilter, status]);
+  }, [infShow, isFilter, status, reRenderFilter]);
 
   useEffect(() => {
     fetchHouseApi();
@@ -180,7 +181,7 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
           onClick={handleOnClickOutSideEditPanel}
           className="fixed w-screen h-screen bg-mask z-50 top-0 left-0 flex" >
           <div className='w-fit h-fit m-auto' ref={editPanel}>
-            <EditForm keyMapBing={keyMapBing} api_url_path={api_url_path} />
+            <EditForm keyMapBing={keyMapBing} api_url_path={api_url_path} setIsEdit={setIsEdit} />
           </div>
         </motion.div>
       </AnimatePresence>
@@ -212,14 +213,31 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
           onClick={handleOnClickOutSideMaskMap}
           className="fixed w-screen h-screen bg-mask z-50 top-0 left-0 flex "
         >
-          <div ref={maskMap} className="w-[50%] h-fit bg-[#f0efe9] p-7 m-auto rounded-2xl">
+          <div ref={maskMap} className="w-[50%] h-fit bg-[#f0efe9] p-7 m-auto rounded-2xl
+      mobile:w-full mobile:h-full
+      tablet:w-full tablet:h-full
+      relative
+          ">
+            <motion.button
+              className="absolute w-[70px] h-[70px] flex desktop:hidden laptop:hidden z-20
+              top-0 left-0
+              "
+              onClick={(event) => {
+                  setIsOpenMaskMap(false)
+              }}
+            >
+              <div className="w-fit h-full m-auto">
+                <GrClose className="text-[30px]" />
+              </div>
+            </motion.button>
+
             <MapEach
               longitude={selectLocale?.longitude ? selectLocale.longitude : 1}
               latitude={selectLocale?.latitude ? selectLocale?.latitude : 1}
               zoom={selectLocale?.zoom ? selectLocale.zoom : 15}
               formattedAddress={selectLocale?.formattedAddress ? selectLocale.formattedAddress : ''}
               keyMapBing={keyMapBing}
-              style='h-[500px]'
+              style='h-[500px] mobile:h-[calc(100%-50px)] tablet:h-[calc(100%-50px)]'
               idMap='4'
             />
           </div>
@@ -234,20 +252,20 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
           viewport={{ once: false, amount: 0.25 }}
           className={` mx-auto flex-col`}
         > */}
-          <AnimateTitle
-            title={
-              infShow === 'authListHouse'
-                ? ''
-                : isFilter === 'houseForSale'
-                  ? 'House for sale '
-                  : isFilter === 'houseForRent'
-                    ? 'House for rent'
-                    : isFilter === 'favoriteHouse'
-                      ? 'Whislist'
-                      : ''
-            }
-            textStyles=" w-full h-fit"
-          />
+        <AnimateTitle
+          title={
+            infShow === 'authListHouse'
+              ? ''
+              : isFilter === 'houseForSale'
+                ? 'House for sale '
+                : isFilter === 'houseForRent'
+                  ? 'House for rent'
+                  : isFilter === 'favoriteHouse'
+                    ? 'Whislist'
+                    : ''
+          }
+          textStyles=" w-full h-fit"
+        />
 
         {/* </motion.div> */}
 

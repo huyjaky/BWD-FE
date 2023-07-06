@@ -12,10 +12,6 @@ export const imgArr: { title: string; path: (type: string) => ReactElement<any, 
     path: (type: string) => <BiSolidBuildingHouse className={type + 'text-[35px]'} />
   },
   {
-    title: 'Trending',
-    path: (type: string) => <WiStars className={type + 'text-[50px]'} />
-  },
-  {
     title: 'Whislist',
     path: (type: string) => <BsBookmarkHeartFill className={type + 'text-[35px]'} />
   }

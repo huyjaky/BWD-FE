@@ -4,13 +4,13 @@ export interface filterForm {
   beds: number;
   bathRooms: number;
   typeHouse: string[];
-  amenities: amenities;
+  amenities: string[];
   hostLanguage: string;
 }
 
 export interface amenities {
-  essentials: string[];
-  features: string[];
-  location: string[];
-  safety: string[];
+  // essentials: string[];
+  // features: string[];
+  // location: string[];
+  // safety: string[];
 }

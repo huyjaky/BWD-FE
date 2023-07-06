@@ -28,7 +28,7 @@ export const variantsAmenities: Variants = {
 const FormFilter = () => {
   const [show, setShow] = useState(false);
   const { filterForm, setFilterForm } = useContext(filterContext);
-  const { setIsFilter, isFilter } = useContext(getHouseContext);
+  const { setIsFilter, isFilter, setReRenderFilter, reRenderFilter } = useContext(getHouseContext);
   const { isClickOutSide, setIsClickOutSide } = useContext(filterFormAnimateContext);
   const { address, setAddress } = useContext(selectPlaceContext);
   const { isShowAllPt } = useContext(IsShowPtContext);
@@ -57,12 +57,7 @@ const FormFilter = () => {
       beds: 0,
       bathRooms: 0,
       typeHouse: [],
-      amenities: {
-        essentials: [],
-        features: [],
-        location: [],
-        safety: []
-      },
+      amenities: [],
       hostLanguage: ''
     };
 
@@ -81,12 +76,14 @@ const FormFilter = () => {
     // neu du lieu co ton tai thi la fetch lai du lieu neu khong thi bo qua
     if (!isEmpty()) {
       setIsFilter('noneAuthFilter');
+      setReRenderFilter(reRenderFilter+1);
       return;
     } else {
       setIsFilter('main');
       return;
     }
   };
+  useEffect(()=>{console.log(filterForm);},[filterForm])
 
   return (
     <>
@@ -149,39 +146,7 @@ const FormFilter = () => {
             <div className="w-full h-fit mb-5 border-b-2 border-slate-500 py-10">
               <div className="w-full h-fit flex flex-col ">
                 <span className="font-bold text-[25px] mb-5">Amenities</span>
-                <Amenities typeAmenities="essentials" />
-                <motion.div
-                  className="overflow-hidden "
-                  variants={variantsAmenities}
-                  animate={show ? { height: 'fit-content', opacity: 1 } : { height: 0, opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <Amenities typeAmenities="features" />
-                  <Amenities typeAmenities="location" />
-                  <Amenities typeAmenities="safety" />
-                </motion.div>
-                <div className="w-fit h-fit flex items-center">
-                  <motion.button
-                    className="w-[300px] rounded-lg border-2 mr-2"
-                    whileHover={{ backgroundColor: 'rgba(255, 56, 92, 0.8)', color: 'white' }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={(event) => setShow(!show)}
-                  >
-                    <span className="text-[20px]">{show ? 'Show less' : 'Show more'}</span>
-                  </motion.button>
-                  <span className="">
-                    {!show &&
-                    (filterForm.amenities.features.length != 0 ||
-                      filterForm.amenities.location.length != 0 ||
-                      filterForm.amenities.safety.length != 0)
-                      ? ` you have filled in ${
-                          filterForm.amenities.features.length +
-                          filterForm.amenities.location.length +
-                          filterForm.amenities.safety.length
-                        } options`
-                      : ''}
-                  </span>
-                </div>
+                <Amenities />
               </div>
             </div>
 
@@ -206,12 +171,7 @@ const FormFilter = () => {
                     beds: 0,
                     bathRooms: 0,
                     typeHouse: [],
-                    amenities: {
-                      essentials: [],
-                      features: [],
-                      location: [],
-                      safety: []
-                    },
+                    amenities: [],
                     hostLanguage: ''
                   };
                   const addressTemp = {

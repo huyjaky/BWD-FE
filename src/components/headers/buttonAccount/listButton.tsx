@@ -46,7 +46,6 @@ const ListButton = () => {
         <Link href={'/'}>
           <div className="w-full py-4 text-left px-5">About us</div>
         </Link>
-        <button className="w-full py-4 text-left px-5">Help</button>
       </div>
     </>
   );

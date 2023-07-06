@@ -23,7 +23,6 @@ const FooterMainRes = () => {
       const isClick = profileTab.current?.contains(event.target);
       if (!isClick) {
         setIsClickProfile(false);
-        console.log('check');
         return;
       }
     };

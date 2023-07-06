@@ -20,20 +20,26 @@ export interface isFilter_ {
 interface getHouseData {
   isFilter: isFilter_['isFilter_'];
   setIsFilter: (payload: isFilter_['isFilter_']) => void;
+  reRenderFilter: number;
+  setReRenderFilter: (payload:number) => void
 }
 
 const getHouseDataDefault: getHouseData = {
   isFilter: 'main',
-  setIsFilter: () => {}
+  setIsFilter: () => {},
+  reRenderFilter:1,
+  setReRenderFilter: ()=>{}
 };
 
 export const getHouseContext = createContext<getHouseData>(getHouseDataDefault);
 
 const GetHouseProvider = ({ children }: getHouseProps) => {
   const [isFilter, setIsFilter_] = useState(getHouseDataDefault.isFilter);
+  const [reRenderFilter, setReRenderFilter_] = useState(getHouseDataDefault.reRenderFilter);
   const setIsFilter = (payload: isFilter_['isFilter_']) => setIsFilter_(payload);
+  const setReRenderFilter = (payload:number) => setReRenderFilter_(payload);
 
-  const getHouseDynamicData = { isFilter, setIsFilter };
+  const getHouseDynamicData = { isFilter, setIsFilter, reRenderFilter, setReRenderFilter };
   return (
     <getHouseContext.Provider value={getHouseDynamicData}>{children}</getHouseContext.Provider>
   );

@@ -197,8 +197,9 @@ const SlideShowHouse = ({
           </Swiper>
         </div>
       </div>
-      <button
-        className="w-full h-[70px] flex hover:border-2 hover:border-red-500
+      <motion.button
+        whileHover={{backgroundColor: 'rgba(239,68,68,1)', color: 'white'}}
+        className="w-[80%] m-auto h-[70px] flex border-2 border-red-500
       rounded-2xl transition-all duration-500 mb-[100px]
       "
         onClick={(event) => {
@@ -232,7 +233,7 @@ const SlideShowHouse = ({
           </motion.div>
           <span className="font-semibold">Show more</span>
         </div>
-      </button>
+      </motion.button>
     </>
   );
 };

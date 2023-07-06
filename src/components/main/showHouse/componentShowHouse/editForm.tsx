@@ -1,7 +1,7 @@
 import { selectHouseContext } from "@/contexts/selectHouse";
 import { house_ } from "@/models/house";
 import { motion } from "framer-motion";
-import { useContext, useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import MapEach from "../mapEach";
 import InputFormEdit from "./inputForm/inputFormEdit";
@@ -18,15 +18,18 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import { FilePondErrorDescription, FilePondFile } from 'filepond';
 import 'filepond/dist/filepond.min.css';
 import axiosClient from "@/api-client/axiosClient";
+import { GrClose } from "react-icons/gr";
+import { filterFormAnimateContext } from "@/contexts/filterFormAnimate";
 
 interface EditFormProps {
   keyMapBing: string;
-  api_url_path: string | undefined
+  api_url_path: string | undefined;
+  setIsEdit: Dispatch<SetStateAction<boolean>> | null;
 }
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
-const EditForm = ({ keyMapBing, api_url_path }: EditFormProps) => {
+const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
   const { selectHouse, setSelectHouse, } = useContext(selectHouseContext);
   const styleInput = 'box-border p-3';
   const compass: string[] = ['West', 'South', 'East', 'North']
@@ -35,6 +38,7 @@ const EditForm = ({ keyMapBing, api_url_path }: EditFormProps) => {
   const [show, setShow] = useState(false);
   const [reRender, setReRender] = useState<boolean>(false);
   const filePondRef = useRef<FilePond>(null);
+  const { isClickOutSide, setIsClickOutSide } = useContext(filterFormAnimateContext);
   const {
     register,
     handleSubmit,
@@ -77,6 +81,20 @@ const EditForm = ({ keyMapBing, api_url_path }: EditFormProps) => {
         <form className='w-full h-full relative '
           onSubmit={handleSubmit(onSubmit)}
         >
+          <motion.button
+            className="absolute w-[70px] h-[70px] flex desktop:hidden laptop:hidden z-20"
+            onClick={(event) => {
+              if (setIsEdit) {
+                console.log('cehck');
+                setIsEdit(false)
+              }
+            }}
+          >
+            <div className="w-fit h-full m-auto">
+              <GrClose className="text-[30px]" />
+            </div>
+          </motion.button>
+
           <div className='w-full absolute h-[40px]  border-b-2  flex'>
             <span className='text-[30px] m-auto'>Edit</span>
 
@@ -227,27 +245,7 @@ const EditForm = ({ keyMapBing, api_url_path }: EditFormProps) => {
                     <div className="w-full h-fit mb-5 border-b-2 border-slate-500 py-10">
                       <div className="w-full h-fit flex flex-col ">
                         <span className="font-bold text-[25px] mb-5">Amenities</span>
-                        <Amenities typeAmenities="essentials" />
-                        <motion.div
-                          className="overflow-hidden "
-                          variants={variantsAmenities}
-                          animate={show ? { height: 'fit-content', opacity: 1 } : { height: 0, opacity: 0 }}
-                          transition={{ duration: 0.4 }}
-                        >
-                          <Amenities typeAmenities="features" />
-                          <Amenities typeAmenities="location" />
-                          <Amenities typeAmenities="safety" />
-                        </motion.div>
-                        <div className="w-fit h-fit flex items-center">
-                          <motion.button
-                            className="w-[300px] rounded-lg border-2 mr-2"
-                            whileHover={{ backgroundColor: 'rgba(255, 56, 92, 0.8)', color: 'white' }}
-                            whileTap={{ scale: 0.9 }}
-                            onClick={(event) => setShow(!show)}
-                          >
-                            <span className="text-[20px]">{show ? 'Show less' : 'Show more'}</span>
-                          </motion.button>
-                        </div>
+                        <Amenities  />
                       </div>
                     </div>
                   </InputFormEdit>

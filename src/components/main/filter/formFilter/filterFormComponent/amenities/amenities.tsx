@@ -4,41 +4,38 @@ import { useContext, useEffect } from 'react';
 import { arrAmenities } from './arrAmenities';
 import CheckBox from './checkBox/checkBox';
 
-interface AmenitiesProps {
-  typeAmenities: 'essentials' | 'features' | 'location' | 'safety';
-}
 
-const Amenities = ({ typeAmenities }: AmenitiesProps) => {
-  const arrAmenities_: amenities = arrAmenities;
+const Amenities = () => {
+  const arrAmenities_: string[] = arrAmenities;
   const { filterForm, setFilterForm } = useContext(filterContext);
 
-  useEffect(() => { }, [filterForm.amenities[typeAmenities]]);
+  useEffect(() => { }, [filterForm.amenities]);
 
   const handleOnClick = (event: any, item: string) => {
-    const arrTemp = filterForm.amenities[typeAmenities];
+    const arrTemp: string[] = Array.isArray(filterForm.amenities) ? filterForm.amenities : [];
+
     if (arrTemp.includes(item)) {
       const updateArrTemp: string[] = arrTemp.filter((item_: string) => {
         return item_ !== item;
       });
       setFilterForm({
         ...filterForm,
-        amenities: { ...filterForm.amenities, [typeAmenities]: updateArrTemp }
+        amenities: updateArrTemp
       });
       return;
     }
     arrTemp.push(item);
     setFilterForm({
       ...filterForm,
-      amenities: { ...filterForm.amenities, [typeAmenities]: arrTemp }
+      amenities: arrTemp
     });
   };
 
   return (
     <div className="w-full mb-14">
-      <span className="w-full font-semibold">{typeAmenities.toLocaleUpperCase()}</span>
 
       <div className="w-full h-fit grid grid-cols-2 gap-y-5 mt-3">
-        {arrAmenities_[typeAmenities].map((item: string, index: number) => {
+        {arrAmenities_.map((item: string, index: number) => {
           return (
             <div
               className="w-full cursor-pointer"
@@ -48,7 +45,13 @@ const Amenities = ({ typeAmenities }: AmenitiesProps) => {
               <div className="w-full flex h-full box-border overflow-hidden">
                 <div className='my-auto'>
                   <CheckBox
-                    isCheckedProps={filterForm.amenities[typeAmenities].includes(item) ? true : false}
+                    // filterForm.amenities.includes(item) ? true : false
+                    isCheckedProps={
+                      Array.isArray(filterForm.amenities) ?
+                        filterForm.amenities.includes(item) ? true : false
+                        :
+                        false
+                    }
                   />{' '}
                 </div>
                 <span

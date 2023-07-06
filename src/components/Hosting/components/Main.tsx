@@ -7,6 +7,7 @@ import { motion, Variants } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import ShowHouse from '@/components/main/showHouse/showHouse';
 import { AmountTabHostingContext } from '@/contexts/amountTabHosting';
+import { userAccContext } from '@/contexts/userAcc';
 interface mainProps {
   keyMapBing: string;
 api_url_path: string
@@ -19,6 +20,7 @@ function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
     // Kích hoạt nhiều lần khi vào khung nhìn
     threshold: 0.01 // Ngưỡng nhìn thấy (tỷ lệ của phần tử nằm trong khung nhìn)
   });
+  const {user} = useContext(userAccContext)
 
   const componentVariants: Variants = {
     offscreen: {
@@ -56,9 +58,9 @@ function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
           initial="offscreen"
           whileInView="onscreen"
           viewport={{ amount: 0.5 }}
-          className="w-[100%] pt-[64px]"
+          className="w-[100%] pt-[64px] mobile:mx-[20px]"
         >
-          <h1 className="text-[32px] font-semibold">Welcome back</h1>
+          <h1 className="text-[32px] font-semibold">Welcome back {user.UserName}</h1>
         </motion.div>
         <div className="w-[100%] py-[64px]">
           <div className="">
@@ -67,7 +69,7 @@ function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
               initial="offscreen"
               whileInView="onscreen"
               viewport={{ amount: 0.5 }}
-              className="flex justify-between mb-[16px]"
+              className="flex justify-between mb-[16px] mobile:mx-[20px]"
             >
               <h2 className="text-[26px] font-semibold">Your reservations</h2>
               <div>
@@ -79,7 +81,7 @@ function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
               initial="offscreen"
               whileInView="onscreen"
               viewport={{ amount: 0.5 }}
-              className="flex flex-wrap"
+              className="flex flex-wrap mobile:mx-[20px]"
             >
               {reservations.map((reservation, index) => (
                 <motion.div
@@ -161,13 +163,10 @@ function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
           >
             We’re here to help
           </motion.h1>
-          <div className="w-[100%] flex mobile:flex-col gap-2">
+          <div className="w-[100%] flex mobile:flex-col gap-2 mb-10">
             <motion.div
               variants={buttonVariants}
-              initial="offscreen"
-              whileInView="onscreen"
-              viewport={{ amount: 0.8 }}
-              className="w-[45%] laptop:w-[50%] mobile:w-[100%] tablet:w-[50%] h-[92px] flex p-[16px] gap-3 border rounded-[10px] cursor-pointer"
+              className="w-[45%] laptop:w-[50%] mobile:w-[100%] tablet:w-full h-[92px] flex p-[16px] gap-3 border rounded-[10px] cursor-pointer"
             >
               <div className="mb-[4px]">
                 <SuperHost />
@@ -182,14 +181,8 @@ function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
 
             <div className="w-[100%]" ref={refButton}>
               <motion.div
-                initial="hidden"
-                animate={inViewButton ? 'visible' : 'hidden'}
                 variants={animationVariants}
-                transition={{
-                  type: 'spring',
-                  duration: 1
-                }}
-                className="w-[45%] laptop:w-[50%] mobile:w-[100%] tablet:w-[50%] h-[92px] flex p-[16px] gap-3 border rounded-[10px] cursor-pointer"
+                className="w-[45%] laptop:w-[50%] mobile:w-[100%] tablet:w-full h-[92px] flex p-[16px] gap-3 border rounded-[10px] cursor-pointer"
               >
                 <div className="mb-[4px]">
                   <ContactSupport />
@@ -201,33 +194,6 @@ function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
                   </p>
                 </div>
               </motion.div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div className="pb-[64px]">
-            <motion.h1
-              variants={componentVariants}
-              initial="offscreen"
-              whileInView="onscreen"
-              viewport={{ amount: 0.5 }}
-              className="text-[26px] font-semibold mb-[24px]"
-            >
-              Resources and tips
-            </motion.h1>
-            <div className="flex h-[293px] mobile:h-fit w-[full] gap-5 mobile:gap-0 mobile:flex-col mobile:items-center mobile:justify-center tablet:justify-center ">
-              {Resourcesandtips.map((Resourceandtip, index) => (
-                <motion.div
-                  className="w-[100%]  flex items-center justify-center "
-                  variants={buttonVariants}
-                  key={index}
-                  initial="offscreen"
-                  whileInView="onscreen"
-                  transition={{ type: 'spring', delay: 0.1 * index }}
-                >
-                  <ResourceAndTip ImgLink={Resourceandtip.ImgLink} title={Resourceandtip.title} />
-                </motion.div>
-              ))}
             </div>
           </div>
         </div>
