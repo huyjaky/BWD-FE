@@ -88,7 +88,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.7 }}
-        className={`${monsterrat.className} relative overflow-hidden `}
+        className={`${monsterrat.className} relative overflow-hidden`}
         id="root"
       >
         <AnimatePresence initial={false}>
@@ -100,6 +100,33 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
 
         <figure className='w-full h-fit'>
           <div className='w-full h-[calc(100vh-40vh)] overflow-hidden relative'>
+            <div className='absolute top-0 left-0 w-full h-full  z-10
+            p-7 rounded-xl
+            '>
+
+              <div className='w-full h-full flex'>
+                <div className='m-auto text-[#ef5c76]  bg-[rgba(253,245,244,.8)] p-3 rounded-lg'>
+                  <motion.div
+                    variants={staggerContainer(null, null)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: false, amount: 0.25 }}
+                    className={` mx-auto flex-col `}
+                  >
+                    <AnimateTitle
+                      title={'Welcome to Olympus'}
+                      textStyles=" w-full h-fit "
+                    />
+
+                  </motion.div>
+                </div>
+
+              </div>
+              {/* <div className='w-full h-full absolute
+              block content-none blur-md bg-[rgba(253,245,244,.8)]
+              '></div> */}
+
+            </div>
             <CarouselMain />
           </div>
         </figure>

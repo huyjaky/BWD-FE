@@ -68,7 +68,7 @@ const HouseCard = ({
         }}
 
         transition={{ type: 'spring' }}
-        className="w-full h-[400px] rounded-2xl box-border bg-[#fbc193] text-black"
+        className="w-full h-[400px] rounded-2xl box-border bg-[#f28076] text-white"
         onHoverStart={() => {
           setIsHover({ ishover: true, id: index });
         }}
@@ -190,7 +190,7 @@ const HouseCard = ({
                   {item.address.adminDistrict2}, {item.address.countryRegion}
                 </span>
               </div>
-              <div className="flex justify-end font-semibold ">
+              <div className="flex justify-end font-semibold text-red-500">
                 <span>&#36;{item.Price}</span>
                 {infShow === 'houseForRent' ? (
                   <span className="font-semibold">{'/month'}</span>

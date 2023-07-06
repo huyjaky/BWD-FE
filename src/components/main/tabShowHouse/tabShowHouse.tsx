@@ -104,7 +104,7 @@ const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
         </motion.div>
       </AnimatePresence>
 
-      <div className="h-fit mt-[70px] tablet:mt-[50px] mobile:mt-[50px] relative bg-[#fffdf8]">
+      <div className="h-fit mt-[70px] tablet:mt-[50px] mobile:mt-[50px] relative  bg-[#fffdf8]">
 
 
         <motion.div variants={variants} exit="exitFavor"
