@@ -104,7 +104,7 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
   }, [houseTemp]);
 
   const isExist = (moreHouse: any) => {
-    if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0) {
+    if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0 && moreHouse.data.length >= 10) {
       setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
     } else {
       setHasMore(false); // cai nay de kiem tra xem da fetch het du lieu hay chua
