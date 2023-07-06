@@ -11,16 +11,14 @@
 }
 
 .gradient-01 {
-  background-image: linear-gradient(
-    270deg,
-    hsl(295deg 76% 51%) 0%,
-    hsl(284deg 70% 73%) 26%,
-    hsl(257deg 70% 86%) 39%,
-    hsl(202deg 92% 90%) 50%,
-    hsl(215deg 77% 81%) 61%,
-    hsl(221deg 73% 70%) 74%,
-    hsl(220deg 76% 51%) 100%
-  );
+  background-image: linear-gradient(270deg,
+      hsl(295deg 76% 51%) 0%,
+      hsl(284deg 70% 73%) 26%,
+      hsl(257deg 70% 86%) 39%,
+      hsl(202deg 92% 90%) 50%,
+      hsl(215deg 77% 81%) 61%,
+      hsl(221deg 73% 70%) 74%,
+      hsl(220deg 76% 51%) 100%);
   filter: blur(125px);
 }
 
@@ -146,10 +144,7 @@
   background: var(--bg);
 }
 
-.heading {
-  padding: 1rem 0;
-  text-align: center;
-}
+
 
 .swiper_container {
   padding: 2rem 0;
@@ -164,8 +159,8 @@
 
 @media (max-width: 500px) {
   .swiper-slide {
-    width: 20rem !important;
-    height: 36rem !important;
+    width: 20rem;
+    height: 36rem;
   }
 }
 
@@ -247,4 +242,10 @@
 
 .swiper-pagination .swiper-pagination-bullet-active {
   background: var(--primary);
+}
+
+
+.checkclass {
+  backdrop-filter: blur(20px);
+  transform:translate3d(0,0,0);
 }

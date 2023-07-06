@@ -19,6 +19,11 @@ import { useContext, useEffect } from 'react';
 import TabShowHouse from '@/components/main/tabShowHouse/tabShowHouse';
 import { house_ } from '@/models/house';
 import { useSession } from 'next-auth/react';
+import CarouselMain from '@/components/main/carousel/carouselMain';
+import AnimateTitle from '@/components/main/showHouse/animateTitle';
+import { staggerContainer } from '@/utils/motion';
+
+
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -74,7 +79,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  useEffect(() => {}, [isFilter]);
+  useEffect(() => { }, [isFilter]);
   initializeSSR();
 
   return (
@@ -83,7 +88,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.7 }}
-        className={`${monsterrat.className} relative overflow-hidden`}
+        className={`${monsterrat.className} relative overflow-hidden `}
         id="root"
       >
         <AnimatePresence initial={false}>
@@ -92,6 +97,12 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
         <motion.div>
           <TypeHouse />
         </motion.div>
+
+        <figure className='w-full h-fit'>
+          <div className='w-full h-[calc(100vh-40vh)] overflow-hidden relative'>
+            <CarouselMain />
+          </div>
+        </figure>
 
         <div
           className="w-full h-fit px-[80px] box-border
@@ -107,6 +118,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
                     : isFilter
                 }
                 keyMapBing={keyMapBing}
+                api_url_path={undefined}
               />
             </motion.div>
           ) : (
@@ -115,9 +127,10 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
             </motion.div>
           )}
         </div>
-
-        <FooterRooms />
-        <FooterMainRes />
+        <div className='relative z-10'>
+          <FooterRooms />
+          <FooterMainRes />
+        </div>
       </motion.main>
     </>
   );

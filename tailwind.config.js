@@ -41,6 +41,18 @@ module.exports = {
           'des des',
           'placeoffer placeoffer',
           'img img'
+        ],
+        layoutEditMobile: [
+          'locale locale',
+          'capacity capacity',
+          'orientation orientation',
+          'baths baths',
+          'beds beds',
+          'price price',
+          'title title',
+          'des des',
+          'placeoffer placeoffer',
+          'img img'
         ]
       },
       gridTemplateColumns: {

@@ -65,8 +65,8 @@ const SlideShowHouse = ({
   const arrEmpty = [1, 2, 3, 4, 5, 6, 7];
   const [houseTemp, setHouseTemp] = useState<house_[]>([]);
   const { data: session, status } = useSession();
-  const { filterForm, setFilterForm } = useContext(filterContext)
-  const { address, setAddress } = useContext(selectPlaceContext);
+  const { filterForm, setFilterForm, emptyFilterForm } = useContext(filterContext)
+  const { address, setAddress, emptyAddress } = useContext(selectPlaceContext);
   const { user } = useContext(userAccContext);
   const { isFilter, setIsFilter } = useContext(getHouseContext);
 
@@ -82,23 +82,24 @@ const SlideShowHouse = ({
       return isEmpty(arr);
     } else if (infShow === 'houseForRent') {
       const tempFilterForm = {
-        ...filterForm,
-        typeHouse: [...filterForm.typeHouse, 'HouseForRent']
+        ...emptyFilterForm,
+        typeHouse: [...emptyFilterForm.typeHouse, 'HouseForRent']
       };
-      const tempSelectPlace = address;
+      const tempSelectPlace = emptyAddress;
       const arr = await houseApi['noneAuthFilter'](
         { filter: tempFilterForm, selectPlace: tempSelectPlace },
         -1,
         status === 'authenticated' ? temp.UserId : ''
       );
-      console.log('rent fetch');
+
       return isEmpty(arr);
     } else if (infShow === 'houseForSale') {
+
       const tempFilterForm = {
-        ...filterForm,
-        typeHouse: [...filterForm.typeHouse, 'HouseForSale']
+        ...emptyFilterForm,
+        typeHouse: [...emptyFilterForm.typeHouse, 'HouseForSale']
       };
-      const tempSelectPlace = address;
+      const tempSelectPlace = emptyAddress;
       const arr = await houseApi['noneAuthFilter'](
         { filter: tempFilterForm, selectPlace: tempSelectPlace },
         -1,
@@ -116,8 +117,13 @@ const SlideShowHouse = ({
   return (
     <>
       <div className="">
-        <h1 className="heading text-[2.5rem] tablet:text-[2rem] mobile:text-[1.5rem]">{title}</h1>
-
+        <div className="w-full h-[100px]
+        relative z-10 text-center flex
+        text-[2.5rem] tablet:text-[2rem] mobile:text-[1.5rem] ">
+          <div className='w-fit h-fit m-auto '>
+            {title}
+          </div>
+        </div>
         <div className="">
           <Swiper
             effect={'coverflow'}

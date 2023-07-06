@@ -111,9 +111,11 @@ const EditForm = ({ keyMapBing, api_url_path }: EditFormProps) => {
               {/* form  */}
               <div className="w-full h-fit grid text-[25px] desktop:grid-areas-layoutEditDesktopLaptop
               laptop:grid-areas-layoutEditDesktopLaptop
-              grid-cols-3
               tablet:grid-areas-layoutEditTabletMobile
-              mobile:grid-areas-layoutEditTabletMobile
+              mobile:grid-areas-layoutEditMobile
+
+              desktop:grid-cols-3 laptop:grid-cols-3
+              tablet:grid-cols-2 mobile:grid-cols-1
               ">
 
                 <div className={`grid-in-locale ${styleInput}`}>
@@ -167,7 +169,7 @@ const EditForm = ({ keyMapBing, api_url_path }: EditFormProps) => {
 
                 {/* chua lam phan nay */}
                 <div className={`grid-in-price ${styleInput}`}>
-                  <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Price">
+                  <InputFormEdit styleDivAround=" before:hidden" styleFieldset="" styleLegend="" title="Price">
                     {/* <input type="number" {...register('Price')} className="w-full h-[50px] outline-none text-[25px]" /> */}
                     <div className="w-full h-[50px] flex mr-0">
                       <Slider

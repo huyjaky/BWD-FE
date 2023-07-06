@@ -105,7 +105,7 @@ function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
               initial="offscreen"
               whileInView="onscreen"
               className="bg-[#F7F7F7] h-fit flex items-center justify-center rounded-[12px] box-border
-              px-4 transition-all
+              px-4 transition-all mobile:px-0
               "
             >
               <div className="w-full h-fit transition-all duration-1000">

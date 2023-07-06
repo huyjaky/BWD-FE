@@ -23,7 +23,7 @@ import EditForm from './componentShowHouse/editForm';
 interface ShowHouseProps {
   infShow: isFilter_['isFilter_'];
   keyMapBing: string;
-api_url_path: string | undefined;
+  api_url_path: string | undefined;
 }
 
 const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
@@ -51,7 +51,7 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
     longitude: number;
     latitude: number;
     zoom: number;
-formattedAddress: string;
+    formattedAddress: string;
   }>();
   const [isOpenMaskMap, setIsOpenMaskMap] = useState(false);
 
@@ -159,7 +159,7 @@ formattedAddress: string;
     }
   };
 
- const handleOnClickOutSideEditPanel = (event: any) => {
+  const handleOnClickOutSideEditPanel = (event: any) => {
     const isClickInSide = editPanel.current?.contains(event.target);
     if (!isClickInSide) {
       setIsEdit(false);
@@ -180,7 +180,7 @@ formattedAddress: string;
           onClick={handleOnClickOutSideEditPanel}
           className="fixed w-screen h-screen bg-mask z-50 top-0 left-0 flex" >
           <div className='w-fit h-fit m-auto' ref={editPanel}>
-            <EditForm keyMapBing={keyMapBing}  api_url_path={api_url_path}/>
+            <EditForm keyMapBing={keyMapBing} api_url_path={api_url_path} />
           </div>
         </motion.div>
       </AnimatePresence>
@@ -227,13 +227,13 @@ formattedAddress: string;
       </AnimatePresence>
 
       <motion.div className="w-full h-fit py-4 pb-28" id="scroll-inf">
-        <motion.div
+        {/* <motion.div
           variants={staggerContainer(null, null)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: false, amount: 0.25 }}
           className={` mx-auto flex-col`}
-        >
+        > */}
           <AnimateTitle
             title={
               infShow === 'authListHouse'
@@ -248,7 +248,8 @@ formattedAddress: string;
             }
             textStyles=" w-full h-fit"
           />
-        </motion.div>
+
+        {/* </motion.div> */}
 
         <InfiniteScroll
           dataLength={houseTemp.length}
@@ -260,7 +261,9 @@ formattedAddress: string;
             </motion.div>
           }
           style={{ overflow: 'hidden' }}
-          className="w-full h-fit grid grid-cols-houseBox gap-x-9 gap-y-8 px-7 py-8"
+          className="w-full h-fit grid grid-cols-houseBox gap-x-9 gap-y-8 px-7 py-8
+          mobile:px-0 mobile:py-0
+          "
           endMessage={<EndMessage />}
         >
           {houseTemp.map((item: house_, index: number) => {

@@ -2,10 +2,14 @@ import { ReactElement, useContext } from 'react';
 import { imgArr } from '../imgArr';
 import { filterContext } from '@/contexts/filter';
 import { getHouseContext } from '@/contexts/getHouse';
+import { useSession } from 'next-auth/react';
+import { selectPopoverContext } from '@/contexts';
 
 const TabletMobile = () => {
   const { filterForm, setFilterForm } = useContext(filterContext);
   const { isFilter, setIsFilter } = useContext(getHouseContext);
+  const { data: session, status } = useSession()
+  const { setIsLoginClick } = useContext(selectPopoverContext);
   return (
     <div className="w-full h-[100px] mobile:h-fit  flex">
       <div
@@ -36,7 +40,12 @@ const TabletMobile = () => {
                     setFilterForm({ ...filterForm, typeHouse: temp });
                     setIsFilter('houseForSale');
                   } else if (item.title === 'Whislist') {
-                    setIsFilter('favoriteHouse');
+                    if (status === 'authenticated') {
+                      setIsFilter('favoriteHouse')
+                    } else if (status === 'unauthenticated') {
+                                  setIsLoginClick(true);
+                    };
+
                   }
                 }}
                 key={index}

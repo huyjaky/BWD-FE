@@ -144,8 +144,8 @@ const ControlPlan = () => {
             ref={refHeader}
             variants={variants}
             animate={isShowHeader ? 'slideDownControlBar' : 'slideUpControlBar'}
-            className="w-full h-full box-border px-1 flex items-center border-2
-            rounded-full border-slate-400
+            className="w-full h-full box-border px-1 flex items-center
+            rounded-full border-slate-400 bg-[#f05123] text-slate-100 font-semibold
           "
             id="scaleUp"
             onClick={handleOnScaleDown}

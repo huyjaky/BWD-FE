@@ -71,7 +71,7 @@ const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
           className="fixed w-screen h-screen bg-mask z-50 top-0 left-0 "
         >
           <motion.div
-            className="w-fit h-fit bg-[#f0efe9] p-7 m-auto mt-[10%] rounded-2xl"
+            className="w-fit h-fit bg-mask p-7 m-auto mt-[10%] rounded-2xl"
             ref={maskUser}
           >
             <HostUser
@@ -104,8 +104,12 @@ const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
         </motion.div>
       </AnimatePresence>
 
-      <div className="h-fit mt-[70px] tablet:mt-[50px] mobile:mt-[50px]">
-        <motion.div variants={variants} exit="exitFavor">
+      <div className="h-fit mt-[70px] tablet:mt-[50px] mobile:mt-[50px] relative bg-[#fffdf8]">
+
+
+        <motion.div variants={variants} exit="exitFavor"
+          className=''
+        >
           <SlideShowHouse
             setIsOpenMask={setIsOpenMask}
             setIsOpenMaskMap={setIsOpenMaskMap}

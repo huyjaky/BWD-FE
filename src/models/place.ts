@@ -11,6 +11,7 @@ export interface placeListData {
 }
 export interface selectPlaceData {
   address: addressSearch;
+  emptyAddress: addressSearch;
   setAddress: (payload: addressSearch) => void;
 }
 export interface selectPopoverDefault {

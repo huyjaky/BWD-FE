@@ -8,6 +8,7 @@ import { ReactNode, useContext, useEffect, useRef } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import nProgress from 'nprogress';
+import { IoCloseOutline } from 'react-icons/io5';
 
 interface LoginPanelProps {
   children: ReactNode;
@@ -107,9 +108,17 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
   };
 
   return (
-    <div className="w-[600px] h-fit m-auto shadow-2xl rounded-3xl box-border p-10">
+    <div className="w-[600px] h-fit m-auto shadow-2xl rounded-3xl box-border p-10
+    mobile:w-full mobile:h-full relative
+    ">
+      <button
+      onClick={()=>{setIsLoginClick(false)}}
+       className='top-5 left-5 absolute '>
+        <IoCloseOutline className='h-full text-[40px] text-left' />
+      </button>
       <div className="w-full h-fit flex justify-end border-b-2 mb-5">
-        <div className="w-full h-full text-center m-auto">
+        <div className="w-full h-full text-center m-auto relative">
+
           <span className="font-bold">Login or Sign Up</span>
         </div>
 
@@ -124,9 +133,8 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
         >
           {/* form input username */}
           <div
-            className={`border-2 rounded-t-xl box-border p-3 h-[90px] ${
-              errors?.username?.message ? 'border-red-500' : ''
-            }`}
+            className={`border-2 rounded-t-xl box-border p-3 h-[90px] ${errors?.username?.message ? 'border-red-500' : ''
+              }`}
             ref={divRef}
           >
             <div className="w-full h-full m-auto">
@@ -151,9 +159,8 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
 
           {/* form input password */}
           <div
-            className={`border-2 rounded-b-xl box-border flex p-3 h-[90px] ${
-              errors?.password?.message ? 'border-red-500' : ''
-            }`}
+            className={`border-2 rounded-b-xl box-border flex p-3 h-[90px] ${errors?.password?.message ? 'border-red-500' : ''
+              }`}
             ref={divRef2}
           >
             <div className="w-full h-full m-auto">
