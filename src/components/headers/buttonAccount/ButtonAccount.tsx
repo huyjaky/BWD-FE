@@ -42,7 +42,9 @@ const ButtonAccount = () => {
     document.addEventListener('scroll', handleControlPanel);
   }, []);
 
-  useEffect(() => {}, [user, status]);
+  useEffect(() => {
+    console.log(user);
+  }, [user, status]);
   return (
     <div
       className="w-fit p-1 rounded-full bg-white flex border-gray-400 hover:shadow-lg
@@ -54,7 +56,8 @@ const ButtonAccount = () => {
     >
       <BsList className="w-[30px] h-[30px]" />
       {user?.Image ? (
-        <img src={'/api/img/path/' + user.Image} className="w-[30px] h-[30px] rounded-full" />
+
+        <img src={'/api/img/path/'+user.Image} className="w-[30px] h-[30px] rounded-full" />
       ) : (
         <HiUserCircle className="w-[40px] h-[30px] " />
       )}

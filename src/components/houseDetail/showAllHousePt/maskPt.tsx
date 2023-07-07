@@ -28,7 +28,7 @@ const MaskPt = ({ Path, setPath }: MaskPtProps) => {
         "
         >
           <div className="w-[1000px] m-auto h-fit overflow-hidden">
-            <img src={Path ? Path : ''} alt="" className="m-auto  rounded-2xl" />
+            <img src={Path ? '/api/img/path/'+Path : ''} alt="" className="m-auto  rounded-2xl" />
           </div>
         </motion.div>
         {/* </AnimatePresence> */}
@@ -49,7 +49,7 @@ const MaskPt = ({ Path, setPath }: MaskPtProps) => {
             transition={{ type: 'spring' }}
             initial={{ y: 200 }}
             animate={{ y: 0 }}
-            src={Path ? Path : ''}
+            src={Path ? '/api/img/path/'+Path : ''}
             alt=""
             className="m-auto max-w-full max-h-full object-cover rounded-2xl "
           />

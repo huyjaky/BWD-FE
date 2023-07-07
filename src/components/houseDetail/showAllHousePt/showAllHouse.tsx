@@ -58,7 +58,7 @@ const ShowAllHouse = ({ arrImg }: ShowAllHouseProps) => {
                 return (
                   <motion.div whileHover={{ opacity: 0.6 }} key={index}>
                     <img
-                      src={item.Path}
+                      src={'/api/img/path/'+item.Path}
                       alt=""
                       onClick={() => setSelect(item.Path)}
                       className="w-full

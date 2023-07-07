@@ -23,7 +23,7 @@ interface HouseCardProps {
   isEdit: boolean | null;
   setIsHover: Dispatch<SetStateAction<{ ishover: boolean; id: number }>>;
   setIsOpenMaskMap: Dispatch<SetStateAction<boolean>>;
-    setSelectLocale: Dispatch<
+  setSelectLocale: Dispatch<
     SetStateAction<{ longitude: number; latitude: number; zoom: number; formattedAddress: string } | undefined>
   >;
   setSelectUser: Dispatch<SetStateAction<userAcc | undefined>>;
@@ -150,7 +150,7 @@ const HouseCard = ({
               )}
             </div>
 
-            <EditRemoveIcon isEdit={isEdit} setIsEdit={setIsEdit} item={item}/>
+            <EditRemoveIcon isEdit={isEdit} setIsEdit={setIsEdit} item={item} />
           </motion.button>
 
 
@@ -173,7 +173,7 @@ const HouseCard = ({
                 <HiUserCircle className="w-full h-full" />
               )}
             </div>
-            <EditRemoveIcon isEdit={isEdit} setIsEdit={setIsEdit} item={item}/>
+            <EditRemoveIcon isEdit={isEdit} setIsEdit={setIsEdit} item={item} />
           </motion.button>
 
 
@@ -185,8 +185,8 @@ const HouseCard = ({
         <Link href={`/house/${item.HouseId}`}>
           <div className="h-[100px] w-full box-border p-4 ">
             <div className="w-full grid grid-cols-2 grid-rows-3">
-              <div>
-                <span className="font-semibold">
+              <div className='whitespace-nowrap max-w-[100%] text-ellipsis overflow-hidden'>
+                <span className="font-semibold ">
                   {item.address.title}, {item.address.countryRegion}
                 </span>
               </div>

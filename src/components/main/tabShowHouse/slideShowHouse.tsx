@@ -150,7 +150,7 @@ const SlideShowHouse = ({
             "
             style={{ width: 'calc(100vw-80px)' }}
           >
-            {houseTemp.length === 0 &&
+            {!houseTemp || houseTemp.length === 0 &&
               arrEmpty.map((item: number, index: number) => {
                 return (
                   <SwiperSlide key={index} style={{ width: '400px', paddingTop: '20px' }}>

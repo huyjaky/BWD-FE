@@ -27,31 +27,31 @@ const Picture = ({ arrImg }: PictureProps) => {
     "
       >
         <img
-          src={arrImg[0].Path}
+          src={'/api/img/path/'+arrImg[0].Path}
           alt=""
           onClick={() => setSelect(arrImg[0].Path)}
           className={`grid-in-h1 ${settingImg}`}
         />
         <img
-          src={arrImg[1].Path}
+          src={'/api/img/path/'+arrImg[1].Path}
           alt=""
           onClick={() => setSelect(arrImg[1].Path)}
           className={`grid-in-h2 ${settingImg}`}
         />
         <img
-          src={arrImg[2].Path}
+          src={'/api/img/path/'+arrImg[2].Path}
           alt=""
           onClick={() => setSelect(arrImg[2].Path)}
           className={`grid-in-h3 ${settingImg}`}
         />
         <img
-          src={arrImg[3].Path}
+          src={'/api/img/path/'+arrImg[3].Path}
           alt=""
           onClick={() => setSelect(arrImg[3].Path)}
           className={`grid-in-h4 ${settingImg}`}
         />
         <img
-          src={arrImg[4].Path}
+          src={'/api/img/path/'+arrImg[4].Path}
           alt=""
           onClick={() => setSelect(arrImg[4].Path)}
           className={`grid-in-h5 ${settingImg}`}

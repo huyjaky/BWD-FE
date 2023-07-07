@@ -18,23 +18,29 @@ import InputFormEdit from "./inputForm/inputFormEdit";
 import MapEdit from "./inputForm/map";
 import EditAmenities from "./amenities/editAmenities";
 import { houseApi } from "@/api-client/houseApi";
+import { getHouseContext } from "@/contexts/getHouse";
+import ShowAllHouse from "@/components/houseDetail/showAllHousePt/showAllHouse";
+import RemoveImg from "./removeImg/removeImg";
+import { houseTempContext } from "@/contexts/houseTemp";
 
 interface EditFormProps {
   keyMapBing: string;
   api_url_path: string | undefined;
-  setIsEdit: Dispatch<SetStateAction<boolean>> | null;
+  setIsEdit: Dispatch<SetStateAction<boolean>>;
 }
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
   const { selectHouse } = useContext(selectHouseContext);
+  const { houseTemp, setHouseTemp } = useContext(houseTempContext)
   const styleInput = 'box-border p-3';
   const compass: string[] = ['West', 'South', 'East', 'North']
   const tempPrice = selectHouse?.Price;
   const [tempHouse, setTempHouse] = useState<house_ | undefined>(selectHouse)
   const [imgArr, setImgArr] = useState<any>([]);
   const filePondRef = useRef<FilePond>(null);
+  const { setReRenderFilter, reRenderFilter } = useContext(getHouseContext);
 
   const {
     register,
@@ -53,18 +59,29 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
   }, [selectHouse]);
 
   const onSubmit: SubmitHandler<house_> = async (data) => {
+
+    console.log('temp', tempHouse?.arrImg);
     if (filePondRef.current) {
-      filePondRef.current.processFiles();
+      await filePondRef.current.processFiles();
     }
     if (tempHouse) {
       console.log('data', data);
       const data0: house_ = {
         ...data, placeOffer: tempHouse?.placeOffer,
         Price: tempHouse.Price,
-        address: tempHouse.address
+        address: tempHouse.address,
+        arrImg: tempHouse.arrImg
       }
       console.log('data0', data0);
       const editStatus = await houseApi.editHouse(data0);
+      // setReRenderFilter(reRenderFilter + 1);
+      setHouseTemp([...houseTemp.map((item, index) => {
+        if (item.AddressId === data0.AddressId) {
+          return data0;
+        }
+        return item;
+      })]);
+      setIsEdit(false);
     }
   }
 
@@ -83,6 +100,7 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
 
   return (
     <>
+      {/* <ShowAllHouse/> */}
       <div className='w-[800px] h-[calc(100vh-50px)] bg-white m-auto rounded-3xl
         overflow-hidden flex flex-col
         mobile:mt-0 mobile:rounded-none
@@ -274,6 +292,10 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
                   <InputFormEdit styleDivAround=" before:hidden" styleFieldset="" styleLegend="" title="Images">
                     {/* <input type="text" className="w-full h-[50px] outline-none text-[25px]" /> */}
 
+                    <RemoveImg arrImg={tempHouse ? tempHouse.arrImg : []} tempHouse={tempHouse}
+                      setTempHouse={setTempHouse}
+                    />
+
                     {api_url_path !== undefined &&
                       <div className="mb-4">
                         <FilePond
@@ -316,7 +338,7 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
                           server={{
                             url: api_url_path + '/api',
                             process: {
-                              url: '/post/img',
+                              url: '/get/house/modifier',
                               method: 'POST',
                               timeout: 120000
                             }
@@ -336,6 +358,7 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
                             'application/pdf'
                           ]}
                         />
+
                       </div>
                     }
                   </InputFormEdit>

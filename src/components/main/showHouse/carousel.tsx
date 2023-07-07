@@ -84,7 +84,7 @@ const Carousel = ({ arrImg, houseId }: CarouselProps) => {
           <AnimatePresence initial={false} custom={direction}>
             <motion.img
               key={page}
-              src={arrImg[imageIndex].Path}
+              src={'/api/img/path/'+arrImg[imageIndex].Path}
               custom={direction}
               variants={variants}
               initial="enter"

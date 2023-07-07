@@ -111,6 +111,8 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
     fetchHouseApi();
   }, [houseTemp]);
 
+  useEffect(()=>{}, [houseTemp]);
+
   const isExist = (moreHouse: any) => {
     if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0 && moreHouse.data.length >= 10) {
       console.log(moreHouse);
