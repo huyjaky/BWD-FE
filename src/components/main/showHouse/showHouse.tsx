@@ -87,6 +87,7 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
       return isEmpty(arr);
     } else if (infShow === 'authListHouse' && status === 'authenticated') {
       const arr = await houseApi[infShow](temp.UserId);
+      console.log('noneauthlist', arr);
       return isEmpty(arr);
     } else if (infShow === 'favoriteHouse' && status === 'authenticated') {
       const arr = await houseApi['authFavoriteList'](temp.UserId, 0);

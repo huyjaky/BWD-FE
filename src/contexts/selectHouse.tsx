@@ -34,7 +34,7 @@ const selectHouseDefaultData: selectHouseData = {
     arrImg: [],
     Capacity: 0, //
     DateUp: new Date(), //
-    Des: '', //
+    Description: '', //
     HouseId: '',
     IsFavorite: false,
     JudicalId: '',

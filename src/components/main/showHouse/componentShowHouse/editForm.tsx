@@ -1,25 +1,22 @@
+import axiosClient from "@/api-client/axiosClient";
+import { filterFormAnimateContext } from "@/contexts/filterFormAnimate";
 import { selectHouseContext } from "@/contexts/selectHouse";
 import { house_ } from "@/models/house";
-import { motion } from "framer-motion";
-import { Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import MapEach from "../mapEach";
-import InputFormEdit from "./inputForm/inputFormEdit";
-import Slider from "rc-slider";
-import { number } from "yup";
-import Amenities from "../../filter/formFilter/filterFormComponent/amenities/amenities";
-import { variantsAmenities } from "../../filter/formFilter/formFilter";
-import { whenLoaded } from "bing-maps-loader";
-import MapEdit from "./inputForm/map";
-import { FilePond, FilePondProps, registerPlugin } from 'react-filepond';
+import { FilePondErrorDescription, FilePondFile } from 'filepond';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
-import { FilePondErrorDescription, FilePondFile } from 'filepond';
 import 'filepond/dist/filepond.min.css';
-import axiosClient from "@/api-client/axiosClient";
+import { motion } from "framer-motion";
+import Slider from "rc-slider";
+import { Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from "react";
+import { FilePond, registerPlugin } from 'react-filepond';
+import { SubmitHandler, useForm } from "react-hook-form";
 import { GrClose } from "react-icons/gr";
-import { filterFormAnimateContext } from "@/contexts/filterFormAnimate";
+import Amenities from "../../filter/formFilter/filterFormComponent/amenities/amenities";
+import InputFormEdit from "./inputForm/inputFormEdit";
+import MapEdit from "./inputForm/map";
+import EditAmenities from "./amenities/editAmenities";
 
 interface EditFormProps {
   keyMapBing: string;
@@ -30,15 +27,14 @@ interface EditFormProps {
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
-  const { selectHouse, setSelectHouse, } = useContext(selectHouseContext);
+  const { selectHouse } = useContext(selectHouseContext);
   const styleInput = 'box-border p-3';
   const compass: string[] = ['West', 'South', 'East', 'North']
+  const tempPrice = selectHouse?.Price;
   const [tempHouse, setTempHouse] = useState<house_ | undefined>(selectHouse)
   const [imgArr, setImgArr] = useState<any>([]);
-  const [show, setShow] = useState(false);
-  const [reRender, setReRender] = useState<boolean>(false);
   const filePondRef = useRef<FilePond>(null);
-  const { isClickOutSide, setIsClickOutSide } = useContext(filterFormAnimateContext);
+
   const {
     register,
     handleSubmit,
@@ -48,21 +44,19 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
     formState: { errors }
   } = useForm<house_>({
     defaultValues: tempHouse,
-    // resolver: yupResolver<any>(schema)
   });
 
   useEffect(() => {
-    setTempHouse(selectHouse);
     reset(selectHouse);
+    setTempHouse(selectHouse);
   }, [selectHouse]);
 
   const onSubmit: SubmitHandler<house_> = (data) => {
-    console.log('item', selectHouse);
     if (filePondRef.current) {
       filePondRef.current.processFiles();
     }
-
   }
+
 
   const handleOnChange = async (value: any) => {
     const temp: house_ | undefined = selectHouse;
@@ -70,6 +64,11 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
       setTempHouse({ ...temp, Price: value });
     }
   }
+
+  useEffect(() => {
+    console.log('selechous', selectHouse);
+    console.log('temphouse', tempHouse);
+  }, [tempHouse])
 
   return (
     <>
@@ -85,7 +84,6 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
             className="absolute w-[70px] h-[70px] flex desktop:hidden laptop:hidden z-20"
             onClick={(event) => {
               if (setIsEdit) {
-                console.log('cehck');
                 setIsEdit(false)
               }
             }}
@@ -100,13 +98,20 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
 
           </div>
           <div className="w-full h-[80px] absolute bottom-0 left-0 border-t-2 flex items-center flex-2 py-3">
-            <div className="flex-1 flex justify-start">
-              <div
-                className="m-auto underline cursor-pointer"
-              >
+
+            <button type="button" className="flex-1 flex justify-start"
+              onClick={(event) => {
+                if (selectHouse) {
+                  setTempHouse({ ...selectHouse, placeOffer: watch().placeOffer })
+                }
+                reset(selectHouse);
+                setImgArr([]);
+              }}
+            >
+              <div className="m-auto underline cursor-pointer" >
                 Clear all
               </div>
-            </div>
+            </button>
             <div className="flex-1 flex justify-center">
               <motion.button
                 type="submit"
@@ -199,7 +204,7 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
                         value={tempHouse?.Price}
                         className="m-auto "
                         min={10}
-                        max={5000}
+                        max={tempPrice ? tempPrice * 2 : 5000}
                         trackStyle={{ backgroundColor: 'black', height: 2 }}
                         railStyle={{ height: 2 }}
                         handleStyle={{
@@ -234,18 +239,18 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
 
                 <div className={`grid-in-des ${styleInput}`}>
                   <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Description">
-                    <textarea {...register('Des')} className="w-full h-fit  outline-none text-[25px]" />
+                    <textarea {...register('Description')} className="w-full h-fit  outline-none text-[25px]" />
                   </InputFormEdit>
                 </div>
 
                 {/* chua lam phan nay */}
                 <div className={`grid-in-placeoffer ${styleInput}`}>
-                  <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="PlaceOffer">
+                  <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Amenities">
                     {/* <input type="text" className="w-full h-[50px] outline-none text-[25px]" /> */}
                     <div className="w-full h-fit mb-5 border-b-2 border-slate-500 py-10">
                       <div className="w-full h-fit flex flex-col ">
                         <span className="font-bold text-[25px] mb-5">Amenities</span>
-                        <Amenities  />
+                        <EditAmenities setTempHouse={setTempHouse} tempHouse={tempHouse} />
                       </div>
                     </div>
                   </InputFormEdit>

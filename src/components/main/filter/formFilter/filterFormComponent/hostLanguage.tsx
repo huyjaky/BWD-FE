@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useContext, useEffect } from 'react';
 const HostLanguage = () => {
   const { filterForm, setFilterForm } = useContext(filterContext);
-  const arrLanguage: string[] = ['English', 'Vietnam'];
+  const arrLanguage: string[] = ['English', 'Vietnamese'];
 
   return (
     <div className="w-full h-fit">

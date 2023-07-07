@@ -18,7 +18,7 @@ export interface house {
 export interface house_ {
   HouseId: string;
   Title: string; //
-  Des: string;
+  Description: string;
   DateUp: Date;
   PostBy: string;
   Price: number; //
@@ -33,5 +33,5 @@ export interface house_ {
   arrImg: { Path: string }[]; // Mang anh //
   Orientation: string; // Huong nha //
   Capacity: number; //
-  placeOffer: { PlaceOfferId: string; PlaceOffer: string; PathIcon: string }[]; //
+  placeOffer: { PlaceOfferId: string; PlaceOffer: string  }[]; //
 }
