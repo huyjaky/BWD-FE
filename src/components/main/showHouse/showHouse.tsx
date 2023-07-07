@@ -21,6 +21,7 @@ import { staggerContainer } from '@/utils/motion';
 import EditForm from './componentShowHouse/editForm';
 import { GrClose } from 'react-icons/gr';
 import nProgress from 'nprogress';
+import { houseTempContext } from '@/contexts/houseTemp';
 
 interface ShowHouseProps {
   infShow: isFilter_['isFilter_'];
@@ -36,7 +37,8 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
   const { data: session, status } = useSession();
   const { user, setUser } = useContext(userAccContext);
   const { isFilter, setIsFilter, reRenderFilter } = useContext(getHouseContext);
-  const [houseTemp, setHouseTemp] = useState<house_[]>([]);
+  // const [houseTemp, setHouseTemp] = useState<house_[]>([]);
+  const {houseTemp, setHouseTemp} = useContext(houseTempContext);
   const maskUser = useRef<HTMLInputElement>(null);
   const maskMap = useRef<HTMLInputElement>(null);
   const editPanel = useRef<HTMLDivElement>(null);
@@ -111,7 +113,8 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
 
   const isExist = (moreHouse: any) => {
     if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0 && moreHouse.data.length >= 10) {
-      setHouseTemp((prevHouse) => [...prevHouse, ...moreHouse.data]);
+      console.log(moreHouse);
+      setHouseTemp([...houseTemp, ...moreHouse.data]);
     } else {
       setHasMore(false); // cai nay de kiem tra xem da fetch het du lieu hay chua
     }

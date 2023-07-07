@@ -30,6 +30,7 @@ import Link from 'next/link';
 import ImgFileProvider from '@/contexts/imgFile';
 import Script from 'next/script';
 import SelectHouseProvider from '@/contexts/selectHouse';
+import HouseTempProvider from '@/contexts/houseTemp';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -68,15 +69,17 @@ export default function App({
                               <AmountTabHostingProviders>
                                 <ImgFileProvider>
                                   <SelectHouseProvider>
-                                    <Layout>
-                                      <div
-                                        className={`${monsterrat.className} bg-white
+                                    <HouseTempProvider>
+                                      <Layout>
+                                        <div
+                                          className={`${monsterrat.className} bg-white
                                         `}
-                                      >
-                                        <NextNProgress color="#B80F0A" height={7} />
-                                        <Component {...pageProps} />
-                                      </div>
-                                    </Layout>
+                                        >
+                                          <NextNProgress color="#B80F0A" height={7} />
+                                          <Component {...pageProps} />
+                                        </div>
+                                      </Layout>
+                                    </HouseTempProvider>
                                   </SelectHouseProvider>
                                 </ImgFileProvider>
                               </AmountTabHostingProviders>
