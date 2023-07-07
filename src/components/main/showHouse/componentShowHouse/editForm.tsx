@@ -17,6 +17,7 @@ import Amenities from "../../filter/formFilter/filterFormComponent/amenities/ame
 import InputFormEdit from "./inputForm/inputFormEdit";
 import MapEdit from "./inputForm/map";
 import EditAmenities from "./amenities/editAmenities";
+import { houseApi } from "@/api-client/houseApi";
 
 interface EditFormProps {
   keyMapBing: string;
@@ -51,9 +52,19 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
     setTempHouse(selectHouse);
   }, [selectHouse]);
 
-  const onSubmit: SubmitHandler<house_> = (data) => {
+  const onSubmit: SubmitHandler<house_> = async (data) => {
     if (filePondRef.current) {
       filePondRef.current.processFiles();
+    }
+    if (tempHouse) {
+      console.log('data', data);
+      const data0: house_ = {
+        ...data, placeOffer: tempHouse?.placeOffer,
+        Price: tempHouse.Price,
+        address: tempHouse.address
+      }
+      console.log('data0', data0);
+      const editStatus = await houseApi.editHouse(data0);
     }
   }
 
@@ -65,10 +76,10 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
     }
   }
 
-  useEffect(() => {
-    console.log('selechous', selectHouse);
-    console.log('temphouse', tempHouse);
-  }, [tempHouse])
+  // useEffect(() => {
+  //   console.log('selechous', selectHouse);
+  //   console.log('temphouse', tempHouse);
+  // }, [tempHouse])
 
   return (
     <>
@@ -101,9 +112,11 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
 
             <button type="button" className="flex-1 flex justify-start"
               onClick={(event) => {
+
                 if (selectHouse) {
                   setTempHouse({ ...selectHouse, placeOffer: watch().placeOffer })
                 }
+
                 reset(selectHouse);
                 setImgArr([]);
               }}

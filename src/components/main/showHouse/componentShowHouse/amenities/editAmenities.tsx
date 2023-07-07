@@ -13,18 +13,6 @@ const EditAmenities = ({ tempHouse, setTempHouse }: EditAmenitiesProps) => {
   // const arrAmenities_: string[] = arrAmenities;
   const [arrAmenities_, setArrAmenities] = useState<{ PlaceOffer: string; PlaceOfferId: string }[]>(arrEditAmeneties);
 
-  useEffect(() => {
-    console.log(tempHouse?.placeOffer);
-  }, [tempHouse])
-
-  const isCheck = (item_: { PlaceOffer: string; PlaceOfferId: string }, arr: { PlaceOffer: string; PlaceOfferId: string }[]):boolean =>{
-    let result: boolean = false
-    for (let index = 0; index < arr.length; index++) {
-      result = arr.some(item => item.PlaceOffer === item_.PlaceOffer);
-      if (result == true) return true
-    }
-    return result;
-  }
 
   const handleOnClick = (event: any, item: { PlaceOffer: string; PlaceOfferId: string }) => {
     if (!tempHouse) return;

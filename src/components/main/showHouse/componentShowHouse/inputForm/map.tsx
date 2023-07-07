@@ -1,5 +1,6 @@
 import { house_ } from "@/models/house";
 import { whenLoaded } from "bing-maps-loader";
+import { title } from "process";
 import { Dispatch, SetStateAction, useEffect } from "react";
 
 interface MapEditProps {
@@ -37,10 +38,15 @@ const MapEdit = ({ setTempHouse, tempHouse, keyMapBing, value }: MapEditProps) =
             var manager = new Microsoft.Maps.AutosuggestManager(options);
             manager.attachAutosuggest('#searchBox2', '#searchBoxContainer2', (suggestionResult: any) => {
               map.entities.clear();
-
               map.setView({ bounds: suggestionResult.bestView });
               var pushpin = new Microsoft.Maps.Pushpin(suggestionResult.location);
               map.entities.push(pushpin);
+
+              console.log(suggestionResult);
+              setTempHouse({...tempHouse,
+                address: {...tempHouse.address, ...suggestionResult?.address, ...suggestionResult?.location,
+                  title: suggestionResult.title
+                }})
             });
           }
         });

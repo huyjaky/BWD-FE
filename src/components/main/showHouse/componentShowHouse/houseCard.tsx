@@ -187,7 +187,7 @@ const HouseCard = ({
             <div className="w-full grid grid-cols-2 grid-rows-3">
               <div>
                 <span className="font-semibold">
-                  {item.address.adminDistrict2}, {item.address.countryRegion}
+                  {item.address.title}, {item.address.countryRegion}
                 </span>
               </div>
               <div className="flex justify-end font-semibold text-red-500">

@@ -4,7 +4,7 @@ import HostUser from './hostUser';
 
 interface HostProps {
   userAcc: userAcc;
-  placeOffer: { PlaceOfferId: string; PlaceOffer: string; PathIcon: string }[];
+  placeOffer: { PlaceOfferId: string; PlaceOffer: string }[];
   link: string;
 }
 
@@ -25,7 +25,7 @@ const Host = ({ userAcc, placeOffer, link }: HostProps) => {
         <div className="w-full grid grid-cols-2">
           {placeOffer.map(
             (
-              item: { PlaceOfferId: string; PlaceOffer: string; PathIcon: string },
+              item: { PlaceOfferId: string; PlaceOffer: string},
               index: number
             ) => {
               return (
@@ -35,11 +35,6 @@ const Host = ({ userAcc, placeOffer, link }: HostProps) => {
                   className="w-full h-fit flex items-center cursor-default"
                   key={index}
                 >
-                  <img
-                    src={`${link}/api/img/path/` + item.PathIcon}
-                    alt=""
-                    className="text-[30px]"
-                  />
                   <span className="text-[25px] text-ellipsis overflow-hidden whitespace-nowrap">
                     {item.PlaceOffer}
                   </span>

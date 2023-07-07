@@ -20,6 +20,7 @@ import { variants } from './variantsShowHouse';
 import { staggerContainer } from '@/utils/motion';
 import EditForm from './componentShowHouse/editForm';
 import { GrClose } from 'react-icons/gr';
+import nProgress from 'nprogress';
 
 interface ShowHouseProps {
   infShow: isFilter_['isFilter_'];
@@ -60,15 +61,18 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
   const isEmpty = (arr: any) => {
     if (arr.data.length == 0) {
       setHasMore(false); // neu nhu du lieu tra ve la khong co lan dau tien thi khong xuat hien nx
+      nProgress.done();
       return;
     }
     setHouseTemp(arr.data as house_[]);
+    nProgress.done();
   };
 
   const fetchHouseApi = async () => {
     if (houseTemp.length != 0 || status === 'loading') return;
     const temp = await session?.userAcc;
     // neu user login thi userid se thay doi nen phai chia ra nhieu truong hop
+    nProgress.set(0.6);
     if (infShow === 'noneAuthHouseApi' && status === 'authenticated') {
       const arr = await houseApi['noneAuthHouseApi'](1, temp.UserId);
       return isEmpty(arr);
@@ -93,6 +97,7 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
       const arr = await houseApi['authFavoriteList'](temp.UserId, 0);
       return isEmpty(arr);
     }
+
   };
 
   useEffect(() => {

@@ -12,15 +12,14 @@ const selectPlaceDefaultData: selectPlaceData = {
       countryRegion: '',
       locality: '',
       adminDistrict: '',
-      adminDistrict2: '',
       countryRegionIso2: '',
-      houseNumber: '',
       postalCode: '',
       addressLine: '',
       streetName: '',
       formattedAddress: '',
       latitude: 0,
-      longitude: 0
+      longitude: 0,
+      title: ''
     },
     checkInDay: new Date(),
     checkOutDay: new Date(),
@@ -32,12 +31,11 @@ const selectPlaceDefaultData: selectPlaceData = {
   },
   emptyAddress: {
     address: {
+      title: '',
       countryRegion: '',
       locality: '',
       adminDistrict: '',
-      adminDistrict2: '',
       countryRegionIso2: '',
-      houseNumber: '',
       postalCode: '',
       addressLine: '',
       streetName: '',

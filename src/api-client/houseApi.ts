@@ -1,6 +1,7 @@
 import { addressSearch } from '@/models/addressSearch';
 import { filterForm } from '@/models/filter';
 import axiosClient from './axiosClient';
+import { house_ } from '@/models/house';
 
 export const houseApi = {
   noneAuthHouseApi(page: number | null, UserId: string) {
@@ -24,5 +25,8 @@ export const houseApi = {
   },
   authFavoriteList(UserId: string, offset: number) {
     return axiosClient.post(`/get/house/userid/favorite/${UserId}`, { offset: offset });
+  },
+  editHouse (dataEdit: house_) {
+    return axiosClient.post(`/modifier/all/house`, dataEdit);
   }
 };

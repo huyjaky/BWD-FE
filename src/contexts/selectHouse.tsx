@@ -19,15 +19,14 @@ const selectHouseDefaultData: selectHouseData = {
       countryRegion: '',
       locality: '',
       adminDistrict: '',
-      adminDistrict2: '',
       countryRegionIso2: '',
-      houseNumber: '',
       postalCode: '',
       addressLine: '',
       streetName: '',
       formattedAddress: '',
       latitude: 0,
-      longitude: 0
+      longitude: 0,
+      title:''
     },
     AddressId: '', //
     Area: '', //
