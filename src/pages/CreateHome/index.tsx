@@ -123,23 +123,36 @@ const CreateHome: NextPageWithLayout<CreateHomeProps> = ({
 
 CreateHome.Layout = authWithoutAnimate;
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const session = await getServerSession(req, res, authOptions);
-  const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
-  const api_url_path = process.env.API_URL_PATH;
+// export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+//   const session = await getServerSession(req, res, authOptions);
+//   const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
+//   const api_url_path = process.env.API_URL_PATH;
+//   initializeSSR();
+//   // if user available not callback api from server
+//   if (!session?.userAcc) {
+//     res.setHeader('location', '/login');
+//     res.statusCode = 302;
+//     res.end();
+//     return { props: {} };
+//   }
+//   return {
+//     props: {
+//       keyMapBing: keyMapBing,
+//       api_url_path: api_url_path
+//     }
+//   };
+// };
+
+export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
   initializeSSR();
-  // if user available not callback api from server
-  if (!session?.userAcc) {
-    res.setHeader('location', '/login');
-    res.statusCode = 302;
-    res.end();
-    return { props: {} };
-  }
+  const link = process.env.API_URL_PATH;
+  const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
   return {
     props: {
       keyMapBing: keyMapBing,
-      api_url_path: api_url_path
-    }
+      link: link
+    },
+    revalidate: 300
   };
 };
 
