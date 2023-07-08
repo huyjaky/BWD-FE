@@ -177,6 +177,8 @@ const SlideShowHouse = ({
                       setSelectUser={setSelectUser}
                       isEdit={null} setIsEdit={null}
                       key={index}
+                      isRemoveReq={undefined}
+                      setIsRemoveReq={()=>{}}
                     />
                   </SwiperSlide>
                 );

@@ -21,7 +21,11 @@ const variants: Variants = {
   }
 };
 
-const HeaderMain = () => {
+interface HeaderMainProps {
+  keyMapBing: string
+}
+
+const HeaderMain = ({keyMapBing}: HeaderMainProps) => {
   const { setPlaceList } = useContext(placeListContext);
   const { isLoginClick, setIsLoginClick } = useContext(selectPopoverContext);
   const { isClickOutSide, setIsClickOutSide, isShowHeader, setIsShowHeader } =
@@ -95,7 +99,7 @@ const HeaderMain = () => {
         overflow-hidden "
           id="maskFilter"
         >
-          <FormFilter />
+          <FormFilter keyMapBing={keyMapBing}/>
         </motion.div>
       </AnimatePresence>
 

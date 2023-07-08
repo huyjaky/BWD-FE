@@ -25,4 +25,13 @@ export const arrEditAmeneties: { PlaceOfferId: string; PlaceOffer: string }[] = 
     PlaceOfferId: '6',
     PlaceOffer: 'Washer'
   },
+  {
+    PlaceOfferId: '7',
+    PlaceOffer: 'Main door direction'
+  },
+  {
+    PlaceOfferId: '8',
+    PlaceOffer: 'Interior condition'
+  }
+
 ]

@@ -1,7 +1,7 @@
 import { selectHouseContext } from '@/contexts/selectHouse';
 import { house_ } from '@/models/house';
 import { motion } from 'framer-motion';
-import { Dispatch, SetStateAction, useContext, useState } from 'react';
+import { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
 import { BsListNested } from 'react-icons/bs';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 
@@ -9,14 +9,16 @@ interface EditRemoveIconProps {
   isEdit: boolean | null;
   item: house_;
   setIsEdit: Dispatch<SetStateAction<boolean>> | null;
+  isRemoveReq: boolean | undefined;
+  setIsRemoveReq: Dispatch<SetStateAction<boolean | undefined>>
 }
 
-const EditRemoveIcon = ({ isEdit, setIsEdit, item }: EditRemoveIconProps) => {
+const EditRemoveIcon = ({ isEdit, setIsEdit, item, isRemoveReq, setIsRemoveReq }: EditRemoveIconProps) => {
   const { selectHouse, setSelectHouse } = useContext(selectHouseContext)
+
 
   return (
     <>
-
       <div className="w-0 relative">
         <motion.div className="w-[50px] h-[60px] top-0 left-0 absolute z-20 flex " >
           <button
@@ -32,7 +34,9 @@ const EditRemoveIcon = ({ isEdit, setIsEdit, item }: EditRemoveIconProps) => {
         </motion.div>
 
         <motion.div className="w-[50px] h-[60px] top-0 left-[50px] absolute z-20 flex " >
-          <button className='w-fit h-fit m-auto'>
+          <button
+            onClick={()=>{setIsRemoveReq(true)}}
+           className='w-fit h-fit m-auto'>
             <RiDeleteBin5Line className="w-[40px] h-[40px] text-red-500 " />
           </button>
         </motion.div>

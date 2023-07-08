@@ -6,6 +6,7 @@ export interface filterForm {
   typeHouse: string[];
   amenities: string[];
   hostLanguage: string;
+  orientation:string;
 }
 
 export interface amenities {

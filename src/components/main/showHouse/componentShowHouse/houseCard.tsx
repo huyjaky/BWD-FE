@@ -21,6 +21,7 @@ interface HouseCardProps {
   infShow: isFilter_['isFilter_'];
   keyMapBing: string;
   isEdit: boolean | null;
+  isRemoveReq: boolean | undefined;
   setIsHover: Dispatch<SetStateAction<{ ishover: boolean; id: number }>>;
   setIsOpenMaskMap: Dispatch<SetStateAction<boolean>>;
   setSelectLocale: Dispatch<
@@ -29,6 +30,7 @@ interface HouseCardProps {
   setSelectUser: Dispatch<SetStateAction<userAcc | undefined>>;
   setIsOpenMask: Dispatch<SetStateAction<boolean>>;
   setIsEdit: Dispatch<SetStateAction<boolean>> | null;
+  setIsRemoveReq: Dispatch<SetStateAction<boolean | undefined>>
 }
 
 const HouseCard = ({
@@ -42,7 +44,9 @@ const HouseCard = ({
   setSelectLocale,
   setSelectUser,
   setIsOpenMask,
-  setIsEdit
+  setIsEdit,
+  isRemoveReq,
+  setIsRemoveReq
 }: HouseCardProps) => {
   const { selectHouse, setSelectHouse } = useContext(selectHouseContext);
 
@@ -150,7 +154,9 @@ const HouseCard = ({
               )}
             </div>
 
-            <EditRemoveIcon isEdit={isEdit} setIsEdit={setIsEdit} item={item} />
+            <EditRemoveIcon isEdit={isEdit} setIsEdit={setIsEdit} item={item}
+            isRemoveReq={isRemoveReq} setIsRemoveReq={setIsRemoveReq}
+            />
           </motion.button>
 
 
@@ -173,7 +179,9 @@ const HouseCard = ({
                 <HiUserCircle className="w-full h-full" />
               )}
             </div>
-            <EditRemoveIcon isEdit={isEdit} setIsEdit={setIsEdit} item={item} />
+            <EditRemoveIcon isEdit={isEdit} setIsEdit={setIsEdit} item={item}
+            isRemoveReq={isRemoveReq} setIsRemoveReq={setIsRemoveReq}
+            />
           </motion.button>
 
 

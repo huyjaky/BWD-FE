@@ -92,7 +92,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
         id="root"
       >
         <AnimatePresence initial={false}>
-          <HeaderMain />
+          <HeaderMain keyMapBing={keyMapBing}/>
         </AnimatePresence>
         <motion.div>
           <TypeHouse />

@@ -12,6 +12,10 @@ import BedsBathRooms from './filterFormComponent/bedsBathrooms';
 import HostLanguage from './filterFormComponent/hostLanguage';
 import PriceRange from './filterFormComponent/priceRange';
 import PropertyHouse from './filterFormComponent/property';
+import { address } from '@/models/address';
+import MapEdit from '../../showHouse/componentShowHouse/inputForm/map';
+import MapFilter from './filterFormComponent/Mapfilter';
+import CompassFilter from './filterFormComponent/compass';
 
 export const variantsAmenities: Variants = {
   showMore: {
@@ -25,7 +29,11 @@ export const variantsAmenities: Variants = {
   }
 };
 
-const FormFilter = () => {
+interface FormFilterProps {
+  keyMapBing: string
+}
+
+const FormFilter = ({ keyMapBing }: FormFilterProps) => {
   const [show, setShow] = useState(false);
   const { filterForm, setFilterForm } = useContext(filterContext);
   const { setIsFilter, isFilter, setReRenderFilter, reRenderFilter } = useContext(getHouseContext);
@@ -51,20 +59,37 @@ const FormFilter = () => {
   }, [isShowAllPt]);
 
   const isEmpty = () => {
-    const emptyObj = {
+    const emptyObj:filterForm = {
       maxPrice: 250,
       minPrice: 10,
       beds: 0,
       bathRooms: 0,
       typeHouse: [],
       amenities: [],
-      hostLanguage: ''
+      hostLanguage: '',
+      orientation: ''
     };
 
+    const emptyAddress: address = {
+      countryRegion: '',
+      locality: '',
+      adminDistrict: '',
+      countryRegionIso2: '',
+      postalCode: '',
+      addressLine: '',
+      streetName: '',
+      formattedAddress: '',
+      latitude: 0,
+      longitude: 0,
+      title: ''
+    };
     const emptyObjJson = JSON.stringify(emptyObj);
     const filterFormJson = JSON.stringify(filterForm);
+    const emptyAddressJson = JSON.stringify(emptyAddress);
+    const addressJson = JSON.stringify(address);
+    console.log(filterForm.orientation);
 
-    if (emptyObjJson === filterFormJson) return true;
+    if (emptyObjJson === filterFormJson && emptyAddressJson === addressJson) return true;
     return false;
   };
 
@@ -76,14 +101,14 @@ const FormFilter = () => {
     // neu du lieu co ton tai thi la fetch lai du lieu neu khong thi bo qua
     if (!isEmpty()) {
       setIsFilter('noneAuthFilter');
-      setReRenderFilter(reRenderFilter+1);
+      setReRenderFilter(reRenderFilter + 1);
       return;
     } else {
       setIsFilter('main');
       return;
     }
   };
-  useEffect(()=>{console.log(filterForm);},[filterForm])
+  useEffect(() => { console.log(filterForm); }, [filterForm])
 
   return (
     <>
@@ -92,10 +117,10 @@ const FormFilter = () => {
           variants={variantsAmenities}
           animate={isClickOutSide ? 'show' : 'hidden'}
           transition={{ duration: 0.5, type: 'tween' }}
-          className="w-[800px] h-[calc(100vh-50px)] bg-white m-auto rounded-3xl overflow-hidden
+          className="w-[800px] h-[calc(100vh-50px)] bg-white m-auto rounded-3xl
           flex flex-col
-          mobile:mt-0 mobile:rounded-none mobile:w-screen mobile:h-[calc(100vh-70px)]
-          tablet:h-[calc(100vh-90px)] tablet:mt-[10px] z-40
+          mobile:mt-0 mobile:rounded-none mobile:w-screen mobile:h-screen
+          tablet:h-[calc(100vh-90px)] tablet:mt-[10px] z-30
           "
           ref={formFilter}
         >
@@ -126,6 +151,15 @@ const FormFilter = () => {
               <PriceRange />
             </div>
 
+            {/* Map */}
+            <div className="w-full h-fit border-b-2 border-slate-500 py-10">
+              {/* header bed&bathrooms */}
+              <div className="w-full h-fit flex flex-col  pb-3">
+                <span className="font-bold text-[25px] mb-5">Map</span>
+                <MapFilter keyMapBing={keyMapBing} />
+              </div>
+            </div>
+
             {/* bed and bathrooms */}
             <div className="w-full h-fit border-b-2 border-slate-500 py-10">
               {/* header bed&bathrooms */}
@@ -147,6 +181,14 @@ const FormFilter = () => {
               <div className="w-full h-fit flex flex-col ">
                 <span className="font-bold text-[25px] mb-5">Amenities</span>
                 <Amenities />
+              </div>
+            </div>
+
+            {/* compass */}
+            <div className="w-full h-fit mb-5 border-b-2 border-slate-500 py-10">
+              <div className="w-full h-fit flex flex-col ">
+                <span className="font-bold text-[25px] mb-5">Orientation</span>
+                <CompassFilter />
               </div>
             </div>
 
@@ -174,19 +216,18 @@ const FormFilter = () => {
                     amenities: [],
                     hostLanguage: ''
                   };
-                  const addressTemp = {
+                  const addressTemp: address = {
                     countryRegion: '',
                     locality: '',
                     adminDistrict: '',
-                    adminDistrict2: '',
                     countryRegionIso2: '',
-                    houseNumber: '',
                     postalCode: '',
                     addressLine: '',
                     streetName: '',
                     formattedAddress: '',
                     latitude: 0,
-                    longitude: 0
+                    longitude: 0,
+                    title: ''
                   };
                   setFilterForm(filterFormTemp);
                   setAddress({ ...address, address: { ...address.address, ...addressTemp } });

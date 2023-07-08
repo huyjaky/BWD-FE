@@ -21,7 +21,8 @@ const filterDataDefault: filterData = {
     bathRooms: 0,
     typeHouse: [],
     amenities: [],
-    hostLanguage: ''
+    hostLanguage: '',
+    orientation: ''
   },
   emptyFilterForm: {
     maxPrice: 250,
@@ -30,7 +31,8 @@ const filterDataDefault: filterData = {
     bathRooms: 0,
     typeHouse: [],
     amenities: [],
-    hostLanguage: ''
+    hostLanguage: '',
+    orientation: ''
   },
   setFilterForm: (payload: filterForm) => {},
   resetFilterForm: () => {},

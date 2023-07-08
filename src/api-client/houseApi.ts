@@ -28,5 +28,8 @@ export const houseApi = {
   },
   editHouse (dataEdit: house_) {
     return axiosClient.post(`/modifier/all/house`, dataEdit);
+  },
+  DeleteHouse(HouseId:string, AddressId:string) {
+    return axiosClient.post(`/delete/house`, {HouseId:HouseId, AddressId:AddressId})
   }
 };

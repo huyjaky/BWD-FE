@@ -4,24 +4,24 @@ import SkeletonShowHouse from '@/components/skeletonLoading/skletonShowHouse';
 import { AmountTabHostingContext } from '@/contexts/amountTabHosting';
 import { filterContext } from '@/contexts/filter';
 import { getHouseContext, isFilter_ } from '@/contexts/getHouse';
+import { houseTempContext } from '@/contexts/houseTemp';
 import { selectPlaceContext } from '@/contexts/selectPlace';
 import { userAccContext } from '@/contexts/userAcc';
 import { house_ } from '@/models/house';
 import { userAcc } from '@/models/userAcc';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useSession } from 'next-auth/react';
+import nProgress from 'nprogress';
 import { useContext, useEffect, useRef, useState } from 'react';
+import { GrClose } from 'react-icons/gr';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import AnimateTitle from './animateTitle';
+import EditForm from './componentShowHouse/editForm';
 import EndMessage from './componentShowHouse/endMessage';
 import HouseCard from './componentShowHouse/houseCard';
+import RemoveReq from './componentShowHouse/inputForm/removeReq';
 import MapEach from './mapEach';
 import { variants } from './variantsShowHouse';
-import { staggerContainer } from '@/utils/motion';
-import EditForm from './componentShowHouse/editForm';
-import { GrClose } from 'react-icons/gr';
-import nProgress from 'nprogress';
-import { houseTempContext } from '@/contexts/houseTemp';
 
 interface ShowHouseProps {
   infShow: isFilter_['isFilter_'];
@@ -42,10 +42,12 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
   const maskUser = useRef<HTMLInputElement>(null);
   const maskMap = useRef<HTMLInputElement>(null);
   const editPanel = useRef<HTMLDivElement>(null);
+  const removeReqPanel = useRef<HTMLDivElement>(null);
   const [isOpenMask, setIsOpenMask] = useState<boolean>(false);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [selectUser, setSelectUser] = useState<userAcc>();
+  const [isRemoveReq, setIsRemoveReq] = useState<boolean | undefined>(false);
 
   const [isHover, setIsHover] = useState<{
     ishover: boolean;
@@ -181,10 +183,34 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
     }
   };
 
+const handleOnClickOutSideRemoveReqPanel = (event: any) => {
+    const isClickInSide = removeReqPanel.current?.contains(event.target);
+    if (!isClickInSide) {
+      setIsRemoveReq(false);
+      return;
+    } else {
+      return;
+    }
+  };
+
   return (
     <div>
-      {/* edit */}
 
+
+      <AnimatePresence initial={false}>
+        <motion.div
+          variants={variants}
+          animate={isRemoveReq ? 'showMask' : 'hiddenMask'}
+          onClick={handleOnClickOutSideRemoveReqPanel}
+          className="fixed w-screen h-screen bg-mask z-50 top-0 left-0" >
+          <div className='w-fit h-fit m-auto' ref={removeReqPanel}>
+            <RemoveReq setIsRemoveReq={setIsRemoveReq} isRemoveReq={isRemoveReq}/>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
+
+      {/* edit */}
       <AnimatePresence initial={false}>
         <motion.div
           variants={variants}
@@ -311,6 +337,8 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
                 setSelectLocale={setSelectLocale}
                 setSelectUser={setSelectUser}
                 setIsEdit={setIsEdit}
+                isRemoveReq={isRemoveReq}
+                setIsRemoveReq={setIsRemoveReq}
               />
             );
           })}

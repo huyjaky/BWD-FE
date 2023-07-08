@@ -19,7 +19,8 @@ const ControlBar = () => {
   const [submit, setSubmit] = useState(false);
   const { setSelected } = useContext(selectPopoverContext);
   const { address } = useContext(selectPlaceContext);
-  const { isFilter, setIsFilter } = useContext(getHouseContext);
+  // const { isFilter, setIsFilter } = useContext(getHouseContext;
+  const { setIsFilter, isFilter, setReRenderFilter, reRenderFilter } = useContext(getHouseContext);
   const { setIsShowHeader } = useContext(filterFormAnimateContext);
   const router = useRouter();
 
@@ -46,6 +47,7 @@ const ControlBar = () => {
     } else {
       setIsShowHeader(false);
       setIsFilter('noneAuthFilter');
+      setReRenderFilter(reRenderFilter+1);
       return;
     }
   };

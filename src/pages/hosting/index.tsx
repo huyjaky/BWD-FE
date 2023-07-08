@@ -25,9 +25,9 @@ const Index: NextPageWithLayout<indexProps> = ({ keyMapBing, api_url_path }: ind
   initializeSSR();
   return (
     <>
-      <div className={`${monsterrat.className}`}>
+      <div className={`${monsterrat.className} overflow-x-hidden mobile:overflow-y-hidden`}>
         <Header />
-        <Main keyMapBing={keyMapBing} api_url_path={api_url_path}/>
+        <Main keyMapBing={keyMapBing} api_url_path={api_url_path} />
         <FooterRooms />
         <FooterMainRes />
       </div>
@@ -44,6 +44,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
   const api_url_path = process.env.API_URL_PATH;
   initializeSSR();
+
   if (!session?.userAcc) {
     res.setHeader('location', '/login');
     res.statusCode = 302;
@@ -54,7 +55,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   return {
     props: {
       keyMapBing: keyMapBing,
-api_url_path: api_url_path
+      api_url_path: api_url_path
     }
   };
 };

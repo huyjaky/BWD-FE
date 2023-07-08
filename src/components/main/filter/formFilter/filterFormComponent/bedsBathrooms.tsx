@@ -4,7 +4,7 @@ import { useContext } from 'react';
 
 const BedsBathRooms = () => {
   const { filterForm, setFilterForm } = useContext(filterContext);
-  const styleButton = 'w-[60px] h-[40px] rounded-full border-2 border-slate-600 ml-3';
+  const styleButton = 'w-[60px] h-[40px] rounded-full border-2 border-slate-600 ml-3 mobile:ml-0';
   const arrButton: number[] = [];
   for (let index = 0; index <= 8; index++) {
     arrButton.push(index);
@@ -23,7 +23,7 @@ const BedsBathRooms = () => {
                   key={index}
                   whileTap={{ scale: 0.6 }}
                   transition={{ duration: 0.5 }}
-                  className={`${styleButton.replace('ml-3', '')}
+                  className={`${styleButton.replace('ml-3 ', '')}
                                 ${filterForm.beds == 0 ? 'bg-black text-white' : ''}
                               `}
                   onClick={(event) => setFilterForm({ ...filterForm, beds: index })}

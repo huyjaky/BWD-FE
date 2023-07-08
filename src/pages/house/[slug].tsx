@@ -49,7 +49,7 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
       <div className="w-full h-fit">
         <main className={`${monsterrat.className} relative box-border`} id="root">
           <AnimatePresence initial={false}>
-            <HeaderMain />
+            <HeaderMain keyMapBing=''/>
           </AnimatePresence>
 
           <div

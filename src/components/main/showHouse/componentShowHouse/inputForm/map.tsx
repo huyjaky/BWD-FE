@@ -24,7 +24,8 @@ const MapEdit = ({ setTempHouse, tempHouse, keyMapBing, value }: MapEditProps) =
           ),
           mapTypeId: Microsoft.Maps.MapTypeId.road,
           zoom: 16,
-          credentials: keyMapBing
+          credentials: keyMapBing,
+          disableScrollWheelZoom: true
         });
         var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), undefined);
         var layer = new Microsoft.Maps.Layer();
