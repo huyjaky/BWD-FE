@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Resourcesandtips, reservations } from '../utils/constants';
 import ButtonReservations from '../ButtonReserations';
-import { AnyReview, ContactSupport, SuperHost } from '../../../../Icon_BnB_svg';
+import { AnyReview, ContactSupport, SuperHost } from '../../../../public/Icon_BnB_svg';
 import ResourceAndTip from '../ResourceAndTip';
 import { motion, Variants } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';

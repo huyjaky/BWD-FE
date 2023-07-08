@@ -1,48 +1,48 @@
-import { House } from '../../../../Icon_BnB_svg';
-import { Cabins } from '../../../../Icon_BnB_svg';
-import { Luxe } from '../../../../Icon_BnB_svg';
-import { Camping } from '../../../../Icon_BnB_svg';
-import { Historical_home } from '../../../../Icon_BnB_svg';
-import { Islands } from '../../../../Icon_BnB_svg';
-import { TynihomeIcon } from '../../../../Icon_BnB_svg';
-import { Private_rooms } from '../../../../Icon_BnB_svg';
-import { Desert } from '../../../../Icon_BnB_svg';
-import { Dammusi } from '../../../../Icon_BnB_svg';
-import { Amazing_pools } from '../../../../Icon_BnB_svg';
-import { Surfing } from '../../../../Icon_BnB_svg';
-import { TropicalIcon } from '../../../../Icon_BnB_svg';
-import { VineYardIcon } from '../../../../Icon_BnB_svg';
-import { BeachFronts } from '../../../../Icon_BnB_svg';
-import { Apartment } from '../../../../Icon_BnB_svg';
-import { Guesthouse } from '../../../../Icon_BnB_svg';
+import { House } from '../../../../public/Icon_BnB_svg';
+import { Cabins } from '../../../../public/Icon_BnB_svg';
+import { Luxe } from '../../../../public/Icon_BnB_svg';
+import { Camping } from '../../../../public/Icon_BnB_svg';
+import { Historical_home } from '../../../../public/Icon_BnB_svg';
+import { Islands } from '../../../../public/Icon_BnB_svg';
+import { TynihomeIcon } from '../../../../public/Icon_BnB_svg';
+import { Private_rooms } from '../../../../public/Icon_BnB_svg';
+import { Desert } from '../../../../public/Icon_BnB_svg';
+import { Dammusi } from '../../../../public/Icon_BnB_svg';
+import { Amazing_pools } from '../../../../public/Icon_BnB_svg';
+import { Surfing } from '../../../../public/Icon_BnB_svg';
+import { TropicalIcon } from '../../../../public/Icon_BnB_svg';
+import { VineYardIcon } from '../../../../public/Icon_BnB_svg';
+import { BeachFronts } from '../../../../public/Icon_BnB_svg';
+import { Apartment } from '../../../../public/Icon_BnB_svg';
+import { Guesthouse } from '../../../../public/Icon_BnB_svg';
 
 import { AiOutlineUser } from 'react-icons/ai';
 import { MdFamilyRestroom } from 'react-icons/md';
 import { HiOutlineUsers } from 'react-icons/hi';
 import { TbFriends } from 'react-icons/tb';
 
-import { Wifi } from '../../../../Icon_BnB_svg';
-import { TV } from '../../../../Icon_BnB_svg';
-import { Kitchen } from '../../../../Icon_BnB_svg';
-import { Washer } from '../../../../Icon_BnB_svg';
-import { Freepark } from '../../../../Icon_BnB_svg';
-import { Paidpark } from '../../../../Icon_BnB_svg';
-import { Aircond } from '../../../../Icon_BnB_svg';
-import { Dedwork } from '../../../../Icon_BnB_svg';
+import { Wifi } from '../../../../public/Icon_BnB_svg';
+import { TV } from '../../../../public/Icon_BnB_svg';
+import { Kitchen } from '../../../../public/Icon_BnB_svg';
+import { Washer } from '../../../../public/Icon_BnB_svg';
+import { Freepark } from '../../../../public/Icon_BnB_svg';
+import { Paidpark } from '../../../../public/Icon_BnB_svg';
+import { Aircond } from '../../../../public/Icon_BnB_svg';
+import { Dedwork } from '../../../../public/Icon_BnB_svg';
 
-import { Hottub } from '../../../../Icon_BnB_svg';
-import { Patio } from '../../../../Icon_BnB_svg';
-import { BBQ } from '../../../../Icon_BnB_svg';
-import { OutdoorDining } from '../../../../Icon_BnB_svg';
-import { Pooltable } from '../../../../Icon_BnB_svg';
-import { Piano } from '../../../../Icon_BnB_svg';
-import { Excersise } from '../../../../Icon_BnB_svg';
-import { OutdoorShow } from '../../../../Icon_BnB_svg';
+import { Hottub } from '../../../../public/Icon_BnB_svg';
+import { Patio } from '../../../../public/Icon_BnB_svg';
+import { BBQ } from '../../../../public/Icon_BnB_svg';
+import { OutdoorDining } from '../../../../public/Icon_BnB_svg';
+import { Pooltable } from '../../../../public/Icon_BnB_svg';
+import { Piano } from '../../../../public/Icon_BnB_svg';
+import { Excersise } from '../../../../public/Icon_BnB_svg';
+import { OutdoorShow } from '../../../../public/Icon_BnB_svg';
 
-import { SmokeA } from '../../../../Icon_BnB_svg';
-import { Firstaid } from '../../../../Icon_BnB_svg';
-import { FireExting } from '../../../../Icon_BnB_svg';
-import { Carbonmono } from '../../../../Icon_BnB_svg';
+import { SmokeA } from '../../../../public/Icon_BnB_svg';
+import { Firstaid } from '../../../../public/Icon_BnB_svg';
+import { FireExting } from '../../../../public/Icon_BnB_svg';
+import { Carbonmono } from '../../../../public/Icon_BnB_svg';
 
 export const categoriesStep2 = [
   { name: 'Home', icon: <House className="w-[45px] h-[45px]" /> },

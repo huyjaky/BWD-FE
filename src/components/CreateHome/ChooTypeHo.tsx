@@ -1,5 +1,5 @@
 import React from 'react';
-import { House } from '../../../Icon_BnB_svg';
+import { House } from '../../../public/Icon_BnB_svg';
 
 interface ChooTypeHoProps {
   name: string;

@@ -7,7 +7,7 @@ import { IoIosArrowDown } from 'react-icons/io';
 import { motion } from 'framer-motion';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import MenuMobile from './MenuMobile';
-import { CreateList } from '../../../../Icon_BnB_svg';
+import { CreateList } from '../../../../public/Icon_BnB_svg';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 

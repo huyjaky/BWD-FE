@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Calendar, CreateList, Inbox, Today } from '../../../../Icon_BnB_svg';
+import { Calendar, CreateList, Inbox, Today } from '../../../../public/Icon_BnB_svg';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 interface MenuMobileProps {
@@ -27,7 +27,7 @@ const MenuMobile: React.FC<MenuMobileProps> = ({ toggleMenu, active, setActive }
       {/* blur: độ đục của màu */}
       {toggleMenu && (
         <ul
-          className="flex text-[14px] font-semibold 
+          className="flex text-[14px] font-semibold
             z-50 flex-col bg-[rgba(255,255,255,.25)]
             shadow-shadowHeadhost backdrop-blur-[4px] rounded-[13px]
             right-[150px] w-[200px] h-full
@@ -46,7 +46,7 @@ const MenuMobile: React.FC<MenuMobileProps> = ({ toggleMenu, active, setActive }
               onClick={() => setActive('Today')}
               className={`w-[100%] h-[40px] p-[20px] text-start flex justify-between items-center rounded-b-none rounded-t-[13px] hover:bg-[#F7F7F7] ${
                 active === 'Today' ? 'text-black' : 'text-[#717171]'
-              }                      
+              }
                             before:absolute before:content-[""] before:w-0 before:h-[2px] before:bg-black before:left-4 before:bottom-0
                             before::ease-in-out before:duration-500
                             hover:before:w-[85%]
