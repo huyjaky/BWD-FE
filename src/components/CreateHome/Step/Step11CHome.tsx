@@ -64,64 +64,8 @@ export default function Step11CHome({ api_url_path }: Step11CHomeProps) {
                 You'll need 5 photos to get started. You can add more or make changes later.
               </motion.p>
               <div className="mt-10">
-                <FilePond
-                  files={imgArr}
-                  allowMultiple={true}
-                  onaddfile={(error: FilePondErrorDescription | null, file: FilePondFile) => {
-                    if (error) return;
-                    let temp = imgArr;
-                    temp.push(file);
-                    setImgArr(temp);
-                  }}
-                  beforeAddFile={async (file: FilePondFile) => {
-                    if (imgArr.length > 0) {
-                      const isExist = await imgArr.some(
-                        (items: any) => items.filename === file.filename
-                      );
-                      console.log(isExist);
-                      return !isExist;
-                    }
-                    return true;
-                  }}
-                  onprocessfilerevert={async (file: FilePondFile) => {
-                    try {
-                      const temp = await axiosClient.post(`/delete/img`, {
-                        nameImg: file.filename
-                      });
-                      if (temp.status == 200) {
-                        console.log(temp.data);
-                      }
-                    } catch (error) {
-                      console.log(error);
-                      return;
-                    }
-                  }}
-                  maxFiles={30}
-                  maxParallelUploads={30}
-                  // server={`${api_url_path}/api/post/img`}
-                  server={{
-                    url: api_url_path + '/api',
-                    process: {
-                      url: '/post/img',
-                      method: 'POST',
-                      timeout: 120000
-                    }
-                  }}
-                  name="files" /* sets the file input name, it's filepond by default */
-                  labelIdle='Drag and drop files <span class="filepond--label-action">Browse</span>'
-                  acceptedFileTypes={[
-                    'image/jpeg',
-                    'image/jpg',
-                    'image/png',
-                    'image/gif',
-                    'image/bmp',
-                    'image/svg+xml',
-                    'image/webp',
-                    'image/tiff',
-                    'image/x-icon',
-                    'application/pdf'
-                  ]}
-                />
+ 
+
               </div>
             </div>
           </div>
