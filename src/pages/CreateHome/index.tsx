@@ -121,7 +121,7 @@ const CreateHome: NextPageWithLayout<CreateHomeProps> = ({
   );
 };
 
-CreateHome.Layout = AuthWithAnimate;
+CreateHome.Layout = authWithoutAnimate;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getServerSession(req, res, authOptions);
