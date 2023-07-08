@@ -56,7 +56,8 @@ const selectHouseDefaultData: selectHouseData = {
       PersonCode: '',
       CustomerType: '',
       Image: '',
-      error: ''
+      error: '',
+      Phone: ''
     }
   },
   resetSelectHouse: ()=>{},

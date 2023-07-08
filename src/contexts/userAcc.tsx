@@ -23,7 +23,8 @@ const userAccDefaultData: userrAccData = {
     PersonCode: '',
     CustomerType: '',
     Image: '',
-    error: ''
+    error: '',
+    Phone:''
   },
   setUser: () => {},
   resetDataUser: () => {}

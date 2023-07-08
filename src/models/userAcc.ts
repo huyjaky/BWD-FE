@@ -10,4 +10,5 @@ export interface userAcc {
   PersonCode: string;
   CustomerType: string;
   error: any;
+  Phone: string;
 }

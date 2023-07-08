@@ -33,10 +33,18 @@ import { initializeSSR } from 'bing-maps-loader';
 import Script from 'next/script';
 import { NextPageWithLayout } from '@/models/layoutprops';
 import authWithoutAnimate from '@/components/layouts/authWithoutAnimate';
+import { Montserrat } from 'next/font/google';
+import AuthWithAnimate from '@/components/layouts/authWithAnimate';
 interface CreateHomeProps {
   keyMapBing: string;
   api_url_path: string;
 }
+
+const monsterrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['200', '400', '600', '800'],
+  variable: '--font-monsterrat'
+});
 
 const CreateHome: NextPageWithLayout<CreateHomeProps> = ({
   keyMapBing,
@@ -87,7 +95,7 @@ const CreateHome: NextPageWithLayout<CreateHomeProps> = ({
   return (
     <>
       <CreateHouseProvider>
-        <div className="">
+        <div className={`${monsterrat.className}`}>
           {currentStep > 0 && currentStep <= 17 && <Header />}
 
           <AnimatePresence>
@@ -113,7 +121,7 @@ const CreateHome: NextPageWithLayout<CreateHomeProps> = ({
   );
 };
 
-CreateHome.Layout = authWithoutAnimate;
+CreateHome.Layout = AuthWithAnimate;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getServerSession(req, res, authOptions);

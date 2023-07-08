@@ -100,6 +100,8 @@ const DesktopLaptop = () => {
                   }}
                   onClick={(event) => {
                     setKeyClickTypehouse(index);
+
+                    window.scrollTo(0, 0);
                     if (item.title === 'House for rent') {
                       const temp = filterForm.typeHouse.filter(
                         (item: string) => item != 'HouseForSale'
@@ -120,6 +122,7 @@ const DesktopLaptop = () => {
                         return;
                       };
                       setIsFilter('favoriteHouse');
+
                     }
                   }}
                   className="p-1 h-[70px]"
