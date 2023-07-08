@@ -33,5 +33,6 @@ export interface house_ {
   arrImg: { Path: string }[]; // Mang anh //
   Orientation: string; // Huong nha //
   Capacity: number; //
+  Type:string,
   placeOffer: { PlaceOfferId: string; PlaceOffer: string  }[]; //
 }

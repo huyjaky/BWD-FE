@@ -44,6 +44,7 @@ const selectHouseDefaultData: selectHouseData = {
     PostBy: '', //
     Price: 0, //
     Title: '', //
+    Type: '',
     useracc: {
       UserId: '',
       UserName: '',

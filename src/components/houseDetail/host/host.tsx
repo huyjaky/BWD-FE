@@ -79,7 +79,7 @@ const Host = ({ userAcc, placeOffer, link, description, houseDetail }: HostProps
           <FaCompass />
         </FtHouse>
 
-        <FtHouse des={'House'} title='Orientation'>
+        <FtHouse des={houseDetail.Type} title='Type'>
           <BsFillHouseFill />
         </FtHouse>
       </div>

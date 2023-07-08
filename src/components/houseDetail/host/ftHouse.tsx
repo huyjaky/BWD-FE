@@ -10,7 +10,7 @@ const FtHouse = ({ children, title, des }: FtHouseProps) => {
   return (
     <div className="w-full h-full flex">
       {/* icon */}
-      <div className="text-[30px] my-auto">
+      <div className="text-[30px] my-auto mr-3">
         {children}
       </div>
       {/* title */}
