@@ -41,10 +41,8 @@ const EditAmenities = ({ tempHouse, setTempHouse }: EditAmenitiesProps) => {
 
   return (
     <div className="w-full mb-14">
-
       <div className="w-full h-fit grid grid-cols-2 gap-y-5 mt-3">
         {arrAmenities_.map((item: { PlaceOffer: string; PlaceOfferId: string }, index: number) => {
-
           return (
             <div
               className="w-full cursor-pointer"

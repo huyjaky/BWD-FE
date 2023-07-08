@@ -280,7 +280,6 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
                     {/* <input type="text" className="w-full h-[50px] outline-none text-[25px]" /> */}
                     <div className="w-full h-fit mb-5 border-b-2 border-slate-500 py-10">
                       <div className="w-full h-fit flex flex-col ">
-                        <span className="font-bold text-[25px] mb-5">Amenities</span>
                         <EditAmenities setTempHouse={setTempHouse} tempHouse={tempHouse} />
                       </div>
                     </div>

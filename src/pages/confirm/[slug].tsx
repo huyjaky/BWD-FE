@@ -11,6 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import moment from 'moment';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
+import { Montserrat } from 'next/font/google';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useRef, useState } from 'react';
@@ -38,6 +39,12 @@ const variants: Variants = {
 };
 
 const phonePattern = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
+
+const monsterrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['200', '400', '600', '800'],
+  variable: '--font-monsterrat'
+});
 
 const schema = yup
   .object({
@@ -209,7 +216,7 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
         </motion.div>
       </AnimatePresence>
 
-      <div className="w-full h-fit box-border flex">
+      <div className={`w-full h-fit box-border flex ${monsterrat.className}`}>
         <div className="w-[1100px] h-fit m-auto mt-5">
           {/* header */}
           <div className="w-full h-fit flex items-center ">
@@ -330,7 +337,8 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
               "
                 >
                   <img
-                    src={houseDetail.arrImg[0].Path}
+                    // src={'/api/img/path'+houseDetail.arrImg[0].Path}
+                    src={'/api/img/path/'+houseDetail.arrImg[0].Path}
                     alt=""
                     className="w-full h-[300px] rounded-2xl object-cover"
                   />
@@ -377,6 +385,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsC
     const slug = await fetch(`${link}/api/get/house/page`);
     cachedHouseDetail = await slug.json();
   }
+
   const houseDetailData = cachedHouseDetail.find((house: house_) => house.HouseId === params?.slug);
   return {
     props: {

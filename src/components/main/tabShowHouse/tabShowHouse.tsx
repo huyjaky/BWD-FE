@@ -71,14 +71,18 @@ const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
           className="fixed w-screen h-screen bg-mask z-50 top-0 left-0 "
         >
           <motion.div
-            className="w-fit h-fit bg-mask p-7 m-auto mt-[10%] rounded-2xl"
+            className="w-fit h-fit bg-[#f0efe9] p-7 m-auto mt-[10%] rounded-2xl"
             ref={maskUser}
           >
-            <HostUser
-              imgPath={selectUser?.Image}
-              gmail={selectUser?.Gmail}
-              userName={selectUser?.UserName}
-            />
+            <div>
+
+              <HostUser
+                description=''
+                imgPath={selectUser?.Image}
+                gmail={selectUser?.Gmail}
+                userName={selectUser?.UserName}
+              />
+            </div>
           </motion.div>
         </motion.div>
       </AnimatePresence>

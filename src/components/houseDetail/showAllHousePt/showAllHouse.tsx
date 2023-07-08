@@ -53,7 +53,7 @@ const ShowAllHouse = ({ arrImg }: ShowAllHouseProps) => {
 
           {/* content */}
           <div className="w-full h-full overflow-scroll overflow-x-hidden flex ">
-            <div className="w-[700px] columns-2 h-fit gap-2  m-auto  mt-16 mb-14 overflow-hidden ">
+            <div className="w-[700px] columns-2 h-fit gap-2  m-auto  mt-28 mb-14 overflow-hidden ">
               {arrImg.map((item: { Path: string }, index: number) => {
                 return (
                   <motion.div whileHover={{ opacity: 0.6 }} key={index}>

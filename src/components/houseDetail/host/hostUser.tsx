@@ -5,6 +5,7 @@ interface HostUserProps {
   imgPath: string | undefined;
   userName: string | undefined;
   gmail: string | undefined;
+  description: string
 }
 
 const variants: Variants = {
@@ -30,13 +31,13 @@ const variants: Variants = {
   }
 };
 
-const HostUser = ({ imgPath, userName, gmail }: HostUserProps) => {
+const HostUser = ({ imgPath, userName, gmail, description }: HostUserProps) => {
   return (
-    <motion.div variants={variants} whileInView="inView" className="w-fit h-fit m-auto">
+    <motion.div variants={variants} whileInView="inView" className="w-fit h-fit m-auto ">
       {/* host card */}
       <motion.div
         whileHover={{ scale: 1.1 }}
-        className="w-[400px] h-[250px] bg-white rounded-2xl flex flex-col shadow-2xl"
+        className="w-[400px] mobile:w-full h-[250px] bg-white rounded-2xl flex flex-col shadow-2xl"
       >
         <div className="w-fit h-fit m-auto text-center">
           <motion.img
@@ -47,6 +48,9 @@ const HostUser = ({ imgPath, userName, gmail }: HostUserProps) => {
             className="w-[120px] h-[120px] rounded-full"
           />
           <span className="font-semibold text-[30px]">{userName}</span>
+          <div className='w-full h-fit text-justify text-[20px]'>
+            {description}
+          </div>
           <br />
         </div>
       </motion.div>

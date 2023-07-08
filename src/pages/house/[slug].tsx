@@ -12,12 +12,10 @@ import HeaderMain from '@/components/rootMaskHeader/headerMain';
 import { IsShowPtContext } from '@/contexts/isShowPt';
 import { house_ } from '@/models/house';
 import { NextPageWithLayout } from '@/models/layoutprops';
-import { initialize, initializeSSR } from 'bing-maps-loader';
+import { initializeSSR } from 'bing-maps-loader';
 import { AnimatePresence } from 'framer-motion';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { Montserrat } from 'next/font/google';
-import Head from 'next/head';
-import Script from 'next/script';
 import { useContext } from 'react';
 import { BiMenu } from 'react-icons/bi';
 
@@ -76,6 +74,8 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
             <div className="w-full h-fit mt-10">
               <div className="w-full h-fit flex box-border mobile:flex-col">
                 <Host
+                houseDetail={houseDetail}
+                  description={houseDetail.Description}
                   link={link}
                   userAcc={houseDetail.useracc}
                   placeOffer={houseDetail.placeOffer}

@@ -235,6 +235,7 @@ const handleOnClickOutSideRemoveReqPanel = (event: any) => {
             ref={maskUser}
           >
             <HostUser
+              description={''}
               imgPath={selectUser?.Image}
               gmail={selectUser?.Gmail}
               userName={selectUser?.UserName}
