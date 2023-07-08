@@ -140,7 +140,9 @@ const HouseCard = ({
             className={`absolute w-[160px] h-[60px] transition-all bg-white
                 left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl flex
                 tablet:hidden mobile:hidden
-                ${infShow === 'authListHouse' ? '' : 'hidden'}`}
+                ${infShow === 'authListHouse' || infShow === 'houseForRent'
+                || infShow === 'houseForSale'
+                 ? '' : 'hidden'}`}
           >
             <div className="w-[60px] h-full rounded-full overflow-hidden">
               {item.useracc.Image != undefined ? (

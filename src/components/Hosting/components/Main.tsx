@@ -8,9 +8,11 @@ import { useInView } from 'react-intersection-observer';
 import ShowHouse from '@/components/main/showHouse/showHouse';
 import { AmountTabHostingContext } from '@/contexts/amountTabHosting';
 import { userAccContext } from '@/contexts/userAcc';
+import AnimateTitle from '@/components/main/showHouse/animateTitle';
+import { staggerContainer } from '@/utils/motion';
 interface mainProps {
   keyMapBing: string;
-api_url_path: string
+  api_url_path: string
 }
 
 function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
@@ -20,7 +22,7 @@ function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
     // Kích hoạt nhiều lần khi vào khung nhìn
     threshold: 0.01 // Ngưỡng nhìn thấy (tỷ lệ của phần tử nằm trong khung nhìn)
   });
-  const {user} = useContext(userAccContext)
+  const { user } = useContext(userAccContext)
 
   const componentVariants: Variants = {
     offscreen: {
@@ -114,13 +116,45 @@ function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
                 <motion.div
                   className={`w-full h-fit ${selected === 'Currently hosting' ? '' : 'hidden'}`}
                 >
-                  <ShowHouse infShow="authListHouse" keyMapBing={keyMapBing} api_url_path={api_url_path}/>
+
+                  {/* house for rent */}
+                  <motion.div
+                    variants={staggerContainer(null, null)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: false, amount: 0.25 }}
+                    className={` mx-auto flex-col `}
+                  >
+                    <AnimateTitle
+                      title={'House for rent'}
+                      textStyles=" w-full h-fit "
+                    />
+
+                  </motion.div>
+
+                  <ShowHouse infShow="houseForRent" keyMapBing={keyMapBing} api_url_path={api_url_path} />
+
+                  {/* house for sale */}
+                  <motion.div
+                    variants={staggerContainer(null, null)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: false, amount: 0.25 }}
+                    className={` mx-auto flex-col `}
+                  >
+                    <AnimateTitle
+                      title={'House for sale'}
+                      textStyles=" w-full h-fit "
+                    />
+
+                  </motion.div>
+
+                  <ShowHouse infShow="houseForSale" keyMapBing={keyMapBing} api_url_path={api_url_path} />
                 </motion.div>
 
                 <div
-                  className={`${
-                    selected === 'Currently hosting' ? 'hidden' : ''
-                  } flex flex-col items-center justify-center gap-4 py-24 `}
+                  className={`${selected === 'Currently hosting' ? 'hidden' : ''
+                    } flex flex-col items-center justify-center gap-4 py-24 `}
                 >
                   <AnyReview />
                   <span className="text-[14px] h-[36px] w-[200px] text-center">

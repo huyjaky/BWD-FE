@@ -31,14 +31,14 @@ interface ShowHouseProps {
 
 const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
   const arrTempLoading: number[] = Array.from({ length: 10 }, (_, index) => index);
-  const { filterForm } = useContext(filterContext);
+  const { filterForm, emptyFilterForm } = useContext(filterContext);
   const { address } = useContext(selectPlaceContext);
   const { setCurrentHosting } = useContext(AmountTabHostingContext);
   const { data: session, status } = useSession();
   const { user, setUser } = useContext(userAccContext);
   const { isFilter, setIsFilter, reRenderFilter } = useContext(getHouseContext);
   // const [houseTemp, setHouseTemp] = useState<house_[]>([]);
-  const {houseTemp, setHouseTemp} = useContext(houseTempContext);
+  const { houseTemp, setHouseTemp } = useContext(houseTempContext);
   const maskUser = useRef<HTMLInputElement>(null);
   const maskMap = useRef<HTMLInputElement>(null);
   const editPanel = useRef<HTMLDivElement>(null);
@@ -99,6 +99,18 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
     } else if (infShow === 'favoriteHouse' && status === 'authenticated') {
       const arr = await houseApi['authFavoriteList'](temp.UserId, 0);
       return isEmpty(arr);
+    } else if (infShow === 'houseForRent' && status === 'authenticated') {
+      const arr = await houseApi.noneAuthFilter({
+        filter: { ...filterForm, typeHouse: ['HouseForRent'] },
+        selectPlace: address
+      }, 2, '');
+      return isEmpty(arr);
+    } else if (infShow === 'houseForSale' && status === 'authenticated') {
+      const arr = await houseApi.noneAuthFilter({
+        filter: { ...filterForm, typeHouse: ['HouseForSale'] },
+        selectPlace: address
+      }, 2, '')
+      return isEmpty(arr);
     }
 
   };
@@ -112,7 +124,7 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
     fetchHouseApi();
   }, [houseTemp]);
 
-  useEffect(()=>{}, [houseTemp]);
+  useEffect(() => { }, [houseTemp]);
 
   const isExist = (moreHouse: any) => {
     if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0 && moreHouse.data.length >= 10) {
@@ -124,7 +136,9 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
   };
 
   const getMoreHouse = async () => {
-    if (infShow === 'favoriteHouse' || infShow == 'authListHouse') {
+    if (infShow === 'favoriteHouse' || infShow == 'authListHouse'
+    || infShow === 'houseForRent' || infShow === 'houseForSale'
+    ) {
       setHasMore(false);
       return;
     }
@@ -182,7 +196,7 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
     }
   };
 
-const handleOnClickOutSideRemoveReqPanel = (event: any) => {
+  const handleOnClickOutSideRemoveReqPanel = (event: any) => {
     const isClickInSide = removeReqPanel.current?.contains(event.target);
     if (!isClickInSide) {
       setIsRemoveReq(false);
@@ -203,7 +217,7 @@ const handleOnClickOutSideRemoveReqPanel = (event: any) => {
           onClick={handleOnClickOutSideRemoveReqPanel}
           className="fixed w-screen h-screen bg-mask z-50 top-0 left-0" >
           <div className='w-fit h-fit m-auto' ref={removeReqPanel}>
-            <RemoveReq setIsRemoveReq={setIsRemoveReq} isRemoveReq={isRemoveReq}/>
+            <RemoveReq setIsRemoveReq={setIsRemoveReq} isRemoveReq={isRemoveReq} />
           </div>
         </motion.div>
       </AnimatePresence>
@@ -260,7 +274,7 @@ const handleOnClickOutSideRemoveReqPanel = (event: any) => {
               top-0 left-0
               "
               onClick={(event) => {
-                  setIsOpenMaskMap(false)
+                setIsOpenMaskMap(false)
               }}
             >
               <div className="w-fit h-full m-auto">
@@ -322,6 +336,17 @@ const handleOnClickOutSideRemoveReqPanel = (event: any) => {
           endMessage={<EndMessage />}
         >
           {houseTemp.map((item: house_, index: number) => {
+
+            if (infShow === 'houseForRent') {
+              if (item.Type === 'House for sale') {
+                return;
+              }
+            } else if (infShow === 'houseForSale') {
+              if (item.Type === 'House for rent') {
+                return
+              }
+            }
+
             return (
               <HouseCard
                 keyMapBing={keyMapBing}
