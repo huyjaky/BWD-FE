@@ -1,29 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
-import Header from '../../components/CreateHome/Step/Header';
-import Step1CHome from '../../components/CreateHome/Step/Step1CHome';
-import Step2CHome from '../../components/CreateHome/Step/Step2CHome';
-import Step3CHome from '../../components/CreateHome/Step/Step3CHome';
-import Step4CHome from '../../components/CreateHome/Step/Step4CHome';
-import Step5CHome from '../../components/CreateHome/Step/Step5CHome';
-import Step6CHome from '../../components/CreateHome/Step/Step6CHome';
-import Step7CHome from '../../components/CreateHome/Step/Step7CHome';
-import Step8CHome from '../../components/CreateHome/Step/Step8CHome';
-import Step9CHome from '../../components/CreateHome/Step/Step9CHome';
-import Step10Home from '@/components/CreateHome/Step/Step10Home';
-import Step11CHome from '@/components/CreateHome/Step/Step11CHome';
-import Step12CHome from '@/components/CreateHome/Step/Step12CHome';
-import Step13CHome from '@/components/CreateHome/Step/Step13CHome';
-import Step14CHome from '@/components/CreateHome/Step/Step14CHome';
-import Step15CHome from '@/components/CreateHome/Step/Step15CHome';
-import Step16CHome from '@/components/CreateHome/Step/Step16CHome';
-import Step17CHome from '@/components/CreateHome/Step/Step17CHome';
+
 import { AnimatePresence } from 'framer-motion';
 import { CreateHouseProvider } from '../../contexts/createHome';
 import { newHouseContext } from '../../contexts/createHome';
 
-import ProcessBar from '../../components/CreateHome/ProcessBar/ProccessBar';
 import { GetServerSideProps, GetStaticProps, GetStaticPropsContext } from 'next';
-import StepCongratulation from '@/components/CreateHome/Step/StepCongratulation';
 import Head from 'next/head';
 import { getSession } from 'next-auth/react';
 import { getServerSession } from 'next-auth';
@@ -35,6 +16,26 @@ import { NextPageWithLayout } from '@/models/layoutprops';
 import authWithoutAnimate from '@/components/layouts/authWithoutAnimate';
 import { Montserrat } from 'next/font/google';
 import AuthWithAnimate from '@/components/layouts/authWithAnimate';
+import Step1CHome from '@/components/CreateHome/Step/Step1CHome';
+import Step2CHome from '@/components/CreateHome/Step/Step2CHome';
+import Step3CHome from '@/components/CreateHome/Step/Step3CHome';
+import Step4CHome from '@/components/CreateHome/Step/Step4CHome';
+import Step5CHome from '@/components/CreateHome/Step/Step5CHome';
+import Step6CHome from '@/components/CreateHome/Step/Step6CHome';
+import Step7CHome from '@/components/CreateHome/Step/Step7CHome';
+import Step8CHome from '@/components/CreateHome/Step/Step8CHome';
+import Step9CHome from '@/components/CreateHome/Step/Step9CHome';
+import Step10Home from '@/components/CreateHome/Step/Step10Home';
+import Step11CHome from '@/components/CreateHome/Step/Step11CHome';
+import Step12CHome from '@/components/CreateHome/Step/Step12CHome';
+import Step13CHome from '@/components/CreateHome/Step/Step13CHome';
+import Step14CHome from '@/components/CreateHome/Step/Step14CHome';
+import Step15CHome from '@/components/CreateHome/Step/Step15CHome';
+import Step16CHome from '@/components/CreateHome/Step/Step16CHome';
+import Step17CHome from '@/components/CreateHome/Step/Step17CHome';
+import StepCongratulation from '@/components/CreateHome/Step/StepCongratulation';
+import Header from '@/components/CreateHome/Step/Header';
+import ProgressBar from '@/components/CreateHome/ProcessBar/ProccessBar';
 interface CreateHomeProps {
   keyMapBing: string;
   api_url_path: string;
@@ -107,7 +108,7 @@ const CreateHome: NextPageWithLayout<CreateHomeProps> = ({
           </AnimatePresence>
 
           {currentStep > 0 && currentStep <= 17 && (
-            <ProcessBar
+            <ProgressBar
               steps={steps}
               handleBackStep={handleBackStep}
               handleNextStep={handleNextStep}

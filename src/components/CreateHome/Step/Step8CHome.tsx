@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import ChooDesPl from '../ChooDesPl';
 import { categoriesStep8 } from '../utils/constant';
 import { motion } from 'framer-motion';
 import { newHouseContext } from '../../../contexts/createHome';
+import ChooDesPl from '../ChooDesPl';
 
 export default function Step8CHome() {
   const { state, dispatch } = useContext(newHouseContext);

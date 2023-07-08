@@ -1,6 +1,5 @@
-import React from 'react';
-import Map from '../Map/Map';
 import { motion } from 'framer-motion';
+import Map from '../Map/map_';
 interface Step4CHomeProps {
   keyMapBing: string;
 }

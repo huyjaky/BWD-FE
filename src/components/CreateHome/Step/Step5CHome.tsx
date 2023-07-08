@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { TiTick } from 'react-icons/ti';
-import MapLocate from '../Map/MapLocate';
 import { motion } from 'framer-motion';
 import { newHouseContext } from '../../../contexts/createHome';
 import MapEach from '@/components/main/showHouse/mapEach';

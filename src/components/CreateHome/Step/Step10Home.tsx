@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { categoriesStep10, safetyitems, standoutamenities } from '../utils/constant';
 import { useInView } from 'react-intersection-observer';
-import ChooDesPl from '../ChooDesPl';
 import { motion } from 'framer-motion';
 import { newHouseContext } from '../../../contexts/createHome';
+import ChooDesPl from '../ChooDesPl';
 
 export default function Step10Home() {
   const { state, dispatch } = useContext(newHouseContext);
@@ -44,7 +44,7 @@ export default function Step10Home() {
       transition={{ duration: 1 }}
       className="w-[98vw] px-[80px]
                         mobile:px-0
-                        
+
         "
     >
       <div

@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { categoriesStep2 } from '../utils/constant';
-import ChooDesPl from '../ChooDesPl';
 import { motion } from 'framer-motion';
 import { newHouseContext } from '../../../contexts/createHome';
+import ChooDesPl from '../ChooDesPl';
 export default function Step2CHome() {
   // set Active thì để ngoài như này kh đc để trong lớp con
   // để trong lớp con thì khi render ra mỗi class sẽ có 1 state

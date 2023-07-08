@@ -1,10 +1,10 @@
 import React from 'react';
 
-import ButtonHeader from '../ButtonHeader';
 import Logo from '../../../../public/assets/Logo.png';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import ButtonHeader from '../ButtonHeader';
 
 export default function Header() {
   const ImgVariants = {

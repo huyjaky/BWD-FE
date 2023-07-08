@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import ChooTypeHo from '../ChooTypeHo';
 import { categoriesStep3 } from '../utils/constant';
 import { motion } from 'framer-motion';
 import { newHouseContext } from '../../../contexts/createHome';
+import ChooTypeHo from '../ChooTypeHo';
 
 export default function Step3CHome() {
   const { state, dispatch } = useContext(newHouseContext);
