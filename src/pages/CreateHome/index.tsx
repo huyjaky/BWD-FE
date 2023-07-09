@@ -1,41 +1,16 @@
-import React, { useState, useContext, useEffect } from 'react';
 
-import { AnimatePresence } from 'framer-motion';
-import { CreateHouseProvider } from '../../contexts/createHome';
-import { newHouseContext } from '../../contexts/createHome';
 
-import { GetServerSideProps, GetStaticProps, GetStaticPropsContext } from 'next';
-import Head from 'next/head';
-import { getSession } from 'next-auth/react';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '../api/auth/[...nextauth]';
-import { useRouter } from 'next/router';
-import { initializeSSR } from 'bing-maps-loader';
-import Script from 'next/script';
-import { NextPageWithLayout } from '@/models/layoutprops';
+import FooterCreateHome from '@/components/createHome/footerCreateHome';
+import StepCreateHome from '@/components/createHome/stepCreateHome';
+import TransitionCreateHome from '@/components/createHome/transitionCreateHome';
+import HeaderForm from '@/components/headers/headerForm/HeaderForm';
 import authWithoutAnimate from '@/components/layouts/authWithoutAnimate';
+import { StepCreateHomeContext } from '@/contexts/stepCreate';
+import { NextPageWithLayout } from '@/models/layoutprops';
+import { initializeSSR } from 'bing-maps-loader';
+import { GetStaticProps, GetStaticPropsContext } from 'next';
 import { Montserrat } from 'next/font/google';
-import AuthWithAnimate from '@/components/layouts/authWithAnimate';
-import Step1CHome from '@/components/CreateHome/Step/Step1CHome';
-import Step2CHome from '@/components/CreateHome/Step/Step2CHome';
-import Step3CHome from '@/components/CreateHome/Step/Step3CHome';
-import Step4CHome from '@/components/CreateHome/Step/Step4CHome';
-import Step5CHome from '@/components/CreateHome/Step/Step5CHome';
-import Step6CHome from '@/components/CreateHome/Step/Step6CHome';
-import Step7CHome from '@/components/CreateHome/Step/Step7CHome';
-import Step8CHome from '@/components/CreateHome/Step/Step8CHome';
-import Step9CHome from '@/components/CreateHome/Step/Step9CHome';
-import Step10Home from '@/components/CreateHome/Step/Step10Home';
-import Step11CHome from '@/components/CreateHome/Step/Step11CHome';
-import Step12CHome from '@/components/CreateHome/Step/Step12CHome';
-import Step13CHome from '@/components/CreateHome/Step/Step13CHome';
-import Step14CHome from '@/components/CreateHome/Step/Step14CHome';
-import Step15CHome from '@/components/CreateHome/Step/Step15CHome';
-import Step16CHome from '@/components/CreateHome/Step/Step16CHome';
-import Step17CHome from '@/components/CreateHome/Step/Step17CHome';
-import StepCongratulation from '@/components/CreateHome/Step/StepCongratulation';
-import Header from '@/components/CreateHome/Step/Header';
-import ProgressBar from '@/components/CreateHome/ProcessBar/ProccessBar';
+import { useContext } from 'react';
 interface CreateHomeProps {
   keyMapBing: string;
   api_url_path: string;
@@ -51,73 +26,46 @@ const CreateHome: NextPageWithLayout<CreateHomeProps> = ({
   keyMapBing,
   api_url_path
 }: CreateHomeProps): JSX.Element => {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [isMounted, setIsMounted] = useState(true);
-  initializeSSR();
-
-  const handleNextStep = () => {
-    setIsMounted(false); // Gán giá trị false để unmount component
-    setTimeout(() => {
-      setCurrentStep((prevStep) => prevStep + 1);
-      setIsMounted(true); // Gán giá trị true để mount component tiếp theo
-    }, 1000); // Thời gian delay trước khi chuyển sang component tiếp theo
-  };
-  const handleBackStep = () => {
-    setIsMounted(false); // Gán giá trị false để unmount component
-    setTimeout(() => {
-      setCurrentStep((prevStep) => prevStep - 1);
-      setIsMounted(true); // Gán giá trị true để mount component tiếp theo
-    }, 1000); // Thời gian delay trước khi chuyển sang component tiếp theo
-  };
-
-  const { state } = useContext(newHouseContext);
-
-  let steps = [
-    { number: 1, component: <Step1CHome />, data: '' },
-    { number: 2, component: <Step2CHome />, data: 'type' },
-    { number: 3, component: <Step3CHome />, data: 'place' },
-    { number: 4, component: <Step4CHome keyMapBing={keyMapBing} />, data: 'address' },
-    { number: 5, component: <Step5CHome keyMapBing={keyMapBing} />, data: 'addressConfirmation' },
-    { number: 6, component: <Step6CHome />, data: 'placeInfo' },
-    { number: 7, component: <Step7CHome />, data: 'kindOfBathrooms' },
-    { number: 8, component: <Step8CHome />, data: 'encounter' },
-    { number: 9, component: <Step9CHome />, data: '' },
-    { number: 10, component: <Step10Home />, data: 'amenities' },
-    { number: 11, component: <Step11CHome api_url_path={api_url_path} />, data: '' },
-    { number: 12, component: <Step12CHome />, data: 'title' },
-    { number: 13, component: <Step13CHome />, data: 'description' },
-    { number: 14, component: <Step14CHome />, data: '' },
-    { number: 15, component: <Step15CHome />, data: 'guest' },
-    { number: 16, component: <Step16CHome />, data: 'price' },
-    { number: 17, component: <Step17CHome />, data: 'note' },
-    { number: 18, component: <StepCongratulation api_url_path={api_url_path} />, data: '' }
-  ];
-
+  const { setStepCreate, stepCreate } = useContext(StepCreateHomeContext)
   return (
     <>
-      <CreateHouseProvider>
-        <div className={`${monsterrat.className}`}>
-          {currentStep > 0 && currentStep <= 17 && <Header />}
+      <HeaderForm>
+        <div></div>
+      </HeaderForm>
+      <StepCreateHome />
 
-          <AnimatePresence>
-            {currentStep > 0 &&
-              currentStep <= 18 &&
-              currentStep === steps[currentStep - 1].number &&
-              isMounted &&
-              steps[currentStep - 1].component}
-          </AnimatePresence>
+      {/* choose type house */}
+      <TransitionCreateHome isShow={stepCreate == 1}>
+        <div className="bg-blue-500 w-full h-fit">
 
-          {currentStep > 0 && currentStep <= 17 && (
-            <ProgressBar
-              steps={steps}
-              handleBackStep={handleBackStep}
-              handleNextStep={handleNextStep}
-              currentStep={currentStep}
-              // data={state}
-            />
-          )}
         </div>
-      </CreateHouseProvider>
+      </TransitionCreateHome>
+
+
+      <TransitionCreateHome isShow={stepCreate == 2}>
+        <div className="bg-orange-600 w-full h-[300px]"></div>
+      </TransitionCreateHome>
+
+
+      <TransitionCreateHome isShow={stepCreate == 3}>
+        <div className="bg-blue-500 w-full h-[300px]"></div>
+      </TransitionCreateHome>
+
+
+      <TransitionCreateHome isShow={stepCreate == 4}>
+        <div className="bg-blue-500 w-full h-[300px]"></div>
+      </TransitionCreateHome>
+
+      <TransitionCreateHome isShow={stepCreate == 5}>
+        <div className="bg-blue-500 w-full h-[300px]"></div>
+      </TransitionCreateHome>
+
+
+      <TransitionCreateHome isShow={stepCreate > 5}>
+        <div className="bg-blue-500 w-full h-[300px]"></div>
+      </TransitionCreateHome>
+
+      <FooterCreateHome />
     </>
   );
 };

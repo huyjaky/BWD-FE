@@ -11,7 +11,7 @@ interface TypingTextProps {
 export const TypingText = ({ title, textStyles }: TypingTextProps) => (
   <motion.p
     variants={textContainer}
-    className={`font-normal text-[30px] text-slate-600 ${textStyles}`}
+    className={`font-normal text-[1.5rem] text-slate-600 ${textStyles}`}
   >
     {Array.from(title).map((letter: any, index: number) => (
       <motion.span variants={textVariant2} key={index}>
@@ -26,7 +26,7 @@ export const TitleText = ({ title, textStyles }: TypingTextProps) => (
     variants={textVariant2}
     initial="hidden"
     whileInView="show"
-    className={`mt-[8px] font-bold md:text-[64px] text-[40px] text-black ${textStyles}`}
+    className={`mt-[.5rem] font-bold md:text-[4rem] text-[3rem] text-black ${textStyles}`}
   >
     {title}
   </motion.h2>

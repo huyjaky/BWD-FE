@@ -1,4 +1,3 @@
-import Step11CHome from '@/components/CreateHome/Step/step11CHome';
 import TabShowHouse from '@/components/main/tabShowHouse/tabShowHouse';
 import { useEffect } from 'react';
 

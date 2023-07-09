@@ -31,6 +31,7 @@ import ImgFileProvider from '@/contexts/imgFile';
 import Script from 'next/script';
 import SelectHouseProvider from '@/contexts/selectHouse';
 import HouseTempProvider from '@/contexts/houseTemp';
+import StepCreateHomeProvider from '@/contexts/stepCreate';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -70,15 +71,18 @@ export default function App({
                                 <ImgFileProvider>
                                   <SelectHouseProvider>
                                     <HouseTempProvider>
-                                      <Layout>
-                                        <div
-                                          className={`${monsterrat.className} bg-white
+                                      <StepCreateHomeProvider>
+
+                                        <Layout>
+                                          <div
+                                            className={`${monsterrat.className} bg-white
                                         `}
-                                        >
-                                          <NextNProgress color="#B80F0A" height={7} />
-                                          <Component {...pageProps} />
-                                        </div>
-                                      </Layout>
+                                          >
+                                            <NextNProgress color="#B80F0A" height={7} />
+                                            <Component {...pageProps} />
+                                          </div>
+                                        </Layout>
+                                      </StepCreateHomeProvider>
                                     </HouseTempProvider>
                                   </SelectHouseProvider>
                                 </ImgFileProvider>

@@ -209,7 +209,6 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
   return (
     <div>
 
-
       <AnimatePresence initial={false}>
         <motion.div
           variants={variants}
