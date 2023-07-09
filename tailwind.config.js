@@ -63,8 +63,16 @@ module.exports = {
           'placeoffer placeoffer baths',
           'placeoffer placeoffer beds',
           'typehouse typehouse typehouse'
-        ]
-
+        ],
+        layoutCreateHouseTabletMobile: [
+          'title title title',
+          'des des des',
+          'price price price',
+          'placeoffer placeoffer placeoffer',
+          'capacity baths beds',
+          'orientation orientation orientation',
+          'typehouse typehouse typehouse'
+        ],
       },
       gridTemplateColumns: {
         houseBox: 'repeat(auto-fill, minmax(300px, 1fr))',
