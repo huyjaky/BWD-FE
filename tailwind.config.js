@@ -53,7 +53,18 @@ module.exports = {
           'des des',
           'placeoffer placeoffer',
           'img img'
+        ],
+        layoutCreateHouseDesktopLaptop: [
+          'title title title',
+          'des des des',
+          'price price price',
+          'placeoffer placeoffer capacity',
+          'placeoffer placeoffer orientation',
+          'placeoffer placeoffer baths',
+          'placeoffer placeoffer beds',
+          'typehouse typehouse typehouse'
         ]
+
       },
       gridTemplateColumns: {
         houseBox: 'repeat(auto-fill, minmax(300px, 1fr))',

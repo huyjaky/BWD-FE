@@ -45,7 +45,7 @@ const ExploreCard = ({ id, imgUrl, title, index, active, handleClick }: ExploreC
         >
           <img src="/about/headset.svg" alt="headset" className="w-1/2 h-1/2 object-contain" />
         </div>
-        <p className="font-normal text-[1rem] leading-[20.1rem] text-white uppercase">
+        <p className="font-normal text-[1rem] leading-[1rem] text-white uppercase">
           Explorer house
         </p>
         <h2 className="mt-[2rem] font-semibold sm:text-[2rem] text-[2rem] text-white">{title}</h2>

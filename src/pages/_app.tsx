@@ -12,26 +12,26 @@ import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import 'react-loading-skeleton/dist/skeleton.css';
 
-import { SWRConfig } from 'swr';
 import NextNProgress from 'nextjs-progressbar';
+import { SWRConfig } from 'swr';
 
 import AmountTabHostingProviders from '@/contexts/amountTabHosting';
 import BillProvider from '@/contexts/bill';
+import CreateHouseFormProvider from '@/contexts/createHouseForm';
 import FilterProvider from '@/contexts/filter';
 import FilterFormAnimateProvider from '@/contexts/filterFormAnimate';
 import GetHouseProvider from '@/contexts/getHouse';
+import HouseTempProvider from '@/contexts/houseTemp';
+import ImgFileProvider from '@/contexts/imgFile';
 import IsShowPtProvider from '@/contexts/isShowPt';
 import MobileContolPanelProvider from '@/contexts/mobileControlPanel';
+import SelectHouseProvider from '@/contexts/selectHouse';
+import StepCreateHomeProvider from '@/contexts/stepCreate';
 import UserAccProvider from '@/contexts/userAcc';
 import { SessionProvider } from 'next-auth/react';
 import { Montserrat } from 'next/font/google';
 import Head from 'next/head';
-import Link from 'next/link';
-import ImgFileProvider from '@/contexts/imgFile';
 import Script from 'next/script';
-import SelectHouseProvider from '@/contexts/selectHouse';
-import HouseTempProvider from '@/contexts/houseTemp';
-import StepCreateHomeProvider from '@/contexts/stepCreate';
 
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -72,16 +72,17 @@ export default function App({
                                   <SelectHouseProvider>
                                     <HouseTempProvider>
                                       <StepCreateHomeProvider>
-
-                                        <Layout>
-                                          <div
-                                            className={`${monsterrat.className} bg-white
+                                        <CreateHouseFormProvider>
+                                          <Layout>
+                                            <div
+                                              className={`${monsterrat.className} bg-white
                                         `}
-                                          >
-                                            <NextNProgress color="#B80F0A" height={7} />
-                                            <Component {...pageProps} />
-                                          </div>
-                                        </Layout>
+                                            >
+                                              <NextNProgress color="#B80F0A" height={7} />
+                                              <Component {...pageProps} />
+                                            </div>
+                                          </Layout>
+                                        </CreateHouseFormProvider>
                                       </StepCreateHomeProvider>
                                     </HouseTempProvider>
                                   </SelectHouseProvider>

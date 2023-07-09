@@ -21,7 +21,7 @@ const Feedback = () => (
       >
         <div className="feedback-gradient" />
         <div>
-          <h4 className="font-bold sm:text-[2rem] text-[2rem] sm:leading-[40.2rem] leading-[36.2rem] text-black">
+          <h4 className="font-bold sm:text-[2rem] text-[2rem] sm:leading-[2rem] leading-[2rem] text-black">
             Huy Phan
           </h4>
           <p className="mt-[8px] font-normal sm:text-[1rem] text-[1rem] sm:leading-[22.68px] leading-[16.68px] text-black">
