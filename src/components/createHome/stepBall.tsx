@@ -27,7 +27,7 @@ const StepBall = ({ step, currentStep, title }: StepBallProps) => {
             'rgb(51,65,85)'
         }}
         transition={{duration: 1}}
-        className={`w-[60px] h-[60px] rounded-full m-auto flex border-2 text-[1.5rem]
+        className={`w-[4rem] h-[4rem] rounded-full m-auto flex border-2 text-[1.5rem]
       ${status === 'active' ? ' border-red-500 text-red-500 bg-white'
             : status === 'complete' ? 'border-red-500 bg-red-500'
               : 'border-slate-500 bg-white text-slate-700'
@@ -46,7 +46,7 @@ const StepBall = ({ step, currentStep, title }: StepBallProps) => {
         </div>
 
       </motion.div>
-      <div className="text-center whitespace-nowrap font-semibold ">
+      <div className="text-center whitespace-nowrap font-semibold mobile:hidden">
         {title}
       </div>
     </div>

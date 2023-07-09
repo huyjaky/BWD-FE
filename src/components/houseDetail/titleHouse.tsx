@@ -9,7 +9,7 @@ const TitleHouse = ({ title, address }: TitleHouseProps) => {
   return (
     <div className="w-full h-fit flex flex-col box-border px-10 mt-7 ">
       <div className="flex-1 mb-3">
-        <span className="text-[30px] font-semibold">{title}</span>
+        <span className="text-[2rem] font-semibold">{title}</span>
       </div>
       <div className="flex-1">
         <span>{address.formattedAddress}</span>

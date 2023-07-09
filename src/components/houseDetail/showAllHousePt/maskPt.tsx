@@ -27,7 +27,7 @@ const MaskPt = ({ Path, setPath }: MaskPtProps) => {
         box-border py-3
         "
         >
-          <div className="w-[1000px] m-auto h-fit overflow-hidden">
+          <div className="w-[63rem] m-auto h-fit overflow-hidden">
             <img src={Path ? '/api/img/path/'+Path : ''} alt="" className="m-auto  rounded-2xl" />
           </div>
         </motion.div>
@@ -44,7 +44,7 @@ const MaskPt = ({ Path, setPath }: MaskPtProps) => {
       "
         onClick={() => setPath(null)}
       >
-        <div className="w-[1000px] m-auto h-full overflow-hidden flex">
+        <div className="w-[63rem] m-auto h-full overflow-hidden flex">
           <motion.img
             transition={{ type: 'spring' }}
             initial={{ y: 200 }}

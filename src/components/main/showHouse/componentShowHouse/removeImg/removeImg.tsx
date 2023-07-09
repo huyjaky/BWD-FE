@@ -48,7 +48,7 @@ const   RemoveImg = ({ arrImg, tempHouse, setTempHouse }: RemoveImgProps) => {
                       }
                     }}
                     className="absolute w-fit h-fit top-2 right-2 bg-white rounded-md z-30">
-                    <RiDeleteBin5Line className="w-[40px] h-[40px] text-red-500 " />
+                    <RiDeleteBin5Line className="w-[2.4rem] h-[2.4rem] text-red-500 " />
                   </div>
                 </motion.div>
               );

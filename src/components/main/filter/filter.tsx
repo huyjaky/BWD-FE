@@ -42,15 +42,15 @@ const Filter = ({ isInvisible }: FilterProps) => {
   return (
     <>
       <div
-        className={`w-[150px] h-[80px] flex ${isInvisible} mobile:h-full mobile:w-[100px]
-tablet:h-full tablet:w-[100px]
+        className={`w-[9.375rem] h-[5rem] flex ${isInvisible} mobile:h-full mobile:w-[6.25rem]
+tablet:h-full tablet:w-[6.25rem]
       `}
         onClick={handleOnClickFilter}
       >
         <div
           className={`flex m-auto p-3 border-2 rounded-2xl cursor-pointer
-          mobile:w-[50px] mobile:h-full mobile:p-0 mobile:border-0
-          tablet:w-[50px] tablet:h-full tablet:p-0 tablet:border-0 relative
+          mobile:w-[3rem] mobile:h-full mobile:p-0 mobile:border-0
+          tablet:w-[3rem] tablet:h-full tablet:p-0 tablet:border-0 relative
           ${
             (isEmpty && isFilter !== 'main') || isFilter !== 'favoriteHouse'
               ? ' border-slate-800'
@@ -65,16 +65,16 @@ tablet:h-full tablet:w-[100px]
             <motion.div
               animate={{ scale: 1.2 }}
               transition={{ repeat: Infinity, duration: 1 }}
-              className="w-[20px] h-[20px] rounded-full bg-red-400 absolute -right-1
+              className="w-[1rem] h-[1rem] rounded-full bg-red-400 absolute -right-1
           top-4 flex opacity-70
           "
             >
-              <div className="w-[10px] h-[10px] bg-red-600 rounded-full m-auto"></div>
+              <div className="w-[.6rem] h-[.6rem] bg-red-600 rounded-full m-auto"></div>
             </motion.div>
           )}
-          <div className="flex w-fit h-[30px] m-auto  mobile:h-full tablet:h-full">
+          <div className="flex w-fit h-[2rem] m-auto  mobile:h-full tablet:h-full">
             <HiOutlineFilter
-              className={`w-[30px] h-full m-auto ${
+              className={`w-[2rem] h-full m-auto ${
                 (isEmpty && isFilter !== 'main') || isFilter !== 'favoriteHouse'
                   ? ''
                   : 'text-red-500'

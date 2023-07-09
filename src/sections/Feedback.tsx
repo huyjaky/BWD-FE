@@ -16,20 +16,20 @@ const Feedback = () => (
     >
       <motion.div
         variants={fadeIn('right', 'tween', 0.2, 1)}
-        className="flex-[0.5] lg:max-w-[370px] flex justify-end flex-col gradient-05 sm:p-8 p-4 rounded-[32px]
+        className="flex-[0.5] lg:max-w-[34.5rem] flex justify-end flex-col gradient-05 sm:p-8 p-4 rounded-[2rem]
         border-[1px] border-[#6A6A6A] relative transition-all"
       >
         <div className="feedback-gradient" />
         <div>
-          <h4 className="font-bold sm:text-[32px] text-[26px] sm:leading-[40.32px] leading-[36.32px] text-black">
+          <h4 className="font-bold sm:text-[2rem] text-[2rem] sm:leading-[40.2rem] leading-[36.2rem] text-black">
             Huy Phan
           </h4>
-          <p className="mt-[8px] font-normal sm:text-[18px] text-[12px] sm:leading-[22.68px] leading-[16.68px] text-black">
+          <p className="mt-[8px] font-normal sm:text-[1rem] text-[1rem] sm:leading-[22.68px] leading-[16.68px] text-black">
             Founder Olympus
           </p>
         </div>
 
-        <p className="mt-[24px] font-normal sm:text-[24px] text-[18px] sm:leading-[45.6px] leading-[39.6px] text-black">
+        <p className="mt-[2rem] font-normal sm:text-[2rem] text-[1rem] sm:leading-[45.6px] leading-[39.6px] text-black">
           “With Olympus, you can harness this technology to explore and interact with properties.
           Easily navigate virtual tours, access detailed information, and interact with virtual
           agents to discover your ideal home.”
@@ -43,7 +43,7 @@ const Feedback = () => (
         <img
           src="/about/planet-09.png"
           alt="planet-09"
-          className="w-full lg:h-[610px] h-auto min-h-[210px] object-cover rounded-[40px]
+          className="w-full lg:h-[38rem] h-auto min-h-[13rem] object-cover rounded-[2.4rem]
           transition-all"
         />
       </motion.div>

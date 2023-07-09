@@ -57,14 +57,14 @@ const MapEdit = ({ setTempHouse, tempHouse, keyMapBing, value }: MapEditProps) =
 
   return (
     <>
-      <div className={`w-full rounded-3xl border-2 border-red-400 overflow-hidden h-[350px]`}>
+      <div className={`w-full rounded-3xl border-2 border-red-400 overflow-hidden h-[22rem]`}>
         <div id={"MapEdit"} className="relative z-10"></div>
       </div>
 
       <div id="searchBoxContainer2">
         <input
           placeholder={value}
-          id="searchBox2" type="text" className="w-full h-[50px] outline-none text-[25px]" />
+          id="searchBox2" type="text" className="w-full h-[3rem] outline-none text-[2rem]" />
       </div>
     </>
   )

@@ -132,7 +132,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
         </figure>
 
         <div
-          className="w-full h-fit px-[80px] box-border
+          className="w-full h-fit px-[5rem] box-border
         tablet:px-0 mobile:px-0
         "
         >

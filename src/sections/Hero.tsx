@@ -30,14 +30,14 @@ const Hero = () => (
 
       <motion.div
         variants={slideIn('right', 'tween', 0.2, 1)}
-        className="relative w-full md:-mt-[20px] -mt-[12px]"
+        className="relative w-full md:-mt-[1rem] -mt-[1rem]"
       >
-        <div className="absolute w-full h-[300px] bg-red-500 rounded-tl-[140px] z-[0] -top-[30px]" />
+        <div className="absolute w-full h-[18.75rem] bg-red-500 rounded-tl-[9rem] z-[0] -top-[2rem]" />
 
         <img
           src="https://news.airbnb.com/wp-content/uploads/sites/4/2022/09/Design-HomesFeatureImage.png?w=2024"
           alt="hero_cover"
-          className="w-full sm:h-[500px] h-[350px] object-cover rounded-tl-[140px] z-10 relative"
+          className="w-full sm:h-[32rem] h-[21.875rem] object-cover rounded-tl-[9rem] z-10 relative"
         />
       </motion.div>
     </motion.div>

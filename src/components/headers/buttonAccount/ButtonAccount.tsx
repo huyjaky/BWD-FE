@@ -11,12 +11,12 @@ import ListButton from './listButton';
 
 const variants: Variants = {
   show: {
-    maxHeight: ['0px', '500px'],
+    maxHeight: ['0px', '32rem'],
     // border: ['none', '3px solid grey'],
     display: 'block'
   },
   hidden: {
-    maxHeight: ['500px', '0px'],
+    maxHeight: ['32rem', '0px'],
     // border: ['3px solid grey', 'none'],
     transitionEnd: {
       display: 'none'
@@ -54,20 +54,20 @@ const ButtonAccount = () => {
         setIsClick(!isClick);
       }}
     >
-      <BsList className="w-[30px] h-[30px]" />
+      <BsList className="w-[2rem] h-[2rem]" />
       {user?.Image ? (
 
-        <img src={'/api/img/path/'+user.Image} className="w-[30px] h-[30px] rounded-full" />
+        <img src={'/api/img/path/'+user.Image} className="w-[2rem] h-[2rem] rounded-full" />
       ) : (
-        <HiUserCircle className="w-[40px] h-[30px] " />
+        <HiUserCircle className="w-[2.4rem] h-[2rem] " />
       )}
-      {/* <HiUserCircle className="w-[40px] h-[30px] " /> */}
+      {/* <HiUserCircle className="w-[2.4rem] h-[2rem] " /> */}
       <AnimatePresence initial={false}>
         <motion.div
           variants={variants}
           animate={isClick ? 'show' : 'hidden'}
           transition={{ duration: 0.5 }}
-          className="absolute translate-y-16 w-[250px] h-fit shadow-2xl right-0 rounded-2xl bg-white
+          className="absolute translate-y-16 w-[16rem] h-fit shadow-2xl right-0 rounded-2xl bg-white
           overflow-hidden
       "
         >

@@ -112,7 +112,7 @@ const ControlPlan = () => {
 
   return (
     <>
-      <div className="w-[550px] box-border p-4 ">
+      <div className="w-[34.3rem] box-border p-4 ">
         <div className="w-full h-full">
           {/* link */}
           <div className="w-full flex overflow-hidden mb-1 " id="link">
@@ -127,7 +127,7 @@ const ControlPlan = () => {
                     key={index}
                     href={`${item.ref}`}
                     className=" relative
-                    before:bottom-0 before:h-[2px]  before:w-0 before:absolute
+                    before:bottom-0 before:h-[.2rem]  before:w-0 before:absolute
                     before:bg-slate-500 hover:before:w-full before:transition-all
                     before:duration-200
                   "
@@ -173,8 +173,8 @@ const ControlPlan = () => {
             >
               Guests
             </button>
-            {/* <button className="rounded-full w-[30px] h-[30px] bg-red-500 flex">
-              <BiSearch className="w-[20px] h-[20px] m-auto text-white" />
+            {/* <button className="rounded-full w-[2rem] h-[2rem] bg-red-500 flex">
+              <BiSearch className="w-[1rem] h-[1rem] m-auto text-white" />
             </button> */}
           </motion.div>
         </div>
@@ -185,7 +185,7 @@ const ControlPlan = () => {
         variants={variants}
         animate={isShowHeader ? 'controlHeaderShow' : 'controlHeaderHidden'}
         ref={refHeaderControl}
-        className="absolute w-full h-[80px] mt-[80px] bg-white
+        className="absolute w-full h-[5rem] mt-[5rem] bg-white
         box-border z-20
       after:h-full after:left-0 after:top-0 after:absolute
       after:w-[calc(100vw-(100vw-100%)/2)] after:bg-white after:-z-10

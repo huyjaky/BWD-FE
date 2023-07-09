@@ -37,7 +37,7 @@ const HostUser = ({ imgPath, userName, gmail, description }: HostUserProps) => {
       {/* host card */}
       <motion.div
         whileHover={{ scale: 1.1 }}
-        className="w-[400px] mobile:w-full h-[250px] bg-white rounded-2xl flex flex-col shadow-2xl"
+        className="w-[25rem] mobile:w-full h-[16rem] bg-white rounded-2xl flex flex-col shadow-2xl"
       >
         <div className="w-fit h-fit m-auto text-center">
           <motion.img
@@ -45,16 +45,16 @@ const HostUser = ({ imgPath, userName, gmail, description }: HostUserProps) => {
             animate="iconAnimate"
             src={'/api/img/path/' + imgPath}
             alt=""
-            className="w-[120px] h-[120px] rounded-full"
+            className="w-[7.5rem] h-[7.5rem] rounded-full"
           />
-          <span className="font-semibold text-[30px]">{userName}</span>
-          <div className='w-full h-fit text-justify text-[20px]'>
+          <span className="font-semibold text-[2rem]">{userName}</span>
+          <div className='w-full h-fit text-justify text-[1rem]'>
             {description}
           </div>
           <br />
         </div>
       </motion.div>
-      <div className="flex flex-col w-full h-fit items-center text-[30px] divide-y-2 divide-red-500 mt-5">
+      <div className="flex flex-col w-full h-fit items-center text-[2rem] divide-y-2 divide-red-500 mt-5">
         <span>Contact me</span>
         <div className="flex items-center">
           <TbBrandGmail />

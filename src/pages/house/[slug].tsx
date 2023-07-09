@@ -58,7 +58,7 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
             <TitleHouse title={houseDetail.Title} address={houseDetail.address} />
 
             <Picture arrImg={houseDetail.arrImg} />
-            <div className="w-full h-[500px] laptop:hidden desktop:hidden flex justify-center box-border relative z-10">
+            <div className="w-full h-[32rem] laptop:hidden desktop:hidden flex justify-center box-border relative z-10">
               <Carousel arrImg={houseDetail.arrImg} houseId={houseDetail.HouseId} />
               <div
                 onClick={handleOnClick}
@@ -66,7 +66,7 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
               rounded-xl p-3
                bg-white z-50 flex items-center"
               >
-                <BiMenu className="text-[24px] " />
+                <BiMenu className="text-[2rem] " />
                 <span className="text-[19px]">Show all photos</span>
               </div>
             </div>

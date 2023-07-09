@@ -18,7 +18,7 @@ const PriceRange = () => {
 
   return (
     <div className="w-full border-b-2 pb-10 border-slate-500">
-      <div className="w-full h-[100px] flex box-border px-6">
+      <div className="w-full h-[6.25rem] flex box-border px-6">
         <Slider
           range
           allowCross={false}
@@ -41,7 +41,7 @@ const PriceRange = () => {
           }}
         />
       </div>
-      <div className="w-full h-[70px] flex mobile:w-full mobile:flex-col mobile:h-fit ">
+      <div className="w-full h-[4.5rem] flex mobile:w-full mobile:flex-col mobile:h-fit ">
         {/* min */}
         <div className="flex-1 h-full border-2 rounded-2xl flex items-center mobile:py-3
         mobile:mb-5
@@ -65,8 +65,8 @@ const PriceRange = () => {
           </div>
         </div>
 
-        <div className="w-[50px] h-full flex mobile:hidden ">
-          <AiOutlineMinus className="m-auto text-[30px]" />
+        <div className="w-[3rem] h-full flex mobile:hidden ">
+          <AiOutlineMinus className="m-auto text-[2rem]" />
         </div>
 
         {/* max */}

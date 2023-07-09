@@ -114,7 +114,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
       <button
       onClick={()=>{setIsLoginClick(false)}}
        className='top-5 left-5 absolute '>
-        <IoCloseOutline className='h-full text-[40px] text-left' />
+        <IoCloseOutline className='h-full text-[2.4rem] text-left' />
       </button>
       <div className="w-full h-fit flex justify-end border-b-2 mb-5">
         <div className="w-full h-full text-center m-auto relative">
@@ -124,7 +124,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
 
         {children}
       </div>
-      <span className="font-semibold text-[24px] w-full">Welcome to Olympus</span>
+      <span className="font-semibold text-[2rem] w-full">Welcome to Olympus</span>
       <div className="mt-5 w-full h-fit">
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -133,7 +133,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
         >
           {/* form input username */}
           <div
-            className={`border-2 rounded-t-xl box-border p-3 h-[90px] ${errors?.username?.message ? 'border-red-500' : ''
+            className={`border-2 rounded-t-xl box-border p-3 h-[5.625rem] ${errors?.username?.message ? 'border-red-500' : ''
               }`}
             ref={divRef}
           >
@@ -151,7 +151,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
                 <input
                   {...register('username')}
                   type="text"
-                  className="w-full h-[40px] outline-none border-b shadow-2xl text-[20px]"
+                  className="w-full h-[2.4rem] outline-none border-b shadow-2xl text-[1rem]"
                 />
               </div>
             </div>
@@ -159,7 +159,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
 
           {/* form input password */}
           <div
-            className={`border-2 rounded-b-xl box-border flex p-3 h-[90px] ${errors?.password?.message ? 'border-red-500' : ''
+            className={`border-2 rounded-b-xl box-border flex p-3 h-[5.625rem] ${errors?.password?.message ? 'border-red-500' : ''
               }`}
             ref={divRef2}
           >
@@ -177,13 +177,13 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
                 <input
                   {...register('password')}
                   type="password"
-                  className="w-full h-[40px] outline-none border-b shadow-2xl text-[20px]"
+                  className="w-full h-[2.4rem] outline-none border-b shadow-2xl text-[1rem]"
                 />
               </div>
             </div>
           </div>
-          <button type="submit" className="w-full h-[40px] bg-red-600 mt-5 rounded-xl">
-            <span className="text-white font-semibold text-[25px]">Login</span>
+          <button type="submit" className="w-full h-[2.4rem] bg-red-600 mt-5 rounded-xl">
+            <span className="text-white font-semibold text-[2rem]">Login</span>
           </button>
         </form>
 

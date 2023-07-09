@@ -24,7 +24,7 @@ const DesktopLaptop = () => {
   const mainDivRef = useRef<HTMLDivElement>(null);
   const secondaryDivRef = useRef<HTMLDivElement>(null);
 
-  const classIcon = 'w-full h-[70px] p-3';
+  const classIcon = 'w-full h-[4.5rem] p-3';
   const controlBtn: { title: string; icon: ReactElement<any, any> }[] = [
     { title: 'Filter', icon: <HiOutlineFilter className={classIcon} /> }
   ];
@@ -48,9 +48,9 @@ const DesktopLaptop = () => {
   }, []);
 
   return (
-    <div className="fixed top-[calc(50vh-230px+40px)] left-0 z-[15]">
+    <div className="fixed top-[calc(50vh-230px+2.4rem)] left-0 z-[15]">
       <motion.div
-        className="w-[50px] h-fit
+        className="w-[3rem] h-fit
     rounded-r-2xl border-2 border-slate-500 border-l-0 bg-white z-10 overflow-hidden
     "
       >
@@ -125,7 +125,7 @@ const DesktopLaptop = () => {
 
                     }
                   }}
-                  className="p-1 h-[70px]"
+                  className="p-1 h-[4.5rem]"
                 >
                   <motion.div className=" relative flex">
                     {item.path(`m-auto w-full  hover:text-red-500 transition-all
@@ -139,7 +139,7 @@ const DesktopLaptop = () => {
         </motion.div>
       </motion.div>
       <motion.div
-        className="absolute left-[90px] top-0 w-fit h-full flex flex-col
+        className="absolute left-[5.625rem] top-0 w-fit h-full flex flex-col
       z-30 overflow-scroll overflow-x-hidden  overflow-y-hidden pointer-events-non
       "
         ref={secondaryDivRef}

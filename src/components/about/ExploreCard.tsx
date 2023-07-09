@@ -29,26 +29,26 @@ const ExploreCard = ({ id, imgUrl, title, index, active, handleClick }: ExploreC
       className="absolute w-full h-full object-cover rounded-[1.5rem]"
     />
     {active !== id ? (
-      <h3 className="font-semibold sm:text-[26px] text-[18px] text-white absolute z-0 lg:bottom-20 lg:rotate-[-90deg] lg:origin-[0,0]">
+      <h3 className="font-semibold sm:text-[2rem] text-[1rem] text-white absolute z-0 lg:bottom-20 lg:rotate-[-90deg] lg:origin-[0,0]">
         {title}
       </h3>
     ) : (
       <div
-        className="absolute bottom-0 p-8 flex justify-start w-full flex-col bg-[rgba(0,0,0,0.5)] rounded-b-[24px] transition-all
+        className="absolute bottom-0 p-8 flex justify-start w-full flex-col bg-[rgba(0,0,0,0.5)] rounded-b-[2rem] transition-all
       ease-linear
       "
       >
         <div
-          className={`${styles.flexCenter} w-[60px] h-[60px] rounded-[24px] glassmorphism mb-[16px]
+          className={`${styles.flexCenter} w-[4rem] h-[4rem] rounded-[2rem] glassmorphism mb-[1rem]
           transition-all ease-in-out
           `}
         >
           <img src="/about/headset.svg" alt="headset" className="w-1/2 h-1/2 object-contain" />
         </div>
-        <p className="font-normal text-[16px] leading-[20.16px] text-white uppercase">
+        <p className="font-normal text-[1rem] leading-[20.1rem] text-white uppercase">
           Explorer house
         </p>
-        <h2 className="mt-[24px] font-semibold sm:text-[32px] text-[24px] text-white">{title}</h2>
+        <h2 className="mt-[2rem] font-semibold sm:text-[2rem] text-[2rem] text-white">{title}</h2>
       </div>
     )}
   </motion.div>

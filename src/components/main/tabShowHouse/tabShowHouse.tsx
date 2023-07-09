@@ -101,14 +101,14 @@ const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
               zoom={selectLocale?.zoom ? selectLocale.zoom : 15}
               keyMapBing={keyMapBing}
               formattedAddress={selectLocale?.formattedAddress ? selectLocale.formattedAddress : ''}
-              style='h-[500px]'
+              style='h-[32rem]'
               idMap='6'
             />
           </div>
         </motion.div>
       </AnimatePresence>
 
-      <div className="h-fit mt-[70px] tablet:mt-[50px] mobile:mt-[50px] relative  bg-[#fffdf8]
+      <div className="h-fit mt-[4.5rem] tablet:mt-[3rem] mobile:mt-[3rem] relative  bg-[#fffdf8]
       rounded-xl shadow-2xl
       ">
 

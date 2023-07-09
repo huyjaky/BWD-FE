@@ -2,15 +2,15 @@ import { MdLanguage } from 'react-icons/md';
 import { TiArrowSortedUp } from 'react-icons/ti';
 const FooterTest = () => {
   return (
-    <div className="flex justify-between px-[80px] bg-ColorBgFooter">
+    <div className="flex justify-between px-[5rem] bg-ColorBgFooter">
       <div>
         <ul className="flex flex-wrap justify-between relative">
           <li>
-            <span className="text-[14px]"> 2023 Olympus,Inc</span>
+            <span className="text-[1rem]"> 2023 Olympus,Inc</span>
           </li>
           <li className="ml-5">
-            <span className="absolute left-[120px] bottom-1 laptop:hidden tablet:hidden">.</span>
-            <a className="text-[14px] hover:underline hover:decoration-solid hover:cursor-pointer ">
+            <span className="absolute left-[7.5rem] bottom-1 laptop:hidden tablet:hidden">.</span>
+            <a className="text-[1rem] hover:underline hover:decoration-solid hover:cursor-pointer ">
               {' '}
               Term
             </a>
@@ -19,7 +19,7 @@ const FooterTest = () => {
             <span className="absolute left-[175px] bottom-1 laptop:hidden tablet:hidden mobile:hidden">
               .
             </span>
-            <a className="text-[14px] hover:underline hover:decoration-solid hover:cursor-pointer">
+            <a className="text-[1rem] hover:underline hover:decoration-solid hover:cursor-pointer">
               {' '}
               Sitemap
             </a>
@@ -28,7 +28,7 @@ const FooterTest = () => {
             <span className="absolute left-[255px] bottom-1 laptop:hidden tablet:hidden mobile:hidden">
               .
             </span>
-            <a className="text-[14px] hover:underline hover:decoration-solid hover:cursor-pointer">
+            <a className="text-[1rem] hover:underline hover:decoration-solid hover:cursor-pointer">
               {' '}
               Privacy
             </a>
@@ -37,16 +37,16 @@ const FooterTest = () => {
             <span className="absolute left-[325px] bottom-1 laptop:hidden tablet:hidden mobile:hidden">
               .
             </span>
-            <a className="text-[14px] hover:underline hover:decoration-solid hover:cursor-pointer">
+            <a className="text-[1rem] hover:underline hover:decoration-solid hover:cursor-pointer">
               {' '}
               Your Privacy Choices
             </a>
           </li>
           <li className="ml-5">
-            <span className="absolute left-[490px] bottom-1 laptop:hidden tablet:hidden mobile:hidden">
+            <span className="absolute left-[45.625rem] bottom-1 laptop:hidden tablet:hidden mobile:hidden">
               .
             </span>
-            <a className="text-[14px] hover:underline hover:decoration-solid hover:cursor-pointer">
+            <a className="text-[1rem] hover:underline hover:decoration-solid hover:cursor-pointer">
               {' '}
               Destinations
             </a>

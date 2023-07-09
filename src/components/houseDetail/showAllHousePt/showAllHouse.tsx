@@ -45,9 +45,9 @@ const ShowAllHouse = ({ arrImg }: ShowAllHouseProps) => {
                 document.body.style.overflow = 'scroll';
                 document.body.style.overflowX = 'hidden';
               }}
-              className="w-[100px] h-[100px] cursor-pointer flex"
+              className="w-[6.25rem] h-[6.25rem] cursor-pointer flex"
             >
-              <IoChevronBackOutline className="text-[50px] m-auto" />
+              <IoChevronBackOutline className="text-[3rem] m-auto" />
             </motion.button>
           </div>
 

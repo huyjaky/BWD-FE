@@ -269,7 +269,7 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
       relative
           ">
             <motion.button
-              className="absolute w-[70px] h-[70px] flex desktop:hidden laptop:hidden z-20
+              className="absolute w-[4.5rem] h-[4.5rem] flex desktop:hidden laptop:hidden z-20
               top-0 left-0
               "
               onClick={(event) => {
@@ -277,7 +277,7 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
               }}
             >
               <div className="w-fit h-full m-auto">
-                <GrClose className="text-[30px]" />
+                <GrClose className="text-[2rem]" />
               </div>
             </motion.button>
 
@@ -287,7 +287,7 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
               zoom={selectLocale?.zoom ? selectLocale.zoom : 15}
               formattedAddress={selectLocale?.formattedAddress ? selectLocale.formattedAddress : ''}
               keyMapBing={keyMapBing}
-              style='h-[500px] mobile:h-[calc(100%-50px)] tablet:h-[calc(100%-50px)]'
+              style='h-[32rem] mobile:h-[calc(100%-3rem)] tablet:h-[calc(100%-3rem)]'
               idMap='4'
             />
           </div>

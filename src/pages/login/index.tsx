@@ -11,7 +11,7 @@ const Login: NextPageWithLayout = () => {
   return (
     <main>
       <HeaderLogin />
-      <div className="w-full h-[calc(100vh-80px)] ">
+      <div className="w-full h-[calc(100vh-5rem)] ">
         <div className="w-full h-full flex">
           <LoginPanel>
             <div></div>

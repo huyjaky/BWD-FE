@@ -34,21 +34,21 @@ const ControlPlanMobile = () => {
         >
           {/* header */}
           <motion.div className="flex-[0.5] ">
-            <motion.button className="h-full w-[100px] overflow-hidden ">
+            <motion.button className="h-full w-[6.25rem] overflow-hidden ">
               <IoIosArrowRoundBack
-                className="w-full text-[40px] font-bold  stroke-[50px] fill-red-500
+                className="w-full text-[2.4rem] font-bold  stroke-[3rem] fill-red-500
               text-red-500 "
                 onClick={(event) => setIsShow(false)}
               />
             </motion.button>
           </motion.div>
 
-          <motion.div className="flex-1 box-border px-[80px] mobile:px-3">
+          <motion.div className="flex-1 box-border px-[5rem] mobile:px-3">
             <ControlBar />
           </motion.div>
 
           {/* content */}
-          <motion.div className="flex-[7] box-border w-full mb-[70px] px-[80px] py-5 mobile:px-0">
+          <motion.div className="flex-[7] box-border w-full mb-[4.5rem] px-[5rem] py-5 mobile:px-0">
             <motion.div className="w-full h-full relative border-2 rounded-2xl mobile:px-0  overflow-hidden">
               <Popover />
             </motion.div>

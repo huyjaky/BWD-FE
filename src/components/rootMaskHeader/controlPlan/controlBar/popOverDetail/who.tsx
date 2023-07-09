@@ -64,7 +64,7 @@ const Who = ({ styleWho }: WhoProps) => {
       className={`${styleWho} w-full h-full flex justify-end mobile:justify-center tablet:justify-center`}
     >
       <div
-        className="w-[350px] h-full bg-white rounded-2xl pointer-events-auto box-border
+        className="w-[21.875rem] h-full bg-white rounded-2xl pointer-events-auto box-border
         p-6 mobile:w-full tablet:w-full
       "
         id="who-popup"
@@ -87,7 +87,7 @@ const Who = ({ styleWho }: WhoProps) => {
                   <div className="w-full h-full flex">
                     <div className="w-fit h-fit flex m-auto">
                       <button
-                        className={`w-[35px] h-[35px] border-2 rounded-full font-bold
+                        className={`w-[2rem] h-[2rem] border-2 rounded-full font-bold
                         ${item.amount == 0 ? '' : 'border-slate-800'}
                       `}
                         id={`${item.title}`}
@@ -95,11 +95,11 @@ const Who = ({ styleWho }: WhoProps) => {
                       >
                         &#45;
                       </button>
-                      <span className="w-[35px] h-[35px] text-[23px] text-center">
+                      <span className="w-[2rem] h-[2rem] text-[1rem] text-center">
                         {item.amount}
                       </span>
                       <button
-                        className="w-[35px] h-[35px] border-2 rounded-full
+                        className="w-[2rem] h-[2rem] border-2 rounded-full
                       border-slate-800 font-bold
                       "
                         id={`${item.title}`}

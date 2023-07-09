@@ -20,19 +20,19 @@ const InsightCard = ({ imgUrl, title, subtitle, index }: InsightCardProps) => (
     <img
       src={imgUrl}
       alt="planet-01"
-      className="md:w-[270px] w-full h-[250px] rounded-[32px] object-cover"
+      className="md:w-[24.5rem] w-full h-[16rem] rounded-[2rem] object-cover"
     />
     <div className="w-full flex justify-between items-center">
-      <div className="flex-1 md:ml-[62px] flex flex-col max-w-[650px]">
-        <h4 className="font-normal lg:text-[42px] text-[26px] text-black">{title}</h4>
-        <p className="mt-[16px] font-normal lg:text-[20px] text-[14px] text-slate-700">
+      <div className="flex-1 md:ml-[4rem] flex flex-col max-w-[40.625rem]">
+        <h4 className="font-normal lg:text-[3rem] text-[2rem] text-black">{title}</h4>
+        <p className="mt-[1rem] font-normal lg:text-[1rem] text-[1rem] text-slate-700">
           {subtitle}
         </p>
       </div>
 
       <motion.div
         whileHover={{ scale: 1.2 }}
-        className="lg:flex hidden items-center justify-center w-[100px] h-[100px] rounded-full bg-transparent"
+        className="lg:flex hidden items-center justify-center w-[6.25rem] h-[6.25rem] rounded-full bg-transparent"
       >
         <BsArrowUpRightCircle className="w-full h-full object-contain text-slate-500" />
       </motion.div>

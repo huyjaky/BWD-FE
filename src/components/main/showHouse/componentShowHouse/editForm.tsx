@@ -1,5 +1,7 @@
 import axiosClient from "@/api-client/axiosClient";
-import { filterFormAnimateContext } from "@/contexts/filterFormAnimate";
+import { houseApi } from "@/api-client/houseApi";
+import { getHouseContext } from "@/contexts/getHouse";
+import { houseTempContext } from "@/contexts/houseTemp";
 import { selectHouseContext } from "@/contexts/selectHouse";
 import { house_ } from "@/models/house";
 import { FilePondErrorDescription, FilePondFile } from 'filepond';
@@ -13,15 +15,10 @@ import { Dispatch, SetStateAction, useContext, useEffect, useRef, useState } fro
 import { FilePond, registerPlugin } from 'react-filepond';
 import { SubmitHandler, useForm } from "react-hook-form";
 import { GrClose } from "react-icons/gr";
-import Amenities from "../../filter/formFilter/filterFormComponent/amenities/amenities";
+import EditAmenities from "./amenities/editAmenities";
 import InputFormEdit from "./inputForm/inputFormEdit";
 import MapEdit from "./inputForm/map";
-import EditAmenities from "./amenities/editAmenities";
-import { houseApi } from "@/api-client/houseApi";
-import { getHouseContext } from "@/contexts/getHouse";
-import ShowAllHouse from "@/components/houseDetail/showAllHousePt/showAllHouse";
 import RemoveImg from "./removeImg/removeImg";
-import { houseTempContext } from "@/contexts/houseTemp";
 
 interface EditFormProps {
   keyMapBing: string;
@@ -101,16 +98,16 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
   return (
     <>
       {/* <ShowAllHouse/> */}
-      <div className='w-[800px] h-[calc(100vh-50px)] bg-white m-auto rounded-3xl
+      <div className='w-[800px] h-[calc(100vh-3rem)] bg-white m-auto rounded-3xl
         overflow-hidden flex flex-col
         mobile:mt-0 mobile:rounded-none
         mobile:w-screen mobile:h-screen
-        tablet:h-[calc(100vh-90px)] tablet:mt-[10px] '>
+        tablet:h-[calc(100vh-5.625rem)] tablet:mt-[.6rem] '>
         <form className='w-full h-full relative '
           onSubmit={handleSubmit(onSubmit)}
         >
           <motion.button
-            className="absolute w-[70px] h-[70px] flex desktop:hidden laptop:hidden z-20"
+            className="absolute w-[4.5rem] h-[4.5rem] flex desktop:hidden laptop:hidden z-20"
             onClick={(event) => {
               if (setIsEdit) {
                 setIsEdit(false)
@@ -118,15 +115,15 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
             }}
           >
             <div className="w-fit h-full m-auto">
-              <GrClose className="text-[30px]" />
+              <GrClose className="text-[2rem]" />
             </div>
           </motion.button>
 
-          <div className='w-full absolute h-[40px]  border-b-2  flex'>
-            <span className='text-[30px] m-auto'>Edit</span>
+          <div className='w-full absolute h-[2.4rem]  border-b-2  flex'>
+            <span className='text-[2rem] m-auto'>Edit</span>
 
           </div>
-          <div className="w-full h-[80px] absolute bottom-0 left-0 border-t-2 flex items-center flex-2 py-3">
+          <div className="w-full h-[5rem] absolute bottom-0 left-0 border-t-2 flex items-center flex-2 py-3">
 
             <button type="button" className="flex-1 flex justify-start"
               onClick={(event) => {
@@ -146,7 +143,7 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
             <div className="flex-1 flex justify-center">
               <motion.button
                 type="submit"
-                className="w-[200px] h-[40px] rounded-lg border-2"
+                className="w-[12.5rem] h-[2.4rem] rounded-lg border-2"
                 whileHover={{ backgroundColor: 'rgba(255, 56, 92, 0.8)', color: 'white' }}
                 whileTap={{ scale: 0.9 }}
               >
@@ -155,15 +152,15 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
             </div>
           </div>
           <div className="w-full h-full">
-            <div className="w-full h-[40px]"></div>
+            <div className="w-full h-[2.4rem]"></div>
 
-            <div className="w-full h-[calc(100%-120px)]
+            <div className="w-full h-[calc(100%-7.5rem)]
               overflow-scroll overflow-x-hidden box-border p-7
               mobile:p-0
               ">
 
               {/* form  */}
-              <div className="w-full h-fit grid text-[25px] desktop:grid-areas-layoutEditDesktopLaptop
+              <div className="w-full h-fit grid text-[2rem] desktop:grid-areas-layoutEditDesktopLaptop
               laptop:grid-areas-layoutEditDesktopLaptop
               tablet:grid-areas-layoutEditTabletMobile
               mobile:grid-areas-layoutEditMobile
@@ -182,27 +179,27 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
 
                 <div className={`grid-in-capacity ${styleInput}`}>
                   <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Capacity">
-                    <input type="number" {...register('Capacity')} className="w-full h-[50px] outline-none text-[25px]" />
+                    <input type="number" {...register('Capacity')} className="w-full h-[3rem] outline-none text-[2rem]" />
                   </InputFormEdit>
                 </div>
 
                 <div className={`grid-in-baths ${styleInput}`}>
                   <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Baths">
-                    <input type="number" {...register('NumsOfBath')} className="w-full h-[50px] outline-none text-[25px]" />
+                    <input type="number" {...register('NumsOfBath')} className="w-full h-[3rem] outline-none text-[2rem]" />
                   </InputFormEdit>
                 </div>
 
                 <div className={`grid-in-beds ${styleInput}`}>
                   <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Beds">
-                    <input type="number" {...register('NumsOfBed')} className="w-full h-[50px] outline-none text-[25px]" />
+                    <input type="number" {...register('NumsOfBed')} className="w-full h-[3rem] outline-none text-[2rem]" />
                   </InputFormEdit>
                 </div>
 
                 {/* huong dong tay nam bac */}
                 <div className={`grid-in-orientation ${styleInput}`}>
                   <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Orientation">
-                    {/* <input type="text" className="w-full h-[50px] outline-none text-[25px]" /> */}
-                    <select {...register('Orientation')} className="select px-0 w-full outline-none text-[25px]">
+                    {/* <input type="text" className="w-full h-[3rem] outline-none text-[2rem]" /> */}
+                    <select {...register('Orientation')} className="select px-0 w-full outline-none text-[2rem]">
                       {compass.map((item: string, index: number) => {
                         if (index == 0) {
                           return (
@@ -224,8 +221,8 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
                 {/* chua lam phan nay */}
                 <div className={`grid-in-price ${styleInput}`}>
                   <InputFormEdit styleDivAround=" before:hidden" styleFieldset="" styleLegend="" title="Price">
-                    {/* <input type="number" {...register('Price')} className="w-full h-[50px] outline-none text-[25px]" /> */}
-                    <div className="w-full h-[50px] flex mr-0">
+                    {/* <input type="number" {...register('Price')} className="w-full h-[3rem] outline-none text-[2rem]" /> */}
+                    <div className="w-full h-[3rem] flex mr-0">
                       <Slider
                         // range
                         allowCross={false}
@@ -247,8 +244,8 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
                           marginTop: -13
                         }}
                       />
-                      <div className="w-[150px] h-full flex ml-5">
-                        <input type="number" {...register('Price')} className="w-[120px] h-full m-auto
+                      <div className="w-[9.375rem] h-full flex ml-5">
+                        <input type="number" {...register('Price')} className="w-[7.5rem] h-full m-auto
                         outline-none "
                           value={tempHouse?.Price}
                           onChange={(event) => {
@@ -264,20 +261,20 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
 
                 <div className={`grid-in-title ${styleInput}`}>
                   <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Title">
-                    <input type="text" {...register('Title')} className="w-full h-[50px] outline-none text-[25px]" />
+                    <input type="text" {...register('Title')} className="w-full h-[3rem] outline-none text-[2rem]" />
                   </InputFormEdit>
                 </div>
 
                 <div className={`grid-in-des ${styleInput}`}>
                   <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Description">
-                    <textarea {...register('Description')} className="w-full h-fit  outline-none text-[25px]" />
+                    <textarea {...register('Description')} className="w-full h-fit  outline-none text-[2rem]" />
                   </InputFormEdit>
                 </div>
 
                 {/* chua lam phan nay */}
                 <div className={`grid-in-placeoffer ${styleInput}`}>
                   <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Amenities">
-                    {/* <input type="text" className="w-full h-[50px] outline-none text-[25px]" /> */}
+                    {/* <input type="text" className="w-full h-[3rem] outline-none text-[2rem]" /> */}
                     <div className="w-full h-fit mb-5 border-b-2 border-slate-500 py-10">
                       <div className="w-full h-fit flex flex-col ">
                         <EditAmenities setTempHouse={setTempHouse} tempHouse={tempHouse} />
@@ -289,7 +286,7 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
                 {/* chua lam phan nay */}
                 <div className={`grid-in-img ${styleInput}`}>
                   <InputFormEdit styleDivAround=" before:hidden" styleFieldset="" styleLegend="" title="Images">
-                    {/* <input type="text" className="w-full h-[50px] outline-none text-[25px]" /> */}
+                    {/* <input type="text" className="w-full h-[3rem] outline-none text-[2rem]" /> */}
 
                     <RemoveImg arrImg={tempHouse ? tempHouse.arrImg : []} tempHouse={tempHouse}
                       setTempHouse={setTempHouse}
@@ -371,7 +368,7 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
             </div>
 
 
-            <div className="w-full h-[80px]"></div>
+            <div className="w-full h-[5rem]"></div>
 
           </div>
         </form>

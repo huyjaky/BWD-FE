@@ -21,15 +21,15 @@ interface HostProps {
 const Host = ({ userAcc, placeOffer, link, description, houseDetail }: HostProps) => (
   <div className="flex-[7] flex flex-col">
     <div className="w-full mb-5 ">
-      <span className="text-[30px]">Meet your host</span>
+      <span className="text-[2rem]">Meet your host</span>
     </div>
-    <div className="w-full rounded-2xl h-[550px] bg-[#f0efe9] flex">
+    <div className="w-full rounded-2xl h-[34.3rem] bg-[#f0efe9] flex">
       <HostUser description={description} imgPath={userAcc.Image} userName={userAcc.UserName} gmail={userAcc.Gmail} />
     </div>
 
     <div className="mt-10 border-t-2 border-slate-800">
       <div className="w-full mb-5 mt-5">
-        <span className="text-[30px]">What this Amenities</span>
+        <span className="text-[2rem]">What this Amenities</span>
       </div>
       <div className="w-full grid grid-cols-2">
         {placeOffer.map(
@@ -44,7 +44,7 @@ const Host = ({ userAcc, placeOffer, link, description, houseDetail }: HostProps
                 className="w-full h-fit flex items-center cursor-default"
                 key={index}
               >
-                <span className="text-[25px] text-ellipsis overflow-hidden whitespace-nowrap">
+                <span className="text-[2rem] text-ellipsis overflow-hidden whitespace-nowrap">
                   {item.PlaceOffer}
                 </span>
               </motion.div>
@@ -56,9 +56,9 @@ const Host = ({ userAcc, placeOffer, link, description, houseDetail }: HostProps
 
     <div className="mt-10 border-t-2 border-slate-800">
       <div className="w-full mb-5 mt-5">
-        <span className="text-[30px]">House features</span>
+        <span className="text-[2rem]">House features</span>
       </div>
-      <div className="w-full grid grid-cols-2 mobile:grid-cols-1 gap-y-4">
+      <div className="w-full grid grid-cols-2 mobile:grid-cols-1 gap-y-4 ">
         <FtHouse des={houseDetail.Price + ''} title='Price'>
           <MdOutlineAttachMoney />
         </FtHouse>

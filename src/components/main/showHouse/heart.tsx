@@ -37,7 +37,7 @@ const Heart = ({ HouseId, IsFavorite }: HeartProps) => {
   return (
     <motion.label
       whileHover={{ scale: 1.2 }}
-      className="swap swap-flip text-[30px] z-10 absolute right-2 top-2
+      className="swap swap-flip text-[2rem] z-10 absolute right-2 top-2
                   text-red-500 "
     >
       <input

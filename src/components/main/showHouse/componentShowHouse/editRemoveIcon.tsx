@@ -20,7 +20,7 @@ const EditRemoveIcon = ({ isEdit, setIsEdit, item, isRemoveReq, setIsRemoveReq }
   return (
     <>
       <div className="w-0 relative">
-        <motion.div className="w-[50px] h-[60px] top-0 left-0 absolute z-20 flex " >
+        <motion.div className="w-[3rem] h-[4rem] top-0 left-0 absolute z-20 flex " >
           <button
             onClick={(event) => {
               if (setIsEdit && isEdit != null) {
@@ -29,15 +29,15 @@ const EditRemoveIcon = ({ isEdit, setIsEdit, item, isRemoveReq, setIsRemoveReq }
               setSelectHouse({ ...selectHouse, ...item });
             }}
             className='w-fit h-fit m-auto'>
-            <BsListNested className="w-[40px] h-[40px] text-blue-600 " />
+            <BsListNested className="w-[2.4rem] h-[2.4rem] text-blue-600 " />
           </button>
         </motion.div>
 
-        <motion.div className="w-[50px] h-[60px] top-0 left-[50px] absolute z-20 flex " >
+        <motion.div className="w-[3rem] h-[4rem] top-0 left-[3rem] absolute z-20 flex " >
           <button
             onClick={()=>{setIsRemoveReq(true)}}
            className='w-fit h-fit m-auto'>
-            <RiDeleteBin5Line className="w-[40px] h-[40px] text-red-500 " />
+            <RiDeleteBin5Line className="w-[2.4rem] h-[2.4rem] text-red-500 " />
           </button>
         </motion.div>
       </div>

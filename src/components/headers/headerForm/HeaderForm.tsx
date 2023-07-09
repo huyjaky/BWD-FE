@@ -28,10 +28,10 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
   const router = useRouter();
   return (
     <>
-      <div className="w-full h-[80px]"></div>
-      <div className="w-full h-[80px]  bg-white z-30 fixed top-0" id="header-root">
+      <div className="w-full h-[5rem]"></div>
+      <div className="w-full h-[5rem]  bg-white z-30 fixed top-0" id="header-root">
         <header
-          className="w-full h-[80px] border-b-2 flex justify-center px-[80px]
+          className="w-full h-[5rem] border-b-2 flex justify-center px-[5rem]
       tablet:hidden mobile:hidden
       box-border absolute"
         >
@@ -49,7 +49,7 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
             "
             >
               <Image src="/icon.png" alt="" width={50} height={50} />
-              <div className="text-[30px] w-0 overflow-hidden desktop:w-fit font-semibold">
+              <div className="text-[2rem] w-0 overflow-hidden desktop:w-fit font-semibold">
                 Olympus
               </div>
             </Link>
@@ -77,25 +77,25 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
                 href={''}
                 className="rounded-full bg-white box-content p-1 mr-3 hover:bg-slate-300"
               >
-                <TbWorld className="w-[30px] h-[30px]" />
+                <TbWorld className="w-[2rem] h-[2rem]" />
               </Link>
               <ButtonAccount />
             </div>
           </div>
         </header>
         <header
-          className="w-full h-fit desktop:hidden laptop:hidden  box-border py-5 tablet:px-[80px]
-      mobile:px-[20px] mobile:relative tablet:relative
+          className="w-full h-fit desktop:hidden laptop:hidden  box-border py-5 tablet:px-[5rem]
+      mobile:px-[1rem] mobile:relative tablet:relative
       "
         >
           <motion.div
             className="w-full h-full shadow-xl rounded-full box-border px-4 py-2 flex cursor-pointer"
             onClick={(event) => setIsShow(true)}
           >
-            <FiSearch className="h-full text-[30px] m-auto" />
+            <FiSearch className="h-full text-[2rem] m-auto" />
             <div className="h-full w-fit flex flex-col ml-5 box-border">
               <span className="font-semibold">Anywhere</span>
-              <span className="text-[14px]">Anyweek & Addguests</span>
+              <span className="text-[1rem]">Anyweek & Addguests</span>
             </div>
             <div className="flex-1"></div>
           </motion.div>

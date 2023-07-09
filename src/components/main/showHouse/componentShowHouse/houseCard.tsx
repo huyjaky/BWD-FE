@@ -72,7 +72,7 @@ const HouseCard = ({
         }}
 
         transition={{ type: 'spring' }}
-        className="w-full h-[400px] rounded-2xl box-border bg-[#f28076] text-white"
+        className="w-full h-[25rem] rounded-2xl box-border bg-[#f28076] text-white"
         onHoverStart={() => {
           setIsHover({ ishover: true, id: index });
         }}
@@ -80,7 +80,7 @@ const HouseCard = ({
           setIsHover({ ishover: false, id: -1 });
         }}
       >
-        <div className="w-full h-[300px] relative">
+        <div className="w-full h-[18.75rem] relative">
           <Carousel arrImg={item.arrImg} houseId={item.HouseId} />
 
           {/* heart */}
@@ -104,7 +104,7 @@ const HouseCard = ({
               });
             }}
             className={`absolute top-3 right-12 ${infShow === 'authListHouse' ? 'right-2' : ''
-              } text-red-500 text-[25px] z-10`}
+              } text-red-500 text-[2rem] z-10`}
           >
             <ImMap />
           </motion.button>
@@ -115,7 +115,7 @@ const HouseCard = ({
               setSelectUser(item.useracc);
               setIsOpenMask(true);
             }}
-            className={`absolute w-[60px] h-[60px] transition-all
+            className={`absolute w-[4rem] h-[4rem] transition-all
                 left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl ${infShow === 'authListHouse' ? 'hidden' : ''
               }`}
           >
@@ -137,14 +137,14 @@ const HouseCard = ({
               isHover.ishover && isHover.id === index ? 'showIconControl' : 'hiddenIconControl'
             }
             transition={{ type: 'spring', duration: 0.3 }}
-            className={`absolute w-[160px] h-[60px] transition-all bg-white
+            className={`absolute w-[14rem] h-[4rem] transition-all bg-white
                 left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl flex
                 tablet:hidden mobile:hidden
                 ${infShow === 'authListHouse' || infShow === 'houseForRent'
                 || infShow === 'houseForSale'
                  ? '' : 'hidden'}`}
           >
-            <div className="w-[60px] h-full rounded-full overflow-hidden">
+            <div className="w-[4rem] h-full rounded-full overflow-hidden">
               {item.useracc.Image != undefined ? (
                 <img
                   src={'/api/img/path/' + item.useracc.Image}
@@ -165,12 +165,12 @@ const HouseCard = ({
           <motion.button
             variants={variants}
             transition={{ type: 'spring', duration: 0.3 }}
-            className={`absolute w-[160px] h-[60px] transition-all bg-white
+            className={`absolute w-[14rem] h-[4rem] transition-all bg-white
                 left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl flex
                 laptop:hidden desktop:hidden
                 ${infShow === 'authListHouse' ? '' : 'hidden'}`}
           >
-            <div className="w-[60px] h-full rounded-full overflow-hidden">
+            <div className="w-[4rem] h-full rounded-full overflow-hidden">
               {item.useracc.Image != undefined ? (
                 <img
                   src={'/api/img/path/' + item.useracc.Image}
@@ -193,7 +193,7 @@ const HouseCard = ({
 
         </div>
         <Link href={`/house/${item.HouseId}`}>
-          <div className="h-[100px] w-full box-border p-4 ">
+          <div className="h-[6.25rem] w-full box-border p-4 ">
             <div className="w-full grid grid-cols-2 grid-rows-3">
               <div className='whitespace-nowrap max-w-[100%] text-ellipsis overflow-hidden'>
                 <span className="font-semibold ">
@@ -221,7 +221,7 @@ const HouseCard = ({
               </div>
               <div className="flex justify-end">
                 <span>{item.Orientation} </span>{' '}
-                <FaRegCompass className="h-full ml-2 text-[20px]" />
+                <FaRegCompass className="h-full ml-2 text-[1rem]" />
               </div>
             </div>
           </div>

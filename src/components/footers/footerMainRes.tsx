@@ -32,13 +32,13 @@ const FooterMainRes = () => {
   return (
     <>
       <div
-        className="laptop:hidden desktop:hidden fixed z-40 bg-white bottom-0 w-full h-[70px]
+        className="laptop:hidden desktop:hidden fixed z-40 bg-white bottom-0 w-full h-[4.5rem]
           flex border-t-2 py-1 box-border justify-center"
       >
         <Link href={'/homepage'}>
           <motion.button className="flex w-fit h-full flex-col box-border ">
             <div className="w-full flex justify-center flex-[4]">
-              <BiSearch className="text-[40px] text-slate-500" />
+              <BiSearch className="text-[2.4rem] text-slate-500" />
             </div>
             <div className="flex-1 text-slate-500">Explorer</div>
           </motion.button>
@@ -46,7 +46,7 @@ const FooterMainRes = () => {
 
 
         <motion.button
-          className="flex w-fit h-full flex-col box-border mx-[70px]"
+          className="flex w-fit h-full flex-col box-border mx-[4.5rem]"
           ref={profileTab}
           onClick={(event) => {
             if (user.UserId) {
@@ -60,13 +60,13 @@ const FooterMainRes = () => {
                 src={'/api/img/path/' + user.Image}
                 alt={user.UserId}
                 className="object-cover
-            w-[40px] h-[40px] rounded-full
+            w-[2.4rem] h-[2.4rem] rounded-full
             "
               />
             </div>
           ) : (
             <div className="w-full flex justify-center flex-[4]">
-              <BiUser className="text-[40px] text-slate-500" />
+              <BiUser className="text-[2.4rem] text-slate-500" />
             </div>
           )}
           <div className="flex-1 text-slate-500">{user.UserId ? 'Profile' : 'Login'}</div>
@@ -82,14 +82,14 @@ const FooterMainRes = () => {
           }}
           className="flex w-fit h-full flex-col box-border ">
           <div className="w-full flex justify-center flex-[4]">
-            <BsHouses className="text-[40px] text-slate-500" />
+            <BsHouses className="text-[2.4rem] text-slate-500" />
           </div>
           <div className="flex-1 text-slate-500">Manage</div>
         </motion.button>
 
         <motion.div
           animate={isClickProfile ? {} : { height: 0 }}
-          className="fixed bottom-[70px] w-full bg-white overflow-hidden"
+          className="fixed bottom-[4.5rem] w-full bg-white overflow-hidden"
         >
           <ListButton />
         </motion.div>

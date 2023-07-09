@@ -53,18 +53,18 @@ const MapFilter = ({ keyMapBing }: MapFilterProps) => {
   }, []);
 
   return (
-    <div className="relative w-full h-[450px]">
+    <div className="relative w-full h-[28rem]">
       <div className={`w-full absolute top-0 left-0 rounded-3xl border-2 border-red-400
-      overflow-hidden h-[350px]
+      overflow-hidden h-[21.875rem]
 
       `}>
         <div id={"Mapfilter"} className="relative z-10"></div>
       </div>
 
-      <div id="searchBoxContainer9" className="border-b-2  absolute top-[350px] mt-5 left-0 w-full ">
+      <div id="searchBoxContainer9" className="border-b-2  absolute top-[21.875rem] mt-5 left-0 w-full ">
         <input
           placeholder={'Search location'}
-          id="searchBox9" type="text" className="w-full h-[50px] outline-none text-[25px]" />
+          id="searchBox9" type="text" className="w-full h-[3rem] outline-none text-[2rem]" />
       </div>
     </div>
   )

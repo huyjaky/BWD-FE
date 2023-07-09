@@ -16,12 +16,12 @@ const ButtonReservations: React.FC<ButtonreservationProps> = ({
   return (
     <button
       onClick={() => setSelected(content)}
-      className={`px-[16px] border-[2px] ${
+      className={`px-[1rem] border-[.2rem] ${
         content === selected
           ? 'border-black bg-[#F7F7F7]'
           : 'border-colorButtonHeader bg-transparent'
-      } rounded-[32px] h-[40px]
-            hover:border-black ease-in duration-200 mr-[16px] mb-[16px] text-[14px]`}
+      } rounded-[2rem] h-[2.4rem]
+            hover:border-black ease-in duration-200 mr-[1rem] mb-[1rem] text-[1rem]`}
     >
       {content}
       <span className="ml-1">({number})</span>

@@ -52,7 +52,7 @@ interface CarouselProps {
 }
 
 const styleBtn =
-  'absolute top-[calc(50%-20px)] z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center ';
+  'absolute top-[calc(50%-1rem)] z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center ';
 
 const Carousel = ({ arrImg, houseId }: CarouselProps) => {
   const [[page, direction], setPage] = useState([0, 0]);
@@ -122,7 +122,7 @@ const Carousel = ({ arrImg, houseId }: CarouselProps) => {
             animate={isHover ? 'showLeft' : 'hiddenLeft'}
             whileHover={{ scale: 1.1, backgroundColor: 'rgba(239, 68, 68, .6)' }}
             transition={{ duration: 0.5, type: 'tween' }}
-            className={`${styleBtn} left-[10px] mobile:hidden tablet:hidden `}
+            className={`${styleBtn} left-[.6rem] mobile:hidden tablet:hidden `}
           >
             <GrCaretPrevious />
           </motion.button>
@@ -133,7 +133,7 @@ const Carousel = ({ arrImg, houseId }: CarouselProps) => {
             whileHover={{ scale: 1.1, backgroundColor: 'rgba(239, 68, 68, .6)' }}
             animate={isHover ? 'hiddenRight' : 'showRight'}
             transition={{ duration: 0.5, type: 'tween' }}
-            className={`${styleBtn} right-[10px] mobile:hidden tablet:hidden `}
+            className={`${styleBtn} right-[.6rem] mobile:hidden tablet:hidden `}
           >
             <GrCaretNext />
           </motion.button>
@@ -144,7 +144,7 @@ const Carousel = ({ arrImg, houseId }: CarouselProps) => {
             onClick={() => paginate(-1)}
             whileTap={{ scale: 1.1, backgroundColor: 'rgba(239, 68, 68, .6)' }}
             transition={{ duration: 0.5, type: 'tween' }}
-            className={`${styleBtn} left-[10px] laptop:hidden desktop:hidden`}
+            className={`${styleBtn} left-[.6rem] laptop:hidden desktop:hidden`}
           >
             <GrCaretPrevious />
           </motion.button>
@@ -153,7 +153,7 @@ const Carousel = ({ arrImg, houseId }: CarouselProps) => {
             onClick={() => paginate(1)}
             whileTap={{ scale: 1.1, backgroundColor: 'rgba(239, 68, 68, .6)' }}
             transition={{ duration: 0.5, type: 'tween' }}
-            className={`${styleBtn} right-[10px] laptop:hidden desktop:hidden`}
+            className={`${styleBtn} right-[.6rem] laptop:hidden desktop:hidden`}
           >
             <GrCaretNext />
           </motion.button>

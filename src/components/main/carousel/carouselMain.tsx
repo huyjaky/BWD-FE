@@ -22,7 +22,7 @@ const CarouselMain = () => {
           disableOnInteraction: false
         }}
         pagination={{ el: '.main-pagination', clickable: true }}
-        modules={[Pagination , Autoplay ]} className="w-full h-[500px] justify-center"
+        modules={[Pagination , Autoplay ]} className="w-full h-[32rem] justify-center"
         style={{width: '100vw'}}
         >
 

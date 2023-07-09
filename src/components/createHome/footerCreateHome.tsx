@@ -7,7 +7,7 @@ import { useContext } from "react";
 const FooterCreateHome = () => {
   const { setStepCreate, stepCreate } = useContext(StepCreateHomeContext);
   return (
-    <div className="fixed w-full bottom-0 border-t-2 h-[5rem]">
+    <div className="fixed w-full bottom-0 border-t-2 h-[5rem] bg-white">
       <div className="w-full h-full grid grid-cols-2">
         {/* back */}
         <div className="w-full h-full flex justify-start box-border py-2 pl-5">

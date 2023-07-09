@@ -11,7 +11,7 @@ const TabletMobile = () => {
   const { data: session, status } = useSession()
   const { setIsLoginClick } = useContext(selectPopoverContext);
   return (
-    <div className="w-full h-[100px] mobile:h-fit  flex">
+    <div className="w-full h-[6.25rem] mobile:h-fit  flex">
       <div
         className="m-auto grid tablet:grid-cols-3 mobile:grid-cols-3 mobile:mb-5
       gap-7 gap-x-12

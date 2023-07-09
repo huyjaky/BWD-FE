@@ -117,7 +117,7 @@ const SlideShowHouse = ({
   return (
     <>
       <div className="">
-        <div className="w-full h-[100px]
+        <div className="w-full h-[6.25rem]
         relative z-10 text-center flex
         text-[2.5rem] tablet:text-[2rem] mobile:text-[1.5rem] ">
           <div className='w-fit h-fit m-auto '>
@@ -146,14 +146,14 @@ const SlideShowHouse = ({
             }}
             modules={[EffectCoverflow, Pagination, Navigation]}
             className="swiper_container laptop:hidden desktop:hidden
-            desktop:h-[550px] laptop:h-[550px] mobile:h-[450px] tablet:h-[450px]
+            desktop:h-[34.3rem] laptop:h-[34.3rem] mobile:h-[28rem] tablet:h-[28rem]
             "
-            style={{ width: 'calc(100vw-80px)' }}
+            style={{ width: 'calc(100vw-5rem)' }}
           >
             {!houseTemp || houseTemp.length === 0 &&
               arrEmpty.map((item: number, index: number) => {
                 return (
-                  <SwiperSlide key={index} style={{ width: '400px', paddingTop: '20px' }}>
+                  <SwiperSlide key={index} style={{ width: '25rem', paddingTop: '1rem' }}>
                     <SkeletonShowHouse />
                   </SwiperSlide>
                 );
@@ -163,7 +163,7 @@ const SlideShowHouse = ({
               houseTemp.length > 0 &&
               houseTemp.map((item: house_, index: number) => {
                 return (
-                  <SwiperSlide key={index} style={{ width: '400px', paddingTop: '20px' }}>
+                  <SwiperSlide key={index} style={{ width: '25rem', paddingTop: '1rem' }}>
                     <HouseCard
                       index={index}
                       keyMapBing={keyMapBing}
@@ -193,7 +193,7 @@ const SlideShowHouse = ({
               </div>
               <div
                 className="swiper-pagination"
-                style={{ position: 'relative', bottom: '-10px' }}
+                style={{ position: 'relative', bottom: '-.6rem' }}
               ></div>
             </div>
           </Swiper>
@@ -201,10 +201,11 @@ const SlideShowHouse = ({
       </div>
       <motion.button
         whileHover={{backgroundColor: 'rgba(239,68,68,1)', color: 'white'}}
-        className="w-[80%] m-auto h-[70px] flex border-2 border-red-500
-      rounded-2xl transition-all duration-500 mb-[100px]
+        className="w-[80%] m-auto h-[4.5rem] flex border-2 border-red-500
+      rounded-2xl transition-all duration-500 mb-[6.25rem]
       "
         onClick={(event) => {
+          window.scrollTo(0,0);
           if (infShow === 'houseForRent') {
             const temp = filterForm.typeHouse.filter((item: string) => item != 'HouseForSale');
             temp.push('HouseForRent');
@@ -219,18 +220,17 @@ const SlideShowHouse = ({
 
           } else if (infShow === 'favoriteHouse') {
             setIsFilter(infShow);
-
           }
         }}
       >
         <div className="w-fit h-fit m-auto flex flex-col">
-          <motion.div className="m-auto relative w-[30px] h-[30px]">
+          <motion.div className="m-auto relative w-[2rem] h-[2rem]">
             <motion.div
               animate={{ y: [-10, 0, -10] }}
               transition={{ repeat: Infinity }}
               className="absolute left-0"
             >
-              <BsChevronDoubleDown className="text-[30px]" />
+              <BsChevronDoubleDown className="text-[2rem]" />
             </motion.div>
           </motion.div>
           <span className="font-semibold">Show more</span>

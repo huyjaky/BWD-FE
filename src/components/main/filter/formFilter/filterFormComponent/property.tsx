@@ -35,7 +35,7 @@ const PropertyHouse = () => {
         return (
           <div className="w-full h-full flex justify-center" key={index}>
             <motion.button
-              className={`w-[150px] h-[130px] border-2 rounded-2xl box-border p-2 mobile:w-full
+              className={`w-[9.375rem] h-[130px] border-2 rounded-2xl box-border p-2 mobile:w-full
               mobile:mb-5
                             ${filterForm.typeHouse.includes(item.title) ? 'border-black' : ''}
                           `}

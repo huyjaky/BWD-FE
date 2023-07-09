@@ -33,7 +33,7 @@ function Header(): JSX.Element {
   };
 
   return (
-    <div className="flex justify-between h-[70px] items-center px-[20px] border-[1px] border-b-[#e4e4e4]">
+    <div className="flex justify-between h-[4.5rem] items-center px-[1rem] border-[1px] border-b-[#e4e4e4]">
       <Link href={'/homepage'}>
         <div>
           <Image width={70} height={70} src={Logo} alt="Logo" />
@@ -43,16 +43,16 @@ function Header(): JSX.Element {
         {/* blur: độ đục của màu */}
         <div className="">
           <ul
-            className="flex gap-3 text-[14px] font-semibold mobile:hidden
+            className="flex gap-3 text-[1rem] font-semibold mobile:hidden
                     "
           >
             <li className="relative">
               <button
                 onClick={() => handleActive('Today')}
-                className={`py-[10px] px-[16px] rounded-[30px] hover:bg-[#F7F7F7] ${
+                className={`py-[.6rem] px-[1rem] rounded-[2rem] hover:bg-[#F7F7F7] ${
                   active === 'Today' ? 'text-black' : 'text-[#717171]'
                 }
-                        before:absolute before:content-[""] before:w-0 before:h-[2px] before:bg-black before:left-4 before:bottom-2
+                        before:absolute before:content-[""] before:w-0 before:h-[.2rem] before:bg-black before:left-4 before:bottom-2
                         before::ease-in-out before:duration-500
                         hover:before:w-[60%]
 
@@ -65,10 +65,10 @@ function Header(): JSX.Element {
             <li className="relative">
               <button
                 onClick={() => handleActive('Inbox')}
-                className={`py-[10px] px-[16px] rounded-[30px] hover:bg-[#F7F7F7] ${
+                className={`py-[.6rem] px-[1rem] rounded-[2rem] hover:bg-[#F7F7F7] ${
                   active === 'Inbox' ? 'text-black' : 'text-[#717171]'
                 }
-                        before:absolute before:content-[""] before:w-0 before:h-[2px] before:bg-black before:left-4 before:bottom-2
+                        before:absolute before:content-[""] before:w-0 before:h-[.2rem] before:bg-black before:left-4 before:bottom-2
                         before::ease-in-out before:duration-500
                         hover:before:w-[60%]
                     `}
@@ -79,10 +79,10 @@ function Header(): JSX.Element {
             <li className="relative">
               <button
                 onClick={() => handleActive('Calendar')}
-                className={`py-[10px] px-[16px] rounded-[30px] hover:bg-[#F7F7F7] ${
+                className={`py-[.6rem] px-[1rem] rounded-[2rem] hover:bg-[#F7F7F7] ${
                   active === 'Calendar' ? 'text-black' : 'text-[#717171]'
                 }
-                        before:absolute before:content-[""] before:w-0 before:h-[2px] before:bg-black before:left-4 before:bottom-2
+                        before:absolute before:content-[""] before:w-0 before:h-[.2rem] before:bg-black before:left-4 before:bottom-2
                         before::ease-in-out before:duration-500
                         hover:before:w-[60%]
                     `}
@@ -93,10 +93,10 @@ function Header(): JSX.Element {
             <li className="relative">
               <button
                 onClick={() => handleMenu()}
-                className={`py-[10px] px-[16px] rounded-[30px] hover:bg-[#F7F7F7] ${
+                className={`py-[.6rem] px-[1rem] rounded-[2rem] hover:bg-[#F7F7F7] ${
                   activeMenu ? 'text-black' : 'text-[#717171]'
                 } flex items-center
-                                before:absolute before:content-[""] before:w-0 before:h-[2px] before:bg-black before:left-4 before:bottom-2
+                                before:absolute before:content-[""] before:w-0 before:h-[.2rem] before:bg-black before:left-4 before:bottom-2
                                 before:ease-in-out before:duration-500
                                 hover:before:w-[60%]
                     `}
@@ -108,9 +108,9 @@ function Header(): JSX.Element {
         </div>
       </div>
       <div
-        className={`w-[200px] absolute right-[35%] top-[11%] bg-[rgba(255,255,255,.25)]
-                shadow-shadowHeadhost  rounded-[13px] mobile:hidden ${
-                  toggleMenu ? 'h-[40px] ease-in-out duration-500' : 'h-0'
+        className={`w-[12.5rem] absolute right-[35%] top-[11%] bg-[rgba(255,255,255,.25)]
+                shadow-shadowHeadhost  rounded-[1rem] mobile:hidden ${
+                  toggleMenu ? 'h-[2.4rem] ease-in-out duration-500' : 'h-0'
                 }  `}
       >
         {toggleMenu && (
@@ -121,17 +121,17 @@ function Header(): JSX.Element {
               transition={{
                 duration: 0.5
               }}
-              className="text-[12px] h-[0%]"
+              className="text-[1rem] h-[0%]"
             >
               <button
                 onClick={handleCreatehome}
-                className={`w-[100%] h-[100%] p-[20px] text-start flex justify-between items-center rounded-[13px] hover:bg-[#F7F7F7] ${
+                className={`w-[100%] h-[100%] p-[20px] text-start flex justify-between items-center rounded-[1rem] hover:bg-[#F7F7F7] ${
                   active === 'Create a new listing' ? 'text-black' : 'text-[#717171]'
                 } flex items-center justify-center
                             `}
               >
-                Create a new listing{' '}
-                <div className="w-[20px]">
+                Create House{' '}
+                <div className="w-[1rem]">
                   <CreateList className="" />
                 </div>
               </button>

@@ -74,8 +74,8 @@ const ControlBar = () => {
   const handleCreate = async (data: Place) => {};
 
   return (
-    <div className="w-full h-full flex relative mobile:text-[12px] mobile:flex-col">
-      <div className="flex-[0.6] flex mobile:text-[20px]">
+    <div className="w-full h-full flex relative mobile:text-[1rem] mobile:flex-col">
+      <div className="flex-[0.6] flex mobile:text-[1rem]">
         {/* animation where */}
         <div
           className="flex-col flex m-auto w-full rounded-full box-border pl-7
@@ -97,19 +97,19 @@ const ControlBar = () => {
         <div className="flex-1 flex ">
           <div
             className="flex flex-col m-auto flex-1 box-border pl-3
-                z-10 relative mobile:pl-0 mobile:text-[20px] mobile:mt-5
+                z-10 relative mobile:pl-0 mobile:text-[1rem] mobile:mt-5
                 "
             id="checkin"
             onClick={onSelected}
           >
             <span>Appointment schedule</span>
-            <span className="text-[12px]">{format(address.checkInDay, 'eeee, ddMMM')}</span>
+            <span className="text-[1rem]">{format(address.checkInDay, 'eeee, ddMMM')}</span>
           </div>
         </div>
         <div className="flex-1 flex mobile:flex-col">
           <div
             className="flex-1 flex flex-col m-auto box-border pl-3
-                z-10 relative mobile:text-[20px] mobile:pl-0 mobile:mt-5
+                z-10 relative mobile:text-[1rem] mobile:pl-0 mobile:mt-5
                 mobile:ml-0
                 "
             id="who"
@@ -132,7 +132,7 @@ const ControlBar = () => {
               id="btn-search-header"
               onClick={fetchData}
             >
-              <BiSearch className="w-[30px] h-[30px] m-auto text-white tablet:w-[20px] tablet:h-[20px] mobile:w-[20px] mobile:h-[20px]" />
+              <BiSearch className="w-[2rem] h-[2rem] m-auto text-white tablet:w-[1rem] tablet:h-[1rem] mobile:w-[1rem] mobile:h-[1rem]" />
               <span className="text-white font-semibold m-auto ml-0 tablet:hidden mobile:hidden">
                 Search
               </span>

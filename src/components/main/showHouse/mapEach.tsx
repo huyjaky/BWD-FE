@@ -35,7 +35,7 @@ const MapEach = ({ latitude, longitude, zoom, keyMapBing, formattedAddress, idMa
 
   return (
     <>
-      <span className='text-[30px]'>{formattedAddress}</span>
+      <span className='text-[2rem]'>{formattedAddress}</span>
       <div className={`w-full rounded-3xl  border-2 border-red-400 overflow-hidden ${style}`}>
         <div id={"MapEach"+idMap} className="relative z-10"></div>
       </div>

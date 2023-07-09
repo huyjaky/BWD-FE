@@ -21,7 +21,7 @@ const Picture = ({ arrImg }: PictureProps) => {
   return (
     <>
       <div
-        className="w-full h-[450px] grid gap-3 rounded-3xl overflow-hidden mt-7
+        className="w-full h-[28rem] grid gap-3 rounded-3xl overflow-hidden mt-7
     grid-cols-layoutPicture grid-rows-layoutPicture grid-areas-layoutPicture
     relative mobile:hidden tablet:hidden
     "
@@ -59,12 +59,12 @@ const Picture = ({ arrImg }: PictureProps) => {
         <motion.button
           onClick={handleOnClick}
           whileTap={{ scale: 0.8 }}
-          className="absolute w-[160px] h-[40px] bg-white right-10 bottom-5 rounded-xl
+          className="absolute w-[14rem] h-[2.4rem] bg-white right-10 bottom-5 rounded-xl
       flex cursor-pointer
       "
         >
           <div className="w-fit h-fit flex items-center m-auto">
-            <BiMenu className="text-[20px]" />
+            <BiMenu className="text-[1rem]" />
             <span className="text-[15px]">Show all photos</span>
           </div>
         </motion.button>

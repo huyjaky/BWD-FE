@@ -117,22 +117,22 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
           variants={variantsAmenities}
           animate={isClickOutSide ? 'show' : 'hidden'}
           transition={{ duration: 0.5, type: 'tween' }}
-          className="w-[800px] h-[calc(100vh-50px)] bg-white m-auto rounded-3xl
+          className="w-[800px] h-[calc(100vh-3rem)] bg-white m-auto rounded-3xl
           flex flex-col
           mobile:mt-0 mobile:rounded-none mobile:w-screen mobile:h-screen
-          tablet:h-[calc(100vh-90px)] tablet:mt-[10px] z-30
+          tablet:h-[calc(100vh-5.625rem)] tablet:mt-[.6rem] z-30
           "
           ref={formFilter}
         >
           {/* header formfilter */}
           <div className=" flex-2 w-full border-b-2 flex relative">
-            <span className="m-auto font-semibold text-[23px]">Filter</span>
+            <span className="m-auto font-semibold text-[1rem]">Filter</span>
             <motion.button
-              className="absolute w-[70px] h-full flex desktop:hidden laptop:hidden"
+              className="absolute w-[4.5rem] h-full flex desktop:hidden laptop:hidden"
               onClick={(event) => setIsClickOutSide(false)}
             >
               <div className="w-fit h-full m-auto">
-                <GrClose className="text-[30px]" />
+                <GrClose className="text-[2rem]" />
               </div>
             </motion.button>
           </div>
@@ -143,8 +143,8 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
             <div className="w-full h-fit mb-5">
               {/* header pricerange */}
               <div className="w-full h-fit flex flex-col">
-                <span className="font-bold text-[25px]">Price range</span>
-                <span className="text-[18px]">
+                <span className="font-bold text-[2rem]">Price range</span>
+                <span className="text-[1rem]">
                   The average nightly price is &#36;79, not including fees or taxes.
                 </span>
               </div>
@@ -155,7 +155,7 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
             <div className="w-full h-fit border-b-2 border-slate-500 py-10">
               {/* header bed&bathrooms */}
               <div className="w-full h-fit flex flex-col  pb-3">
-                <span className="font-bold text-[25px] mb-5">Map</span>
+                <span className="font-bold text-[2rem] mb-5">Map</span>
                 <MapFilter keyMapBing={keyMapBing} />
               </div>
             </div>
@@ -164,7 +164,7 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
             <div className="w-full h-fit border-b-2 border-slate-500 py-10">
               {/* header bed&bathrooms */}
               <div className="w-full h-fit flex flex-col  pb-3">
-                <span className="font-bold text-[25px] mb-5">Beds & Bathrooms</span>
+                <span className="font-bold text-[2rem] mb-5">Beds & Bathrooms</span>
                 <BedsBathRooms />
               </div>
             </div>
@@ -172,14 +172,14 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
             {/* property type */}
             <div className="w-full h-fit mb-5 border-b-2 border-slate-500 py-10">
               <div className="w-full h-fit flex flex-col ">
-                <span className="font-bold text-[25px] mb-5">Property type</span>
+                <span className="font-bold text-[2rem] mb-5">Property type</span>
                 <PropertyHouse />
               </div>
             </div>
 
             <div className="w-full h-fit mb-5 border-b-2 border-slate-500 py-10">
               <div className="w-full h-fit flex flex-col ">
-                <span className="font-bold text-[25px] mb-5">Amenities</span>
+                <span className="font-bold text-[2rem] mb-5">Amenities</span>
                 <Amenities />
               </div>
             </div>
@@ -187,7 +187,7 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
             {/* compass */}
             <div className="w-full h-fit mb-5 border-b-2 border-slate-500 py-10">
               <div className="w-full h-fit flex flex-col ">
-                <span className="font-bold text-[25px] mb-5">Orientation</span>
+                <span className="font-bold text-[2rem] mb-5">Orientation</span>
                 <CompassFilter />
               </div>
             </div>
@@ -195,7 +195,7 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
             {/* host language */}
             <div className="w-full h-fit mb-5 py-10">
               <div className="w-full h-fit flex flex-col ">
-                <span className="font-bold text-[25px] mb-5">Host language</span>
+                <span className="font-bold text-[2rem] mb-5">Host language</span>
                 <HostLanguage />
               </div>
             </div>
@@ -238,7 +238,7 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
             </div>
             <div className="flex-1 flex justify-center">
               <motion.button
-                className="w-[200px] h-[40px] rounded-lg border-2"
+                className="w-[12.5rem] h-[2.4rem] rounded-lg border-2"
                 whileHover={{ backgroundColor: 'rgba(255, 56, 92, 0.8)', color: 'white' }}
                 onClick={fetchData}
                 whileTap={{ scale: 0.9 }}

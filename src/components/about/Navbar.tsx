@@ -36,11 +36,11 @@ const Navbar = () => {
     >
       <div className="absolute w-[50%] inset-0 gradient-01" />
       <div className={`${styles.innerWidth} mx-auto flex justify-between gap-8 relative`}>
-        <div className="w-[24px] h-[24px] object-contain"></div>
-        <h2 className="font-extrabold text-[24px] leading-[30.24px] text-black">Olympus</h2>
-        {/* <img src="/about/menu.svg" alt="menu" className="w-[24px] h-[24px] object-contain fill-black" /> */}
+        <div className="w-[2rem] h-[2rem] object-contain"></div>
+        <h2 className="font-extrabold text-[2rem] leading-[30.2rem] text-black">Olympus</h2>
+        {/* <img src="/about/menu.svg" alt="menu" className="w-[2rem] h-[2rem] object-contain fill-black" /> */}
         <BsList
-          className="w-[30px] h-[40px] object-contain text-black"
+          className="w-[2rem] h-[2.4rem] object-contain text-black"
           onClick={() => {
             setIsOpen(!isOpen);
           }}
@@ -49,14 +49,14 @@ const Navbar = () => {
         <motion.div
           variants={variants}
           animate={isOpen ? 'show' : 'hidden'}
-          className="absolute top-[40px] w-full h-[100px] bg-white
+          className="absolute top-[2.4rem] w-full h-[6.25rem] bg-white
       rounded-3xl shadow-xl overflow-hidden box-border py-3 "
         >
           <div className="w-full h-full">
             <Link href={'/homepage'}>
               <motion.button className="w-full h-fit">
                 <span
-                  className="text-[20px] bg-red-500 px-3 py-1 rounded-2xl
+                  className="text-[1rem] bg-red-500 px-3 py-1 rounded-2xl
             text-white
             "
                 >

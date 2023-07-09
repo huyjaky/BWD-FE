@@ -39,14 +39,14 @@ const MapBox = ({ longitude, latitude, keyMapBing }: MapBoxProps) => {
   return (
     <div className="w-full h-fit mt-10 border-t-2 border-slate-800 mb-10">
       <div className="w-full mb-5 mt-5">
-        <span className="text-[30px]">Where you will be</span>
+        <span className="text-[2rem]">Where you will be</span>
       </div>
       <motion.div
         whileInView={{ y: [40, 0], opacity: [0, 1] }}
         transition={{ duration: 0.5 }}
         className="w-full h-fit"
       >
-        <div className="w-full h-[500px] rounded-3xl border-2 border-red-400 overflow-hidden">
+        <div className="w-full h-[32rem] rounded-3xl border-2 border-red-400 overflow-hidden">
           <div id="Map"></div>
         </div>
       </motion.div>

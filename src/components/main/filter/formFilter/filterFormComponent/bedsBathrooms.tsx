@@ -4,7 +4,7 @@ import { useContext } from 'react';
 
 const BedsBathRooms = () => {
   const { filterForm, setFilterForm } = useContext(filterContext);
-  const styleButton = 'w-[60px] h-[40px] rounded-full border-2 border-slate-600 ml-3 mobile:ml-0';
+  const styleButton = 'w-[4rem] h-[2.4rem] rounded-full border-2 border-slate-600 ml-3 mobile:ml-0';
   const arrButton: number[] = [];
   for (let index = 0; index <= 8; index++) {
     arrButton.push(index);

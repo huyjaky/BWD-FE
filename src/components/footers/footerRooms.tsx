@@ -4,8 +4,8 @@ import { AiFillFacebook, AiFillTwitterSquare, AiFillInstagram } from 'react-icon
 export default function FooterRooms() {
   return (
     <div
-      className="bg-ColorBgFooter px-[24px] desktop:px-[80px] pt-4 laptop:px-[80px]
-    mobile:mb-[70px] tablet:mb-[70px]
+      className="bg-ColorBgFooter px-[2rem] desktop:px-[5rem] pt-4 laptop:px-[5rem]
+    mobile:mb-[4.5rem] tablet:mb-[4.5rem]
     "
     >
       <div
@@ -14,94 +14,94 @@ export default function FooterRooms() {
                 "
       >
         <div
-          className="border-b border-colorBorderBottom pb-[24px] mb-[24px] leading-7
+          className="border-b border-colorBorderBottom pb-[2rem] mb-[2rem] leading-7
                 desktop:border-none
                 latop: border-none
             "
         >
           <h1 className="font-semibold">Support</h1>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+          <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Help Center
           </p>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+          <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             OlympusCover
           </p>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+          <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Supporting people with disabilities
           </p>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+          <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Cancellation options
           </p>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+          <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Our COVID-19 Response
           </p>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+          <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Report a neighborhood concern
           </p>
         </div>
         <div
-          className="border-b border-colorBorderBottom  pb-[24px] mb-[24px] leading-7
+          className="border-b border-colorBorderBottom  pb-[2rem] mb-[2rem] leading-7
                     desktop:border-none
                     laptop:border-none
                 "
         >
           <h1 className="font-semibold">Community</h1>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+          <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Olympus.org: disaster relief housing
           </p>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+          <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Combating discrimination
           </p>
         </div>
         <div
-          className="border-b border-colorBorderBottom  pb-[24px] mb-[24px] leading-7
+          className="border-b border-colorBorderBottom  pb-[2rem] mb-[2rem] leading-7
                     desktop:border-none
                     laptop:border-none
                 "
         >
           <h1 className="font-semibold">Hosting</h1>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+          <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Olympus your home
           </p>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+          <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             OlympusCover for Hosts
           </p>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+          <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Explore hosting resources
           </p>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+          <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Visit our community forum
           </p>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+          <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             How to host responsibly
           </p>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+          <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Olympus-friendly apartments
           </p>
         </div>
         <div
-          className="border-b border-colorBorderBottom  pb-[24px] mb-[24px] leading-7
+          className="border-b border-colorBorderBottom  pb-[2rem] mb-[2rem] leading-7
                     desktop:border-none
                     laptop:border-none
                 "
         >
           <h1 className="font-semibold">Olympus</h1>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+          <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Newsroom
           </p>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+          <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Learn about new features
           </p>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+          <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Letter from our founders
           </p>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+          <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Careers
           </p>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+          <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Investors
           </p>
-          <p className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+          <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Gift cards
           </p>
         </div>
@@ -117,13 +117,13 @@ export default function FooterRooms() {
                     laptop: items-center
                     "
           >
-            <li className="text-[14px] flex items-center ">
+            <li className="text-[1rem] flex items-center ">
               <MdLanguage />{' '}
               <span className="hover:underline hover:decoration-solid hover:cursor-pointer">
                 English (US)
               </span>
             </li>
-            <li className="ml-3 text-[14px]">
+            <li className="ml-3 text-[1rem]">
               ${' '}
               <span className="hover:underline hover:decoration-solid hover:cursor-pointer">
                 USD
@@ -143,32 +143,32 @@ export default function FooterRooms() {
         <div className="">
           <ul className="flex flex-col desktop:flex-row laptop:flex-row relative">
             <li className="flex items-center mt-1">
-              <p className="text-[13px] font-thin">&copy; 2023 Olympus,Inc.</p>
+              <p className="text-[1rem] font-thin">&copy; 2023 Olympus,Inc.</p>
             </li>
 
             <li>
               <ul className="flex relative">
                 <li>
                   <span className="absolute left-[5px] bottom-1 ">.</span>
-                  <a className="text-[13px] font-thin ml-3 hover:underline hover:decoration-solid hover:cursor-pointer">
+                  <a className="text-[1rem] font-thin ml-3 hover:underline hover:decoration-solid hover:cursor-pointer">
                     Term
                   </a>
                 </li>
                 <li className="ml-3 ">
-                  <span className="absolute left-[58px] bottom-1">.</span>
-                  <a className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+                  <span className="absolute left-[3.5rem] bottom-1">.</span>
+                  <a className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
                     Sitemap
                   </a>
                 </li>
                 <li className="ml-4">
-                  <span className="absolute left-[138px] bottom-1">.</span>
-                  <a className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+                  <span className="absolute left-[8.625rem] bottom-1">.</span>
+                  <a className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
                     Privacy
                   </a>
                 </li>
                 <li className="ml-4">
-                  <span className="absolute left-[212px] bottom-1">.</span>
-                  <a className="text-[13px] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
+                  <span className="absolute left-[13.25rem] bottom-1">.</span>
+                  <a className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
                     Your Privacy Choices
                   </a>
                 </li>

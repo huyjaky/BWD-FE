@@ -25,22 +25,22 @@ const RemoveReq = ({ isRemoveReq, setIsRemoveReq }: RemoveReqProps) => {
     <div className="w-fit h-fit bg-white mobile:w-screen mobile:h-screen
     flex flex-col mobile:p-0 p-5 rounded-xl">
       <div className="w-full m-auto flex">
-        <div className="w-[150px] h-fit">
+        <div className="w-[9.375rem] h-fit">
           <img src={`/api/img/path/${user.Image}`} alt="" className="rounded-full" />
         </div>
 
-        <div className="w-fit h-full grid grid-cols-1 grid-rows-2 ml-[30px] m-auto gap-5">
-          <div className="font-semibold text-[50px] mobile:text-[30px]">Delete house</div>
+        <div className="w-fit h-full grid grid-cols-1 grid-rows-2 ml-[2rem] m-auto gap-5">
+          <div className="font-semibold text-[3rem] mobile:text-[2rem]">Delete house</div>
           <div>
             <input type="password" className={`outline-none
             border-b-2 border-slate-900
-            ${isTruePass ? '' : 'border-red-600'} mobile:text-[19px] text-[30px] `} placeholder="Password"
+            ${isTruePass ? '' : 'border-red-600'} mobile:text-[19px] text-[2rem] `} placeholder="Password"
               onChange={(event) => setInputPass(event.target.value)}
             />
           </div>
         </div>
       </div>
-      <div className="w-full h-[100px]  grid grid-cols-2 grid-rows-1 ">
+      <div className="w-full h-[6.25rem]  grid grid-cols-2 grid-rows-1 ">
         <div className="w-full h-full box-border p-3">
           <motion.button
             onClick={(event) => {

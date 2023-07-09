@@ -54,28 +54,28 @@ function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
 
   return (
     <div className="w-[100%]">
-      <div className="w-[100%] px-[80px] mobile:px-[0]">
+      <div className="w-[100%] px-[5rem] mobile:px-[0]">
         <motion.div
           variants={componentVariants}
           initial="offscreen"
           whileInView="onscreen"
           viewport={{ amount: 0.5 }}
-          className="w-[100%] pt-[64px] mobile:mx-[20px]"
+          className="w-[100%] pt-[4rem] mobile:mx-[1rem]"
         >
-          <h1 className="text-[32px] font-semibold">Welcome back {user.UserName}</h1>
+          <h1 className="text-[2rem] font-semibold">Welcome back {user.UserName}</h1>
         </motion.div>
-        <div className="w-[100%] py-[64px]">
+        <div className="w-[100%] py-[4rem]">
           <div className="">
             <motion.div
               variants={componentVariants}
               initial="offscreen"
               whileInView="onscreen"
               viewport={{ amount: 0.5 }}
-              className="flex justify-between mb-[16px] mobile:mx-[20px]"
+              className="flex justify-between mb-[1rem] mobile:mx-[1rem]"
             >
-              <h2 className="text-[26px] font-semibold">Your reservations</h2>
+              <h2 className="text-[2rem] font-semibold">Your reservations</h2>
               <div>
-                <a className="underline text-[16px] font-semibold">All reservations (0)</a>
+                <a className="underline text-[1rem] font-semibold">All reservations (0)</a>
               </div>
             </motion.div>
             <motion.div
@@ -83,7 +83,7 @@ function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
               initial="offscreen"
               whileInView="onscreen"
               viewport={{ amount: 0.5 }}
-              className="flex flex-wrap mobile:mx-[20px]"
+              className="flex flex-wrap mobile:mx-[1rem]"
             >
               {reservations.map((reservation, index) => (
                 <motion.div
@@ -108,7 +108,7 @@ function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
               variants={componentVariants}
               initial="offscreen"
               whileInView="onscreen"
-              className="bg-[#F7F7F7] h-fit flex items-center justify-center rounded-[12px] box-border
+              className="bg-[#F7F7F7] h-fit flex items-center justify-center rounded-[1rem] box-border
               px-4 transition-all mobile:px-0
               "
             >
@@ -157,7 +157,7 @@ function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
                     } flex flex-col items-center justify-center gap-4 py-24 `}
                 >
                   <AnyReview />
-                  <span className="text-[14px] h-[36px] w-[200px] text-center">
+                  <span className="text-[1rem] h-[36px] w-[12.5rem] text-center">
                     You don't have any guest reviews to write.
                   </span>
                 </div>
@@ -178,36 +178,36 @@ function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
           initial="offscreen"
           whileInView="onscreen"
           viewport={{ amount: 0.5 }}
-          className="px-[80px] mobile:px-0 py-[64px]"
+          className="px-[5rem] mobile:px-0 py-[4rem]"
         >
-          <h2 className="text-[26px] font-semibold">Share more details</h2>
+          <h2 className="text-[2rem] font-semibold">Share more details</h2>
           <p className="text-[15px] font-extralight">
             Check, check, check! You’re all set for now.
           </p>
         </motion.div>
       </motion.div>
-      <div className="w-[100%] px-[80px] mobile:px-0 flex flex-col gap-3 mt-[64px]">
+      <div className="w-[100%] px-[5rem] mobile:px-0 flex flex-col gap-3 mt-[4rem]">
         <div>
           <motion.h1
             variants={componentVariants}
             initial="offscreen"
             whileInView="onscreen"
             viewport={{ amount: 0.5 }}
-            className="text-[26px] font-semibold mb-3"
+            className="text-[2rem] font-semibold mb-3"
           >
             We’re here to help
           </motion.h1>
           <div className="w-[100%] flex mobile:flex-col gap-2 mb-10">
             <motion.div
               variants={buttonVariants}
-              className="w-[45%] laptop:w-[50%] mobile:w-[100%] tablet:w-full h-[92px] flex p-[16px] gap-3 border rounded-[10px] cursor-pointer"
+              className="w-[45%] laptop:w-[50%] mobile:w-[100%] tablet:w-full h-[5.75rem] flex p-[1rem] gap-3 border rounded-[.6rem] cursor-pointer"
             >
-              <div className="mb-[4px]">
+              <div className="mb-[.25rem]">
                 <SuperHost />
               </div>
               <div className="w-[100%]">
-                <h3 className="text-[16px] font-semibold">Guidance from a Superhost</h3>
-                <p className="text-[13px] text-[#717171] font-thin w-[90%]">
+                <h3 className="text-[1rem] font-semibold">Guidance from a Superhost</h3>
+                <p className="text-[1rem] text-[#717171] font-thin w-[90%]">
                   We'll match you with an experienced Host who can you get started
                 </p>
               </div>
@@ -216,14 +216,14 @@ function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
             <div className="w-[100%]" ref={refButton}>
               <motion.div
                 variants={animationVariants}
-                className="w-[45%] laptop:w-[50%] mobile:w-[100%] tablet:w-full h-[92px] flex p-[16px] gap-3 border rounded-[10px] cursor-pointer"
+                className="w-[45%] laptop:w-[50%] mobile:w-[100%] tablet:w-full h-[5.75rem] flex p-[1rem] gap-3 border rounded-[.6rem] cursor-pointer"
               >
-                <div className="mb-[4px]">
+                <div className="mb-[.25rem]">
                   <ContactSupport />
                 </div>
                 <div className="w-[100%]">
-                  <h3 className="text-[16px] font-semibold">Contact specialized support</h3>
-                  <p className="text-[13px] text-[#717171] font-thin w-[90%]">
+                  <h3 className="text-[1rem] font-semibold">Contact specialized support</h3>
+                  <p className="text-[1rem] text-[#717171] font-thin w-[90%]">
                     As a new Host, you get one-tap access to a specially trained support team.
                   </p>
                 </div>

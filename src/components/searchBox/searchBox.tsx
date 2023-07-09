@@ -52,7 +52,7 @@ const SearchBox = ({ styleBox }: SearchBoxProps) => {
           id="searchBox"
           ref={inputBox}
           placeholder="Search your locations"
-          className={`outline-none focus:border-b-2 focus:border-slate-600 w-[calc(100%-40px)] ${styleBox} pointer-events-auto text-ellipsis `}
+          className={`outline-none focus:border-b-2 focus:border-slate-600 w-[calc(100%-2.4rem)] ${styleBox} pointer-events-auto text-ellipsis `}
         />
       </div>
     </>

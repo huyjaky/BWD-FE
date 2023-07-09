@@ -10,10 +10,10 @@ const HostLanguage = () => {
       <div className="w-full grid grid-cols-2">
         {arrLanguage.map((item: string, index: number) => {
           return (
-            <div className="flex-1 h-[100px] flex" key={index}>
+            <div className="flex-1 h-[6.25rem] flex" key={index}>
               <button
                 onClick={(event) => setFilterForm({ ...filterForm, hostLanguage: item })}
-                className={`w-[80%] h-[70px] m-auto border-2 rounded-xl hover:bg-redIcon hover:text-white
+                className={`w-[80%] h-[4.5rem] m-auto border-2 rounded-xl hover:bg-redIcon hover:text-white
                 active:scale-[.8] transition-all duration-500
                 ${filterForm.hostLanguage === item ? 'bg-redIcon text-white' : ''}`}
               >
@@ -23,10 +23,10 @@ const HostLanguage = () => {
           );
         })}
 
-        <div className="flex-1 h-[100px] flex">
+        <div className="flex-1 h-[6.25rem] flex">
           <button
             onClick={(event) => setFilterForm({ ...filterForm, hostLanguage: '' })}
-            className={`w-[80%] h-[70px] m-auto border-2 rounded-xl hover:bg-redIcon hover:text-white
+            className={`w-[80%] h-[4.5rem] m-auto border-2 rounded-xl hover:bg-redIcon hover:text-white
                 active:scale-[.8] transition-all duration-500
                 ${filterForm.hostLanguage === '' ? 'bg-redIcon text-white' : ''}`}
           >

@@ -29,7 +29,7 @@ const GetStarted = () => (
       >
         <TypingText title="| How Olympus Works" textStyles="" />
         <TitleText title={<>Get started with just a few clicks</>} textStyles="" />
-        <div className="mt-[31px] flex flex-col max-w-[370px] gap-[24px]">
+        <div className="mt-[2rem] flex flex-col max-w-[34.5rem] gap-[2rem]">
           {startingFeatures.map((feature, index) => (
             <StartSteps
               key={feature}

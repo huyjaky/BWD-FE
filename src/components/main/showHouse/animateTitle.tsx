@@ -10,8 +10,8 @@ const AnimateTitle = ({ title, textStyles }: TypingTextProps) => {
   return (
     <motion.p
       variants={textContainer}
-      className={`font-bold text-[40px]
- mobile:text-[30px] mobile:text-left
+      className={`font-bold text-[2.4rem]
+ mobile:text-[2rem] mobile:text-left
       `}
     >
       {Array.from(title).map((letter: any, index: number) => (

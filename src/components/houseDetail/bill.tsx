@@ -31,15 +31,15 @@ const Bill = ({ houseDetail }: BillProps) => {
   return (
     <div
       className="w-full h-fit bg-white rounded-2xl
-                    shadow-2xl sticky top-4 mb-[280px] transition-all"
+                    shadow-2xl sticky top-4 mb-[17.5rem] transition-all"
     >
       <div className="w-full h-full box-border p-5">
         <div className="w-full">
-          <span className="text-[40px] font-semibold">&#36;{houseDetail.Price}</span>
+          <span className="text-[2.4rem] font-semibold">&#36;{houseDetail.Price}</span>
         </div>
 
         <div className="dropdown w-full border-2 border-red-500 rounded-xl">
-          <label tabIndex={0} className="btn m-1 w-full justify-start text-[25px]">
+          <label tabIndex={0} className="btn m-1 w-full justify-start text-[2rem]">
             {Bill.checkInDay.getDate() !== new Date().getDate()
               ? moment(Bill.checkInDay).format('MM-DD-YYYY')
               : 'Select date'}
@@ -48,7 +48,7 @@ const Bill = ({ houseDetail }: BillProps) => {
             tabIndex={0}
             className="dropdown-content shadow-xl
                           menu p-2 bg-base-100 rounded-box
-                          transition-all duration-500 w-full mt-[150px]
+                          transition-all duration-500 w-full mt-[9.375rem]
                           "
           >
             <li>
@@ -66,7 +66,7 @@ const Bill = ({ houseDetail }: BillProps) => {
         </div>
 
         <div className="dropdown w-full border-2 border-red-500 rounded-xl mt-2 ">
-          <label tabIndex={0} className="btn m-1 w-full justify-start text-[25px]">
+          <label tabIndex={0} className="btn m-1 w-full justify-start text-[2rem]">
             {Bill.guest.adults != 0 || Bill.guest.childrens != 0
               ? Bill.guest.adults + Bill.guest.childrens + ' guests'
               : 'Guests '}
@@ -96,7 +96,7 @@ const Bill = ({ houseDetail }: BillProps) => {
                 price: houseDetail.Price
               });
             }}
-            className="mt-2  w-full h-[50px] bg-red-500 rounded-xl text-white font-semibold"
+            className="mt-2  w-full h-[3rem] bg-red-500 rounded-xl text-white font-semibold"
           >
             Reverse
           </motion.button>

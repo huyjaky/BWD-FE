@@ -158,7 +158,7 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
           className="fixed w-screen h-screen bg-mask flex z-30"
         >
           <motion.div className="w-fit h-fit m-auto" ref={guestRef}>
-            <Who styleWho={'justify-center w-[800px] h-[500px]'} />
+            <Who styleWho={'justify-center w-[800px] h-[32rem]'} />
           </motion.div>
         </motion.div>
       </AnimatePresence>
@@ -198,7 +198,7 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
                 <GrClose />
               </button>
               <div className="flex items-center">
-                <BiMessageSquareError className="mr-2 text-[25px] text-red-500" /> you must be
+                <BiMessageSquareError className="mr-2 text-[2rem] text-red-500" /> you must be
                 cancelled before create new one schedule apointment
               </div>
 
@@ -217,22 +217,22 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
       </AnimatePresence>
 
       <div className={`w-full h-fit box-border flex ${monsterrat.className}`}>
-        <div className="w-[1100px] h-fit m-auto mt-5">
+        <div className="w-[16.25rem] h-fit m-auto mt-5">
           {/* header */}
           <div className="w-full h-fit flex items-center ">
             <Link href={`/house/${houseDetail.HouseId}`}>
-              <motion.button className="w-[50px] h-[40px]">
+              <motion.button className="w-[3rem] h-[2.4rem]">
                 <GrPrevious className="text-[28px] m-auto" />
               </motion.button>
             </Link>
-            <span className="text-[32px]">Confirm and pay</span>
+            <span className="text-[2rem]">Confirm and pay</span>
           </div>
 
           <form className="w-full flex mt-5" onSubmit={handleSubmit(onSubmit)}>
             {/* pay method */}
             <div className="flex-[7] flex flex-col box-border tablet:px-5 mobile:px-5">
               <div className="w-full flex-1">
-                <span className="text-[24px]">Make an appointment</span>
+                <span className="text-[2rem]">Make an appointment</span>
               </div>
               <div className="w-full mt-5 flex-1  cursor-pointer">
                 <div className="w-full flex justify-between">
@@ -279,12 +279,12 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
 
               <div className="w-full h-fit flex flex-col mt-10 border-t-2 relative">
                 <div className="w-full flex-1 mt-10">
-                  <span className="text-[24px]">Enter your phone number</span>
+                  <span className="text-[2rem]">Enter your phone number</span>
                 </div>
 
                 <div
                   className={`w-full h-fit  relative
-              after:absolute after:bottom-0 after:w-full after:h-[4px]  mt-5
+              after:absolute after:bottom-0 after:w-full after:h-[.25rem]  mt-5
               after:right-0  rounded-xl ${
                 errors.phoneNumber?.message !== undefined
                   ? 'after:bg-red-500'
@@ -295,7 +295,7 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
                   <input
                     {...register('phoneNumber')}
                     type="text"
-                    className="w-full h-[50px] outline-none
+                    className="w-full h-[3rem] outline-none
                 "
                     placeholder="Phone number"
                   />
@@ -323,9 +323,9 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
               <motion.button
                 whileTap={{ scale: 0.8 }}
                 type="submit"
-                className="w-[200px] h-[60px] bg-red-500 text-white mt-5 rounded-xl"
+                className="w-[12.5rem] h-[4rem] bg-red-500 text-white mt-5 rounded-xl"
               >
-                <span className="font-semibold text-[25px]">Confirm</span>
+                <span className="font-semibold text-[2rem]">Confirm</span>
               </motion.button>
             </div>
 
@@ -340,11 +340,11 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
                     // src={'/api/img/path'+houseDetail.arrImg[0].Path}
                     src={'/api/img/path/'+houseDetail.arrImg[0].Path}
                     alt=""
-                    className="w-full h-[300px] rounded-2xl object-cover"
+                    className="w-full h-[18.75rem] rounded-2xl object-cover"
                   />
                   <div className="w-full flex justify-between">
                     <div className="w-fit h-fit flex flex-col">
-                      <span className="font-semibold text-[23px]">{houseDetail.Title}</span>
+                      <span className="font-semibold text-[1rem]">{houseDetail.Title}</span>
                       <span>{houseDetail.address.formattedAddress}</span>
                     </div>
                     <div className="w-fit h-full flex">

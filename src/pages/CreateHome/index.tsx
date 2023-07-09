@@ -1,5 +1,7 @@
 
 
+import ChooseTypeHouse from '@/components/createHome/componentCreateHome/chooseTypeHouse/chooseTypeHouse';
+import HouseProperties from '@/components/createHome/componentCreateHome/houseProperties/houseProperties';
 import FooterCreateHome from '@/components/createHome/footerCreateHome';
 import StepCreateHome from '@/components/createHome/stepCreateHome';
 import TransitionCreateHome from '@/components/createHome/transitionCreateHome';
@@ -36,33 +38,34 @@ const CreateHome: NextPageWithLayout<CreateHomeProps> = ({
 
       {/* choose type house */}
       <TransitionCreateHome isShow={stepCreate == 1}>
-        <div className="bg-blue-500 w-full h-fit">
-
+        <div className="w-full h-fit">
+          <ChooseTypeHouse />
         </div>
       </TransitionCreateHome>
 
 
       <TransitionCreateHome isShow={stepCreate == 2}>
-        <div className="bg-orange-600 w-full h-[300px]"></div>
+        {/* <div className="bg-orange-600 w-full h-[18.75rem]"></div> */}
+        <HouseProperties api_url_path={api_url_path} keyMapBing={keyMapBing}/>
       </TransitionCreateHome>
 
 
       <TransitionCreateHome isShow={stepCreate == 3}>
-        <div className="bg-blue-500 w-full h-[300px]"></div>
+        <div className="bg-blue-500 w-full h-[18.75rem]"></div>
       </TransitionCreateHome>
 
 
       <TransitionCreateHome isShow={stepCreate == 4}>
-        <div className="bg-blue-500 w-full h-[300px]"></div>
+        <div className="bg-blue-500 w-full h-[18.75rem]"></div>
       </TransitionCreateHome>
 
       <TransitionCreateHome isShow={stepCreate == 5}>
-        <div className="bg-blue-500 w-full h-[300px]"></div>
+        <div className="bg-blue-500 w-full h-[18.75rem]"></div>
       </TransitionCreateHome>
 
 
       <TransitionCreateHome isShow={stepCreate > 5}>
-        <div className="bg-blue-500 w-full h-[300px]"></div>
+        <div className="bg-blue-500 w-full h-[18.75rem]"></div>
       </TransitionCreateHome>
 
       <FooterCreateHome />

@@ -21,7 +21,7 @@ const About = () => (
 
       <motion.p
         variants={fadeIn('up', 'tween', 0.2, 1)}
-        className="mt-[8px] font-normal sm:text-[32px] text-[20px] text-center text-slate-700"
+        className="mt-[8px] font-normal sm:text-[2rem] text-[1rem] text-center text-slate-700"
       >
         Welcome to <span className="font-extrabold text-black">Olympus</span>, the cutting-edge real
         estate platform that leverages Artificial Intelligence{' '}
@@ -34,7 +34,7 @@ const About = () => (
       </motion.p>
 
       <motion.div variants={fadeIn('up', 'tween', 0.3, 1)}>
-        <AiOutlineArrowDown className="text-[40px] object-contain mt-[28px] text-black" />
+        <AiOutlineArrowDown className="text-[2.4rem] object-contain mt-[28px] text-black" />
       </motion.div>
     </motion.div>
   </section>
