@@ -5,21 +5,23 @@ import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orien
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import 'filepond/dist/filepond.min.css';
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { FilePond, registerPlugin } from 'react-filepond';
 
 
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 interface ImgCreateHouseProps {
   api_url_path: string
 }
-registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 const ImgCreateHouse = ({ api_url_path }: ImgCreateHouseProps) => {
   // const [imgArr, setImgArr] = useState<any>([]);
-  const {imgArr, setImgArr} = useContext(createHouseFormContext)
+  const { imgArr, setImgArr } = useContext(createHouseFormContext)
   const filePondRef = useRef<FilePond>(null);
 
+  useEffect(() => { }, [imgArr]);
+
   return (
-    <div>
+    <div className="">
       <FilePond
         ref={filePondRef}
         files={imgArr}
@@ -29,6 +31,11 @@ const ImgCreateHouse = ({ api_url_path }: ImgCreateHouseProps) => {
           if (error) return;
           let temp = imgArr;
           temp.push(file);
+          setImgArr(temp);
+        }}
+        onremovefile={(error: FilePondErrorDescription | null, file: FilePondFile) => {
+          if (error) return;
+          let temp = imgArr.filter((item:FilePondFile)=> {return item.filename != file.filename});
           setImgArr(temp);
         }}
         beforeAddFile={async (file: FilePondFile) => {
@@ -60,7 +67,7 @@ const ImgCreateHouse = ({ api_url_path }: ImgCreateHouseProps) => {
         server={{
           url: api_url_path + '/api',
           process: {
-            url: '/get/house/modifier',
+            url: '/create/house/img',
             method: 'POST',
             timeout: 120000
           }

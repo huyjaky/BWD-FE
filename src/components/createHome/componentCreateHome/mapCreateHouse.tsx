@@ -13,10 +13,7 @@ interface MapEditProps {
 
 
 const MapCreateHouse = ({ setTempHouse, tempHouse, keyMapBing }: MapEditProps) => {
-  const { createHouseForm, setCreateHouseForm } = useContext(createHouseFormContext)
-  useEffect(()=>{
-    console.log('create', createHouseForm);
-  }, [createHouseForm])
+  const { setAddress, Address } = useContext(createHouseFormContext)
 
   useEffect(() => {
     whenLoaded.then(() => {
@@ -47,17 +44,11 @@ const MapCreateHouse = ({ setTempHouse, tempHouse, keyMapBing }: MapEditProps) =
               map.setView({ bounds: suggestionResult.bestView });
               var pushpin = new Microsoft.Maps.Pushpin(suggestionResult.location);
               map.entities.push(pushpin);
-
               console.log(suggestionResult);
-              if (createHouseForm) {
-                setCreateHouseForm({
-                  ...createHouseForm,
-                  address: {
-                    ...createHouseForm.address, ...suggestionResult?.address, ...suggestionResult?.location,
-                    title: suggestionResult.title
-                  }
-                })
-              }
+              setAddress({
+                ...Address, ...suggestionResult?.address, ...suggestionResult?.location,
+                title: suggestionResult.title
+              })
             });
           }
         });

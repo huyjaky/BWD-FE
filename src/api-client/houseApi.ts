@@ -31,5 +31,8 @@ export const houseApi = {
   },
   DeleteHouse(HouseId:string, AddressId:string) {
     return axiosClient.post(`/delete/house`, {HouseId:HouseId, AddressId:AddressId})
+  },
+  createHouse(house:house_, typehouse:string[]) {
+    return axiosClient.post('/create/house/house', {house, typehouse})
   }
 };

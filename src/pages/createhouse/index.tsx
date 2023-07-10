@@ -15,9 +15,11 @@ import { createHouseFormContext } from '@/contexts/createHouseForm';
 import { StepCreateHomeContext } from '@/contexts/stepCreate';
 import { NextPageWithLayout } from '@/models/layoutprops';
 import { initializeSSR, whenLoaded } from 'bing-maps-loader';
-import { GetStaticProps, GetStaticPropsContext } from 'next';
+import { GetServerSideProps, GetStaticProps, GetStaticPropsContext } from 'next';
+import { getServerSession } from 'next-auth';
 import { Montserrat } from 'next/font/google';
 import { useContext, useEffect, useState } from 'react';
+import { authOptions } from '../api/auth/[...nextauth]';
 interface CreateHomeProps {
   keyMapBing: string;
   api_url_path: string;
@@ -75,13 +77,8 @@ const CreateHome: NextPageWithLayout<CreateHomeProps> = ({
         </InputFormEdit>
       </TransitionCreateHome>
 
-      <TransitionCreateHome isShow={stepCreate == 5}>
-          <FinishPage />
-      </TransitionCreateHome>
-
-
-      <TransitionCreateHome isShow={stepCreate > 5}>
-        <div className="bg-blue-500 w-full h-[18.75rem]"></div>
+      <TransitionCreateHome isShow={stepCreate > 4}>
+          <FinishPage api_url_path={api_url_path}/>
       </TransitionCreateHome>
 
       <FooterCreateHome />
@@ -91,37 +88,37 @@ const CreateHome: NextPageWithLayout<CreateHomeProps> = ({
 
 CreateHome.Layout = authWithoutAnimate;
 
-// export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-//   const session = await getServerSession(req, res, authOptions);
-//   const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
-//   const api_url_path = process.env.API_URL_PATH;
-//   initializeSSR();
-//   // if user available not callback api from server
-//   if (!session?.userAcc) {
-//     res.setHeader('location', '/login');
-//     res.statusCode = 302;
-//     res.end();
-//     return { props: {} };
-//   }
-//   return {
-//     props: {
-//       keyMapBing: keyMapBing,
-//       api_url_path: api_url_path
-//     }
-//   };
-// };
-
-export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
-  initializeSSR();
-  const link = process.env.API_URL_PATH;
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = await getServerSession(req, res, authOptions);
   const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
+  const api_url_path = process.env.API_URL_PATH;
+  initializeSSR();
+  // if user available not callback api from server
+  // if (!session?.userAcc) {
+  //   res.setHeader('location', '/login');
+  //   res.statusCode = 302;
+  //   res.end();
+  //   return { props: {} };
+  // }
   return {
     props: {
       keyMapBing: keyMapBing,
-      link: link
-    },
-    revalidate: 300
+      api_url_path: api_url_path
+    }
   };
 };
+
+// export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
+//   initializeSSR();
+//   const link = process.env.API_URL_PATH;
+//   const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
+//   return {
+//     props: {
+//       keyMapBing: keyMapBing,
+//       link: link
+//     },
+//     revalidate: 300
+//   };
+// };
 
 export default CreateHome;
