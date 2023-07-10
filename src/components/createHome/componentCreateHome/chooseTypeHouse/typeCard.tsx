@@ -1,7 +1,7 @@
 import { createHouseFormContext } from '@/contexts/createHouseForm';
 import { StepCreateHomeContext } from '@/contexts/stepCreate';
 import { motion } from 'framer-motion';
-import { ReactNode, useContext } from 'react';
+import { ReactNode, useContext, useEffect } from 'react';
 import { TbKey } from 'react-icons/tb';
 interface TypeCardProps {
   children: ReactNode;
@@ -15,7 +15,7 @@ const TypeCard = ({ children, title }: TypeCardProps) => {
   const handleOnClick = (event: any) => {
     const updatedTypeHouseId = [...typeHouseId];
     // Kiểm tra xem item.title đã tồn tại trong mảng hay chưa
-    if (title === 'House for rent') {
+    if (title === 'House For Rent') {
       const index = updatedTypeHouseId.indexOf('4');
       updatedTypeHouseId.splice(index, 1); // Loại bỏ phần tử nếu đã tồn tại
       updatedTypeHouseId.push('5'); // Thêm phần tử nếu chưa tồn tại
