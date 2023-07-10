@@ -336,15 +336,15 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
         >
           {houseTemp.map((item: house_, index: number) => {
 
-            if (infShow === 'houseForRent') {
-              if (item.Type === 'House for sale') {
-                return;
-              }
-            } else if (infShow === 'houseForSale') {
-              if (item.Type === 'House for rent') {
-                return
-              }
-            }
+            // if (infShow === 'houseForRent') {
+            //   if (item.Type === 'House for sale') {
+            //     return;
+            //   }
+            // } else if (infShow === 'houseForSale') {
+            //   if (item.Type === 'House for rent') {
+            //     return
+            //   }
+            // }
 
             return (
               <HouseCard

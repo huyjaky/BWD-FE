@@ -121,37 +121,7 @@ function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
                 <motion.div
                   className={`w-full h-fit ${selected === 'Currently hosting' ? '' : 'hidden'}`}
                 >
-
-                  {/* house for rent */}
-                  <motion.div
-                    variants={staggerContainer(null, null)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: false, amount: 0.25 }}
-                    className={` mx-auto flex-col `}
-                  >
-                    <AnimateTitle
-                      title={'House for rent'}
-                      textStyles=" w-full h-fit "
-                    />
-                  </motion.div>
-                  <ShowHouse infShow="houseForRent" keyMapBing={keyMapBing} api_url_path={api_url_path} />
-
-                  {/* house for sale */}
-                  <motion.div
-                    variants={staggerContainer(null, null)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: false, amount: 0.25 }}
-                    className={` mx-auto flex-col `}
-                  >
-                    <AnimateTitle
-                      title={'House for sale'}
-                      textStyles=" w-full h-fit "
-                    />
-                  </motion.div>
-
-                  <ShowHouse infShow="houseForSale" keyMapBing={keyMapBing} api_url_path={api_url_path} />
+                  <ShowHouse infShow="authListHouse" keyMapBing={keyMapBing} api_url_path={api_url_path} />
                 </motion.div>
 
                 <div
