@@ -10,10 +10,16 @@ interface createHouseFormProps {
 interface createHouseData {
   createHouseForm: house_ | undefined;
   emptyCreateHouseForm: house_ | undefined;
-  setCreateHouseForm: (payload: house_) => void
+  setCreateHouseForm: (payload: house_) => void;
+  typeHouseId: string[];
+  setTypeHouseId: (payload: string[]) => void;
+  imgArr: any;
+  setImgArr: (payload: any) => void;
 }
 
 const createHouseDataDefault: createHouseData = {
+  typeHouseId: [],
+  setTypeHouseId: () => { },
   createHouseForm: {
     address: {
       countryRegion: '',
@@ -106,7 +112,9 @@ const createHouseDataDefault: createHouseData = {
       Phone: ''
     },
   },
-  setCreateHouseForm: () => { }
+  imgArr: [],
+  setCreateHouseForm: () => { },
+  setImgArr: ()=>{}
 }
 
 export const createHouseFormContext = createContext<createHouseData>(createHouseDataDefault);
@@ -114,9 +122,15 @@ export const createHouseFormContext = createContext<createHouseData>(createHouse
 const CreateHouseFormProvider = ({ children }: createHouseFormProps) => {
   const [createHouseForm, setSelectHouse_] = useState<house_ | undefined>(createHouseDataDefault.createHouseForm);
   const [emptyCreateHouseForm, setEmptyCreateHouseForm_] = useState<house_ | undefined>(createHouseDataDefault.emptyCreateHouseForm)
+  const [typeHouseId, setTypeHouseId_] = useState<string[]>(createHouseDataDefault.typeHouseId);
+  const [imgArr, setImgArr_] = useState<any>(createHouseDataDefault.imgArr);
   const setCreateHouseForm = (payload: house_) => setSelectHouse_(payload);
+  const setTypeHouseId = (payload: string[]) => setTypeHouseId_(payload);
+  const setImgArr = (payload: any) => setImgArr_(payload);
 
-  const selectHouseDynamicData = { createHouseForm, emptyCreateHouseForm, setCreateHouseForm };
+  const selectHouseDynamicData = { createHouseForm, emptyCreateHouseForm, setCreateHouseForm, typeHouseId, setTypeHouseId,
+    imgArr, setImgArr
+   };
 
   return <createHouseFormContext.Provider value={selectHouseDynamicData}>
     {children}

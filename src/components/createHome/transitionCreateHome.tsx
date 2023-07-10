@@ -34,6 +34,7 @@ const TransitionCreateHome = ({ children, isShow }: TransitionCreateHomeProps) =
   }, []);
 
   return (
+
     <AnimatePresence initial={false}>
       <motion.div
         variants={variants}

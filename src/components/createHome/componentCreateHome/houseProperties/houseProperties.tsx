@@ -2,62 +2,33 @@ import EditAmenities from "@/components/main/showHouse/componentShowHouse/amenit
 import InputFormEdit from "@/components/main/showHouse/componentShowHouse/inputForm/inputFormEdit";
 import { createHouseFormContext } from "@/contexts/createHouseForm";
 import { house_ } from "@/models/house";
-import { motion } from "framer-motion";
 import Slider from "rc-slider";
 import { useContext, useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
 import PropertyCreateHouse from "./propertyCreateHouse";
 
 interface HousePropertiesProps {
-  keyMapBing: string;
-  api_url_path: string | undefined;
+  // keyMapBing: string;
+  // api_url_path: string | undefined;
 }
 
-const HouseProperties = ({ keyMapBing, api_url_path }: HousePropertiesProps) => {
-  const { createHouseForm, emptyCreateHouseForm, setCreateHouseForm } = useContext(createHouseFormContext);
-  const [typeHouseId, setTypeHouseId] = useState<string[]>([]);
+const HouseProperties = ({ }: HousePropertiesProps) => {
+  const { createHouseForm, emptyCreateHouseForm, setCreateHouseForm,
+    typeHouseId, setTypeHouseId
+  } = useContext(createHouseFormContext);
+  // const [typeHouseId, setTypeHouseId] = useState<string[]>([]);
+
   const styleInput = 'box-border p-3';
   const compass: string[] = ['West', 'South', 'East', 'North']
   const [tempHouse, setTempHouse] = useState<house_ | undefined>(createHouseForm)
 
   useEffect(() => {
     setTempHouse(createHouseForm);
+    console.log(createHouseForm);
   }, [createHouseForm]);
 
-  useEffect(()=>{
-    console.log(createHouseForm);
-  },[createHouseForm])
-
-  const onSubmit: SubmitHandler<house_> = async (data) => {
-
-    // console.log('data', data);
-    // console.log('temphouse', tempHouse);
-    // console.log('typehouseid', typeHouseId);
-
-    // if (tempHouse) {
-    //   console.log('data', data);
-    //   const data0: house_ = {
-    //     ...data, placeOffer: tempHouse?.placeOffer,
-    //     Price: tempHouse.Price,
-    //     address: tempHouse.address,
-    //     arrImg: tempHouse.arrImg
-    //   }
-    //   console.log('data0', data0);
-    //   const editStatus = await houseApi.editHouse(data0);
-    //   // setReRenderFilter(reRenderFilter + 1);
-    //   setHouseTemp([...houseTemp.map((item, index) => {
-    //     if (item.AddressId === data0.AddressId) {
-    //       return data0;
-    //     }
-    //     return item;
-    //   })]);
-    //   setIsEdit(false);
-  }
-
   const handleOnChange = async (value: any) => {
-    const temp: house_ | undefined = createHouseForm;
-    if (temp) {
-      setTempHouse({ ...temp, Price: value });
+    if (createHouseForm) {
+      setCreateHouseForm({ ...createHouseForm, Price: value });
     }
   }
 
@@ -89,19 +60,41 @@ const HouseProperties = ({ keyMapBing, api_url_path }: HousePropertiesProps) => 
 
                 <div className={`grid-in-capacity ${styleInput}`}>
                   <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Capacity">
-                    <input type="number"  className="w-full h-[3rem] outline-none text-[2rem]" />
+                    <input type="number"
+                      value={createHouseForm?.Capacity}
+                      onChange={event => {
+                        if (createHouseForm) {
+                          setCreateHouseForm({ ...createHouseForm, Capacity: parseInt(event.target.value) })
+                        }
+                      }
+                      }
+                      className="w-full h-[3rem] outline-none text-[2rem]" />
                   </InputFormEdit>
                 </div>
 
                 <div className={`grid-in-baths ${styleInput}`}>
                   <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Baths">
-                    <input type="number"  className="w-full h-[3rem] outline-none text-[2rem]" />
+                    <input
+                      value={createHouseForm?.NumsOfBath}
+                      onChange={event => {
+                        if (createHouseForm) {
+                          setCreateHouseForm({ ...createHouseForm, NumsOfBath: parseInt(event.target.value) })
+                        }
+                      }}
+                      type="number" className="w-full h-[3rem] outline-none text-[2rem]" />
                   </InputFormEdit>
                 </div>
 
                 <div className={`grid-in-beds ${styleInput}`}>
                   <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Beds">
-                    <input type="number"  className="w-full h-[3rem] outline-none text-[2rem]" />
+                    <input
+                      value={createHouseForm?.NumsOfBed}
+                      onChange={event => {
+                        if (createHouseForm) {
+                          setCreateHouseForm({ ...createHouseForm, NumsOfBed: parseInt(event.target.value) })
+                        }
+                      }}
+                      type="number" className="w-full h-[3rem] outline-none text-[2rem]" />
                   </InputFormEdit>
                 </div>
 
@@ -109,7 +102,14 @@ const HouseProperties = ({ keyMapBing, api_url_path }: HousePropertiesProps) => 
                 <div className={`grid-in-orientation ${styleInput}`}>
                   <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Orientation">
                     {/* <input type="text" className="w-full h-[3rem] outline-none text-[2rem]" /> */}
-                    <select  className="select px-0 w-full outline-none text-[2rem]">
+                    <select
+                      onChange={event => {
+                        if (createHouseForm) {
+                          setCreateHouseForm({ ...createHouseForm, Orientation: event.target.value })
+                        }
+                      }}
+                      value={createHouseForm?.Orientation}
+                      className="select px-0 w-full outline-none text-[2rem]">
                       {compass.map((item: string, index: number) => {
                         if (index == 0) {
                           return (
@@ -138,9 +138,9 @@ const HouseProperties = ({ keyMapBing, api_url_path }: HousePropertiesProps) => 
                         // range
                         allowCross={false}
                         draggableTrack
-                        defaultValue={tempHouse?.Price}
+                        defaultValue={createHouseForm?.Price}
                         onChange={handleOnChange}
-                        value={tempHouse?.Price}
+                        value={createHouseForm?.Price}
                         className="m-auto "
                         min={10}
                         max={7000}
@@ -158,11 +158,11 @@ const HouseProperties = ({ keyMapBing, api_url_path }: HousePropertiesProps) => 
                       <div className="w-[9.375rem] h-full flex ml-5">
                         <input type="number" className="w-[7.5rem] h-full m-auto
                         outline-none "
-                          value={tempHouse?.Price}
+                          value={createHouseForm?.Price}
                           onChange={(event) => {
-                            if (!tempHouse) return
+                            if (!createHouseForm) return
                             const temp: number = parseFloat(event.target.value);
-                            setTempHouse({ ...tempHouse, Price: temp });
+                            setCreateHouseForm({ ...createHouseForm, Price: temp });
                           }}
                         />
                       </div>
@@ -172,7 +172,13 @@ const HouseProperties = ({ keyMapBing, api_url_path }: HousePropertiesProps) => 
 
                 <div className={`grid-in-title ${styleInput}`}>
                   <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Title">
-                    <input type="text"  className="w-full h-[3rem] outline-none text-[2rem]"
+                    <input type="text" className="w-full h-[3rem] outline-none text-[2rem]"
+                      value={createHouseForm?.Title}
+                      onChange={event => {
+                        if (createHouseForm) {
+                          setCreateHouseForm({ ...createHouseForm, Title: event.target.value })
+                        }
+                      }}
                       placeholder="Enter your house title..."
                     />
                   </InputFormEdit>
@@ -181,6 +187,12 @@ const HouseProperties = ({ keyMapBing, api_url_path }: HousePropertiesProps) => 
                 <div className={`grid-in-des ${styleInput}`}>
                   <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Description">
                     <textarea
+                      value={createHouseForm?.Description}
+                      onChange={event => {
+                        if (createHouseForm) {
+                          setCreateHouseForm({ ...createHouseForm, Description: event.target.value })
+                        }
+                      }}
                       placeholder="Enter the description..."
                       className="w-full h-fit  outline-none text-[2rem]" />
                   </InputFormEdit>
@@ -192,7 +204,7 @@ const HouseProperties = ({ keyMapBing, api_url_path }: HousePropertiesProps) => 
                     {/* <input type="text" className="w-full h-[3rem] outline-none text-[2rem]" /> */}
                     <div className="w-full h-full mb-5 border-b-2 border-slate-500 py-10">
                       <div className="w-full h-fit flex flex-col ">
-                        <EditAmenities setTempHouse={setTempHouse} tempHouse={tempHouse} />
+                        <EditAmenities setTempHouse={setCreateHouseForm} tempHouse={createHouseForm} />
                       </div>
                     </div>
                   </InputFormEdit>
@@ -203,30 +215,16 @@ const HouseProperties = ({ keyMapBing, api_url_path }: HousePropertiesProps) => 
                     {/* <input type="text" className="w-full h-[3rem] outline-none text-[2rem]" /> */}
                     <div className="w-full h-full mb-5 border-b-2 border-slate-500 py-10">
                       <div className="w-full h-fit flex flex-col ">
-                        <PropertyCreateHouse setTypeHouseId={setTypeHouseId} typeHouseId={typeHouseId} />
+                        <PropertyCreateHouse
+                          setTypeHouseId={setTypeHouseId}
+                          typeHouseId={typeHouseId}
+                        />
                       </div>
                     </div>
                   </InputFormEdit>
                 </div>
-
               </div>
             </div>
-            <div className="w-full h-[5rem]"></div>
-
-          </div>
-
-
-          <div className="w-full h-[5rem] bottom-0 left-0 border-t-2 flex items-center flex-2 py-3">
-            <button type="button" className="flex-1 flex justify-start"
-              onClick={(event) => {
-
-              }}
-            >
-              <div className="m-auto underline cursor-pointer" >
-                Clear all
-              </div>
-            </button>
-
           </div>
         </div>
       </div>

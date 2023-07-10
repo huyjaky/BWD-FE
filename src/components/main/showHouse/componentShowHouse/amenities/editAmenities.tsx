@@ -5,7 +5,7 @@ import CheckBox from "@/components/main/filter/formFilter/filterFormComponent/am
 
 interface EditAmenitiesProps {
   tempHouse: house_ | undefined;
-  setTempHouse: Dispatch<SetStateAction<house_ | undefined>>;
+  setTempHouse: (payload: house_) => void
 }
 
 
@@ -56,10 +56,10 @@ const EditAmenities = ({ tempHouse, setTempHouse }: EditAmenitiesProps) => {
 
                     isCheckedProps={
                       tempHouse?.placeOffer ?
-                      // isCheck(item, tempHouse?.placeOffer)
-                      tempHouse.placeOffer.some(item_ => item_.PlaceOffer === item.PlaceOffer)
-                      :
-                      false
+                        // isCheck(item, tempHouse?.placeOffer)
+                        tempHouse.placeOffer.some(item_ => item_.PlaceOffer === item.PlaceOffer)
+                        :
+                        false
                     }
                   />{' '}
                 </div>

@@ -90,10 +90,6 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
     }
   }
 
-  // useEffect(() => {
-  //   console.log('selechous', selectHouse);
-  //   console.log('temphouse', tempHouse);
-  // }, [tempHouse])
 
   return (
     <>

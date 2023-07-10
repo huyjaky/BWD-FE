@@ -1,8 +1,9 @@
 import { filterContext } from "@/contexts/filter";
 import { Variants, motion } from "framer-motion";
-import { Dispatch, SetStateAction, useContext } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 
 interface PropertyItem {
+  id: string;
   title: string;
   imgPath: string;
 
@@ -10,7 +11,7 @@ interface PropertyItem {
 
 interface PropertyCreateHouseProps {
   typeHouseId: string[];
-  setTypeHouseId: Dispatch<SetStateAction<string[]>>
+  setTypeHouseId: (payload: string[]) => void
 }
 
 const variantsPropertyItems: Variants = {
@@ -19,21 +20,29 @@ const variantsPropertyItems: Variants = {
   }
 };
 
-const PropertyCreateHouse = ({ typeHouseId, setTypeHouseId }: PropertyCreateHouseProps) => {
+const PropertyCreateHouse = ({typeHouseId, setTypeHouseId}: PropertyCreateHouseProps) => {
   const arrPropertyItems: PropertyItem[] = [
     {
+      id: '1',
       title: 'House',
       imgPath: 'https://a0.muscache.com/pictures/4d7580e1-4ab2-4d26-a3d6-97f9555ba8f9.jpg'
     },
     {
+      id: '2',
       title: 'Apartment',
       imgPath: 'https://a0.muscache.com/pictures/21cfc7c9-5457-494d-9779-7b0c21d81a25.jpg'
     },
     {
+      id: '3',
       title: 'Guesthouse',
       imgPath: 'https://a0.muscache.com/pictures/6f261426-2e47-4c91-8b1a-7a847da2b21b.jpg'
     }
   ];
+
+  useEffect(() => {
+    // Cập nhật giá trị mới của typeHouseId
+    console.log(typeHouseId);
+  }, [typeHouseId]);
 
   return (
     <div className="grid grid-cols-3 gap-x-10 mobile:gap-y-5   grid-rows-1 mobile:grid-cols-1 mobile:grid-rows-3">
@@ -43,24 +52,23 @@ const PropertyCreateHouse = ({ typeHouseId, setTypeHouseId }: PropertyCreateHous
             <motion.button
               className={`w-full h-[130px] border-2 rounded-2xl box-border p-2 mobile:w-full
               mobile:mb-5
-                            ${typeHouseId.includes(item.title) ? 'border-black' : ''}
+                            ${typeHouseId.includes(item.id) ? 'border-black' : ''}
                           `}
               variants={variantsPropertyItems}
-              whileTap={{ scale: 0.6 }}
+              whileTap={{ scale: 0.8 }}
               transition={{ duration: 0.5 }}
               onClick={(event) => {
-                const arrTemp = typeHouseId;
-                // if typeHouse have exist => remove it
-                if (typeHouseId.includes(item.title)) {
-                  const updateArrTemp: string[] = arrTemp.filter((item_: string) => {
-                    return item_ !== item.title;
-                  });
-                  setTypeHouseId(updateArrTemp)
-                  return;
+                const updatedTypeHouseId = [...typeHouseId];
+                // Kiểm tra xem item.title đã tồn tại trong mảng hay chưa
+                if (updatedTypeHouseId.includes(item.id)) {
+                  const index = updatedTypeHouseId.indexOf(item.id);
+                  updatedTypeHouseId.splice(index, 1); // Loại bỏ phần tử nếu đã tồn tại
+                } else {
+                  updatedTypeHouseId.push(item.id); // Thêm phần tử nếu chưa tồn tại
                 }
-                arrTemp.push(item.title);
-                setTypeHouseId(arrTemp);
-                return;
+
+                // Cập nhật giá trị mới của typeHouseId
+                setTypeHouseId(updatedTypeHouseId);
               }}
               key={index}
             >

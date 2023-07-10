@@ -6,22 +6,21 @@ import { Dispatch, SetStateAction, useEffect } from "react";
 
 interface MapEditProps {
   tempHouse: house_ | undefined;
-  setTempHouse: Dispatch<SetStateAction<house_ | undefined>>;
+  setTempHouse: (payload: house_) => void;
   keyMapBing: string;
-  value: string
 }
 
 
-const MapCreateHouse = ({ setTempHouse, tempHouse, keyMapBing, value }: MapEditProps) => {
+const MapCreateHouse = ({ setTempHouse, tempHouse, keyMapBing}: MapEditProps) => {
 
   useEffect(() => {
     whenLoaded.then(() => {
-      const map_ = document.getElementById('mapCreateHouse');
+      const map_ = document.getElementById('MapEdit7');
       if (map_ && tempHouse) {
         const map = new Microsoft.Maps.Map(map_, {
           /* No need to set credentials if already passed in URL */
-          center: new Microsoft.Maps.Location(tempHouse.address.latitude || 16.047079,
-            tempHouse.address.longitude || 	108.206230
+          center: new Microsoft.Maps.Location(tempHouse.address.latitude || 	16.047079,
+            tempHouse.address.longitude || 108.206230
           ),
           mapTypeId: Microsoft.Maps.MapTypeId.road,
           zoom: 16,
@@ -38,12 +37,13 @@ const MapCreateHouse = ({ setTempHouse, tempHouse, keyMapBing, value }: MapEditP
           callback: () => {
             var options = { maxResults: 5, businessSuggestions: true };
             var manager = new Microsoft.Maps.AutosuggestManager(options);
-            manager.attachAutosuggest('#searchBoxCreateHouse', '#searchBoxContainerCreateHouse', (suggestionResult: any) => {
+            manager.attachAutosuggest('#searchBox7', '#searchBoxContainer7', (suggestionResult: any) => {
               map.entities.clear();
               map.setView({ bounds: suggestionResult.bestView });
               var pushpin = new Microsoft.Maps.Pushpin(suggestionResult.location);
               map.entities.push(pushpin);
 
+              console.log(suggestionResult);
               setTempHouse({...tempHouse,
                 address: {...tempHouse.address, ...suggestionResult?.address, ...suggestionResult?.location,
                   title: suggestionResult.title
@@ -58,13 +58,15 @@ const MapCreateHouse = ({ setTempHouse, tempHouse, keyMapBing, value }: MapEditP
   return (
     <>
       <div className={`w-full rounded-3xl border-2 border-red-400 overflow-hidden h-[22rem]`}>
-        <div id={"mapCreateHouse"} className="relative z-10"></div>
+        <div id={"MapEdit7"} className="relative z-10"></div>
       </div>
 
-      <div id="searchBoxContainerCreateHouse">
+      <div id="searchBoxContainer7" className="box-border px-5">
         <input
-          placeholder='Search your'
-          id="searchBoxCreateHouse" type="text" className="w-full h-[3rem] outline-none text-[2rem]" />
+          placeholder={'Enter your house locale'}
+          id="searchBox7" type="text" className="w-full h-[3rem] outline-none text-[2rem] mt-[3rem]
+          border-b-2 border-slate-600
+          " />
       </div>
     </>
   )

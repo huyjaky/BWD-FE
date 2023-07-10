@@ -1,11 +1,15 @@
+import { createHouseFormContext } from "@/contexts/createHouseForm";
 import { StepCreateHomeContext } from "@/contexts/stepCreate";
-import { MotionConfig, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useContext } from "react";
 
 
 
 const FooterCreateHome = () => {
-  const { setStepCreate, stepCreate } = useContext(StepCreateHomeContext);
+  const { createHouseForm, imgArr, typeHouseId } = useContext(createHouseFormContext);
+  const { stepCreate, setStepCreate } = useContext(StepCreateHomeContext)
+
+
   return (
     <div className="fixed w-full bottom-0 border-t-2 h-[5rem] bg-white">
       <div className="w-full h-full grid grid-cols-2">
@@ -21,7 +25,9 @@ const FooterCreateHome = () => {
         {/* next */}
         <div className="w-full h-full flex justify-end box-border py-2 pr-5">
           <motion.button
-            onClick={() => { setStepCreate(stepCreate > 4 ? stepCreate : stepCreate + 1) }}
+            onClick={(event) => {
+                setStepCreate(stepCreate > 5 ? stepCreate : stepCreate + 1)
+            }}
             className="h-full w-fit px-7 bg-red-500 rounded-xl">
             <span className=" font-semibold text-[1.5rem] rounded-xl  text-white
             w-full h-full

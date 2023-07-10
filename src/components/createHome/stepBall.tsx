@@ -1,3 +1,4 @@
+import { createHouseFormContext } from "@/contexts/createHouseForm"
 import { StepCreateHomeContext } from "@/contexts/stepCreate"
 import { motion } from "framer-motion"
 import { useContext } from "react"
@@ -15,18 +16,23 @@ const StepBall = ({ step, currentStep, title }: StepBallProps) => {
   let status: 'active' | 'inactive' | 'complete' =
     currentStep === step ? 'active' : currentStep < step ? 'inactive'
       : 'complete'
-  const {setStepCreate} = useContext(StepCreateHomeContext)
+  const { setStepCreate, stepCreate } = useContext(StepCreateHomeContext)
+
+
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="w-full h-full flex flex-col cursor-pointer">
       <motion.div
-        onClick={event => setStepCreate(step)}
+        onClick={event => {
+          setStepCreate(step)
+        }
+        }
         animate={{
           backgroundColor: status === 'complete' ? 'rgb(239,68,68)' : 'rgb(255,255,255)',
           borderColor: status === 'complete' || status === 'active' ?
             'rgb(239,68,68)' :
             'rgb(51,65,85)'
         }}
-        transition={{duration: 1}}
+        transition={{ duration: 1 }}
         className={`w-[4rem] h-[4rem] rounded-full m-auto flex border-2 text-[1.5rem]
       ${status === 'active' ? ' border-red-500 text-red-500 bg-white'
             : status === 'complete' ? 'border-red-500 bg-red-500'

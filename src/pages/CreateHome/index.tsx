@@ -2,17 +2,21 @@
 
 import ChooseTypeHouse from '@/components/createHome/componentCreateHome/chooseTypeHouse/chooseTypeHouse';
 import HouseProperties from '@/components/createHome/componentCreateHome/houseProperties/houseProperties';
+import ImgCreateHouse from '@/components/createHome/componentCreateHome/imgCreateHouse';
+import MapCreateHouse from '@/components/createHome/componentCreateHome/mapCreateHouse';
 import FooterCreateHome from '@/components/createHome/footerCreateHome';
 import StepCreateHome from '@/components/createHome/stepCreateHome';
 import TransitionCreateHome from '@/components/createHome/transitionCreateHome';
 import HeaderForm from '@/components/headers/headerForm/HeaderForm';
 import authWithoutAnimate from '@/components/layouts/authWithoutAnimate';
+import InputFormEdit from '@/components/main/showHouse/componentShowHouse/inputForm/inputFormEdit';
+import { createHouseFormContext } from '@/contexts/createHouseForm';
 import { StepCreateHomeContext } from '@/contexts/stepCreate';
 import { NextPageWithLayout } from '@/models/layoutprops';
-import { initializeSSR } from 'bing-maps-loader';
+import { initializeSSR, whenLoaded } from 'bing-maps-loader';
 import { GetStaticProps, GetStaticPropsContext } from 'next';
 import { Montserrat } from 'next/font/google';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 interface CreateHomeProps {
   keyMapBing: string;
   api_url_path: string;
@@ -23,12 +27,19 @@ const monsterrat = Montserrat({
   weight: ['200', '400', '600', '800'],
   variable: '--font-monsterrat'
 });
+initializeSSR()
 
 const CreateHome: NextPageWithLayout<CreateHomeProps> = ({
   keyMapBing,
   api_url_path
 }: CreateHomeProps): JSX.Element => {
+  initializeSSR()
   const { setStepCreate, stepCreate } = useContext(StepCreateHomeContext)
+  const { createHouseForm, setCreateHouseForm, typeHouseId, imgArr } = useContext(createHouseFormContext)
+  useEffect(() => {
+    console.log(createHouseForm);
+  }, [createHouseForm]);
+
   return (
     <>
       <HeaderForm>
@@ -46,21 +57,34 @@ const CreateHome: NextPageWithLayout<CreateHomeProps> = ({
 
       <TransitionCreateHome isShow={stepCreate == 2}>
         {/* <div className="bg-orange-600 w-full h-[18.75rem]"></div> */}
-        <HouseProperties api_url_path={api_url_path} keyMapBing={keyMapBing}/>
+        <HouseProperties />
       </TransitionCreateHome>
 
 
       <TransitionCreateHome isShow={stepCreate == 3}>
-        <div className="bg-blue-500 w-full h-[18.75rem]"></div>
+        <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Address">
+          <MapCreateHouse keyMapBing={keyMapBing} setTempHouse={setCreateHouseForm}
+            tempHouse={createHouseForm}
+          />
+        </InputFormEdit>
       </TransitionCreateHome>
 
-
       <TransitionCreateHome isShow={stepCreate == 4}>
-        <div className="bg-blue-500 w-full h-[18.75rem]"></div>
+        <InputFormEdit styleDivAround=" before:hidden" styleFieldset="" styleLegend="" title="Images">
+          <ImgCreateHouse api_url_path={api_url_path} />
+        </InputFormEdit>
       </TransitionCreateHome>
 
       <TransitionCreateHome isShow={stepCreate == 5}>
-        <div className="bg-blue-500 w-full h-[18.75rem]"></div>
+        <div className="bg-blue-500 w-full h-[18.75rem]">
+          <button onClick={(event)=>{
+            console.log('typeHouse', typeHouseId);
+            console.log('createhouse', createHouseForm);
+            console.log('imgarr', imgArr);
+          }}>
+            print
+          </button>
+        </div>
       </TransitionCreateHome>
 
 
