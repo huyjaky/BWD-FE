@@ -21,7 +21,7 @@ const FooterCreateHome = () => {
         {/* next */}
         <div className="w-full h-full flex justify-end box-border py-2 pr-5">
           <motion.button
-            onClick={() => { setStepCreate(stepCreate > 5 ? stepCreate : stepCreate + 1) }}
+            onClick={() => { setStepCreate(stepCreate > 4 ? stepCreate : stepCreate + 1) }}
             className="h-full w-fit px-7 bg-red-500 rounded-xl">
             <span className=" font-semibold text-[1.5rem] rounded-xl  text-white
             w-full h-full

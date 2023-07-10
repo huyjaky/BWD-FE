@@ -182,7 +182,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
               </div>
             </div>
           </div>
-          <button type="submit" className="w-full h-[2.4rem] bg-red-600 mt-5 rounded-xl">
+          <button type="submit" className="w-full h-fit py-3 bg-red-600 mt-5 rounded-xl">
             <span className="text-white font-semibold text-[2rem]">Login</span>
           </button>
         </form>
