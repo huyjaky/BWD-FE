@@ -1,6 +1,7 @@
 
 
 import ChooseTypeHouse from '@/components/createHome/componentCreateHome/chooseTypeHouse/chooseTypeHouse';
+import FinishPage from '@/components/createHome/componentCreateHome/finishPage';
 import HouseProperties from '@/components/createHome/componentCreateHome/houseProperties/houseProperties';
 import ImgCreateHouse from '@/components/createHome/componentCreateHome/imgCreateHouse';
 import MapCreateHouse from '@/components/createHome/componentCreateHome/mapCreateHouse';
@@ -37,7 +38,6 @@ const CreateHome: NextPageWithLayout<CreateHomeProps> = ({
   const { setStepCreate, stepCreate } = useContext(StepCreateHomeContext)
   const { createHouseForm, setCreateHouseForm, typeHouseId, imgArr } = useContext(createHouseFormContext)
   useEffect(() => {
-    console.log(createHouseForm);
   }, [createHouseForm]);
 
   return (
@@ -76,15 +76,7 @@ const CreateHome: NextPageWithLayout<CreateHomeProps> = ({
       </TransitionCreateHome>
 
       <TransitionCreateHome isShow={stepCreate == 5}>
-        <div className="bg-blue-500 w-full h-[18.75rem]">
-          <button onClick={(event)=>{
-            console.log('typeHouse', typeHouseId);
-            console.log('createhouse', createHouseForm);
-            console.log('imgarr', imgArr);
-          }}>
-            print
-          </button>
-        </div>
+          <FinishPage />
       </TransitionCreateHome>
 
 

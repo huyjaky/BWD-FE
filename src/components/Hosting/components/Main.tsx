@@ -129,9 +129,7 @@ function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
                       title={'House for rent'}
                       textStyles=" w-full h-fit "
                     />
-
                   </motion.div>
-
                   <ShowHouse infShow="houseForRent" keyMapBing={keyMapBing} api_url_path={api_url_path} />
 
                   {/* house for sale */}
@@ -146,7 +144,6 @@ function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
                       title={'House for sale'}
                       textStyles=" w-full h-fit "
                     />
-
                   </motion.div>
 
                   <ShowHouse infShow="houseForSale" keyMapBing={keyMapBing} api_url_path={api_url_path} />

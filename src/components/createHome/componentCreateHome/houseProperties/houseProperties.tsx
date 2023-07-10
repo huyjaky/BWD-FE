@@ -23,7 +23,6 @@ const HouseProperties = ({ }: HousePropertiesProps) => {
 
   useEffect(() => {
     setTempHouse(createHouseForm);
-    console.log(createHouseForm);
   }, [createHouseForm]);
 
   const handleOnChange = async (value: any) => {

@@ -1,8 +1,9 @@
 
+import { createHouseFormContext } from "@/contexts/createHouseForm";
 import { house_ } from "@/models/house";
 import { whenLoaded } from "bing-maps-loader";
 import { title } from "process";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect } from "react";
 
 interface MapEditProps {
   tempHouse: house_ | undefined;
@@ -11,7 +12,11 @@ interface MapEditProps {
 }
 
 
-const MapCreateHouse = ({ setTempHouse, tempHouse, keyMapBing}: MapEditProps) => {
+const MapCreateHouse = ({ setTempHouse, tempHouse, keyMapBing }: MapEditProps) => {
+  const { createHouseForm, setCreateHouseForm } = useContext(createHouseFormContext)
+  useEffect(()=>{
+    console.log('create', createHouseForm);
+  }, [createHouseForm])
 
   useEffect(() => {
     whenLoaded.then(() => {
@@ -19,7 +24,7 @@ const MapCreateHouse = ({ setTempHouse, tempHouse, keyMapBing}: MapEditProps) =>
       if (map_ && tempHouse) {
         const map = new Microsoft.Maps.Map(map_, {
           /* No need to set credentials if already passed in URL */
-          center: new Microsoft.Maps.Location(tempHouse.address.latitude || 	16.047079,
+          center: new Microsoft.Maps.Location(tempHouse.address.latitude || 16.047079,
             tempHouse.address.longitude || 108.206230
           ),
           mapTypeId: Microsoft.Maps.MapTypeId.road,
@@ -44,10 +49,15 @@ const MapCreateHouse = ({ setTempHouse, tempHouse, keyMapBing}: MapEditProps) =>
               map.entities.push(pushpin);
 
               console.log(suggestionResult);
-              setTempHouse({...tempHouse,
-                address: {...tempHouse.address, ...suggestionResult?.address, ...suggestionResult?.location,
-                  title: suggestionResult.title
-                }})
+              if (createHouseForm) {
+                setCreateHouseForm({
+                  ...createHouseForm,
+                  address: {
+                    ...createHouseForm.address, ...suggestionResult?.address, ...suggestionResult?.location,
+                    title: suggestionResult.title
+                  }
+                })
+              }
             });
           }
         });

@@ -41,7 +41,6 @@ const PropertyCreateHouse = ({typeHouseId, setTypeHouseId}: PropertyCreateHouseP
 
   useEffect(() => {
     // Cập nhật giá trị mới của typeHouseId
-    console.log(typeHouseId);
   }, [typeHouseId]);
 
   return (

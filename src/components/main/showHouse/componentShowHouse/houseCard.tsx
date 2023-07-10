@@ -103,7 +103,7 @@ const HouseCard = ({
                 formattedAddress: item.address.formattedAddress
               });
             }}
-            className={`absolute top-3 right-12 ${infShow === 'authListHouse' ? 'right-2' : ''
+            className={`absolute top-2 right-12 ${infShow === 'authListHouse' ? 'right-2' : ''
               } text-red-500 text-[2rem] z-10`}
           >
             <ImMap />
@@ -114,9 +114,11 @@ const HouseCard = ({
             onClick={() => {
               setSelectUser(item.useracc);
               setIsOpenMask(true);
+              console.log('user click');
+
             }}
             className={`absolute w-[4rem] h-[4rem] transition-all
-                left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl ${infShow === 'authListHouse' ? 'hidden' : ''
+                left-3 bottom-3 z-30 rounded-full overflow-hidden shadow-2xl ${infShow === 'authListHouse' ? 'hidden' : ''
               }`}
           >
             {item.useracc.Image != undefined ? (
@@ -130,6 +132,7 @@ const HouseCard = ({
             )}
           </motion.button>
 
+
           {/* cai nay dung trong /hosting de them sua xoa */}
           <motion.button
             variants={variants}
@@ -142,7 +145,7 @@ const HouseCard = ({
                 tablet:hidden mobile:hidden
                 ${infShow === 'authListHouse' || infShow === 'houseForRent'
                 || infShow === 'houseForSale'
-                 ? '' : 'hidden'}`}
+                ? '' : 'hidden'}`}
           >
             <div className="w-[4rem] h-full rounded-full overflow-hidden">
               {item.useracc.Image != undefined ? (
@@ -166,8 +169,8 @@ const HouseCard = ({
             variants={variants}
             transition={{ type: 'spring', duration: 0.3 }}
             className={`absolute w-[14rem] h-[4rem] transition-all bg-white
-                left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl flex
-                laptop:hidden desktop:hidden
+                left-3 bottom-3  rounded-full overflow-hidden shadow-2xl flex
+                laptop:hidden desktop:hidden z-50
                 ${infShow === 'authListHouse' ? '' : 'hidden'}`}
           >
             <div className="w-[4rem] h-full rounded-full overflow-hidden">

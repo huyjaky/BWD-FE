@@ -15,7 +15,7 @@ function Header(): JSX.Element {
   const router = useRouter();
 
   const handleCreatehome = () => {
-    router.push('/createhome');
+    router.push('/createhouse');
   };
 
   const [active, setActive] = useState('');
