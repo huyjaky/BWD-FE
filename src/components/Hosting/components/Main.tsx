@@ -10,6 +10,7 @@ import { AmountTabHostingContext } from '@/contexts/amountTabHosting';
 import { userAccContext } from '@/contexts/userAcc';
 import AnimateTitle from '@/components/main/showHouse/animateTitle';
 import { staggerContainer } from '@/utils/motion';
+import { getHouseContext } from '@/contexts/getHouse';
 interface mainProps {
   keyMapBing: string;
   api_url_path: string
@@ -18,11 +19,15 @@ interface mainProps {
 function Main({ keyMapBing, api_url_path }: mainProps): JSX.Element {
   const [selected, setSelected] = useState('Currently hosting');
   const { currentHosting } = useContext(AmountTabHostingContext);
+  const { isFilter, setIsFilter, reRenderFilter } = useContext(getHouseContext);
   const [refButton, inViewButton] = useInView({
     // Kích hoạt nhiều lần khi vào khung nhìn
     threshold: 0.01 // Ngưỡng nhìn thấy (tỷ lệ của phần tử nằm trong khung nhìn)
   });
   const { user } = useContext(userAccContext)
+  useEffect(()=>{
+    setIsFilter('main');
+  },[])
 
   const componentVariants: Variants = {
     offscreen: {
