@@ -2,13 +2,13 @@
   "name": "bwd-fe",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://vvtbatdongsan.online",
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc"
-  },
+    "start": "next start"
+  }
+,
   "dependencies": {
     "@hookform/resolvers": "^3.1.0",
     "@types/bingmaps": "^0.0.1",

@@ -15,9 +15,10 @@ const styles = {
 
   // hero section
   heroHeading:
-    'font-bold lg:text-[144px] md:text-[6.25rem] sm:text-[4rem] text-[3rem] lg:leading-[158..25rem] md:leading-[114..25rem] sm:leading-[74..25rem] leading-[64..25rem] uppercase text-black',
+    'font-bold lg:text-[144px] md:text-[100px] sm:text-[60px] text-[44px] lg:leading-[158.4px] md:leading-[114.4px] sm:leading-[74.4px] leading-[64.4px] uppercase text-black',
   heroDText:
-    'md:w-[13.25rem] sm:w-[5rem] w-[4rem] md:h-[108px] sm:h-[48px] h-[38px] md:border-[1rem] border-[9px] rounded-r-[3rem] border-black sm:mx-2 mx-[6px]'
+    'md:w-[212px] sm:w-[80px] w-[60px] md:h-[108px] sm:h-[48px] h-[38px] md:border-[18px] border-[9px] rounded-r-[50px] border-black sm:mx-2 mx-[6px]'
 };
 
 export default styles;
+
