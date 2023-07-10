@@ -15,19 +15,16 @@ const About = () => (
       initial="hidden"
       whileInView="show"
       viewport={{ once: false, amount: 0.25 }}
-      className={`${styles.innerWidth} mx-auto ${styles.flexCenter} flex-col`}
-    >
+      className={`${styles.innerWidth} mx-auto ${styles.flexCenter} flex-col`}>
       <TypingText title="| About Olympus" textStyles="text-center" />
 
       <motion.p
         variants={fadeIn('up', 'tween', 0.2, 1)}
-        className="mt-[8px] font-normal sm:text-[2rem] text-[1rem] text-center text-slate-700"
-      >
-        Welcome to <span className="font-extrabold text-black">Olympus</span>, the cutting-edge real
-        estate platform that leverages Artificial Intelligence{' '}
-        <span className="font-extrabold text-black">(AI) </span>
-        to revolutionize your property search experience. With a user-friendly interface and
-        state-of-the-art AI technology, <span className="font-extrabold text-black">
+        className="mt-[8px] font-normal sm:text-[2rem] text-[1rem] text-center text-slate-700">
+        Welcome to <span className="font-extrabold text-black">Olympus</span>, the real estate
+        platform that delivers a great user experience for you.{' '}
+        <span className="font-extrabold text-black">(With) </span>
+        its user-friendly interface Olympus is your ultimate destination in search of the perfect home. <span className="font-extrabold text-black">
           Olympus
         </span>{' '}
         is your ultimate destination for finding the perfect home.

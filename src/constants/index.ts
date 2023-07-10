@@ -54,21 +54,15 @@ export const newFeatures = [
 export const insights = [
   {
     imgUrl: '/about/planet-06.png',
-    title: 'The launch of the website makes Huy rich',
-    subtitle:
-      'Magna etiam tempor orci eu lobortis elementum nibh tellus molestie. Diam maecenas sed enim ut sem viverra alique.'
+    title: 'Friendly interface',
   },
   {
     imgUrl: '/about/planet-07.png',
-    title: '7 tips to easily master the madness of the Olympus',
-    subtitle:
-      'Vitae congue eu consequat ac felis donec. Et magnis dis parturient montes nascetur ridiculus mus. Convallis tellus id interdum'
+    title: 'A website that makes it easier for you to find a home',
   },
   {
     imgUrl: '/about/planet-08.png',
     title: 'With one platform you can explore the whole world house',
-    subtitle:
-      'Quam quisque id diam vel quam elementum. Viverra nam libero justo laoreet sit amet cursus sit. Mauris in aliquam sem'
   }
 ];
 
