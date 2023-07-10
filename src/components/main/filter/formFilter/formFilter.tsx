@@ -3,19 +3,18 @@ import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 import { getHouseContext } from '@/contexts/getHouse';
 import { IsShowPtContext } from '@/contexts/isShowPt';
 import { selectPlaceContext } from '@/contexts/selectPlace';
+import { address } from '@/models/address';
 import { filterForm } from '@/models/filter';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { GrClose } from 'react-icons/gr';
+import MapFilter from './filterFormComponent/Mapfilter';
 import Amenities from './filterFormComponent/amenities/amenities';
 import BedsBathRooms from './filterFormComponent/bedsBathrooms';
+import CompassFilter from './filterFormComponent/compass';
 import HostLanguage from './filterFormComponent/hostLanguage';
 import PriceRange from './filterFormComponent/priceRange';
 import PropertyHouse from './filterFormComponent/property';
-import { address } from '@/models/address';
-import MapEdit from '../../showHouse/componentShowHouse/inputForm/map';
-import MapFilter from './filterFormComponent/Mapfilter';
-import CompassFilter from './filterFormComponent/compass';
 
 export const variantsAmenities: Variants = {
   showMore: {

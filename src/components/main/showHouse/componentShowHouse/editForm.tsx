@@ -1,6 +1,6 @@
 import axiosClient from "@/api-client/axiosClient";
 import { houseApi } from "@/api-client/houseApi";
-import { getHouseContext } from "@/contexts/getHouse";
+import { getHouseContext, isFilter_ } from "@/contexts/getHouse";
 import { houseTempContext } from "@/contexts/houseTemp";
 import { selectHouseContext } from "@/contexts/selectHouse";
 import { house_ } from "@/models/house";
@@ -24,11 +24,12 @@ interface EditFormProps {
   keyMapBing: string;
   api_url_path: string | undefined;
   setIsEdit: Dispatch<SetStateAction<boolean>>;
+  infShow:isFilter_['isFilter_']
 }
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
-const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
+const EditForm = ({ keyMapBing, api_url_path, setIsEdit, infShow }: EditFormProps) => {
   const { selectHouse } = useContext(selectHouseContext);
   const { houseTemp, setHouseTemp } = useContext(houseTempContext)
   const styleInput = 'box-border p-3';
@@ -168,6 +169,7 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit }: EditFormProps) => {
                 <div className={`grid-in-locale ${styleInput}`}>
                   <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Address">
                     <MapEdit
+                      id={infShow==='houseForRent' ? 'rent' : 'sale'}
                       value={tempHouse?.address.formattedAddress || ''}
                       keyMapBing={keyMapBing} tempHouse={tempHouse} setTempHouse={setTempHouse} />
                   </InputFormEdit>

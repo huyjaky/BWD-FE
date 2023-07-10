@@ -230,7 +230,7 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
           onClick={handleOnClickOutSideEditPanel}
           className="fixed w-screen h-screen bg-mask z-50 top-0 left-0 flex" >
           <div className='w-fit h-fit m-auto' ref={editPanel}>
-            <EditForm keyMapBing={keyMapBing} api_url_path={api_url_path} setIsEdit={setIsEdit} />
+            <EditForm infShow={infShow} keyMapBing={keyMapBing} api_url_path={api_url_path} setIsEdit={setIsEdit} />
           </div>
         </motion.div>
       </AnimatePresence>

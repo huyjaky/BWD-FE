@@ -10,6 +10,7 @@ import { authOptions } from '../api/auth/[...nextauth]';
 import { Montserrat } from 'next/font/google';
 import FooterMainRes from '@/components/footers/footerMainRes';
 
+initializeSSR();
 interface indexProps {
   keyMapBing: string;
   api_url_path: string
@@ -43,7 +44,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getServerSession(req, res, authOptions);
   const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
   const api_url_path = process.env.API_URL_PATH;
-  initializeSSR();
 
   if (!session?.userAcc) {
     res.setHeader('location', '/login');
@@ -51,7 +51,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     res.end();
     return { props: {} };
   }
-
+  initializeSSR();
   return {
     props: {
       keyMapBing: keyMapBing,
