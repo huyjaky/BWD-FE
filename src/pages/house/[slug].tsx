@@ -16,7 +16,7 @@ import { initializeSSR } from 'bing-maps-loader';
 import { AnimatePresence } from 'framer-motion';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { Montserrat } from 'next/font/google';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { BiMenu } from 'react-icons/bi';
 
 interface HouseDetailProps {
@@ -41,6 +41,10 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
     document.body.style.overflow = 'hidden';
   };
   initializeSSR();
+  useEffect(()=>{
+    window.scrollTo(0,0);
+
+  }, [])
 
   return (
     <>
@@ -64,7 +68,7 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
                 onClick={handleOnClick}
                 className="absolute right-4 bottom-4 w-fit h-fit
               rounded-xl p-3
-               bg-white z-50 flex items-center"
+              bg-white z-50 flex items-center"
               >
                 <BiMenu className="text-[2rem] " />
                 <span className="text-[19px]">Show all photos</span>
@@ -115,7 +119,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = cachedHouseDetail.map((house: house_) => ({ params: { slug: house.HouseId } }));
   return {
     paths,
-    fallback: false
+    fallback: 'blocking'
   };
 };
 
