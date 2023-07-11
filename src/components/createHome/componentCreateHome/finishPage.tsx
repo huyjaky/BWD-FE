@@ -15,6 +15,7 @@ import ImgCreateHouse from "./imgCreateHouse";
 import { house_ } from "@/models/house";
 import { useSession } from "next-auth/react";
 import { houseApi } from "@/api-client/houseApi";
+import nProgress from "nprogress";
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 interface FinishPageProps {
@@ -23,10 +24,13 @@ interface FinishPageProps {
 
 const FinishPage = ({ api_url_path }: FinishPageProps) => {
   const [key, setKey] = useState(0);
-  const { createHouseForm, imgArr, typeHouseId, Address } = useContext(createHouseFormContext)
-  const { stepCreate } = useContext(StepCreateHomeContext)
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { createHouseForm, imgArr, typeHouseId, Address
+    , setCreateHouseForm, setImgArr, setTypeHouseId, setAddress, emptyCreateHouseForm
+  } = useContext(createHouseFormContext)
+  const { stepCreate, setStepCreate } = useContext(StepCreateHomeContext)
   const filePondRef = useRef<FilePond>(null);
-  const {data:session, status} = useSession();
+  const { data: session, status } = useSession();
   useEffect(() => {
     setKey((prevKey) => prevKey + 1);
   }, [stepCreate]);
@@ -35,26 +39,39 @@ const FinishPage = ({ api_url_path }: FinishPageProps) => {
 
 
   const handleOnClick = async (event: any) => {
-    console.log(createHouseForm);
-    console.log(imgArr);
-    console.log(typeHouseId);
 
+    nProgress.set(0.6);
+    setIsLoading(true);
     if (filePondRef.current) {
       await filePondRef.current.processFiles();
     }
     try {
       if (createHouseForm) {
-        const data0: house_ = { ...createHouseForm, address: Address, useracc: session?.userAcc}
+        const data0: house_ = { ...createHouseForm, address: Address, useracc: session?.userAcc }
         await houseApi.createHouse(data0, typeHouseId);
       }
     } catch (error) {
       console.log(error);
       return
     }
+    if (emptyCreateHouseForm) {
+      setCreateHouseForm(emptyCreateHouseForm)
+      setImgArr([]);
+      setTypeHouseId([]);
+      setAddress({...emptyCreateHouseForm.address});
+      setStepCreate(1);
+      setIsLoading(false);
+    }
+    nProgress.done();
   }
 
   return (
     <>
+      <motion.div
+      animate={isLoading ? {opacity: [0,1], display: 'flex'} : {opacity: [1,0], display: 'none'}}
+      className={`fixed bg-mask top-0 left-0 w-screen z-50 hidden
+      h-screen`}></motion.div>
+
       <div className="hidden">
         <FilePond
           ref={filePondRef}
@@ -70,7 +87,7 @@ const FinishPage = ({ api_url_path }: FinishPageProps) => {
               url: '/create/house/img',
               method: 'POST',
               timeout: 120000,
-              withCredentials:true
+              withCredentials: true
             }
           }}
           name="files" /* sets the file input name, it's filepond by default */

@@ -9,16 +9,16 @@ import FooterCreateHome from '@/components/createHome/footerCreateHome';
 import StepCreateHome from '@/components/createHome/stepCreateHome';
 import TransitionCreateHome from '@/components/createHome/transitionCreateHome';
 import HeaderForm from '@/components/headers/headerForm/HeaderForm';
-import authWithoutAnimate from '@/components/layouts/authWithoutAnimate';
+import AuthWithAnimate from '@/components/layouts/authWithAnimate';
 import InputFormEdit from '@/components/main/showHouse/componentShowHouse/inputForm/inputFormEdit';
 import { createHouseFormContext } from '@/contexts/createHouseForm';
 import { StepCreateHomeContext } from '@/contexts/stepCreate';
 import { NextPageWithLayout } from '@/models/layoutprops';
-import { initializeSSR, whenLoaded } from 'bing-maps-loader';
-import { GetServerSideProps, GetStaticProps, GetStaticPropsContext } from 'next';
+import { initializeSSR } from 'bing-maps-loader';
+import { GetServerSideProps } from 'next';
 import { getServerSession } from 'next-auth';
 import { Montserrat } from 'next/font/google';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { authOptions } from '../api/auth/[...nextauth]';
 interface CreateHomeProps {
   keyMapBing: string;
@@ -32,7 +32,7 @@ const monsterrat = Montserrat({
 });
 initializeSSR()
 
-const CreateHome: NextPageWithLayout<CreateHomeProps> = ({
+const CreateHouse: NextPageWithLayout<CreateHomeProps> = ({
   keyMapBing,
   api_url_path
 }: CreateHomeProps): JSX.Element => {
@@ -78,7 +78,7 @@ const CreateHome: NextPageWithLayout<CreateHomeProps> = ({
       </TransitionCreateHome>
 
       <TransitionCreateHome isShow={stepCreate > 4}>
-          <FinishPage api_url_path={api_url_path}/>
+        <FinishPage api_url_path={api_url_path} />
       </TransitionCreateHome>
 
       <FooterCreateHome />
@@ -86,7 +86,7 @@ const CreateHome: NextPageWithLayout<CreateHomeProps> = ({
   );
 };
 
-CreateHome.Layout = authWithoutAnimate;
+CreateHouse.Layout = AuthWithAnimate;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getServerSession(req, res, authOptions);
@@ -94,12 +94,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const api_url_path = process.env.NEXTAUTH_URL;
   initializeSSR();
   // if user available not callback api from server
-  // if (!session?.userAcc) {
-  //   res.setHeader('location', '/login');
-  //   res.statusCode = 302;
-  //   res.end();
-  //   return { props: {} };
-  // }
+  if (!session?.userAcc) {
+    res.setHeader('location', '/login');
+    res.statusCode = 302;
+    res.end();
+    return { props: {} };
+  }
   return {
     props: {
       keyMapBing: keyMapBing,
@@ -121,4 +121,4 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 //   };
 // };
 
-export default CreateHome;
+export default CreateHouse;

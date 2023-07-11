@@ -22,7 +22,7 @@ const Animate = ({ children }: AnimateProps) => {
               clipPath: 'circle(0.2% at 100% 0)'
             },
             animateState: {
-              clipPath: 'circle(142.0% at 100% 0)'
+              clipPath: 'circle(150.0% at 100% 0)'
             },
             exitState: {
               clipPath: 'circle(0.2% at 100% 0)'

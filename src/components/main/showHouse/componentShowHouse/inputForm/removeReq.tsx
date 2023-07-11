@@ -23,20 +23,22 @@ const RemoveReq = ({ isRemoveReq, setIsRemoveReq }: RemoveReqProps) => {
   useEffect(() => { }, [isTruePass])
   return (
     <div className="w-fit h-fit bg-white mobile:w-screen mobile:h-screen
-    flex flex-col mobile:p-0 p-5 rounded-xl">
+    flex flex-col mobile:p-0 p-5 rounded-xl ">
       <div className="w-full m-auto flex">
-        <div className="w-[9.375rem] h-fit">
-          <img src={`/api/img/path/${user.Image}`} alt="" className="rounded-full" />
-        </div>
+        <div className="m-auto flex">
+          <div className="w-[9.375rem] h-fit">
+            <img src={`/api/img/path/${user.Image}`} alt="" className="rounded-full" />
+          </div>
 
-        <div className="w-fit h-full grid grid-cols-1 grid-rows-2 ml-[2rem] m-auto gap-5">
-          <div className="font-semibold text-[3rem] mobile:text-[2rem]">Delete house</div>
-          <div>
-            <input type="password" className={`outline-none
+          <div className="w-fit h-full grid grid-cols-1 grid-rows-2 ml-[2rem] m-auto gap-5">
+            <div className="font-semibold text-[3rem] mobile:text-[2rem]">Delete house</div>
+            <div>
+              <input type="password" className={`outline-none
             border-b-2 border-slate-900
             ${isTruePass ? '' : 'border-red-600'} mobile:text-[19px] text-[2rem] `} placeholder="Password"
-              onChange={(event) => setInputPass(event.target.value)}
-            />
+                onChange={(event) => setInputPass(event.target.value)}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -58,7 +60,7 @@ const RemoveReq = ({ isRemoveReq, setIsRemoveReq }: RemoveReqProps) => {
                 setIsTruePass(false);
               } else {
                 setIsTruePass(true);
-                setHouseTemp(houseTemp.filter(item=>item.AddressId !== selectHouse?.AddressId))
+                setHouseTemp(houseTemp.filter(item => item.AddressId !== selectHouse?.AddressId))
 
                 if (selectHouse) {
                   await houseApi.DeleteHouse(selectHouse?.HouseId, selectHouse.AddressId)
