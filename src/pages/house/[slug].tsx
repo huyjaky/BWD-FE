@@ -105,7 +105,7 @@ let cachedHouseDetail: house_[] = [];
 HouseDetail.Layout = AuthWithAnimate;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const link = process.env.API_URL_PATH;
+  const link = process.env.NEXTAUTH_URL;
   initializeSSR();
   if (cachedHouseDetail.length == 0) {
     const slug = await fetch(`${link}/api/get/house/page`);
@@ -121,7 +121,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
   initializeSSR();
-  const link = process.env.API_URL_PATH;
+  const link = process.env.NEXTAUTH_URL;
   if (cachedHouseDetail.length == 0) {
     const slug = await fetch(`${link}/api/get/house/page`);
     cachedHouseDetail = await slug.json();

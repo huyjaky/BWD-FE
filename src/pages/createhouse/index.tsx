@@ -91,7 +91,7 @@ CreateHome.Layout = authWithoutAnimate;
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getServerSession(req, res, authOptions);
   const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
-  const api_url_path = process.env.API_URL_PATH;
+  const api_url_path = process.env.NEXTAUTH_URL;
   initializeSSR();
   // if user available not callback api from server
   // if (!session?.userAcc) {

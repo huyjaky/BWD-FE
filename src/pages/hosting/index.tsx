@@ -43,7 +43,7 @@ export default Index;
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getServerSession(req, res, authOptions);
   const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
-  const api_url_path = process.env.API_URL_PATH;
+  const api_url_path = process.env.NEXTAUTH_URL;
 
   if (!session?.userAcc) {
     res.setHeader('location', '/login');

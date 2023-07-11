@@ -28,7 +28,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
     proxy.web(req, res, {
       target: process.env.API_URL_PATH,
       changeOrigin: true,
-      selfHandleResponse: false
+      selfHandleResponse: false,
+      secure: false,
     });
 
     proxy.once('proxyRes', () => {});
