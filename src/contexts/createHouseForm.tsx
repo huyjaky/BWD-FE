@@ -65,7 +65,7 @@ const createHouseDataDefault: createHouseData = {
     Orientation: '',
     placeOffer: [], //
     PostBy: '', //
-    Price: 0, //
+    Price: 10, //
     Title: '', //
     Type: '',
     useracc: {
@@ -111,7 +111,7 @@ const createHouseDataDefault: createHouseData = {
     Orientation: '',
     placeOffer: [], //
     PostBy: '', //
-    Price: 0, //
+    Price: 10, //
     Title: '', //
     Type: '',
     useracc: {

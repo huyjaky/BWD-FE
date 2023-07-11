@@ -140,7 +140,7 @@ const HouseCard = ({
               isHover.ishover && isHover.id === index ? 'showIconControl' : 'hiddenIconControl'
             }
             transition={{ type: 'spring', duration: 0.3 }}
-            className={`absolute w-[14rem] h-[4rem] transition-all bg-white
+            className={`absolute w-[4rem] h-[4rem] transition-all bg-white
                 left-3 bottom-3 z-10 rounded-full overflow-hidden shadow-2xl flex
                 tablet:hidden mobile:hidden
                 ${infShow === 'authListHouse' || infShow === 'houseForRent'
@@ -168,9 +168,9 @@ const HouseCard = ({
           <motion.button
             variants={variants}
             transition={{ type: 'spring', duration: 0.3 }}
-            className={`absolute w-[14rem] h-[4rem] transition-all bg-white
+            className={`absolute w-[4rem] h-[4rem] transition-all bg-white
                 left-3 bottom-3  rounded-full overflow-hidden shadow-2xl flex
-                laptop:hidden desktop:hidden z-50
+                laptop:hidden desktop:hidden z-20
                 ${infShow === 'authListHouse' ? '' : 'hidden'}`}
           >
             <div className="w-[4rem] h-full rounded-full overflow-hidden">

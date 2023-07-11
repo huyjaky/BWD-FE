@@ -334,7 +334,8 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit, infShow }: EditFormProp
                             process: {
                               url: '/get/house/modifier',
                               method: 'POST',
-                              timeout: 120000
+                              timeout: 120000,
+                              withCredentials:true
                             }
                           }}
                           name="files" /* sets the file input name, it's filepond by default */
