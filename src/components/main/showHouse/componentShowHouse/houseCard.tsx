@@ -168,7 +168,7 @@ const HouseCard = ({
           <motion.button
             variants={variants}
             transition={{ type: 'spring', duration: 0.3 }}
-            className={`absolute w-[4rem] h-[4rem] transition-all bg-white
+            className={`absolute w-[160px] h-[4rem] transition-all bg-white
                 left-3 bottom-3  rounded-full overflow-hidden shadow-2xl flex
                 laptop:hidden desktop:hidden z-20
                 ${infShow === 'authListHouse' ? '' : 'hidden'}`}
