@@ -60,8 +60,8 @@ const createHouseDataDefault: createHouseData = {
     HouseId: '',
     IsFavorite: false,
     JudicalId: '',
-    NumsOfBath: 0, //
-    NumsOfBed: 0, //
+    NumsOfBath: 1, //
+    NumsOfBed: 1, //
     Orientation: '',
     placeOffer: [], //
     PostBy: '', //
@@ -106,8 +106,8 @@ const createHouseDataDefault: createHouseData = {
     HouseId: '',
     IsFavorite: false,
     JudicalId: '',
-    NumsOfBath: 0, //
-    NumsOfBed: 0, //
+    NumsOfBath: 1, //
+    NumsOfBed: 1, //
     Orientation: '',
     placeOffer: [], //
     PostBy: '', //

@@ -142,7 +142,7 @@ const HouseProperties = ({ }: HousePropertiesProps) => {
                         value={createHouseForm?.Price}
                         className="m-auto "
                         min={10}
-                        max={7000}
+                        max={500000}
                         trackStyle={{ backgroundColor: 'black', height: 2 }}
                         railStyle={{ height: 2 }}
                         handleStyle={{
