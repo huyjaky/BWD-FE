@@ -9,7 +9,7 @@ import { userAccContext } from '@/contexts/userAcc';
 import { NextPageWithLayout } from '@/models/layoutprops';
 import { userAcc } from '@/models/userAcc';
 import { initializeSSR } from 'bing-maps-loader';
-import { AnimatePresence, Variants, motion, useElementScroll } from 'framer-motion';
+import { AnimatePresence, Variants, motion, useElementScroll, useScroll, useTransform } from 'framer-motion';
 import { GetServerSideProps, GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { getServerSession } from 'next-auth';
 import { Montserrat } from 'next/font/google';
@@ -82,8 +82,32 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
   useEffect(() => { }, [isFilter]);
   initializeSSR();
 
+
+  const { scrollYProgress } = useScroll();
+  const convert = useTransform(scrollYProgress, [0, .7], [1, 5]);
+
   return (
     <>
+      <div className='fixed top-[80px] left-0 w-screen h-[100vh] '>
+        <CarouselMain />
+      </div>
+
+      <div className='fixed top-[80px] left-0 w-screen h-screen'>
+        <div className='w-full h-full relative'>
+          <motion.div className={`w-[36rem] h-[calc(100vh-100px)] bottom-0 left-[calc(50%-18rem-100vh)]
+            bg-transparent absolute rounded-t-full box-content border-[100vh] border-b-0
+            origin-bottom
+            `} style={{ scale: convert }}>
+
+            <div className='w-full h-full rounded-t-full overflow-hidden
+            border-[10px] border-emerald-300'>
+
+            </div>
+
+          </motion.div>
+        </div>
+      </div>
+
       <motion.main
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -92,44 +116,17 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
         id="root"
       >
         <AnimatePresence initial={false}>
-          <HeaderMain keyMapBing={keyMapBing}/>
+          <HeaderMain keyMapBing={keyMapBing} />
         </AnimatePresence>
         <motion.div>
           <TypeHouse />
         </motion.div>
 
-        <figure className='w-full h-fit'>
-          <div className='w-full h-[calc(100vh-40vh)] overflow-hidden relative'>
-            <div className='absolute top-0 left-0 w-full h-full  z-10
-            p-7 rounded-xl
-            '>
+        <div className='w-full h-fit'>
+          <div className='w-full h-[300vh] overflow-hidden relative '>
 
-              <div className='w-full h-full flex'>
-                <div className='m-auto text-[#ef5c76]  bg-[rgba(253,245,244,.8)] p-3 rounded-lg'>
-                  <motion.div
-                    variants={staggerContainer(null, null)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: false, amount: 0.25 }}
-                    className={` mx-auto flex-col `}
-                  >
-                    <AnimateTitle
-                      title={'Welcome to Olympus'}
-                      textStyles=" w-full h-fit "
-                    />
-
-                  </motion.div>
-                </div>
-
-              </div>
-              {/* <div className='w-full h-full absolute
-              block content-none blur-md bg-[rgba(253,245,244,.8)]
-              '></div> */}
-
-            </div>
-            <CarouselMain />
           </div>
-        </figure>
+        </div>
 
         <div
           className="w-full h-fit px-[5rem] box-border

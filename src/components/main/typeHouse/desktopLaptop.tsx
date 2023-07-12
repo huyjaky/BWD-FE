@@ -48,10 +48,10 @@ const DesktopLaptop = () => {
   }, []);
 
   return (
-    <div className="fixed top-[calc(50vh-230px+2.4rem)] left-0 z-[15]">
+    <div className="fixed top-[calc(50vh-150px+2.4rem)] left-0 z-[15]">
       <motion.div
         className="w-[3rem] h-fit
-    rounded-r-2xl border-2 border-slate-500 border-l-0 bg-white z-10 overflow-hidden
+    rounded-r-2xl bg-white z-10 overflow-hidden
     "
       >
         <motion.div className="w-full h-fit" ref={mainDivRef}>
@@ -75,7 +75,6 @@ const DesktopLaptop = () => {
                       document.body.style.overflow = 'hidden';
                     }
                   }}
-                  className="border-b-2 border-slate-700"
                 >
                   <motion.div className="w-full h-fit">{item.icon}</motion.div>
                 </motion.div>
