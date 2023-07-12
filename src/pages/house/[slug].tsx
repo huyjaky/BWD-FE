@@ -18,7 +18,8 @@ import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { Montserrat } from 'next/font/google';
 import { useContext, useEffect } from 'react';
 import { BiMenu } from 'react-icons/bi';
-
+import https from 'https'
+import fetch from 'node-fetch';
 interface HouseDetailProps {
   houseDetail: house_;
   keyMapBing: string;
@@ -41,8 +42,8 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
     document.body.style.overflow = 'hidden';
   };
   initializeSSR();
-  useEffect(()=>{
-    window.scrollTo(0,0);
+  useEffect(() => {
+    window.scrollTo(0, 0);
 
   }, [])
 
@@ -51,7 +52,7 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
       <div className="w-full h-fit">
         <main className={`${monsterrat.className} relative box-border`} id="root">
           <AnimatePresence initial={false}>
-            <HeaderMain keyMapBing=''/>
+            <HeaderMain keyMapBing='' />
           </AnimatePresence>
 
           <div
@@ -78,7 +79,7 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
             <div className="w-full h-fit mt-10">
               <div className="w-full h-fit flex box-border mobile:flex-col">
                 <Host
-                houseDetail={houseDetail}
+                  houseDetail={houseDetail}
                   description={houseDetail.Description}
                   link={link}
                   userAcc={houseDetail.useracc}
@@ -111,9 +112,20 @@ HouseDetail.Layout = AuthWithAnimate;
 export const getStaticPaths: GetStaticPaths = async () => {
   const link = process.env.NEXTAUTH_URL;
   initializeSSR();
+
+  const agent = new https.Agent({
+    rejectUnauthorized: false,
+  });
+
+  const options = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+    agent
+  }
+
   if (cachedHouseDetail.length == 0) {
-    const slug = await fetch(`${link}/api/get/house/page`);
-    cachedHouseDetail = await slug.json();
+    const slug = await fetch(`${link}/api/get/house/page`, options);
+    cachedHouseDetail = await slug.json() as house_[];
   }
 
   const paths = cachedHouseDetail.map((house: house_) => ({ params: { slug: house.HouseId } }));
@@ -126,10 +138,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
   initializeSSR();
   const link = process.env.NEXTAUTH_URL;
-  if (cachedHouseDetail.length == 0) {
-    const slug = await fetch(`${link}/api/get/house/page`);
-    cachedHouseDetail = await slug.json();
+
+  const agent = new https.Agent({
+    rejectUnauthorized: false,
+  });
+
+  const options = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+    agent
   }
+
+  if (cachedHouseDetail.length == 0) {
+    const slug = await fetch(`${link}/api/get/house/page`, options);
+    cachedHouseDetail = await slug.json() as house_[];
+  }
+
   const houseDetailData = cachedHouseDetail.find((house: house_) => house.HouseId === params?.slug);
   const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
   return {
