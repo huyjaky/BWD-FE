@@ -1,9 +1,12 @@
 import { ExtendedSession, ExtendedToken } from '@/types';
+import axios from 'axios';
+import { Agent } from 'https';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import NextAuth, { Account, CallbacksOptions, NextAuthOptions, User } from 'next-auth';
 import { AdapterUser } from 'next-auth/adapters';
 import { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import https from 'https'
 
 // export default async function auth(req: NextApiRequest, res: NextApiResponse) {
 //   // Do whatever you want here, before the request is passed down to `NextAuth`
@@ -53,14 +56,22 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 //       })
 //     ]
 //   });
-// }
+//}
 
 const refreshToken = async (token: JWT) => {
-  const accessToken = await fetch(process.env.API_URL_AUTH + '/api/refresh', {
+  const agent = new https.Agent({
+    rejectUnauthorized: false,
+  });
+
+  const options = {
     method: 'POST',
     body: JSON.stringify({ refreshToken: token.token.refreshToken }),
-    headers: { 'Content-Type': 'application/json' }
-  });
+    headers: { 'Content-Type': 'application/json' },
+    agent
+  }
+
+  const accessToken = await fetch(process.env.API_URL_AUTH + '/api/refresh', options);
+
   const token_: ExtendedToken = await accessToken.json();
   if (token_.userAcc) {
     token.token.accessToken = token_.token.accessToken;
@@ -108,16 +119,23 @@ export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'Credentials',
+
       credentials: {
         username: { label: 'Username', type: 'text' },
         password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials, req) {
-        const accessToken = await fetch(process.env.API_URL_AUTH + '/api/login', {
+        const agent = new https.Agent({
+          rejectUnauthorized: false,
+        });
+        const options = {
           method: 'POST',
           body: JSON.stringify(credentials),
-          headers: { 'Content-Type': 'application/json' }
-        });
+          headers: { 'Content-Type': 'application/json' },
+          agent
+        }
+
+        const accessToken = await fetch(process.env.API_URL_AUTH + '/api/login', options);
         const token = await accessToken.json();
 
         if (token.userAcc) {
