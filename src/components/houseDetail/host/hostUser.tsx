@@ -48,9 +48,7 @@ const HostUser = ({ imgPath, userName, gmail, description }: HostUserProps) => {
             className="w-[7.5rem] h-[7.5rem] rounded-full"
           />
           <span className="font-semibold text-[2rem]">{userName}</span>
-          <div className='w-full h-fit text-justify text-[1rem]'>
-            {description}
-          </div>
+
           <br />
         </div>
       </motion.div>

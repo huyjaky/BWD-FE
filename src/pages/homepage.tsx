@@ -22,6 +22,7 @@ import { useSession } from 'next-auth/react';
 import CarouselMain from '@/components/main/carousel/carouselMain';
 import AnimateTitle from '@/components/main/showHouse/animateTitle';
 import { staggerContainer } from '@/utils/motion';
+import TabletMobile from '@/components/main/typeHouse/tabletMobile';
 
 
 
@@ -89,18 +90,24 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
   return (
     <>
       <div className='fixed top-[80px] left-0 w-screen h-[100vh] '>
-        <CarouselMain />
+        <div className='w-full h-full relative' >
+          <CarouselMain />
+
+          <div className='absolute w-full h-full flex bg-mask z-30 top-0 left-0'>
+
+          </div>
+        </div>
       </div>
 
       <div className='fixed top-[80px] left-0 w-screen h-screen'>
         <div className='w-full h-full relative'>
           <motion.div className={`w-[36rem] h-[calc(100vh-100px)] bottom-0 left-[calc(50%-18rem-100vh)]
             bg-transparent absolute rounded-t-full box-content border-[100vh] border-b-0
-            origin-bottom
+            origin-bottom border-[#fdf5f4]
             `} style={{ scale: convert }}>
 
             <div className='w-full h-full rounded-t-full overflow-hidden
-            border-[10px] border-emerald-300'>
+            border-[25px] border-[#ee6457] border-b-0 flex'>
 
             </div>
 
@@ -133,8 +140,12 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
         tablet:px-0 mobile:px-0
         "
         >
+          <div className="desktop:hidden laptop:hidden mt-6">
+            <TabletMobile />
+          </div>
+
           {isFilter != 'main' ? (
-            <motion.div variants={variants} animate="show">
+            <motion.div variants={variants} animate="show" className=' h-fit bg-[#f0efe9] m-auto rounded-2xl mb-[100px]'>
               <ShowHouse
                 infShow={
                   isFilter === 'houseForRent' || isFilter === 'houseForSale'

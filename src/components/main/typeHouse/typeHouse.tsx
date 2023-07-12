@@ -14,9 +14,7 @@ const TypeHouse = () => {
         <DesktopLaptop />
       </div>
 
-      <div className="desktop:hidden laptop:hidden mt-6">
-        <TabletMobile />
-      </div>
+
     </>
   );
 };

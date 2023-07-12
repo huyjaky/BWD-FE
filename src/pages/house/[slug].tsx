@@ -59,7 +59,7 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
           tablet:w-screen mobile:w-screen mobile:px-4
           box-border m-auto"
           >
-            <TitleHouse title={houseDetail.Title} address={houseDetail.address} />
+            <TitleHouse title={houseDetail?.Title} address={houseDetail.address} />
 
             <Picture arrImg={houseDetail.arrImg} />
             <div className="w-full h-[32rem] laptop:hidden desktop:hidden flex justify-center box-border relative z-10">

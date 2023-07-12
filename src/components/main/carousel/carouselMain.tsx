@@ -17,10 +17,10 @@ const CarouselMain = () => {
     <>
       <Swiper
         loop={true}
-        // autoplay={{
-        //   delay: 3000,
-        //   disableOnInteraction: false
-        // }}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false
+        }}
         pagination={{ el: '.main-pagination', clickable: true }}
         modules={[Pagination , Autoplay ]} className="w-full h-screen justify-center"
         style={{width: '100vw'}}

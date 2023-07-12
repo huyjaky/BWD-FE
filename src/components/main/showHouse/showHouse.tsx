@@ -314,7 +314,7 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
                     ? 'Whislist'
                     : ''
           }
-          textStyles=" w-full h-fit"
+          textStyles=" w-full h-fit "
         />
 
         {/* </motion.div> */}

@@ -29,6 +29,16 @@ const Host = ({ userAcc, placeOffer, link, description, houseDetail }: HostProps
 
     <div className="mt-10 border-t-2 border-slate-800">
       <div className="w-full mb-5 mt-5">
+        <span className="text-[2rem]">Description</span>
+      </div>
+      <div className="w-full ">
+        {description}
+      </div>
+
+    </div>
+
+    <div className="mt-10 border-t-2 border-slate-800">
+      <div className="w-full mb-5 mt-5">
         <span className="text-[2rem]">What this Amenities</span>
       </div>
       <div className="w-full grid grid-cols-2">
@@ -44,7 +54,7 @@ const Host = ({ userAcc, placeOffer, link, description, houseDetail }: HostProps
                 className="w-full h-fit flex items-center cursor-default"
                 key={index}
               >
-                <span className="text-[2rem] text-ellipsis overflow-hidden whitespace-nowrap">
+                <span className="text-[1.5rem] text-ellipsis overflow-hidden whitespace-nowrap">
                   {item.PlaceOffer}
                 </span>
               </motion.div>
