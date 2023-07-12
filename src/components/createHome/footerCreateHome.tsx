@@ -28,6 +28,7 @@ const FooterCreateHome = () => {
             onClick={(event) => {
                 setStepCreate(stepCreate > 5 ? stepCreate : stepCreate + 1)
             }}
+            disabled={stepCreate === 5}
             className="h-full w-fit px-7 bg-red-500 rounded-xl">
             <span className=" font-semibold text-[1.5rem] rounded-xl  text-white
             w-full h-full
