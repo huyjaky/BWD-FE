@@ -101,6 +101,12 @@ const DesktopLaptop = () => {
                     setKeyClickTypehouse(index);
 
                     window.scrollTo(0, 0);
+
+                    const element = document.getElementById('slideShowHouse');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+
                     if (item.title === 'House for rent') {
                       const temp = filterForm.typeHouse.filter(
                         (item: string) => item != 'HouseForSale'
@@ -141,6 +147,7 @@ const DesktopLaptop = () => {
         className="absolute left-[5.625rem] top-0 w-fit h-full flex flex-col
       z-30 overflow-scroll overflow-x-hidden  overflow-y-hidden pointer-events-non
       "
+
         ref={secondaryDivRef}
       >
         {controlBtn.map((item: { title: string; icon: ReactElement<any, any> }, index: number) => {

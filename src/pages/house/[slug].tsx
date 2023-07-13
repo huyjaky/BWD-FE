@@ -14,16 +14,18 @@ import { house_ } from '@/models/house';
 import { NextPageWithLayout } from '@/models/layoutprops';
 import { initializeSSR } from 'bing-maps-loader';
 import { AnimatePresence } from 'framer-motion';
+import https from 'https';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { Montserrat } from 'next/font/google';
+import { useRouter } from 'next/router';
+import fetch from 'node-fetch';
 import { useContext, useEffect } from 'react';
 import { BiMenu } from 'react-icons/bi';
-import https from 'https'
-import fetch from 'node-fetch';
 interface HouseDetailProps {
   houseDetail: house_;
   keyMapBing: string;
   link: string;
+  keyChatEngine:string,
 }
 const monsterrat = Montserrat({
   subsets: ['latin'],
@@ -34,9 +36,18 @@ const monsterrat = Montserrat({
 const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
   houseDetail,
   keyMapBing,
-  link
+  link,
+  keyChatEngine
 }: HouseDetailProps) => {
   const { setIsShowAllPt } = useContext(IsShowPtContext);
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return (
+      <div className='w-full text-center text-[5rem]'>Loading</div>
+    )
+  }
+
   const handleOnClick = () => {
     setIsShowAllPt(true);
     document.body.style.overflow = 'hidden';
@@ -52,7 +63,7 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
       <div className="w-full h-fit">
         <main className={`${monsterrat.className} relative box-border`} id="root">
           <AnimatePresence initial={false}>
-            <HeaderMain keyMapBing='' />
+            <HeaderMain keyMapBing='' keyChatEngine={keyChatEngine}/>
           </AnimatePresence>
 
           <div
@@ -108,51 +119,38 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
 let cachedHouseDetail: house_[] = [];
 
 HouseDetail.Layout = AuthWithAnimate;
+const agent = new https.Agent({
+  rejectUnauthorized: false,
+});
+
+const options = {
+  method: 'GET',
+  headers: { 'Content-Type': 'application/json' },
+  agent
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const link = process.env.NEXTAUTH_URL;
+  const link = process.env.API_URL_PATH;
   initializeSSR();
 
-  const agent = new https.Agent({
-    rejectUnauthorized: false,
-  });
 
-  const options = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-    agent
-  }
-
-  if (cachedHouseDetail.length == 0) {
-    const slug = await fetch(`${link}/api/get/house/page`, options);
-    cachedHouseDetail = await slug.json() as house_[];
-  }
+  const slug = await fetch(`${link}/api/get/house/page`, options);
+  cachedHouseDetail = await slug.json() as house_[];
 
   const paths = cachedHouseDetail.map((house: house_) => ({ params: { slug: house.HouseId } }));
   return {
     paths,
-    fallback: 'blocking'
+    fallback: true,
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
   initializeSSR();
-  const link = process.env.NEXTAUTH_URL;
+  const link = process.env.API_URL_PATH;
 
-  const agent = new https.Agent({
-    rejectUnauthorized: false,
-  });
-
-  const options = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-    agent
-  }
-
-  if (cachedHouseDetail.length == 0) {
-    const slug = await fetch(`${link}/api/get/house/page`, options);
-    cachedHouseDetail = await slug.json() as house_[];
-  }
+  const keyChatEngine = process.env.KEYCHAT_ENGINE;
+  const slug = await fetch(`${link}/api/get/house/page`, options);
+  cachedHouseDetail = await slug.json() as house_[];
 
   const houseDetailData = cachedHouseDetail.find((house: house_) => house.HouseId === params?.slug);
   const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
@@ -160,9 +158,10 @@ export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsC
     props: {
       houseDetail: houseDetailData,
       keyMapBing: keyMapBing,
-      link: link
+      link: link,
+      keyChatEngine: keyChatEngine
     },
-    revalidate: 60
+    revalidate: 600
   };
 };
 

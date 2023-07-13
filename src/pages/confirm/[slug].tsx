@@ -19,7 +19,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { BiMessageSquareError } from 'react-icons/bi';
 import { GrClose, GrPrevious } from 'react-icons/gr';
 import * as yup from 'yup';
-
+import https from 'https';
+import fetch from 'node-fetch';
 interface ConfirmProps {
   houseDetail: house_;
   keyMapBox: string;
@@ -92,11 +93,12 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
 
   const onSubmit: SubmitHandler<ConfirmSchema> = async (data) => {
     if (Bill.guest.adults === 0) {
-      setMaskGuests(true);
+      // setMaskGuests(true);
+      router.push('/homepage', undefined, {shallow: true});
       return;
     }
     const createSchedule = await schedule.createSchedule({
-      HouseId: houseDetail.HouseId,
+      HouseId: houseDetail?.HouseId,
       UserId: user.UserId,
       PhoneNumber: data.phoneNumber + '',
       Date: Bill.checkInDay,
@@ -115,7 +117,7 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
       }
       router.push(
         {
-          pathname: '/confirm/' + houseDetail.HouseId,
+          pathname: '/confirm/' + houseDetail?.HouseId,
           query: { slug: 'your-slug-value' }
         },
         undefined,
@@ -204,7 +206,7 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
 
               <Link
                 href={{
-                  pathname: `/house/${houseDetail.HouseId}`
+                  pathname: `/house/${houseDetail?.HouseId}`
                 }}
               >
                 <button className="w-full mt-2 bg-red-400 rounded-2xl text-white">
@@ -217,10 +219,10 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
       </AnimatePresence>
 
       <div className={`w-full h-fit box-border flex ${monsterrat.className}`}>
-        <div className="w-[16.25rem] h-fit m-auto mt-5">
+        <div className="w-[calc(100vw-20rem)] h-fit m-auto mt-5 mobile:w-screen">
           {/* header */}
           <div className="w-full h-fit flex items-center ">
-            <Link href={`/house/${houseDetail.HouseId}`}>
+            <Link href={`/house/${houseDetail?.HouseId}`}>
               <motion.button className="w-[3rem] h-[2.4rem]">
                 <GrPrevious className="text-[28px] m-auto" />
               </motion.button>
@@ -285,11 +287,10 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
                 <div
                   className={`w-full h-fit  relative
               after:absolute after:bottom-0 after:w-full after:h-[.25rem]  mt-5
-              after:right-0  rounded-xl ${
-                errors.phoneNumber?.message !== undefined
-                  ? 'after:bg-red-500'
-                  : 'after:bg-slate-800'
-              }
+              after:right-0  rounded-xl ${errors.phoneNumber?.message !== undefined
+                      ? 'after:bg-red-500'
+                      : 'after:bg-slate-800'
+                    }
               `}
                 >
                   <input
@@ -337,18 +338,18 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
               "
                 >
                   <img
-                    // src={'/api/img/path'+houseDetail.arrImg[0].Path}
-                    src={'/api/img/path/'+houseDetail.arrImg[0].Path}
+                    // src={'/api/img/path'+houseDetail?.arrImg[0].Path}
+                    src={'/api/img/path/' + houseDetail?.arrImg[0].Path}
                     alt=""
                     className="w-full h-[18.75rem] rounded-2xl object-cover"
                   />
                   <div className="w-full flex justify-between">
                     <div className="w-fit h-fit flex flex-col">
-                      <span className="font-semibold text-[1rem]">{houseDetail.Title}</span>
-                      <span>{houseDetail.address.formattedAddress}</span>
+                      <span className="font-semibold text-[1rem]">{houseDetail?.Title}</span>
+                      <span>{houseDetail?.address.formattedAddress}</span>
                     </div>
                     <div className="w-fit h-full flex">
-                      <span className="text-[34px] m-auto">&#36;{houseDetail.Price}</span>
+                      <span className="text-[34px] m-auto">&#36;{houseDetail?.Price}</span>
                     </div>
                   </div>
                 </div>
@@ -365,33 +366,41 @@ Confirm.Layout = AuthWithAnimate;
 
 let cachedHouseDetail: house_[] = [];
 
+const agent = new https.Agent({
+  rejectUnauthorized: false,
+});
+
+const options = {
+  method: 'GET',
+  headers: { 'Content-Type': 'application/json' },
+  agent
+}
+
 export const getStaticPaths: GetStaticPaths = async () => {
   const link = process.env.API_URL_PATH;
-  if (cachedHouseDetail.length == 0) {
-    const slug = await fetch(`${link}/api/get/house/page`);
-    cachedHouseDetail = await slug.json();
-  }
+
+  const slug = await fetch(`${link}/api/get/house/page`, options);
+  cachedHouseDetail = await slug.json() as house_[];
 
   const paths = cachedHouseDetail.map((house: house_) => ({ params: { slug: house.HouseId } }));
   return {
     paths,
-    fallback: false
+    fallback: true
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
   const link = process.env.API_URL_PATH;
-  if (cachedHouseDetail.length == 0) {
-    const slug = await fetch(`${link}/api/get/house/page`);
-    cachedHouseDetail = await slug.json();
-  }
+
+  const slug = await fetch(`${link}/api/get/house/page`,options);
+  cachedHouseDetail = await slug.json() as house_[];
 
   const houseDetailData = cachedHouseDetail.find((house: house_) => house.HouseId === params?.slug);
   return {
     props: {
       houseDetail: houseDetailData
     },
-    revalidate: 60
+    revalidate: 600
   };
 };
 

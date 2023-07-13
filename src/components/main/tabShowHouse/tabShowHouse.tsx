@@ -109,7 +109,7 @@ const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
       </AnimatePresence>
 
       <div className="h-fit mt-[4.5rem] tablet:mt-[3rem] mobile:mt-[3rem] relative  bg-[#fffdf8]
-      rounded-xl shadow-2xl
+      rounded-xl shadow-2xl box-border py-4 mb-[5rem]
       ">
 
 

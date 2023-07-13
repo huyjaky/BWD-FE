@@ -9,20 +9,16 @@ import { userAccContext } from '@/contexts/userAcc';
 import { NextPageWithLayout } from '@/models/layoutprops';
 import { userAcc } from '@/models/userAcc';
 import { initializeSSR } from 'bing-maps-loader';
-import { AnimatePresence, Variants, motion, useElementScroll, useScroll, useTransform } from 'framer-motion';
-import { GetServerSideProps, GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
-import { getServerSession } from 'next-auth';
-import { Montserrat } from 'next/font/google';
+import { AnimatePresence, Variants, motion, useScroll, useTransform } from 'framer-motion';
+import { GetServerSideProps } from 'next';
+import { Dancing_Script, Montserrat } from 'next/font/google';
 import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
 // import { authOptions } from './api/auth/[...nextauth]';
-import TabShowHouse from '@/components/main/tabShowHouse/tabShowHouse';
-import { house_ } from '@/models/house';
-import { useSession } from 'next-auth/react';
 import CarouselMain from '@/components/main/carousel/carouselMain';
-import AnimateTitle from '@/components/main/showHouse/animateTitle';
-import { staggerContainer } from '@/utils/motion';
+import TabShowHouse from '@/components/main/tabShowHouse/tabShowHouse';
 import TabletMobile from '@/components/main/typeHouse/tabletMobile';
+import { useSession } from 'next-auth/react';
 
 
 
@@ -31,10 +27,18 @@ const monsterrat = Montserrat({
   weight: ['200', '400', '600', '800'],
   variable: '--font-monsterrat'
 });
+
+const dancingScript = Dancing_Script({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700']
+})
+
+
 interface HomeProps {
   user_: userAcc;
   keyMapBing: string;
   props: any;
+  keyChatEngine:string
 }
 
 const variants: Variants = {
@@ -64,7 +68,7 @@ const variants: Variants = {
 };
 
 initializeSSR();
-const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeProps) => {
+const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing, keyChatEngine }: HomeProps) => {
   const { user, setUser } = useContext(userAccContext);
   const { isFilter } = useContext(getHouseContext);
   const { data: session, status } = useSession();
@@ -94,7 +98,11 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
           <CarouselMain />
 
           <div className='absolute w-full h-full flex bg-mask z-30 top-0 left-0'>
-
+            <div className='m-auto'>
+              <span className={`${dancingScript.className} text-[50px]
+                font-extrabold text-white
+                `}>House is where you return</span>
+            </div>
           </div>
         </div>
       </div>
@@ -123,7 +131,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
         id="root"
       >
         <AnimatePresence initial={false}>
-          <HeaderMain keyMapBing={keyMapBing} />
+          <HeaderMain keyMapBing={keyMapBing} keyChatEngine={keyChatEngine}/>
         </AnimatePresence>
         <motion.div>
           <TypeHouse />
@@ -138,7 +146,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing }: HomeP
         <div
           className="w-full h-fit px-[5rem] box-border
         tablet:px-0 mobile:px-0
-        "
+        " id='slideShowHouse'
         >
           <div className="desktop:hidden laptop:hidden mt-6">
             <TabletMobile />
@@ -177,10 +185,12 @@ export default Home;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
+  const keyChatEngine = process.env.KEYCHAT_ENGINE;
   initializeSSR();
   return {
     props: {
-      keyMapBing: keyMapBing
+      keyMapBing: keyMapBing,
+      keyChatEngine: keyChatEngine
     }
   };
 };

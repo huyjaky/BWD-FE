@@ -249,3 +249,24 @@
   backdrop-filter: blur(1rem);
   transform:translate3d(0,0,0);
 }
+
+#ce-ice-breaker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#ce-send-message-button {
+  display: flex;
+  justify-content: center;
+}
+
+
+.send-icon {
+  margin: auto;
+  margin-right: 0;
+}
+
+#msg-textarea {
+  border:  #ff0000 solid 2px;
+}

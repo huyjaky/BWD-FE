@@ -9,9 +9,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import nProgress from 'nprogress';
 import { IoCloseOutline } from 'react-icons/io5';
+import axiosClient from '@/api-client/axiosClient';
+import axios from 'axios';
 
 interface LoginPanelProps {
   children: ReactNode;
+  keyChatEngine: string;
 }
 
 const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
@@ -25,7 +28,7 @@ const schema = yup
 
 type LoginInterface = yup.InferType<typeof schema>;
 
-const LoginPanel = ({ children }: LoginPanelProps) => {
+const LoginPanel = ({ children, keyChatEngine }: LoginPanelProps) => {
   const { data: session } = useSession();
   const { user, setUser } = useContext(userAccContext);
   const { setIsLoginClick } = useContext(selectPopoverContext);
@@ -97,7 +100,9 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
 
     if (login_?.ok) {
       setUser({ ...user, ...session?.userAcc });
-      setIsLoginClick(false);
+      setIsLoginClick(session?.userAcc?.UserName);
+     
+
     }
     setIsFilter('main');
     if (router.asPath === '/login') {

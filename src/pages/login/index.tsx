@@ -7,13 +7,17 @@ import { GetServerSideProps } from 'next';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]';
 
-const Login: NextPageWithLayout = () => {
+interface LoginProps{
+  keyChatEngine: string
+}
+
+const Login: NextPageWithLayout<LoginProps> = ({keyChatEngine}: LoginProps) => {
   return (
     <main>
       <HeaderLogin />
       <div className="w-full h-[calc(100vh-5rem)] ">
         <div className="w-full h-full flex">
-          <LoginPanel>
+          <LoginPanel keyChatEngine={keyChatEngine}>
             <div></div>
           </LoginPanel>
         </div>
@@ -27,6 +31,7 @@ Login.Layout = EmptyLayout;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getServerSession(req, res, authOptions);
+  const keyChatEngine = process.env.KEYCHAT_ENGINE;
 
   if (session?.userAcc) {
     res.setHeader('location', '/');
@@ -34,7 +39,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     res.end();
     return { props: {} };
   }
-  return { props: {} };
+  return { props: {
+    keyChatEngine: keyChatEngine
+  } };
 };
 
 export default Login;

@@ -22,10 +22,11 @@ const variants: Variants = {
 };
 
 interface HeaderMainProps {
-  keyMapBing: string
+  keyMapBing: string,
+  keyChatEngine: string
 }
 
-const HeaderMain = ({keyMapBing}: HeaderMainProps) => {
+const HeaderMain = ({keyMapBing, keyChatEngine}: HeaderMainProps) => {
   const { setPlaceList } = useContext(placeListContext);
   const { isLoginClick, setIsLoginClick } = useContext(selectPopoverContext);
   const { isClickOutSide, setIsClickOutSide, isShowHeader, setIsShowHeader } =
@@ -111,7 +112,7 @@ const HeaderMain = ({keyMapBing}: HeaderMainProps) => {
       >
         <div className="w-full h-full flex">
           <div className="w-fit  h-fit bg-white m-auto rounded-3xl" ref={loginPanel}>
-            <LoginPanel>
+            <LoginPanel keyChatEngine={keyChatEngine}>
               <div></div>
             </LoginPanel>
           </div>

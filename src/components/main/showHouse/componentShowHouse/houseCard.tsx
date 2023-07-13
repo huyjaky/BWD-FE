@@ -118,7 +118,7 @@ const HouseCard = ({
 
             }}
             className={`absolute w-[4rem] h-[4rem] transition-all
-                left-3 bottom-3 z-30 rounded-full overflow-hidden shadow-2xl ${infShow === 'authListHouse' ? 'hidden' : ''
+                left-3 bottom-3 z-[15] rounded-full overflow-hidden shadow-2xl ${infShow === 'authListHouse' ? 'hidden' : ''
               }`}
           >
             {item.useracc.Image != undefined ? (

@@ -1,4 +1,9 @@
+import { userAccContext } from '@/contexts/userAcc';
+import axios from 'axios';
 import { Variants, motion } from 'framer-motion';
+import { useRouter } from 'next/router';
+import { useContext } from 'react';
+import { AiOutlineMessage } from 'react-icons/ai';
 import { TbBrandGmail } from 'react-icons/tb';
 
 interface HostUserProps {
@@ -32,6 +37,23 @@ const variants: Variants = {
 };
 
 const HostUser = ({ imgPath, userName, gmail, description }: HostUserProps) => {
+  const router = useRouter();
+  const { user } = useContext(userAccContext);
+
+
+  const ChangeRouter = async () => {
+    if (user.UserName === userName) return;
+    await axios.put('https://api.chatengine.io/chats/',
+      {
+        username: [user.UserName, userName],
+        title: "Chat with " + userName,
+        is_direct_chat: true
+      },
+      { headers: { "Private-key": '659aed62-8471-4685-beb3-d0209645877a' } }
+    )
+    router.push('/chats', undefined, { shallow: true });
+  }
+
   return (
     <motion.div variants={variants} whileInView="inView" className="w-fit h-fit m-auto ">
       {/* host card */}
@@ -48,8 +70,18 @@ const HostUser = ({ imgPath, userName, gmail, description }: HostUserProps) => {
             className="w-[7.5rem] h-[7.5rem] rounded-full"
           />
           <span className="font-semibold text-[2rem]">{userName}</span>
-
           <br />
+          {userName === user.UserName ? <></> :
+            <motion.button onClick={ChangeRouter}
+              whileHover={{ backgroundColor: 'red', color: 'white' }}
+              transition={{ duration: .5, type: 'tween' }}
+              className='w-full h-[3rem] bg-emerald-300 rounded-2xl flex'>
+              <AiOutlineMessage className='text-[2rem] m-auto mr-0' />
+              <span className=' font-semibold m-auto ml-0 text-[1.5rem]'>
+                Chat
+              </span>
+            </motion.button>
+          }
         </div>
       </motion.div>
       <div className="flex flex-col w-full h-fit items-center text-[2rem] divide-y-2 divide-red-500 mt-5">
