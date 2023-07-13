@@ -58,7 +58,7 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
   }, [isShowAllPt]);
 
   const isEmpty = () => {
-    const emptyObj:filterForm = {
+    const emptyObj: filterForm = {
       maxPrice: 250,
       minPrice: 10,
       beds: 0,
@@ -85,8 +85,8 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
     const emptyObjJson = JSON.stringify(emptyObj);
     const filterFormJson = JSON.stringify(filterForm);
     const emptyAddressJson = JSON.stringify(emptyAddress);
-    const addressJson = JSON.stringify(address);
-    console.log(filterForm.orientation);
+    const addressJson = JSON.stringify(address.address);
+
 
     if (emptyObjJson === filterFormJson && emptyAddressJson === addressJson) return true;
     return false;
@@ -96,6 +96,11 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
     setIsClickOutSide(false);
     document.body.style.overflow = 'scroll';
     document.body.style.overflowX = 'hidden';
+
+    const element = document.getElementById('slideShowHouse');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
 
     // neu du lieu co ton tai thi la fetch lai du lieu neu khong thi bo qua
     if (!isEmpty()) {

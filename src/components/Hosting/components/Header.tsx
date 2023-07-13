@@ -18,6 +18,7 @@ function Header(): JSX.Element {
     router.push('/createhouse');
   };
 
+
   const [active, setActive] = useState('');
 
   const [activeMenu, setActiveMenu] = useState(false);
@@ -49,9 +50,8 @@ function Header(): JSX.Element {
             <li className="relative">
               <button
                 onClick={() => handleActive('Today')}
-                className={`py-[.6rem] px-[1rem] rounded-[2rem] hover:bg-[#F7F7F7] ${
-                  active === 'Today' ? 'text-black' : 'text-[#717171]'
-                }
+                className={`py-[.6rem] px-[1rem] rounded-[2rem] hover:bg-[#F7F7F7] ${active === 'Today' ? 'text-black' : 'text-[#717171]'
+                  }
                         before:absolute before:content-[""] before:w-0 before:h-[.2rem] before:bg-black before:left-4 before:bottom-2
                         before::ease-in-out before:duration-500
                         hover:before:w-[60%]
@@ -64,10 +64,12 @@ function Header(): JSX.Element {
             </li>
             <li className="relative">
               <button
-                onClick={() => handleActive('Inbox')}
-                className={`py-[.6rem] px-[1rem] rounded-[2rem] hover:bg-[#F7F7F7] ${
-                  active === 'Inbox' ? 'text-black' : 'text-[#717171]'
-                }
+                onClick={() => {
+                  router.push('/chats', undefined, { shallow: true });
+                  handleActive('Inbox')
+                }}
+                className={`py-[.6rem] px-[1rem] rounded-[2rem] hover:bg-[#F7F7F7] ${active === 'Inbox' ? 'text-black' : 'text-[#717171]'
+                  }
                         before:absolute before:content-[""] before:w-0 before:h-[.2rem] before:bg-black before:left-4 before:bottom-2
                         before::ease-in-out before:duration-500
                         hover:before:w-[60%]
@@ -79,9 +81,8 @@ function Header(): JSX.Element {
             <li className="relative">
               <button
                 onClick={() => handleActive('Calendar')}
-                className={`py-[.6rem] px-[1rem] rounded-[2rem] hover:bg-[#F7F7F7] ${
-                  active === 'Calendar' ? 'text-black' : 'text-[#717171]'
-                }
+                className={`py-[.6rem] px-[1rem] rounded-[2rem] hover:bg-[#F7F7F7] ${active === 'Calendar' ? 'text-black' : 'text-[#717171]'
+                  }
                         before:absolute before:content-[""] before:w-0 before:h-[.2rem] before:bg-black before:left-4 before:bottom-2
                         before::ease-in-out before:duration-500
                         hover:before:w-[60%]
@@ -93,9 +94,8 @@ function Header(): JSX.Element {
             <li className="relative">
               <button
                 onClick={() => handleMenu()}
-                className={`py-[.6rem] px-[1rem] rounded-[2rem] hover:bg-[#F7F7F7] ${
-                  activeMenu ? 'text-black' : 'text-[#717171]'
-                } flex items-center
+                className={`py-[.6rem] px-[1rem] rounded-[2rem] hover:bg-[#F7F7F7] ${activeMenu ? 'text-black' : 'text-[#717171]'
+                  } flex items-center
                                 before:absolute before:content-[""] before:w-0 before:h-[.2rem] before:bg-black before:left-4 before:bottom-2
                                 before:ease-in-out before:duration-500
                                 hover:before:w-[60%]
@@ -109,9 +109,8 @@ function Header(): JSX.Element {
       </div>
       <div
         className={`w-[12.5rem] absolute right-[35%] top-[11%] bg-[rgba(255,255,255,.25)]
-                shadow-shadowHeadhost  rounded-[1rem] mobile:hidden ${
-                  toggleMenu ? 'h-[2.4rem] ease-in-out duration-500' : 'h-0'
-                }  `}
+                shadow-shadowHeadhost  rounded-[1rem] mobile:hidden ${toggleMenu ? 'h-[2.4rem] ease-in-out duration-500' : 'h-0'
+          }  `}
       >
         {toggleMenu && (
           <motion.ul className="h-full">
@@ -125,9 +124,8 @@ function Header(): JSX.Element {
             >
               <button
                 onClick={handleCreatehome}
-                className={`w-[100%] h-[100%] p-[20px] text-start flex justify-between items-center rounded-[1rem] hover:bg-[#F7F7F7] ${
-                  active === 'Create a new listing' ? 'text-black' : 'text-[#717171]'
-                } flex items-center justify-center
+                className={`w-[100%] h-[100%] p-[20px] text-start flex justify-between items-center rounded-[1rem] hover:bg-[#F7F7F7] ${active === 'Create a new listing' ? 'text-black' : 'text-[#717171]'
+                  } flex items-center justify-center
                             `}
               >
                 Create House{' '}

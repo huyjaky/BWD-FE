@@ -49,7 +49,17 @@ const Chats = () => {
     console.log(user);
   }, [user]);
 
-  if (!showChat || status === 'unauthenticated') return <div />;
+  if (!showChat || status === 'unauthenticated') return (
+    <>
+      <HeaderForm />
+      <div className="bg-slate-700">
+        <div className="w-screen h-screen box-border scale-90
+shadow-xl rounded-xl overflow-hidden">
+          <div className="w-screen h-screen"></div>
+        </div>
+      </div>
+    </>
+  );
 
   return (
     <>
