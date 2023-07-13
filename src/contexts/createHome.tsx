@@ -54,14 +54,15 @@ const initHouseData: houseDataType = {
     countryRegion: '',
     locality: '',
     adminDistrict: '',
-    countryRegionIso2: '',
+    countryRegionISO2: '',
     postalCode: '',
     addressLine: '',
     streetName: '',
     formattedAddress: '',
     latitude: 0,
     longitude: 0,
-    title: ''
+    title: '',
+    district: ''
   },
   addressConfirmation: {
     country: '',

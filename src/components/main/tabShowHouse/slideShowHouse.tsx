@@ -178,7 +178,7 @@ const SlideShowHouse = ({
                       isEdit={null} setIsEdit={null}
                       key={index}
                       isRemoveReq={undefined}
-                      setIsRemoveReq={()=>{}}
+                      setIsRemoveReq={() => { }}
                     />
                   </SwiperSlide>
                 );
@@ -200,12 +200,17 @@ const SlideShowHouse = ({
         </div>
       </div>
       <motion.button
-        whileHover={{backgroundColor: 'rgba(239,68,68,1)', color: 'white'}}
+        whileHover={{ backgroundColor: 'rgba(239,68,68,1)', color: 'white' }}
         className="w-[80%] m-auto h-[4.5rem] flex border-2 border-red-500
       rounded-2xl transition-all duration-500 mb-[6.25rem]
       "
         onClick={(event) => {
-          window.scrollTo(0,0);
+
+          const element = document.getElementById('slideShowHouse');
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth'});
+          }
+
           if (infShow === 'houseForRent') {
             const temp = filterForm.typeHouse.filter((item: string) => item != 'HouseForSale');
             temp.push('HouseForRent');

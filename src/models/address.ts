@@ -2,14 +2,15 @@ export interface address {
   countryRegion: string;
   locality: string;
   adminDistrict: string;
-  countryRegionIso2: string;
+  countryRegionISO2: string;
   postalCode: string;
   addressLine: string;
   streetName: string;
   formattedAddress: string;
   latitude: number;
   longitude: number;
-  title:string
+  title:string;
+  district:string;
 }
 
 export interface addressProps {

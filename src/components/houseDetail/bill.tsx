@@ -58,6 +58,7 @@ const Bill = ({ houseDetail }: BillProps) => {
                 minDate={new Date()}
                 // moveRangeOnFirstSelection={false}
                 date={Bill.checkInDay}
+                
                 color="rgb(239 68 68)"
                 className=" font-bold m-auto text-3xl"
               />

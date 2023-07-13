@@ -100,7 +100,6 @@ const DesktopLaptop = () => {
                   onClick={(event) => {
                     setKeyClickTypehouse(index);
 
-                    window.scrollTo(0, 0);
 
                     const element = document.getElementById('slideShowHouse');
                     if (element) {

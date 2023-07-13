@@ -1,6 +1,7 @@
 import { filterContext } from "@/contexts/filter";
 import { selectPlaceContext } from "@/contexts/selectPlace";
 import { whenLoaded } from "bing-maps-loader";
+import { title } from "process";
 import { useContext, useEffect } from "react";
 
 interface MapFilterProps {
@@ -41,10 +42,26 @@ const MapFilter = ({ keyMapBing }: MapFilterProps) => {
               map.entities.push(pushpin);
 
               console.log(suggestionResult);
+              const addressSuggest = suggestionResult?.address
+              const locationSuggest = suggestionResult?.location
               setAddress({
                 ...address,
-                address: { ...address.address, ...suggestionResult?.address, ...suggestionResult?.location }
+                address: {
+                  addressLine: addressSuggest.addressLine + '',
+                  adminDistrict: addressSuggest.adminDistrict + '',
+                  countryRegion: addressSuggest.countryRegion + '',
+                  countryRegionISO2: addressSuggest.countryRegionISO2 + '',
+                  district:  addressSuggest.district + '',
+                  formattedAddress: addressSuggest.formattedAddress + '',
+                  locality: addressSuggest.locality + '',
+                  postalCode: addressSuggest.postalCode + '',
+                  latitude: locationSuggest.latitude ,
+                  longitude: locationSuggest.longitude,
+                  title: suggestionResult?.title + '',
+                  streetName: ''
+                }
               });
+
             });
           }
         });

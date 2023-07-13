@@ -73,14 +73,15 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
       countryRegion: '',
       locality: '',
       adminDistrict: '',
-      countryRegionIso2: '',
+      countryRegionISO2: '',
       postalCode: '',
       addressLine: '',
       streetName: '',
       formattedAddress: '',
       latitude: 0,
       longitude: 0,
-      title: ''
+      title: '',
+      district: ''
     };
     const emptyObjJson = JSON.stringify(emptyObj);
     const filterFormJson = JSON.stringify(filterForm);
@@ -112,7 +113,7 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
       return;
     }
   };
-  useEffect(() => { console.log(filterForm); }, [filterForm])
+  useEffect(() => { console.log(address); }, [filterForm, address])
 
   return (
     <>
@@ -224,17 +225,18 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
                     countryRegion: '',
                     locality: '',
                     adminDistrict: '',
-                    countryRegionIso2: '',
+                    countryRegionISO2: '',
                     postalCode: '',
                     addressLine: '',
                     streetName: '',
                     formattedAddress: '',
                     latitude: 0,
                     longitude: 0,
-                    title: ''
+                    title: '',
+                    district: ''
                   };
                   setFilterForm(filterFormTemp);
-                  setAddress({ ...address, address: { ...address.address, ...addressTemp } });
+                  setAddress({ ...address, address: {...addressTemp} });
                 }}
               >
                 Clear all

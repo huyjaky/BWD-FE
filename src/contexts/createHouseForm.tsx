@@ -25,24 +25,26 @@ const createHouseDataDefault: createHouseData = {
     countryRegion: '',
     locality: '',
     adminDistrict: '',
-    countryRegionIso2: '',
+    countryRegionISO2: '',
     postalCode: '',
     addressLine: '',
     streetName: '',
     formattedAddress: '',
     latitude: 0,
     longitude: 0,
-    title: ''
+    title: '',
+    district: ''
   },
   setAddress: ()=>{},
   typeHouseId: [],
   setTypeHouseId: () => { },
   createHouseForm: {
     address: {
+      district: '',
       countryRegion: '',
       locality: '',
       adminDistrict: '',
-      countryRegionIso2: '',
+      countryRegionISO2: '',
       postalCode: '',
       addressLine: '',
       streetName: '',
@@ -85,10 +87,11 @@ const createHouseDataDefault: createHouseData = {
   },
   emptyCreateHouseForm: {
     address: {
+      district: '',
       countryRegion: '',
       locality: '',
       adminDistrict: '',
-      countryRegionIso2: '',
+      countryRegionISO2: '',
       postalCode: '',
       addressLine: '',
       streetName: '',
