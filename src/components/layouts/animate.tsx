@@ -10,7 +10,7 @@ const Animate = ({ children }: AnimateProps) => {
   const router = useRouter();
   return (
     <div>
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" >
         <motion.div
           key={router.route}
           initial="initialState"

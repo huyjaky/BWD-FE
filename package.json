@@ -9,6 +9,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "@fullcalendar/core": "^6.1.8",
+    "@fullcalendar/daygrid": "^6.1.8",
+    "@fullcalendar/interaction": "^6.1.8",
+    "@fullcalendar/list": "^6.1.8",
+    "@fullcalendar/react": "^6.1.8",
+    "@fullcalendar/resource": "^6.1.8",
+    "@fullcalendar/resource-timeline": "^6.1.8",
+    "@fullcalendar/timegrid": "^6.1.8",
     "@hookform/resolvers": "^3.1.0",
     "@next/font": "^13.4.9",
     "@types/bingmaps": "^0.0.1",
@@ -16,6 +24,7 @@
     "bing-maps-loader": "^1.0.7",
     "bingmaps": "^2.0.3",
     "cookies": "^0.8.0",
+    "css-loader": "^6.8.1",
     "daisyui": "^2.51.6",
     "date-fns": "^2.30.0",
     "filepond": "^4.30.4",

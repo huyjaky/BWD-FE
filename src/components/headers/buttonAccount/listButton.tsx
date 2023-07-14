@@ -33,6 +33,11 @@ const ListButton = () => {
             <Link href={'/chats'}>
               <button className="w-full py-4 text-left px-5">Messages</button>
             </Link>
+
+            <Link href={'/dashboard'}>
+              <button className="w-full py-4 text-left px-5">Dashboard</button>
+            </Link>
+
             <button
               className="w-full py-4 text-left px-5"
               onClick={async () => {

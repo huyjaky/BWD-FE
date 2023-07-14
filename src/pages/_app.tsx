@@ -32,6 +32,7 @@ import { SessionProvider } from 'next-auth/react';
 import { Montserrat } from 'next/font/google';
 import Head from 'next/head';
 import Script from 'next/script';
+import DashboardProvider from '@/contexts/dashboard';
 
 
 const monsterrat = Montserrat({
@@ -74,15 +75,17 @@ export default function App({
                                     <HouseTempProvider>
                                       <StepCreateHomeProvider>
                                         <CreateHouseFormProvider>
-                                          <Layout>
-                                            <div
-                                              className={`${monsterrat.className} bg-white
+                                          <DashboardProvider>
+                                            <Layout>
+                                              <div
+                                                className={`${monsterrat.className} bg-white
                                         `}
-                                            >
-                                              <NextNProgress color="#B80F0A" height={7} />
-                                              <Component {...pageProps} />
-                                            </div>
-                                          </Layout>
+                                              >
+                                                <NextNProgress color="#B80F0A" height={7} />
+                                                <Component {...pageProps} />
+                                              </div>
+                                            </Layout>
+                                          </DashboardProvider>
                                         </CreateHouseFormProvider>
                                       </StepCreateHomeProvider>
                                     </HouseTempProvider>
