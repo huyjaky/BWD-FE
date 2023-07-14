@@ -5,6 +5,7 @@ import { house_ } from "@/models/house";
 import Slider from "rc-slider";
 import { useContext, useEffect, useState } from "react";
 import PropertyCreateHouse from "./propertyCreateHouse";
+import { compassUtils } from "@/utils/compass";
 
 interface HousePropertiesProps {
   // keyMapBing: string;
@@ -18,7 +19,7 @@ const HouseProperties = ({ }: HousePropertiesProps) => {
   // const [typeHouseId, setTypeHouseId] = useState<string[]>([]);
 
   const styleInput = 'box-border p-3';
-  const compass: string[] = ['West', 'South', 'East', 'North']
+  const compass: string[] = compassUtils;
   const [tempHouse, setTempHouse] = useState<house_ | undefined>(createHouseForm)
 
   useEffect(() => {

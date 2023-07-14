@@ -1,9 +1,10 @@
 import { filterContext } from "@/contexts/filter";
+import { compassUtils } from "@/utils/compass";
 import { useContext } from "react";
 
 
 const CompassFilter = () => {
-  const compass: string[] = ['West', 'South', 'East', 'North']
+  const compass: string[] = compassUtils
   const { filterForm, setFilterForm } = useContext(filterContext);
 
   const handeOcClick = (item:string)=>{

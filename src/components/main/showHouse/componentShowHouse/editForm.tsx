@@ -19,6 +19,7 @@ import EditAmenities from "./amenities/editAmenities";
 import InputFormEdit from "./inputForm/inputFormEdit";
 import MapEdit from "./inputForm/map";
 import RemoveImg from "./removeImg/removeImg";
+import { compassUtils } from "@/utils/compass";
 
 interface EditFormProps {
   keyMapBing: string;
@@ -33,7 +34,7 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit, infShow }: EditFormProp
   const { selectHouse } = useContext(selectHouseContext);
   const { houseTemp, setHouseTemp } = useContext(houseTempContext)
   const styleInput = 'box-border p-3';
-  const compass: string[] = ['West', 'South', 'East', 'North']
+  const compass: string[] = compassUtils;
   const tempPrice = selectHouse?.Price;
   const [tempHouse, setTempHouse] = useState<house_ | undefined>(selectHouse)
   const [imgArr, setImgArr] = useState<any>([]);
