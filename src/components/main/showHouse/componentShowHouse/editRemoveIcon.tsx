@@ -35,8 +35,8 @@ const EditRemoveIcon = ({ isEdit, setIsEdit, item, isRemoveReq, setIsRemoveReq }
 
         <motion.div className="w-[3rem] h-[4rem] top-0 left-[3rem] absolute z-20 flex " >
           <button
-            onClick={()=>{setIsRemoveReq(true)}}
-           className='w-fit h-fit m-auto'>
+            onClick={() => { setIsRemoveReq(true) }}
+            className='w-fit h-fit m-auto'>
             <RiDeleteBin5Line className="w-[2.4rem] h-[2.4rem] text-red-500 " />
           </button>
         </motion.div>

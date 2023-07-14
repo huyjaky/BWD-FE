@@ -9,7 +9,7 @@ interface LayoutPanelDasboardProps {
 const LayoutPanelDasboard = ({ children }: LayoutPanelDasboardProps) => {
   const { selectOption } = useContext(DashboardContext)
   return (
-    <div className="w-full h-full box-border p-7">
+    <div className="w-full h-full box-border">
       <div className="w-full h-full rounded-xl shadow-xl overflow-hidden p-10">
         <div className="w-full h-full">
           {/* title */}

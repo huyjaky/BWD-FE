@@ -8,6 +8,7 @@ import { selectPlaceContext } from '@/contexts/selectPlace';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { title } from 'process';
+import { useSession } from 'next-auth/react';
 
 interface BillProps {
   houseDetail: house_;
@@ -16,6 +17,7 @@ interface BillProps {
 const Bill = ({ houseDetail }: BillProps) => {
   const { Bill, setBill } = useContext(BillContext);
   const { address } = useContext(selectPlaceContext);
+  const {data:session, status} = useSession()
 
   const handleOnChange = (item: any) => {
     setBill({ ...Bill, checkInDay: item });
@@ -58,7 +60,7 @@ const Bill = ({ houseDetail }: BillProps) => {
                 minDate={new Date()}
                 // moveRangeOnFirstSelection={false}
                 date={Bill.checkInDay}
-                
+
                 color="rgb(239 68 68)"
                 className=" font-bold m-auto text-3xl"
               />
@@ -89,6 +91,8 @@ const Bill = ({ houseDetail }: BillProps) => {
         <Link href={`/confirm/${houseDetail.HouseId}`}>
           <motion.button
             onClick={(event) => {
+              if (session?.userAcc.UserId === houseDetail.PostBy) return;
+
               setBill({
                 ...Bill,
                 image: houseDetail.arrImg[0].Path,

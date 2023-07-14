@@ -92,11 +92,11 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
   }, [address.guest]);
 
   const onSubmit: SubmitHandler<ConfirmSchema> = async (data) => {
-    if (Bill.guest.adults === 0) {
-      // setMaskGuests(true);
-      router.push('/homepage', undefined, {shallow: true});
-      return;
-    }
+    // if (Bill.guest.adults === 0) {
+    //   // setMaskGuests(true);
+    //   router.push('/homepage', undefined, {shallow: true});
+    //   return;
+    // }
     const createSchedule = await schedule.createSchedule({
       HouseId: houseDetail?.HouseId,
       UserId: user.UserId,
@@ -104,10 +104,12 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
       Date: Bill.checkInDay,
       Adults: Bill.guest.adults,
       Childrens: Bill.guest.childrens,
-      Infants: Bill.guest.infants
+      Infants: Bill.guest.infants,
+      Host: houseDetail?.PostBy
     });
 
     if (createSchedule.status != 200) {
+
       console.log('have err with create schedule');
       return;
     } else {

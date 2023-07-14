@@ -30,6 +30,7 @@ const FinishPage = ({ api_url_path }: FinishPageProps) => {
   } = useContext(createHouseFormContext)
   const { stepCreate, setStepCreate } = useContext(StepCreateHomeContext)
   const filePondRef = useRef<FilePond>(null);
+  const [isClick, setIsClick]= useState<number>(0);
   const { data: session, status } = useSession();
   useEffect(() => {
     setKey((prevKey) => prevKey + 1);
@@ -39,6 +40,8 @@ const FinishPage = ({ api_url_path }: FinishPageProps) => {
 
 
   const handleOnClick = async (event: any) => {
+    if (isClick === 1) return
+    await setIsClick(1);
 
     nProgress.set(0.6);
     setIsLoading(true);

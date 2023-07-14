@@ -1,7 +1,7 @@
 import { addressProps } from '@/models/address';
 import axiosClient from './axiosClient';
 
-interface scheduleCreate {
+export interface scheduleCreate {
   UserId: string;
   HouseId: string;
   PhoneNumber: string;
@@ -9,6 +9,7 @@ interface scheduleCreate {
   Adults: number;
   Childrens: number;
   Infants: number;
+  Host: string
 }
 
 export const schedule = {
