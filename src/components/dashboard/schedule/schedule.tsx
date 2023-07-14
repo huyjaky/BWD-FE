@@ -19,6 +19,7 @@ const Schedule = () => {
   const calendarRef = useRef<FullCalendar | null>(null);
   const { user } = useContext(userAccContext)
   const [isRemoveReq, setIsRemoveReq] = useState<boolean | undefined>(false);
+  const [isFirstLoading, setIsFirstLoading] = useState<boolean>(true);
   const [selectedRemove, setSelectedRemove] = useState<EventClickArg>();
   const removeReqPanel = useRef<HTMLDivElement>(null);
   const handleDateClick = (selected: DateSelectArg) => {
@@ -50,10 +51,10 @@ const Schedule = () => {
     try {
       if (user.UserId === 'none user') return;
       const schedule = await ScheduleApi.scheduleHost(user.UserId);
-      console.log('schedullel', schedule.data);
 
       const calendarApi = calendarRef?.current?.getApi();
-
+      if (!isFirstLoading) return
+      setIsFirstLoading(false);
       if (schedule.status == 200) {
         const setEv = await schedule.data.map((item: scheduleCreate, index: number) => {
           const newEvent = {

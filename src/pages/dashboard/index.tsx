@@ -2,6 +2,7 @@
 import LayoutPanelDasboard from "@/components/dashboard/layoutPanel";
 import NavbarDashboard from "@/components/dashboard/navbar/navbar";
 import Schedule from "@/components/dashboard/schedule/schedule";
+import HeaderForm from "@/components/headers/headerForm/HeaderForm";
 import AuthWithAnimate from "@/components/layouts/authWithAnimate";
 import { DashboardContext } from "@/contexts/dashboard";
 import { NextPageWithLayout } from "@/models/layoutprops";
@@ -17,10 +18,12 @@ const Index: NextPageWithLayout = () => {
 
   return (
     <div className="w-screen h-screen">
-      <div className="w-screen h-screen flex">
+      <HeaderForm>
+        <div></div>
+      </HeaderForm>
 
+      <div className="w-screen h-[calc(100vh-5rem)] flex">
         <div className="w-[100%] h-full">
-
           {selectOption === 'Schedule' &&
             <LayoutPanelDasboard>
               <Schedule />
@@ -34,10 +37,10 @@ const Index: NextPageWithLayout = () => {
 
         <motion.div
           onHoverStart={(event) => { setIsHoverCorner(true) }}
-          initial={{left: '-30rem'}}
-          animate={isHoverCorner ? {left: ['-30rem', '0rem']} : {x: ['0rem', '-30rem']}}
-          transition={{duration: .6}}
-          onHoverEnd={(event)=>{setIsHoverCorner(false)}}
+          initial={{ left: '-30rem' }}
+          animate={isHoverCorner ? { left: ['-30rem', '0rem'] } : { x: ['0rem', '-30rem'] }}
+          transition={{ duration: .6 }}
+          onHoverEnd={(event) => { setIsHoverCorner(false) }}
           className="fixed top-0 left-0 bg-white w-fit h-screen z-50 ">
           <NavbarDashboard />
         </motion.div>
