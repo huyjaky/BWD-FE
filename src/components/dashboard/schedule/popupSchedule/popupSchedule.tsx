@@ -5,11 +5,9 @@ import LayoutTitle from "./layoutTitle";
 
 const PopupSchedule = () => {
   const { selectHousePopup, setSelectHousePopup } = useContext(DashboardContext)
-  useEffect(() => {
-  }, [selectHousePopup])
 
   return (
-    <div className="w-[20rem] h-[15rem]  rounded-xl overflow-hidden">
+    <div className="w-[20rem] h-[15rem] rounded-xl overflow-hidden">
       <div className="w-full h-full relative">
         <img src={"/api/img/path/" + selectHousePopup?.arrImg[0]?.Path} alt="" className="w-full h-full
 object-cover
