@@ -23,7 +23,7 @@ const Filter = ({ isInvisible }: FilterProps) => {
   };
   useEffect(() => {
     const emptyObjJson = JSON.stringify({
-      maxPrice: 250,
+      maxPrice: 500000,
       minPrice: 10,
       beds: 0,
       bathRooms: 0,

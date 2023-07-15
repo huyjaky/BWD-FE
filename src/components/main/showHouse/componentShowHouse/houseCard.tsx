@@ -85,7 +85,7 @@ const HouseCard = ({
 
           {/* heart */}
           {infShow !== 'authListHouse' && (
-            <Heart HouseId={item.HouseId} IsFavorite={item.IsFavorite} />
+            <Heart HouseId={item.HouseId} IsFavorite={item.IsFavorite} PostBy={item.PostBy}/>
           )}
 
           <div className="absolute left-2 top-2 z-10">

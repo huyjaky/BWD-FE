@@ -20,6 +20,7 @@ import InputFormEdit from "./inputForm/inputFormEdit";
 import MapEdit from "./inputForm/map";
 import RemoveImg from "./removeImg/removeImg";
 import { compassUtils } from "@/utils/compass";
+import nProgress from "nprogress";
 
 interface EditFormProps {
   keyMapBing: string;
@@ -60,6 +61,7 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit, infShow }: EditFormProp
   const onSubmit: SubmitHandler<house_> = async (data) => {
 
     console.log('temp', tempHouse?.arrImg);
+    nProgress.set(.6);
     if (filePondRef.current) {
       await filePondRef.current.processFiles();
     }
@@ -80,6 +82,7 @@ const EditForm = ({ keyMapBing, api_url_path, setIsEdit, infShow }: EditFormProp
         }
         return item;
       })]);
+      nProgress.done();
       setIsEdit(false);
     }
   }

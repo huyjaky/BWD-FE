@@ -63,9 +63,9 @@ const RemoveReq = ({ isRemoveReq, setIsRemoveReq }: RemoveReqProps) => {
                 setHouseTemp(houseTemp.filter(item => item.AddressId !== selectHouse?.AddressId))
 
                 if (selectHouse) {
+                  setIsRemoveReq(false);
                   await houseApi.DeleteHouse(selectHouse?.HouseId, selectHouse.AddressId)
                 }
-                setIsRemoveReq(false);
               }
             }}
             className="w-full h-full rounded-xl border-2 bg-red bg-[#f05123]

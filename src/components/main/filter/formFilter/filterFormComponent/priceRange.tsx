@@ -23,12 +23,12 @@ const PriceRange = () => {
           range
           allowCross={false}
           draggableTrack
-          defaultValue={[10, 250]}
+          defaultValue={[10, 500000]}
           onChange={handleOnChange}
           value={[filterForm.minPrice, filterForm.maxPrice]}
           className="m-auto "
           min={10}
-          max={250}
+          max={500000}
           trackStyle={{ backgroundColor: 'black', height: 2 }}
           railStyle={{ height: 2 }}
           handleStyle={{
@@ -82,7 +82,7 @@ const PriceRange = () => {
                 className="outline-none overflow-y-hidden"
                 onChange={(event) => {
                   const temp = Number.parseInt(event.target.value);
-                  if (temp > 250 || temp < filterForm.minPrice || !temp) return;
+                  if (temp > 500000 || temp < filterForm.minPrice || !temp) return;
                   setFilterForm({ ...filterForm, maxPrice: temp });
                 }}
               />

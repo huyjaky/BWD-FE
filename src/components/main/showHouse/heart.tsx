@@ -8,9 +8,10 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 interface HeartProps {
   HouseId: string;
   IsFavorite: boolean;
+  PostBy: string
 }
 
-const Heart = ({ HouseId, IsFavorite }: HeartProps) => {
+const Heart = ({ HouseId, IsFavorite, PostBy }: HeartProps) => {
   const { user } = useContext(userAccContext);
   const [isClickHeart, setIsClickHeart] = useState(false);
   const { setIsLoginClick } = useContext(selectPopoverContext);
@@ -37,8 +38,8 @@ const Heart = ({ HouseId, IsFavorite }: HeartProps) => {
   return (
     <motion.label
       whileHover={{ scale: 1.2 }}
-      className="swap swap-flip text-[2rem] z-10 absolute right-2 top-2
-                  text-red-500 "
+      className={`swap swap-flip text-[2rem] z-10 absolute right-2 top-2
+                  text-red-500 ${user.UserId === PostBy ? 'hidden': ''}`}
     >
       <input
         type="checkbox"

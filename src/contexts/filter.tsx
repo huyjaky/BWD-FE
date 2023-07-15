@@ -15,7 +15,7 @@ interface filterData {
 
 const filterDataDefault: filterData = {
   filterForm: {
-    maxPrice: 250,
+    maxPrice: 500000,
     minPrice: 10,
     beds: 0,
     bathRooms: 0,
@@ -25,7 +25,7 @@ const filterDataDefault: filterData = {
     orientation: ''
   },
   emptyFilterForm: {
-    maxPrice: 250,
+    maxPrice: 500000,
     minPrice: 10,
     beds: 0,
     bathRooms: 0,
