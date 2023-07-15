@@ -10,8 +10,10 @@ import listPlugin from '@fullcalendar/list';
 import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { AnimatePresence, motion } from "framer-motion";
-import { useContext, useEffect, useRef, useState } from "react";
+import { RefObject, useContext, useEffect, useRef, useState } from "react";
 import RemoveReqSchedule from "./removeReqSchedule";
+import { DashboardContext } from "@/contexts/dashboard";
+import PopupSchedule from "./popupSchedule/popupSchedule";
 
 const Schedule = () => {
 
@@ -19,9 +21,16 @@ const Schedule = () => {
   const calendarRef = useRef<FullCalendar | null>(null);
   const { user } = useContext(userAccContext)
   const [isRemoveReq, setIsRemoveReq] = useState<boolean | undefined>(false);
+  const { eventArr, setEventArr, setSelectHousePopup, selectHousePopup } = useContext(DashboardContext)
   const [isFirstLoading, setIsFirstLoading] = useState<boolean>(true);
   const [selectedRemove, setSelectedRemove] = useState<EventClickArg>();
   const removeReqPanel = useRef<HTMLDivElement>(null);
+
+  const [isShowPopup, setIsShowPopup] = useState<boolean>(false);
+  const [keyPopup, setKeyPopup] = useState<number>(-1);
+  const popupHouse = useRef<HTMLDivElement>(null);
+  const { x, y } = useFollowPointer(popupHouse);
+
   const handleDateClick = (selected: DateSelectArg) => {
     const title = prompt('please enter');
     const calenderApi = selected.view.calendar;
@@ -46,35 +55,6 @@ const Schedule = () => {
     setIsRemoveReq(true);
   }
 
-
-  const fetchSchedule = async () => {
-    try {
-      if (user.UserId === 'none user') return;
-      const schedule = await ScheduleApi.scheduleHost(user.UserId);
-
-      const calendarApi = calendarRef?.current?.getApi();
-      if (!isFirstLoading) return
-      setIsFirstLoading(false);
-      if (schedule.status == 200) {
-        const setEv = await schedule.data.map((item: scheduleCreate, index: number) => {
-          const newEvent = {
-            title: item.PhoneNumber,
-            start: item.Date + '',
-            id: item.HouseId,
-          };
-          if (calendarApi) {
-            calendarApi.addEvent(newEvent);
-          }
-          return item;
-        })
-      }
-
-    } catch (error) {
-      console.log(error);
-      return;
-    }
-  }
-
   function addDays(date: Date, days: number) {
     var result = new Date(date);
     result.setDate(result.getDate() + days);
@@ -92,8 +72,24 @@ const Schedule = () => {
   };
 
   useEffect(() => {
-    fetchSchedule();
-  }, [user])
+    const addEv = async () => {
+      if (eventArr.length == 0) return;
+      const calendarApi = calendarRef?.current?.getApi();
+      const setEv = await eventArr.map((item: scheduleCreate, index: number) => {
+        const newEvent = {
+          title: item.PhoneNumber,
+          start: item.Date + '',
+          id: item.HouseId,
+        };
+        if (calendarApi) {
+          calendarApi.addEvent(newEvent);
+        }
+        return item;
+      })
+    }
+    addEv();
+  }, [eventArr])
+
 
   useEffect(() => {
     console.log('crev', currentEvents);
@@ -101,6 +97,14 @@ const Schedule = () => {
 
   return (
     <>
+      <motion.div
+        ref={popupHouse}
+        animate={{ x, y }}
+        className={`w-fit fixed z-50 h-fit ${isShowPopup ? '' : 'hidden'}`}
+      >
+        <PopupSchedule />
+      </motion.div>
+
       <AnimatePresence initial={false}>
         <motion.div
           variants={variants}
@@ -113,14 +117,24 @@ const Schedule = () => {
         </motion.div>
       </AnimatePresence>
 
-      <div className="w-full h-full flex">
-        <div className="w-[15rem] h-full  overflow-scroll overflow-x-hidden mobile:hidden">
+      <div className="w-full h-full flex box-border ">
+        <motion.div
+          className="w-[15rem] h-[70vh] overflow-scroll overflow-x-hidden mobile:hidden">
           {currentEvents.map((item: EventApi, index: number) => {
             return (
               <div key={index}>
-                <div className="w-ful h-[8rem]   box-border p-4">
-                  <div className="w-full h-full bg-[#6699CC] rounded-lg p-2">
-                    <div className="w-fit h-fit flex flex-col text-[#FAE8EB]  ">
+                <motion.div
+                  onHoverStart={(event) => {
+                    setIsShowPopup(true); setKeyPopup(index);
+                    console.log('showpopup',eventArr[index].house);
+                    setSelectHousePopup(eventArr[index].house);
+                  }}
+                  onHoverEnd={(event) => { setIsShowPopup(false); setKeyPopup(-1) }}
+                  className="w-ful h-[8rem]   box-border p-4">
+                  <motion.div className="w-full h-full bg-[#6699CC] rounded-lg p-2 cursor-pointer">
+                    <motion.div
+                      onHoverStart={(event) => setIsShowPopup(true)}
+                      className="w-fit h-fit flex flex-col text-[#FAE8EB]  ">
                       <div className="mb-2 font-semibold text-[20px]">
                         {item.title}
                       </div>
@@ -131,13 +145,13 @@ const Schedule = () => {
                           day: 'numeric'
                         })}
                       </div>
-                    </div>
-                  </div>
-                </div>
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
               </div>
             )
           })}
-        </div>
+        </motion.div>
         <div className="w-[100%] h-full">
 
           <FullCalendar
@@ -185,3 +199,27 @@ const Schedule = () => {
 }
 
 export default Schedule;
+
+
+function useFollowPointer(ref: RefObject<HTMLElement>) {
+  const [point, setPoint] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const handlePointerMove = ({ clientX, clientY }: MouseEvent) => {
+      const element = ref.current!;
+
+      const x = clientX - element.offsetLeft - element.offsetWidth / 2 + 200;
+      const y = clientY - element.offsetTop - element.offsetHeight / 2 - 200;
+
+      setPoint({ x, y });
+    };
+
+    window.addEventListener("pointermove", handlePointerMove);
+
+    return () => window.removeEventListener("pointermove", handlePointerMove);
+  }, []);
+
+  return point;
+}

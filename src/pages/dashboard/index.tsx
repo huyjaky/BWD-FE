@@ -8,13 +8,47 @@ import { DashboardContext } from "@/contexts/dashboard";
 import { NextPageWithLayout } from "@/models/layoutprops";
 import { motion } from "framer-motion";
 import { GetServerSideProps } from "next";
-import { useContext, useState } from "react";
+import { getServerSession } from "next-auth";
+import { useContext, useEffect, useState } from "react";
+import { authOptions } from "../api/auth/[...nextauth]";
+import https from 'https';
+import fetch from 'node-fetch';
+import { scheduleCreate } from "@/api-client/schedule";
+import { useSession } from "next-auth/react";
+import { ScheduleApi } from "@/api-client/scheduleApi";
 
+interface IndexProps {
+  // eventArr: scheduleCreate[];
+}
 
-
-const Index: NextPageWithLayout = () => {
-  const { selectOption, setSelectOption } = useContext(DashboardContext)
+const Index: NextPageWithLayout<IndexProps> = ({ }: IndexProps) => {
+  const { selectOption, setSelectOption, setEventArr, eventArr } = useContext(DashboardContext)
+  const { data: session, status } = useSession();
   const [isHoverCorner, setIsHoverCorner] = useState<boolean>(false);
+
+  const fetchSchedule = async () => {
+    try {
+      if (status === 'unauthenticated' || status === 'loading') return;
+
+      const schedule = await ScheduleApi.scheduleHost(session?.userAcc.UserId)
+
+      if (schedule.status == 200) {
+        console.log(schedule.data);
+        setEventArr(schedule.data as scheduleCreate[]);
+
+      }
+
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+  }
+
+  useEffect(() => {
+    if (eventArr.length == 0) {
+      fetchSchedule();
+    }
+  }, [status])
 
   return (
     <div className="w-screen h-screen">
@@ -23,14 +57,12 @@ const Index: NextPageWithLayout = () => {
       </HeaderForm>
 
       <div className="w-screen h-[calc(100vh-5rem)] flex">
-        <div className="w-[100%] h-full">
-          {selectOption === 'Schedule' &&
-            <LayoutPanelDasboard>
-              <Schedule />
-            </LayoutPanelDasboard>
-          }
+        {selectOption === 'Schedule' &&
+          <LayoutPanelDasboard>
+            <Schedule />
+          </LayoutPanelDasboard>
+        }
 
-        </div>
         <motion.div
           onHoverStart={(event) => { setIsHoverCorner(true) }}
           className="w-[2rem] fixed h-screen top-0 left-0 bg-red-400"></motion.div>
@@ -55,13 +87,11 @@ Index.Layout = AuthWithAnimate;
 export default Index;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
-  const keyChatEngine = process.env.KEYCHAT_ENGINE;
+
 
   return {
     props: {
-      keyMapBing: keyMapBing,
-      keyChatEngine: keyChatEngine
+      // eventArr: eventArr
     }
   };
 };

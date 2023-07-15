@@ -1,5 +1,6 @@
 import { addressProps } from '@/models/address';
 import axiosClient from './axiosClient';
+import { house_ } from '@/models/house';
 
 export interface scheduleCreate {
   UserId: string;
@@ -9,7 +10,8 @@ export interface scheduleCreate {
   Adults: number;
   Childrens: number;
   Infants: number;
-  Host: string
+  Host: string;
+  house: house_ | undefined
 }
 
 export const schedule = {

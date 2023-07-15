@@ -21,6 +21,7 @@ import { GrClose, GrPrevious } from 'react-icons/gr';
 import * as yup from 'yup';
 import https from 'https';
 import fetch from 'node-fetch';
+import { houseTempContext } from '@/contexts/houseTemp';
 interface ConfirmProps {
   houseDetail: house_;
   keyMapBox: string;
@@ -64,6 +65,7 @@ type ConfirmSchema = yup.InferType<typeof schema>;
 
 const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: ConfirmProps) => {
   const { Bill, setBill } = useContext(BillContext);
+
   const { address } = useContext(selectPlaceContext);
   const { user } = useContext(userAccContext);
   const guestRef = useRef<HTMLDivElement>(null);
@@ -105,7 +107,8 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
       Adults: Bill.guest.adults,
       Childrens: Bill.guest.childrens,
       Infants: Bill.guest.infants,
-      Host: houseDetail?.PostBy
+      Host: houseDetail?.PostBy,
+      house: undefined
     });
 
     if (createSchedule.status != 200) {

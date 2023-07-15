@@ -9,6 +9,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { title } from 'process';
 import { useSession } from 'next-auth/react';
+import { userAccContext } from '@/contexts/userAcc';
 
 interface BillProps {
   houseDetail: house_;
@@ -17,6 +18,7 @@ interface BillProps {
 const Bill = ({ houseDetail }: BillProps) => {
   const { Bill, setBill } = useContext(BillContext);
   const { address } = useContext(selectPlaceContext);
+  const {user} = useContext(userAccContext)
   const {data:session, status} = useSession()
 
   const handleOnChange = (item: any) => {
@@ -88,11 +90,11 @@ const Bill = ({ houseDetail }: BillProps) => {
             </li>
           </ul>
         </div>
-        <Link href={`/confirm/${houseDetail.HouseId}`}>
+        <Link href={user.UserId === houseDetail.PostBy ? `/house/${houseDetail.HouseId}` : `/confirm/${houseDetail.HouseId}`}>
           <motion.button
             onClick={(event) => {
-              if (session?.userAcc.UserId === houseDetail.PostBy) return;
 
+              if (user.UserId === houseDetail.PostBy) return;
               setBill({
                 ...Bill,
                 image: houseDetail.arrImg[0].Path,
