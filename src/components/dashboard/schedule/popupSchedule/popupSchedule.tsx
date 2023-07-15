@@ -6,7 +6,6 @@ import LayoutTitle from "./layoutTitle";
 const PopupSchedule = () => {
   const { selectHousePopup, setSelectHousePopup } = useContext(DashboardContext)
   useEffect(() => {
-    console.log(selectHousePopup);
   }, [selectHousePopup])
 
   return (

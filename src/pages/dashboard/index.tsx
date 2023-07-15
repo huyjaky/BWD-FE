@@ -65,9 +65,9 @@ const Index: NextPageWithLayout<IndexProps> = ({ }: IndexProps) => {
 
         <motion.div
           onHoverStart={(event) => { setIsHoverCorner(true) }}
-          className="w-[2rem] fixed h-screen top-0 left-0 bg-red-400">
+          className="w-[2rem] fixed h-screen top-0 left-0 border-r-2">
             <div className="w-full h-full flex">
-              <div className="m-auto" id="hoverme">chasc</div>
+              <div className="m-auto" id="hoverme">Lets hover me</div>
             </div>
           </motion.div>
 

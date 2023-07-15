@@ -39,7 +39,7 @@ const Heart = ({ HouseId, IsFavorite, PostBy }: HeartProps) => {
     <motion.label
       whileHover={{ scale: 1.2 }}
       className={`swap swap-flip text-[2rem] z-10 absolute right-2 top-2
-                  text-red-500 ${user.UserId === PostBy ? 'hidden': ''}`}
+                  text-red-500 `}
     >
       <input
         type="checkbox"

@@ -91,9 +91,9 @@ const Schedule = () => {
   }, [eventArr])
 
 
-  useEffect(() => {
-    console.log('crev', currentEvents);
-  }, [currentEvents, selectedRemove])
+  // useEffect(() => {
+  //   console.log('crev', currentEvents);
+  // }, [currentEvents, selectedRemove])
 
   return (
     <>
@@ -126,8 +126,7 @@ const Schedule = () => {
                 <motion.div
                   onHoverStart={(event) => {
                     setIsShowPopup(true); setKeyPopup(index);
-                    console.log('showpopup',eventArr[index].house);
-                    setSelectHousePopup(eventArr[index].house);
+                    setSelectHousePopup(eventArr[index]?.house);
                   }}
                   onHoverEnd={(event) => { setIsShowPopup(false); setKeyPopup(-1) }}
                   className="w-ful h-[8rem]   box-border p-4">
@@ -152,7 +151,7 @@ const Schedule = () => {
             )
           })}
         </motion.div>
-        <div className="w-[100%] h-full">
+        <div className="w-[calc(100%-15rem)] h-full">
 
           <FullCalendar
             ref={calendarRef}
@@ -177,7 +176,7 @@ const Schedule = () => {
             eventClick={handleEventClick}
             eventsSet={(event) => { setCurrentEvents(event) }}
             eventChange={(event) => {
-              console.log(event);
+              console.log('event change', event);
               const eventChange = new Date(formatDate(event.event.startStr, {
                 year: 'numeric',
                 month: 'short',
@@ -189,7 +188,6 @@ const Schedule = () => {
                 console.log(error);
                 return { error }
               }
-              console.log(event);
             }}
           />
         </div>
@@ -211,7 +209,7 @@ function useFollowPointer(ref: RefObject<HTMLElement>) {
       const element = ref.current!;
 
       const x = clientX - element.offsetLeft - element.offsetWidth / 2 + 200;
-      const y = clientY - element.offsetTop - element.offsetHeight / 2 - 200;
+      const y = clientY - element.offsetTop - element.offsetHeight / 2 - 150;
 
       setPoint({ x, y });
     };
