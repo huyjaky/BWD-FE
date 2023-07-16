@@ -2,7 +2,6 @@
 import { scheduleCreate } from "@/api-client/schedule";
 import { ScheduleApi } from "@/api-client/scheduleApi";
 import { variants } from "@/components/main/showHouse/variantsShowHouse";
-import { DashboardContext } from "@/contexts/dashboard";
 import { userAccContext } from "@/contexts/userAcc";
 import { DateSelectArg, EventApi, EventClickArg, formatDate } from "@fullcalendar/core";
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -12,26 +11,23 @@ import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { AnimatePresence, motion } from "framer-motion";
 import { RefObject, useContext, useEffect, useRef, useState } from "react";
-import PopupSchedule from "./popupSchedule/popupSchedule";
 import RemoveReqSchedule from "./removeReqSchedule";
+import { DashboardContext } from "@/contexts/dashboard";
+import PopupSchedule from "./popupSchedule/popupSchedule";
 
 const Schedule = () => {
 
   const [currentEvents, setCurrentEvents] = useState<EventApi[]>([]);
+  const calendarRef = useRef<FullCalendar | null>(null);
   const { user } = useContext(userAccContext)
   const [isRemoveReq, setIsRemoveReq] = useState<boolean | undefined>(false);
   const { eventArr, setEventArr, setSelectHousePopup, selectHousePopup } = useContext(DashboardContext)
   const [isFirstLoading, setIsFirstLoading] = useState<boolean>(true);
   const [selectedRemove, setSelectedRemove] = useState<EventClickArg>();
+  const removeReqPanel = useRef<HTMLDivElement>(null);
 
   const [isShowPopup, setIsShowPopup] = useState<boolean>(false);
   const [keyPopup, setKeyPopup] = useState<number>(-1);
-
-  const removeReqPanel = useRef<HTMLDivElement>(null);
-  const calendarRef = useRef<FullCalendar | null>(null);
-
-  const houseDetailPopup = useRef<HTMLDivElement>(null);
-  const { x, y } = useFollowPointer(houseDetailPopup);
 
   const handleDateClick = (selected: DateSelectArg) => {
     const title = prompt('please enter');
@@ -99,8 +95,13 @@ const Schedule = () => {
 
   return (
     <>
-
-
+      {/* <motion.div
+        // ref={popupHouse}
+        animate={{ x, y }}
+        className={`w-fit fixed z-50 h-fit ${isShowPopup ? '' : 'hidden'}`}
+      > */}
+      <PopupSchedule isShowPopup={isShowPopup} setIsShowPopup={setIsShowPopup} />
+      {/* </motion.div> */}
 
       <AnimatePresence initial={false}>
         <motion.div
@@ -123,6 +124,7 @@ const Schedule = () => {
                 <motion.div
                   onHoverStart={(event) => {
                     setIsShowPopup(true); setKeyPopup(index);
+                    // console.log('showpopup', eventArr[index]?.house);
                     setSelectHousePopup(eventArr[index]?.house);
                   }}
                   onHoverEnd={(event) => { setIsShowPopup(false); setKeyPopup(-1) }}
@@ -149,6 +151,7 @@ const Schedule = () => {
           })}
         </motion.div>
         <div className="w-[calc(100%-15rem)] h-full">
+
           <FullCalendar
             ref={calendarRef}
             height={'100%'}
@@ -168,8 +171,13 @@ const Schedule = () => {
             selectable={true}
             selectMirror={true}
             dayMaxEvents={true}
+            select={handleDateClick}
             eventClick={handleEventClick}
-            eventsSet={(event) => { setCurrentEvents(event) }}
+            eventsSet={(event) => {
+              setCurrentEvents(event);
+
+            }}
+            // eventChange={(event) => console.log(event)}
             eventChange={(event) => {
               const eventChange = new Date(formatDate(event.event.startStr, {
                 year: 'numeric',
@@ -183,17 +191,9 @@ const Schedule = () => {
                 return { error }
               }
             }}
-            select={handleDateClick}
           />
         </div>
       </div>
-      <motion.div
-        ref={houseDetailPopup}
-        animate={{ x, y }}
-        className={`w-fit fixed z-20 h-fit ${isShowPopup ? '' : 'hidden'}`}
-      >
-        <PopupSchedule />
-      </motion.div>
     </>
   )
 }
@@ -201,30 +201,5 @@ const Schedule = () => {
 export default Schedule;
 
 
-function useFollowPointer(ref: RefObject<HTMLDivElement>) {
-  const [point, setPoint] = useState({ x: 0, y: 0 });
 
-  useEffect(() => {
-    if (!ref.current) return;
 
-    const handlePointerMove = ({ clientX, clientY }: MouseEvent) => {
-      const element = ref.current!;
-      const x = clientX - element.offsetLeft - element.offsetWidth / 2 + 200;
-      const y = clientY - element.offsetTop - element.offsetHeight / 2 - 150;
-
-      setPoint({ x, y });
-    };
-
-    if (!ref.current) {
-      window.addEventListener("pointermove", handlePointerMove);
-    }
-
-    return () => {
-      if (!ref.current) {
-        window.removeEventListener("pointermove", handlePointerMove);
-      }
-    };
-  }, []);
-
-  return point;
-}
