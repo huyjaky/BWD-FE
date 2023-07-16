@@ -55,7 +55,7 @@ const HouseDetail: NextPageWithLayout<HouseDetailProps> = ({
   initializeSSR();
   useEffect(() => {
     window.scrollTo(0, 0);
-
+    console.log(houseDetail.useracc);
   }, [])
 
   return (

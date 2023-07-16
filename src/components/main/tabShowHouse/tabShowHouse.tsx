@@ -77,6 +77,7 @@ const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
             <div>
 
               <HostUser
+                phone={selectUser?.Phone || 'xxxx-xxxx'}
                 description=''
                 imgPath={selectUser?.Image}
                 gmail={selectUser?.Gmail}

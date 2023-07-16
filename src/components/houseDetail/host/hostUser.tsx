@@ -4,13 +4,15 @@ import { Variants, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { AiOutlineMessage } from 'react-icons/ai';
+import { BiPhoneCall } from 'react-icons/bi';
 import { TbBrandGmail } from 'react-icons/tb';
 
 interface HostUserProps {
   imgPath: string | undefined;
   userName: string | undefined;
   gmail: string | undefined;
-  description: string
+  description: string;
+  phone:string;
 }
 
 const variants: Variants = {
@@ -36,7 +38,7 @@ const variants: Variants = {
   }
 };
 
-const HostUser = ({ imgPath, userName, gmail, description }: HostUserProps) => {
+const HostUser = ({ imgPath, userName, gmail, description, phone }: HostUserProps) => {
   const router = useRouter();
   const { user } = useContext(userAccContext);
 
@@ -86,9 +88,15 @@ const HostUser = ({ imgPath, userName, gmail, description }: HostUserProps) => {
       </motion.div>
       <div className="flex flex-col w-full h-fit items-center text-[2rem] divide-y-2 divide-red-500 mt-5">
         <span>Contact me</span>
-        <div className="flex items-center">
-          <TbBrandGmail />
-          &#58; &#160;<span>{gmail}</span>
+        <div>
+          <div className="flex items-center">
+            <TbBrandGmail />
+            &#58; &#160;<span>{gmail}</span>
+          </div>
+          <div className='flex items-center'>
+            <BiPhoneCall />
+            &#58; &#160;<span>{phone}</span>
+          </div>
         </div>
       </div>
     </motion.div>

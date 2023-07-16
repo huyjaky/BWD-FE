@@ -247,6 +247,7 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
             ref={maskUser}
           >
             <HostUser
+              phone={selectUser?.Phone || 'xxxx-xxxx'}
               description={''}
               imgPath={selectUser?.Image}
               gmail={selectUser?.Gmail}

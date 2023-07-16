@@ -24,7 +24,7 @@ const Host = ({ userAcc, placeOffer, link, description, houseDetail }: HostProps
       <span className="text-[2rem]">Meet your host</span>
     </div>
     <div className="w-full rounded-2xl h-[34.3rem] bg-[#f0efe9] flex">
-      <HostUser description={description} imgPath={userAcc.Image} userName={userAcc.UserName} gmail={userAcc.Gmail} />
+      <HostUser phone={userAcc.Phone} description={description} imgPath={userAcc.Image} userName={userAcc.UserName} gmail={userAcc.Gmail} />
     </div>
 
     <div className="mt-10 border-t-2 border-slate-800">
