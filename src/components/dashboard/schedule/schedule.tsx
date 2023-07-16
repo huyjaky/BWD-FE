@@ -150,7 +150,7 @@ const Schedule = () => {
             )
           })}
         </motion.div>
-        <div className="w-[calc(100%-15rem)] h-full">
+        <div className="w-[calc(100%-15rem)] h-full mobile:w-full">
 
           <FullCalendar
             ref={calendarRef}
@@ -173,6 +173,7 @@ const Schedule = () => {
             dayMaxEvents={true}
             select={handleDateClick}
             eventClick={handleEventClick}
+
             eventsSet={(event) => {
               setCurrentEvents(event);
 

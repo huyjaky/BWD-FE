@@ -2,31 +2,31 @@ export const exploreWorlds = [
   {
     id: 'world-1',
     imgUrl:
-      'https://cdn.homedit.com/wp-content/uploads/2020/09/A-19th-Century-Timber-Frame-House-Adapted-To-A-Contemporary-World.jpg',
+      '/A-19th-Century-Timber-Frame-House-Adapted-To-A-Contemporary-World.jpg',
     title: '19th-century'
   },
   {
     id: 'world-2',
     imgUrl:
-      'https://cdn.homedit.com/wp-content/uploads/2020/09/A-Century-Old-Barn-Transformed-Into-A-Modern-Home-With-Soaring-Ceilings.jpg',
+      '/A-Century-Old-Barn-Transformed-Into-A-Modern-Home-With-Soaring-Ceilings.jpg',
     title: 'Minimalism'
   },
   {
     id: 'world-3',
     imgUrl:
-      'https://cdn.homedit.com/wp-content/uploads/2020/09/A-Serene-House-Lets-Pine-Trees-Grow-Through-Its-Decks-and-Roofs.jpg',
+      '/A-Serene-House-Lets-Pine-Trees-Grow-Through-Its-Decks-and-Roofs.jpg',
     title: 'Natural'
   },
   {
     id: 'world-4',
     imgUrl:
-      'https://cdn.homedit.com/wp-content/uploads/2020/09/A-Volcanic-Rock-House-Seamlessly-Disappears-Into-The-Landscape.jpg',
+      '/A-Volcanic-Rock-House-Seamlessly-Disappears-Into-The-Landscape.jpg',
     title: 'A Volcanic Rock '
   },
   {
     id: 'world-5',
     imgUrl:
-      'https://cdn.homedit.com/wp-content/uploads/2020/09/Old-Ranch-Style-House-Updated-With-A-Sleek-And-Contemporary-Design.jpg',
+      '/Old-Ranch-Style-House-Updated-With-A-Sleek-And-Contemporary-Design.jpg',
     title: 'Ranch-Style'
   }
 ];
@@ -54,19 +54,22 @@ export const newFeatures = [
 export const insights = [
   {
     imgUrl: '/about/planet-06.png',
-    title: 'The launch of the website makes Huy rich',
+    // imgUrl: '/handshake-3311965-2764508.webp',
+    title: 'Website with friendly interface',
     subtitle:
       'Magna etiam tempor orci eu lobortis elementum nibh tellus molestie. Diam maecenas sed enim ut sem viverra alique.'
   },
   {
     imgUrl: '/about/planet-07.png',
-    title: '7 tips to easily master the madness of the Olympus',
+    // imgUrl: '/alarm-clock-icon-3d-render-png.webp',
+    title: 'Search for a house quickly',
     subtitle:
       'Vitae congue eu consequat ac felis donec. Et magnis dis parturient montes nascetur ridiculus mus. Convallis tellus id interdum'
   },
   {
     imgUrl: '/about/planet-08.png',
-    title: 'With one platform you can explore the whole world house',
+    // imgUrl: '/shield_4x-removebg-preview.png',
+    title: 'Securely secured website ensures user experience',
     subtitle:
       'Quam quisque id diam vel quam elementum. Viverra nam libero justo laoreet sit amet cursus sit. Mauris in aliquam sem'
   }

@@ -10,6 +10,9 @@ export const ScheduleApi = {
   scheduleHostModifier(HostId: string, event: Date) {
     return axiosClient.post('/modifier/schedule/host', { HostId: HostId, data: event });
   },
+  EditTitleHost(HostId: string, event: string) {
+    return axiosClient.post('/edit/title/schedule/host', { HostId: HostId, data: event });
+  },
   scheduleHostDelete(HostId: string) {
     return axiosClient.post('/delete/scheduel/host', { HostId: HostId });
   },

@@ -23,14 +23,12 @@ const About = () => (
         variants={fadeIn('up', 'tween', 0.2, 1)}
         className="mt-[8px] font-normal sm:text-[2rem] text-[1rem] text-center text-slate-700"
       >
-        Welcome to <span className="font-extrabold text-black">Olympus</span>, the cutting-edge real
-        estate platform that leverages Artificial Intelligence{' '}
-        <span className="font-extrabold text-black">(AI) </span>
-        to revolutionize your property search experience. With a user-friendly interface and
-        state-of-the-art AI technology, <span className="font-extrabold text-black">
-          Olympus
-        </span>{' '}
-        is your ultimate destination for finding the perfect home.
+
+        Welcome to <span className="font-extrabold text-black"> Olympus </span>{' '}, our real estate website, our website
+        offers a user-friendly interface that provides your real estate
+        search experience. With so many features packed in, we're confident <span className="font-extrabold text-black"> Olympus </span>{' '}
+        is your ultimate destination
+        for finding the perfect home.
       </motion.p>
 
       <motion.div variants={fadeIn('up', 'tween', 0.3, 1)}>

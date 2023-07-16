@@ -29,10 +29,9 @@ const Feedback = () => (
           </p>
         </div>
 
-        <p className="mt-[2rem] font-normal sm:text-[2rem] text-[1rem] sm:leading-[45.6px] leading-[39.6px] text-black">
-          “With Olympus, you can harness this technology to explore and interact with properties.
-          Easily navigate virtual tours, access detailed information, and interact with virtual
-          agents to discover your ideal home.”
+        <p className="mt-[2rem] font-normal sm:text-[2.2rem] text-[1rem] sm:leading-[45.6px] leading-[39.6px] text-black">
+          “With Olympus, you can easily explore and select your favorite homes. Users can access detailed information
+          and interact with homeowners to discover your ideal home.”
         </p>
       </motion.div>
 

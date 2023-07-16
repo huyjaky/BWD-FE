@@ -52,16 +52,16 @@ const Navbar = () => {
           className="absolute top-[2.4rem] w-full h-[6.25rem] bg-white
       rounded-3xl shadow-xl overflow-hidden box-border py-3 "
         >
-          <div className="w-full h-full">
+          <div className="w-full h-full box-border px-3">
             <Link href={'/homepage'}>
-              <motion.button className="w-full h-fit">
-                <span
+              <motion.button className="w-full h-[2rem]">
+                <div
                   className="text-[1rem] bg-red-500 px-3 py-1 rounded-2xl
-            text-white
+            text-white w-full h-full
             "
                 >
                   Homepage
-                </span>
+                </div>
               </motion.button>
             </Link>
           </div>
