@@ -11,7 +11,7 @@ interface createHouseFormProps {
 interface createHouseData {
   createHouseForm: house_ | undefined;
   emptyCreateHouseForm: house_ | undefined;
-  setCreateHouseForm: (payload: house_) => void;
+  setCreateHouseForm: (payload: house_ | undefined) => void;
   typeHouseId: string[];
   setTypeHouseId: (payload: string[]) => void;
   imgArr: any;
@@ -145,7 +145,7 @@ const CreateHouseFormProvider = ({ children }: createHouseFormProps) => {
   const [typeHouseId, setTypeHouseId_] = useState<string[]>(createHouseDataDefault.typeHouseId);
   const [imgArr, setImgArr_] = useState<any>(createHouseDataDefault.imgArr);
   const [Address, setAddress_] = useState<address>(createHouseDataDefault.Address);
-  const setCreateHouseForm = (payload: house_) => setSelectHouse_(payload);
+  const setCreateHouseForm = (payload: house_ | undefined) => setSelectHouse_(payload);
   const setTypeHouseId = (payload: string[]) => setTypeHouseId_(payload);
   const setImgArr = (payload: any) => setImgArr_(payload);
   const setAddress = (payload:address) => setAddress_(payload);

@@ -6,15 +6,18 @@ import { NextPageWithLayout } from '@/models/layoutprops';
 import { GetServerSideProps } from 'next';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]';
+import HeaderForm from '@/components/headers/headerForm/HeaderForm';
 
-interface LoginProps{
+interface LoginProps {
   keyChatEngine: string
 }
 
-const Login: NextPageWithLayout<LoginProps> = ({keyChatEngine}: LoginProps) => {
+const Login: NextPageWithLayout<LoginProps> = ({ keyChatEngine }: LoginProps) => {
   return (
     <main>
-      <HeaderLogin />
+      <HeaderForm >
+        <div></div>
+      </HeaderForm>
       <div className="w-full h-[calc(100vh-5rem)] ">
         <div className="w-full h-full flex">
           <LoginPanel keyChatEngine={keyChatEngine}>
@@ -39,9 +42,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     res.end();
     return { props: {} };
   }
-  return { props: {
-    keyChatEngine: keyChatEngine
-  } };
+  return {
+    props: {
+      keyChatEngine: keyChatEngine
+    }
+  };
 };
 
 export default Login;

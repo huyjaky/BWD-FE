@@ -41,7 +41,7 @@ const Host = ({ userAcc, placeOffer, link, description, houseDetail }: HostProps
       <div className="w-full mb-5 mt-5">
         <span className="text-[2rem]">What this Amenities</span>
       </div>
-      <div className="w-full grid grid-cols-2">
+      <div className="w-full grid grid-cols-2 gap-x-4 gap-y-3">
         {placeOffer.map(
           (
             item: { PlaceOfferId: string; PlaceOffer: string; },
@@ -51,7 +51,9 @@ const Host = ({ userAcc, placeOffer, link, description, houseDetail }: HostProps
               <motion.div
                 whileInView={{ y: [20, 0], opacity: [0, 1] }}
                 transition={{ duration: 0.6, delay: 0.2 * index }}
-                className="w-full h-fit flex items-center cursor-default"
+                className="w-full h-fit flex items-center cursor-default border-2 rounded-lg
+                border-red-500 box-border px-4 py-2
+                "
                 key={index}
               >
                 <span className="text-[1.5rem] text-ellipsis overflow-hidden whitespace-nowrap">

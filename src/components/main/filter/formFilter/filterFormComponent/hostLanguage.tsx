@@ -1,9 +1,11 @@
 import { filterContext } from '@/contexts/filter';
+import { getHouseContext } from '@/contexts/getHouse';
 import { motion } from 'framer-motion';
 import { useContext, useEffect } from 'react';
 const HostLanguage = () => {
   const { filterForm, setFilterForm } = useContext(filterContext);
-  const arrLanguage: string[] = ['English', 'Vietnamese'];
+  const { isFilter, setIsFilter } = useContext(getHouseContext)
+  const arrLanguage: string[] = ['HouseForSale', 'HouseForRent'];
 
   return (
     <div className="w-full h-fit">
@@ -12,10 +14,18 @@ const HostLanguage = () => {
           return (
             <div className="flex-1 h-[6.25rem] flex" key={index}>
               <button
-                onClick={(event) => setFilterForm({ ...filterForm, hostLanguage: item })}
+                onClick={(event) => {
+                  if (filterForm.typeHouse.includes(item)) {
+                    const temp = filterForm.typeHouse.filter((items: string) => items != item);
+                    setFilterForm({ ...filterForm, typeHouse: temp });
+                    console.log(filterForm.typeHouse);
+                    return;
+                  }
+                  setFilterForm({ ...filterForm, typeHouse: [...filterForm.typeHouse, item] });
+                }}
                 className={`w-[80%] h-[4.5rem] m-auto border-2 rounded-xl hover:bg-redIcon hover:text-white
                 active:scale-[.8] transition-all duration-500
-                ${filterForm.hostLanguage === item ? 'bg-redIcon text-white' : ''}`}
+                ${filterForm.typeHouse.includes(item) ? 'bg-redIcon text-white' : ''}`}
               >
                 {item}
               </button>
@@ -23,16 +33,6 @@ const HostLanguage = () => {
           );
         })}
 
-        <div className="flex-1 h-[6.25rem] flex">
-          <button
-            onClick={(event) => setFilterForm({ ...filterForm, hostLanguage: '' })}
-            className={`w-[80%] h-[4.5rem] m-auto border-2 rounded-xl hover:bg-redIcon hover:text-white
-                active:scale-[.8] transition-all duration-500
-                ${filterForm.hostLanguage === '' ? 'bg-redIcon text-white' : ''}`}
-          >
-            All
-          </button>
-        </div>
       </div>
     </div>
   );

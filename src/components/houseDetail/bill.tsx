@@ -34,9 +34,8 @@ const Bill = ({ houseDetail }: BillProps) => {
 
   return (
     <div
-      className="w-full h-fit bg-white rounded-2xl
-                    shadow-2xl sticky top-4 mb-[17.5rem] transition-all"
-    >
+      className="w-full h-fit bg-white rounded-2xl top-[6rem]
+                    shadow-2xl sticky  mb-[17.5rem] transition-all" >
       <div className="w-full h-full box-border p-5">
         <div className="w-full">
           <span className="text-[2.4rem] font-semibold">&#36;{houseDetail.Price}</span>

@@ -15,6 +15,7 @@ import CompassFilter from './filterFormComponent/compass';
 import HostLanguage from './filterFormComponent/hostLanguage';
 import PriceRange from './filterFormComponent/priceRange';
 import PropertyHouse from './filterFormComponent/property';
+import { houseTempContext } from '@/contexts/houseTemp';
 
 export const variantsAmenities: Variants = {
   showMore: {
@@ -34,12 +35,13 @@ interface FormFilterProps {
 
 const FormFilter = ({ keyMapBing }: FormFilterProps) => {
   const [show, setShow] = useState(false);
-  const { filterForm, setFilterForm } = useContext(filterContext);
+  const { filterForm, setFilterForm, emptyFilterForm } = useContext(filterContext);
   const { setIsFilter, isFilter, setReRenderFilter, reRenderFilter } = useContext(getHouseContext);
   const { isClickOutSide, setIsClickOutSide } = useContext(filterFormAnimateContext);
   const { address, setAddress } = useContext(selectPlaceContext);
   const { isShowAllPt } = useContext(IsShowPtContext);
   const formFilter = useRef<HTMLInputElement>(null);
+  const {setHouseTemp} = useContext(houseTempContext)
 
   useEffect(() => {
     const handleOnClickOutSide = (event: any) => {
@@ -113,7 +115,7 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
       return;
     }
   };
-  useEffect(() => { console.log(address); }, [filterForm, address])
+  useEffect(() => { }, [filterForm, address])
 
   return (
     <>
@@ -200,7 +202,7 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
             {/* host language */}
             <div className="w-full h-fit mb-5 py-10">
               <div className="w-full h-fit flex flex-col ">
-                <span className="font-bold text-[2rem] mb-5">Host language</span>
+                <span className="font-bold text-[2rem] mb-5">Type house</span>
                 <HostLanguage />
               </div>
             </div>
@@ -211,16 +213,7 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
               <div
                 className="m-auto underline cursor-pointer"
                 onClick={(event) => {
-                  const filterFormTemp: filterForm = {
-                    ...filterForm,
-                    maxPrice: 500000,
-                    minPrice: 10,
-                    beds: 0,
-                    bathRooms: 0,
-                    typeHouse: [],
-                    amenities: [],
-                    hostLanguage: ''
-                  };
+                  setHouseTemp([])
                   const addressTemp: address = {
                     countryRegion: '',
                     locality: '',
@@ -235,7 +228,7 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
                     title: '',
                     district: ''
                   };
-                  setFilterForm(filterFormTemp);
+                  setFilterForm({...emptyFilterForm, typeHouse: []});
                   setAddress({ ...address, address: {...addressTemp} });
                 }}
               >

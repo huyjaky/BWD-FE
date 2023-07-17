@@ -63,11 +63,18 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
 
   // thuc hien hanh dong khi kiem tra xem arr co ton tai hay khong
   const isEmpty = (arr: any) => {
-    if (arr.data.length == 0) {
+    console.log('fetch first', arr.data);
+    if (arr?.data?.length == 0) {
+      setHasMore(false); // neu nhu du lieu tra ve la khong co lan dau tien thi khong xuat hien nx
+      nProgress.done();
+      return;
+    } else if (arr?.data?.length < 10) {
+      setHouseTemp(arr.data as house_[]);
       setHasMore(false); // neu nhu du lieu tra ve la khong co lan dau tien thi khong xuat hien nx
       nProgress.done();
       return;
     }
+
     setHouseTemp(arr.data as house_[]);
     nProgress.done();
   };
@@ -99,18 +106,6 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
     } else if (infShow === 'favoriteHouse' && status === 'authenticated') {
       const arr = await houseApi['authFavoriteList'](temp.UserId, 0);
       return isEmpty(arr);
-    } else if (infShow === 'houseForRent' && status === 'authenticated') {
-      const arr = await houseApi.noneAuthFilter({
-        filter: { ...filterForm, typeHouse: ['HouseForRent'] },
-        selectPlace: address
-      }, 2, '');
-      return isEmpty(arr);
-    } else if (infShow === 'houseForSale' && status === 'authenticated') {
-      const arr = await houseApi.noneAuthFilter({
-        filter: { ...filterForm, typeHouse: ['HouseForSale'] },
-        selectPlace: address
-      }, 2, '')
-      return isEmpty(arr);
     }
 
   };
@@ -127,9 +122,12 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
   useEffect(() => { }, [houseTemp]);
 
   const isExist = (moreHouse: any) => {
+    console.log('fetch second', moreHouse);
     if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0 && moreHouse.data.length >= 10) {
-      console.log(moreHouse);
       setHouseTemp([...houseTemp, ...moreHouse.data]);
+    } else if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0 && moreHouse.data.length < 10) {
+      setHouseTemp([...houseTemp, ...moreHouse.data]);
+      setHasMore(false); // cai nay de kiem tra xem da fetch het du lieu hay chua
     } else {
       setHasMore(false); // cai nay de kiem tra xem da fetch het du lieu hay chua
     }
@@ -137,11 +135,13 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
 
   const getMoreHouse = async () => {
     if (infShow === 'favoriteHouse' || infShow == 'authListHouse'
-    || infShow === 'houseForRent' || infShow === 'houseForSale'
+      || infShow === 'houseForRent' || infShow === 'houseForSale'
     ) {
+      console.log('return ');
       setHasMore(false);
       return;
     }
+
     try {
       // get more house de lay them nha khi scroll xuoong cuoi cung https://www.npmjs.com/package/react-infinite-scroll-component
       // noi get more them du lieu khi dung infinite
@@ -149,9 +149,10 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
         const moreHouse = await houseApi[infShow](houseTemp.length / 10 + 1, user.UserId);
         isExist(moreHouse);
       } else if (infShow === 'noneAuthFilter') {
+        console.log('fetch more');
         const moreHouse = await houseApi[infShow](
           { filter: filterForm, selectPlace: address },
-          houseTemp.length / 10 + 1,
+          houseTemp.length /10 + 1,
           user.UserId
         );
         isExist(moreHouse);
@@ -321,7 +322,7 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
         {/* </motion.div> */}
 
         <InfiniteScroll
-          dataLength={houseTemp.length}
+          dataLength={houseTemp?.length || 0}
           next={getMoreHouse}
           hasMore={hasMore}
           loader={

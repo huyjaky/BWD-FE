@@ -77,7 +77,7 @@ const SlideShowHouse = ({
   const fetchAPI = async () => {
     if (status === 'loading') return;
     const temp = await session?.userAcc;
-    if (infShow === 'favoriteHouse') {
+    if (infShow === 'favoriteHouse' && status === 'authenticated') {
       const arr = await houseApi['authFavoriteList'](temp.UserId, -1);
       return isEmpty(arr);
     } else if (infShow === 'houseForRent') {

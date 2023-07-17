@@ -30,7 +30,7 @@ const FinishPage = ({ api_url_path }: FinishPageProps) => {
   } = useContext(createHouseFormContext)
   const { stepCreate, setStepCreate } = useContext(StepCreateHomeContext)
   const filePondRef = useRef<FilePond>(null);
-  const [isClick, setIsClick]= useState<number>(0);
+  const [isClick, setIsClick] = useState<number>(0);
   const { data: session, status } = useSession();
   useEffect(() => {
     setKey((prevKey) => prevKey + 1);
@@ -53,26 +53,27 @@ const FinishPage = ({ api_url_path }: FinishPageProps) => {
         const data0: house_ = { ...createHouseForm, address: Address, useracc: session?.userAcc }
         await houseApi.createHouse(data0, typeHouseId);
       }
+      setCreateHouseForm(emptyCreateHouseForm)
     } catch (error) {
       console.log(error);
       return
     }
     if (emptyCreateHouseForm) {
-      setCreateHouseForm(emptyCreateHouseForm)
       setImgArr([]);
       setTypeHouseId([]);
-      setAddress({...emptyCreateHouseForm.address});
+      setAddress({ ...emptyCreateHouseForm.address });
       setStepCreate(1);
       setIsLoading(false);
     }
+    setIsClick(0);
     nProgress.done();
   }
 
   return (
     <>
       <motion.div
-      animate={isLoading ? {opacity: [0,1], display: 'flex'} : {opacity: [1,0], display: 'none'}}
-      className={`fixed bg-mask top-0 left-0 w-screen z-50 hidden
+        animate={isLoading ? { opacity: [0, 1], display: 'flex' } : { opacity: [1, 0], display: 'none' }}
+        className={`fixed bg-mask top-0 left-0 w-screen z-50 hidden
       h-screen`}></motion.div>
 
       <div className="hidden">
