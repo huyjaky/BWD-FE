@@ -17,7 +17,8 @@ const PopupSchedule = ({isShowPopup, setIsShowPopup}:PopupScheduleProps) => {
     <motion.div
       ref={popupHouse}
       animate={{ x, y }}
-      className={`w-fit fixed z-50 h-fit ${isShowPopup ? '' : 'hidden'}`}
+      className={`w-fit fixed z-50 h-fit ${isShowPopup ? '' : 'hidden'}
+      ${selectHousePopup && selectHousePopup.HouseId ? '' : 'hidden'}`}
     >
       <div className="w-[20rem] h-[15rem] rounded-xl overflow-hidden">
         <div className="w-full h-full relative">

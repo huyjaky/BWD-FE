@@ -11,11 +11,12 @@ export interface scheduleCreate {
   Childrens: number;
   Infants: number;
   Host: string;
-  house: house_ | undefined
+  house: house_ | undefined;
+  EventId:string;
 }
 
 export const schedule = {
   createSchedule(payload: scheduleCreate) {
-    return axiosClient.post('/create/schedule', payload);
+    return axiosClient.post('/create/schedule/host', payload);
   }
 };

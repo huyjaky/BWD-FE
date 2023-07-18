@@ -108,7 +108,7 @@ const ControlPlan = () => {
     setIsFirstLoading(false);
   }, []);
 
-  useEffect(()=>{}, [isShowHeader])
+  useEffect(() => { }, [isShowHeader])
 
   return (
     <>
@@ -119,21 +119,26 @@ const ControlPlan = () => {
             <motion.div
               variants={variants}
               animate={isShowHeader ? 'showUpLinkControl' : 'hiddenLinkControl'}
-              className="m-auto mt-3 flex w-full justify-between"
+              className="m-auto mt-3 w-full grid grid-cols-3 grid-rows-1"
             >
               {arrLink.map((item, index) => {
                 return (
-                  <Link
+                  // <Link
+                  //   key={index}
+                  //   href={`${item.ref}`} >
+                  <div
                     key={index}
-                    href={`${item.ref}`}
-                    className=" relative
+                    className=" relative w-full
                     before:bottom-0 before:h-[.2rem]  before:w-0 before:absolute
                     before:bg-slate-500 hover:before:w-full before:transition-all
                     before:duration-200
                   "
                   >
-                    {item.title}
-                  </Link>
+                    <div className='w-fit h-full m-auto'>
+                      {item.title}
+                    </div>
+                  </div>
+                  // </Link>
                 );
               })}
             </motion.div>

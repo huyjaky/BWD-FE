@@ -94,12 +94,9 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
   }, [address.guest]);
 
   const onSubmit: SubmitHandler<ConfirmSchema> = async (data) => {
-    // if (Bill.guest.adults === 0) {
-    //   // setMaskGuests(true);
-    //   router.push('/homepage', undefined, {shallow: true});
-    //   return;
-    // }
+
     const createSchedule = await schedule.createSchedule({
+      EventId: '',
       HouseId: houseDetail?.HouseId,
       UserId: user.UserId,
       PhoneNumber: data.phoneNumber + '',
@@ -108,7 +105,7 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
       Childrens: Bill.guest.childrens,
       Infants: Bill.guest.infants,
       Host: houseDetail?.PostBy,
-      house: undefined
+      house: undefined,
     });
 
     if (createSchedule.status != 200) {
@@ -116,10 +113,11 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
       console.log('have err with create schedule');
       return;
     } else {
-      if (createSchedule.data.isExist == true) {
-        setMaskNotificate(true);
-        return;
-      }
+      // if (createSchedule.data.isExist == true) {
+      //   setMaskNotificate(true);
+      //   return;
+      // }
+
       router.push(
         {
           pathname: '/confirm/' + houseDetail?.HouseId,
@@ -128,6 +126,7 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
         undefined,
         { shallow: true }
       );
+
     }
   };
 

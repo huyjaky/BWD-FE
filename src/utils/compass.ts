@@ -1,2 +1,2 @@
-export  const compassUtils: string[] = ['West', 'South', 'East', 'North', 'NorthEast',
-'SouthEast', 'SouthWest', 'NorthEast']
+export  const compassUtils: string[] = ['All' , 'West', 'South', 'East', 'North', 'NorthEast',
+'SouthEast', 'SouthWest', 'NorthWest'];

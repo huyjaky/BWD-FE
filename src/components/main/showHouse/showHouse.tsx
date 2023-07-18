@@ -63,7 +63,7 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
 
   // thuc hien hanh dong khi kiem tra xem arr co ton tai hay khong
   const isEmpty = (arr: any) => {
-    console.log('fetch first', arr.data);
+    console.log('isEmpty',arr.data);
     if (arr?.data?.length == 0) {
       setHasMore(false); // neu nhu du lieu tra ve la khong co lan dau tien thi khong xuat hien nx
       nProgress.done();
@@ -91,12 +91,12 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
       const arr = await houseApi[infShow](1, '');
       return isEmpty(arr);
     } else if (infShow === 'noneAuthFilter' && status === 'unauthenticated') {
-      const arr = await houseApi[infShow]({ filter: filterForm, selectPlace: address }, 1, '');
+      const arr = await houseApi[infShow]({ filter: filterForm, selectPlace: address }, 0, '');
       return isEmpty(arr);
     } else if (infShow === 'noneAuthFilter' && status === 'authenticated') {
       const arr = await houseApi[infShow](
         { filter: filterForm, selectPlace: address },
-        1,
+        0,
         temp.UserId
       );
       return isEmpty(arr);
@@ -122,10 +122,11 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
   useEffect(() => { }, [houseTemp]);
 
   const isExist = (moreHouse: any) => {
-    console.log('fetch second', moreHouse);
     if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0 && moreHouse.data.length >= 10) {
       setHouseTemp([...houseTemp, ...moreHouse.data]);
+      console.log('fetchmore',moreHouse.data);
     } else if (Array.isArray(moreHouse.data) && moreHouse.data.length != 0 && moreHouse.data.length < 10) {
+      console.log('last fetch', moreHouse.data);
       setHouseTemp([...houseTemp, ...moreHouse.data]);
       setHasMore(false); // cai nay de kiem tra xem da fetch het du lieu hay chua
     } else {
@@ -146,13 +147,13 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
       // get more house de lay them nha khi scroll xuoong cuoi cung https://www.npmjs.com/package/react-infinite-scroll-component
       // noi get more them du lieu khi dung infinite
       if (infShow === 'noneAuthHouseApi') {
-        const moreHouse = await houseApi[infShow](houseTemp.length / 10 + 1, user.UserId);
+        const moreHouse = await houseApi[infShow](houseTemp.length , user.UserId);
         isExist(moreHouse);
       } else if (infShow === 'noneAuthFilter') {
         console.log('fetch more');
         const moreHouse = await houseApi[infShow](
           { filter: filterForm, selectPlace: address },
-          houseTemp.length /10 + 1,
+          houseTemp.length,
           user.UserId
         );
         isExist(moreHouse);

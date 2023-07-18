@@ -247,7 +247,7 @@
 
 .checkclass {
   backdrop-filter: blur(1rem);
-  transform:translate3d(0,0,0);
+  transform: translate3d(0, 0, 0);
 }
 
 #ce-ice-breaker {
@@ -268,10 +268,16 @@
 }
 
 #msg-textarea {
-  border:  #ff0000 solid 2px;
+  border: #ff0000 solid 2px;
 
 }
 
 #hoverme {
   writing-mode: vertical-rl;
+}
+
+.border_animation-main {
+  border-radius: 50%;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to right bottom, #6a5af9, #f62682);
 }

@@ -15,7 +15,7 @@ import { createHouseFormContext } from '@/contexts/createHouseForm';
 import { StepCreateHomeContext } from '@/contexts/stepCreate';
 import { NextPageWithLayout } from '@/models/layoutprops';
 import { initializeSSR } from 'bing-maps-loader';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, GetStaticProps, GetStaticPropsContext } from 'next';
 import { getServerSession } from 'next-auth';
 import { Montserrat } from 'next/font/google';
 import { useContext, useEffect } from 'react';
@@ -108,17 +108,5 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   };
 };
 
-// export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
-//   initializeSSR();
-//   const link = process.env.API_URL_PATH;
-//   const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
-//   return {
-//     props: {
-//       keyMapBing: keyMapBing,
-//       link: link
-//     },
-//     revalidate: 300
-//   };
-// };
 
 export default CreateHouse;

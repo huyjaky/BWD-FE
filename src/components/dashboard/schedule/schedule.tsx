@@ -14,6 +14,7 @@ import { RefObject, useContext, useEffect, useRef, useState } from "react";
 import RemoveReqSchedule from "./removeReqSchedule";
 import { DashboardContext } from "@/contexts/dashboard";
 import PopupSchedule from "./popupSchedule/popupSchedule";
+import AddEvent from "./popupSchedule/addEvent";
 
 const Schedule = () => {
 
@@ -24,25 +25,37 @@ const Schedule = () => {
   const { eventArr, setEventArr, setSelectHousePopup, selectHousePopup } = useContext(DashboardContext)
   const [isFirstLoading, setIsFirstLoading] = useState<boolean>(true);
   const [selectedRemove, setSelectedRemove] = useState<EventClickArg>();
+
   const removeReqPanel = useRef<HTMLDivElement>(null);
+
+
+  const [selectAddEvent, setSelectAddEvent] = useState<DateSelectArg>()
+  const [isAddEvent, setIsAddEvent] = useState<boolean>(false);
+  const addEventPanell = useRef<HTMLDivElement>(null)
+
+
+
 
   const [isShowPopup, setIsShowPopup] = useState<boolean>(false);
   const [keyPopup, setKeyPopup] = useState<number>(-1);
 
   const handleDateClick = (selected: DateSelectArg) => {
-    const title = prompt('please enter');
-    const calenderApi = selected.view.calendar;
-    calenderApi.unselect();
+    setSelectAddEvent(selected);
+    setIsAddEvent(true);
 
-    if (title) {
-      calenderApi.addEvent({
-        id: `${selected.startStr}-${title}`,
-        title: title,
-        start: selected.startStr,
-        end: selected.endStr,
-        allDay: selected.allDay
-      })
-    }
+    // const title = prompt('please enter');
+    // const calenderApi = selected.view.calendar;
+    // calenderApi.unselect();
+
+    // if (title) {
+    //   calenderApi.addEvent({
+    //     id: `${selected.startStr}-${title}`,
+    //     title: title,
+    //     start: selected.startStr,
+    //     end: selected.endStr,
+    //     allDay: selected.allDay
+    //   })
+    // }
   }
 
   const handleEventClick = (selected: EventClickArg) => {
@@ -58,6 +71,16 @@ const Schedule = () => {
     result.setDate(result.getDate() + days);
     return result;
   }
+
+  const handleOnClickOutSideAddEventPanel = (event: any) => {
+    const isClickInSide = addEventPanell.current?.contains(event.target);
+    if (!isClickInSide) {
+      setIsAddEvent(false);
+      return;
+    } else {
+      return;
+    }
+  };
 
   const handleOnClickOutSideRemoveReqPanel = (event: any) => {
     const isClickInSide = removeReqPanel.current?.contains(event.target);
@@ -77,7 +100,7 @@ const Schedule = () => {
         const newEvent = {
           title: item.PhoneNumber,
           start: item.Date + '',
-          id: item.HouseId,
+          id: item.EventId,
         };
         if (calendarApi) {
           calendarApi.addEvent(newEvent);
@@ -102,6 +125,21 @@ const Schedule = () => {
       > */}
       <PopupSchedule isShowPopup={isShowPopup} setIsShowPopup={setIsShowPopup} />
       {/* </motion.div> */}
+
+      <AnimatePresence initial={false}>
+        <motion.div
+          variants={variants}
+          animate={isAddEvent ? 'showMask' : 'hiddenMask'}
+          onClick={handleOnClickOutSideAddEventPanel}
+          className="fixed w-screen h-screen bg-mask z-50 top-0 left-0" >
+          <div className='w-fit h-fit m-auto bg-white mobile:w-screen mobile:h-screen
+    flex flex-col mobile:p-0 p-5 rounded-xl ' ref={addEventPanell}>
+
+            <AddEvent selected={selectAddEvent} setIsAddEvent={setIsAddEvent} />
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
 
       <AnimatePresence initial={false}>
         <motion.div
@@ -186,7 +224,7 @@ const Schedule = () => {
                 day: 'numeric'
               }));
               try {
-                ScheduleApi.scheduleHostModifier(event.event.id, addDays(eventChange, 1));
+                ScheduleApi.scheduleHostModifier(event.event.id, { Date: addDays(eventChange, 1) });
               } catch (error) {
                 console.log(error);
                 return { error }

@@ -19,6 +19,8 @@ import CarouselMain from '@/components/main/carousel/carouselMain';
 import TabShowHouse from '@/components/main/tabShowHouse/tabShowHouse';
 import TabletMobile from '@/components/main/typeHouse/tabletMobile';
 import { useSession } from 'next-auth/react';
+import AnimateTitle from '@/components/main/showHouse/animateTitle';
+import { staggerContainer } from '@/utils/motion';
 
 
 
@@ -38,7 +40,7 @@ interface HomeProps {
   user_: userAcc;
   keyMapBing: string;
   props: any;
-  keyChatEngine:string
+  keyChatEngine: string
 }
 
 const variants: Variants = {
@@ -89,7 +91,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing, keyChat
 
 
   const { scrollYProgress } = useScroll();
-  const convert = useTransform(scrollYProgress, [0, .7], [1, 5]);
+  const convert = useTransform(scrollYProgress, [0,.7], [1, 5]);
 
   return (
     <>
@@ -97,11 +99,26 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing, keyChat
         <div className='w-full h-full relative' >
           <CarouselMain />
 
-          <div className='absolute w-full h-full flex bg-mask z-30 top-0 left-0'>
+          <div className='absolute w-full h-full flex bg-[rgba(105,105,105,0.7)] z-30 top-0 left-0'>
             <div className='m-auto'>
-              <span className={`${dancingScript.className} text-[50px]
-                font-extrabold text-white
-                `}>House is where you return</span>
+              {/* <span className={`${dancingScript.className} text-[50px]
+                font-extrabold text-white `}>
+              </span> */}
+
+              <motion.div
+                variants={staggerContainer(null, null)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: false, amount: 0.25 }}
+                className={`${dancingScript.className} text-[50px]
+                font-extrabold text-white `} >
+                <AnimateTitle
+                  title={' House is where you return '}
+                  textStyles=" w-fit h-fit text-[3rem] text-center"
+                />
+
+              </motion.div>
+
             </div>
           </div>
         </div>
@@ -110,8 +127,8 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing, keyChat
       <div className='fixed top-[80px] left-0 w-screen h-screen'>
         <div className='w-full h-full relative'>
           <motion.div className={`w-[36rem] h-[calc(100vh-100px)] bottom-0 left-[calc(50%-18rem-100vh)]
-            bg-transparent absolute rounded-t-full box-content border-[100vh] border-b-0
-            origin-bottom border-[#fdf5f4]
+            bg-transparent absolute  box-content border-[100vh] border-b-0
+            origin-bottom border-[#fdf5f4] rounded-t-full
             `} style={{ scale: convert }}>
 
             <div className='w-full h-full rounded-t-full overflow-hidden
@@ -131,7 +148,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing, keyChat
         id="root"
       >
         <AnimatePresence initial={false}>
-          <HeaderMain keyMapBing={keyMapBing} keyChatEngine={keyChatEngine}/>
+          <HeaderMain keyMapBing={keyMapBing} keyChatEngine={keyChatEngine} />
         </AnimatePresence>
         <motion.div>
           <TypeHouse />
@@ -153,7 +170,10 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing, keyChat
           </div>
 
           {isFilter != 'main' ? (
-            <motion.div variants={variants} animate="show" className=' h-fit bg-[#f0efe9] m-auto rounded-2xl mb-[100px]'>
+            <motion.div variants={variants} animate="show" className=' h-fit bg-[#f0efe9] m-auto rounded-2xl mb-[100px]
+            tablet:mt-[3rem] mobile:mt-[3rem] mobile:rounded-none tablet:rounded-none
+
+            '>
               <ShowHouse
                 infShow={
                   isFilter === 'houseForRent' || isFilter === 'houseForSale'
