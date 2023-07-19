@@ -101,7 +101,7 @@ const LoginPanel = ({ children, keyChatEngine }: LoginPanelProps) => {
     if (login_?.ok) {
       setUser({ ...user, ...session?.userAcc });
       setIsLoginClick(session?.userAcc?.UserName);
-     
+
 
     }
     setIsFilter('main');
@@ -114,7 +114,7 @@ const LoginPanel = ({ children, keyChatEngine }: LoginPanelProps) => {
 
   return (
     <div className="w-[600px] h-fit m-auto shadow-2xl rounded-3xl box-border p-10
-    mobile:w-full mobile:h-full relative
+    mobile:w-full mobile:h-full relative bg-white
     ">
       <button
       onClick={()=>{setIsLoginClick(false)}}

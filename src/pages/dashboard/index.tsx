@@ -65,10 +65,10 @@ const Index: NextPageWithLayout<IndexProps> = ({ }: IndexProps) => {
         <motion.div
           onHoverStart={(event) => { setIsHoverCorner(true) }}
           className="w-[2rem] fixed h-screen top-0 left-0 border-r-2">
-            <div className="w-full h-full flex">
-              <div className="m-auto" id="hoverme">Lets hover me</div>
-            </div>
-          </motion.div>
+          <div className="w-full h-full flex">
+            <div className="m-auto" id="hoverme">Lets hover me</div>
+          </div>
+        </motion.div>
 
         <motion.div
           onHoverStart={(event) => { setIsHoverCorner(true) }}
@@ -90,12 +90,14 @@ Index.Layout = AuthWithAnimate;
 export default Index;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-
+  const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
+  const keyChatEngine = process.env.KEYCHAT_ENGINE;
 
   return {
     props: {
-      // eventArr: eventArr
+      keyMapBing: keyMapBing,
+      keyChatEngine: keyChatEngine
     }
-  };
+  };;
 };
 

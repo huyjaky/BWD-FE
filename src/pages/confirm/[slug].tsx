@@ -94,10 +94,11 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
   }, [address.guest]);
 
   const onSubmit: SubmitHandler<ConfirmSchema> = async (data) => {
+    console.log('housedetail',houseDetail);
 
     const createSchedule = await schedule.createSchedule({
       EventId: '',
-      HouseId: houseDetail?.HouseId,
+      HouseId: houseDetail.HouseId,
       UserId: user.UserId,
       PhoneNumber: data.phoneNumber + '',
       Date: Bill.checkInDay,
@@ -117,14 +118,14 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
       //   setMaskNotificate(true);
       //   return;
       // }
-      router.push(
-        {
-          pathname: '/homepage',
-          query: { slug: 'your-slug-value' }
-        },
-        undefined,
-        { shallow: true }
-      );
+      // router.push(
+      //   {
+      //     pathname: '/homepage',
+      //     query: { slug: 'your-slug-value' }
+      //   },
+      //   undefined,
+      //   { shallow: true }
+      // );
 
     }
   };

@@ -12,9 +12,11 @@ const PopupSchedule = ({isShowPopup, setIsShowPopup}:PopupScheduleProps) => {
   const { selectHousePopup, setSelectHousePopup } = useContext(DashboardContext)
   const popupHouse = useRef<HTMLDivElement>(null);
   const { x, y } = useFollowPointer(popupHouse);
-  if (!selectHousePopup) return (
-    <div className="hidden"></div>
-  )
+
+  // if (!selectHousePopup) return (
+  //   <div className="hidden"></div>
+  // )
+
   return (
     <motion.div
       ref={popupHouse}
