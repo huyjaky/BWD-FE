@@ -35,7 +35,7 @@ interface FormFilterProps {
 
 const FormFilter = ({ keyMapBing }: FormFilterProps) => {
   const [show, setShow] = useState(false);
-  const { filterForm, setFilterForm, emptyFilterForm } = useContext(filterContext);
+  const { filterForm, setFilterForm, emptyFilterForm, resetFilterForm } = useContext(filterContext);
   const { setIsFilter, isFilter, setReRenderFilter, reRenderFilter } = useContext(getHouseContext);
   const { isClickOutSide, setIsClickOutSide } = useContext(filterFormAnimateContext);
   const { address, setAddress } = useContext(selectPlaceContext);
@@ -104,6 +104,8 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+
+
 
     // neu du lieu co ton tai thi la fetch lai du lieu neu khong thi bo qua
     if (!isEmpty()) {
@@ -228,7 +230,9 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
                     title: '',
                     district: ''
                   };
-                  setFilterForm({...emptyFilterForm, typeHouse: []});
+                  // setFilterForm({...emptyFilterForm, typeHouse: []});
+                  resetFilterForm();
+                  setFilterForm({...filterForm, amenities: []})
                   setAddress({ ...address, address: {...addressTemp} });
                 }}
               >

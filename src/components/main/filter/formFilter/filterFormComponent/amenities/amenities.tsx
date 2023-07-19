@@ -9,7 +9,7 @@ const Amenities = () => {
   const arrAmenities_: string[] = arrAmenities;
   const { filterForm, setFilterForm } = useContext(filterContext);
 
-  useEffect(() => { }, [filterForm.amenities]);
+  useEffect(() => { }, [filterForm]);
 
   const handleOnClick = (event: any, item: string) => {
     const arrTemp: string[] = Array.isArray(filterForm.amenities) ? filterForm.amenities : [];

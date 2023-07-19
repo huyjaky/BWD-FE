@@ -35,7 +35,6 @@ const Index: NextPageWithLayout<IndexProps> = ({ }: IndexProps) => {
       if (schedule.status == 200) {
         console.log(schedule.data);
         setEventArr(schedule.data as scheduleCreate[]);
-
       }
 
     } catch (error) {

@@ -15,6 +15,7 @@ import RemoveReqSchedule from "./removeReqSchedule";
 import { DashboardContext } from "@/contexts/dashboard";
 import PopupSchedule from "./popupSchedule/popupSchedule";
 import AddEvent from "./popupSchedule/addEvent";
+import { house_ } from "@/models/house";
 
 const Schedule = () => {
 
@@ -161,9 +162,11 @@ const Schedule = () => {
               <div key={index}>
                 <motion.div
                   onHoverStart={(event) => {
-                    setIsShowPopup(true); setKeyPopup(index);
-                    // console.log('showpopup', eventArr[index]?.house);
-                    setSelectHousePopup(eventArr[index]?.house);
+                    setIsShowPopup(true);
+                    setKeyPopup(index);
+                    // if (eventArr[index].house !== undefined && eventArr[index].house?.length == 0) return;
+                    // console.log(eventArr[index].house);
+                    // setSelectHousePopup(eventArr[index]?.house[0]);
                   }}
                   onHoverEnd={(event) => { setIsShowPopup(false); setKeyPopup(-1) }}
                   className="w-ful h-[8rem]   box-border p-4">

@@ -117,10 +117,9 @@ const Confirm: NextPageWithLayout<ConfirmProps> = ({ houseDetail, keyMapBox }: C
       //   setMaskNotificate(true);
       //   return;
       // }
-
       router.push(
         {
-          pathname: '/confirm/' + houseDetail?.HouseId,
+          pathname: '/homepage',
           query: { slug: 'your-slug-value' }
         },
         undefined,
