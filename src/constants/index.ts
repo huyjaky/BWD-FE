@@ -53,25 +53,28 @@ export const newFeatures = [
 
 export const insights = [
   {
-    imgUrl: '/about/planet-06.png',
+    imgUrl: 'https://cdn.luatvietnam.vn/uploaded/Images/Original/2022/02/16/chinh-sach-moi-anh-huong-den-thi-truong-bat-dong-san_1602162451.png',
     // imgUrl: '/handshake-3311965-2764508.webp',
     title: 'Website with friendly interface',
     subtitle:
-      'Magna etiam tempor orci eu lobortis elementum nibh tellus molestie. Diam maecenas sed enim ut sem viverra alique.'
+      // 'Magna etiam tempor orci eu lobortis elementum nibh tellus molestie. Diam maecenas sed enim ut sem viverra alique.'
+      'The website has a friendly interface that helps you interact easily to find information'
   },
   {
-    imgUrl: '/about/planet-07.png',
+    imgUrl: 'https://danviet.mediacdn.vn/296231569849192448/2022/7/3/vang-16568301719341316800141.jpg',
     // imgUrl: '/alarm-clock-icon-3d-render-png.webp',
     title: 'Search for a house quickly',
     subtitle:
-      'Vitae congue eu consequat ac felis donec. Et magnis dis parturient montes nascetur ridiculus mus. Convallis tellus id interdum'
+      // 'Vitae congue eu consequat ac felis donec. Et magnis dis parturient montes nascetur ridiculus mus. Convallis tellus id interdum'
+      'With the optimization of the website will help you find the house more quickly'
   },
   {
-    imgUrl: '/about/planet-08.png',
+    imgUrl: 'https://cdn.thuvienphapluat.vn/uploads/lawnews/2022/01/08/38994/dieu-kien-kinh-doanh-bat-dong-san.jpg?w\\u003d480\\u0026h\\u003d280',
     // imgUrl: '/shield_4x-removebg-preview.png',
     title: 'Securely secured website ensures user experience',
     subtitle:
-      'Quam quisque id diam vel quam elementum. Viverra nam libero justo laoreet sit amet cursus sit. Mauris in aliquam sem'
+      // 'Quam quisque id diam vel quam elementum. Viverra nam libero justo laoreet sit amet cursus sit. Mauris in aliquam sem'
+      'Websites with ssl certificates help keep information safe'
   }
 ];
 

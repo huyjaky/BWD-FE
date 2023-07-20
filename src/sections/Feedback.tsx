@@ -40,7 +40,7 @@ const Feedback = () => (
         className="relative flex-1 flex justify-center items-center transition-all"
       >
         <img
-          src="/about/planet-09.png"
+          src="https://thanhtra.com.vn/data/images/0/2021/12/21/nghiemlan/lam-phat-bat-dong-san.jpg"
           alt="planet-09"
           className="w-full lg:h-[38rem] h-auto min-h-[13rem] object-cover rounded-[2.4rem]
           transition-all"
