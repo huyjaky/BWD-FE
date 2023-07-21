@@ -117,8 +117,8 @@ const LoginPanel = ({ children, keyChatEngine }: LoginPanelProps) => {
     mobile:w-full mobile:h-full relative bg-white
     ">
       <button
-      onClick={()=>{setIsLoginClick(false)}}
-       className='top-5 left-5 absolute '>
+        onClick={() => { setIsLoginClick(false) }}
+        className='top-5 left-5 absolute '>
         <IoCloseOutline className='h-full text-[2.4rem] text-left' />
       </button>
       <div className="w-full h-fit flex justify-end border-b-2 mb-5">

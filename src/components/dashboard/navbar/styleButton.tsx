@@ -18,7 +18,7 @@ const StyleButton = ({ children, title }: StyleButtonProps) => {
         onHoverEnd={(event) => { setIsHover(false) }}
         className="w-full h-full flex relative z-10">
         <motion.div animate={isHover ? { width: ['0%', '100%'] } : { width: ['100%', '0%'] }}
-          className="absolute h-full w-0 top-0 left-0 bg-emerald-300 z-0">
+          className="absolute h-full w-0 top-0 left-0 bg-red-400 z-0">
         </motion.div>
 
         <motion.div

@@ -1,8 +1,10 @@
 
 // import required modules
 
+import PieChartDashboard from '@/components/dashboard/piechart/pieChart';
 import { motion, useMotionValue, useScroll, useTransform } from 'framer-motion';
 import { useEffect } from 'react';
+import { Pie, PieChart } from 'recharts';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
@@ -12,21 +14,67 @@ const Test = () => {
   const { scrollYProgress } = useScroll();
   const convert = useTransform(scrollYProgress, [0, .7], [1, 5]);
 
+  const data01 = [
+    {
+      "name": "Group A",
+      "value": 400
+    },
+    {
+      "name": "Group B",
+      "value": 300
+    },
+    {
+      "name": "Group C",
+      "value": 300
+    },
+    {
+      "name": "Group D",
+      "value": 200
+    },
+    {
+      "name": "Group E",
+      "value": 278
+    },
+    {
+      "name": "Group F",
+      "value": 189
+    }
+  ];
+  const data02 = [
+    {
+      "name": "Group A",
+      "value": 2400
+    },
+    {
+      "name": "Group B",
+      "value": 4567
+    },
+    {
+      "name": "Group C",
+      "value": 1398
+    },
+    {
+      "name": "Group D",
+      "value": 9800
+    },
+    {
+      "name": "Group E",
+      "value": 3908
+    },
+    {
+      "name": "Group F",
+      "value": 4800
+    }
+  ];
+
   return (
     <>
-      <div className='w-full h-[100vh] bg-emerald-300'>
-        <div className='fixed top-0 left-0 w-screen h-screen  flex
-        '>
-          <motion.div className='relative w-full h-full '>
-            <motion.div className={`w-[36rem] h-[calc(100vh-100px)] bottom-0 left-[calc(50%-18rem-100vh)]
-            bg-transparent absolute rounded-t-full box-content border-[100vh] border-b-0
-            origin-bottom
-            `} style={{ scale: convert }}>
-
-            </motion.div>
-          </motion.div>
-
-        </div>
+      <div className='w-screen h-screen bg-red-400'>
+        <PieChartDashboard />
+        {/* <PieChart width={730} height={250}>
+          <Pie data={data01} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={50} fill="#8884d8" />
+          <Pie data={data02} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={60} outerRadius={80} fill="#82ca9d" label />
+        </PieChart> */}
       </div>
     </>
   );

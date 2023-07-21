@@ -16,6 +16,8 @@ import fetch from 'node-fetch';
 import { scheduleCreate } from "@/api-client/schedule";
 import { useSession } from "next-auth/react";
 import { ScheduleApi } from "@/api-client/scheduleApi";
+import BarChartDashboard from "@/components/dashboard/barchart/barChart";
+import PieChartDashboard from "@/components/dashboard/piechart/pieChart";
 
 interface IndexProps {
   // eventArr: scheduleCreate[];
@@ -62,6 +64,17 @@ const Index: NextPageWithLayout<IndexProps> = ({ }: IndexProps) => {
           </LayoutPanelDasboard>
         }
 
+        {selectOption === 'Barchart' &&
+          <LayoutPanelDasboard>
+            <BarChartDashboard />
+          </LayoutPanelDasboard>
+        }
+
+        {selectOption === 'Piechart' &&
+          <LayoutPanelDasboard>
+            <PieChartDashboard />
+          </LayoutPanelDasboard>
+        }
         <motion.div
           onHoverStart={(event) => { setIsHoverCorner(true) }}
           className="w-[2rem] fixed h-screen top-0 left-0 border-r-2">

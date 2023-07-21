@@ -34,7 +34,7 @@ const TypeCard = ({ children, title }: TypeCardProps) => {
     <div className="w-full h-fit flex ">
       <div
         onClick={handleOnClick}
-        className="w-[60%] h-[25rem] m-auto bg-emerald-400 flex rounded-2xl text-center
+        className="w-[60%] h-[25rem] m-auto border-[5px] flex rounded-2xl text-center
       flex-col">
         <motion.div
           className='m-auto rounded-full p-5 text-[15rem]' >
