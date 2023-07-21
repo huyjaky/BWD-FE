@@ -28,6 +28,12 @@ const Chats = () => {
     }
   }, []);
 
+  useEffect(()=>{
+    if (status!=='loading' && status !== 'authenticated') {
+      router.push('/login', undefined, {shallow: true});
+    }
+  }, [status])
+
   useEffect(() => {
     const auth = async () => {
       const temp = await session?.userAcc;

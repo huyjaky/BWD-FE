@@ -45,7 +45,7 @@ const ListButton = () => {
                   redirect: false
                 });
 
-                if (router.asPath === '/chats') {
+                if (router.asPath !== '/homepage') {
                   router.push('/homepage', undefined, { shallow: true });
                 }
 

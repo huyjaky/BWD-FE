@@ -102,7 +102,6 @@ const LoginPanel = ({ children, keyChatEngine }: LoginPanelProps) => {
       setUser({ ...user, ...session?.userAcc });
       setIsLoginClick(session?.userAcc?.UserName);
 
-
     }
     setIsFilter('main');
     if (router.asPath === '/login') {
