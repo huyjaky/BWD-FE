@@ -297,7 +297,7 @@ const ShowHouse = ({ infShow, keyMapBing, api_url_path }: ShowHouseProps) => {
         </motion.div>
       </AnimatePresence>
 
-      <motion.div className="w-full h-fit py-4 pb-28" id="scroll-inf">
+      <motion.div className="w-full h-fit py-4 pb-28 box-border px-[5rem]" id="scroll-inf">
         {/* <motion.div
           variants={staggerContainer(null, null)}
           initial="hidden"

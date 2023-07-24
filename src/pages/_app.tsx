@@ -11,6 +11,7 @@ import 'rc-slider/assets/index.css';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import 'react-loading-skeleton/dist/skeleton.css';
+import '../styles/sass/main.scss'
 
 import NextNProgress from 'nextjs-progressbar';
 import { SWRConfig } from 'swr';

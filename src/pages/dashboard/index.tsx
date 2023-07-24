@@ -18,6 +18,7 @@ import { useSession } from "next-auth/react";
 import { ScheduleApi } from "@/api-client/scheduleApi";
 import BarChartDashboard from "@/components/dashboard/barchart/barChart";
 import PieChartDashboard from "@/components/dashboard/piechart/pieChart";
+import { userAccContext } from "@/contexts/userAcc";
 
 interface IndexProps {
   // eventArr: scheduleCreate[];
@@ -26,6 +27,7 @@ interface IndexProps {
 const Index: NextPageWithLayout<IndexProps> = ({ }: IndexProps) => {
   const { selectOption, setSelectOption, setEventArr, eventArr } = useContext(DashboardContext)
   const { data: session, status } = useSession();
+  const {user} = useContext(userAccContext);
   const [isHoverCorner, setIsHoverCorner] = useState<boolean>(false);
 
   const fetchSchedule = async () => {
@@ -45,11 +47,17 @@ const Index: NextPageWithLayout<IndexProps> = ({ }: IndexProps) => {
     }
   }
 
+  // useEffect(() => {
+  //   if (eventArr.length == 0) {
+  //     fetchSchedule();
+  //   }
+  // }, [status])
+
   useEffect(() => {
-    if (eventArr.length == 0) {
+    if (user.UserId !== 'none user') {
       fetchSchedule();
     }
-  }, [status])
+  }, [user])
 
   return (
     <div className="w-screen h-screen">
@@ -105,6 +113,7 @@ export default Index;
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
   const keyChatEngine = process.env.KEYCHAT_ENGINE;
+
 
   return {
     props: {

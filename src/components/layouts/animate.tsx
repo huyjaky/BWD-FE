@@ -16,7 +16,7 @@ const Animate = ({ children }: AnimateProps) => {
           initial="initialState"
           animate="animateState"
           exit="exitState"
-          transition={{ duration: 2 }}
+          transition={{ duration: 3 }}
           variants={{
             initialState: {
               clipPath: 'circle(0.2% at 100% 0)'

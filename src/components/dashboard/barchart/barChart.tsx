@@ -18,19 +18,24 @@ for (let num = 30; num >= 0; num--) {
   });
 }
 
-const BarChartDashboard =  () => {
+const BarChartDashboard = () => {
   return (
     <ResponsiveContainer width="100%" height='100%'>
       <AreaChart data={data}>
         <defs>
-          <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#2451B7" stopOpacity={0.4} />
-            <stop offset="75%" stopColor="#2451B7" stopOpacity={0.05} />
+          <linearGradient id="color0" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#4eb09b" stopOpacity={0.4} />
+            <stop offset="75%" stopColor="#4eb09b" stopOpacity={0.05} />
+          </linearGradient>
+
+          <linearGradient id="color1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#f28076" stopOpacity={0.4} />
+            <stop offset="75%" stopColor="#f28076" stopOpacity={0.05} />
           </linearGradient>
         </defs>
 
-        <Area dataKey="value" stroke="#2451B7" fill="url(#color)" />
-        <Area dataKey="value2" stroke="#ad31b7" fill="url(#color)" />
+        <Area dataKey="value" stroke="#2451B7" fill="url(#color0)" />
+        <Area dataKey="value2" stroke="#ad31b7" fill="url(#color1)" />
 
         <XAxis
           dataKey="date"
@@ -63,7 +68,7 @@ const BarChartDashboard =  () => {
 
 export default BarChartDashboard;
 
-function CustomTooltip({ active, payload, label }: { active:any, payload:any, label:any }) {
+function CustomTooltip({ active, payload, label }: { active: any, payload: any, label: any }) {
   if (active) {
     return (
       <div className="tooltip">

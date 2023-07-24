@@ -161,7 +161,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing, keyChat
         </div>
 
         <div
-          className="w-full h-fit px-[5rem] box-border
+          className="w-full h-fit  box-border
         tablet:px-0 mobile:px-0
         " id='slideShowHouse'
         >
@@ -170,7 +170,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing, keyChat
           </div>
 
           {isFilter != 'main' ? (
-            <motion.div variants={variants} animate="show" className=' h-fit bg-[#f0efe9] m-auto rounded-2xl mb-[100px]
+            <motion.div variants={variants} animate="show" className=' h-fit bg-[#f0efe9] m-auto rounded-2xl
             tablet:mt-[3rem] mobile:mt-[3rem] mobile:rounded-none tablet:rounded-none
 
             '>
