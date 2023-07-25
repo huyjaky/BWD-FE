@@ -4,7 +4,7 @@ import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
 import { mobileContolPanelContext } from '@/contexts/mobileControlPanel';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ReactNode, useContext } from 'react';
+import { ReactNode, useContext, useEffect } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { TbWorld } from 'react-icons/tb';
 import ButtonAccount from '../buttonAccount/ButtonAccount';
@@ -14,6 +14,7 @@ import { filterContext } from '@/contexts/filter';
 import { userAccContext } from '@/contexts/userAcc';
 import { useRouter } from 'next/router';
 import { selectPopoverContext } from '@/contexts';
+import { isLoadingAnimateContext } from '@/contexts/isLoadingAnimate';
 interface HeaderFormProps {
   children: ReactNode;
 }
@@ -25,6 +26,9 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
   const { isFilter, setIsFilter } = useContext(getHouseContext);
   const { resetFilterForm } = useContext(filterContext);
   const { setIsLoginClick } = useContext(selectPopoverContext);
+
+
+
   const router = useRouter();
   return (
     <>

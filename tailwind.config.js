@@ -15,9 +15,7 @@ module.exports = {
         tablet: { max: '1149px', min: '950px' },
         mobile: { max: '949px' }
       },
-      gridTemplateColumns: {
-        houseBox: 'repeat(auto-fill, minmax(300px, 1fr))'
-      },
+
 
       gridTemplateAreas: {
         layoutPicture: ['h1 h1 h2 h3', 'h1 h1 h4 h5'],
@@ -75,9 +73,10 @@ module.exports = {
         ],
       },
       gridTemplateColumns: {
-        houseBox: 'repeat(auto-fill, minmax(300px, 1fr))',
+        houseBox: 'repeat(auto-fill, minmax(19rem, 1fr))',
         layoutPicture: '1fr 1fr 1fr 1fr',
-        layoutShowAllPt: '350px 350px'
+        layoutShowAllPt: '350px 350px',
+        newsBox: 'repeat(auto-fill, minmax(37rem, 1fr))'
       },
       gridTemplateRows: {
         layoutPicture: '225px 225px',

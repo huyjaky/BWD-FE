@@ -34,6 +34,7 @@ import { Montserrat } from 'next/font/google';
 import Head from 'next/head';
 import Script from 'next/script';
 import DashboardProvider from '@/contexts/dashboard';
+import IsLoadingAnimateProvider from '@/contexts/isLoadingAnimate';
 
 
 const monsterrat = Montserrat({
@@ -77,15 +78,17 @@ export default function App({
                                       <StepCreateHomeProvider>
                                         <CreateHouseFormProvider>
                                           <DashboardProvider>
-                                            <Layout>
-                                              <div
-                                                className={`${monsterrat.className} bg-white
+                                            <IsLoadingAnimateProvider>
+                                              <Layout>
+                                                <div
+                                                  className={`${monsterrat.className} bg-white
                                         `}
-                                              >
-                                                <NextNProgress color="#B80F0A" height={7} />
-                                                <Component {...pageProps} />
-                                              </div>
-                                            </Layout>
+                                                >
+                                                  <NextNProgress color="#B80F0A" height={7} />
+                                                  <Component {...pageProps} />
+                                                </div>
+                                              </Layout>
+                                            </IsLoadingAnimateProvider>
                                           </DashboardProvider>
                                         </CreateHouseFormProvider>
                                       </StepCreateHomeProvider>

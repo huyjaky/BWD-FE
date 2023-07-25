@@ -1,5 +1,6 @@
 import { selectPopoverContext } from '@/contexts';
 import { getHouseContext } from '@/contexts/getHouse';
+import { isLoadingAnimateContext } from '@/contexts/isLoadingAnimate';
 import { userAccContext } from '@/contexts/userAcc';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
@@ -45,7 +46,7 @@ const ListButton = () => {
                   redirect: false
                 });
 
-                if (router.asPath !== '/homepage') {
+                if (router.asPath !== '/homepage' && router.asPath !== '/news') {
                   router.push('/homepage', undefined, { shallow: true });
                 }
 
@@ -61,6 +62,10 @@ const ListButton = () => {
       <div className="w-full h-fit">
         <Link href={'/'}>
           <div className="w-full py-4 text-left px-5">About us</div>
+        </Link>
+
+        <Link href={'/news'}>
+          <div  className="w-full py-4 text-left px-5">News</div>
         </Link>
       </div>
     </>

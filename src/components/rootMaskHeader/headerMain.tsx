@@ -41,51 +41,7 @@ const HeaderMain = ({ keyMapBing, keyChatEngine }: HeaderMainProps) => {
     setPlaceList([]);
   };
 
-  useEffect(() => {
-    // animate de mo popup login
-    // const handleOnclickLogin = (event: any) => {
-    //   const isClick = loginPanel.current?.contains(event.target);
-    //   if (!isClick && isLoginClick) {
-    //     mask.current?.classList.remove('animate-transparentAnimateLogin2');
-    //     loginPanel.current?.classList.remove('animate-slideUpLogin');
-    //     mask.current?.classList.add('animate-transparentAnimateLoginReverse2');
-    //     loginPanel.current?.classList.add('animate-slideDownLogin');
-    //     setIsLoginClick(false);
-    //     return;
-    //   }
-    // };
-
-    // animate de dong popup login
-    const handleOnClickLogin2 = (event: any) => {
-      if (isFirstLoading) return;
-      mask.current?.classList.remove('animate-transparentAnimateLogin2');
-      loginPanel.current?.classList.remove('animate-slideUpLogin');
-      mask.current?.classList.add('animate-transparentAnimateLoginReverse2');
-      loginPanel.current?.classList.add('animate-slideDownLogin');
-      setIsLoginClick(false);
-    };
-
-    // animate for dynamic event
-    const handleIsClick = () => {
-      if (isLoginClick) {
-        mask.current?.classList.remove('animate-transparentAnimateLoginReverse2');
-        loginPanel.current?.classList.remove('animate-slideDownLogin');
-        mask.current?.classList.add('animate-transparentAnimateLogin2');
-        loginPanel.current?.classList.add('animate-slideUpLogin');
-        return;
-      } else if (!isLoginClick && !isFirstLoading) {
-        mask.current?.classList.remove('animate-transparentAnimateLogin2');
-        loginPanel.current?.classList.remove('animate-slideUpLogin');
-        mask.current?.classList.add('animate-transparentAnimateLoginReverse2');
-        loginPanel.current?.classList.add('animate-slideDownLogin');
-      }
-    };
-
-    // document.addEventListener('mousedown', handleOnclickLogin);
-    document.addEventListener('scroll', handleOnClickLogin2);
-    handleIsClick();
-    setIsFirstLoading(false);
-  }, [isLoginClick]);
+  useEffect(() => {}, [isLoginClick]);
 
   const handleOnClickLogin = (event: any) => {
     const isClickInSide = loginPanel.current?.contains(event.target);
@@ -114,25 +70,6 @@ const HeaderMain = ({ keyMapBing, keyChatEngine }: HeaderMainProps) => {
         </motion.div>
       </AnimatePresence>
 
-      {/* <div
-        className="w-screen h-screen fixed top-0 left-0 transition-all duration-500 bg-mask z-40 flex
-        overflow-hidden invisible
-        "
-        ref={mask}
-      >
-        <div className="w-full h-full flex">
-          <motion.div
-            variants={variants_}
-            animate={isLoginClick ? 'showMask' : 'hiddenMask'}
-            onClick={handleOnClickLogin}
-            className="w-fit  h-fit bg-white m-auto rounded-3xl" ref={loginPanel}>
-            <LoginPanel keyChatEngine={keyChatEngine}>
-              <div></div>
-            </LoginPanel>
-          </motion.div>
-        </div>
-      </div> */}
-
       <AnimatePresence initial={false}>
         <motion.div
           variants={variants_}
@@ -141,7 +78,7 @@ const HeaderMain = ({ keyMapBing, keyChatEngine }: HeaderMainProps) => {
           className="fixed w-screen h-screen bg-mask z-50 top-0 left-0" >
           <div className='w-fit h-fit m-auto  mobile:w-screen mobile:h-screen
     flex flex-col mobile:p-0 p-5 rounded-xl ' ref={loginPanel}>
-            <LoginPanel keyChatEngine={keyChatEngine}>
+            <LoginPanel >
               <div></div>
             </LoginPanel>
           </div>

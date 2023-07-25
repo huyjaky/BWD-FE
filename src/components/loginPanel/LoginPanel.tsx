@@ -11,10 +11,11 @@ import nProgress from 'nprogress';
 import { IoCloseOutline } from 'react-icons/io5';
 import axiosClient from '@/api-client/axiosClient';
 import axios from 'axios';
+import { motion } from 'framer-motion';
+import { variants } from '../main/showHouse/variantsShowHouse';
 
 interface LoginPanelProps {
   children: ReactNode;
-  keyChatEngine: string;
 }
 
 const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
@@ -28,10 +29,10 @@ const schema = yup
 
 type LoginInterface = yup.InferType<typeof schema>;
 
-const LoginPanel = ({ children, keyChatEngine }: LoginPanelProps) => {
+const LoginPanel = ({ children }: LoginPanelProps) => {
   const { data: session } = useSession();
   const { user, setUser } = useContext(userAccContext);
-  const { setIsLoginClick } = useContext(selectPopoverContext);
+  const { setIsLoginClick,isLoginClick } = useContext(selectPopoverContext);
   const router = useRouter();
   const divRef = useRef<HTMLInputElement>(null);
   const title_username = useRef<HTMLInputElement>(null);
@@ -49,7 +50,6 @@ const LoginPanel = ({ children, keyChatEngine }: LoginPanelProps) => {
       if (isContain1) {
         title_username?.current?.classList.add('animate-boxInputLoginFocus_title');
         input_username?.current?.classList.add('animate-boxInputLoginFocus_input');
-        // input_username?.current?.classList.add('border-b-2');
         title_username?.current?.classList.remove('animate-boxInputLoginFocus_titleReverse');
         input_username?.current?.classList.remove('animate-boxInputLoginFocus_inputReverse');
         input_username?.current?.focus();
@@ -112,8 +112,12 @@ const LoginPanel = ({ children, keyChatEngine }: LoginPanelProps) => {
   };
 
   return (
-    <div className="w-[600px] h-fit m-auto shadow-2xl rounded-3xl box-border p-10
-    mobile:w-full mobile:h-full relative bg-white
+    <motion.div
+    variants={variants}
+    animate={isLoginClick ? 'showMaskLogin' : 'hiddenMaskLogin'}
+    transition={{ duration: 0.5, type: 'tween' }}
+    className="w-[600px] h-fit m-auto shadow-2xl rounded-3xl box-border p-10
+    mobile:w-full mobile:h-full relative bg-white flex-col
     ">
       <button
         onClick={() => { setIsLoginClick(false) }}
@@ -195,7 +199,7 @@ const LoginPanel = ({ children, keyChatEngine }: LoginPanelProps) => {
           We&#39;ll call or text you to confirm your number. Standard message and data rates apply.
         </span>
       </div>
-    </div>
+    </motion.div>
   );
 };
 export default LoginPanel;

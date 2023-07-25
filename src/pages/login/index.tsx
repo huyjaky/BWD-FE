@@ -20,7 +20,7 @@ const Login: NextPageWithLayout<LoginProps> = ({ keyChatEngine }: LoginProps) =>
       </HeaderForm>
       <div className="w-full h-[calc(100vh-5rem)] ">
         <div className="w-full h-full flex">
-          <LoginPanel keyChatEngine={keyChatEngine}>
+          <LoginPanel >
             <div></div>
           </LoginPanel>
         </div>

@@ -51,10 +51,23 @@ export const variants: Variants = {
 
   showMask: {
     display: 'flex',
-    opacity: [0, 1]
+    opacity: [0, 1],
   },
   hiddenMask: {
     opacity: [1, 0],
+    transitionEnd: {
+      display: 'none'
+    }
+  },
+
+  showMaskLogin: {
+    display: 'flex',
+    opacity: [0, 1],
+    y: [1200, 0]
+  },
+  hiddenMaskLogin: {
+    opacity: [1, 0],
+    y: [0, 1200],
     transitionEnd: {
       display: 'none'
     }
@@ -73,7 +86,7 @@ export const variants: Variants = {
   hoverItem: {
     scale: 1.03,
     boxShadow:
-     'rgba(255, 122, 141, 0.4) -5px 5px, rgba(255, 122, 141, 0.3) -10px 10px, rgba(255, 122, 141, 0.2) -15px 15px, rgba(255, 122, 141, 0.1) -20px 20px, rgba(255, 122, 141, 0.05) -25px 25px',
+      'rgba(255, 122, 141, 0.4) -5px 5px, rgba(255, 122, 141, 0.3) -10px 10px, rgba(255, 122, 141, 0.2) -15px 15px, rgba(255, 122, 141, 0.1) -20px 20px, rgba(255, 122, 141, 0.05) -25px 25px',
     transition: {
       delay: 0,
       type: 'spring'

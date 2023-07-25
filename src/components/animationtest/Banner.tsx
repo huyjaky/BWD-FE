@@ -13,6 +13,7 @@ const Banner = () => {
     }, 2000);
   }, []);
   return (
+
     <motion.div className='banner' variants={banner}>
       <BannerRowTop title={"Olympus"} />
       <BannerRowCenter title={"News"} playMarquee={playMarquee} />
@@ -103,7 +104,7 @@ const BannerRowCenter = ({ title, playMarquee }:{title:any, playMarquee:any}) =>
       <motion.div
         initial={{ y: 310 }}
         animate={{ y: 0 }}
-        transition={{ ease: [0.6, 0.01, -0.05, 0.9], duration: 1 }}
+        transition={{ ease: [0.6, 0.01, 0.05, 0.9], duration: 1 }}
         className='marquee__inner'>
         <AnimatedLetters title={title} disabled />
         <AnimatedLetters title={title} disabled={undefined} />

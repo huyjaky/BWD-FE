@@ -21,6 +21,7 @@ import TabletMobile from '@/components/main/typeHouse/tabletMobile';
 import { useSession } from 'next-auth/react';
 import AnimateTitle from '@/components/main/showHouse/animateTitle';
 import { staggerContainer } from '@/utils/motion';
+import { isLoadingAnimateContext } from '@/contexts/isLoadingAnimate';
 
 
 
@@ -86,6 +87,8 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing, keyChat
     window.scrollTo(0, 0);
   }, [pathname]);
 
+
+
   useEffect(() => { }, [isFilter]);
   initializeSSR();
 
@@ -101,9 +104,6 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing, keyChat
 
           <div className='absolute w-full h-full flex bg-[rgba(105,105,105,0.7)] z-30 top-0 left-0'>
             <div className='m-auto'>
-              {/* <span className={`${dancingScript.className} text-[50px]
-                font-extrabold text-white `}>
-              </span> */}
 
               <motion.div
                 variants={staggerContainer(null, null)}

@@ -5,9 +5,9 @@ import HeaderForm from '@/components/headers/headerForm/HeaderForm';
 const Test = () => {
   return (
     <>
-      <div className='setFont' >
+      {/* <div className='setFont' >
         <AnimateTest />
-      </div>
+      </div> */}
     </>
   )
 };
