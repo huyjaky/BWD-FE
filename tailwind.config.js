@@ -76,7 +76,8 @@ module.exports = {
         houseBox: 'repeat(auto-fill, minmax(19rem, 1fr))',
         layoutPicture: '1fr 1fr 1fr 1fr',
         layoutShowAllPt: '350px 350px',
-        newsBox: 'repeat(auto-fill, minmax(37rem, 1fr))'
+        newsBox: 'repeat(auto-fill, minmax(37rem, 1fr))',
+        contact: 'repeat(auto-fill, minmax(20rem, 1fr))',
       },
       gridTemplateRows: {
         layoutPicture: '225px 225px',

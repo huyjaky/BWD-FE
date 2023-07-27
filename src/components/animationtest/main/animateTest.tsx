@@ -7,10 +7,13 @@ import { useContext, useEffect, useState } from 'react';
 import Banner from '@/components/animationtest/Banner';
 import Header from '@/components/animationtest/Header';
 import Loader from '@/components/animationtest/Loader';
-import { isLoadingAnimateContext } from '@/contexts/isLoadingAnimate';
-import LatestNews from './latestNews';
 import FooterMainRes from '@/components/footers/footerMainRes';
 import FooterRooms from '@/components/footers/footerRooms';
+import { isLoadingAnimateContext } from '@/contexts/isLoadingAnimate';
+import { newsPost } from '@/utils/newsPost';
+import Contact from './contact';
+import LatestNews from './latestNews';
+import SlideTab from './slideTab/slideTab';
 
 const AnimateTest = () => {
   const [loading, setLoading] = useState(true);
@@ -48,12 +51,26 @@ const AnimateTest = () => {
                   </div>
 
 
-                  <div className='w-full h-fit'>
+                  <div className='w-full h-fit mb-20'>
                     <LatestNews />
                   </div>
 
-                  
-                  <FooterMainRes/>
+                  <div className='w-full h-fit bg-slate-200 mb-20'>
+                    <SlideTab arrPost={newsPost.economic} title='The economic opportunities of hosting'
+                      des='More people are turning to hosting for the first time. From community stories, to the latest Host earnings data and trends, discover how it has never been easier to host and earn on Airbnb.' />
+                  </div>
+
+                  <div className='w-full h-fit mb-20'>
+                    <Contact />
+                  </div>
+
+
+                  <div className='w-full h-fit bg-slate-200 mb-20'>
+                    <SlideTab arrPost={newsPost.only} title='One-of-a-kind stays, only on Airbnb'
+                      des='Explore the unique, limited-time stays that give guests a rare glimpse into some of the most iconic places in pop culture.' />
+                  </div>
+
+                  <FooterMainRes />
                   <FooterRooms />
                 </>
 
