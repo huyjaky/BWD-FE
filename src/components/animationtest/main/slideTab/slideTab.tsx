@@ -1,5 +1,5 @@
 import { newsPost, typePost } from "@/utils/newsPost";
-import { FreeMode, Pagination, Scrollbar } from 'swiper';
+import { Autoplay, FreeMode, Pagination, Scrollbar } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
@@ -29,13 +29,40 @@ const SlideTab = ({ title, des, arrPost }: EconomicProps) => {
           {des}
         </div>
 
-        <div className="w-full h-fit ">
+        <div className="w-full h-fit mobile:hidden tablet:hidden">
           <Swiper
             slidesPerView={3}
             spaceBetween={30}
+            autoplay={{
+              delay: 2000,
+              disableOnInteraction: false
+            }}
             freeMode={true}
             pagination={false}
-            modules={[FreeMode, Pagination, Scrollbar]}
+            modules={[FreeMode, Pagination, Scrollbar, Autoplay]}
+            scrollbar={true}
+            // className="mySwiper"
+            style={{ height: 'fit-content' }}
+          >
+            {arrPost.map((item: typePost, index: number) => {
+              return (
+                <SwiperSlide key={index}><TabSlide post={item} /></SwiperSlide>
+              )
+            })}
+          </Swiper>
+        </div>
+
+        <div className="w-full h-fit desktop:hidden laptop:hidden">
+          <Swiper
+            slidesPerView={'auto'}
+            spaceBetween={30}
+            autoplay={{
+              delay: 2000,
+              disableOnInteraction: false
+            }}
+            freeMode={true}
+            pagination={false}
+            modules={[FreeMode, Pagination, Scrollbar, Autoplay]}
             scrollbar={true}
             // className="mySwiper"
             style={{ height: 'fit-content' }}

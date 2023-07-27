@@ -78,6 +78,9 @@ const AnimateTest = () => {
             </>
           )}
 
+            {/* <motion.div key='loader'>
+              <Loader setLoading={setIsLoading} />
+            </motion.div> */}
         </AnimatePresence>
       </LayoutGroup>
     </div>

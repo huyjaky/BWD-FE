@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 const Contact = () => {
   return (
     <LayoutAnimate>
-      <div className="w-full h-[36rem] grid grid-cols-contact gap-x-4">
+      <div className="w-full h-[36rem] grid grid-cols-contact gap-x-4 mobile:gap-y-4">
         {/* icon */}
         <div className="w-full h-full flex flex-col">
           <div className="w-fit h-fit text-[1.5rem] text-center m-auto">

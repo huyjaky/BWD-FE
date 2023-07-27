@@ -13,7 +13,7 @@ const TabSlide = ({ post }: TabSlideProps) => {
       </div>
       <div className="w-full h-[calc(100%-25rem)] flex flex-col box-border px-4">
         <div className="w-full h-fit mt-5 text-[1.4rem] font-semibold
-        max-h-[8.5rem] 
+        max-h-[8.5rem]
         ">
           {post.title}
         </div>
