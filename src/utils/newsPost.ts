@@ -14,7 +14,7 @@ export const newsPost: {
     },
     {
       img: '/newPost/Alaska-Ben-e1689360454113.webp',
-      title: 'Airbnb’s most hospitable Host in every US state',
+      title: 'Olympus most hospitable Host in every US state',
       date: new Date()
     },
     {
@@ -73,17 +73,17 @@ export const newsPost: {
   only: [
     {
       img: '/newPost/01-Kens-DreamHouse-Airbnb-Exterior-Credit-Hogwash-Studios.webp',
-      title: 'Barbie’s Malibu DreamHouse is back on Airbnb – but this time, Ken’s hosting',
+      title: 'Barbie’s Malibu DreamHouse is back on Olympus – but this time, Ken’s hosting',
       date: new Date()
     },
     {
       img: '/newPost/DJI_20230524063911_0068_D_Gassho_Village-Aerial_Credit-Satoshi-Nagare_4200x2800px.webp',
-      title: 'Rediscover Japan in World Heritage Site Gokayama, now on Airbnb',
+      title: 'Rediscover Japan in World Heritage Site Gokayama, now on Olympus',
       date: new Date()
     },
     {
       img: '/newPost/01-DDP-Airbnb-Enhypen-Credit-Chun-Youngsang.webp',
-      title: 'Preview Seoul Fashion Week with K-Pop’s ENHYPEN at Dongdaemun Design Plaza now on Airbnb',
+      title: 'Preview Seoul Fashion Week with K-Pop’s ENHYPEN at Dongdaemun Design Plaza now on Olympus',
       date: new Date()
     },
     {
@@ -93,27 +93,27 @@ export const newsPost: {
     },
     {
       img: '/newPost/01-Opera-Airbnb-Theater-Credit-Blue-Max-Media-1-1.webp',
-      title: 'Palais Garnier, home of The Phantom of the Opera, is now on Airbnb',
+      title: 'Palais Garnier, home of The Phantom of the Opera, is now on Olympus',
       date: new Date()
     },
     {
       img: '/newPost/01-Houseplant-Airbnb-Seth-Rogen-Portrait-Credit-Yuri-Hasegawa-and-Hogwash-Studios.webp',
-      title: 'Get glazed with Seth Rogen at his creative retreat, now on Airbnb',
+      title: 'Get glazed with Seth Rogen at his creative retreat, now on Olympus',
       date: new Date()
     },
     {
       img: '/newPost/01-Hobbiton-Airbnb-The-Shire-Credit-Larnie-Nicolson.webp',
-      title: 'The one-and-only Hobbiton from The Lord of the Rings is now on Airbnb',
+      title: 'The one-and-only Hobbiton from The Lord of the Rings is now on Olympus',
       date: new Date()
     },
     {
       img: '/newPost/11-DJ-Khaled-Airbnb-Portrait-Bedroom-Credit-Erick-Hercules.webp',
-      title: 'Sleep inside DJ Khaled’s legendary sneaker closet, now on Airbnb',
+      title: 'Sleep inside DJ Khaled’s legendary sneaker closet, now on Olympus',
       date: new Date()
     },
     {
       img: '/newPost/01-Airbnb-BTS-IN-THE-SOOP-Exterior-with-BTS-IN-THE-SOOP-Credit-Time-of-Blue-1.webp',
-      title: 'Relax like BTS: IN THE SOOP estate now on Airbnb',
+      title: 'Relax like BTS: IN THE SOOP estate now on Olympus',
       date: new Date()
     },
   ],

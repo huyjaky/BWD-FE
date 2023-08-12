@@ -3,7 +3,6 @@
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import { useContext, useEffect, useState } from 'react';
 
-
 import Banner from '@/components/animationtest/Banner';
 import Header from '@/components/animationtest/Header';
 import Loader from '@/components/animationtest/Loader';
@@ -57,16 +56,15 @@ const AnimateTest = () => {
 
                   <div className='w-full h-fit bg-slate-200 mb-20'>
                     <SlideTab arrPost={newsPost.economic} title='The economic opportunities of hosting'
-                      des='More people are turning to hosting for the first time. From community stories, to the latest Host earnings data and trends, discover how it has never been easier to host and earn on Airbnb.' />
+                      des='More people are turning to hosting for the first time. From community stories, to the latest Host earnings data and trends, discover how it has never been easier to host and earn on Olympus.' />
                   </div>
 
                   <div className='w-full h-fit mb-20'>
                     <Contact />
                   </div>
 
-
                   <div className='w-full h-fit bg-slate-200 mb-20'>
-                    <SlideTab arrPost={newsPost.only} title='One-of-a-kind stays, only on Airbnb'
+                    <SlideTab arrPost={newsPost.only} title='One-of-a-kind stays, only on Olympus'
                       des='Explore the unique, limited-time stays that give guests a rare glimpse into some of the most iconic places in pop culture.' />
                   </div>
 

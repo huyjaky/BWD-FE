@@ -40,7 +40,7 @@ const Contact = () => {
         </div>
         <div className="w-full h-full flex flex-col">
           <div className="w-fit h-fit text-[1.5rem] text-center m-auto">
-            <span>Hear more from Co‑founder and CEO Brian Chesky</span>
+            <span>Hear more from Brian Chesky</span>
             <div className="flex w-full h-fit mt-5 ">
               <motion.button className=" px-7 py-2 border-2 m-auto rounded-xl">
                 <span>Learn more</span>
