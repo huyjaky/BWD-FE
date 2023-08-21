@@ -28,7 +28,8 @@ const CarouselMain = () => {
 
         {arrImg.map((item: string, index: number) => {
           return (
-            <SwiperSlide style={{width: '100vw'}}>
+
+            <SwiperSlide style={{width: '100vw'}} key={index}>
               <div className='w-full h-full'>
                 <img src={item} alt="" className='w-full h-full object-cover' />
               </div>

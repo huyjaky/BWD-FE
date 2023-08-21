@@ -33,7 +33,7 @@ const Index: NextPageWithLayout<IndexProps> = ({ }: IndexProps) => {
   const fetchSchedule = async () => {
     try {
       if (status === 'unauthenticated' || status === 'loading') return;
-
+      if (eventArr.length !== 0) return;
       const schedule = await ScheduleApi.scheduleHost(session?.userAcc.UserId)
 
       if (schedule.status == 200) {

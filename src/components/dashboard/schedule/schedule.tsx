@@ -164,19 +164,22 @@ const Schedule = () => {
                 <motion.div
                   onHoverStart={(event) => {
                     // if (!eventArr[index].house) return
-
-                    setIsShowPopup(true);
-                    setKeyPopup(index);
-                    setSelectHousePopup(eventArr[index].house)
+                    if (eventArr[index]?.house) {
+                      setKeyPopup(index);
+                      setIsShowPopup(true);
+                      setSelectHousePopup(eventArr[index].house)
+                    } else {
+                      setSelectHousePopup(undefined)
+                    }
                     // if (eventArr[index].house !== undefined && eventArr[index].house?.length == 0) return;
                     // console.log(eventArr[index].house);
                     // setSelectHousePopup(eventArr[index]?.house[0]);
                   }}
                   onHoverEnd={(event) => { setIsShowPopup(false); setKeyPopup(-1) }}
                   className="w-ful h-[8rem]   box-border p-4">
-                  <motion.div className={`w-full h-full ${eventArr[index].HouseId
-                  ? 'bg-[#ee6457]' : 'bg-[#6699CC]'
-                  } rounded-lg p-2 cursor-pointer`}>
+                  <motion.div className={`w-full h-full ${eventArr[index]?.HouseId
+                    ? 'bg-[#ee6457]' : 'bg-[#6699CC]'
+                    } rounded-lg p-2 cursor-pointer`}>
                     <motion.div
                       onHoverStart={(event) => setIsShowPopup(true)}
                       className="w-fit h-fit flex flex-col text-[#FAE8EB]  ">
