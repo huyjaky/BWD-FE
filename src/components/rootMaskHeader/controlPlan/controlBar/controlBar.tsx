@@ -125,10 +125,13 @@ const ControlBar = () => {
             </span>
           </div>
 
-          <div className="flex-1 flex box-border p-3 w-full relative z-10 mobile:py-5 tablet:py-5 ">
+          <div className="flex-1 flex box-border p-3 w-full relative z-10 mobile:py-2 tablet:py-5 mobile:px-0
+          mobile:mt-3
+          ">
+
             <motion.div
               whileTap={{ scale: 0.8 }}
-              className="rounded-full w-full h-full bg-red-500 flex "
+              className="rounded-full w-full h-full bg-red-500 flex mobile:h-[2rem]"
               id="btn-search-header"
               onClick={fetchData}
             >

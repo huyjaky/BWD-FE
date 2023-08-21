@@ -29,11 +29,11 @@ const PopupSchedule = ({isShowPopup, setIsShowPopup}:PopupScheduleProps) => {
           <img src={"/api/img/path/" + selectHousePopup?.arrImg[0]?.Path} alt="" className="w-full h-full
 object-cover
         " />
-          <div className="absolute w-full h-[5rem] bottom-0 left-0 backdrop-blur-sm box-border px-2
+          <div className="absolute w-full h-[5rem] bottom-0 left-0 bg-[#f28076] box-border px-2
         rounded-b-xl
         ">
-            <div className="w-full h-full grid grid-cols-2 grid-rows-3 gap-y-5
-          text-[#de741c] font-semibold">
+            <div className="w-full h-full grid grid-cols-2 grid-rows-3 gap-y-5 mt-3
+          text-white font-semibold">
               <LayoutTitle leftRight="left">
                 {selectHousePopup?.address.title}
               </LayoutTitle>
