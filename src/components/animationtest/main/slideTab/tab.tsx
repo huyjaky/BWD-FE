@@ -7,7 +7,9 @@ interface TabSlideProps {
 
 const TabSlide = ({ post }: TabSlideProps) => {
   return (
-    <div className="w-[30rem] h-[36rem] rounded-2xl overflow-hidden bg-white">
+    <div className="w-[30rem] h-[36rem] rounded-2xl overflow-hidden bg-white mobile:w-full
+    mobile:h-[36rem]
+    ">
       <div className="w-full h-[25rem] ">
         <img src={post.img} alt="" className="object-cover w-full h-full" />
       </div>

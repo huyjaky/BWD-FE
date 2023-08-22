@@ -94,7 +94,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing, keyChat
 
 
   const { scrollYProgress } = useScroll();
-  const convert = useTransform(scrollYProgress, [0,.7], [1, 5]);
+  const convert = useTransform(scrollYProgress, [0, .7], [1, 5]);
 
   return (
     <>
@@ -170,7 +170,7 @@ const Home: NextPageWithLayout<HomeProps> = ({ user_, props, keyMapBing, keyChat
           </div>
 
           {isFilter != 'main' ? (
-            <motion.div variants={variants} animate="show" className=' h-fit bg-[#f0efe9] m-auto rounded-2xl
+            <motion.div variants={variants} animate="show" className=' h-fit bg-[#f0efe9] m-auto rounded-t-2xl
             tablet:mt-[3rem] mobile:mt-[3rem] mobile:rounded-none tablet:rounded-none
 
             '>

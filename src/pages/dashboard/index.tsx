@@ -19,10 +19,17 @@ import { ScheduleApi } from "@/api-client/scheduleApi";
 import BarChartDashboard from "@/components/dashboard/barchart/barChart";
 import PieChartDashboard from "@/components/dashboard/piechart/pieChart";
 import { userAccContext } from "@/contexts/userAcc";
+import { Montserrat } from "next/font/google";
 
 interface IndexProps {
   // eventArr: scheduleCreate[];
 }
+
+const monsterrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['200', '400', '600', '800'],
+  variable: '--font-monsterrat'
+});
 
 const Index: NextPageWithLayout<IndexProps> = ({ }: IndexProps) => {
   const { selectOption, setSelectOption, setEventArr, eventArr } = useContext(DashboardContext)
@@ -65,7 +72,7 @@ const Index: NextPageWithLayout<IndexProps> = ({ }: IndexProps) => {
         <div></div>
       </HeaderForm>
 
-      <div className="w-screen h-[calc(100vh-5rem)] flex">
+      <div className={`w-screen h-[calc(100vh-5rem)] flex ${monsterrat.className}`}>
         {selectOption === 'Schedule' &&
           <LayoutPanelDasboard>
             <Schedule />

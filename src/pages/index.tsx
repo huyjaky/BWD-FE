@@ -9,6 +9,7 @@ const monsterrat = Montserrat({
   variable: '--font-monsterrat'
 });
 
+
 const About_ = () => (
   <div className={`bg-primary-white overflow-hidden ${monsterrat.className}`}>
     <Navbar />
@@ -32,6 +33,8 @@ const About_ = () => (
     <Footer />
   </div>
 );
+
+
 
 export default About_;
 

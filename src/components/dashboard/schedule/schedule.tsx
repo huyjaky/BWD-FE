@@ -2,6 +2,7 @@
 import { scheduleCreate } from "@/api-client/schedule";
 import { ScheduleApi } from "@/api-client/scheduleApi";
 import { variants } from "@/components/main/showHouse/variantsShowHouse";
+import { DashboardContext } from "@/contexts/dashboard";
 import { userAccContext } from "@/contexts/userAcc";
 import { DateSelectArg, EventApi, EventClickArg, formatDate } from "@fullcalendar/core";
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -10,12 +11,10 @@ import listPlugin from '@fullcalendar/list';
 import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { AnimatePresence, motion } from "framer-motion";
-import { RefObject, useContext, useEffect, useRef, useState } from "react";
-import RemoveReqSchedule from "./removeReqSchedule";
-import { DashboardContext } from "@/contexts/dashboard";
-import PopupSchedule from "./popupSchedule/popupSchedule";
+import { useContext, useEffect, useRef, useState } from "react";
 import AddEvent from "./popupSchedule/addEvent";
-import { house_ } from "@/models/house";
+import PopupSchedule from "./popupSchedule/popupSchedule";
+import RemoveReqSchedule from "./removeReqSchedule";
 
 const Schedule = () => {
 
@@ -33,9 +32,6 @@ const Schedule = () => {
   const [selectAddEvent, setSelectAddEvent] = useState<DateSelectArg>()
   const [isAddEvent, setIsAddEvent] = useState<boolean>(false);
   const addEventPanell = useRef<HTMLDivElement>(null)
-
-
-
 
   const [isShowPopup, setIsShowPopup] = useState<boolean>(false);
   const [keyPopup, setKeyPopup] = useState<number>(-1);
@@ -171,9 +167,6 @@ const Schedule = () => {
                     } else {
                       setSelectHousePopup(undefined)
                     }
-                    // if (eventArr[index].house !== undefined && eventArr[index].house?.length == 0) return;
-                    // console.log(eventArr[index].house);
-                    // setSelectHousePopup(eventArr[index]?.house[0]);
                   }}
                   onHoverEnd={(event) => { setIsShowPopup(false); setKeyPopup(-1) }}
                   className="w-ful h-[8rem]   box-border p-4">
@@ -199,6 +192,7 @@ const Schedule = () => {
               </div>
             )
           })}
+
         </motion.div>
         <div className="w-[calc(100%-15rem)] h-full mobile:w-full">
 

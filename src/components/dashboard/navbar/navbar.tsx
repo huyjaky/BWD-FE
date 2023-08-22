@@ -1,11 +1,8 @@
 import { userAccContext } from "@/contexts/userAcc";
-import { motion } from "framer-motion";
-import { useSession } from "next-auth/react";
 import { useContext, useEffect } from "react";
-import StyleButton from "./styleButton";
-import { GrSchedules } from "react-icons/gr";
-import { AiOutlinePieChart } from "react-icons/ai";
+import { AiOutlinePieChart, AiOutlineSchedule } from "react-icons/ai";
 import { BsFillBarChartFill } from "react-icons/bs";
+import StyleButton from "./styleButton";
 
 
 
@@ -32,7 +29,7 @@ const NavbarDashboard = () => {
         {/* barchart */}
         <div className="w-full">
           <StyleButton title="Schedule">
-            <GrSchedules className="text-[25px] my-auto mr-2" />
+            <AiOutlineSchedule className="text-[25px]  my-auto mr-2" />
           </StyleButton>
         </div>
 

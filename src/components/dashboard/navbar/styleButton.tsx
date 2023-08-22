@@ -11,7 +11,7 @@ const StyleButton = ({ children, title }: StyleButtonProps) => {
   const [isHover, setIsHover] = useState<boolean>(false);
   const { selectOption, setSelectOption } = useContext(DashboardContext);
   return (
-    <div className="w-full h-[4rem] ">
+    <div className="w-full h-[4rem] hover:text-white transition-all duration-500">
       <motion.button
         onClick={(event) => { setSelectOption(title) }}
         onHoverStart={(event) => { setIsHover(true) }}
@@ -25,7 +25,7 @@ const StyleButton = ({ children, title }: StyleButtonProps) => {
           className="w-[50%] h-fit m-auto flex relative z-10
           justify-start ">
           {children}
-          <span className="text-[24px]">{title}</span>
+          <div className="text-[24px] ">{title}</div>
         </motion.div>
 
 

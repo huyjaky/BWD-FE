@@ -4,6 +4,7 @@ import 'swiper/css/pagination';
 
 // import './styles.css';
 import { Pagination, Autoplay } from 'swiper';
+import { motion } from 'framer-motion';
 
 const CarouselMain = () => {
   const arrImg: string[] = [
@@ -30,9 +31,9 @@ const CarouselMain = () => {
           return (
 
             <SwiperSlide style={{width: '100vw'}} key={index}>
-              <div className='w-full h-full'>
-                <img src={item} alt="" className='w-full h-full object-cover' />
-              </div>
+              <motion.div className='w-full h-full'>
+                <motion.img src={item} alt="" className='w-full h-full object-cover' />
+              </motion.div>
             </SwiperSlide>
           )
         })}
