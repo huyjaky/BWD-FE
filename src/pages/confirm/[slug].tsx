@@ -20,7 +20,6 @@ import { BiMessageSquareError } from 'react-icons/bi';
 import { GrClose, GrPrevious } from 'react-icons/gr';
 import * as yup from 'yup';
 import https from 'https';
-import fetch from 'node-fetch';
 import { houseTempContext } from '@/contexts/houseTemp';
 interface ConfirmProps {
   houseDetail: house_;

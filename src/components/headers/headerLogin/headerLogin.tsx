@@ -4,6 +4,8 @@ import { BsList } from 'react-icons/bs';
 import { HiUserCircle } from 'react-icons/hi';
 
 const HeaderLogin = () => {
+
+
   return (
     <header className="w-full h-[5rem] border-b-2 flex justify-center">
       <div className="w-[81.25rem] h-full flex px-10 mobile:hidden">
@@ -24,9 +26,9 @@ const HeaderLogin = () => {
             <span className="font-semibold">Olympus your home</span>
           </Link>
           {/* translate */}
-          <Link href={''} className="rounded-full bg-white box-content p-1 mr-3 hover:bg-slate-300">
+          <button onClick={()=>{}} className="rounded-full bg-white box-content p-1 mr-3 hover:bg-slate-300">
             <TbWorld className="w-[2rem] h-[2rem]" />
-          </Link>
+          </button>
           {/* control */}
           <div className="w-fit p-1 rounded-full bg-white flex border-2 border-gray-400 ">
             <BsList className="w-[2rem] h-[2rem]" />

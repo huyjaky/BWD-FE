@@ -16,13 +16,13 @@ import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
 // import { authOptions } from './api/auth/[...nextauth]';
 import CarouselMain from '@/components/main/carousel/carouselMain';
+import AnimateTitle from '@/components/main/showHouse/animateTitle';
 import TabShowHouse from '@/components/main/tabShowHouse/tabShowHouse';
 import TabletMobile from '@/components/main/typeHouse/tabletMobile';
-import { useSession } from 'next-auth/react';
-import AnimateTitle from '@/components/main/showHouse/animateTitle';
 import { staggerContainer } from '@/utils/motion';
-import { isLoadingAnimateContext } from '@/contexts/isLoadingAnimate';
+import { useSession } from 'next-auth/react';
 
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 
 const monsterrat = Montserrat({
@@ -210,7 +210,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   return {
     props: {
       keyMapBing: keyMapBing,
-      keyChatEngine: keyChatEngine
+      keyChatEngine: keyChatEngine,
+      ...(await serverSideTranslations('', [
+        'common'
+      ])),
     }
   };
 };

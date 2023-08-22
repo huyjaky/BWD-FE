@@ -1,9 +1,11 @@
 /** @type {import('next').NextConfig} */
 
+const { i18n } = require('./next-i18next.config')
 const path = require('path');
 const fs = require('fs');
 
 const nextConfig = {
+  i18n,
   reactStrictMode: false,
   webpack(config) {
     // Grab the existing rule that handles SVG imports

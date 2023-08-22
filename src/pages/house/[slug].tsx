@@ -18,7 +18,6 @@ import https from 'https';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { Montserrat } from 'next/font/google';
 import { useRouter } from 'next/router';
-import fetch from 'node-fetch';
 import { useContext, useEffect } from 'react';
 import { BiMenu } from 'react-icons/bi';
 interface HouseDetailProps {

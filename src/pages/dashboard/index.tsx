@@ -1,25 +1,21 @@
 "use client"
+import { scheduleCreate } from "@/api-client/schedule";
+import { ScheduleApi } from "@/api-client/scheduleApi";
+import BarChartDashboard from "@/components/dashboard/barchart/barChart";
 import LayoutPanelDasboard from "@/components/dashboard/layoutPanel";
 import NavbarDashboard from "@/components/dashboard/navbar/navbar";
+import PieChartDashboard from "@/components/dashboard/piechart/pieChart";
 import Schedule from "@/components/dashboard/schedule/schedule";
 import HeaderForm from "@/components/headers/headerForm/HeaderForm";
 import AuthWithAnimate from "@/components/layouts/authWithAnimate";
 import { DashboardContext } from "@/contexts/dashboard";
+import { userAccContext } from "@/contexts/userAcc";
 import { NextPageWithLayout } from "@/models/layoutprops";
 import { motion } from "framer-motion";
 import { GetServerSideProps } from "next";
-import { getServerSession } from "next-auth";
-import { useContext, useEffect, useState } from "react";
-import { authOptions } from "../api/auth/[...nextauth]";
-import https from 'https';
-import fetch from 'node-fetch';
-import { scheduleCreate } from "@/api-client/schedule";
 import { useSession } from "next-auth/react";
-import { ScheduleApi } from "@/api-client/scheduleApi";
-import BarChartDashboard from "@/components/dashboard/barchart/barChart";
-import PieChartDashboard from "@/components/dashboard/piechart/pieChart";
-import { userAccContext } from "@/contexts/userAcc";
 import { Montserrat } from "next/font/google";
+import { useContext, useEffect, useState } from "react";
 
 interface IndexProps {
   // eventArr: scheduleCreate[];

@@ -1,20 +1,20 @@
 import Filter from '@/components/main/filter/filter';
 import ControlPlanMobile from '@/components/main/mobile/controlPlaneMobile';
+import { filterContext } from '@/contexts/filter';
 import { filterFormAnimateContext } from '@/contexts/filterFormAnimate';
+import { getHouseContext } from '@/contexts/getHouse';
 import { mobileContolPanelContext } from '@/contexts/mobileControlPanel';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ReactNode, useContext, useEffect } from 'react';
+import { ReactNode, useContext } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { TbWorld } from 'react-icons/tb';
 import ButtonAccount from '../buttonAccount/ButtonAccount';
-import { getHouseContext } from '@/contexts/getHouse';
-import { filterContext } from '@/contexts/filter';
 // import Image from 'next/image';
+import { selectPopoverContext } from '@/contexts';
 import { userAccContext } from '@/contexts/userAcc';
 import { useRouter } from 'next/router';
-import { selectPopoverContext } from '@/contexts';
-import { isLoadingAnimateContext } from '@/contexts/isLoadingAnimate';
+import { useTranslation } from 'next-i18next'
 interface HeaderFormProps {
   children: ReactNode;
 }
@@ -27,6 +27,7 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
   const { resetFilterForm } = useContext(filterContext);
   const { setIsLoginClick } = useContext(selectPopoverContext);
 
+  const { t } = useTranslation(['common']);
 
 
   const router = useRouter();
@@ -54,7 +55,10 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
             >
               <img src="/icon.png" alt="" width={50} height={50} />
               <div className="text-[2rem] w-0 overflow-hidden desktop:w-fit font-semibold">
-                Olympus
+                {/* Olympus */}
+
+                {t('teamName')}
+
               </div>
             </Link>
 

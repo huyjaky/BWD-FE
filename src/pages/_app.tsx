@@ -35,6 +35,7 @@ import Head from 'next/head';
 import Script from 'next/script';
 import DashboardProvider from '@/contexts/dashboard';
 import IsLoadingAnimateProvider from '@/contexts/isLoadingAnimate';
+import { appWithTranslation } from 'next-i18next';
 
 
 const monsterrat = Montserrat({
@@ -43,10 +44,10 @@ const monsterrat = Montserrat({
   variable: '--font-monsterrat'
 });
 
-export default function App({
+const App = ({
   Component,
   pageProps: { session, ...pageProps }
-}: AppPropsWithLayout) {
+}: AppPropsWithLayout) => {
   const Layout = Component.Layout ?? EmptyLayout;
 
   return (
@@ -111,3 +112,5 @@ export default function App({
     </>
   );
 }
+
+export default appWithTranslation(App);
