@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { TbWorld } from 'react-icons/tb';
 import { BsList } from 'react-icons/bs';
 import { HiUserCircle } from 'react-icons/hi';
+import { useTranslation } from 'next-i18next';
 
 const HeaderLogin = () => {
 
@@ -26,7 +27,7 @@ const HeaderLogin = () => {
             <span className="font-semibold">Olympus your home</span>
           </Link>
           {/* translate */}
-          <button onClick={()=>{}} className="rounded-full bg-white box-content p-1 mr-3 hover:bg-slate-300">
+          <button className="rounded-full bg-white box-content p-1 mr-3 hover:bg-slate-300">
             <TbWorld className="w-[2rem] h-[2rem]" />
           </button>
           {/* control */}

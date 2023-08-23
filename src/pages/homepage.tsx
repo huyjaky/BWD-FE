@@ -207,6 +207,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const keyMapBing = process.env.ACCESS_TOKEN_BINGMAP;
   const keyChatEngine = process.env.KEYCHAT_ENGINE;
   initializeSSR();
+
   return {
     props: {
       keyMapBing: keyMapBing,

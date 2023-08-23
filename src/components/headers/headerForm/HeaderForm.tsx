@@ -27,7 +27,7 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
   const { resetFilterForm } = useContext(filterContext);
   const { setIsLoginClick } = useContext(selectPopoverContext);
 
-  const { t } = useTranslation(['common']);
+  const { t, i18n } = useTranslation(['common']);
 
 
   const router = useRouter();
@@ -81,12 +81,11 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
                 <span className="font-semibold">Olympus your home</span>
               </div>
               {/* translate */}
-              <Link
-                href={''}
-                className="rounded-full bg-white box-content p-1 mr-3 hover:bg-slate-300"
-              >
+              <button
+                onClick={()=>{{i18n.changeLanguage('vn')}; console.log('clicked');}}
+                className="rounded-full bg-white box-content p-1 mr-3 hover:bg-slate-300">
                 <TbWorld className="w-[2rem] h-[2rem]" />
-              </Link>
+              </button>
               <ButtonAccount />
             </div>
           </div>
