@@ -52,17 +52,14 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
             z-30
             "
             >
-              <img src="/icon.png" alt="" width={50} height={50} />
-              <div className="text-[2rem] w-0 overflow-hidden desktop:w-fit font-semibold">
-                Olympus
-              </div>
+              <img src="/icon2.jpg" alt="" width={200} height={0} />
             </Link>
 
             {children}
 
             {/* controlbar */}
             <div className="flex-1 flex items-center justify-end z-30">
-              {/* Olympus your home */}
+              {/* Candy your home */}
               <div
                 onClick={() => {
                   if (user.UserId !== 'none user') {
@@ -74,7 +71,7 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
                 className="rounded-full bg-white h-fit box-content px-4 py-2
             hover:bg-slate-300 tablet:hidden mobile:hidden cursor-pointer"
               >
-                <span className="font-semibold">Olympus your home</span>
+                <span className="font-semibold">Candy your home</span>
               </div>
               {/* translate */}
               <Link

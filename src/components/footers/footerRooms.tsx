@@ -24,7 +24,7 @@ export default function FooterRooms() {
             Help Center
           </p>
           <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
-            OlympusCover
+            CandyCover
           </p>
           <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Supporting people with disabilities
@@ -47,7 +47,7 @@ export default function FooterRooms() {
         >
           <h1 className="font-semibold">Community</h1>
           <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
-            Olympus.org: disaster relief housing
+            Candy.org: disaster relief housing
           </p>
           <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Combating discrimination
@@ -61,10 +61,10 @@ export default function FooterRooms() {
         >
           <h1 className="font-semibold">Hosting</h1>
           <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
-            Olympus your home
+            Candy your home
           </p>
           <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
-            OlympusCover for Hosts
+            CandyCover for Hosts
           </p>
           <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Explore hosting resources
@@ -76,7 +76,7 @@ export default function FooterRooms() {
             How to host responsibly
           </p>
           <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
-            Olympus-friendly apartments
+            Candy-friendly apartments
           </p>
         </div>
         <div
@@ -85,7 +85,7 @@ export default function FooterRooms() {
                     laptop:border-none
                 "
         >
-          <h1 className="font-semibold">Olympus</h1>
+          <h1 className="font-semibold">Candy</h1>
           <p className="text-[1rem] font-thin hover:underline hover:decoration-solid hover:cursor-pointer">
             Newsroom
           </p>
@@ -143,7 +143,7 @@ export default function FooterRooms() {
         <div className="">
           <ul className="flex flex-col desktop:flex-row laptop:flex-row relative">
             <li className="flex items-center mt-1">
-              <p className="text-[1rem] font-thin">&copy; 2023 Olympus,Inc.</p>
+              <p className="text-[1rem] font-thin">&copy; 2023 Candy,Inc.</p>
             </li>
 
             <li>

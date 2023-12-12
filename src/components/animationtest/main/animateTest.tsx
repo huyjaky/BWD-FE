@@ -56,7 +56,7 @@ const AnimateTest = () => {
 
                   <div className='w-full h-fit bg-slate-200 mb-20'>
                     <SlideTab arrPost={newsPost.economic} title='The economic opportunities of hosting'
-                      des='More people are turning to hosting for the first time. From community stories, to the latest Host earnings data and trends, discover how it has never been easier to host and earn on Olympus.' />
+                      des='More people are turning to hosting for the first time. From community stories, to the latest Host earnings data and trends, discover how it has never been easier to host and earn on Candy.' />
                   </div>
 
                   <div className='w-full h-fit mb-20'>
@@ -64,7 +64,7 @@ const AnimateTest = () => {
                   </div>
 
                   <div className='w-full h-fit bg-slate-200 mb-20'>
-                    <SlideTab arrPost={newsPost.only} title='One-of-a-kind stays, only on Olympus'
+                    <SlideTab arrPost={newsPost.only} title='One-of-a-kind stays, only on Candy'
                       des='Explore the unique, limited-time stays that give guests a rare glimpse into some of the most iconic places in pop culture.' />
                   </div>
 

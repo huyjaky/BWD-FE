@@ -27,7 +27,7 @@ const GetStarted = () => (
         variants={fadeIn('left', 'tween', 0.2, 1)}
         className="flex-[0.75] flex justify-center flex-col"
       >
-        <TypingText title="| How Olympus Works" textStyles="" />
+        <TypingText title="| How Candy Works" textStyles="" />
         <TitleText title={<>Get started with just a few clicks</>} textStyles="" />
         <div className="mt-[2rem] flex flex-col max-w-[34.5rem] gap-[2rem]">
           {startingFeatures.map((feature, index) => (

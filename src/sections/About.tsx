@@ -17,16 +17,16 @@ const About = () => (
       viewport={{ once: false, amount: 0.25 }}
       className={`${styles.innerWidth} mx-auto ${styles.flexCenter} flex-col`}
     >
-      <TypingText title="| About Olympus" textStyles="text-center" />
+      <TypingText title="| About Candy" textStyles="text-center" />
 
       <motion.p
         variants={fadeIn('up', 'tween', 0.2, 1)}
         className="mt-[8px] font-normal sm:text-[2rem] text-[1rem] text-center text-slate-700"
       >
 
-        Welcome to <span className="font-extrabold text-black"> Olympus </span>{' '}, our real estate website, our website
+        Welcome to <span className="font-extrabold text-black"> Candy </span>{' '}, our real estate website, our website
         offers a user-friendly interface that provides your real estate
-        search experience. With so many features packed in, we're confident <span className="font-extrabold text-black"> Olympus </span>{' '}
+        search experience. With so many features packed in, we're confident <span className="font-extrabold text-black"> Candy </span>{' '}
         is your ultimate destination
         for finding the perfect home.
       </motion.p>

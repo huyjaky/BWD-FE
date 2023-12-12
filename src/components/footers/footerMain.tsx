@@ -6,7 +6,7 @@ const FooterTest = () => {
       <div>
         <ul className="flex flex-wrap justify-between relative">
           <li>
-            <span className="text-[1rem]"> 2023 Olympus,Inc</span>
+            <span className="text-[1rem]"> 2023 Candy,Inc</span>
           </li>
           <li className="ml-5">
             <span className="absolute left-[7.5rem] bottom-1 laptop:hidden tablet:hidden">.</span>

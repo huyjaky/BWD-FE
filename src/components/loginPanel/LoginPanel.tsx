@@ -132,7 +132,7 @@ const LoginPanel = ({ children }: LoginPanelProps) => {
 
         {children}
       </div>
-      <span className="font-semibold text-[2rem] w-full">Welcome to Olympus</span>
+      <span className="font-semibold text-[2rem] w-full">Welcome to Candy</span>
       <div className="mt-5 w-full h-fit">
         <form
           onSubmit={handleSubmit(onSubmit)}

@@ -52,7 +52,7 @@ export default function App({
   return (
     <>
       <Head>
-        <title>Olympus</title>
+        <title>Candy</title>
         <Script
           src="https://www.bing.com/api/maps/mapcontrol?callback=GetMapCallback&amp;key=AiWimzL8WC5fWxhKerTLiSvd63qgv22WhCiBLgm63xMJ-nn1Mv9SMqYpLPB4nkMI"
           async={true}

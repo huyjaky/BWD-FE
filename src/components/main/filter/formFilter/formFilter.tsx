@@ -202,12 +202,6 @@ const FormFilter = ({ keyMapBing }: FormFilterProps) => {
             </div>
 
             {/* host language */}
-            <div className="w-full h-fit mb-5 py-10">
-              <div className="w-full h-fit flex flex-col ">
-                <span className="font-bold text-[2rem] mb-5">Type house</span>
-                <HostLanguage />
-              </div>
-            </div>
           </div>
 
           <div className="w-full border-t-2 flex items-center flex-2 py-3">

@@ -45,9 +45,9 @@ const Footer = () => {
             <div className="mb-[3rem] h-[.2rem] bg-white opacity-10" />
 
             <div className="flex items-center justify-between flex-wrap gap-4">
-              <h4 className="font-extrabold text-[2rem] text-black">Olympus</h4>
+              <h4 className="font-extrabold text-[2rem] text-black">Candy</h4>
               <p className="font-normal text-[1rem] text-black opacity-50">
-                Copyright © 2022 - 2023 Olympus. All rights reserved.
+                Copyright © 2022 - 2023 Candy. All rights reserved.
               </p>
 
               <div className="flex gap-4">

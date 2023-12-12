@@ -25,12 +25,12 @@ const Feedback = () => (
             Huy Phan
           </h4>
           <p className="mt-[8px] font-normal sm:text-[1rem] text-[1rem] sm:leading-[22.68px] leading-[16.68px] text-black">
-            Founder Olympus
+            Founder Candy
           </p>
         </div>
 
         <p className="mt-[2rem] font-normal sm:text-[2.2rem] text-[1rem] sm:leading-[45.6px] leading-[39.6px] text-black">
-          “With Olympus, you can easily explore and select your favorite homes. Users can access detailed information
+          “With Candy, you can easily explore and select your favorite homes. Users can access detailed information
           and interact with homeowners to discover your ideal home.”
         </p>
       </motion.div>

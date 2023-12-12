@@ -50,20 +50,14 @@ const CreateHouse: NextPageWithLayout<CreateHomeProps> = ({
       <StepCreateHome />
 
       {/* choose type house */}
+
       <TransitionCreateHome isShow={stepCreate == 1}>
-        <div className="w-full h-fit">
-          <ChooseTypeHouse />
-        </div>
-      </TransitionCreateHome>
-
-
-      <TransitionCreateHome isShow={stepCreate == 2}>
         {/* <div className="bg-orange-600 w-full h-[18.75rem]"></div> */}
         <HouseProperties />
       </TransitionCreateHome>
 
 
-      <TransitionCreateHome isShow={stepCreate == 3}>
+      <TransitionCreateHome isShow={stepCreate == 2}>
         <InputFormEdit styleDivAround="" styleFieldset="" styleLegend="" title="Address">
           <MapCreateHouse keyMapBing={keyMapBing} setTempHouse={setCreateHouseForm}
             tempHouse={createHouseForm}
@@ -71,13 +65,13 @@ const CreateHouse: NextPageWithLayout<CreateHomeProps> = ({
         </InputFormEdit>
       </TransitionCreateHome>
 
-      <TransitionCreateHome isShow={stepCreate == 4}>
+      <TransitionCreateHome isShow={stepCreate == 3}>
         <InputFormEdit styleDivAround=" before:hidden" styleFieldset="" styleLegend="" title="Images">
           <ImgCreateHouse api_url_path={api_url_path} />
         </InputFormEdit>
       </TransitionCreateHome>
 
-      <TransitionCreateHome isShow={stepCreate > 4}>
+      <TransitionCreateHome isShow={stepCreate > 3}>
         <FinishPage api_url_path={api_url_path} />
       </TransitionCreateHome>
 

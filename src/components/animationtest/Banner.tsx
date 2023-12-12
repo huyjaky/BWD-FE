@@ -15,7 +15,7 @@ const Banner = () => {
   return (
 
     <motion.div className='banner' variants={banner}>
-      <BannerRowTop title={"Olympus"} />
+      <BannerRowTop title={"Candy"} />
       <BannerRowCenter title={"News"} playMarquee={playMarquee} />
       <BannerRowBottom title={"studio"} />
     </motion.div>
