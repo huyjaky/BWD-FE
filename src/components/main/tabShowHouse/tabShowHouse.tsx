@@ -114,22 +114,6 @@ const TabShowHouse = ({ keyMapBing }: TabShowHouseProps) => {
       ">
 
 
-        <motion.div variants={variants} exit="exitFavor"
-          className=''
-        >
-          <SlideShowHouse
-            setIsOpenMask={setIsOpenMask}
-            setIsOpenMaskMap={setIsOpenMaskMap}
-            setSelectLocale={setSelectLocale}
-            setSelectUser={setSelectUser}
-            isHover={isHover}
-            setIsHover={setIsHover}
-            infShow={'houseForSale'}
-            title="House for sale"
-            keyMapBing={keyMapBing}
-          />
-        </motion.div>
-
         <motion.div variants={variants} exit="exitFavor">
           <SlideShowHouse
             setIsOpenMask={setIsOpenMask}
