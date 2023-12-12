@@ -42,7 +42,7 @@ const HeaderForm = ({ children }: HeaderFormProps) => {
           <div className="w-full h-full flex relative">
             {/* logo container */}
             <Link
-              href={'/homepage'}
+              href={'/'}
               onClick={() => {
                 setIsShowHeader(false);
                 setIsFilter('main');

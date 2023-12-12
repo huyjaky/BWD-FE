@@ -35,9 +35,9 @@ function Header(): JSX.Element {
 
   return (
     <div className="flex justify-between h-[4.5rem] items-center px-[1rem] border-[1px] border-b-[#e4e4e4]">
-      <Link href={'/homepage'}>
+      <Link href={'/'}>
         <div>
-          <Image width={70} height={70} src={Logo} alt="Logo" />
+          <Image width={200} height={0} src={'/icon2.jpg'} alt="Logo" />
         </div>
       </Link>
       <div className="relative">
@@ -148,7 +148,6 @@ function Header(): JSX.Element {
           <ButtonRounded icon={toggleMenu ? <AiOutlineClose /> : <AiOutlineMenu />} />
         </div>
         <ButtonRounded icon={<BsBell />} />
-        <ButtonRounded image={Logo} />
       </div>
     </div>
   );

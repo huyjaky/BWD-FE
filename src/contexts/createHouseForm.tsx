@@ -36,7 +36,7 @@ const createHouseDataDefault: createHouseData = {
     district: ''
   },
   setAddress: ()=>{},
-  typeHouseId: [],
+  typeHouseId: ['5'],
   setTypeHouseId: () => { },
   createHouseForm: {
     address: {

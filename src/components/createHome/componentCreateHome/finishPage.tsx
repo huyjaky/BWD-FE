@@ -51,6 +51,13 @@ const FinishPage = ({ api_url_path }: FinishPageProps) => {
     try {
       if (createHouseForm) {
         const data0: house_ = { ...createHouseForm, address: Address, useracc: session?.userAcc }
+
+        if (data0 === emptyCreateHouseForm) {
+          setIsClick(0);
+          nProgress.done();
+          return
+        }
+
         await houseApi.createHouse(data0, typeHouseId);
       }
       setCreateHouseForm(emptyCreateHouseForm)
